@@ -36,10 +36,9 @@ inc(存放 include 文件)，link（存放友情链接）,media(存放多媒体�
 下面是几个范例： banner_sohu.gif 、 banner_sina.gif、 menu_aboutus.gif 、 menu_job.gif、 title_news.gif、 logo_police.gif、 logo_national.gif 、 pic_people.jpg 。
 
 
+###4. **技术分享** 
+有比较好的技术教程可以将网址上传至**wiki页面**大家共享，另外，仓库中有不完善需要改进的尽可随意添加修改。
 
+###5. 
 
-4. **技术分享** 有比较好的技术教程可以将网址上传至**wiki页面**大家共享，另外，仓库中有不完善需要改进的尽可随意添加修改。
-
-5. 
-
-6.
+###6.
