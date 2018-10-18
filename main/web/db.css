@@ -1,0 +1,137 @@
+@CHARSET "UTF-8";
+/*<!-- 赵柯存  v_1.0  完成于2018.10.01 -->*/
+.navigate-title a ,.director li a,.cast li a{
+	text-decoration: none;
+	font-family:"黑体";
+	font-size:20px;
+}
+
+.navigate-title {
+	width: 1040px;
+	margin: 0 auto;
+	padding-bottom: 0;
+	overflow: hidden;
+	zoom: 1;
+}
+
+.primary {
+	margin: 0 auto;
+	width: 400px;
+}
+
+.navigate-logo {
+	float: left;
+	height: 70px;
+	width: 145px;
+}
+
+.search-textfeild {
+	margin: 25px 0 0 0;
+}
+
+.nav li {
+	padding: 8px 15px;
+	list-style: none;
+	color: #fff;
+	float: left;
+}
+
+.primary{
+	width: 1000px;
+	height: 50px;
+	/*border: 1px #333 solid;*/
+	margin: 5px;
+	float:left;
+}
+.navigate-title{
+	width: 1000px;
+	height: 50px;
+	/*border: 1px #333 solid;*/
+	margin: 5px;
+}
+.specific-movie{
+	width: 1000px;
+	height: 1050px;
+	/*border: 1px #333 solid;*/
+	margin: 5px;
+}
+.director,.cast{
+	width: 1000px;
+	height: 250px;
+	/*border: 1px #333 solid;*/
+	margin: 5px;
+}
+
+.cast div{
+	width: 400px;
+	height: 199px;
+	/*border: 1px #333 solid;*/
+	margin: 0;
+	float:left
+}
+
+
+.director_title{
+	font-size:18px;
+	font-family:"仿宋";
+	margin: 5px 0 5px 0;
+}
+
+.cast_title{
+	font-size:18px;
+	font-family:"仿宋";
+	margin: 5px 0 5px 0;
+}
+.movie-title{
+	font-family:"黑体";
+	font-size:30px;
+	font-weight:200px;
+	/*border: 1px #333 solid;*/
+	margin:5px 0 50px 0;
+}
+
+.movie_cast_product,.movie_director_product{
+	color:gray;
+}
+
+.pic-nav a{
+	font-family:"仿宋";
+	font-size:15px;
+	text-decoration: none;
+}
+
+.pic-frame{
+	width: 600px;
+	height: 1000px;
+}
+
+.movie-pic div{
+	width: 200px;
+	height: 200px;
+	float:left;
+}
+
+.pic-nav{
+	width: 200px;
+	margin:0 0 0 600px;
+}
+
+.page ul.pagination {
+    display: inline-block;
+    padding: 0;
+    margin: 0;
+}
+
+.page ul.pagination li {display: inline;}
+
+.page ul.pagination li a {
+    color: black;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+}
+
+.page{
+	width:500px;
+	height:20px;
+}
