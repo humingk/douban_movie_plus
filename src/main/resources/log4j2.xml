@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--日志级别以及优先级排序: OFF > FATAL > ERROR > WARN > INFO > DEBUG > TRACE > ALL -->
+
+<!--Configuration后面的status，用于设置log4j2自身内部的信息输出，
+    当设置成trace时，会看到log4j2内部各种详细输出-->
+<configuration  status="info">
+    <!-- 变量配置 日志文件保存路径-->
+    <Properties>
+        <!-- 部署应用的名称,
+            命名规则 :全部小写字母、中短横线、数字,与微服务命名,disconf中命名一致 -->
+        <property name="APPNAME">movie</property>
+        <!-- 日志文件本地存放目录路径 -->
+        <!--sys:catalina.home  tomcat的根目录-->
+        <Property name="logBaseFolder">${sys:catalina.home}/logs/movie/</Property>
+        <!-- *必须并强制遵守 日志文件的编码 -->
+        <property name="log_charset">UTF-8</property>
+        <!--输出日志格式-->
+        <property name="log_pattern">
+            %d{yyyy-MM-dd HH:mm:ss} [%t] %-5p %c{1}:%L - %msg%n
+        </property>
+    </Properties>
+
+    <!--定义所有的appender-->
+    <appenders>
+        <!--输出控制台的配置-->
+        <console name="Console" target="SYSTEM_OUT">
+            <!--输出日志的格式 %l :表示某个类-->
+            <PatternLayout pattern="[%d{HH:mm:ss:SSS}] [%t] %-5p %c{1}:%L - %msg%n"/>
+        </console>
+
+        <!-- 打印出所有的info及以下级别的信息，
+        每次大小超过size，则size大小的日志会自动存入按年份-月份建立的文件夹下面并进行压缩，作为存档-->
+        <RollingFile name="RollingFileInfo" fileName="${logBaseFolder}/${APPNAME}-info.log"
+                     filePattern="${logBaseFolder}/%d{yyyy-MM}/${APPNAME}-info-%d{dd HH:mm:ss}.%i.log.gz">
+            <ThresholdFilter level="info" onMatch="ACCEPT" onMismatch="DENY"/>
+            <!-- 日志输出格式 -->
+            <PatternLayout charset="${log_charset}" pattern="${log_pattern}" />
+            <!-- 日志压缩包目录的建议格式名称
+                建议1天归档依次，压缩文件上线建议为200,
+                预估每个磁盘存储空间200G左右，每个压缩包最大值200MB -->
+            <Policies>
+                <TimeBasedTriggeringPolicy  modulate="true" interval="1"/>
+                <SizeBasedTriggeringPolicy size="20 MB"/>
+            </Policies>
+        </RollingFile>
+
+        <RollingFile name="RollingFileError" fileName="${logBaseFolder}/${APPNAME}-error.log"
+                     filePattern="${logBaseFolder}/%d{yyyy-MM}/${APPNAME}-error-%d{dd HH:mm:ss}.%i.log.gz">
+            <ThresholdFilter level="error" onMatch="ACCEPT" onMismatch="DENY"/>
+            <PatternLayout charset="${log_charset}" pattern="${log_pattern}" />
+            <Policies>
+                <TimeBasedTriggeringPolicy  modulate="true" interval="1"/>
+                <SizeBasedTriggeringPolicy size="20 MB"/>
+            </Policies>
+        </RollingFile>
+    </appenders>
+
+    <!--定义logger，只有定义了logger并引入的appender，appender才会生效-->
+    <loggers>
+        <!--过滤掉spring和mybatis的一些无用的DEBUG信息-->
+        <logger name="org.springframework" level="INFO"/>
+        <logger name="org.mybatis" level="INFO"/>
+
+        <root level="all">
+            <appender-ref ref="Console"/>
+            <appender-ref ref="RollingFileInfo"/>
+            <appender-ref ref="RollingFileError"/>
+        </root>
+    </loggers>
+
+</configuration>
