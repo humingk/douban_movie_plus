@@ -15,7 +15,16 @@
 </head>
 <body>
 
-<a href="WEB-INF/views/movie.jsp">搜索</a>
+<form:form method="post" action="/index">
+<table>
+    <tr>
+        <td><form:label path="alias">alias</form:label></td>
+        <td><form:input path="alias"></form:input></td>
+        <td><input type="submit" value="search"></td>
+    </tr>
+</table>
+
+</form:form>
 
 </body>
 </html>

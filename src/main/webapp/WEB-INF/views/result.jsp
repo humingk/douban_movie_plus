@@ -15,7 +15,21 @@
 </head>
 <body>
 
-<a href="WEB-INF/views/movie.jsp">搜索</a>
+<table>
+    <tr>
+        <td>name</td>
+        <td>${name}</td>
+    </tr>
+    <tr>
+        <td>alias</td>
+        <td>${alias}</td>
+    </tr>
+    <tr>
+        <td>releasetime</td>
+        <td>${releasetime}</td>
+    </tr>
+</table>
+
 
 </body>
 </html>

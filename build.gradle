@@ -81,10 +81,10 @@ dependencies {
     //日志
 
     // log4j 核心包
-    compile group: ' org.apache.logging.log4j', name: 'log4j-core', version: '2.11.1'
-    compile group: 'org.slf4j', name: 'slf4j-api', version: '1.7.25'
+    compile group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.11.1'
+    compile group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.11.1'
     // 用于与slf4j桥接
-    compile group: 'org.apache.logging.log4j', name: 'log4j-slf4j-impl', version: '2.11.0'
+    compile group: 'org.apache.logging.log4j', name: 'log4j-slf4j-impl', version: '2.11.1'
     // slf4j 核心包
     compile group: 'org.slf4j', name: 'slf4j-api', version: '1.7.25'
     // web 项目需添加
