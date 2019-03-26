@@ -1,13 +1,12 @@
 package org.humingk.movie.service.impl;
 
 import org.humingk.movie.TestBase;
-import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.humingk.movie.entity.*;
 import org.humingk.movie.service.MovieService;
-import java.util.List;
+import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 
-import static org.junit.Assert.*;
+import java.util.List;
 
 public class MovieServiceImplTest extends TestBase {
     @Autowired
@@ -15,7 +14,7 @@ public class MovieServiceImplTest extends TestBase {
 
     @Test
     public void getMovieAllOfMovieByAlias() {
-        List<MovieAll> movieAlls = movieService.getMovieAllOfMovieByAlias("爱丽丝");
+        List<MovieAll> movieAlls = movieService.getMovieAllsOfMovieByAlias("爱丽丝");
 
         if (movieAlls != null) {
             for (int i = 0; i < movieAlls.size(); i++) {
@@ -77,6 +76,24 @@ public class MovieServiceImplTest extends TestBase {
                     System.out.println("======================================");
                 }
             }
+        }
+    }
+
+    @Test
+    public void getMovieByNameStart() {
+        List<Movie> movies = movieService.getMoviesByNameStart("爱丽丝");
+        if (movies != null) {
+            for (Movie movie : movies) {
+                if (movie.getName() != null) {
+                    System.out.println("======================================");
+                    System.out.println("name        " + movie.getName());
+                    System.out.println("id          " + movie.getMovieId());
+                    System.out.println("rate        " + movie.getRate());
+                }
+            }
+        }
+        else {
+
         }
     }
 }

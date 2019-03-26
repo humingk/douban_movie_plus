@@ -1,8 +1,8 @@
 package org.humingk.movie.mapper;
 
-import java.util.List;
-
 import org.humingk.movie.entity.*;
+
+import java.util.List;
 
 public interface MovieMapper {
     int deleteByPrimaryKey(Integer movieId);
@@ -20,6 +20,13 @@ public interface MovieMapper {
     List<Movie> selectMoviesByName(String name);
 
     List<Movie> selectMoviesByAlias(String name);
+
+    /**
+     * 根据电影名称开头的关键字模糊搜索
+     * @param name
+     * @return
+     */
+    List<Movie> selectMoviesByNameStart(String name);
 
     Movie selectMovieBaseById(Integer movieId);
 

@@ -109,6 +109,12 @@ dependencies {
     // Junit测试
     testCompile group: 'junit', name: 'junit', version: '4.11'
     testCompile group: 'junit', name: 'junit', version: '4.12'
+
+    // jackson
+    compile group: 'com.fasterxml.jackson.core',name: 'jackson-databind',version:'2.9.8'
+    compile group: 'com.fasterxml.jackson.core',name: 'jackson-core',version:'2.9.8'
+    compile group: 'com.fasterxml.jackson.core',name: 'jackson-annotations',version:'2.9.8'
+
 }
 
 // gradle可以调用ant任务，ant启动Mybatis Generator

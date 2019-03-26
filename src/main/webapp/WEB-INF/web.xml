@@ -4,15 +4,16 @@
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0">
 
+
     <!-- 默认界面 -->
     <welcome-file-list>
-        <welcome-file>index.jsp</welcome-file>
+        <welcome-file>/WEB-INF/views/index.jsp</welcome-file>
     </welcome-file-list>
 
     <!--错误页面-->
     <error-page>
         <error-code>404</error-code>
-        <location>/errorPage.jsp</location>
+        <location>/WEB-INF/views/errorPage.jsp</location>
     </error-page>
 
      <!--编码过滤器-->
@@ -77,6 +78,8 @@
             <param-name>contextConfigLocation</param-name>
             <param-value>classpath:spring/spring-*.xml</param-value>
         </init-param>
+        <!--解决懒加载，优先启动此servlet-->
+        <load-on-startup>1</load-on-startup>
     </servlet>
     <servlet-mapping>
         <servlet-name>dispatcherServlet</servlet-name>
