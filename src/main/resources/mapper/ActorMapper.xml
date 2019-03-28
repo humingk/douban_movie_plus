@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.humingk.movie.mapper.ActorMapper">
-  <resultMap id="BaseResultMap" type="org.humingk.movie.entity.Actor">
-    <id column="actor_id" jdbcType="INTEGER" property="actorId" />
-    <result column="name" jdbcType="CHAR" property="name" />
-    <result column="sex" jdbcType="CHAR" property="sex" />
-    <result column="homeplace" jdbcType="CHAR" property="homeplace" />
-    <result column="birthday" jdbcType="CHAR" property="birthday" />
-    <result column="occupation" jdbcType="CHAR" property="occupation" />
-    <result column="alias" jdbcType="VARCHAR" property="alias" />
-    <result column="imdb_id" jdbcType="CHAR" property="imdbId" />
-  </resultMap>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    <resultMap id="BaseResultMap" type="org.humingk.movie.entity.Actor">
+        <id column="actor_id" jdbcType="INTEGER" property="actorId"/>
+        <result column="name" jdbcType="CHAR" property="name"/>
+        <result column="sex" jdbcType="CHAR" property="sex"/>
+        <result column="homeplace" jdbcType="CHAR" property="homeplace"/>
+        <result column="birthday" jdbcType="CHAR" property="birthday"/>
+        <result column="occupation" jdbcType="CHAR" property="occupation"/>
+        <result column="alias" jdbcType="VARCHAR" property="alias"/>
+        <result column="imdb_id" jdbcType="CHAR" property="imdbId"/>
+    </resultMap>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from actor
     where actor_id = #{actorId,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="org.humingk.movie.entity.Actor">
+    <insert id="insert" parameterType="org.humingk.movie.entity.Actor">
     insert into actor (actor_id, name, sex, 
       homeplace, birthday, occupation, 
       alias, imdb_id)
@@ -23,7 +23,7 @@
       #{homeplace,jdbcType=CHAR}, #{birthday,jdbcType=CHAR}, #{occupation,jdbcType=CHAR}, 
       #{alias,jdbcType=VARCHAR}, #{imdbId,jdbcType=CHAR})
   </insert>
-  <update id="updateByPrimaryKey" parameterType="org.humingk.movie.entity.Actor">
+    <update id="updateByPrimaryKey" parameterType="org.humingk.movie.entity.Actor">
     update actor
     set name = #{name,jdbcType=CHAR},
       sex = #{sex,jdbcType=CHAR},
@@ -34,13 +34,52 @@
       imdb_id = #{imdbId,jdbcType=CHAR}
     where actor_id = #{actorId,jdbcType=INTEGER}
   </update>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select actor_id, name, sex, homeplace, birthday, occupation, alias, imdb_id
     from actor
     where actor_id = #{actorId,jdbcType=INTEGER}
   </select>
-  <select id="selectAll" resultMap="BaseResultMap">
+    <select id="selectAll" resultMap="BaseResultMap">
     select actor_id, name, sex, homeplace, birthday, occupation, alias, imdb_id
     from actor
   </select>
+
+    <!--根据演员的ID返回所有的电影-->
+
+    <!--电影基本资料返回结构-->
+    <resultMap id="MovieList" type="org.humingk.movie.entity.Movie">
+        <id column="movie_id" jdbcType="INTEGER" property="movieId"/>
+        <result column="name" jdbcType="CHAR" property="name"/>
+        <result column="rate" jdbcType="REAL" property="rate"/>
+        <result column="imdb_id" jdbcType="CHAR" property="imdbId"/>
+        <result column="alias" jdbcType="VARCHAR" property="alias"/>
+    </resultMap>
+
+    <!--根据导演id-->
+    <select id="selectMoviesByDirectorId" parameterType="java.lang.Integer" resultMap="MovieList">
+    select movie.*
+    from movie
+    inner join movie_director
+    on movie.movie_id = movie_director.movie_id
+    where movie_director.director_id=#{actorId,jdbcType=INTEGER}
+  </select>
+
+    <!--根据编剧id-->
+    <select id="selectMoviesByWriterId" parameterType="java.lang.Integer" resultMap="MovieList">
+    select movie.*
+    from movie
+    inner join movie_writer
+    on movie.movie_id = movie_writer.movie_id
+    where movie_writer.writer_id=#{actorId,jdbcType=INTEGER}
+  </select>
+
+    <!--根据主演id-->
+    <select id="selectMoviesByLeadingactorId" parameterType="java.lang.Integer" resultMap="MovieList">
+    select movie.*
+    from movie
+    inner join movie_leadingactor
+    on movie.movie_id = movie_leadingactor.movie_id
+    where movie_leadingactor.leadingactor_id=#{actorId,jdbcType=INTEGER}
+  </select>
+
 </mapper>

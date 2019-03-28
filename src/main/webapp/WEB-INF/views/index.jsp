@@ -23,14 +23,14 @@
 
         // 异步获取用户输入的信息
         function getMoreNames() {
-            var name = document.getElementById("name");
+            var name = document.getElementById("search_name");
             if(name.value == ""){
                 clearName();
                 return;
             }
             xmlhttp=newAjax();
             // var url="search?name="+escape(name.value);
-            var url="search?name="+name.value;
+            var url="searchTips?searchTips_name="+name.value;
             // xmlhttp.responseType='json';
             // true 异步
             xmlhttp.open("GET",url,true);
@@ -64,6 +64,7 @@
             clearName();
             setLocation();
             for (var i = 0; i < json.length ; i++) {
+
                 var tr = document.createElement("tr");
                 var tdForName = document.createElement("td");
                 var tdForRate = document.createElement("td");
@@ -83,17 +84,23 @@
                     this.className='mouseOut';
                 };
                 tdForName.onmousedown=function(){
-                    //鼠标点击关联数据，在输入框中显示
-                    document.getElementById("name").value = this.innerHTML;
+                    //鼠标点击关联数据，跳转
+                    window.open(url="subject/"+this.children[0].id);
                 };
-                var show_name = document.createTextNode(json[i].name);
+                var show_name = document.createTextNode(json[i]["name"]);
+                show_name;
                 tdForName.appendChild(show_name);
 
-                var show_rate= document.createTextNode(json[i].rate);
+                var show_rate= document.createTextNode(json[i]["rate"]);
                 tdForRate.appendChild(show_rate);
 
                 tr.appendChild(tdForName);
                 tr.appendChild(tdForRate);
+
+                // 用于在onmousedowm中获取到当前tdForName所对应的 URL，通过a.id传递movieId
+                var a=document.createElement("a");
+                a.id=json[i]["movieId"];
+                tdForName.appendChild(a);
 
                 document.getElementById("searchTips_table_tbody").appendChild(tr);
             }
@@ -113,7 +120,7 @@
         function setLocation(){
 
             //关联位置显示位置与输入框
-            var name = document.getElementById("name");
+            var name = document.getElementById("search_name");
             var width = name.offsetWidth-2;  //input width
             var left = name["offsetLeft"]; //距左边框的距离
             var top = name["offsetTop"]+name.height; //到顶部的距离
@@ -125,7 +132,6 @@
             searchTips.style.top = top + "px";
             searchTips.style.width = width + "px";
             document.getElementById("searchTips_table").width = width + "px";
-
         }
 
         //失去焦点，清除数据
@@ -171,9 +177,8 @@
 <form name="search" id="search" method="get" action="/search">
     <table>
         <tr>
-            Search Tips
-            电影基本情况搜索，ajax 搜索框智能提醒<br/>
-            <td><input id="name" name="name" type="text" size="50" placeholder="请输入电影名"
+            Search
+            <td><input id="search_name" name="search_name" type="text" size="50" placeholder="请输入电影名"
                 autocomplete="off" onkeyup="getMoreNames()" onblur="nameLossFocus()" onfocus="nameGetFocus()"></td>
             <td><input type="submit" value="search"></td>
         </tr>
@@ -188,7 +193,6 @@
 </form>
 
 <br/>
-<a href="/subject/1292720" >电影subject跳转</a>
 
 
 

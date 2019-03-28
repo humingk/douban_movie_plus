@@ -49,14 +49,18 @@
     select movie.*
     from movie
     where movie.name like CONCAT('%',#{name,jdbcType=CHAR},'%') or movie.alias like CONCAT('%',#{name,jdbcType=CHAR},'%')
-  </select>
+    order by movie.rate desc
+    limit 20
+</select>
 
   <!--根据以 电影名 开头的字符串返回电影集合-->
 
   <select id="selectMoviesByNameStart" parameterType="java.lang.String" resultMap="BaseResultMap">
       select movie.*
     from movie
-    where movie.name like CONCAT('',#{name,jdbcType=CHAR},'%') order by  movie.rate desc limit 10
+    where movie.name like CONCAT('',#{name,jdbcType=CHAR},'%')
+     order by  movie.rate desc
+     limit 10
   </select>
 
   <!--根据电影id返回电影的详细资料-->
