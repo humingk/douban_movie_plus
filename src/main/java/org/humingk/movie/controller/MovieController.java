@@ -28,7 +28,7 @@ public class MovieController {
      */
     @RequestMapping(value = "{movieId}",method = RequestMethod.GET)
     @ResponseBody
-    public ModelAndView subject(@PathVariable("movieId") int movieId,ModelAndView modelAndView){
+    public ModelAndView subject(@PathVariable("movieId") int movieId, ModelAndView modelAndView){
         MovieAll movieAll = movieService.getMovieAllByMovieId(movieId);
         // 将对象转化为JSON字符串
         String movieAllString= JsonUtil.toJson(movieAll);

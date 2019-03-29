@@ -37,6 +37,19 @@
         </mvc:message-converters>
     </mvc:annotation-driven>
 
+    <!--支持ajax跨域请求-->
+    <!--<mvc:cors>-->
+        <!--<mvc:mapping path="/subject/**"-->
+                     <!--allowed-origins="/http://api.douban.com"-->
+                     <!--allowed-methods="GET,POST"-->
+                     <!--allowed-headers="header1, header2, header3"-->
+                     <!--exposed-headers="header1, header2" allow-credentials="false"-->
+                     <!--max-age="123" />-->
+        <!--<mvc:mapping path="/resources/**"-->
+                     <!--allowed-origins="http://domain1.com" />-->
+    <!--</mvc:cors>-->
+
+
     <!-- 静态资源默认servlet配置
         (1)加入对静态资源的处理：js,gif,png
         (2)允许使用"/"做整体映射
