@@ -176,3 +176,44 @@ foreign key (movie_id) references movie(movie_id),
 foreign key (review_id) references review(review_id)
 ) ENGINE=InnoDB DEFAULT charset=utf8mb4;
 
+-- 3.盗版资源 -----------------------------------------------------
+/*
+根据电影名+导演名精确定位豆瓣电影ID
+eg：
+ select movie.* from movie
+                                   inner join movie_director
+                                   on movie.movie_id = movie_director.movie_id
+                                   inner join actor
+                                   on movie_director.director_id=actor.actor_id
+                                   where movie.name like "%间谍%" and actor.name like "%seung%";
+
+ */
+
+create table movie_resource(
+movie_id int NOT NULL,
+resource_id int(100) NOT NULL,
+primary key (movie_id,resource_id),
+foreign key (movie_id) references movie(movie_id),
+foreign key (resource_id) references resource(resource_id)
+)ENGINE=InnoDB DEFAULT charset=utf8mb4;
+
+/*
+quality:
+  0 未知
+
+ */
+
+create table resource(
+resource_id int NOT NULL auto_increment,
+name char(50),
+quality int NOT NULL DEFAULT 0,
+content varchar NOT NULL,
+url char(10) NOT NULL DEFAULT '',
+movie_name char(50) NOT NULL DEFAULT '',
+director_name char(30) NOT NULL DEFAULT '',
+primary key (resource_id),
+unique(url),
+unique(content),
+index movie_name(movie_name),
+index director_name(director_name)
+)ENGINE=InnoDB DEFAULT charset=utf8mb4;

@@ -136,6 +136,35 @@
                 }
             });
         });
+        var movie_name=movieAllJson["name"];
+        $(document).ready(function () {
+            getMusic();
+
+        });
+        function getMusic() {
+            $.ajax({
+                type:"GET",
+                dataType:"json",
+                url:"http://localhost:3000/search/suggest?keywords="+movie_name,
+                success:function (result) {
+                    console.log(result);
+                    if("songs" in result["result"]){
+                        var music_id=result["result"]["songs"][0]["id"];
+                        getMusicComments(music_id);
+                    }
+                }
+            });
+        }
+        function getMusicComments(music_id){
+            $.ajax({
+                type:"GET",
+                dataType:"json",
+                url:"http://localhost:3000/comment/music?id="+music_id,
+                success:function (result) {
+                    console.log(result);
+                }
+            });
+        }
 
 
     </script>
@@ -179,6 +208,11 @@
 
 <div id="movie_summary">
 
+    <div id="movie_netease_music">
+        
+    </div>
+    
+    
 </div>
 
 <div id="movie_comments">
