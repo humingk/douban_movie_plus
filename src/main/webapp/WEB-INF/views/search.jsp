@@ -39,9 +39,8 @@
 <body>
 
 <script type="text/javascript">
-    var movieAllsJson=${movieAllsString};
+    var movieAllsJson=${movieAllsString}["data"];
     console.log(${movieAllsString});
-    console.log(movieAllsJson.length);
     $(document).ready(function () {
         $.each(movieAllsJson,function (movieNum) {
            createMovieList(movieNum,movieAllsJson[movieNum]);

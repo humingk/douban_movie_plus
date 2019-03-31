@@ -36,6 +36,24 @@
     from movie
   </select>
 
+  <!--根据movieAll更新movie-->
+  <update id="updateMovieByMovieAll" parameterType="org.humingk.movie.common.MovieAll">
+    update movie
+    set name = #{name,jdbcType=CHAR},
+      rate = #{rate,jdbcType=REAL},
+      imdb_id = #{imdbId,jdbcType=CHAR},
+      alias = #{alias,jdbcType=VARCHAR}
+    where movie_id = #{movieId,jdbcType=INTEGER}
+  </update>
+
+
+  <!--更新电影豆瓣评分-->
+  <update id="updateRateByPrimaryKey" >
+    update movie
+    set movie.rate = #{rate,jdbcType=REAL}
+    where movie.movie_id = #{movieId,jdbcType=INTEGER}
+  </update>
+
   <!--根据电影名返回电影集合-->
   <select id="selectMoviesByName" parameterType="java.lang.String" resultMap="BaseResultMap">
     select movie.*

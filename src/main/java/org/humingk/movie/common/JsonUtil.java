@@ -1,4 +1,4 @@
-package org.humingk.movie.config;
+package org.humingk.movie.common;
 
 
 import com.google.gson.Gson;
@@ -7,7 +7,6 @@ import com.google.gson.JsonNull;
 public class JsonUtil {
 
     private static Gson gson = new Gson();
-
 
     /**
      * @param src :将要被转化的对象

@@ -259,7 +259,7 @@
                  -->
 
                 <!-- typeHandler 用于指定该列使用到的TypeHandler，如果要指定，配置类型处理器的全限定名
-                    注意，mybatis中，不会生成到mybatis-config.xml中的typeHandler
+                    注意，mybatis中，不会生成到mybatis-common.xml中的typeHandler
                     只会生成类似：where id = #{id,jdbcType=BIGINT,typeHandler=com._520it.mybatis.MyTypeHandler}的参数描述
                 <property name="jdbcType" value=""/>
                 -->

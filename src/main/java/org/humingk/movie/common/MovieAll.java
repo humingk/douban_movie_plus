@@ -1,4 +1,6 @@
-package org.humingk.movie.entity;
+package org.humingk.movie.common;
+
+import org.humingk.movie.entity.*;
 
 import java.util.List;
 

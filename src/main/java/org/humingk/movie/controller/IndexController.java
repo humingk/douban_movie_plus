@@ -1,8 +1,8 @@
 package org.humingk.movie.controller;
 
-import org.humingk.movie.config.JsonUtil;
+import org.humingk.movie.common.MovieAll;
+import org.humingk.movie.common.ResultMessage;
 import org.humingk.movie.entity.Movie;
-import org.humingk.movie.entity.MovieAll;
 import org.humingk.movie.service.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -45,7 +45,7 @@ public class IndexController {
     @ResponseBody
     public ModelAndView search(@RequestParam("search_name") String name, ModelAndView modelAndView){
         List<MovieAll> movieAlls=movieService.getMovieAllsOfMovieByAlias(name);
-        modelAndView.addObject("movieAllsString", JsonUtil.toJson(movieAlls));
+        modelAndView.addObject("movieAllsString", ResultMessage.createMessage(200,"OK",movieAlls));
         modelAndView.setViewName("search");
         return modelAndView;
     }

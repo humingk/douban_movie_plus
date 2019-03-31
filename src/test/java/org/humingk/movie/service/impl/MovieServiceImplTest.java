@@ -1,6 +1,7 @@
 package org.humingk.movie.service.impl;
 
 import org.humingk.movie.TestBase;
+import org.humingk.movie.common.MovieAll;
 import org.humingk.movie.entity.*;
 import org.humingk.movie.service.MovieService;
 import org.junit.Test;

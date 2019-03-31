@@ -23,10 +23,10 @@
 <%--加载演员信息和参加影片信息--%>
 <script type="text/javascript">
 
-    var actorJson=${actorString};
-    var moviesByDirectorJson=${moviesByDirectorString};
-    var moviesByWriterJson=${moviesByWriterString};
-    var moviesByLeadingactorJson=${moviesByLeadingactorString};
+    var actorJson=${actorString}["data"];
+    var moviesByDirectorJson=${moviesByDirectorString}["data"];
+    var moviesByWriterJson=${moviesByWriterString}["data"];
+    var moviesByLeadingactorJson=${moviesByLeadingactorString}["data"];
 
     console.log(actorJson);
     console.log(moviesByLeadingactorJson);

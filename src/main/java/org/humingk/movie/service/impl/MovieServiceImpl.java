@@ -3,7 +3,7 @@ package org.humingk.movie.service.impl;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.humingk.movie.entity.Movie;
-import org.humingk.movie.entity.MovieAll;
+import org.humingk.movie.common.MovieAll;
 import org.humingk.movie.mapper.MovieMapper;
 import org.humingk.movie.service.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +32,10 @@ public class MovieServiceImpl implements MovieService {
      */
     @Override
     public MovieAll getMovieAllByMovieId(int movieId) {
+
+
         try {
+            // 提取电影信息
             MovieAll movieAll=new MovieAll(movieMapper.selectMovieBaseById(movieId));
             movieAll.setDirectors(movieMapper.selectDirectorsOfMovieById(movieId));
             movieAll.setWriters(movieMapper.selectWritersOfMovieById(movieId));
@@ -42,7 +45,16 @@ public class MovieServiceImpl implements MovieService {
             movieAll.setReleasetimes(movieMapper.selectReleasetimesOfMovieById(movieId));
             return movieAll;
         } catch (Exception e) {
-            e.printStackTrace();
+            // 提取失败，查无此电影，添加电影库信息
+
+
+            try{
+                //添加后，再次提取电影信息
+
+
+            }catch (Exception ee){
+                // 添加后，仍提取失败
+            }
         }
         return null;
     }
@@ -102,4 +114,30 @@ public class MovieServiceImpl implements MovieService {
         return null;
     }
 
+    /**
+     * 更新电影评分
+     * @param movieId
+     * @param rate
+     */
+    @Override
+    public void updateRateByMovieId(int movieId, float rate) {
+        try {
+            movieMapper.updateRateByPrimaryKey(movieId,rate);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+
+    /**
+     * 向数据库添加movieAll
+     * @param movieAll
+     * @return
+     */
+    @Override
+    public Boolean addMovieAll(MovieAll movieAll) {
+
+
+        return null;
+    }
 }

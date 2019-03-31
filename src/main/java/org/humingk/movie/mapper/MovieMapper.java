@@ -1,5 +1,6 @@
 package org.humingk.movie.mapper;
 
+import org.apache.ibatis.annotations.Param;
 import org.humingk.movie.entity.*;
 
 import java.util.List;
@@ -16,6 +17,13 @@ public interface MovieMapper {
     int updateByPrimaryKey(Movie record);
 
     // -----------------------
+
+    /**
+     * 更新电影评分
+     * @param movieId
+     * @param rate
+     */
+    void updateRateByPrimaryKey(@Param("movieId") Integer movieId, @Param("rate") float rate);
 
     List<Movie> selectMoviesByName(String name);
 

@@ -1,7 +1,7 @@
 package org.humingk.movie.service;
 
 import org.humingk.movie.entity.Movie;
-import org.humingk.movie.entity.MovieAll;
+import org.humingk.movie.common.MovieAll;
 
 import java.util.List;
 
@@ -31,5 +31,21 @@ public interface MovieService {
      * @return
      */
     List<Movie> getMoviesByNameStart(String s);
+
+
+    /**
+     * 更新电影评分
+     * @param movieId
+     * @param rate
+     */
+    void updateRateByMovieId(int movieId,float rate);
+
+
+    /**
+     * 向数据库添加movieAll
+     * @param movieAll
+     * @return
+     */
+    Boolean addMovieAll(MovieAll movieAll);
 }
 
