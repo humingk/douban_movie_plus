@@ -25,6 +25,18 @@ public interface MovieMapper {
      */
     void updateRateByPrimaryKey(@Param("movieId") Integer movieId, @Param("rate") float rate);
 
+    /**
+     * 更新电影基本资料
+     * @param movieId
+     * @param name
+     * @param rate
+     * @param imdbId
+     * @param alias
+     */
+    void updateMovieBaseByMovieAll(@Param("movieId") Integer movieId, @Param("name") String name,
+                                   @Param("rate") float rate,@Param("imdbId") String imdbId,
+                                   @Param("alias") String alias);
+
     List<Movie> selectMoviesByName(String name);
 
     List<Movie> selectMoviesByAlias(String name);
@@ -38,13 +50,14 @@ public interface MovieMapper {
 
     Movie selectMovieBaseById(Integer movieId);
 
-    List<Actor> selectDirectorsOfMovieById(Integer movieId);
-    List<Actor> selectWritersOfMovieById(Integer movieId);
-    List<Actor> selectLeadingactorsOfMovieById(Integer movieId);
+    // 根据演员ID查找所有的电影list
 
-    List<Type> selectTypesOfMovieById(Integer movieId);
+    List<Movie> selectMoviesByDirectorId(Integer directorId);
 
-    List<Tag> selectTagsOfMovieById(Integer movieId);
+    List<Movie> selectMoviesByWriterId(Integer writerId);
 
-    List<Releasetime> selectReleasetimesOfMovieById(Integer movieId);
+    List<Movie> selectMoviesByLeadingactorId(Integer leadingactorId);
+
+
+
 }

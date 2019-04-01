@@ -44,42 +44,39 @@
     from actor
   </select>
 
-    <!--根据演员的ID返回所有的电影-->
+    <!--=====================-->
 
-    <!--电影基本资料返回结构-->
-    <resultMap id="MovieList" type="org.humingk.movie.entity.Movie">
-        <id column="movie_id" jdbcType="INTEGER" property="movieId"/>
-        <result column="name" jdbcType="CHAR" property="name"/>
-        <result column="rate" jdbcType="REAL" property="rate"/>
-        <result column="imdb_id" jdbcType="CHAR" property="imdbId"/>
-        <result column="alias" jdbcType="VARCHAR" property="alias"/>
-    </resultMap>
+    <!--根据电影id返回所有的演员-->
 
-    <!--根据导演id-->
-    <select id="selectMoviesByDirectorId" parameterType="java.lang.Integer" resultMap="MovieList">
-    select movie.*
-    from movie
+    <!--导演-->
+    <select id="selectDirectorsOfMovieById" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select actor.*
+    from actor
     inner join movie_director
-    on movie.movie_id = movie_director.movie_id
-    where movie_director.director_id=#{actorId,jdbcType=INTEGER}
+    on actor.actor_id = movie_director.director_id and movie_director.movie_id=#{movieId,jdbcType=INTEGER}
   </select>
 
-    <!--根据编剧id-->
-    <select id="selectMoviesByWriterId" parameterType="java.lang.Integer" resultMap="MovieList">
-    select movie.*
-    from movie
-    inner join movie_writer
-    on movie.movie_id = movie_writer.movie_id
-    where movie_writer.writer_id=#{actorId,jdbcType=INTEGER}
+    <!--编剧-->
+    <select id="selectWritersOfMovieById" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+     select actor.*
+     FROM actor,movie_writer
+     where movie_writer.writer_id=actor.actor_id and movie_writer.movie_id=#{movieId,jdbcType=INTEGER}
   </select>
 
-    <!--根据主演id-->
-    <select id="selectMoviesByLeadingactorId" parameterType="java.lang.Integer" resultMap="MovieList">
-    select movie.*
-    from movie
+    <!--主演-->
+    <select id="selectLeadingactorsOfMovieById" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select actor.*
+    from actor
     inner join movie_leadingactor
-    on movie.movie_id = movie_leadingactor.movie_id
-    where movie_leadingactor.leadingactor_id=#{actorId,jdbcType=INTEGER}
+    on actor.actor_id = movie_leadingactor.leadingactor_id and movie_leadingactor.movie_id=#{movieId,jdbcType=INTEGER}
   </select>
+
+    <!--根据movieAll的movieId更新所有的演员-->
+    <insert id="updateActorsByMovieAll">
+        insert ignore into
+        actor(actor_id, name)
+            values (#{actorId,jdbcType=INTEGER}, #{name,jdbcType=CHAR})
+    </insert>
+
 
 </mapper>

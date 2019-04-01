@@ -1,7 +1,7 @@
 package org.humingk.movie.mapper;
 
+import org.apache.ibatis.annotations.Param;
 import org.humingk.movie.entity.Actor;
-import org.humingk.movie.entity.Movie;
 
 import java.util.List;
 
@@ -16,11 +16,17 @@ public interface ActorMapper {
 
     int updateByPrimaryKey(Actor record);
 
-    // 根据演员ID查找所有的电影list
+//    -----------------
 
-    List<Movie> selectMoviesByDirectorId(Integer directorId);
+    void updateActorsByMovieAll(@Param("actorId") int actorId,@Param("name") String name);
 
-    List<Movie> selectMoviesByWriterId(Integer writerId);
+    // 根据movieId查找所有的actor
 
-    List<Movie> selectMoviesByLeadingactorId(Integer leadingactorId);
+    List<Actor> selectDirectorsOfMovieById(Integer movieId);
+
+    List<Actor> selectWritersOfMovieById(Integer movieId);
+
+    List<Actor> selectLeadingactorsOfMovieById(Integer movieId);
+
+
 }

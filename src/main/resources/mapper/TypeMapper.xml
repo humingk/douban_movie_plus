@@ -27,4 +27,26 @@
     select type_id, type_name
     from type
   </select>
+
+  <!--=======================-->
+
+  <!--根据movieId返回电影类型-->
+
+    <!--类型-->
+  <select id="selectTypesOfMovieById" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select type.type_id,type.type_name
+    from type
+    inner join movie_type
+    on type.type_id=movie_type.type_id and movie_type.movie_id=#{movieId,jdbcType=INTEGER}
+  </select>
+
+
+  <!--返回typeId用于更新movieType关联表-->
+  <select id="selectTypesByTypeName" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select type_id, type_name
+    from type
+    where type_name = #{typeName,jdbcType=CHAR}
+    limit 1
+  </select>
+
 </mapper>

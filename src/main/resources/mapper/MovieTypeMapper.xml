@@ -1,21 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.humingk.movie.mapper.MovieTypeMapper">
-  <resultMap id="BaseResultMap" type="org.humingk.movie.entity.MovieType">
-    <id column="type_id" jdbcType="INTEGER" property="typeId" />
-    <id column="movie_id" jdbcType="INTEGER" property="movieId" />
-  </resultMap>
-  <delete id="deleteByPrimaryKey" parameterType="map">
+    <resultMap id="BaseResultMap" type="org.humingk.movie.entity.MovieType">
+        <id column="type_id" jdbcType="INTEGER" property="typeId"/>
+        <id column="movie_id" jdbcType="INTEGER" property="movieId"/>
+    </resultMap>
+    <delete id="deleteByPrimaryKey" parameterType="map">
     delete from movie_type
     where type_id = #{typeId,jdbcType=INTEGER}
       and movie_id = #{movieId,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="org.humingk.movie.entity.MovieType">
+    <insert id="insert" parameterType="org.humingk.movie.entity.MovieType">
     insert into movie_type (type_id, movie_id)
     values (#{typeId,jdbcType=INTEGER}, #{movieId,jdbcType=INTEGER})
   </insert>
-  <select id="selectAll" resultMap="BaseResultMap">
+    <select id="selectAll" resultMap="BaseResultMap">
     select type_id, movie_id
     from movie_type
   </select>
+
+    <!--===================-->
+
+    <!--根据movieAll更新关联表-->
+    <insert id="updateMovieTypeByMovieAll">
+  insert ignore
+  into movie_type (type_id, movie_id)
+  values (#{typeId,jdbcType=INTEGER},#{movieId,jdbcType=INTEGER})
+  </insert>
 </mapper>

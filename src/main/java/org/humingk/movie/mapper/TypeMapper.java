@@ -1,7 +1,8 @@
 package org.humingk.movie.mapper;
 
-import java.util.List;
 import org.humingk.movie.entity.Type;
+
+import java.util.List;
 
 public interface TypeMapper {
     int deleteByPrimaryKey(Integer typeId);
@@ -13,4 +14,10 @@ public interface TypeMapper {
     List<Type> selectAll();
 
     int updateByPrimaryKey(Type record);
+
+//    -----------------
+
+    List<Type> selectTypesOfMovieById(Integer movieId);
+
+    Type selectTypesByTypeName(String typeName);
 }

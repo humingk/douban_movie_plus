@@ -18,4 +18,13 @@
     select tag_id, movie_id
     from movie_tag
   </select>
+
+  <!--==================-->
+
+  <!--根据movieAll更新关联表-->
+  <insert id="updateMovieTagByMovieAll">
+  insert ignore
+  into movie_tag (tag_id, movie_id)
+  values (#{tagId,jdbcType=INTEGER}, #{movieId,jdbcType=INTEGER})
+  </insert>
 </mapper>

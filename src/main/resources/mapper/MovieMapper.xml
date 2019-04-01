@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.humingk.movie.mapper.MovieMapper">
-  <resultMap id="BaseResultMap" type="org.humingk.movie.entity.Movie">
-    <id column="movie_id" jdbcType="INTEGER" property="movieId" />
-    <result column="name" jdbcType="CHAR" property="name" />
-    <result column="rate" jdbcType="REAL" property="rate" />
-    <result column="imdb_id" jdbcType="CHAR" property="imdbId" />
-    <result column="alias" jdbcType="VARCHAR" property="alias" />
-  </resultMap>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    <resultMap id="BaseResultMap" type="org.humingk.movie.entity.Movie">
+        <id column="movie_id" jdbcType="INTEGER" property="movieId"/>
+        <result column="name" jdbcType="CHAR" property="name"/>
+        <result column="rate" jdbcType="REAL" property="rate"/>
+        <result column="imdb_id" jdbcType="CHAR" property="imdbId"/>
+        <result column="alias" jdbcType="VARCHAR" property="alias"/>
+    </resultMap>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from movie
     where movie_id = #{movieId,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="org.humingk.movie.entity.Movie">
+    <insert id="insert" parameterType="org.humingk.movie.entity.Movie">
     insert into movie (movie_id, name, rate, 
       imdb_id, alias)
     values (#{movieId,jdbcType=INTEGER}, #{name,jdbcType=CHAR}, #{rate,jdbcType=REAL}, 
       #{imdbId,jdbcType=CHAR}, #{alias,jdbcType=VARCHAR})
   </insert>
-  <update id="updateByPrimaryKey" parameterType="org.humingk.movie.entity.Movie">
+    <update id="updateByPrimaryKey" parameterType="org.humingk.movie.entity.Movie">
     update movie
     set name = #{name,jdbcType=CHAR},
       rate = #{rate,jdbcType=REAL},
@@ -26,44 +26,42 @@
       alias = #{alias,jdbcType=VARCHAR}
     where movie_id = #{movieId,jdbcType=INTEGER}
   </update>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select movie_id, name, rate, imdb_id, alias
     from movie
     where movie_id = #{movieId,jdbcType=INTEGER}
   </select>
-  <select id="selectAll" resultMap="BaseResultMap">
+    <select id="selectAll" resultMap="BaseResultMap">
     select movie_id, name, rate, imdb_id, alias
     from movie
   </select>
 
-  <!--根据movieAll更新movie-->
-  <update id="updateMovieByMovieAll" parameterType="org.humingk.movie.common.MovieAll">
-    update movie
-    set name = #{name,jdbcType=CHAR},
-      rate = #{rate,jdbcType=REAL},
-      imdb_id = #{imdbId,jdbcType=CHAR},
-      alias = #{alias,jdbcType=VARCHAR}
-    where movie_id = #{movieId,jdbcType=INTEGER}
-  </update>
+    <!--根据movieAll更新movie-->
+    <insert id="updateMovieBaseByMovieAll">
+    Insert  ignore
+    into movie(movie_id,name,rate,imdb_id,alias)
+    values (#{movieId,jdbcType=INTEGER}, #{name,jdbcType=CHAR}, #{rate,jdbcType=REAL},
+      #{imdbId,jdbcType=CHAR}, #{alias,jdbcType=VARCHAR})
+  </insert>
 
 
-  <!--更新电影豆瓣评分-->
-  <update id="updateRateByPrimaryKey" >
+    <!--更新电影豆瓣评分-->
+    <update id="updateRateByPrimaryKey">
     update movie
     set movie.rate = #{rate,jdbcType=REAL}
     where movie.movie_id = #{movieId,jdbcType=INTEGER}
   </update>
 
-  <!--根据电影名返回电影集合-->
-  <select id="selectMoviesByName" parameterType="java.lang.String" resultMap="BaseResultMap">
+    <!--根据电影名返回电影集合-->
+    <select id="selectMoviesByName" parameterType="java.lang.String" resultMap="BaseResultMap">
     select movie.*
     from movie
     where movie.name=#{name,jdbcType=CHAR}
   </select>
 
-  <!--根据电影名或者部分电影名或者别称返回电影集合-->
+    <!--根据电影名或者部分电影名或者别称返回电影集合-->
 
-  <select id="selectMoviesByAlias" parameterType="java.lang.String" resultMap="BaseResultMap">
+    <select id="selectMoviesByAlias" parameterType="java.lang.String" resultMap="BaseResultMap">
     select movie.*
     from movie
     where movie.name like CONCAT('%',#{name,jdbcType=CHAR},'%') or movie.alias like CONCAT('%',#{name,jdbcType=CHAR},'%')
@@ -71,9 +69,9 @@
     limit 20
 </select>
 
-  <!--根据以 电影名 开头的字符串返回电影集合-->
+    <!--根据以 电影名 开头的字符串返回电影集合-->
 
-  <select id="selectMoviesByNameStart" parameterType="java.lang.String" resultMap="BaseResultMap">
+    <select id="selectMoviesByNameStart" parameterType="java.lang.String" resultMap="BaseResultMap">
       select movie.*
     from movie
     where movie.name like CONCAT('',#{name,jdbcType=CHAR},'%')
@@ -81,98 +79,43 @@
      limit 10
   </select>
 
-  <!--根据电影id返回电影的详细资料-->
+    <!--根据电影id返回电影的详细资料-->
 
-  <!--基本资料-->
-  <select id="selectMovieBaseById" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    <!--基本资料-->
+    <select id="selectMovieBaseById" parameterType="java.lang.Integer" resultMap="BaseResultMap">
   select movie.*
   from movie
   where movie.movie_id=#{movieId,jdbcType=INTEGER}
   </select>
 
-  <!--演员返回类型-->
-  <resultMap id="ActorList" type="org.humingk.movie.entity.Actor">
-    <id column="actor_id" property="actorId"></id>
-    <result column="name" property="name"></result>
-    <result column="sex" property="sex"></result>
-    <result column="homeplace" property="homeplace"></result>
-    <result column="birthday" property="birthday"></result>
-    <result column="occupation" property="occupation"></result>
-    <result column="alias" property="alias"></result>
-    <result column="imdb_id" property="imdbId"></result>
-  </resultMap>
 
-  <!--导演-->
-  <select id="selectDirectorsOfMovieById" parameterType="java.lang.Integer" resultMap="ActorList">
-    select actor.*
-    from actor
+    <!--根据演员的ID返回所有的电影-->
+
+    <!--根据导演id-->
+    <select id="selectMoviesByDirectorId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select movie.*
+    from movie
     inner join movie_director
-    on actor.actor_id = movie_director.director_id and movie_director.movie_id=#{movieId,jdbcType=INTEGER}
+    on movie.movie_id = movie_director.movie_id
+    where movie_director.director_id=#{actorId,jdbcType=INTEGER}
   </select>
 
-  <!--编剧-->
-  <select id="selectWritersOfMovieById" parameterType="java.lang.Integer" resultMap="ActorList">
-     select actor.*
-     FROM actor,movie_writer
-     where movie_writer.writer_id=actor.actor_id and movie_writer.movie_id=#{movieId,jdbcType=INTEGER}
+    <!--根据编剧id-->
+    <select id="selectMoviesByWriterId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select movie.*
+    from movie
+    inner join movie_writer
+    on movie.movie_id = movie_writer.movie_id
+    where movie_writer.writer_id=#{actorId,jdbcType=INTEGER}
   </select>
 
-  <!--错误 查不到结果 待解决-->
-  <!--select actor.*-->
-  <!--from actorinner-->
-  <!--join movie_writer-->
-  <!--on actor.actor_id = movie_writer.writer_id-->
-  <!--and-->
-  <!--movie_writer.movie_id=1291346-->
-
-  <!--主演-->
-  <select id="selectLeadingactorsOfMovieById" parameterType="java.lang.Integer" resultMap="ActorList">
-    select actor.*
-    from actor
+    <!--根据主演id-->
+    <select id="selectMoviesByLeadingactorId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select movie.*
+    from movie
     inner join movie_leadingactor
-    on actor.actor_id = movie_leadingactor.leadingactor_id and movie_leadingactor.movie_id=#{movieId,jdbcType=INTEGER}
-  </select>
-
-  <!--类型 返回类型-->
-  <resultMap id="TypeList" type="org.humingk.movie.entity.Type">
-    <id column="type_id" jdbcType="INTEGER" property="typeId"></id>
-    <result column="type_name" jdbcType="CHAR" property="typeName"></result>
-  </resultMap>
-
-  <!--类型-->
-  <select id="selectTypesOfMovieById" parameterType="java.lang.Integer" resultMap="TypeList">
-    select type.type_id,type.type_name
-    from type
-    inner join movie_type
-    on type.type_id=movie_type.type_id and movie_type.movie_id=#{movieId,jdbcType=INTEGER}
-  </select>
-
-  <!--3.标签 返回类型-->
-  <resultMap id="TagList" type="org.humingk.movie.entity.Tag">
-    <id column="tag_id" property="tagId"></id>
-    <result column="tag_name" property="tagName"></result>
-  </resultMap>
-
-  <!--标签-->
-  <select id="selectTagsOfMovieById" parameterType="java.lang.Integer" resultMap="TagList">
-    select tag.*
-    from tag
-    inner join movie_tag
-    on tag.tag_id=movie_tag.tag_id and movie_tag.movie_id=#{movieId,jdbcType=INTEGER}
-  </select>
-
-  <!--4.上映时间 返回类型-->
-  <resultMap id="ReleaseTimeList" type="org.humingk.movie.entity.Releasetime">
-    <id column="releasetime_id" property="releasetimeId"></id>
-    <result column="time_area" property="timeArea"></result>
-  </resultMap>
-
-  <!--上映时间-->
-  <select id="selectReleasetimesOfMovieById" parameterType="java.lang.Integer" resultMap="ReleaseTimeList">
-    select releasetime.*
-    from releasetime
-    inner join movie_releasetime
-    on releasetime.releasetime_id = movie_releasetime.releasetime_id and movie_releasetime.movie_id=#{movieId,jdbcType=INTEGER}
+    on movie.movie_id = movie_leadingactor.movie_id
+    where movie_leadingactor.leadingactor_id=#{actorId,jdbcType=INTEGER}
   </select>
 
 </mapper>

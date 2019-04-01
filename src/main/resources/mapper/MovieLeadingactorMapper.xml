@@ -18,4 +18,14 @@
     select movie_id, leadingactor_id
     from movie_leadingactor
   </select>
+
+  <!--===================-->
+
+  <!--根据movieAll更新关联表-->
+  <insert id="updateMovieLeadingactorByMovieAll" >
+    insert ignore
+    into movie_leadingactor (movie_id, leadingactor_id)
+    values (#{movieId,jdbcType=INTEGER}, #{leadingactorId,jdbcType=INTEGER})
+  </insert>
+
 </mapper>

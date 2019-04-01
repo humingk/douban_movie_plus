@@ -27,17 +27,24 @@ public class MovieController {
      * @param modelAndView
      * @return
      */
-    @RequestMapping(value = "{movieId}", method = RequestMethod.GET)
+    @RequestMapping(value = {"{movieId}","{movieId}/*"} , method = RequestMethod.GET)
     @ResponseBody
     public ModelAndView subject(@PathVariable("movieId") int movieId, ModelAndView modelAndView) {
         MovieAll movieAll= new MovieAll();
         try{
-            // 成功获取电影，返回电影信息
             movieAll = movieService.getMovieAllByMovieId(movieId);
-            modelAndView.addObject("movieAllString", ResultMessage.createMessage(200, "OK", movieAll));
-        }catch (Exception e){
+            // 成功获取电影，返回电影信息
+            if(movieAll!=null){
+                System.out.println("有这个电影========================================");
+                modelAndView.addObject("movieAllString", ResultMessage.createMessage(200, "OK", movieAll));
+            }
             //获取电影失败，返回添加电影确认信息
-            modelAndView.addObject("movieAllString", ResultMessage.createMessage(200, "ADD", null));
+            else {
+                System.out.println("没有这个电影========================================");
+                modelAndView.addObject("movieAllString", ResultMessage.createMessage(200, "ADD", null));
+            }
+        }catch (Exception e){
+            e.printStackTrace();
         }
         modelAndView.setViewName("subject");
         return modelAndView;
@@ -46,21 +53,38 @@ public class MovieController {
     /**
      * 添加数据库中没有的movieAll
      * @param movieAll
-     * @param modelAndView
      * @return
      */
     @RequestMapping(value = "addMovieAll",method = RequestMethod.POST)
     @ResponseBody
-    public ModelAndView addMovieAll(@RequestBody MovieAll movieAll,ModelAndView modelAndView){
+    public String addMovieAll(@RequestBody MovieAll movieAll){
+        // 添加成功
         if(movieService.addMovieAll(movieAll)){
-            modelAndView.addObject("isAdded",ResultMessage.createMessage(200,"OK",null));
-        }else {
-            modelAndView.addObject("isAdded",ResultMessage.createMessage(200,"NO",null));
+            System.out.println("添加成功=============================================");
+            // 将movieAll返回
         }
-        modelAndView.setViewName("subject");
-        return modelAndView;
+        // 添加失败
+        else {
+            System.out.println("添加失败=============================================");
+        }
+        return "";
     }
 
+    /**
+     * ===========此controller暂时没用==================
+     *
+     * 自动收录电影的跳转页
+     * @param movieId
+     * @param modelAndView
+     * @return
+     */
+    @RequestMapping(value = "autoReflush",method = RequestMethod.GET)
+    @ResponseBody
+    public ModelAndView autoReflush(@RequestParam("movieId") int movieId,ModelAndView modelAndView){
+        modelAndView.addObject("autoReflush",ResultMessage.createMessage(200,"OK",movieId));
+        modelAndView.setViewName("autoReflush");
+        return modelAndView;
+    }
 
     /**
      * 更新数据库电影评分

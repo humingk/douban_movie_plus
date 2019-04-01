@@ -18,4 +18,15 @@
     select movie_id, releasetime_id
     from movie_releasetime
   </select>
+
+  <!--==============-->
+
+  <!--根据movieAll更新关联表-->
+  <insert id="updateMovieReleasetimeByMovieAll" >
+    insert ignore
+    into movie_releasetime (movie_id, releasetime_id)
+    values (#{movieId,jdbcType=INTEGER}, #{releasetimeId,jdbcType=INTEGER})
+  </insert>
+
+
 </mapper>

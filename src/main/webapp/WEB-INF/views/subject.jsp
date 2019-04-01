@@ -38,7 +38,6 @@
 
     <style type="text/css">
 
-
         　　 </style>
 
 
@@ -50,16 +49,34 @@
 <table>
 
     <script type="text/javascript">
-        var movieAllJson = ${movieAllString}["data"];
-        console.log(movieAllJson);
+        // 本项目的url
+        var url_base = "http://localhost:8080";
 
-        // js执行顺序
+        // neteaseMusic api url
+        var url_netease = "http://localhost:3000";
+
+        // IMDB OMDB api url
+        var url_omdb = "http://www.omdbapi.com";
+        var apikey_omdb = "apikey=e409ce71";
+
+        // IMDB url
+        var url_imdb = "https://www.imdb.com";
+
+        // 豆瓣V2 API url apiKey
+        var url_douban = "http://api.douban.com";
+        var apikey_douban = "apikey=0b2bdeda43b5688921839c8ecb20399b";
+
+        /**
+         * js执行顺序
+         *
+         *
+         */
         $(document).ready(function () {
             // 当前电影豆瓣ID
             var urlId = /\d{5,}/.exec(document.URL);
             // 获取豆瓣API数据 并决定是否添加数据库
             getMovieDoubanApi(urlId);
-            getNeteaseMusic(movieAllJson["movieId"]);
+
         });
 
         // 电影基本资料
@@ -67,8 +84,9 @@
             $("#movie_name").append("影名     " + movieAllJson["name"]);
             $("#movie_alias").append("别称     " + movieAllJson["alias"]);
             $("#movie_rate").append("评分     " + movieAllJson["rate"]);
-            $("#movie_imdbId").append("IMDB     " + "<a href='https://www.imdb.com/title/" + movieAllJson["imdbId"] + "'>" + movieAllJson["imdbId"] + "</a>");
-
+            if (movieAllJson["imdbId"]!="") {
+                $("#movie_imdbId").append("IMDB     " + "<a href='" + url_imdb + "/title/" + movieAllJson["imdbId"] + "'>" + movieAllJson["imdbId"] + "</a>");
+            }
             MovieOthersAppend(movieAllJson.directors, "name", "celebrity", "actorId", "movie_directors", "导演");
             MovieOthersAppend(movieAllJson.writers, "name", "celebrity", "actorId", "movie_writers", "编剧");
             MovieOthersAppend(movieAllJson.leadingactors, "name", "celebrity", "actorId", "movie_leadingactors", "主演");
@@ -99,7 +117,7 @@
         function getMovieDoubanApi(movieId) {
             $.ajax({
                 type: "GET",
-                url: "http://api.douban.com/v2/movie/subject/" + movieId + "?apikey=0b2bdeda43b5688921839c8ecb20399b",
+                url: url_douban + "/v2/movie/subject/" + movieId + "?" + apikey_douban,
                 dataType: "JSONP",
                 headers: {
                     "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3",
@@ -110,24 +128,39 @@
                     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36"
                 },
                 success: function (result) {
+                    // ===============================================================
+                    console.log("douban API data:");
                     console.log(result);
 
-                    // 判断数据库中是否有此电影 ， 没有的话添加
+                    // 判断数据库中是否有此电影，没有则添加
                     if (${movieAllString}["message"] == "OK") {
-                        setMovieBase(movieAllJson);
+
+                        // ===============================================================
+                        console.log("movieAll base data:");
+                        console.log(${movieAllString});
+
+                        // 设置movieAll base
+                        setMovieBase(${movieAllString}["data"]);
+
+                        // IMDB api 获取
+                        // 豆瓣API JSON中没有IMDB_ID信息
+                        if (${movieAllString}["data"]["imdbId"] != "") {
+                            getImdbApi(${movieAllString}["data"]["imdbId"]);
+                        }
+
                     } else if (${movieAllString}["message"] == "ADD") {
                         addMovieAll(result);
                     }
-                    // 测试===========================================================================
-                    addMovieAll(result);
-                    // 测试===========================================================================
 
                     // 更新后台数据库评分 movieId rate
                     updateRate(result["id"], result["rating"]["average"]);
                     $("#movie_rate").html("评分     " + result["rating"]["average"]);
 
+                    // 网易云音乐api 之doubanAPI获取
+                    getNeteaseMusic(result["name"]);
+
                     // 展示API中的数据
-                    $("#movie_poster").append("<img src='" + result["images"]["large"] + "'>");
+                    $("#movie_poster").append("<img src='" + result["images"]["large"] + "' rel='noreferrer'>");
                     $("#movie_summary").append("<p>" + result["summary"] + "</p>");
 
                     $.each(result["popular_comments"], function (i, popular_comment) {
@@ -161,8 +194,9 @@
         function updateRate(movieId, rate) {
             $.ajax({
                 type: "GET",
-                url: "/subject/updateRate?movieId=" + movieId + "&rate=" + rate,
+                url: url_base + "/subject/updateRate?movieId=" + movieId + "&rate=" + rate,
                 success: function (result) {
+                    // ===============================================================
                     console.log("update rate success");
                 }
             });
@@ -174,71 +208,134 @@
                 "movieId": data["id"],
                 "name": data["title"],
                 "rate": data["rating"]["average"],
-                "imdbId":null,
-                "alias":data["aka"].toString().replace(/,/g,"/"),
-                "directors":[],
-                "writers":null,
-                "leadingactors":[],
-                "types":[],
-                "tags":[],
-                "releasetimes":[]
+                "imdbId": "",
+                "alias": data["aka"].toString().replace(/,/g, "/"),
+                "directors": [],
+                "writers": [],
+                "leadingactors": [],
+                "types": [],
+                "tags": [],
+                "releasetimes": []
             };
-            addMovieActors(movieAll.directors,data["directors"]);
-            addMovieActors(movieAll.leadingactors,data["casts"]);
-            $.each(data["pubdates"],function (i,releasetime) {
-                movieAll.releasetimes.push({"timeArea":releasetime});
+            addMovieActors(movieAll.directors, data["directors"]);
+            addMovieActors(movieAll.leadingactors, data["casts"]);
+            $.each(data["pubdates"], function (i, releasetime) {
+                movieAll.releasetimes.push({"timeArea": releasetime});
             });
-            $.each(data["genres"],function (i,type) {
-                movieAll.types.push({"typeName":type});
+            $.each(data["genres"], function (i, type) {
+                movieAll.types.push({"typeName": type});
             });
-            $.each(data["tags"],function (i,tag) {
-               movieAll.tags.push({"tagName":tag});
+            $.each(data["tags"], function (i, tag) {
+                movieAll.tags.push({"tagName": tag});
             });
-            console.log(movieAll);
             // 异步上传movieAll
             $.ajax({
-                url:"/subject/addMovieAll",
-                type:"POST",
-                data:JSON.stringify(movieAll),
-                dataType : "json",
-                contentType : "application/json",
-                success:function (result) {
-                    console.log("update movieAll success");
+                url: url_base + "/subject/addMovieAll",
+                type: "POST",
+                data: JSON.stringify(movieAll),
+                dataType: "json",
+                contentType: "application/json",
+                success: function (result) {
+                    // ===============================================================
+                    console.log("add movieAll success");
+                    setMovieBase(movieAll);
+
                 }
             });
         }
+
         // 回传的movieAll添加actor信息
-        function addMovieActors(mActors,dActors) {
-            $.each(dActors,function (i) {
-                mActors.push({"actorId":dActors[i]["id"],"name":dActors[i]["name"]});
+        function addMovieActors(mActors, dActors) {
+            $.each(dActors, function (i) {
+                mActors.push({"actorId": dActors[i]["id"], "name": dActors[i]["name"]});
             });
         }
 
 
         // 获取网易云音乐 电影相关搜索信息
-        function getNeteaseMusic() {
+        function getNeteaseMusic(movieName) {
             $.ajax({
                 type: "GET",
                 dataType: "json",
-                url: "http://localhost:3000/search/suggest?keywords=" + ${movieAllString}["data"]["name"],
+                url: url_netease + "/search/suggest?keywords=" + movieName,
                 success: function (result) {
+                    // ===============================================================
+                    console.log("netease movie search:");
                     console.log(result);
-                    if ("songs" in result["result"]) {
-                        var music_id = result["result"]["songs"][0]["id"];
-                        getMusicComments(music_id);
+                    if ("result" in result) {
+                        if ("songs" in result["result"]) {
+                            var song_id = result["result"]["songs"][0]["id"];
+                            getMusicComments(song_id);
+                        }
+                        if ("albums" in result["result"]) {
+                            var album_id = result["result"]["albums"][0]["id"];
+                            getMusicAlbums(album_id);
+                        }
+                        if ("playlists" in result["result"]) {
+                            var playlist_id = result["result"]["playlists"][0]["id"];
+                            getMusicPlaylists(playlist_id);
+                        }
                     }
                 }
             });
         }
 
-        // 获取网易云音乐 对应歌曲评论信息
-        function getMusicComments(music_id) {
+        // 获取网易云音乐 歌曲评论
+        function getMusicComments(song_id) {
             $.ajax({
                 type: "GET",
                 dataType: "json",
-                url: "http://localhost:3000/comment/music?id=" + music_id,
+                url: url_netease + "/comment/music?id=" + song_id,
                 success: function (result) {
+                    // ===============================================================
+                    console.log("netease song comments:");
                     console.log(result);
+
+                }
+            });
+        }
+
+        // 获取网易云音乐 专辑评论
+        function getMusicAlbums(album_id) {
+            $.ajax({
+                type: "GET",
+                dataType: "json",
+                url: url_netease + "/comment/album?id=" + album_id,
+                success: function (result) {
+                    // ===============================================================
+                    console.log("netease album comments:");
+                    console.log(result);
+
+                }
+            });
+        }
+
+        // 获取网易云音乐 歌单评论
+        function getMusicPlaylists(playlist_id) {
+            $.ajax({
+                type: "GET",
+                dataType: "json",
+                url: url_netease + "/comment/playlist?id=" + playlist_id,
+                success: function (result) {
+                    // ===============================================================
+                    console.log("netease playlist comments:");
+                    console.log(result);
+
+                }
+            });
+        }
+
+        // IMDB
+        function getImdbApi(imdbId) {
+            $.ajax({
+                url: url_omdb + "/?" + apikey_omdb + "&plot=full&i=" + imdbId,
+                type: "GET",
+                dataType: "json",
+                success: function (result) {
+                    // ===============================================================
+                    console.log("IMDB API data:");
+                    console.log(result);
+
                 }
             });
         }
@@ -288,7 +385,6 @@
     <div id="movie_netease_music">
 
     </div>
-
 
 </div>
 
