@@ -53,7 +53,6 @@ public class MovieServiceImpl implements MovieService {
     @Override
     public MovieAll getMovieAllByMovieId(int movieId) {
 
-
         try {
             // 提取电影信息
             MovieAll movieAll = new MovieAll(movieMapper.selectMovieBaseById(movieId));
@@ -65,16 +64,7 @@ public class MovieServiceImpl implements MovieService {
             movieAll.setReleasetimes(releasetimeMapper.selectReleasetimesOfMovieById(movieId));
             return movieAll;
         } catch (Exception e) {
-            // 提取失败，查无此电影，添加电影库信息
-
-
-            try {
-                //添加后，再次提取电影信息
-
-
-            } catch (Exception ee) {
-                // 添加后，仍提取失败
-            }
+            e.printStackTrace();
         }
         return null;
     }
@@ -149,7 +139,6 @@ public class MovieServiceImpl implements MovieService {
             e.printStackTrace();
         }
     }
-
 
     /**
      * 向数据库添加movieAll

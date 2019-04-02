@@ -6,12 +6,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="utf-8" %>
 <html>
 <head>
-    <style>
-        body {
-            background-color: black;
-            color: white;
-        }
-    </style>
+
     <script src='https://code.jquery.com/jquery-3.3.1.min.js'></script>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>豆瓣电影1S</title>

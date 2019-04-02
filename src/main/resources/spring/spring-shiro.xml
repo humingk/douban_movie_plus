@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+
+    <!--组件扫描-->
+    <context:component-scan base-package="org.humingk.movie.realm"></context:component-scan>
+
+    <!--启用shiro注解-->
+    <bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator" depends-on="lifecycleBeanPostProcessor"/>
+    <bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
+        <property name="securityManager" ref="securityManager"/>
+    </bean>
+
+
+    <bean id="myRealm" class="org.humingk.movie.realm.MyRealm">
+
+        <!--MD5加密-->
+        <property name="credentialsMatcher">
+            <bean class="org.apache.shiro.authc.credential.HashedCredentialsMatcher">
+                <!-- MD5 -->
+                <property name="hashAlgorithmName" value="MD5"/>
+                <!-- 加密次数 -->
+                <property name="hashIterations" value="1024"/>
+            </bean>
+        </property>
+    </bean>
+
+    <!-- 配置安全管理器 -->
+    <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+        <!--注入myRealm-->
+        <property name="realm" ref="myRealm"/>
+    </bean>
+
+
+
+    <!-- 配置Shiro过滤器，id对应web.xml -->
+    <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+        <!-- Shiro核心安全接口 -->
+        <property name="securityManager" ref="securityManager"/>
+        <!-- 身份认证失败，跳转到登录页面的配置 -->
+        <property name="loginUrl" value="/login.jsp"/>
+        <!-- 权限认证失败，则跳转到指定页面 -->
+        <property name="unauthorizedUrl" value="/unauthor.jsp"/>
+        <!-- Shiro连接约束配置,过滤链的定义 -->
+        <property name="filterChainDefinitions">
+            <value>
+                # url=拦截器[参数]，拦截器
+                # 如果用户没有该角色，然后访问该 路径 会报 401错误
+
+                # anon  匿名   不需要认证
+                /login          =   anon
+                /subject/**     =   anon
+                /celebrity/**   =   anon
+                /search/**      =   anon
+                /autoRefush/**  =   anon
+                /errorPage/**   =   anon
+                /tag/**         =   anon
+                /index/**       =   anon
+
+                # anon 静态资源 不需要认证
+                /css/**         =   anon
+                /js/**          =   anon
+                /images/**      =   anon
+
+
+                # user 注册用户 认证才能访问
+                /people/**      =   authc, roles[user]
+
+            </value>
+        </property>
+    </bean>
+
+    <!--生命周期-->
+    <!-- 保证Shiro内部lifecycle函数的bean执行 -->
+    <bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"/>
+</beans>

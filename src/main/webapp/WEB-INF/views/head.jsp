@@ -6,9 +6,13 @@
 <html>
 <head>
 
-    <title>404</title>
+    <script src='https://code.jquery.com/jquery-3.3.1.min.js'></script>
+    <script type="text/javascript">
+
+    </script>
+
 </head>
 <body>
-404 not found
+
 </body>
 </html>

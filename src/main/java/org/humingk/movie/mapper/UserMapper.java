@@ -1,7 +1,8 @@
 package org.humingk.movie.mapper;
 
-import java.util.List;
 import org.humingk.movie.entity.User;
+
+import java.util.List;
 
 public interface UserMapper {
     int deleteByPrimaryKey(Integer userId);
@@ -13,4 +14,13 @@ public interface UserMapper {
     List<User> selectAll();
 
     int updateByPrimaryKey(User record);
+
+//    --------------
+
+    /**
+     * 根据email获取user
+     * @param email
+     * @return
+     */
+    User selectByUserEmail(String email);
 }

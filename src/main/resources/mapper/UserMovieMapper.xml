@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.humingk.movie.mapper.UserMovieMapper">
+  <resultMap id="BaseResultMap" type="org.humingk.movie.entity.UserMovie">
+    <id column="user_id" jdbcType="INTEGER" property="userId" />
+    <id column="movie_id" jdbcType="INTEGER" property="movieId" />
+    <result column="rate" jdbcType="REAL" property="rate" />
+    <result column="wish" jdbcType="BIT" property="wish" />
+    <result column="sean" jdbcType="BIT" property="sean" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="map">
+    delete from user_movie
+    where user_id = #{userId,jdbcType=INTEGER}
+      and movie_id = #{movieId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="org.humingk.movie.entity.UserMovie">
+    insert into user_movie (user_id, movie_id, rate, 
+      wish, sean)
+    values (#{userId,jdbcType=INTEGER}, #{movieId,jdbcType=INTEGER}, #{rate,jdbcType=REAL}, 
+      #{wish,jdbcType=BIT}, #{sean,jdbcType=BIT})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="org.humingk.movie.entity.UserMovie">
+    update user_movie
+    set rate = #{rate,jdbcType=REAL},
+      wish = #{wish,jdbcType=BIT},
+      sean = #{sean,jdbcType=BIT}
+    where user_id = #{userId,jdbcType=INTEGER}
+      and movie_id = #{movieId,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="map" resultMap="BaseResultMap">
+    select user_id, movie_id, rate, wish, sean
+    from user_movie
+    where user_id = #{userId,jdbcType=INTEGER}
+      and movie_id = #{movieId,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select user_id, movie_id, rate, wish, sean
+    from user_movie
+  </select>
+</mapper>
