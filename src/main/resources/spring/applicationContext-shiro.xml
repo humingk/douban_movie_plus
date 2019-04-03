@@ -16,6 +16,7 @@
 
 
     <bean id="myRealm" class="org.humingk.movie.realm.MyRealm">
+        <property name="shiroService" ref="shiroService"></property>
 
         <!--MD5加密-->
         <property name="credentialsMatcher">
@@ -27,6 +28,10 @@
             </bean>
         </property>
     </bean>
+
+    <!--将shiroService注入MyRealm-->
+    <bean id="shiroService" class="org.humingk.movie.service.impl.ShiroServiceImpl"></bean>
+
 
     <!-- 配置安全管理器 -->
     <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
@@ -55,6 +60,7 @@
                 /subject/**     =   anon
                 /celebrity/**   =   anon
                 /search/**      =   anon
+                /noPermission/**=   anon
                 /autoRefush/**  =   anon
                 /errorPage/**   =   anon
                 /tag/**         =   anon
@@ -68,6 +74,9 @@
 
                 # user 注册用户 认证才能访问
                 /people/**      =   authc, roles[user]
+
+                # admin 管理员 认证才能访问
+                /admin/**      =   authc,roles[admin]
 
             </value>
         </property>

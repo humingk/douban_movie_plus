@@ -158,7 +158,34 @@ create table user
   index (email)
 ) ENGINE = InnoDB
   DEFAULT charset = utf8mb4;
+
 # shiro
+/**
+# 重置自增ID
+alter TABLE user auto_increment =1;
+alter TABLE role auto_increment =1;
+alter TABLE permission auto_increment =1;
+
+# user:
+INSERT INTO `user`(user_id,email,`password`,name,label,phone) VALUES(1,"hukk@qq.com","1233","小明也来过","humingk","15612331233");
+INSERT INTO `user`(user_id,email,`password`,name,label,phone) VALUES(2,"kk@qq.com","1233","大明","kk","15612331233");
+
+# role:
+insert into role(role_id,name,description) values(1,"admin","管理员用户");
+insert into role(role_id,name,description) values(2,"user","普通注册用户");
+
+# user_role:
+insert into user_role(user_id,role_id) values(1,1);
+insert into user_role(user_id,role_id) values(1,2);
+insert into user_role(user_id,role_id) values(2,2);
+
+# permission:
+insert into permission(permission_id, url,role_id,description) values(1,"/people/**",1,"访问个人主页");
+insert into permission(permission_id, url,role_id,description) values(2,"/admin/**",1,"管理员页面");
+insert into permission(permission_id, url,role_id,description) values(3,"/people/**",2,"访问个人主页");
+
+ */
+
 
 create table role
 (

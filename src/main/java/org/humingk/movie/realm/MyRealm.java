@@ -8,18 +8,28 @@ import org.apache.shiro.subject.PrincipalCollection;
 import org.humingk.movie.entity.Permission;
 import org.humingk.movie.entity.User;
 import org.humingk.movie.service.ShiroService;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 /**
  * @author humin
  */
+
+@Component
 public class MyRealm extends AuthorizingRealm {
-    @Autowired
+
+    @Resource(name = "shiroService")
     private ShiroService shiroService;
 
+    public void setShiroService(ShiroService shiroService) {
+        this.shiroService = shiroService;
+    }
 
+    public ShiroService getShiroService() {
+        return shiroService;
+    }
     /**
      * 登陆验证:
      *      用户登录时，为用户授予权限和角色
@@ -67,7 +77,7 @@ public class MyRealm extends AuthorizingRealm {
      * <p/>
      * A {@code null} return value means that no account could be associated with the specified token.
      *
-     * @param token the authentication token containing the user's principal and credentials.
+     * @param authenticationToken the authentication token containing the user's principal and credentials.
      * @return an {@link AuthenticationInfo} object containing account data resulting from the
      * authentication ONLY if the lookup is successful (i.e. account exists and is valid, etc.)
      * @throws AuthenticationException if there is an error acquiring data or performing
@@ -83,7 +93,7 @@ public class MyRealm extends AuthorizingRealm {
         if(user == null){
             return null;
         }
-        // 包装简单认证信息的包装，交给securityManager
+        // 身份认证验证成功，返回一个AuthenticationInfo实现
         AuthenticationInfo info = new SimpleAuthenticationInfo(user, user.getPassword(), this.getClass().getSimpleName());
         return info;
     }

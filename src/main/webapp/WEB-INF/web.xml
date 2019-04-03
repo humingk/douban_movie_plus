@@ -4,6 +4,29 @@
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0">
 
+    <!--配置 dispatcherServlet-->
+    <!--需要在最前面，shiroRelam属于filter即过滤器，它在Spring未完成注入bean之前就已经拦截了，因此无法注入。-->
+    <servlet>
+        <servlet-name>dispatcherServlet</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <!-- 配置springMVC需要加载的配置文件
+            mybatis:        spring-mapper.xml
+            spring:         spring-service.xml
+            spring-MVC:     spring-mvc.xml
+         -->
+        <init-param>
+            <param-name>contextConfigLocation</param-name>
+            <param-value>classpath:spring/spring-*.xml</param-value>
+        </init-param>
+        <!--解决懒加载，优先启动此servlet-->
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>dispatcherServlet</servlet-name>
+        <!-- 默认匹配所有的请求 -->
+        <url-pattern>/</url-pattern>
+    </servlet-mapping>
+
 
     <!-- 默认界面 -->
     <welcome-file-list>
@@ -54,14 +77,12 @@
         <dispatcher>ERROR</dispatcher>
     </filter-mapping>
     
-    <!--shiro 过滤器-->
+    <!--&lt;!&ndash;shiro 过滤器&ndash;&gt;-->
     <filter>
         <filter-name>shiroFilter</filter-name>
         <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
         <init-param>
             <param-name>targetFilterLifecycle</param-name>
-            <!-- 默认为false,表示生命周期由SpringApplicationContext管理,
-                设置为true则表示由ServletContainer管理 -->
             <param-value>true</param-value>
         </init-param>
     </filter>
@@ -70,35 +91,22 @@
         <url-pattern>/*</url-pattern>
     </filter-mapping>
 
+    <!--加载spring-shiro.xml-->
+    <!--在web.xml中，先执行filter再执行servlet-->
+    <!--故shiro不能用servlet加载，应该用context-param 加载-->
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>classpath:/spring/applicationContext-shiro.xml</param-value>
+    </context-param>
 
-    <!--配置监听器 contextLoaderListener-->
+    <!--Spring 监听器-->
     <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>
-    <context-param>
-        <param-name>contextConfigLocation</param-name>
-        <param-value>classpath:applicationContext.xml</param-value>
-    </context-param>
 
-    <!--配置 dispatcherServlet-->
-    <servlet>
-        <servlet-name>dispatcherServlet</servlet-name>
-        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
-        <!-- 配置springMVC需要加载的配置文件
-            mybatis:        spring-mapper.xml
-            spring:         spring-service.xml
-            spring-MVC:     spring-mvc.xml
-         -->
-        <init-param>
-            <param-name>contextConfigLocation</param-name>
-            <param-value>classpath:spring/spring-*.xml</param-value>
-        </init-param>
-        <!--解决懒加载，优先启动此servlet-->
-        <load-on-startup>1</load-on-startup>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>dispatcherServlet</servlet-name>
-        <!-- 默认匹配所有的请求 -->
-        <url-pattern>/</url-pattern>
-    </servlet-mapping>
+    <!--监听器 防止spring内存溢出-->
+    <listener>
+        <listener-class>org.springframework.web.util.IntrospectorCleanupListener</listener-class>
+    </listener>
+
 </web-app>

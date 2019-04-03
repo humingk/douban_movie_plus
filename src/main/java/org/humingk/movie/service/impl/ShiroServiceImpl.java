@@ -19,11 +19,11 @@ import java.util.List;
 @Service
 public class ShiroServiceImpl implements ShiroService {
 
-    @Autowired
+    @Autowired(required = false)
     private UserMapper userMapper;
-    @Autowired
+    @Autowired(required = false)
     private RoleMapper roleMapper;
-    @Autowired
+    @Autowired(required = false)
     private PermissionMapper permissionMapper;
 
     /**
