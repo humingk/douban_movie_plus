@@ -3,7 +3,6 @@
 <mapper namespace="org.humingk.movie.mapper.CommentMapper">
   <resultMap id="BaseResultMap" type="org.humingk.movie.entity.Comment">
     <id column="comment_id" jdbcType="INTEGER" property="commentId" />
-    <result column="rate" jdbcType="REAL" property="rate" />
     <result column="comments" jdbcType="VARCHAR" property="comments" />
   </resultMap>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
@@ -11,24 +10,21 @@
     where comment_id = #{commentId,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="org.humingk.movie.entity.Comment">
-    insert into comment (comment_id, rate, comments
-      )
-    values (#{commentId,jdbcType=INTEGER}, #{rate,jdbcType=REAL}, #{comments,jdbcType=VARCHAR}
-      )
+    insert into comment (comment_id, comments)
+    values (#{commentId,jdbcType=INTEGER}, #{comments,jdbcType=VARCHAR})
   </insert>
   <update id="updateByPrimaryKey" parameterType="org.humingk.movie.entity.Comment">
     update comment
-    set rate = #{rate,jdbcType=REAL},
-      comments = #{comments,jdbcType=VARCHAR}
+    set comments = #{comments,jdbcType=VARCHAR}
     where comment_id = #{commentId,jdbcType=INTEGER}
   </update>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select comment_id, rate, comments
+    select comment_id, comments
     from comment
     where comment_id = #{commentId,jdbcType=INTEGER}
   </select>
   <select id="selectAll" resultMap="BaseResultMap">
-    select comment_id, rate, comments
+    select comment_id, comments
     from comment
   </select>
 </mapper>

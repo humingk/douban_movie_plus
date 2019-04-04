@@ -21,5 +21,4 @@ public interface PermissionMapper {
      * @return
      */
     List<Permission> selectByRoleId(Integer roleId);
-
 }

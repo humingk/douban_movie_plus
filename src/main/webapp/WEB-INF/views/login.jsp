@@ -17,9 +17,18 @@
 <body>
 
 <form id="user_login" action="/loginForm" method="post">
-    email:<input type="text" name="email"><br>
+    email:<input type="text" name="email" placeholder="请用邮箱登录"><br>
     password:<input type="password" name="password"><br>
     <input type="submit" value="login">
+</form>
+=========================
+<form id="user_register" action="/registerForm" method="post">
+    email:<input type="text" name="email" placeholder="请用邮箱注册"><br>
+    alias:<input type="text" name="name"><br>
+    label:<input type="text" name="label"><br>
+    phone:<input type="text" name="phone"><br>
+    password:<input type="password" name="password"><br>
+    <input type="submit" value="register">
 </form>
 
 </body>

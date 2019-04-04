@@ -15,7 +15,7 @@ public interface UserMapper {
 
     int updateByPrimaryKey(User record);
 
-//    --------------
+    //    --------------
 
     /**
      * 根据email获取user
@@ -23,4 +23,5 @@ public interface UserMapper {
      * @return
      */
     User selectByUserEmail(String email);
+
 }

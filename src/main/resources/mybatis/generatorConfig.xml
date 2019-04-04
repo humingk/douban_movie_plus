@@ -357,6 +357,7 @@
         <!--<table schema="douban_movie" tableName="permission" domainObjectName="Permission">-->
         <!--</table>-->
 
+        <!--<table schema="douban_movie" tableName="role_permission" domainObjectName="RolePermission"></table>-->
 
         <!--所有table已添加 被注释-->
         <table tableName=""></table>

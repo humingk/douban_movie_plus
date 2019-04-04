@@ -151,6 +151,7 @@ create table user
   email    char(20)  NOT NULL DEFAULT '',
   primary key (user_id),
   unique (label),
+  unique (email),
   index (label),
   index (password),
   index (name),
@@ -165,10 +166,13 @@ create table user
 alter TABLE user auto_increment =1;
 alter TABLE role auto_increment =1;
 alter TABLE permission auto_increment =1;
+alter TABLE comment auto_increment =1;
+alter TABLE review auto_increment =1;
+
 
 # user:
-INSERT INTO `user`(user_id,email,`password`,name,label,phone) VALUES(1,"hukk@qq.com","1233","小明也来过","humingk","15612331233");
-INSERT INTO `user`(user_id,email,`password`,name,label,phone) VALUES(2,"kk@qq.com","1233","大明","kk","15612331233");
+INSERT INTO user(user_id,email,password,name,label,phone) VALUES(1,"hukk@qq.com","1233","小明也来过","humingk","15612331233");
+INSERT INTO user(user_id,email,password,name,label,phone) VALUES(2,"kk@qq.com","1233","大明","kk","15612331233");
 
 # role:
 insert into role(role_id,name,description) values(1,"admin","管理员用户");
@@ -180,9 +184,15 @@ insert into user_role(user_id,role_id) values(1,2);
 insert into user_role(user_id,role_id) values(2,2);
 
 # permission:
-insert into permission(permission_id, url,role_id,description) values(1,"/people/**",1,"访问个人主页");
-insert into permission(permission_id, url,role_id,description) values(2,"/admin/**",1,"管理员页面");
-insert into permission(permission_id, url,role_id,description) values(3,"/people/**",2,"访问个人主页");
+insert into permission(permission_id, url,description) values(1,"/admin/**","管理员页面");
+insert into permission(permission_id, url,description) values(2,"/people/**","访问个人主页");
+
+
+# role_permission:
+insert into role_permission(role_id,permission_id) values(1,1);
+insert into role_permission(role_id,permission_id) values(1,2);
+insert into role_permission(role_id,permission_id) values(2,2);
+
 
  */
 
@@ -202,7 +212,7 @@ create table user_role
 (
   user_id int NOT NULL,
   role_id int NOT NULL,
-  primary key (user_id,role_id),
+  primary key (user_id, role_id),
   foreign key (user_id) references user (user_id),
   foreign key (role_id) references role (role_id)
 ) ENGINE = InnoDB
@@ -211,17 +221,24 @@ create table user_role
 create table permission
 (
   permission_id int         NOT NULL auto_increment,
-  role_id       int         NOT NULL,
-  token         char(20)    NOT NULL DEFAULT '',
   url           char(30)    NOT NULL DEFAULT '',
   description   varchar(50) NOT NULL DEFAULT '',
   primary key (permission_id),
-  foreign key (role_id) references role (role_id),
-  index(token),
-  index(url),
-  index(description)
+  index (url),
+  index (description)
 ) ENGINE = InnoDB
   DEFAULT charset = utf8mb4;
+
+create table role_permission
+(
+  role_id       int NOT NULL,
+  permission_id int NOT NULL,
+  primary key (role_id, permission_id),
+  foreign key (role_id) references role (role_id),
+  foreign key (permission_id) references permission (permission_id)
+) ENGINE = InnoDB
+  DEFAULT charset = utf8mb4;
+
 
 create table user_movie
 (
@@ -240,11 +257,9 @@ create table user_movie
 
 create table comment
 (
-  comment_id int          NOT NULL,
-  rate       float(2, 1)  NOT NULL DEFAULT 0.0,
+  comment_id int          NOT NULL auto_increment,
   comments   varchar(255) NOT NULL DEFAULT '',
   primary key (comment_id),
-  index (rate),
   index (comments)
 ) ENGINE = InnoDB
   DEFAULT charset = utf8mb4;
@@ -271,7 +286,7 @@ create table movie_comment
 
 create table review
 (
-  review_id int         NOT NULL,
+  review_id int         NOT NULL auto_increment,
   rate      float(2, 1) NOT NULL DEFAULT 0.0,
   reviews   text(1000)  NOT NULL,
   primary key (review_id),

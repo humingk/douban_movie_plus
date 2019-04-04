@@ -3,10 +3,6 @@ package org.humingk.movie.entity;
 public class Permission {
     private Integer permissionId;
 
-    private Integer roleId;
-
-    private String token;
-
     private String url;
 
     private String description;
@@ -17,22 +13,6 @@ public class Permission {
 
     public void setPermissionId(Integer permissionId) {
         this.permissionId = permissionId;
-    }
-
-    public Integer getRoleId() {
-        return roleId;
-    }
-
-    public void setRoleId(Integer roleId) {
-        this.roleId = roleId;
-    }
-
-    public String getToken() {
-        return token;
-    }
-
-    public void setToken(String token) {
-        this.token = token == null ? null : token.trim();
     }
 
     public String getUrl() {

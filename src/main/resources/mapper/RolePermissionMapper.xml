@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.humingk.movie.mapper.RolePermissionMapper">
+  <resultMap id="BaseResultMap" type="org.humingk.movie.entity.RolePermission">
+    <id column="role_id" jdbcType="INTEGER" property="roleId" />
+    <id column="permission_id" jdbcType="INTEGER" property="permissionId" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="map">
+    delete from role_permission
+    where role_id = #{roleId,jdbcType=INTEGER}
+      and permission_id = #{permissionId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="org.humingk.movie.entity.RolePermission">
+    insert into role_permission (role_id, permission_id)
+    values (#{roleId,jdbcType=INTEGER}, #{permissionId,jdbcType=INTEGER})
+  </insert>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select role_id, permission_id
+    from role_permission
+  </select>
+</mapper>

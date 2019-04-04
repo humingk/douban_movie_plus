@@ -11,6 +11,7 @@ import org.humingk.movie.mapper.*;
 import org.humingk.movie.service.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,6 +19,7 @@ import java.util.List;
 /**
  * @author humin
  */
+@Transactional
 @Service
 public class MovieServiceImpl implements MovieService {
 

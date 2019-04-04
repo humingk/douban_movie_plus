@@ -68,4 +68,10 @@
     <!--上传下载-->
     <bean class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>
 
+    <!--开启shiro注解-->
+    <bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator" depends-on="lifecycleBeanPostProcessor"/>
+    <bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
+        <property name="securityManager" ref="securityManager"/>
+    </bean>
+
 </beans>

@@ -21,7 +21,7 @@ import java.util.regex.Pattern;
  */
 @Controller
 @RequestMapping(value = "/")
-public class UserController {
+public class LoginController {
 
     @Autowired
     private ShiroService shiroService;
@@ -32,17 +32,6 @@ public class UserController {
     private static final String ADMIN = "admin";
 
     /**
-     * 登录页面 url处理
-     *
-     * @return
-     */
-    @RequestMapping(value = "login")
-    public String loginPage() {
-        return "login";
-    }
-
-
-    /**
      * 登录表单处理
      *
      * @param email
@@ -51,7 +40,7 @@ public class UserController {
      * @param modelAndView
      * @return
      */
-    @RequestMapping(value = "loginForm")
+    @RequestMapping(value = "loginForm",method = RequestMethod.POST)
     @ResponseBody
     public ModelAndView login(@RequestParam("email") String email,
                               @RequestParam("password") String password,
@@ -64,34 +53,57 @@ public class UserController {
         Subject subject = SecurityUtils.getSubject();
         // 封装表单,存入shiro的token
         UsernamePasswordToken token = new UsernamePasswordToken(email, password);
-
+//        User user=shiroService.getUserByUserEmail(email);
         User user = userService.getUserByUserEmail(email);
         try {
             subject.login(token);
+            // 管理员用户
+            if (subject.hasRole(ADMIN)) {
+                modelAndView.setViewName("redirect:/people/" + user.getLabel());
+            }
             // 普通注册用户
-            if (subject.hasRole(USER)) {
+            else if (subject.hasRole(USER)) {
                 // 普通用户有域名
                 if (user.getLabel() != null) {
-                    modelAndView.addObject("login", ResultMessage.createMessage(200, "OK user", "label"));
-                    modelAndView.setViewName("/people/" + user.getLabel());
+                    modelAndView.setViewName("redirect:/people/" + user.getLabel());
                 }
                 // 普通用户没有域名 只有ID
                 else {
-                    modelAndView.addObject("login", ResultMessage.createMessage(200, "OK user", "userId"));
-                    modelAndView.setViewName("/people/" + user.getUserId());
+                    modelAndView.setViewName("redirect:/people/" + user.getUserId());
                 }
-            }
-            // 管理员用户
-            else if (subject.hasRole(ADMIN)) {
-                modelAndView.addObject("login", ResultMessage.createMessage(200, "OK admin", null));
-                modelAndView.setViewName("/admin/" + user.getLabel());
             }
         } catch (AuthenticationException e) {
             // 登陆失败
-            modelAndView.addObject("login", ResultMessage.createMessage(200, "wrong password", null));
-            modelAndView.setViewName("/login");
+            modelAndView.setViewName("redirect:/login");
             e.printStackTrace();
         }
+        return modelAndView;
+    }
+
+    /**
+     * 用户注册
+     *
+     * @param email
+     * @param label
+     * @param password
+     * @param modelAndView
+     * @return
+     */
+    @RequestMapping(value = "/registerForm",method = RequestMethod.POST)
+    public ModelAndView register(@RequestParam("email") String email,
+                                 @RequestParam("name") String name,
+                                 @RequestParam("label") String label,
+                                 @RequestParam("phone") String phone,
+                                 @RequestParam("password") String password,
+                                 ModelAndView modelAndView){
+        try{
+            User user=new User(email,label,name,password,phone);
+            shiroService.insertNormalUser(user);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        modelAndView.setViewName("redirect:/people/"+label);
         return modelAndView;
     }
 
@@ -116,4 +128,46 @@ public class UserController {
         modelAndView.setViewName("people");
         return modelAndView;
     }
+
+
+    /**
+     * 登录页面 url处理
+     *
+     * @return
+     */
+    @RequestMapping(value = "login")
+    public String loginPage() {
+        return "login";
+    }
+
+    /**
+     * 有权限访问个人主页
+     *
+     * @return
+     */
+    @RequestMapping(value = "people")
+    public String people() {
+        return "people";
+    }
+
+    /**
+     * 个人权限认证失败跳转页
+     *
+     * @return
+     */
+    @RequestMapping(value = "unauthor")
+    public String unauthor() {
+        return "unauthor";
+    }
+
+    /**
+     * 没有权限跳转页
+     *
+     * @return
+     */
+    @RequestMapping(value = "noPermission/**")
+    public String noPermission() {
+        return "noPermission";
+    }
+
 }

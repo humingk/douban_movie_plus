@@ -5,7 +5,9 @@ import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
+import org.apache.shiro.util.ByteSource;
 import org.humingk.movie.entity.Permission;
+import org.humingk.movie.entity.Role;
 import org.humingk.movie.entity.User;
 import org.humingk.movie.service.ShiroService;
 import org.springframework.stereotype.Component;
@@ -30,58 +32,56 @@ public class MyRealm extends AuthorizingRealm {
     public ShiroService getShiroService() {
         return shiroService;
     }
+
+
     /**
      * 登陆验证:
-     *      用户登录时，为用户授予权限和角色
-     *      根据账号从数据库获取账号密码进行比较，如果一致则登录成功，否则登录失败
+     * 用户登录时，为用户授予权限和角色
+     * 根据账号从数据库获取账号密码进行比较，如果一致则登录成功，否则登录失败
      *
-     * Retrieves the AuthorizationInfo for the given principals from the underlying data store.  When returning
-     * an instance from this method, you might want to consider using an instance of
-     * {@link SimpleAuthorizationInfo SimpleAuthorizationInfo}, as it is suitable in most cases.
-     *
-     * @param principals the primary identifying principals of the AuthorizationInfo that should be retrieved.
-     * @return the AuthorizationInfo associated with this principals.
-     * @see SimpleAuthorizationInfo
+     * @param principals
+     * @return
      */
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
-        // 获取user
-        User user=(User)principals.getPrimaryPrincipal();
-        // 获取urls
-        SimpleAuthorizationInfo info=new SimpleAuthorizationInfo();
-        // 获取urls对应的permissions
-        if(user!=null){
-            List<Permission> permissionsByUser=shiroService.getPermissionsByUser(user);
-            if(permissionsByUser.size()!=0){
-                for (int i = 0; i <permissionsByUser.size() ; i++) {
-                    info.addStringPermission(permissionsByUser.get(i).getUrl());
+        try {
+            // 获取user
+            User user = (User) principals.getPrimaryPrincipal();
+            // 获取urls
+            SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
+
+            // 获取urls对应的permissions
+            if (user != null) {
+                // 获取user对应的roles
+                List<Role> roles = shiroService.getRolesByUserId(user.getUserId());
+                // 获取roles对应的permissions
+                for (int i = 0; i < roles.size(); i++) {
+                    // 添加role信息
+                    info.addRole(roles.get(i).getName());
+                    List<Permission> permissions = shiroService.getPermissionsByRoleId(roles.get(i).getRoleId());
+                    for (int j = 0; j < permissions.size(); j++) {
+                        // 添加permission信息
+                        info.addStringPermission(permissions.get(j).getUrl());
+                    }
                 }
+                return info;
             }
-            return info;
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         return null;
     }
 
+
     /**
      * 授权验证:
-     *      对用户进行授权验证 与过滤器结合
-     *      在登录成功后，根据用户id获取到该用户的权限，并把权限保存在安全管理器之中，
-     *   当用户访问的时候，会从管理器中判断该用户是否有权限去访问该url。
+     * 对用户进行授权验证 与过滤器结合
+     * 在登录成功后，根据用户id获取到该用户的权限，并把权限保存在安全管理器之中，
+     * 当用户访问的时候，会从管理器中判断该用户是否有权限去访问该url。
      *
-     * Retrieves authentication data from an implementation-specific datasource (RDBMS, LDAP, etc) for the given
-     * authentication token.
-     * <p/>
-     * For most datasources, this means just 'pulling' authentication data for an associated subject/user and nothing
-     * more and letting Shiro do the rest.  But in some systems, this method could actually perform EIS specific
-     * log-in logic in addition to just retrieving data - it is up to the Realm implementation.
-     * <p/>
-     * A {@code null} return value means that no account could be associated with the specified token.
-     *
-     * @param authenticationToken the authentication token containing the user's principal and credentials.
-     * @return an {@link AuthenticationInfo} object containing account data resulting from the
-     * authentication ONLY if the lookup is successful (i.e. account exists and is valid, etc.)
-     * @throws AuthenticationException if there is an error acquiring data or performing
-     *                                 realm-specific authentication logic for the specified <tt>token</tt>
+     * @param authenticationToken
+     * @return
+     * @throws AuthenticationException
      */
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
@@ -89,12 +89,19 @@ public class MyRealm extends AuthorizingRealm {
         // 验证账号密码
         UsernamePasswordToken token = (UsernamePasswordToken) authenticationToken;
         //此处getUsername对应userEmail
-        User user=shiroService.getUserByUserEmail(token.getUsername());
-        if(user == null){
+        User user = shiroService.getUserByUserEmail(token.getUsername());
+        if (user == null) {
+            ////没有返回登录用户名对应的SimpleAuthenticationInfo对象时
+            // 就会在LoginController中抛出UnknownAccountException异常
             return null;
         }
         // 身份认证验证成功，返回一个AuthenticationInfo实现
-        AuthenticationInfo info = new SimpleAuthenticationInfo(user, user.getPassword(), this.getClass().getSimpleName());
+        AuthenticationInfo info = new SimpleAuthenticationInfo(
+                user,
+                user.getPassword(),
+                // MD5加密的盐 email
+                ByteSource.Util.bytes(user.getEmail()),
+                this.getClass().getSimpleName());
         return info;
     }
 }

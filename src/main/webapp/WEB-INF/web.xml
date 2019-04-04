@@ -4,30 +4,6 @@
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0">
 
-    <!--配置 dispatcherServlet-->
-    <!--需要在最前面，shiroRelam属于filter即过滤器，它在Spring未完成注入bean之前就已经拦截了，因此无法注入。-->
-    <servlet>
-        <servlet-name>dispatcherServlet</servlet-name>
-        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
-        <!-- 配置springMVC需要加载的配置文件
-            mybatis:        spring-mapper.xml
-            spring:         spring-service.xml
-            spring-MVC:     spring-mvc.xml
-         -->
-        <init-param>
-            <param-name>contextConfigLocation</param-name>
-            <param-value>classpath:spring/spring-*.xml</param-value>
-        </init-param>
-        <!--解决懒加载，优先启动此servlet-->
-        <load-on-startup>1</load-on-startup>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>dispatcherServlet</servlet-name>
-        <!-- 默认匹配所有的请求 -->
-        <url-pattern>/</url-pattern>
-    </servlet-mapping>
-
-
     <!-- 默认界面 -->
     <welcome-file-list>
         <welcome-file>/WEB-INF/views/index.jsp</welcome-file>
@@ -38,6 +14,64 @@
         <error-code>404</error-code>
         <location>/WEB-INF/views/errorPage.jsp</location>
     </error-page>
+
+    <!--在web.xml中，先执行filter再执行servlet-->
+    <!--故shiro不能用servlet加载，应该用context-param 加载-->
+
+    <!-- 配置spring需要加载的配置文件
+    mybatis:        spring-mapper.xml
+    spring:         spring-service.xml
+    spring-MVC:     spring-mvc.xml
+    shiro:          spring-shiro.xml
+        -->
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>classpath:spring/spring-*.xml</param-value>
+    </context-param>
+
+
+    <!-- 添加对springmvc的支持 配置 dispatcherServlet-->
+    <servlet>
+        <servlet-name>springMVC</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+
+        <init-param>
+            <param-name>contextConfigLocation</param-name>
+            <param-value>classpath:spring/spring-mvc.xml</param-value>
+        </init-param>
+        <!--解决懒加载，优先启动此servlet-->
+        <load-on-startup>1</load-on-startup>
+        <async-supported>true</async-supported>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>springMVC</servlet-name>
+        <!-- 默认匹配所有的请求 -->
+        <url-pattern>/</url-pattern>
+    </servlet-mapping>
+
+    <!--Spring 监听器-->
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+
+    <!--监听器 防止spring内存溢出-->
+    <listener>
+        <listener-class>org.springframework.web.util.IntrospectorCleanupListener</listener-class>
+    </listener>
+
+    <!--shiro 过滤器-->
+    <filter>
+        <filter-name>shiroFilter</filter-name>
+        <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+        <init-param>
+            <param-name>targetFilterLifecycle</param-name>
+            <param-value>true</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>shiroFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
 
      <!--编码过滤器-->
     <filter>
@@ -76,37 +110,5 @@
         <dispatcher>INCLUDE</dispatcher>
         <dispatcher>ERROR</dispatcher>
     </filter-mapping>
-    
-    <!--&lt;!&ndash;shiro 过滤器&ndash;&gt;-->
-    <filter>
-        <filter-name>shiroFilter</filter-name>
-        <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
-        <init-param>
-            <param-name>targetFilterLifecycle</param-name>
-            <param-value>true</param-value>
-        </init-param>
-    </filter>
-    <filter-mapping>
-        <filter-name>shiroFilter</filter-name>
-        <url-pattern>/*</url-pattern>
-    </filter-mapping>
-
-    <!--加载spring-shiro.xml-->
-    <!--在web.xml中，先执行filter再执行servlet-->
-    <!--故shiro不能用servlet加载，应该用context-param 加载-->
-    <context-param>
-        <param-name>contextConfigLocation</param-name>
-        <param-value>classpath:/spring/applicationContext-shiro.xml</param-value>
-    </context-param>
-
-    <!--Spring 监听器-->
-    <listener>
-        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-    </listener>
-
-    <!--监听器 防止spring内存溢出-->
-    <listener>
-        <listener-class>org.springframework.web.util.IntrospectorCleanupListener</listener-class>
-    </listener>
 
 </web-app>

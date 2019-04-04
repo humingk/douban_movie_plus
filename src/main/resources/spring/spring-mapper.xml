@@ -58,11 +58,5 @@
     </bean>
 
 
-    <!--其他bean-->
-
-    <!--电影service-->
-    <bean id="movieService" class="org.humingk.movie.service.impl.MovieServiceImpl">
-
-    </bean>
 
 </beans>

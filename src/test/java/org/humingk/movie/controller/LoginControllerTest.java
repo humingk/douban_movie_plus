@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping(value = "/user")
-public class UserControllerTest extends TestBase {
+public class LoginControllerTest extends TestBase {
 
     @Test
     @RequestMapping("login")

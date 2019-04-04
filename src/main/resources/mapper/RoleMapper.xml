@@ -36,10 +36,18 @@
 
   <!--根据userID获取role列表-->
   <select id="selectByUserId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select role_id, name, description
+    select role.role_id, role.name, role.description
+    from role
     inner join user_role
     on role.role_id=user_role.role_id
-    where user.user_id = #{userId,jdbcType=INTEGER}
+    where user_role.user_id = #{userId,jdbcType=INTEGER}
+  </select>
+
+  <!--根据roleName获取role-->
+  <select id="selectByRoleName" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select role_id, name, description
+    from role
+    where name = #{name,jdbcType=CHAR}
   </select>
 
 </mapper>
