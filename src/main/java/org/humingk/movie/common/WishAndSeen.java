@@ -204,8 +204,8 @@ public class WishAndSeen {
         HashMap<Integer, Integer> t2 = tt.getAllMovie("humingk", "collect");
         System.out.println("看过总数: " + tt.getMovieSum());
         System.out.println("爬取到: " + t2.size());
-        for(Integer key:t1.keySet()){
-            System.out.print(key+"-"+t1.get(key)+" ");
+        for(Integer key:t2.keySet()){
+            System.out.print(key+"-"+t2.get(key)+" ");
         }
     }
 }

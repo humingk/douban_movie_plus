@@ -42,9 +42,30 @@
 
   <!--根据email获取user-->
   <select id="selectByUserEmail" parameterType="java.lang.String" resultMap="BaseResultMap">
-  select user_id, label, name, password, phone, email
+  select user_id, label, name, password,phone, email
   from user
   where user.email = #{email,jdbcType=CHAR}
+  </select>
+
+  <!--根据email获取user Info-->
+  <select id="selectUserInfoByUserEmail" parameterType="java.lang.String" resultMap="BaseResultMap">
+  select user_id, label, name, phone, email
+  from user
+  where user.email = #{email,jdbcType=CHAR}
+  </select>
+
+  <!--根据userId获取user Info-->
+  <select id="selectUserInfoByUserId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  select user_id, label, name, phone, email
+  from user
+  where user.user_id = #{userId,jdbcType=INTEGER}
+  </select>
+
+  <!--根据userLabel获取user Info-->
+  <select id="selectUserInfoByUserLabel" parameterType="java.lang.String" resultMap="BaseResultMap">
+  select user_id, label, name, phone, email
+  from user
+  where user.label = #{label,jdbcType=CHAR}
   </select>
 
 </mapper>

@@ -1,8 +1,9 @@
 package org.humingk.movie.mapper;
 
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import org.humingk.movie.entity.UserMovie;
+
+import java.util.List;
 
 public interface UserMovieMapper {
     int deleteByPrimaryKey(@Param("userId") Integer userId, @Param("movieId") Integer movieId);
@@ -14,4 +15,15 @@ public interface UserMovieMapper {
     List<UserMovie> selectAll();
 
     int updateByPrimaryKey(UserMovie record);
+
+//    ------------
+
+    /**
+     * 更新user_movie
+     * @param userMovie
+     */
+    void updateWishsAndSeens(UserMovie userMovie);
+
+    List<UserMovie> selectByUserId(int userId);
+
 }

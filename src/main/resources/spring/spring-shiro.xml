@@ -8,14 +8,15 @@
     <!--组件扫描-->
     <context:component-scan base-package="org.humingk.movie.realm"></context:component-scan>
 
+    <!--手动将shiroService注入MyRealm-->
+    <bean id="shiroService" class="org.humingk.movie.service.impl.ShiroServiceImpl"></bean>
+
     <!--启用shiro注解-->
-    <!--spring-MVC中启用-->
-    <!--<bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator" depends-on="lifecycleBeanPostProcessor"/>-->
-    <!--<bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">-->
-        <!--<property name="securityManager" ref="securityManager"/>-->
-    <!--</bean>-->
+    <!--在 spring-MVC 中启用-->
+    <!--因为spring先执行context再执行servlet-->
 
 
+    <!--1 myRealm-->
     <bean id="myRealm" class="org.humingk.movie.realm.MyRealm">
         <property name="shiroService" ref="shiroService"></property>
 
@@ -30,21 +31,56 @@
         </property>
     </bean>
 
-    <!--将shiroService注入MyRealm-->
-    <bean id="shiroService" class="org.humingk.movie.service.impl.ShiroServiceImpl"></bean>
 
+    <!--2 配置session管理器-->
+    <!--<bean id="sessionManager" class="org.apache.shiro.web.session.mgt.DefaultWebSessionManager">-->
+    <!--&lt;!&ndash;session 设置过期时间 单位 毫秒-->
+    <!--3600000 = 1 Hour&ndash;&gt;-->
+    <!--<property name="globalSessionTimeout" value="5000"></property>-->
 
-    <!-- 配置安全管理器 -->
-    <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
-        <!--注入myRealm-->
-        <property name="realm" ref="myRealm"/>
+    <!--</bean>-->
+
+    <!--3 配置rememberMe管理器-->
+    <!--下一次访问无需登录-->
+    <bean id="remenberMeManager" class="org.apache.shiro.web.mgt.CookieRememberMeManager">
+        <!--cookie加密 AES-->
+        <property name="cipherKey"
+                  value="#{T(org.apache.shiro.codec.Base64).decode('4AvVhmFLUs0KTA3Kprsdag==')}"/>
+        <!--remenberMe cookie 超时设置-->
+        <property name="cookie">
+            <bean class="org.apache.shiro.web.servlet.SimpleCookie">
+                <constructor-arg value="shiro-cookie"></constructor-arg>
+                <!--设置超时时间 单位 秒-->
+                <!--86400       = 1     day -->
+                <!--2592000     = 30    day-->
+                <property name="maxAge" value="31104000"></property>
+                <!--<property name="maxAge" value="2592000"></property>-->
+            </bean>
+        </property>
     </bean>
 
+    <!--配置cache管理器-->
+    <bean id="cacheManager" class="org.apache.shiro.cache.ehcache.EhCacheManager">
+        <property name="cacheManagerConfigFile" value="classpath:spring/ehcache-shiro.xml">
+        </property>
+    </bean>
 
+    <!--5 配置安全管理器 -->
+    <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+        <!--1 注入myRealm-->
+        <property name="realm" ref="myRealm"/>
+        <!--2 注入remenberMe-->
+        <property name="rememberMeManager" ref="remenberMeManager"></property>
+        <!--3 注入session-->
+        <!--<property name="sessionManager" ref="sessionManager"></property>-->
+        <!--4 注入 cache-->
+        <property name="cacheManager" ref="cacheManager"></property>
+
+    </bean>
 
     <!-- 配置Shiro过滤器，id对应web.xml -->
     <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
-        <!-- Shiro核心安全接口 -->
+        <!-- 注入security 管理器 -->
         <property name="securityManager" ref="securityManager"/>
         <!-- 身份认证失败，跳转到登录页面的配置 -->
         <property name="loginUrl" value="/login"/>
@@ -56,30 +92,32 @@
                 # url=拦截器[参数]，拦截器
                 # 如果用户没有该角色，然后访问该 路径 会报 401错误
 
-                # anon  匿名   不需要认证
-                /login/**       =   anon
-                /subject/**     =   anon
-                /celebrity/**   =   anon
-                /search/**      =   anon
-                /noPermission/**=   anon
-                /autoRefush/**  =   anon
-                /errorPage/**   =   anon
-                /tag/**         =   anon
-                /index/**       =   anon
-                /head/**        =   anon
-                /unauthor/**    =   anon
+                # anon 匿名 不需要认证
+                /login/** = anon
+                /subject/** = anon
+                /celebrity/** = anon
+                /search/** = anon
+                /noPermission/**= anon
+                /autoRefush/** = anon
+                /errorPage/** = anon
+                /tag/** = anon
+                /index/** = anon
+                /head/** = anon
+                /unauthor/** = anon
 
                 # anon 静态资源 不需要认证
-                /css/**         =   anon
-                /js/**          =   anon
-                /images/**      =   anon
+                /css/** = anon
+                /js/** = anon
+                /images/** = anon
 
 
                 # user 注册用户 认证才能访问
-                /people/**      =   authc, roles[user]
+                <!--/people/** = authc, roles[user]-->
+                <!--表示 authc 和 rememberMe 都能访问-->
+                /people/** = user
 
                 # admin 管理员 认证才能访问
-                /admin/**      =   authc,roles[admin]
+                /admin/** = authc,roles[admin]
 
             </value>
         </property>

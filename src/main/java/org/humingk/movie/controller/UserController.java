@@ -4,24 +4,29 @@ import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
+import org.humingk.movie.common.JsonUtil;
 import org.humingk.movie.common.ResultMessage;
 import org.humingk.movie.entity.User;
+import org.humingk.movie.entity.UserMovie;
 import org.humingk.movie.service.ShiroService;
 import org.humingk.movie.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
-import java.util.regex.Pattern;
+import java.util.List;
 
 /**
  * @author humin
  */
 @Controller
 @RequestMapping(value = "/")
-public class LoginController {
+public class UserController {
 
     @Autowired
     private ShiroService shiroService;
@@ -40,36 +45,40 @@ public class LoginController {
      * @param modelAndView
      * @return
      */
-    @RequestMapping(value = "loginForm",method = RequestMethod.POST)
+    @RequestMapping(value = "loginForm", method = RequestMethod.POST)
     @ResponseBody
     public ModelAndView login(@RequestParam("email") String email,
                               @RequestParam("password") String password,
-                              HttpSession session, ModelAndView modelAndView) {
+                              @RequestParam(value = "rememberMe", defaultValue = "false") boolean rememberMe,
+                              HttpSession session,
+                              ModelAndView modelAndView) {
         if ("".equals(email)) {
             modelAndView.addObject("login", ResultMessage.createMessage(200, "null email", null));
             modelAndView.setViewName("login");
         }
+        User userInfo = userService.getUserInfoByUserEmail(email);
+        session.setAttribute("currentUser", JsonUtil.toJson(userInfo));
+        // 封装表单,存入shiro的token
+        // 为了加入 rememberMe 选项， 需要让 user 实体类 实现 序列化接口
+        UsernamePasswordToken token = new UsernamePasswordToken(email, password, rememberMe);
         // Shiro 实现登录
         Subject subject = SecurityUtils.getSubject();
-        // 封装表单,存入shiro的token
-        UsernamePasswordToken token = new UsernamePasswordToken(email, password);
-//        User user=shiroService.getUserByUserEmail(email);
-        User user = userService.getUserByUserEmail(email);
         try {
             subject.login(token);
+            System.out.println("登录成功===================");
             // 管理员用户
             if (subject.hasRole(ADMIN)) {
-                modelAndView.setViewName("redirect:/people/" + user.getLabel());
+                modelAndView.setViewName("redirect:/people/" + userInfo.getLabel());
             }
             // 普通注册用户
             else if (subject.hasRole(USER)) {
                 // 普通用户有域名
-                if (user.getLabel() != null) {
-                    modelAndView.setViewName("redirect:/people/" + user.getLabel());
+                if (userInfo.getLabel() != null) {
+                    modelAndView.setViewName("redirect:/people/" + userInfo.getLabel());
                 }
                 // 普通用户没有域名 只有ID
                 else {
-                    modelAndView.setViewName("redirect:/people/" + user.getUserId());
+                    modelAndView.setViewName("redirect:/people/" + userInfo.getUserId());
                 }
             }
         } catch (AuthenticationException e) {
@@ -89,45 +98,24 @@ public class LoginController {
      * @param modelAndView
      * @return
      */
-    @RequestMapping(value = "/registerForm",method = RequestMethod.POST)
+    @RequestMapping(value = "/registerForm", method = RequestMethod.POST)
     public ModelAndView register(@RequestParam("email") String email,
                                  @RequestParam("name") String name,
                                  @RequestParam("label") String label,
                                  @RequestParam("phone") String phone,
                                  @RequestParam("password") String password,
-                                 ModelAndView modelAndView){
-        try{
-            User user=new User(email,label,name,password,phone);
+                                 ModelAndView modelAndView) {
+        try {
+            User user = new User(email, label, name, password, phone);
             shiroService.insertNormalUser(user);
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
-        modelAndView.setViewName("redirect:/people/"+label);
+        modelAndView.setViewName("redirect:/people/" + label);
         return modelAndView;
     }
 
-    /**
-     * 响应url路径 people/{userId} or people/{label}
-     *
-     * @param modelAndView
-     * @param labelOrId
-     * @return
-     */
-    @RequestMapping(value = "people/{labelOrId}")
-    public ModelAndView people(ModelAndView modelAndView, @PathVariable String labelOrId) {
-        String pattern = "\\d+";
-        // labelOrId 是ID
-        if (Pattern.matches(pattern, labelOrId)) {
-
-        }
-        // labelOrId 是label
-        else {
-
-        }
-        modelAndView.setViewName("people");
-        return modelAndView;
-    }
 
 
     /**
@@ -139,6 +127,19 @@ public class LoginController {
     public String loginPage() {
         return "login";
     }
+
+
+    /**
+     * 更新用户 wish seen
+     *
+     * @return
+     */
+    @RequestMapping(value = "updateWishAndSeen")
+    public List<UserMovie> updateWishAndSeen() {
+
+        return null;
+    }
+
 
     /**
      * 有权限访问个人主页

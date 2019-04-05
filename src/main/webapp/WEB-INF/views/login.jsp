@@ -19,6 +19,7 @@
 <form id="user_login" action="/loginForm" method="post">
     email:<input type="text" name="email" placeholder="请用邮箱登录"><br>
     password:<input type="password" name="password"><br>
+    rememberMe:<input type="checkbox" name="rememberMe"><br>
     <input type="submit" value="login">
 </form>
 =========================

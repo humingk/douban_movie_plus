@@ -7,9 +7,9 @@ public class UserMovie {
 
     private Float rate;
 
-    private Boolean wish;
+    private Integer wish;
 
-    private Boolean sean;
+    private Integer seen;
 
     public Integer getUserId() {
         return userId;
@@ -35,19 +35,20 @@ public class UserMovie {
         this.rate = rate;
     }
 
-    public Boolean getWish() {
+
+    public Integer getWish() {
         return wish;
     }
 
-    public void setWish(Boolean wish) {
+    public void setWish(Integer wish) {
         this.wish = wish;
     }
 
-    public Boolean getSean() {
-        return sean;
+    public Integer getSeen() {
+        return seen;
     }
 
-    public void setSean(Boolean sean) {
-        this.sean = sean;
+    public void setSeen(Integer seen) {
+        this.seen = seen;
     }
 }

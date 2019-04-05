@@ -17,6 +17,46 @@
 <body>
 people 个人主页<br>
 
+更新所有的想看电影和已看电影
+<button onclick="updateWishsAndSeens('humingk')" value="update">更新</button>
+<button onclick="getWishsAndSeens('humingk')" value="getWishsAndSeens">获取wishsAndSeens</button>
+
+
+    <script type="text/javascript">
+
+        var currentUser = ${currentUser}
+
+        $(document).ready(function () {
+        });
+
+        // 获取wishsAndSeens
+        function getWishsAndSeens(label) {
+            $.ajax({
+                type: "GET",
+                dataType: "json",
+                url: "/people/getWishsAndSeens?label=" + label,
+                success: function (result) {
+                    // ===============================================================
+                    console.log("getwishsAndSeens : ");
+                    console.log(result);
+                }
+            });
+        }
+
+        // 更新wishsAndSeens
+        function updateWishsAndSeens(label) {
+            $.ajax({
+                type: "GET",
+                url: "/people/updateWishsAndSeens?label=" + label,
+                success: function (result) {
+                    // ===============================================================
+                    console.log("updateWishsAndSeens: OK")
+                }
+            });
+        }
+
+
+    </script>
 
 </body>
 </html>

@@ -32,11 +32,8 @@ public class ShiroServiceImpl implements ShiroService {
     private RoleMapper roleMapper;
     @Autowired
     private PermissionMapper permissionMapper;
-
     @Autowired
     private UserRoleMapper userRoleMapper;
-    @Autowired
-    private RolePermissionMapper rolePermissionMapper;
 
     /**
      * 根据email获取user
