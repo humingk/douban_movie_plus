@@ -14,8 +14,6 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <script src='https://code.jquery.com/jquery-3.3.1.min.js'></script>
     <script src="https://apps.bdimg.com/libs/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-    <%--vue--%>
-    <script src="https://unpkg.com/vue/dist/vue.js"></script>
     <link rel="stylesheet" href="https://apps.bdimg.com/libs/bootstrap/3.2.0/css/bootstrap.min.css">
 
     <meta name="viewport" content="width=device-width,

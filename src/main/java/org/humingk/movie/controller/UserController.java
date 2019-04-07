@@ -3,6 +3,7 @@ package org.humingk.movie.controller;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
 import org.humingk.movie.common.JsonUtil;
 import org.humingk.movie.common.ResultMessage;
@@ -10,6 +11,8 @@ import org.humingk.movie.entity.User;
 import org.humingk.movie.entity.UserMovie;
 import org.humingk.movie.service.ShiroService;
 import org.humingk.movie.service.UserService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,7 +21,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpSession;
 import java.util.List;
 
 /**
@@ -36,12 +38,13 @@ public class UserController {
     private static final String USER = "user";
     private static final String ADMIN = "admin";
 
+    private final Logger logger= LoggerFactory.getLogger(this.getClass());
+
     /**
      * 登录表单处理
      *
      * @param email
      * @param password
-     * @param session
      * @param modelAndView
      * @return
      */
@@ -50,22 +53,31 @@ public class UserController {
     public ModelAndView login(@RequestParam("email") String email,
                               @RequestParam("password") String password,
                               @RequestParam(value = "rememberMe", defaultValue = "false") boolean rememberMe,
-                              HttpSession session,
                               ModelAndView modelAndView) {
         if ("".equals(email)) {
             modelAndView.addObject("login", ResultMessage.createMessage(200, "null email", null));
             modelAndView.setViewName("login");
         }
         User userInfo = userService.getUserInfoByUserEmail(email);
-        session.setAttribute("currentUser", JsonUtil.toJson(userInfo));
         // 封装表单,存入shiro的token
         // 为了加入 rememberMe 选项， 需要让 user 实体类 实现 序列化接口
         UsernamePasswordToken token = new UsernamePasswordToken(email, password, rememberMe);
         // Shiro 实现登录
         Subject subject = SecurityUtils.getSubject();
+        Session session = subject.getSession();
         try {
+            // 登录前先清除当前session的currentUser
+            session.removeAttribute("currentUser");
             subject.login(token);
-            System.out.println("登录成功===================");
+            // 登录后，添加session currentUser
+            // 便于全局获取Userinfo
+            session.setAttribute("currentUser", JsonUtil.toJson(userInfo));
+
+            logger.info("登录成功,添加session");
+            logger.info("session sessionID: "+session.getId());
+            logger.info("session  account: "+((User)subject.getPrincipal()).getEmail());
+            logger.info("session currentUser: "+session.getAttribute("currentUser").toString());
+
             // 管理员用户
             if (subject.hasRole(ADMIN)) {
                 modelAndView.setViewName("redirect:/people/" + userInfo.getLabel());
@@ -115,8 +127,6 @@ public class UserController {
         modelAndView.setViewName("redirect:/people/" + label);
         return modelAndView;
     }
-
-
 
     /**
      * 登录页面 url处理

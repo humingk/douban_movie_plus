@@ -22,41 +22,65 @@ people 个人主页<br>
 <button onclick="getWishsAndSeens('humingk')" value="getWishsAndSeens">获取wishsAndSeens</button>
 
 
-    <script type="text/javascript">
+<script type="text/javascript">
 
-        var currentUser = ${currentUser}
+    var currentUser = ${sessionScope.currentUser};
 
-        $(document).ready(function () {
+    var userInfo ='${userInfo}';
+
+    var userName =${userName};
+
+    var wishsAndSeens =${wishsAndSeens};
+
+    <%--var currentUser=<%=session.getAttribute("currentUser")%>;--%>
+    $(document).ready(function () {
+
+        //-------------------------
+        console.log("people userName: ");
+        console.log(userName);
+
+        //-------------------------
+        console.log("people wishsAndSeens: ");
+        console.log(wishsAndSeens);
+
+        //-------------------------
+        console.log("only-owner userInfo: ");
+        console.log(userInfo);
+
+        //-------------------------
+        console.log("session currentUser: ");
+        console.log(currentUser);
+
+    });
+
+    // 获取wishsAndSeens
+    function getWishsAndSeens(label) {
+        $.ajax({
+            type: "GET",
+            dataType: "json",
+            url: "/people/getWishsAndSeens?label=" + label,
+            success: function (result) {
+                // ===============================================================
+                console.log("getwishsAndSeens : ");
+                console.log(result);
+            }
         });
+    }
 
-        // 获取wishsAndSeens
-        function getWishsAndSeens(label) {
-            $.ajax({
-                type: "GET",
-                dataType: "json",
-                url: "/people/getWishsAndSeens?label=" + label,
-                success: function (result) {
-                    // ===============================================================
-                    console.log("getwishsAndSeens : ");
-                    console.log(result);
-                }
-            });
-        }
-
-        // 更新wishsAndSeens
-        function updateWishsAndSeens(label) {
-            $.ajax({
-                type: "GET",
-                url: "/people/updateWishsAndSeens?label=" + label,
-                success: function (result) {
-                    // ===============================================================
-                    console.log("updateWishsAndSeens: OK")
-                }
-            });
-        }
+    // 更新wishsAndSeens
+    function updateWishsAndSeens(label) {
+        $.ajax({
+            type: "GET",
+            url: "/people/updateWishsAndSeens?label=" + label,
+            success: function (result) {
+                // ===============================================================
+                console.log("updateWishsAndSeens: OK")
+            }
+        });
+    }
 
 
-    </script>
+</script>
 
 </body>
 </html>

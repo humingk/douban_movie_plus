@@ -5,6 +5,8 @@ import org.humingk.movie.common.MovieAll;
 import org.humingk.movie.entity.*;
 import org.humingk.movie.service.MovieService;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
@@ -13,6 +15,8 @@ public class MovieServiceImplTest extends TestBase {
     @Autowired
     private MovieService movieService;
 
+    private final Logger logger= LoggerFactory.getLogger(this.getClass());
+
     @Test
     public void getMovieAllOfMovieByAlias() {
         List<MovieAll> movieAlls = movieService.getMovieAllsOfMovieByAlias("爱丽丝");
@@ -20,18 +24,18 @@ public class MovieServiceImplTest extends TestBase {
         if (movieAlls != null) {
             for (int i = 0; i < movieAlls.size(); i++) {
                 if (movieAlls.get(i) != null) {
-                    System.out.println((i + 1) + ".  name        " + movieAlls.get(i).getName());
+                    logger.info((i + 1) + ".  name        " + movieAlls.get(i).getName());
                 }
             }
 
             for (MovieAll movieAll : movieAlls) {
                 if (movieAll.getName() != null) {
-                    System.out.println("======================================");
-                    System.out.println("name        " + movieAll.getName());
-                    System.out.println("id          " + movieAll.getMovieId());
-                    System.out.println("rate        " + movieAll.getRate());
-                    System.out.println("imdb        " + movieAll.getImdbId());
-                    System.out.println("alias       " + movieAll.getAlias());
+                    logger.info("======================================");
+                    logger.info("name        " + movieAll.getName());
+                    logger.info("id          " + movieAll.getMovieId());
+                    logger.info("rate        " + movieAll.getRate());
+                    logger.info("imdb        " + movieAll.getImdbId());
+                    logger.info("alias       " + movieAll.getAlias());
 
                     List<Actor> directors = movieAll.getDirectors();
                     System.out.print("dirctors    ");
@@ -74,7 +78,7 @@ public class MovieServiceImplTest extends TestBase {
                         System.out.print(releasetime.getTimeArea() + " ");
                     }
                     System.out.println();
-                    System.out.println("======================================");
+                    logger.info("======================================");
                 }
             }
         }
@@ -86,10 +90,10 @@ public class MovieServiceImplTest extends TestBase {
         if (movies != null) {
             for (Movie movie : movies) {
                 if (movie.getName() != null) {
-                    System.out.println("======================================");
-                    System.out.println("name        " + movie.getName());
-                    System.out.println("id          " + movie.getMovieId());
-                    System.out.println("rate        " + movie.getRate());
+                    logger.info("======================================");
+                    logger.info("name        " + movie.getName());
+                    logger.info("id          " + movie.getMovieId());
+                    logger.info("rate        " + movie.getRate());
                 }
             }
         }

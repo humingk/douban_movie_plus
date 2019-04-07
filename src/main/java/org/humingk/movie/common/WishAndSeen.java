@@ -6,6 +6,8 @@ import org.htmlcleaner.HtmlCleaner;
 import org.htmlcleaner.TagNode;
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -60,6 +62,8 @@ public class WishAndSeen {
      */
     private static final int PAGE_NUM = 30;
 
+    private final Logger logger= LoggerFactory.getLogger(this.getClass());
+
     public WishAndSeen() {
         movies = new HashMap<>();
         movieSum = -1;
@@ -85,9 +89,6 @@ public class WishAndSeen {
         }
         for (int i = PAGE_NUM; i <= movieSum; i += PAGE_NUM) {
             try {
-                System.out.println("---------------------------");
-                System.out.println("第" + i / PAGE_NUM + "页");
-
                 boolean isOk = getPageMovie(url + i);
                 if (!isOk) {
                     return movies;
@@ -175,8 +176,6 @@ public class WishAndSeen {
                         }
                     }
                     movies.put(movieId,rate);
-                    System.out.println("----------------");
-                    System.out.println(movieId+" - "+rate);
                 }
             } else {
                 re = false;

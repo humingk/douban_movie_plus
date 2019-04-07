@@ -1,3 +1,4 @@
+
 package org.humingk.movie.realm;
 
 import org.apache.shiro.authc.*;
@@ -10,6 +11,8 @@ import org.humingk.movie.entity.Permission;
 import org.humingk.movie.entity.Role;
 import org.humingk.movie.entity.User;
 import org.humingk.movie.service.ShiroService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
@@ -21,6 +24,7 @@ import java.util.List;
 
 @Component
 public class MyRealm extends AuthorizingRealm {
+    private final Logger logger= LoggerFactory.getLogger(this.getClass());
 
     @Resource(name = "shiroService")
     private ShiroService shiroService;
@@ -66,6 +70,11 @@ public class MyRealm extends AuthorizingRealm {
                 }
                 return info;
             }
+
+            logger.info("登录验证");
+            logger.info("user.email:" + user.getEmail());
+            logger.info("user.permission:" + info.getStringPermissions());
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -86,22 +95,27 @@ public class MyRealm extends AuthorizingRealm {
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
 
-        // 验证账号密码
-        UsernamePasswordToken token = (UsernamePasswordToken) authenticationToken;
-        //此处getUsername对应userEmail
-        User user = shiroService.getUserByUserEmail(token.getUsername());
-        if (user == null) {
-            ////没有返回登录用户名对应的SimpleAuthenticationInfo对象时
-            // 就会在LoginController中抛出UnknownAccountException异常
-            return null;
+        try {
+            // 验证账号密码
+            UsernamePasswordToken token = (UsernamePasswordToken) authenticationToken;
+            //此处getUsername对应userEmail
+            User user = shiroService.getUserByUserEmail(token.getUsername());
+            if (user == null) {
+                ////没有返回登录用户名对应的SimpleAuthenticationInfo对象时
+                // 就会在LoginController中抛出UnknownAccountException异常
+                return null;
+            }
+            // 身份认证验证成功，返回一个AuthenticationInfo实现
+            AuthenticationInfo info = new SimpleAuthenticationInfo(
+                    user,
+                    user.getPassword(),
+                    // MD5加密的盐 email
+                    ByteSource.Util.bytes(user.getEmail()),
+                    this.getClass().getSimpleName());
+            return info;
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        // 身份认证验证成功，返回一个AuthenticationInfo实现
-        AuthenticationInfo info = new SimpleAuthenticationInfo(
-                user,
-                user.getPassword(),
-                // MD5加密的盐 email
-                ByteSource.Util.bytes(user.getEmail()),
-                this.getClass().getSimpleName());
-        return info;
+        return null;
     }
 }

@@ -6,8 +6,13 @@ import org.humingk.movie.entity.Permission;
 import org.humingk.movie.entity.Role;
 import org.humingk.movie.entity.User;
 import org.humingk.movie.entity.UserRole;
-import org.humingk.movie.mapper.*;
+import org.humingk.movie.mapper.PermissionMapper;
+import org.humingk.movie.mapper.RoleMapper;
+import org.humingk.movie.mapper.UserMapper;
+import org.humingk.movie.mapper.UserRoleMapper;
 import org.humingk.movie.service.ShiroService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,6 +30,8 @@ public class ShiroServiceImpl implements ShiroService {
      * 普通用户名
      */
     private static final String USER = "user";
+
+    private final Logger logger= LoggerFactory.getLogger(this.getClass());
 
     @Autowired
     private UserMapper userMapper;
@@ -82,8 +89,6 @@ public class ShiroServiceImpl implements ShiroService {
             // toHex : 将密码转化为String
             user.setPassword(new SimpleHash(
                     "MD5",user.getPassword(),salt,2).toHex());
-            System.out.println("======================================");
-            System.out.println(user.getEmail()+"-  - - - - - -  "+user.getPassword());
             userMapper.insert(user);
             int userId = userMapper.selectByUserEmail(user.getEmail()).getUserId();
             int roleId = roleMapper.selectByRoleName(USER).getRoleId();

@@ -1,8 +1,12 @@
 package org.humingk.movie.controller;
 
+import org.humingk.movie.common.AddSession;
 import org.humingk.movie.common.MovieAll;
 import org.humingk.movie.common.ResultMessage;
 import org.humingk.movie.service.MovieService;
+import org.humingk.movie.service.UserService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -18,7 +22,10 @@ public class MovieController {
 
     @Autowired
     private MovieService movieService;
+    @Autowired
+    private UserService userService;
 
+    private final Logger logger= LoggerFactory.getLogger(this.getClass());
 
     /**
      * 根据url中的movieId 返回subject视图,并携带movieAll
@@ -30,17 +37,24 @@ public class MovieController {
     @RequestMapping(value = {"{movieId}","{movieId}/*"} , method = RequestMethod.GET)
     @ResponseBody
     public ModelAndView subject(@PathVariable("movieId") int movieId, ModelAndView modelAndView) {
-        MovieAll movieAll= new MovieAll();
+        MovieAll movieAll;
         try{
+            // 给用户添加session
+            if(AddSession.add(userService)){
+                logger.info("添加session成功");
+            }else {
+                logger.info("添加session失败");
+            }
+
             movieAll = movieService.getMovieAllByMovieId(movieId);
             // 成功获取电影，返回电影信息
             if(movieAll!=null){
-                System.out.println("有这个电影========================================");
+                logger.info("有这个电影");
                 modelAndView.addObject("movieAllString", ResultMessage.createMessage(200, "OK", movieAll));
             }
             //获取电影失败，返回添加电影确认信息
             else {
-                System.out.println("没有这个电影========================================");
+                logger.info("没有这个电影");
                 modelAndView.addObject("movieAllString", ResultMessage.createMessage(200, "ADD", null));
             }
         }catch (Exception e){
@@ -60,12 +74,12 @@ public class MovieController {
     public String addMovieAll(@RequestBody MovieAll movieAll){
         // 添加成功
         if(movieService.addMovieAll(movieAll)){
-            System.out.println("添加成功=============================================");
+            logger.info("从doubanAPI添加电影信息成功");
             // 将movieAll返回
         }
         // 添加失败
         else {
-            System.out.println("添加失败=============================================");
+            logger.info("从doubanAPI添加电影信息失败");
         }
         return "";
     }

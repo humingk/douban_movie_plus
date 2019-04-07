@@ -1,7 +1,5 @@
 package org.humingk.movie.service.impl;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.humingk.movie.common.MovieAll;
 import org.humingk.movie.entity.Movie;
 import org.humingk.movie.entity.Releasetime;
@@ -9,6 +7,8 @@ import org.humingk.movie.entity.Tag;
 import org.humingk.movie.entity.Type;
 import org.humingk.movie.mapper.*;
 import org.humingk.movie.service.MovieService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,7 +23,7 @@ import java.util.List;
 @Service
 public class MovieServiceImpl implements MovieService {
 
-    private static final Logger LOGGER = LogManager.getLogger(LogManager.ROOT_LOGGER_NAME);
+    private final Logger logger= LoggerFactory.getLogger(this.getClass());
 
     @Autowired
     private MovieMapper movieMapper;
@@ -117,7 +117,7 @@ public class MovieServiceImpl implements MovieService {
             List<Movie> movies = movieMapper.selectMoviesByNameStart(s);
 
             if (movies == null) {
-                LOGGER.error("movies为空,没有此电影...");
+                logger.error("movies为空,没有此电影...");
                 return null;
             }
             return movies;

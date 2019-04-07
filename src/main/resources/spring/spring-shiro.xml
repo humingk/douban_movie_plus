@@ -8,8 +8,9 @@
     <!--组件扫描-->
     <context:component-scan base-package="org.humingk.movie.realm"></context:component-scan>
 
-    <!--手动将shiroService注入MyRealm-->
+    <!--手动将shiroService、userService注入MyRealm-->
     <bean id="shiroService" class="org.humingk.movie.service.impl.ShiroServiceImpl"></bean>
+
 
     <!--启用shiro注解-->
     <!--在 spring-MVC 中启用-->
@@ -19,6 +20,7 @@
     <!--1 myRealm-->
     <bean id="myRealm" class="org.humingk.movie.realm.MyRealm">
         <property name="shiroService" ref="shiroService"></property>
+        <!--<property name="userService" ref="userService"></property>-->
 
         <!--MD5加密-->
         <property name="credentialsMatcher">
@@ -47,25 +49,38 @@
         <property name="cipherKey"
                   value="#{T(org.apache.shiro.codec.Base64).decode('4AvVhmFLUs0KTA3Kprsdag==')}"/>
         <!--remenberMe cookie 超时设置-->
-        <property name="cookie">
-            <bean class="org.apache.shiro.web.servlet.SimpleCookie">
-                <constructor-arg value="shiro-cookie"></constructor-arg>
-                <!--设置超时时间 单位 秒-->
-                <!--86400       = 1     day -->
-                <!--2592000     = 30    day-->
-                <property name="maxAge" value="31104000"></property>
-                <!--<property name="maxAge" value="2592000"></property>-->
-            </bean>
-        </property>
+        <property name="cookie" ref="rememberMeCookie"></property>
     </bean>
 
-    <!--配置cache管理器-->
+    <!--4. rememberMeCookie 配置-->
+    <bean id="rememberMeCookie" class="org.apache.shiro.web.servlet.SimpleCookie">
+        <constructor-arg value="rememberMe"></constructor-arg>
+        <property name="path" value="/"></property>
+        <property name="httpOnly" value="true"></property>
+        <!--设置超时时间 单位 秒-->
+        <!--86400       = 1     day -->
+        <!--2592000     = 30    day-->
+        <property name="maxAge" value="31104000"></property>
+    </bean>
+
+    <!--5. 添加 记住我功能设置session-->
+    <!--<bean id="rememberMeFilter" class="org.humingk.movie.config.RememberMeFilter">-->
+
+    <!--</bean>-->
+
+    <!--6. 配置cache管理器-->
     <bean id="cacheManager" class="org.apache.shiro.cache.ehcache.EhCacheManager">
         <property name="cacheManagerConfigFile" value="classpath:spring/ehcache-shiro.xml">
         </property>
     </bean>
 
-    <!--5 配置安全管理器 -->
+    <!--7. 配置session管理器-->
+    <!--<bean id="sessionManager" class="org.apache.shiro.session.mgt.DefaultSessionManager">-->
+        <!--3600000  = 1 hour-->
+        <!--<property name="globalSessionTimeout" value="7200000"/>-->
+    <!--</bean>-->
+
+    <!--8. 配置安全管理器 -->
     <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
         <!--1 注入myRealm-->
         <property name="realm" ref="myRealm"/>
@@ -78,20 +93,34 @@
 
     </bean>
 
+
     <!-- 配置Shiro过滤器，id对应web.xml -->
     <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
         <!-- 注入security 管理器 -->
         <property name="securityManager" ref="securityManager"/>
+        
+        <!--注入自定义rememberMeFilters-->
+        <!--<property name="filters">-->
+            <!--<map>-->
+                <!--&lt;!&ndash;rememberMeFilter&ndash;&gt;-->
+                <!--&lt;!&ndash;<entry key="rememberMe" value-ref="rememberMeFilter"></entry>&ndash;&gt;-->
+            <!--</map>-->
+        <!--</property>-->
+        
         <!-- 身份认证失败，跳转到登录页面的配置 -->
         <property name="loginUrl" value="/login"/>
         <!-- 权限认证失败，则跳转到指定页面 -->
-        <property name="unauthorizedUrl" value="/unauthor"/>
+        <!--<property name="unauthorizedUrl" value="/unauthor"/>-->
         <!-- Shiro连接约束配置,过滤链的定义 -->
         <property name="filterChainDefinitions">
+            <!--url=拦截器[参数]，拦截器-->
+            <!---->
+            <!--
+            “/authenticated.jsp = authc”
+                表示访问该地址用户必须身份验证通过（Subject. isAuthenticated()==true）
+            “/** = user”
+                表示访问该地址的用户是身份验证通过或 RememberMe 登录的都可以-->
             <value>
-                # url=拦截器[参数]，拦截器
-                # 如果用户没有该角色，然后访问该 路径 会报 401错误
-
                 # anon 匿名 不需要认证
                 /login/** = anon
                 /subject/** = anon
@@ -111,12 +140,12 @@
                 /images/** = anon
 
 
-                # user 注册用户 认证才能访问
+                # 注册用户 才能访问
                 <!--/people/** = authc, roles[user]-->
-                <!--表示 authc 和 rememberMe 都能访问-->
-                /people/** = user
+                <!--/people/** = roles[user,admin],rememberMe-->
+                /people/** = roles[user,admin]
 
-                # admin 管理员 认证才能访问
+                # 管理员 才能访问
                 /admin/** = authc,roles[admin]
 
             </value>
