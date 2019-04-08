@@ -135,9 +135,7 @@
                 /unauthor/** = anon
 
                 # anon 静态资源 不需要认证
-                /css/** = anon
-                /js/** = anon
-                /images/** = anon
+                /WEB-INF/static/** = anon
 
 
                 # 注册用户 才能访问

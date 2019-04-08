@@ -8,22 +8,30 @@
 <html>
 <head>
     <title></title>
-
-
-    <%--bootstrap框架 jquery--%>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <script src='https://code.jquery.com/jquery-3.3.1.min.js'></script>
-    <script src="https://apps.bdimg.com/libs/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-    <%--vue--%>
-    <script src="https://unpkg.com/vue/dist/vue.js"></script>
-    <link rel="stylesheet" href="https://apps.bdimg.com/libs/bootstrap/3.2.0/css/bootstrap.min.css">
+    <%--jquery--%>
+    <script src="/static/js/jquery-3.3.1.js"></script>
+    <%--vue.js--%>
+    <script src="/static/js/vue.js"></script>
 
-    <meta name="viewport" content="width=device-width,
-            initial-scale=1.0",maximum-scale=1.0, user-scalable=no">
 
 </head>
 <body>
 <table>
+
+
+    <div id="test111">
+        {{app}}
+    </div>
+
+    <script type="text/javascript">
+        new Vue({
+            el:"#test111",
+            data:{
+                app:"appTest"
+            }
+        })
+    </script>
 
     <div id="movie_poster">
 
@@ -61,6 +69,7 @@
     </tr>
 </table>
 
+
 <div id="movie_summary">
 
     <div id="movie_netease_music">
@@ -79,6 +88,7 @@
 
 
 <script type="text/javascript">
+
     // 本项目的url
     var url_base = "http://localhost:8080";
 
