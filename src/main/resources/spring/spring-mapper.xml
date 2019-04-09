@@ -10,6 +10,9 @@
     <!-- 配置数据库相关参数properties的属性：${url} -->
     <context:property-placeholder location="classpath:/mybatis/jdbc.properties" />
 
+    <!--手动注入DataSourceInitializer-->
+    <bean id="DataSourceInitializer" class="org.humingk.movie.config.DataSourceInitializer"></bean>
+
     <!--数据源  通过 C3P0 连接池-->
     <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
 
@@ -22,7 +25,7 @@
         <!-- c3p0连接池的私有属性 -->
         <property name="maxPoolSize" value="30" />
         <property name="minPoolSize" value="10" />
-
+        <property name="initialPoolSize" value="10"></property>
         <!-- 关闭连接后不自动commit -->
         <property name="autoCommitOnClose" value="false" />
 

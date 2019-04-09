@@ -9,11 +9,17 @@
 <head>
     <title></title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <%--jquery--%>
-    <script src="/static/js/jquery-3.3.1.js"></script>
-    <%--vue.js--%>
-    <script src="/static/js/vue.js"></script>
 
+    <%--引入vue.js--%>
+
+    <%--引入jquery--%>
+
+    <%--引入bootstrap--%>
+
+    <!-- 引入element-ui样式 -->
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <!-- 引入element-ui组件库 -->
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
 
 </head>
 <body>

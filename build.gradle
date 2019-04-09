@@ -66,7 +66,9 @@ dependencies {
     compile group: 'org.mybatis', name: 'mybatis-spring', version: '1.3.2'
 
     //C3P0 连接池配置
-    compile group: 'com.mchange',name: 'c3p0',version: '0.9.5.2'
+    compile group: 'com.mchange', name: 'c3p0', version: '0.9.5.2'
+    // JSR-303 验证
+    compile group: 'org.hibernate.validator', name: 'hibernate-validator', version: '6.0.13.Final'
 
 
     //mysql数据库连接驱动
@@ -76,7 +78,7 @@ dependencies {
     //jsp相关
     compile group: 'jstl', name: 'jstl', version: '1.2'
     //JavaEE servlet
-    compile group: 'javax', name: 'javaee-api', version: '7.0'
+    compile group: 'javax', name: 'javaee-api', version: '8.0'
 
     //日志
 
@@ -112,9 +114,9 @@ dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.12'
 
     // jackson
-    compile group: 'com.fasterxml.jackson.core',name: 'jackson-databind',version:'2.6.0'
-    compile group: 'com.fasterxml.jackson.core',name: 'jackson-core',version:'2.6.0'
-    compile group: 'com.fasterxml.jackson.core',name: 'jackson-annotations',version:'2.6.0'
+    compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.6.0'
+    compile group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: '2.6.0'
+    compile group: 'com.fasterxml.jackson.core', name: 'jackson-annotations', version: '2.6.0'
 
     //gson
     compile group: 'com.google.code.gson', name: 'gson', version: '2.7'
@@ -124,11 +126,11 @@ dependencies {
 
 
     // webmagic 简易的爬虫框架
-    compile group:'us.codecraft',name:'webmagic-core',version:'0.7.3'
-    compile group:'us.codecraft',name:'webmagic-extension',version:'0.7.3'
+    compile group: 'us.codecraft', name: 'webmagic-core', version: '0.7.3'
+    compile group: 'us.codecraft', name: 'webmagic-extension', version: '0.7.3'
 
     // 网页解析
-    compile group:'net.sourceforge.htmlcleaner',name:'htmlcleaner',version:'2.13'
+    compile group: 'net.sourceforge.htmlcleaner', name: 'htmlcleaner', version: '2.13'
 
 
 }
@@ -151,9 +153,9 @@ task mybatisGenerate << {
     ant.properties['password'] = properties.getProperty("jdbc.password")
     ant.properties['src_main_java'] = sourceSets.main.java.srcDirs[0].path
     ant.properties['src_main_resources'] = sourceSets.main.resources.srcDirs[0].path
-    ant.properties['modelPackage'] =properties.getProperty("package.model")
-    ant.properties['mapperPackage'] =properties.getProperty("package.mapper")
-    ant.properties['sqlMapperPackage'] =properties.getProperty("package.xml")
+    ant.properties['modelPackage'] = properties.getProperty("package.model")
+    ant.properties['mapperPackage'] = properties.getProperty("package.mapper")
+    ant.properties['sqlMapperPackage'] = properties.getProperty("package.xml")
     ant.taskdef(
             name: 'mbgenerator',
             classname: 'org.mybatis.generator.ant.GeneratorAntTask',
