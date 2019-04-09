@@ -4,16 +4,29 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 
-import ElementUI from 'element-ui'
-import 'element-ui/lib/theme-chalk/index.css'
+// axios
+import axios from 'axios'
+import VueAxios from 'vue-axios'
+Vue.use(VueAxios,axios);
 
-Vue.config.productionTip = false
-Vue.use(ElementUI)
+// jsonp
+import VueJsonp from 'vue-jsonp'
+Vue.use(VueJsonp);
+
+// element-ui
+import ElementUI from 'element-ui';
+import 'element-ui/lib/theme-chalk/index.css';
+Vue.use(ElementUI);
+
+
+Vue.config.productionTip = false;
 
 /* eslint-disable no-new */
 new Vue({
-    el: '#app',
-    router,
-    components: {App},
-    template: '<App/>'
-})
+  el: '#app',
+  router,
+  components: {
+    "App":App
+  },
+  template: "<App/>"
+});
