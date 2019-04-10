@@ -34,9 +34,39 @@ public class MovieController {
      * @param modelAndView
      * @return
      */
+//    @RequestMapping(value = {"{movieId}","{movieId}/*"} , method = RequestMethod.GET)
+//    @ResponseBody
+//    public ModelAndView subject(@PathVariable("movieId") int movieId, ModelAndView modelAndView) {
+//        MovieAll movieAll;
+//        try{
+//            // 给用户添加session
+//            if(AddSession.add(userService)){
+//                logger.info("添加session成功");
+//            }else {
+//                logger.info("添加session失败");
+//            }
+//
+//            movieAll = movieService.getMovieAllByMovieId(movieId);
+//            // 成功获取电影，返回电影信息
+//            if(movieAll!=null){
+//                logger.info("有这个电影");
+//                modelAndView.addObject("movieAllString", ResultMessage.createMessage(200, "OK", movieAll));
+//            }
+//            //获取电影失败，返回添加电影确认信息
+//            else {
+//                logger.info("没有这个电影");
+//                modelAndView.addObject("movieAllString", ResultMessage.createMessage(200, "ADD", null));
+//            }
+//        }catch (Exception e){
+//            e.printStackTrace();
+//        }
+//        modelAndView.setViewName("subject");
+//        return modelAndView;
+//    }
+
     @RequestMapping(value = {"{movieId}","{movieId}/*"} , method = RequestMethod.GET)
     @ResponseBody
-    public ModelAndView subject(@PathVariable("movieId") int movieId, ModelAndView modelAndView) {
+    public MovieAll subject(@PathVariable("movieId") int movieId) {
         MovieAll movieAll;
         try{
             // 给用户添加session
@@ -47,22 +77,23 @@ public class MovieController {
             }
 
             movieAll = movieService.getMovieAllByMovieId(movieId);
+            ResultMessage resultMessage=new ResultMessage();
             // 成功获取电影，返回电影信息
             if(movieAll!=null){
                 logger.info("有这个电影");
-                modelAndView.addObject("movieAllString", ResultMessage.createMessage(200, "OK", movieAll));
+                return movieAll;
             }
             //获取电影失败，返回添加电影确认信息
             else {
                 logger.info("没有这个电影");
-                modelAndView.addObject("movieAllString", ResultMessage.createMessage(200, "ADD", null));
+                return null;
             }
         }catch (Exception e){
             e.printStackTrace();
+            return null;
         }
-        modelAndView.setViewName("subject");
-        return modelAndView;
     }
+
 
     /**
      * 添加数据库中没有的movieAll
