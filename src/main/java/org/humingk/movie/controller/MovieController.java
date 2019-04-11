@@ -2,6 +2,7 @@ package org.humingk.movie.controller;
 
 import org.humingk.movie.common.AddSession;
 import org.humingk.movie.common.MovieAll;
+import org.humingk.movie.common.Result;
 import org.humingk.movie.common.ResultMessage;
 import org.humingk.movie.service.MovieService;
 import org.humingk.movie.service.UserService;
@@ -66,7 +67,7 @@ public class MovieController {
 
     @RequestMapping(value = {"{movieId}","{movieId}/*"} , method = RequestMethod.GET)
     @ResponseBody
-    public MovieAll subject(@PathVariable("movieId") int movieId) {
+    public Result subject(@PathVariable("movieId") int movieId) {
         MovieAll movieAll;
         try{
             // 给用户添加session
@@ -77,16 +78,15 @@ public class MovieController {
             }
 
             movieAll = movieService.getMovieAllByMovieId(movieId);
-            ResultMessage resultMessage=new ResultMessage();
             // 成功获取电影，返回电影信息
             if(movieAll!=null){
                 logger.info("有这个电影");
-                return movieAll;
+                return Result.createMessage(200,"OK",movieAll);
             }
             //获取电影失败，返回添加电影确认信息
             else {
                 logger.info("没有这个电影");
-                return null;
+                return Result.createMessage(200,"NONE",null);
             }
         }catch (Exception e){
             e.printStackTrace();
@@ -100,20 +100,37 @@ public class MovieController {
      * @param movieAll
      * @return
      */
+//    @RequestMapping(value = "addMovieAll",method = RequestMethod.POST)
+//    @ResponseBody
+//    public String addMovieAll(@RequestBody MovieAll movieAll){
+//        // 添加成功
+//        if(movieService.addMovieAll(movieAll)){
+//            logger.info("从doubanAPI添加电影信息成功");
+//            // 将movieAll返回
+//        }
+//        // 添加失败
+//        else {
+//            logger.info("从doubanAPI添加电影信息失败");
+//        }
+//        return "";
+//    }
+
     @RequestMapping(value = "addMovieAll",method = RequestMethod.POST)
     @ResponseBody
-    public String addMovieAll(@RequestBody MovieAll movieAll){
+    public Result addMovieAll(@RequestBody MovieAll movieAll){
         // 添加成功
         if(movieService.addMovieAll(movieAll)){
             logger.info("从doubanAPI添加电影信息成功");
+            return Result.createMessage(200,"success",null);
             // 将movieAll返回
         }
         // 添加失败
         else {
             logger.info("从doubanAPI添加电影信息失败");
+            return Result.createMessage(200,"fail",null);
         }
-        return "";
     }
+
 
     /**
      * ===========此controller暂时没用==================

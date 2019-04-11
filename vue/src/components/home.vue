@@ -8,8 +8,6 @@
   // 豆瓣V2 API url apiKey
   var url_douban = "https://api.douban.com";
   var apikey_douban = "apikey=0b2bdeda43b5688921839c8ecb20399b";
-  var movieId = 1292720;
-
   export default {
     name: 'home',
     data: function () {
