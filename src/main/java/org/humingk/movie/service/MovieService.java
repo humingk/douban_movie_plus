@@ -38,7 +38,7 @@ public interface MovieService {
      * @param movieId
      * @param rate
      */
-    void updateRateByMovieId(int movieId,float rate);
+    boolean updateRateByMovieId(int movieId,float rate);
 
 
     /**

@@ -38,6 +38,8 @@ public class MovieServiceImpl implements MovieService {
     @Autowired
     private MovieDirectorMapper movieDirectorMapper;
     @Autowired
+    private MovieWriterMapper movieWriterMapper;
+    @Autowired
     private MovieLeadingactorMapper movieLeadingactorMapper;
     @Autowired
     private MovieTypeMapper movieTypeMapper;
@@ -134,11 +136,13 @@ public class MovieServiceImpl implements MovieService {
      * @param rate
      */
     @Override
-    public void updateRateByMovieId(int movieId, float rate) {
+    public boolean updateRateByMovieId(int movieId, float rate) {
         try {
             movieMapper.updateRateByPrimaryKey(movieId, rate);
+            return true;
         } catch (Exception e) {
             e.printStackTrace();
+            return false;
         }
     }
 
@@ -158,6 +162,12 @@ public class MovieServiceImpl implements MovieService {
                 if (movieAll.getDirectors().get(i).getActorId() != null) {
                     actorMapper.updateActorsByMovieAll(movieAll.getDirectors().get(i).getActorId(), movieAll.getDirectors().get(i).getName());
                     movieDirectorMapper.updateMovieDirectorByMovieAll(movieAll.getMovieId(), movieAll.getDirectors().get(i).getActorId());
+                }
+            }
+            for (int i = 0; i < movieAll.getWriters().size(); i++) {
+                if (movieAll.getWriters().get(i).getActorId() != null) {
+                    actorMapper.updateActorsByMovieAll(movieAll.getWriters().get(i).getActorId(), movieAll.getWriters().get(i).getName());
+                    movieWriterMapper.updateMovieWriterByMovieAll(movieAll.getMovieId(), movieAll.getWriters().get(i).getActorId());
                 }
             }
             for (int i = 0; i < movieAll.getLeadingactors().size(); i++) {

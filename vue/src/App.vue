@@ -1,29 +1,31 @@
 <template>
   <div id="app">
-
-    <!--导航栏-->
-    <el-container>
-      <el-header>
-        <keep-alive>
-          <headernav></headernav>
-        </keep-alive>
-      </el-header>
-    </el-container>
+    <headernav></headernav>
     <router-view></router-view>
   </div>
 </template>
 
 <script>
-  import header from "./components/header"
+  import headernav from "./components/top"
 
   export default {
     name: 'App',
     components: {
-      headernav: header
+      headernav: headernav
     }
   }
 </script>
 
 <style>
+  .el-header, .el-footer {
+    text-align: left;
+  }
+  .el-aside {
+    text-align: left;
+  }
 
+  .el-main {
+    overflow: hidden;
+    text-align: left;
+  }
 </style>
