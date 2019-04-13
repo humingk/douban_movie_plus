@@ -4,10 +4,10 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 
-// axios
-import axios from 'axios'
-import VueAxios from 'vue-axios'
-Vue.use(VueAxios,axios);
+// // axios
+// import axios from 'axios'
+// import VueAxios from 'vue-axios'
+// Vue.use(VueAxios,axios);
 
 // jsonp
 import VueJsonp from 'vue-jsonp'

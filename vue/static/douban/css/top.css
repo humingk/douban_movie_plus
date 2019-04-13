@@ -30,7 +30,7 @@ ul{list-style-type:none;margin:0;padding:0;}
 ul{list-style:none;}
 input{font-size:12px;margin-right:3px;vertical-align:middle;}
 a{cursor:pointer;}
-.nav{width:100%;min-width:1040px;overflow:hidden;zoom:1;margin-bottom:40px;}
+.nav{width:100%;min-width:1040px;overflow:hidden;zoom:1;margin-bottom:20px;}
 .nav .nav-wrap{border-bottom:1px solid #e5ebe4;}
 .nav .nav-primary{width:1040px;margin:0 auto;overflow:visible!important;position:relative;padding:10px 0 5px;zoom:1;}
 .nav .nav-logo{float:left;height:56px;width:145px;margin:0 13px 0 0;}

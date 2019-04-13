@@ -35,14 +35,14 @@
         var xmlhttp;
         // 异步获取用户输入的信息
         function getMoreNames() {
-            var name = document.getElementById("search_name");
+            var name = document.getElementById("keyword");
             if (name.value == "") {
                 clearName();
                 return;
             }
             xmlhttp = newAjax();
             // var url="search?name="+escape(name.value);
-            var url = "searchTips?searchTips_name=" + name.value;
+            var url = "searchTips?keyword=" + name.value;
             // xmlhttp.responseType='json';
             // true 异步
             xmlhttp.open("GET", url, true);
@@ -81,7 +81,7 @@
         function callback() {
             if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
                 var result = JSON.parse(xmlhttp.responseText);
-                showTips(result);
+                showTips(result.data);
             }
         }
 
@@ -146,7 +146,7 @@
         function setLocation() {
 
             //关联位置显示位置与输入框
-            var name = document.getElementById("search_name");
+            var name = document.getElementById("keyword");
             var width = name.offsetWidth - 2;  //input width
             var left = name["offsetLeft"]; //距左边框的距离
             var top = name["offsetTop"] + name.height; //到顶部的距离
@@ -235,7 +235,7 @@
     <table>
         <tr>
             Search
-            <td><input id="search_name" name="search_name" type="text" size="50" placeholder="请输入电影名"
+            <td><input id="keyword" name="keyword" type="text" size="50" placeholder="请输入电影名"
                        autocomplete="off" onkeyup="getMoreNames()" onblur="nameLossFocus()" onfocus="nameGetFocus()">
             </td>
             <td><input type="submit" value="search"></td>

@@ -76,7 +76,7 @@
     from movie
     where movie.name like CONCAT('',#{name,jdbcType=CHAR},'%')
      order by  movie.rate desc
-     limit 10
+     limit 6
   </select>
 
     <!--根据电影id返回电影的详细资料-->

@@ -72,7 +72,6 @@ a.lnk-sharing:hover,a.lnk-sharing:active{border-color:#c4e2d8;background-color:#
 .minisubmit{padding:0;margin:0;color:#37a;background:none;cursor:pointer;border:none;}
 .minisubmit:hover{background:#003399;color:#fff;}
 .gray_ad{background:#F4F4EC;padding:10px;margin-bottom:20px;word-wrap:break-word;}
-.bigstar45{background-position:0 -15px;}
 .doulist-add-btn{float:left;margin-right:15px;}
 .fleft{float:left;}
 .fright{float:right;}
@@ -94,8 +93,18 @@ p.gact{margin:0;}
 div.comment-item{margin-bottom:1em;word-break:break-word;}
 .comment-item{*zoom:1;overflow:hidden;margin-bottom:1.6em;}
 .comment-item h3{margin:1.5em 0 1em 0;height:1.7em;line-height:1.7em;padding-left:4px;}
-.bigstar45{display:inline-block;*display:inline;zoom:1;background:url(https://img3.doubanio.com/f/shire/680a4bc4c384199245b080c7104da5be8ed717d3/pics/rating_icons/ic_rating_m.png) no-repeat;background:-webkit-image-set(url(https://img3.doubanio.com/f/shire/680a4bc4c384199245b080c7104da5be8ed717d3/pics/rating_icons/ic_rating_m.png) 1x, url(https://img3.doubanio.com/f/shire/ee7f53d76c3f8ed4991bdbafdb9b2c90c0aedfef/pics/rating_icons/ic_rating_m@2x.png) 2x) no-repeat;background:-moz-image-set(url(https://img3.doubanio.com/f/shire/680a4bc4c384199245b080c7104da5be8ed717d3/pics/rating_icons/ic_rating_m.png) 1x, url(https://img3.doubanio.com/f/shire/ee7f53d76c3f8ed4991bdbafdb9b2c90c0aedfef/pics/rating_icons/ic_rating_m@2x.png) 2x) no-repeat;background:-o-image-set(url(https://img3.doubanio.com/f/shire/680a4bc4c384199245b080c7104da5be8ed717d3/pics/rating_icons/ic_rating_m.png) 1x, url(https://img3.doubanio.com/f/shire/ee7f53d76c3f8ed4991bdbafdb9b2c90c0aedfef/pics/rating_icons/ic_rating_m@2x.png) 2x) no-repeat;background:-ms-image-set(url(https://img3.doubanio.com/f/shire/680a4bc4c384199245b080c7104da5be8ed717d3/pics/rating_icons/ic_rating_m.png) 1x, url(https://img3.doubanio.com/f/shire/ee7f53d76c3f8ed4991bdbafdb9b2c90c0aedfef/pics/rating_icons/ic_rating_m@2x.png) 2x) no-repeat;width:75px;height:15px;margin:1px 0 0 0;overflow:hidden;}
+
+.bigstar45, .bigstar40, .bigstar35, .bigstar30, .bigstar25, .bigstar20, .bigstar15, .bigstar10, .bigstar5{display:inline-block;*display:inline;zoom:1;background:url(https://img3.doubanio.com/f/shire/680a4bc4c384199245b080c7104da5be8ed717d3/pics/rating_icons/ic_rating_m.png) no-repeat;background:-webkit-image-set(url(https://img3.doubanio.com/f/shire/680a4bc4c384199245b080c7104da5be8ed717d3/pics/rating_icons/ic_rating_m.png) 1x, url(https://img3.doubanio.com/f/shire/ee7f53d76c3f8ed4991bdbafdb9b2c90c0aedfef/pics/rating_icons/ic_rating_m@2x.png) 2x) no-repeat;background:-moz-image-set(url(https://img3.doubanio.com/f/shire/680a4bc4c384199245b080c7104da5be8ed717d3/pics/rating_icons/ic_rating_m.png) 1x, url(https://img3.doubanio.com/f/shire/ee7f53d76c3f8ed4991bdbafdb9b2c90c0aedfef/pics/rating_icons/ic_rating_m@2x.png) 2x) no-repeat;background:-o-image-set(url(https://img3.doubanio.com/f/shire/680a4bc4c384199245b080c7104da5be8ed717d3/pics/rating_icons/ic_rating_m.png) 1x, url(https://img3.doubanio.com/f/shire/ee7f53d76c3f8ed4991bdbafdb9b2c90c0aedfef/pics/rating_icons/ic_rating_m@2x.png) 2x) no-repeat;background:-ms-image-set(url(https://img3.doubanio.com/f/shire/680a4bc4c384199245b080c7104da5be8ed717d3/pics/rating_icons/ic_rating_m.png) 1x, url(https://img3.doubanio.com/f/shire/ee7f53d76c3f8ed4991bdbafdb9b2c90c0aedfef/pics/rating_icons/ic_rating_m@2x.png) 2x) no-repeat;width:75px;height:15px;margin:1px 0 0 0;overflow:hidden;}
 .bigstar45{background-position:0 -15px;}
+.bigstar40{background-position:0 -30px;}
+.bigstar35{background-position:0 -45px;}
+.bigstar30{background-position:0 -60px;}
+.bigstar25{background-position:0 -75px;}
+.bigstar20{background-position:0 -90px;}
+.bigstar15{background-position:0 -105px;}
+.bigstar10{background-position:0 -120px;}
+.bigstar5{background-position:0 -150px;}
+
 .allstar50,.allstar40,.allstar20,.allstar10{display:inline-block;*display:inline;zoom:1;background:url(https://img3.doubanio.com/f/shire/b8f4c3672ef81106701071831e22422a745d3b74/pics/rating_icons/ic_rating_s.png) no-repeat;background:-webkit-image-set(url(https://img3.doubanio.com/f/shire/b8f4c3672ef81106701071831e22422a745d3b74/pics/rating_icons/ic_rating_s.png) 1x, url(https://img3.doubanio.com/f/shire/0147ca9efddcac80050854590d26bee587b008df/pics/rating_icons/ic_rating_s@2x.png) 2x) no-repeat;background:-moz-image-set(url(https://img3.doubanio.com/f/shire/b8f4c3672ef81106701071831e22422a745d3b74/pics/rating_icons/ic_rating_s.png) 1x, url(https://img3.doubanio.com/f/shire/0147ca9efddcac80050854590d26bee587b008df/pics/rating_icons/ic_rating_s@2x.png) 2x) no-repeat;background:-o-image-set(url(https://img3.doubanio.com/f/shire/b8f4c3672ef81106701071831e22422a745d3b74/pics/rating_icons/ic_rating_s.png) 1x, url(https://img3.doubanio.com/f/shire/0147ca9efddcac80050854590d26bee587b008df/pics/rating_icons/ic_rating_s@2x.png) 2x) no-repeat;background:-ms-image-set(url(https://img3.doubanio.com/f/shire/b8f4c3672ef81106701071831e22422a745d3b74/pics/rating_icons/ic_rating_s.png) 1x, url(https://img3.doubanio.com/f/shire/0147ca9efddcac80050854590d26bee587b008df/pics/rating_icons/ic_rating_s@2x.png) 2x) no-repeat;width:55px;height:11px;margin:0 3px 0 0;overflow:hidden;}
 .allstar50{background-position:0 0px;}
 .allstar40{background-position:0 -22px;}
@@ -148,7 +157,8 @@ html h1{font-size:26px;}
 /*! CSS Used from: Embedded */
 img{max-width:100%;}
 /*! CSS Used from: https://img3.doubanio.com/misc/mixed_static/4ed34a7564f61c0f.css */
-#content h2{color:#007722;}
+/*#content h2{color:#007722;}*/
+#content h2{color: #f7097a;}
 .indent{*zoom:1;margin-bottom:30px;}
 .related-info h2,.related-pic h2,#recommendations h2{margin:24px 0 3px 0;}
 .comment_btn{display:inline-block;height:auto;color:#ca6445;background:#fae9da;border-radius:2px;float:right;line-height:13px;padding:7px 12px;}
@@ -223,11 +233,31 @@ div.comment-item .comment{overflow:hidden;line-height:1.5;color:#494949;*zoom:1;
 div.comment-item .comment p{margin:0;}
 div.comment-item .comment-vote{float:right;}
 .comment-time{color:#aaa;}
-#comments-section{margin-bottom:30px;}
+
+#comments-section{margin-bottom:20px;}
 #comments-section .mod-hd{margin-top:16px;overflow:hidden;*zoom:1;}
 #comments-section .mod-hd h2{margin-top:0;}
 #comments-section .comment-item{padding:14px 0;}
 #comments-section .comment-item:last-of-type:before{height:0;}
+
+#playlists-section{margin-bottom:30px;}
+#playlists-section .mod-hd{margin-top:16px;overflow:hidden;*zoom:1;}
+#playlists-section .mod-hd h2{margin-top:0;}
+#playlists-section .comment-item{padding:14px 0;}
+#playlists-section .comment-item:last-of-type:before{height:0;}
+
+#albums-section{margin-bottom:30px;}
+#albums-section .mod-hd{margin-top:16px;overflow:hidden;*zoom:1;}
+#albums-section .mod-hd h2{margin-top:0;}
+#albums-section .comment-item{padding:14px 0;}
+#albums-section .comment-item:last-of-type:before{height:0;}
+
+#songs-section{margin-bottom:30px;}
+#songs-section .mod-hd{margin-top:16px;overflow:hidden;*zoom:1;}
+#songs-section .mod-hd h2{margin-top:0;}
+#songs-section .comment-item{padding:14px 0;}
+#songs-section .comment-item:last-of-type:before{height:0;}
+
 .qa-tip{display:none;line-height:22px;}
 .qa-tip a:link{color:#3377AA;}
 .tab-hd{padding-bottom:15px;position:relative;}
