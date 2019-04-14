@@ -61,7 +61,8 @@ h2{font:15px Arial, Helvetica, sans-serif;color:#072;margin:0 0 12px 0;line-heig
 #info{float:left;max-width:248px;word-wrap:break-word;}
 .clearbox{clear:both;width:100%;}
 .clearbox:after{content:".";display:block;height:0;clear:both;visibility:hidden;}
-.subjectwrap{position:relative;float:left;width:100%;margin-bottom:15px;}
+/*.subjectwrap{position:relative;float:left;width:100%;margin-bottom:15px;}*/
+.subjectwrap{position:relative;float:left;width:100%;}
 .rec-sec{text-align:right;color:#999;}
 .rec-sec span{*zoom:1;}
 .lnk-sharing{display:inline-block;*display:inline;zoom:1;padding:0 8px;vertical-align:middle;*vertical-align:baseline;height:19px;line-height:19px;line-height:21px\9;overflow:hidden;border:1px solid #b9dcd0;-moz-border-radius:3px;-webkit-border-radius:3px;border-radius:3px;}
@@ -75,9 +76,6 @@ a.lnk-sharing:hover,a.lnk-sharing:active{border-color:#c4e2d8;background-color:#
 .doulist-add-btn{float:left;margin-right:15px;}
 .fleft{float:left;}
 .fright{float:right;}
-.clearfix:after{content:".";display:block;height:0;clear:both;visibility:hidden;}
-.clearfix{zoom:1;display:inline-block;_height:1px;}
-.clearfix{display:block;}
 #interest_sect_level{clear:both;padding:20px 0 3px;}
 .ul_subject_menu{margin-left:-15px;}
 .ul_subject_menu li{float:left;display:inline;line-height:14px;margin-left:15px;}
@@ -105,6 +103,48 @@ div.comment-item{margin-bottom:1em;word-break:break-word;}
 .bigstar10{background-position:0 -120px;}
 .bigstar5{background-position:0 -150px;}
 
+/*IMDB stars*/
+.bigImdbStar45, .bigImdbStar40, .bigImdbStar35, .bigImdbStar30, .bigImdbStar25, .bigImdbStar20, .bigImdbStar15, .bigImdbStar10, .bigImdbStar5, .bigImdbStar0{display:inline-block;*display:inline;zoom:1;background:url(../../images/ImdbStars.png) no-repeat;background:-webkit-image-set(url(../../images/ImdbStars.png) 1x, url(../../images/ImdbStars.png) 2x) no-repeat;background:-moz-image-set(url(../../images/ImdbStars.png) 1x, url(../../images/ImdbStars.png) 2x) no-repeat;background:-o-image-set(url(../../images/ImdbStars.png) 1x, url(../../images/ImdbStars.png) 2x) no-repeat;background:-ms-image-set(url(../../images/ImdbStars.png) 1x, url(../../images/ImdbStars.png) 2x) no-repeat;width:75px;height:15px;margin:1px 0 0 0;overflow:hidden;}
+.bigImdbStar45{background-position:0 -15px;}
+.bigImdbStar40{background-position:0 -30px;}
+.bigImdbStar35{background-position:0 -45px;}
+.bigImdbStar30{background-position:0 -60px;}
+.bigImdbStar25{background-position:0 -75px;}
+.bigImdbStar20{background-position:0 -90px;}
+.bigImdbStar15{background-position:0 -105px;}
+.bigImdbStar10{background-position:0 -120px;}
+.bigImdbStar5{background-position:0 -150px;}
+.bigImdbStar0{background-position:0 -165px;}
+
+/*Metacritic stars*/
+.bigMetacriticStar45, .bigMetacriticStar40, .bigMetacriticStar35, .bigMetacriticStar30, .bigMetacriticStar25, .bigMetacriticStar20, .bigMetacriticStar15, .bigMetacriticStar10, .bigMetacriticStar5, .bigMetacriticStar0{display:inline-block;*display:inline;zoom:1;background:url(../../images/MetacriticStars.png) no-repeat;background:-webkit-image-set(url(../../images/MetacriticStars.png) 1x, url(../../images/MetacriticStars.png) 2x) no-repeat;background:-moz-image-set(url(../../images/MetacriticStars.png) 1x, url(../../images/MetacriticStars.png) 2x) no-repeat;background:-o-image-set(url(../../images/MetacriticStars.png) 1x, url(../../images/MetacriticStars.png) 2x) no-repeat;background:-ms-image-set(url(../../images/MetacriticStars.png) 1x, url(../../images/MetacriticStars.png) 2x) no-repeat;width:75px;height:15px;margin:1px 0 0 0;overflow:hidden;}
+.bigMetacriticStar45{background-position:0 -15px;}
+.bigMetacriticStar40{background-position:0 -30px;}
+.bigMetacriticStar35{background-position:0 -45px;}
+.bigMetacriticStar30{background-position:0 -60px;}
+.bigMetacriticStar25{background-position:0 -75px;}
+.bigMetacriticStar20{background-position:0 -90px;}
+.bigMetacriticStar15{background-position:0 -105px;}
+.bigMetacriticStar10{background-position:0 -120px;}
+.bigMetacriticStar5{background-position:0 -150px;}
+.bigMetacriticStar0{background-position:0 -165px;}
+
+
+/*烂番茄*/
+.bigTomato45, .bigTomato40, .bigTomato35, .bigTomato30, .bigTomato25, .bigTomato20, .bigTomato15, .bigTomato10, .bigTomato5, .bigTomato0{display:inline-block;*display:inline;zoom:1;background:url(../../images/tomatoes.png) no-repeat;background:-webkit-image-set(url(../../images/tomatoes.png) 1x, url(../../images/tomatoes.png) 2x) no-repeat;background:-moz-image-set(url(../../images/tomatoes.png) 1x, url(../../images/tomatoes.png) 2x) no-repeat;background:-o-image-set(url(../../images/tomatoes.png) 1x, url(../../images/tomatoes.png) 2x) no-repeat;background:-ms-image-set(url(../../images/tomatoes.png) 1x, url(../../images/tomatoes.png) 2x) no-repeat;width:75px;height:15px;margin:1px 0 0 0;overflow:hidden;}
+.bigTomato45{background-position:0 -15px;}
+.bigTomato40{background-position:0 -30px;}
+.bigTomato35{background-position:0 -45px;}
+.bigTomato30{background-position:0 -60px;}
+.bigTomato25{background-position:0 -75px;}
+.bigTomato20{background-position:0 -90px;}
+.bigTomato15{background-position:0 -105px;}
+.bigTomato10{background-position:0 -120px;}
+.bigTomato5{background-position:0 -150px;}
+.bigTomato0{background-position:0 -165px;}
+
+
+
 .allstar50,.allstar40,.allstar20,.allstar10{display:inline-block;*display:inline;zoom:1;background:url(https://img3.doubanio.com/f/shire/b8f4c3672ef81106701071831e22422a745d3b74/pics/rating_icons/ic_rating_s.png) no-repeat;background:-webkit-image-set(url(https://img3.doubanio.com/f/shire/b8f4c3672ef81106701071831e22422a745d3b74/pics/rating_icons/ic_rating_s.png) 1x, url(https://img3.doubanio.com/f/shire/0147ca9efddcac80050854590d26bee587b008df/pics/rating_icons/ic_rating_s@2x.png) 2x) no-repeat;background:-moz-image-set(url(https://img3.doubanio.com/f/shire/b8f4c3672ef81106701071831e22422a745d3b74/pics/rating_icons/ic_rating_s.png) 1x, url(https://img3.doubanio.com/f/shire/0147ca9efddcac80050854590d26bee587b008df/pics/rating_icons/ic_rating_s@2x.png) 2x) no-repeat;background:-o-image-set(url(https://img3.doubanio.com/f/shire/b8f4c3672ef81106701071831e22422a745d3b74/pics/rating_icons/ic_rating_s.png) 1x, url(https://img3.doubanio.com/f/shire/0147ca9efddcac80050854590d26bee587b008df/pics/rating_icons/ic_rating_s@2x.png) 2x) no-repeat;background:-ms-image-set(url(https://img3.doubanio.com/f/shire/b8f4c3672ef81106701071831e22422a745d3b74/pics/rating_icons/ic_rating_s.png) 1x, url(https://img3.doubanio.com/f/shire/0147ca9efddcac80050854590d26bee587b008df/pics/rating_icons/ic_rating_s@2x.png) 2x) no-repeat;width:55px;height:11px;margin:0 3px 0 0;overflow:hidden;}
 .allstar50{background-position:0 0px;}
 .allstar40{background-position:0 -22px;}
@@ -116,7 +156,7 @@ div.comment-item{margin-bottom:1em;word-break:break-word;}
 .starstop{float:left;}
 .rating_num{color:#e09015;font-size:12px;padding:0 3px;}
 #interest_sectl{float:left;width:155px;margin:2px 0 0 0;padding:0 0 0 15px;border-left:1px solid #eaeaea;color:#9b9b9b;}
-#interest_sectl .rating_wrap{padding-bottom:15px;font-size:12px;line-height:14px;}
+#interest_sectl .rating_wrap{font-size:12px;line-height:14px;}
 #interest_sectl .rating_wrap .rating_logo{line-height:1;}
 #interest_sectl .rating_self{padding:0;line-height:2;}
 #interest_sectl .rating_self:before,#interest_sectl .rating_self:after{content:'';display:block;clear:both;}
@@ -152,6 +192,7 @@ html h1{font-size:26px;}
   [id^=dale_]{max-width:1000px;}
 }
 .subject{width:500px;}
+/*.subject #mainpic{margin-right:15px;margin-bottom: 30px;}*/
 .subject #mainpic{margin-right:15px;}
 #info{max-width:333px;}
 /*! CSS Used from: Embedded */
@@ -159,7 +200,9 @@ img{max-width:100%;}
 /*! CSS Used from: https://img3.doubanio.com/misc/mixed_static/4ed34a7564f61c0f.css */
 /*#content h2{color:#007722;}*/
 #content h2{color: #f7097a;}
-.indent{*zoom:1;margin-bottom:30px;}
+.indent{*zoom:1;
+  /*margin-bottom:30px;*/
+}
 .related-info h2,.related-pic h2,#recommendations h2{margin:24px 0 3px 0;}
 .comment_btn{display:inline-block;height:auto;color:#ca6445;background:#fae9da;border-radius:2px;float:right;line-height:13px;padding:7px 12px;}
 .comment_btn:before{content:'';background:no-repeat url(https://img3.doubanio.com/f/movie/2b420e1750aba8cf053de75b4a5b6fed5438c64b/pics/movie/write.png) center/contain;width:13px;height:13px;float:left;margin-right:4px;}

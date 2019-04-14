@@ -10,14 +10,19 @@
             <div class="inp">
               <!--keyup事件           即时搜索-->
               <!--keydown.enter时间   进入搜索内容-->
+              <!--focus 获得焦点-->
+              <!--blur 失去焦点-->
+              <!--使用blur自动关闭搜索提示框-->
               <input id="inp-query" size="22" maxlength="60" placeholder="搜索电影、影人" autocomplete="off"
                      type="text" v-model="keyword"
+                     @blur="clearSearchTips()"
                      @keyup.esc="clearinput"
                      @keyup="get($event)"
                      @keydown.enter="search()"
                      @keydown.down="selectDown()"
                      @keydown.up.prevent="selectUp()">
               <span class="search-reset" @click="clearInput()">&times;</span>
+              <span></span>
             </div>
             <div class="inp-btn">
               <input @click="search()">
@@ -79,6 +84,10 @@
       }
     },
     methods: {
+      // 只清除 提示框
+      clearSearchTips:function(){
+        this.searchResult=null;
+      },
       get: function (ev) {
         // 按键是上或者下，不需要异步调取数据
         if (ev.keyCode == 38 || ev.keyCode == 40) {
@@ -125,8 +134,8 @@
           return;
         } else if (this.now == -1) {
           window.open("/search?keyword=" + this.keyword);
-        }else {
-          if(this.searchResult){
+        } else {
+          if (this.searchResult) {
             window.open("/subject/" + this.searchResult[this.now].movieId);
           }
         }
@@ -142,14 +151,14 @@
         this.searchResult = null;
       },
     },
-    mounted() {
+    // 页面渲染完成后...
+    mounted: function () {
 
-    },
+    }
   }
 </script>
 <style>
   @import "../../static/douban/css/top.css";
-
   .search-reset {
     width: 21px;
     height: 21px;
@@ -162,6 +171,7 @@
     left: 450px;
     top: 13px
   }
+
   .selectback {
     background-color: #f56fbe !important;
     cursor: pointer

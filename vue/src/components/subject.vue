@@ -3,7 +3,7 @@
     <div id="wrapper">
       <div id="content">
         <h1>
-          <span>{{movieBase.name}}</span>
+          <span>{{movieBase.name}} {{movieApi.original_title}}</span>
           <span class="year">({{movieApi.year}})</span>
         </h1>
         <div class="grid-16-8 clearfix">
@@ -14,17 +14,31 @@
                   <div id="mainpic" class="">
                     <a class="nbgnbg" v-if="movieApi.images" :href="movieApi.images.large"><img
                       :src="movieApi.images.large" rel="noreferrer"></a>
+                    <p class="gact"></p>
                   </div>
-                  <div class="info">
+                  <div style="position:relative; line-height: 16px;" class="info">
                     <span class="pl" v-if="movieBase.directors.length">导演: </span>
                     <span class="attrs" v-for="(item,index) in movieBase.directors"><a
                       target="_blank" :href="'/celebrity/'+item.actorId">{{item.name}}</a>{{ index === movieBase.directors.length-1 ? "" : " / " }}</span><br>
                     <span class="pl" v-if="movieBase.writers.length">编剧: </span>
                     <span class="attrs" v-for="(item,index) in movieBase.writers"><a target="_blank"
                                                                                      :href="'/celebrity/'+item.actorId">{{item.name}}</a>{{ index === movieBase.writers.length-1 ? "" : " / " }}</span><br>
+                    <span class="actor">
                     <span class="pl" v-if="movieBase.leadingactors.length">演员: </span>
-                    <span class="attrs" v-for="(item,index) in movieBase.leadingactors"><a target="_blank"
-                                                                                           :href="'/celebrity/'+item.actorId">{{item.name}}</a>{{ index === movieBase.leadingactors.length-1 ? "" : " / " }}</span><br>
+                    <span class="attrs" v-for="(item,index) in movieBase.leadingactors" v-if="index < 10">
+                      <a target="_blank" :href="'/celebrity/'+item.actorId">{{item.name}}</a>
+                      {{ index === movieBase.leadingactors.length-1 ? "" : " / " }}
+                    </span>
+
+                      <span class="attrs" v-for="(item,index) in movieBase.leadingactors"
+                            v-if="index >= 10 && !brandOrFold">
+                      <a target="_blank" :href="'/celebrity/'+item.actorId">{{item.name}}</a>
+                      {{ index === movieBase.leadingactors.length-1 ? "" : " / " }}
+                    </span>
+
+                      <span @click="moreActor()" style="color: #4c9b4a;font-size: 11px">{{brandOrFold?'...(展开)':'...(收起)'}}</span>
+                      <br>
+                    </span>
                     <span class="pl" v-if="movieBase.types.length">类型: </span>
                     <span class="attrs" v-for="(item,index) in movieBase.types"><a target="_blank"
                                                                                    :href="'/type/'+item.typeName">{{item.typeName}}</a>{{ index === movieBase.types.length-1 ? "" : " / " }}</span><br>
@@ -38,21 +52,109 @@
                                            :href="url_imdb+'/title/'+movieBase.imdbId">{{movieBase.imdbId}}</a></span>
                   </div>
                 </div>
-                <!--豆瓣评分-->
                 <div id="interest_sectl">
+                  <!--豆瓣评分-->
                   <div class="rating_wrap clearbox">
                     <div class="clearfix">
-                      <div class="rating_logo ll">豆瓣评分</div>
+                      <div class="rating_logo ll">
+                        <a :href="url_douban" target="_blank">
+                        豆瓣电影
+                        </a>
+                      </div>
                       <div class="output-btn-wrap rr" style="">
                       </div>
                     </div>
                     <div class="rating_self clearfix">
-                      <strong class="ll rating_num">{{movieApi.rating.average==0?'无':movieApi.rating.average}}</strong>
+                      <strong class="ll rating_num">{{movieApi.rating.average==0?'囧':movieApi.rating.average}}</strong>
                       <span content="10.0"></span>
                       <div class="rating_right ">
                         <div :class="'ll bigstar '+getBigRateType(movieApi.rating.average)"></div>
                         <div class="rating_sum">
-                          <div class="rating_people"><span>{{movieApi.ratings_count}}</span>人评价</div>
+                          <div class="rating_people"><span>
+                            <a :href="url_douban+'/subject/'+movieBase.movieId+'/collections'" target="_blank">
+                            {{movieApi.rating.average==0?'仅':''}}{{movieApi.ratings_count|thousands()}}人评价
+                            </a>
+                          </span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!--IMDB评分-->
+                  <div v-if="imdbApi.imdbID" class="rating_wrap clearbox">
+                    <div class="clearfix">
+                      <div class="rating_logo ll">
+                        <a :href="url_imdb" target="_blank">
+                        IMDB
+                        </a>
+                      </div>
+                      <div class="output-btn-wrap rr" style="">
+                      </div>
+                    </div>
+                    <div class="rating_self clearfix">
+                      <strong class="ll rating_num">{{imdbApi.imdbRating=='N/A'?'囧':imdbApi.imdbRating}}</strong>
+                      <span content="10.0"></span>
+                      <div class="rating_right ">
+                        <div :class="'ll bigstar '+getBigRateTypeForImdb(imdbApi.imdbRating)"></div>
+                        <div class="rating_sum">
+                          <div class="rating_people">
+                            <span>
+                            <a target="_blank" :href="url_imdb+'/title/'+movieBase.imdbId">
+                              {{imdbApi.imdbVotes=='N/A'?'暂时无':imdbApi.imdbVotes}}人评价
+                            </a>
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!--Metacritic-->
+                  <div v-if="imdbApi.Ratings.length!=0" class="rating_wrap clearbox">
+                    <div class="clearfix">
+                      <div class="rating_logo ll">
+                        <a :href="url_metacritic" target="_blank">
+                        MTC
+                        </a>
+                      </div>
+                      <div class="output-btn-wrap rr" style="">
+                      </div>
+                    </div>
+                    <div class="rating_self clearfix" v-if="imdbApi.Ratings[2]">
+                      <strong class="ll rating_num">{{imdbApi.Ratings[2].Value|fixSlish()}}</strong>
+                      <span content="10.0"></span>
+                      <div class="rating_right " v-if="imdbApi.Ratings[2]">
+                        <div :class="'ll bigstar '+getBigRateTypeForMetacritic(imdbApi.Ratings[2].Value)"></div>
+                        <div class="rating_sum">
+                          <div class="rating_people">
+                            <a target="_blank"
+                               :href="url_metacritic+'/movie/'+getMetacriticName(movieApi.original_title)">
+                              --> Metacritic
+                            </a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!--烂番茄评分-->
+                  <div v-if="imdbApi.Ratings.length!=0" class="rating_wrap clearbox">
+                    <div class="clearfix">
+                      <div class="rating_logo ll">
+                        <a :href="url_tomato" target="_blank">
+                        烂番茄
+                        </a>
+                      </div>
+                      <div class="output-btn-wrap rr" style="">
+                      </div>
+                    </div>
+                    <div class="rating_self clearfix" v-if="imdbApi.Ratings[1]">
+                      <strong class="ll rating_num">{{imdbApi.Ratings[1].Value|fixPercent()}}</strong>
+                      <span content="10.0"></span>
+                      <div class="rating_right " v-if="imdbApi.Ratings[1]">
+                        <div :class="'ll bigstar '+getBigRateTypeForTomatoes(imdbApi.Ratings[1].Value)"></div>
+                        <div class="rating_sum">
+                          <a target="_blank" :href="url_tomato+'/m/'+getTomatoName(movieApi.original_title)">
+                            --> RTomatoes
+                          </a>
                         </div>
                       </div>
                     </div>
@@ -103,7 +205,7 @@
                     </div>
                   </a>
                 </li>
-                <li class="celebrity" v-for="(item,index) in movieApi.casts">
+                <li class="celebrity" v-for="(item,index) in movieApi.casts" v-if="index < 3">
                   <a :href="'/celebrity/'+item.id" target="_blank" class="">
                     <div class="avatar">
                       <img :src="item.avatars.large" rel="noreferrer">
@@ -151,7 +253,7 @@
                               <span class="votes">{{item.useful_count}} 有用</span>
                             </span>
                           <span class="comment-info">
-                            <a :href="'/people/'+item.author.id" target="_blank" class="">{{item.author.name}}</a>
+                            <a :href="url_douban+'/people/'+item.author.id" target="_blank" class="">{{item.author.name}}</a>
                             <span :class="getRateType(item.rating.value)+' rating'"></span>
                             <span class="comment-time">{{item.created_at}}</span>
                           </span>
@@ -179,10 +281,10 @@
               <div class="review-list">
                 <div v-for="(item,index) in movieApi.popular_reviews" v-if="index < 5" class="main review-item">
                   <header class="main-hd">
-                    <a :href="'/people/'+item.author.id" class="avator">
+                    <a :href="url_douban+'/people/'+item.author.id" class="avator">
                       <img width="24" height="24" :src="item.author.avatar">
                     </a>
-                    <a :href="'/people/'+item.author.id" class="name" target="_blank">{{item.author.name}}</a>
+                    <a :href="url_douban+'/people/'+item.author.id" class="name" target="_blank">{{item.author.name}}</a>
                     <span :class="getRateType(item.rating.value)+' main-title-rating'"></span>
                     <!--影评时间-->
                     <span class="main-meta"></span>
@@ -344,10 +446,17 @@
         url_imdb: "https://www.imdb.com",
         url_douban: "https://movie.douban.com",
         url_netease: "https://music.163.com",
+        url_metacritic: "https://www.metacritic.com",
+        url_tomato: "https://www.rottentomatoes.com",
+        brandOrFold: true,
+        subTitle:" (1s)",
         neteaseSearch: {},
         neteaseSongs: [],
         neteaseAlbums: [],
         neteasePlaylists: [],
+        imdbApi: {
+          Ratings:[]
+        },
         movieApi: {},
         movieBase: {
           movieId: "",
@@ -374,7 +483,7 @@
         console.log("movie douban API :");
         console.log(responseApi);
         this.movieApi = responseApi;
-        // 获取电影基础资料
+        // 获取电影基础资料 加 IMDB 相关
         getMovieBase(this.$route.params.movieId, this, responseApi);
         // 更新服务端 评分
         updateRate(responseApi.id, responseApi.rating.average);
@@ -388,14 +497,16 @@
         console.log(error);
         // 获取APi失败，再次获取 movie base
         if (!isDoubanApi) {
-          getMovieBase(this.$route.params.movieId, null, null);
           console.log("get movieApi fail, get movie base again...");
+          getMovieBase(this.$route.params.movieId, null, null);
         }
       });
       // axios主要执行流程------------------end
 
       // axios 方法集合---------------------start
       // 从服务器获取 movieBase
+
+      // 从服务器获取电影基础信息
       function getMovieBase(movieId, _this, responseApi) {
         axios.get(url_ssm_base + "/subject/" + movieId).then(responseBase => {
           console.log("movie base :");
@@ -403,6 +514,10 @@
           // 服务端有这部电影
           if (responseBase.data.code == 200 && responseBase.data.message == "OK") {
             _this.movieBase = responseBase.data.data;
+            // 设置标题
+            document.title=responseBase.data.data.name+_this.subTitle;
+            // 获取 imdb 相关
+            getImdb(_this.movieBase.imdbId, _this);
           }
           // 服务端没有这部电影
           // base上传------------------start
@@ -442,6 +557,8 @@
               for (let i = 0; i < responseApi.tags.length; i++) {
                 _this.movieBase.tags.push({"tagName": responseApi.tags[i]});
               }
+              // 设置标题
+              document.title=responseApi.title+_this.subTitle;
               // API赋值base-----end
               axios.post(url_ssm_base + "/subject/addMovieAll", _this.movieBase).then(
                 response => {
@@ -573,11 +690,38 @@
         });
       }
 
+      // 获取IMDB信息
+      function getImdb(imdbId, _this) {
+        axios.get(url_omdb + "/?" + apikey_omdb + "&plot=full&i=" + imdbId).then(response => {
+          _this.imdbApi = response.data;
+          console.log("imdb Api :");
+          console.log(response.data);
+        }).catch(error => {
+          console.log("get imdb api fail...");
+          console.log(error);
+        });
+      }
 
       // axios 方法集合---------------------end
 
     },
     methods: {
+      // 展开更多actors
+      moreActor: function () {
+        if (this.brandOrFold) {
+          this.brandOrFold = false;
+        } else {
+          this.brandOrFold = true;
+        }
+      },
+      // 获取 metacritic 对应的电影名
+      getMetacriticName(val) {
+        return val.toString().replace(/ |: /g, '-').toLowerCase();
+      },
+      // 获取 rottentomato 对应的电影名
+      getTomatoName(val) {
+        return val.toString().replace(/ |: /g, '_').toLowerCase();
+      },
       // 评分图标
       getRateType: function (rate) {
         switch (rate) {
@@ -617,12 +761,78 @@
           return 'bigstar15';
         } else if (rate <= 3 && rate > 2) {
           return 'bigstar10';
-        }else {
+        } else {
           return 'bigstar5';
+        }
+      },
+      getBigRateTypeForTomatoes: function (rateT) {
+        let rate = parseFloat(rateT.toString().replace(/%/g, '')) / 10;
+        if (rate <= 10 && rate > 9) {
+          return 'bigTomato45';
+        } else if (rate <= 9 && rate > 8) {
+          return 'bigTomato40';
+        } else if (rate <= 8 && rate > 7) {
+          return 'bigTomato35';
+        } else if (rate <= 7 && rate > 6) {
+          return 'bigTomato30';
+        } else if (rate <= 6 && rate > 5) {
+          return 'bigTomato25';
+        } else if (rate <= 5 && rate > 4) {
+          return 'bigTomato20';
+        } else if (rate <= 4 && rate > 3) {
+          return 'bigTomato15';
+        } else if (rate <= 3 && rate > 2) {
+          return 'bigTomato10';
+        } else {
+          return 'bigTomato5';
+        }
+      },
+      getBigRateTypeForImdb: function (rate) {
+        if (rate <= 10 && rate > 9) {
+          return 'bigImdbStar45';
+        } else if (rate <= 9 && rate > 8) {
+          return 'bigImdbStar40';
+        } else if (rate <= 8 && rate > 7) {
+          return 'bigImdbStar35';
+        } else if (rate <= 7 && rate > 6) {
+          return 'bigImdbStar30';
+        } else if (rate <= 6 && rate > 5) {
+          return 'bigImdbStar25';
+        } else if (rate <= 5 && rate > 4) {
+          return 'bigImdbStar20';
+        } else if (rate <= 4 && rate > 3) {
+          return 'bigImdbStar15';
+        } else if (rate <= 3 && rate > 2) {
+          return 'bigImdbStar10';
+        } else {
+          return 'bigImdbStar5';
+        }
+      },
+      getBigRateTypeForMetacritic: function (rateM) {
+        let rate = parseFloat(rateM.toString().replace(/\/100/g, '')) / 10;
+        if (rate <= 10 && rate > 9) {
+          return 'bigMetacriticStar45';
+        } else if (rate <= 9 && rate > 8) {
+          return 'bigMetacriticStar40';
+        } else if (rate <= 8 && rate > 7) {
+          return 'bigMetacriticStar35';
+        } else if (rate <= 7 && rate > 6) {
+          return 'bigMetacriticStar30';
+        } else if (rate <= 6 && rate > 5) {
+          return 'bigMetacriticStar25';
+        } else if (rate <= 5 && rate > 4) {
+          return 'bigMetacriticStar20';
+        } else if (rate <= 4 && rate > 3) {
+          return 'bigMetacriticStar15';
+        } else if (rate <= 3 && rate > 2) {
+          return 'bigMetacriticStar10';
+        } else {
+          return 'bigMetacriticStar5';
         }
       }
     },
     filters: {
+      // 时间戳转换
       formatDate: function (value) {
         if (!value) return '';
         let date = new Date(value);
@@ -632,8 +842,24 @@
         let hour = date.getHours();
         let minute = date.getMinutes();
         return year + '-' + month + '-' + day + ' ' + hour + ':' + minute;
+      },
+      // 千分位转换
+      thousands: function (val) {
+        return val.toString().replace(/(\d)(?=(?:\d{3})+$)/g, '$1,');
+      },
+      // 烂番茄去除百分号并且两个数之间加小数点
+      fixPercent: function (val) {
+        return parseFloat(val.toString().replace(/%/g, '')) / 10;
+      },
+      // Metacritic 去除斜杠
+      fixSlish: function (val) {
+        return parseFloat(val.toString().replace(/\/100/g, '')) / 10;
       }
-    }
+    },
+    // 页面渲染完成后...
+    mounted: function () {
+
+    },
   }
 </script>
 <style>
@@ -641,6 +867,11 @@
   /*字体*/
   .attrs {
     font-size: 13px;
+  }
+
+  .subject #mainpic {
+    margin-right: 15px;
+    margin-bottom: 65px;
   }
 
   .review-short {
@@ -660,17 +891,13 @@
     margin-bottom: 0px;
   }
 
-  .subjectwrap {
-    margin-bottom: 0px;
-  }
-
-  .indent {
-    margin-bottom: 20px;
-  }
-
   .related-pic {
     margin-top: 20px;
     margin-bottom: 20px;
+  }
+
+  .related-celebrities {
+    margin-top: 20px;
   }
 
   .pl {

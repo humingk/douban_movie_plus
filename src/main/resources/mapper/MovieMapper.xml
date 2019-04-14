@@ -75,7 +75,7 @@
       select movie.*
     from movie
     where movie.name like CONCAT('',#{name,jdbcType=CHAR},'%')
-     order by  movie.rate desc
+     order by  length(movie.alias) desc
      limit 6
   </select>
 
