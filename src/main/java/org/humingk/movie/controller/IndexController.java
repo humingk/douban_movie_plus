@@ -60,7 +60,13 @@ public class IndexController {
     @ResponseBody
     public Result searchTips(@RequestParam("keyword") String keyword) {
         List<Movie> movies = movieService.getMoviesByNameStart(keyword);
-        return Result.createMessage(200,"success",movies);
+        if(movies.size()!=0){
+            logger.info(keyword+" 返回此关键字的电影");
+            return Result.createMessage(200,"success",movies);
+        }else {
+            logger.info(keyword+" 没有此关键字的电影");
+            return Result.createMessage(200,"fail",null);
+        }
     }
 
     @RequestMapping(value = "search",method = RequestMethod.GET)

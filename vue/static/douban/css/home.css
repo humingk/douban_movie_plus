@@ -1,0 +1,149 @@
+
+/*! CSS Used from: https://img3.doubanio.com/f/shire/bf61b1fa02f564a4a8f809da7c7179b883a56146/css/douban.css */
+div,ul,li,h2{margin:0;padding:0;}
+img{border:0;}
+ul{list-style:none;}
+h2{font-size:100%;font-weight:normal;}
+a{cursor:pointer;}
+a:link{color:#37a;text-decoration:none;}
+a:visited{color:#669;text-decoration:none;}
+a:hover{color:#fff;text-decoration:none;background:#37a;}
+a:active{color:#fff;text-decoration:none;background:#f93;}
+a img{border-width:0;vertical-align:middle;}
+.clearfix:after{content:".";display:block;height:0;clear:both;visibility:hidden;}
+.clearfix{zoom:1;display:inline-block;_height:1px;}
+.clearfix{display:block;}
+#wrapper{width:950px;margin:0 auto;}
+#content{min-height:420px;}
+.grid-16-8 .article{float:left;width:590px;padding-right:40px;}
+a{cursor:pointer;}
+a:link{color:#37a;text-decoration:none;}
+a:visited{color:#666699;text-decoration:none;}
+a:hover{color:#FFFFFF;text-decoration:none;background:#37a;}
+a:active{color:#FFFFFF;text-decoration:none;background:#FF9933;}
+a img{border-width:0;vertical-align:middle;}
+ul{list-style-type:none;margin:0;padding:0;}
+h2{font:15px Arial, Helvetica, sans-serif;color:#072;margin:0 0 12px 0;line-height:150%;}
+.clearfix:after{content:".";display:block;height:0;clear:both;visibility:hidden;}
+.clearfix{zoom:1;display:inline-block;_height:1px;}
+.clearfix{display:block;}
+.allstar45,.allstar40,.allstar35,.allstar30,.allstar25,.allstar15{display:inline-block;*display:inline;zoom:1;background:url(https://img3.doubanio.com/f/shire/b8f4c3672ef81106701071831e22422a745d3b74/pics/rating_icons/ic_rating_s.png) no-repeat;background:-webkit-image-set(url(https://img3.doubanio.com/f/shire/b8f4c3672ef81106701071831e22422a745d3b74/pics/rating_icons/ic_rating_s.png) 1x, url(https://img3.doubanio.com/f/shire/0147ca9efddcac80050854590d26bee587b008df/pics/rating_icons/ic_rating_s@2x.png) 2x) no-repeat;background:-moz-image-set(url(https://img3.doubanio.com/f/shire/b8f4c3672ef81106701071831e22422a745d3b74/pics/rating_icons/ic_rating_s.png) 1x, url(https://img3.doubanio.com/f/shire/0147ca9efddcac80050854590d26bee587b008df/pics/rating_icons/ic_rating_s@2x.png) 2x) no-repeat;background:-o-image-set(url(https://img3.doubanio.com/f/shire/b8f4c3672ef81106701071831e22422a745d3b74/pics/rating_icons/ic_rating_s.png) 1x, url(https://img3.doubanio.com/f/shire/0147ca9efddcac80050854590d26bee587b008df/pics/rating_icons/ic_rating_s@2x.png) 2x) no-repeat;background:-ms-image-set(url(https://img3.doubanio.com/f/shire/b8f4c3672ef81106701071831e22422a745d3b74/pics/rating_icons/ic_rating_s.png) 1x, url(https://img3.doubanio.com/f/shire/0147ca9efddcac80050854590d26bee587b008df/pics/rating_icons/ic_rating_s@2x.png) 2x) no-repeat;width:55px;height:11px;margin:0 3px 0 0;overflow:hidden;}
+.allstar45{background-position:0 -11px;}
+.allstar40{background-position:0 -22px;}
+.allstar35{background-position:0 -33px;}
+.allstar30{background-position:0 -44px;}
+.allstar25{background-position:0 -55px;}
+.allstar15{background-position:0 -77px;}
+#screening .subject-rate{color:#e09015;font-size:12px;margin-left:2px;}
+#screening .rating{display:inline-block;*display:inline;zoom:1;margin:4px auto 2px;height:19px;}
+#screening .rating span{float:left;}
+#screening .rating .rating-star{margin:3px 3px 0 0;width:55px;}
+span.subject-rate{color:#e09015;}
+/*! CSS Used from: https://img3.doubanio.com/f/movie/8864d3756094f5272d3c93e30ee2e324665855b0/css/movie/base/init.css */
+html h2{font-size:16px;}
+#wrapper{width:1040px;}
+.grid-16-8 .article{width:675px;}
+@media (max-width: 1024px){
+  #wrapper{width:1000px;}
+  body .grid-16-8 .article{padding-right:25px;}
+  [id^=dale_]{max-width:1000px;}
+}
+/*! CSS Used from: https://img3.doubanio.com/f/movie/587856b78f46ea9f546a570724e03591afb37cfa/css/movie/home.css */
+#content h2{color:#111;padding-bottom:10px;border-bottom:1px solid #eaeaea;margin-bottom:18px;}
+#content h2 span{font-size:13px;margin-left:12px;}
+#screening{margin-bottom:36px;}
+@media (max-device-width: 640px){
+  #wrapper{padding-bottom:10px!important;}
+}
+/*! CSS Used from: Embedded */
+img{max-width:100%;}
+/*! CSS Used from: https://img3.doubanio.com/misc/mixed_static/11d137da675bd116.css */
+.ui-slide-content{letter-spacing:-0.31em;*letter-spacing:normal;*word-spacing:-0.43em;white-space:nowrap;position:absolute;font-size:0;}
+.ui-slide-item{display:inline-block;*display:inline;*zoom:1;vertical-align:top;letter-spacing:normal;word-spacing:normal;font-size:12px;}
+.ui-slide-control{float:right;margin:5px 0 0 15px;}
+.ui-slide-control a{display:block;float:left;width:18px;height:18px;margin-right:5px;cursor:pointer;background:url(https://img3.doubanio.com/f/movie/708be21a7bb2d0f21419dc4e2e2fde8b21ad661a/pics/movie/slide_swithc_2.png) no-repeat;}
+.ui-slide-control .btn-prev{background-position:0 0;}
+.ui-slide-control .btn-next{background-position:-18px 0;}
+.slide-tip{float:right;line-height:30px;color:#666;}
+#screening .title{letter-spacing:-0.31em;*letter-spacing:normal;*word-spacing:-0.43em;font-size:14px;white-space:nowrap;height:22px;overflow:hidden;}
+#screening .title a:link,#screening .title a:visited,#screening .title a:hover,#screening .title a:active{color:#333;}
+#screening .title a:hover{background:none;color:#222;}
+#screening h2 span{margin-left:15px;}
+#screening .screening-bd{overflow:hidden;height:400px;}
+/*#screening .screening-bd{overflow:hidden;height:400px;width: 700px;}*/
+/*#screening .screening-bd{overflow:hidden;position:relative;height:270px;}*/
+#screening .ui-slide-content{position:absolute;left:0;}
+#screening .ui-slide-item{font-size:12px;text-align:center;margin-right:25px;width:115px;height:270px;overflow:hidden;}
+#screening .ui-slide-item img{width:128px;}
+#screening .poster{height:161px;overflow:hidden;margin-bottom:12px;}
+#screening .title a{display:inline-block;*display:inline;*zoom:1;vertical-align:top;letter-spacing:normal;word-spacing:normal;height:24px;line-height:24px;}
+#screening .ticket_btn span{display:block;margin:0 auto;text-align:center;width:90px;height:24px;line-height:24px;background-color:#268dcd;color:#fff;border-radius:2px;}
+#screening .ticket_btn a:link,#screening .ticket_btn a:visited,#screening .ticket_btn a:hover,#screening .ticket_btn a:active{background:none;color:#fff;}
+/*! CSS Used from: https://img3.doubanio.com/dae/accounts/resources/0246c88/movie/bundle.css */
+ul{list-style-type:none;margin:0;padding:0;}
+ul{list-style:none;}
+a{cursor:pointer;}
+
+
+/*! CSS Used from: https://img3.doubanio.com/f/shire/bf61b1fa02f564a4a8f809da7c7179b883a56146/css/douban.css */
+div{margin:0;padding:0;}
+img{border:0;}
+a{cursor:pointer;}
+a:link{color:#37a;text-decoration:none;}
+a:visited{color:#669;text-decoration:none;}
+a:hover{color:#fff;text-decoration:none;background:#37a;}
+a:active{color:#fff;text-decoration:none;background:#f93;}
+a img{border-width:0;vertical-align:middle;}
+a{cursor:pointer;}
+a:link{color:#37a;text-decoration:none;}
+a:visited{color:#666699;text-decoration:none;}
+a:hover{color:#FFFFFF;text-decoration:none;background:#37a;}
+a:active{color:#FFFFFF;text-decoration:none;background:#FF9933;}
+a img{border-width:0;vertical-align:middle;}
+.rate{color:#e09015;}
+/*! CSS Used from: https://img3.doubanio.com/f/movie/37a038f5b8fb1d904a4b8a0ba5e83fe61ce4377e/css/movie/explore/app.css */
+div{margin:0;padding:0;}
+/*.list-wp[data-v-3e982be2]{overflow:auto;margin-top:40px;zoom:1;}*/
+.list-wp[data-v-3e982be2]{overflow:auto;margin-top:0px;zoom:1;}
+a[data-v-2c455d87]{text-decoration:none;}
+.item[data-v-2c455d87]{display:inline-block;vertical-align:top;color:#37a;font-size:13px;text-align:left;margin-top:auto 0;padding:0;width:145px;}
+.item[data-v-2c455d87]:active,.item[data-v-2c455d87]:hover,.item[data-v-2c455d87]:link,.item[data-v-2c455d87]:visited{background:none;color:#258dcd;}
+.item .rate[data-v-2c455d87]{color:#ffac2d;}
+.item p[data-v-2c455d87]{overflow:hidden;color:#333;line-height:18px;padding-right:15px;margin:8px 0 20px;}
+.item p .title[data-v-2c455d87]{margin-right:5px;}
+.item p .title[data-v-2c455d87]:hover{text-decoration:underline;}
+.item .cover-wp[data-v-2c455d87]{background-size:100%;height:161px;overflow:hidden;}
+.item .cover-wp[data-v-2c455d87]:after{content:"";top:0;left:0;border:1px solid rgba(0,0,0,.05);border-radius:0;box-sizing:border-box;width:230px;height:200%;transform:scale(.5);transform-origin:left top;}
+.item .pic[data-v-2c455d87]{display:inline-block;}
+.item .pic img[data-v-2c455d87]{width:115px;}
+/*! CSS Used from: Embedded */
+img{max-width:100%;}
+/*! CSS Used from: https://img3.doubanio.com/dae/accounts/resources/0246c88/movie/bundle.css */
+a{cursor:pointer;}
+
+
+/*!*主页纯框架测试*! wrapper*/
+
+/*!*! CSS Used from: https://img3.doubanio.com/f/shire/bf61b1fa02f564a4a8f809da7c7179b883a56146/css/douban.css *!*/
+/*div{margin:0;padding:0;}*/
+/*.clearfix:after{content:".";display:block;height:0;clear:both;visibility:hidden;}*/
+/*.clearfix{zoom:1;display:inline-block;_height:1px;}*/
+/*.clearfix{display:block;}*/
+/*#wrapper{width:950px;margin:0 auto;}*/
+/*#content{min-height:420px;}*/
+/*.grid-16-8 .article{float:left;width:590px;padding-right:40px;}*/
+/*.clearfix:after{content:".";display:block;height:0;clear:both;visibility:hidden;}*/
+/*.clearfix{zoom:1;display:inline-block;_height:1px;}*/
+/*.clearfix{display:block;}*/
+/*!*! CSS Used from: https://img3.doubanio.com/f/movie/8864d3756094f5272d3c93e30ee2e324665855b0/css/movie/base/init.css *!*/
+/*#wrapper{width:1040px;}*/
+/*.grid-16-8 .article{width:675px;}*/
+/*@media (max-width: 1024px){*/
+  /*#wrapper{width:1000px;}*/
+  /*body .grid-16-8 .article{padding-right:25px;}*/
+  /*[id^=dale_]{max-width:1000px;}*/
+/*}*/
+/*!*! CSS Used from: https://img3.doubanio.com/f/movie/587856b78f46ea9f546a570724e03591afb37cfa/css/movie/home.css *!*/
+/*@media (max-device-width: 640px){*/
+  /*#wrapper{padding-bottom:10px!important;}*/
+/*}*/

@@ -45,7 +45,7 @@ fieldset legend{color:#666;padding:0 5px;}
 .nav-search legend{display:none;}
 .nav-search label{position:absolute;left:11px;top:10px;line-height:30px;cursor:text;color:#bbb;width:auto;}
 .nav-search .inp{float:left;width:470px;height:34px;text-align:center;margin-right:-3px;cursor:text;}
-.nav-search .inp input{background:#fff;width:96%;margin:0;text-align:left;height:30px;padding-left:10px;height:28px\9;line-height:28px\9;outline:none;}
+.nav-search .inp input{background:#fff;width:92%;margin:0;text-align:left;height:30px;padding-left:10px;height:28px\9;line-height:28px\9;outline:none;}
 .nav-search input{-webkit-appearance:none;border:none;background:transparent;}
 .nav-search .inp-btn{position:relative;left:-1px;width:37px;height:34px;zoom:1;overflow:hidden;}
 .nav-search .inp-btn input{width:100%;height:100%;font-size:0;padding:35px 0 0 0;overflow:hidden;color:transparent;cursor:pointer;}

@@ -12,7 +12,11 @@
     name: 'App',
     components: {
       headernav: headernav
-    }
+    },
+    data() {
+      return{
+      }
+    },
   }
 </script>
 

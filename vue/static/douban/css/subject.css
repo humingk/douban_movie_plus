@@ -62,7 +62,9 @@ h2{font:15px Arial, Helvetica, sans-serif;color:#072;margin:0 0 12px 0;line-heig
 .clearbox{clear:both;width:100%;}
 .clearbox:after{content:".";display:block;height:0;clear:both;visibility:hidden;}
 /*.subjectwrap{position:relative;float:left;width:100%;margin-bottom:15px;}*/
-.subjectwrap{position:relative;float:left;width:100%;}
+/*.subjectwrap{position:relative;float:left;width:100%;}*/
+/*不需要 position 会与搜索提示混合*/
+.subjectwrap{float:left;width:100%;}
 .rec-sec{text-align:right;color:#999;}
 .rec-sec span{*zoom:1;}
 .lnk-sharing{display:inline-block;*display:inline;zoom:1;padding:0 8px;vertical-align:middle;*vertical-align:baseline;height:19px;line-height:19px;line-height:21px\9;overflow:hidden;border:1px solid #b9dcd0;-moz-border-radius:3px;-webkit-border-radius:3px;border-radius:3px;}
