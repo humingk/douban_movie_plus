@@ -21,7 +21,8 @@ let url_api_netease = "http://localhost:3000";
 
 // IMDB OMDB api url
 let url_omdb = "http://www.omdbapi.com";
-let apikey_omdb = "apikey=e409ce71";
+// apikey=
+let apikey_omdb = "e409ce71";
 
 // 吉卜力工作室 API
 let url_gbl = "https://ghibliapi.herokuapp.com";
@@ -30,10 +31,12 @@ let url_time = "https://api-m.mtime.cn";
 
 // 豆瓣V2 API url apiKey
 let url_api_douban = "https://api.douban.com";
-let apikey_api_douban = "apikey=0b2bdeda43b5688921839c8ecb20399b";
+// apikey=
+let apikey_api_douban = "0b2bdeda43b5688921839c8ecb20399b";
 // 豆瓣V2 API url apikey 备用
 let url_api_douban_bak = "https://douban.uieee.com";
-let apikey_api_douban_bak = "apikey=0df993c66c0c636e29ecbb5344252a4a";
+// apukey=
+let apikey_api_douban_bak = "0df993c66c0c636e29ecbb5344252a4a";
 
 export {
   url_vue_base,

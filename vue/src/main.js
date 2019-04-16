@@ -18,6 +18,10 @@ import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 Vue.use(ElementUI);
 
+// 瀑布流加载数据
+import infiniteScroll from 'vue-infinite-scroll';
+Vue.use(infiniteScroll);
+
 Vue.config.productionTip = false;
 
 /* eslint-disable no-new */

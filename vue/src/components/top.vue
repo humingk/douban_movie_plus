@@ -17,7 +17,7 @@
               <input id="inp-query" ref="searchInput" size="22" maxlength="60" placeholder="搜索电影、影人" autocomplete="off"
                      type="text" v-model="keyword"
                      @click="resetNow()"
-                     @blur="clearInput($event)"
+                     @blur="clearInput()"
                      @focus="get($event,'yes')"
                      @keyup.esc="clearInput()"
                      @keyup="get($event,'no')"
@@ -32,7 +32,6 @@
               <input @click="search()">
             </div>
             <div @keyup.esc="clearInput"></div>
-
             <div id="search_suggest" class="search-select"
                  style="position:fixed;top: 65px;left: 275px;width: 465px;">
               <transition-group name="itemfade" tag="ul" mode="out-in"
@@ -54,7 +53,6 @@
                 </li>
               </transition-group>
             </div>
-
           </div>
         </div>
       </div>
@@ -76,6 +74,9 @@
             <li>
               <a href="/subject/1889243" target="_blank">星际穿越</a>
             </li>
+            <li>
+              <a href="/subject_search?search_text=星球大战" target="_blank">搜索页面</a>
+            </li>
           </ul>
         </div>
       </div>
@@ -94,9 +95,11 @@
     data() {
       return {
         url_douban: url_douban,
-        // 绑定search输入框的数据
+        // 绑定search输入框的关键字
         keyword: "",
+        // 当前选中电影
         now: -1,
+        // 实时获取的搜索提示
         searchResult: [
           {
             movieId: "",
@@ -108,9 +111,20 @@
         ],
       }
     },
+
     // 向父组件传值
     props: {},
+
+    created:function(){
+
+      // 跳转到搜索页面,保留关键字
+      if(this.$route.path=="/subject_search"){
+        this.keyword=this.$route.query.search_text;
+      }
+    },
     methods: {
+
+      // 实时获取搜索提示内容
       get: function (ev, isFocus) {
         // 按键是上或者下，不需要异步调取数据
         if (ev.keyCode == 38 || ev.keyCode == 40) {
@@ -124,7 +138,11 @@
           if (isFocus == "yes") {
             this.keyword = this.$refs.searchInput.value;
           }
-          axios.get(url_ssm_base + "/searchTips?keyword=" + this.keyword).then(response => {
+          axios.get(url_ssm_base + "/searchTips",{
+            params:{
+              keyword:this.keyword
+            }
+          }).then(response => {
             if (response.data.code == 200) {
               if (response.data.message == "success") {
                 this.searchResult = response.data.data;
@@ -169,17 +187,13 @@
           });
         }
       },
+
       // 重置 now
       resetNow: function () {
         this.now = -1;
       },
-      // 只清除 提示框
-      // clearSearchTips: function () {
-      //   if (!(this.searchResult.length == 2 && (this.searchResult[0].rate == "11" || this.searchResult[1].rate == "11"))) {
-      //     this.searchResult = null;
-      //   }
-      // },
-      // down
+
+      // down 搜索提示框
       selectDown: function () {
         this.now++;
         // 底部最后一个跳转第一个
@@ -195,7 +209,8 @@
           }
         }
       },
-      // up
+
+      // up 搜索提示框按键
       selectUp: function () {
         if (this.now == -1) {
           return;
@@ -208,7 +223,8 @@
           this.keyword = this.searchResult[this.now].name;
         }
       },
-      // 搜索页面跳转
+
+      // 搜索页面跳转 回车 点击
       search: function () {
         if (this.keyword == '') {
           return;
@@ -216,72 +232,81 @@
         // keyword 不为空
         // 直接搜索页跳转
         else if (this.now == -1) {
-          window.open("/search?keyword=" + this.keyword);
+          // 是否在搜索页面搜索
+          if(this.$route.path=="/subject_search"){
+            // 本页面跳转
+            window.location.href="/subject_search?search_text=" + this.keyword;
+          }else {
+            // 新页面跳转
+            window.open("/subject_search?search_text=" + this.keyword);
+          }
         }
         // 选中电影跳转
         else {
           if (this.searchResult) {
             // 服务器没有此电影，跳转豆瓣电影官网搜索
             if (this.searchResult[this.now].movieId == '404') {
-              window.open(this.url_douban + "/subject_search?search_text=" + this.keyword);
+              // 是否在搜索页面搜索
+              if(this.$route.path=="/subject_search"){
+                // 本页面跳转
+                window.location.href=this.url_douban + "/subject_search?search_text=" + this.keyword;
+              }else {
+                // 新页面跳转
+                window.open(this.url_douban + "/subject_search?search_text=" + this.keyword);
+              }
             } else {
               window.open("/subject/" + this.searchResult[this.now].movieId);
             }
           }
         }
       },
+
+      // 鼠标悬在对应条目 实时改变now
       selectHover: function (index) {
         this.now = index;
-        if(this.searchResult && !(this.searchResult[this.now].movieId == '404')){
-          this.keyword=this.searchResult[this.now].name;
+        if (this.searchResult && !(this.searchResult[this.now].movieId == '404')) {
+          this.keyword = this.searchResult[this.now].name;
         }
       },
+
+      // 点击搜索提示框 对应电影条目
       selectClick: function (index) {
         // 404 情况
-        if (this.searchResult[this.now].movieId == '404'
-          ||(this.searchResult.length == 2
-            && (this.searchResult[0].rate == "11" || this.searchResult[1].rate == "11"))) {
-          window.open(this.url_douban + "/subject_search?search_text=" + this.keyword);
+        if ( (this.searchResult[this.now] && this.searchResult[this.now].movieId == '404') ||
+          (this.searchResult.length == 2 &&
+            (this.searchResult[0].rate == "11" || this.searchResult[1].rate == "11"))) {
+          // 是否在搜索页面搜索
+          if(this.$route.path=="/subject_search"){
+            // 本页面跳转
+            window.location.href=this.url_douban + "/subject_search?search_text=" + this.keyword;
+          }else {
+            // 新页面跳转
+            window.open(this.url_douban + "/subject_search?search_text=" + this.keyword);
+          }
         } else {
           window.open("/subject/" + this.searchResult[index].movieId);
         }
       },
-      clearInput: function (ev) {
-        let left=ev.targetTouches[0].clientX;
-        let top=ev.targetTouches[0].clientY;
-        // 判断是否在搜索提示框内点击
-        if(!(left>210 && left<740 && top>27 && top< 128)){
+
+      // 清理搜索提示框
+      clearInput: function () {
+        // 设置定时器，为了避免在点击提示框对应电影的时候被清理
+        setTimeout(clear => {
           this.keyword = "";
           this.searchResult = null;
-        }
+        }, 180);
       }
     },
+
     // 页面渲染完成后...
     mounted() {
 
     },
+
+    // 过滤器
     filters: {}
   }
 </script>
 <style>
   @import "../../static/douban/css/top.css";
-
-  /*.search-reset {*/
-  /*width: 21px;*/
-  /*height: 21px;*/
-  /*position: absolute;*/
-  /*display: block;*/
-  /*line-height: 21px;*/
-  /*text-align: center;*/
-  /*cursor: pointer;*/
-  /*font-size: 20px;*/
-  /*left: 35px;*/
-  /*top: 14px*/
-  /*}*/
-
-  .selectback {
-    background-color: #c7cbff !important;
-    cursor: pointer
-  }
-
 </style>

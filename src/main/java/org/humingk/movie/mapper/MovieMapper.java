@@ -39,7 +39,14 @@ public interface MovieMapper {
 
     List<Movie> selectMoviesByName(String name);
 
-    List<Movie> selectMoviesByAlias(String name);
+    /**
+     * 根据 部分电影名称 别称开头的关键字搜索 movieAll
+     * @param name
+     * @param start
+     * @param count
+     * @return
+     */
+    List<Movie> selectMoviesByAlias(@Param("name") String name,@Param("start")int start,@Param("count")int count);
 
     /**
      * 根据电影名称开头的关键字模糊搜索

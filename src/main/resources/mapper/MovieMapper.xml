@@ -61,12 +61,12 @@
 
     <!--根据电影名或者部分电影名或者别称返回电影集合-->
 
-    <select id="selectMoviesByAlias" parameterType="java.lang.String" resultMap="BaseResultMap">
+    <select id="selectMoviesByAlias" resultMap="BaseResultMap">
     select movie.*
     from movie
-    where movie.name like CONCAT('%',#{name,jdbcType=CHAR},'%') or movie.alias like CONCAT('%',#{name,jdbcType=CHAR},'%')
-    order by movie.rate desc
-    limit 20
+    where movie.name like CONCAT('%',#{name,jdbcType=CHAR},'%') or movie.alias like CONCAT('',#{name,jdbcType=CHAR},'%')
+     order by  length(movie.alias) desc
+    limit #{start,jdbcType=INTEGER},#{count,jdbcType=INTEGER}
 </select>
 
     <!--根据以 电影名 开头的字符串返回电影集合-->

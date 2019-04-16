@@ -43,17 +43,16 @@ public class MovieController {
             }else {
                 logger.info("添加session失败");
             }
-
             movieAll = movieService.getMovieAllByMovieId(movieId);
             // 成功获取电影，返回电影信息
             if(movieAll!=null){
                 logger.info("ID: "+movieAll.getMovieId()+" Name: "+movieAll.getName()+" 有这个电影");
-                return Result.createMessage(200,"OK",movieAll);
+                return Result.createMessage(200,"success",movieAll);
             }
             //获取电影失败，返回添加电影确认信息
             else {
                 logger.info("ID: "+movieId+" 没有这个电影");
-                return Result.createMessage(200,"NONE",null);
+                return Result.createMessage(200,"fail",null);
             }
         }catch (Exception e){
             e.printStackTrace();

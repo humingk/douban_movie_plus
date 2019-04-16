@@ -20,10 +20,13 @@ public interface MovieService {
 
     /**
      * 根据电影名称找出所有电影所有的详细资料
+     *
      * @param s
+     * @param start
+     * @param count
      * @return
      */
-    List<MovieAll> getMovieAllsOfMovieByAlias(String s);
+    List<MovieAll> getMovieAllsOfMovieByAlias(String s,int start,int count);
 
     /**
      * 根据电影名称开头的字符串找出所有电影的基本资料

@@ -94,6 +94,14 @@ div.comment-item{margin-bottom:1em;word-break:break-word;}
 .comment-item{*zoom:1;overflow:hidden;margin-bottom:1.6em;}
 .comment-item h3{margin:1.5em 0 1em 0;height:1.7em;line-height:1.7em;padding-left:4px;}
 
+/*豆瓣Allstars*/
+.allstar50,.allstar40,.allstar20,.allstar10{display:inline-block;*display:inline;zoom:1;background:url(../../images/star/doubanStars.png) no-repeat;background:-webkit-image-set(url(../../images/star/doubanStars.png) 1x, url(../../images/star/doubanStars.png) 2x) no-repeat;background:-moz-image-set(url(../../images/star/doubanStars.png) 1x, url(../../images/star/doubanStars.png) 2x) no-repeat;background:-o-image-set(url(../../images/star/doubanStars.png) 1x, url(../../images/star/doubanStars.png) 2x) no-repeat;background:-ms-image-set(url(../../images/star/doubanStars.png) 1x, url(../../images/star/doubanStars.png) 2x) no-repeat;width:55px;height:11px;margin:0 3px 0 0;overflow:hidden;}
+.allstar50{background-position:0 0px;}
+.allstar40{background-position:0 -22px;}
+.allstar20{background-position:0 -66px;}
+.allstar10{background-position:0 -88px;}
+
+/*豆瓣Bigstars*/
 .bigstar45, .bigstar40, .bigstar35, .bigstar30, .bigstar25, .bigstar20, .bigstar15, .bigstar10, .bigstar5{display:inline-block;*display:inline;zoom:1;background:url(https://img3.doubanio.com/f/shire/680a4bc4c384199245b080c7104da5be8ed717d3/pics/rating_icons/ic_rating_m.png) no-repeat;background:-webkit-image-set(url(https://img3.doubanio.com/f/shire/680a4bc4c384199245b080c7104da5be8ed717d3/pics/rating_icons/ic_rating_m.png) 1x, url(https://img3.doubanio.com/f/shire/ee7f53d76c3f8ed4991bdbafdb9b2c90c0aedfef/pics/rating_icons/ic_rating_m@2x.png) 2x) no-repeat;background:-moz-image-set(url(https://img3.doubanio.com/f/shire/680a4bc4c384199245b080c7104da5be8ed717d3/pics/rating_icons/ic_rating_m.png) 1x, url(https://img3.doubanio.com/f/shire/ee7f53d76c3f8ed4991bdbafdb9b2c90c0aedfef/pics/rating_icons/ic_rating_m@2x.png) 2x) no-repeat;background:-o-image-set(url(https://img3.doubanio.com/f/shire/680a4bc4c384199245b080c7104da5be8ed717d3/pics/rating_icons/ic_rating_m.png) 1x, url(https://img3.doubanio.com/f/shire/ee7f53d76c3f8ed4991bdbafdb9b2c90c0aedfef/pics/rating_icons/ic_rating_m@2x.png) 2x) no-repeat;background:-ms-image-set(url(https://img3.doubanio.com/f/shire/680a4bc4c384199245b080c7104da5be8ed717d3/pics/rating_icons/ic_rating_m.png) 1x, url(https://img3.doubanio.com/f/shire/ee7f53d76c3f8ed4991bdbafdb9b2c90c0aedfef/pics/rating_icons/ic_rating_m@2x.png) 2x) no-repeat;width:75px;height:15px;margin:1px 0 0 0;overflow:hidden;}
 .bigstar45{background-position:0 -15px;}
 .bigstar40{background-position:0 -30px;}
@@ -106,7 +114,7 @@ div.comment-item{margin-bottom:1em;word-break:break-word;}
 .bigstar5{background-position:0 -150px;}
 
 /*IMDB stars*/
-.bigImdbStar45, .bigImdbStar40, .bigImdbStar35, .bigImdbStar30, .bigImdbStar25, .bigImdbStar20, .bigImdbStar15, .bigImdbStar10, .bigImdbStar5, .bigImdbStar0{display:inline-block;*display:inline;zoom:1;background:url(../../images/ImdbStars.png) no-repeat;background:-webkit-image-set(url(../../images/ImdbStars.png) 1x, url(../../images/ImdbStars.png) 2x) no-repeat;background:-moz-image-set(url(../../images/ImdbStars.png) 1x, url(../../images/ImdbStars.png) 2x) no-repeat;background:-o-image-set(url(../../images/ImdbStars.png) 1x, url(../../images/ImdbStars.png) 2x) no-repeat;background:-ms-image-set(url(../../images/ImdbStars.png) 1x, url(../../images/ImdbStars.png) 2x) no-repeat;width:75px;height:15px;margin:1px 0 0 0;overflow:hidden;}
+.bigImdbStar45, .bigImdbStar40, .bigImdbStar35, .bigImdbStar30, .bigImdbStar25, .bigImdbStar20, .bigImdbStar15, .bigImdbStar10, .bigImdbStar5, .bigImdbStar0{display:inline-block;*display:inline;zoom:1;background:url(../../images/star/ImdbStars.png) no-repeat;background:-webkit-image-set(url(../../images/star/ImdbStars.png) 1x, url(../../images/star/ImdbStars.png) 2x) no-repeat;background:-moz-image-set(url(../../images/star/ImdbStars.png) 1x, url(../../images/star/ImdbStars.png) 2x) no-repeat;background:-o-image-set(url(../../images/star/ImdbStars.png) 1x, url(../../images/star/ImdbStars.png) 2x) no-repeat;background:-ms-image-set(url(../../images/star/ImdbStars.png) 1x, url(../../images/star/ImdbStars.png) 2x) no-repeat;width:75px;height:15px;margin:1px 0 0 0;overflow:hidden;}
 .bigImdbStar45{background-position:0 -15px;}
 .bigImdbStar40{background-position:0 -30px;}
 .bigImdbStar35{background-position:0 -45px;}
@@ -119,7 +127,7 @@ div.comment-item{margin-bottom:1em;word-break:break-word;}
 .bigImdbStar0{background-position:0 -165px;}
 
 /*Metacritic stars*/
-.bigMetacriticStar45, .bigMetacriticStar40, .bigMetacriticStar35, .bigMetacriticStar30, .bigMetacriticStar25, .bigMetacriticStar20, .bigMetacriticStar15, .bigMetacriticStar10, .bigMetacriticStar5, .bigMetacriticStar0{display:inline-block;*display:inline;zoom:1;background:url(../../images/MetacriticStars.png) no-repeat;background:-webkit-image-set(url(../../images/MetacriticStars.png) 1x, url(../../images/MetacriticStars.png) 2x) no-repeat;background:-moz-image-set(url(../../images/MetacriticStars.png) 1x, url(../../images/MetacriticStars.png) 2x) no-repeat;background:-o-image-set(url(../../images/MetacriticStars.png) 1x, url(../../images/MetacriticStars.png) 2x) no-repeat;background:-ms-image-set(url(../../images/MetacriticStars.png) 1x, url(../../images/MetacriticStars.png) 2x) no-repeat;width:75px;height:15px;margin:1px 0 0 0;overflow:hidden;}
+.bigMetacriticStar45, .bigMetacriticStar40, .bigMetacriticStar35, .bigMetacriticStar30, .bigMetacriticStar25, .bigMetacriticStar20, .bigMetacriticStar15, .bigMetacriticStar10, .bigMetacriticStar5, .bigMetacriticStar0{display:inline-block;*display:inline;zoom:1;background:url(../../images/star/MetacriticStars.png) no-repeat;background:-webkit-image-set(url(../../images/star/MetacriticStars.png) 1x, url(../../images/star/MetacriticStars.png) 2x) no-repeat;background:-moz-image-set(url(../../images/star/MetacriticStars.png) 1x, url(../../images/star/MetacriticStars.png) 2x) no-repeat;background:-o-image-set(url(../../images/star/MetacriticStars.png) 1x, url(../../images/star/MetacriticStars.png) 2x) no-repeat;background:-ms-image-set(url(../../images/star/MetacriticStars.png) 1x, url(../../images/star/MetacriticStars.png) 2x) no-repeat;width:75px;height:15px;margin:1px 0 0 0;overflow:hidden;}
 .bigMetacriticStar45{background-position:0 -15px;}
 .bigMetacriticStar40{background-position:0 -30px;}
 .bigMetacriticStar35{background-position:0 -45px;}
@@ -133,7 +141,7 @@ div.comment-item{margin-bottom:1em;word-break:break-word;}
 
 
 /*烂番茄*/
-.bigTomato45, .bigTomato40, .bigTomato35, .bigTomato30, .bigTomato25, .bigTomato20, .bigTomato15, .bigTomato10, .bigTomato5, .bigTomato0{display:inline-block;*display:inline;zoom:1;background:url(../../images/tomatoes.png) no-repeat;background:-webkit-image-set(url(../../images/tomatoes.png) 1x, url(../../images/tomatoes.png) 2x) no-repeat;background:-moz-image-set(url(../../images/tomatoes.png) 1x, url(../../images/tomatoes.png) 2x) no-repeat;background:-o-image-set(url(../../images/tomatoes.png) 1x, url(../../images/tomatoes.png) 2x) no-repeat;background:-ms-image-set(url(../../images/tomatoes.png) 1x, url(../../images/tomatoes.png) 2x) no-repeat;width:75px;height:15px;margin:1px 0 0 0;overflow:hidden;}
+.bigTomato45, .bigTomato40, .bigTomato35, .bigTomato30, .bigTomato25, .bigTomato20, .bigTomato15, .bigTomato10, .bigTomato5, .bigTomato0{display:inline-block;*display:inline;zoom:1;background:url(../../images/star/tomatoStars.png) no-repeat;background:-webkit-image-set(url(../../images/star/tomatoStars.png) 1x, url(../../images/star/tomatoStars.png) 2x) no-repeat;background:-moz-image-set(url(../../images/star/tomatoStars.png) 1x, url(../../images/star/tomatoStars.png) 2x) no-repeat;background:-o-image-set(url(../../images/star/tomatoStars.png) 1x, url(../../images/star/tomatoStars.png) 2x) no-repeat;background:-ms-image-set(url(../../images/star/tomatoStars.png) 1x, url(../../images/star/tomatoStars.png) 2x) no-repeat;width:75px;height:15px;margin:1px 0 0 0;overflow:hidden;}
 .bigTomato45{background-position:0 -15px;}
 .bigTomato40{background-position:0 -30px;}
 .bigTomato35{background-position:0 -45px;}
@@ -147,11 +155,7 @@ div.comment-item{margin-bottom:1em;word-break:break-word;}
 
 
 
-.allstar50,.allstar40,.allstar20,.allstar10{display:inline-block;*display:inline;zoom:1;background:url(https://img3.doubanio.com/f/shire/b8f4c3672ef81106701071831e22422a745d3b74/pics/rating_icons/ic_rating_s.png) no-repeat;background:-webkit-image-set(url(https://img3.doubanio.com/f/shire/b8f4c3672ef81106701071831e22422a745d3b74/pics/rating_icons/ic_rating_s.png) 1x, url(https://img3.doubanio.com/f/shire/0147ca9efddcac80050854590d26bee587b008df/pics/rating_icons/ic_rating_s@2x.png) 2x) no-repeat;background:-moz-image-set(url(https://img3.doubanio.com/f/shire/b8f4c3672ef81106701071831e22422a745d3b74/pics/rating_icons/ic_rating_s.png) 1x, url(https://img3.doubanio.com/f/shire/0147ca9efddcac80050854590d26bee587b008df/pics/rating_icons/ic_rating_s@2x.png) 2x) no-repeat;background:-o-image-set(url(https://img3.doubanio.com/f/shire/b8f4c3672ef81106701071831e22422a745d3b74/pics/rating_icons/ic_rating_s.png) 1x, url(https://img3.doubanio.com/f/shire/0147ca9efddcac80050854590d26bee587b008df/pics/rating_icons/ic_rating_s@2x.png) 2x) no-repeat;background:-ms-image-set(url(https://img3.doubanio.com/f/shire/b8f4c3672ef81106701071831e22422a745d3b74/pics/rating_icons/ic_rating_s.png) 1x, url(https://img3.doubanio.com/f/shire/0147ca9efddcac80050854590d26bee587b008df/pics/rating_icons/ic_rating_s@2x.png) 2x) no-repeat;width:55px;height:11px;margin:0 3px 0 0;overflow:hidden;}
-.allstar50{background-position:0 0px;}
-.allstar40{background-position:0 -22px;}
-.allstar20{background-position:0 -66px;}
-.allstar10{background-position:0 -88px;}
+
 #stars{font-size:0;vertical-align:text-bottom;cursor:pointer;}
 #stars a img{vertical-align:text-bottom;}
 .starstop{margin-right:5px;}
@@ -429,3 +433,53 @@ header{position:relative;}
 .topics .topic-item .abstract:hover{color:#333333;background-color:#fff;}
 .topics .topic-item .action{font-size:13px;line-height:18px;color:#999999;}
 .topics .topic-item .action .item{margin-right:16px;}
+
+
+
+/*字体*/
+.attrs {
+  font-size: 13px;
+}
+
+.subject #mainpic {
+  margin-right: 15px;
+  margin-bottom: 65px;
+}
+
+.review-short {
+  font-size: 13px;
+  text-indent: 26px;
+}
+
+/*summary换行*/
+.summary {
+  font-size: 13px;
+  text-indent: 26px;
+  white-space: pre-line;
+}
+
+.article .related-info h2, #celebrities h2, .related-pic h2, #recommendations h2 {
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+.related-pic {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.related-celebrities {
+  margin-top: 20px;
+}
+
+.pl {
+  color: #0aa236;
+}
+
+h1 {
+  color: #f7097a;
+}
+
+#interest_sectl .rating_num {
+  color: #f7097a;
+}

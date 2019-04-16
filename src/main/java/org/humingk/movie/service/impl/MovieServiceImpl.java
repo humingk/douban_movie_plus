@@ -78,12 +78,14 @@ public class MovieServiceImpl implements MovieService {
      * 根据电影名称找出所有电影的所有详细资料
      *
      * @param s
+     * @param start
+     * @param count
      * @return
      */
     @Override
-    public List<MovieAll> getMovieAllsOfMovieByAlias(String s) {
+    public List<MovieAll> getMovieAllsOfMovieByAlias(String s,int start,int count) {
         try {
-            List<Movie> movies = movieMapper.selectMoviesByAlias(s);
+            List<Movie> movies = movieMapper.selectMoviesByAlias(s,start,count);
             if (movies != null) {
                 List<MovieAll> movieAlls = new ArrayList<>();
                 for (Movie movie : movies) {

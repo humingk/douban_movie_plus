@@ -23,7 +23,7 @@
               </span>
                   </div>
                   <p data-v-2c455d87="">
-              <span data-v-2c455d87="" >
+              <span data-v-2c455d87="">
                 <strong>{{item.title}}</strong>
               </span>
                     <span data-v-2c455d87="" class="rate">{{item.rating.average}}</span>
@@ -58,20 +58,38 @@
         }
       }
     },
-    beforeCreate: function () {
-      // 获取豆瓣Api 最近上映
-      this.$jsonp(url_api_douban + "/v2/movie/in_theaters?start=0&count=14&" + apikey_api_douban).then(response => {
-        console.log("douban theaters: ");
-        console.log(response);
-        this.inTheaters = response;
-      })
+
+    created: function () {
+      // 获取豆瓣Api 最近上映 start count
+      this.getInTheaters(0, 14);
+
     },
-    methods: {}
+
+    methods: {
+      // 获取豆瓣Api 最近上映
+      getInTheaters: function (start, count) {
+        this.$jsonp(url_api_douban + "/v2/movie/in_theaters",{
+          params:{
+            start:start,
+            count:count,
+            apikey:apikey_api_douban
+          }
+        }).then(response => {
+          if (response.total && response.total != 0) {
+            console.log("douban theaters: ");
+            console.log(response);
+            this.inTheaters = response;
+          } else {
+            console.log("get in theaters failed...count 0...(server error)");
+          }
+        }).catch(error => {
+          console.log("get in theaters failed...");
+          console.log(error);
+        });
+      }
+    }
   }
 </script>
 <style>
   @import "../../static/douban/css/home.css";
-
-
-
 </style>

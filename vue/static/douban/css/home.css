@@ -138,12 +138,12 @@ a{cursor:pointer;}
 /*!*! CSS Used from: https://img3.doubanio.com/f/movie/8864d3756094f5272d3c93e30ee2e324665855b0/css/movie/base/init.css *!*/
 /*#wrapper{width:1040px;}*/
 /*.grid-16-8 .article{width:675px;}*/
-/*@media (max-width: 1024px){*/
+/*@media (count-width: 1024px){*/
   /*#wrapper{width:1000px;}*/
   /*body .grid-16-8 .article{padding-right:25px;}*/
-  /*[id^=dale_]{max-width:1000px;}*/
+  /*[id^=dale_]{count-width:1000px;}*/
 /*}*/
 /*!*! CSS Used from: https://img3.doubanio.com/f/movie/587856b78f46ea9f546a570724e03591afb37cfa/css/movie/home.css *!*/
-/*@media (max-device-width: 640px){*/
+/*@media (count-device-width: 640px){*/
   /*#wrapper{padding-bottom:10px!important;}*/
 /*}*/

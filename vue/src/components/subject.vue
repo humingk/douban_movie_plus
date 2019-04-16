@@ -122,53 +122,56 @@
                       </div>
                     </div>
                   </div>
-                  <!--Metacritic-->
-                  <div v-if="imdbApi.Ratings.length!=0" class="rating_wrap clearbox">
-                    <div class="clearfix">
-                      <div class="rating_logo ll">
-                        <a :href="url_metacritic" target="_blank">
-                          MTC
-                        </a>
+                  <div v-if="imdbApi.Ratings && imdbApi.Ratings.length>1">
+                    <!--Metacritic-->
+                    <div v-if="item.Source=='Rotten Tomatoes'" class="rating_wrap clearbox"
+                         v-for="item in imdbApi.Ratings">
+                      <div class="clearfix">
+                        <div class="rating_logo ll">
+                          <a :href="url_metacritic" target="_blank">
+                            MTC
+                          </a>
+                        </div>
+                        <div class="output-btn-wrap rr" style="">
+                        </div>
                       </div>
-                      <div class="output-btn-wrap rr" style="">
-                      </div>
-                    </div>
-                    <div class="rating_self clearfix" v-if="imdbApi.Ratings[2]">
-                      <strong class="ll rating_num">{{imdbApi.Ratings[2].Value|fixSlish()}}</strong>
-                      <span content="10.0"></span>
-                      <div class="rating_right " v-if="imdbApi.Ratings[2]">
-                        <div :class="'ll bigstar '+getBigRateTypeForMetacritic(imdbApi.Ratings[2].Value)"></div>
-                        <div class="rating_sum">
-                          <div class="rating_people">
-                            <a target="_blank"
-                               :href="url_metacritic+'/movie/'+getMetacriticName(movieApi.original_title)">
-                              --> Metacritic
-                            </a>
+                      <div class="rating_self clearfix">
+                        <strong class="ll rating_num">{{item.Value|fixSlish()}}</strong>
+                        <span content="10.0"></span>
+                        <div class="rating_right ">
+                          <div :class="'ll bigstar '+getBigRateTypeForMetacritic(item.Value)"></div>
+                          <div class="rating_sum">
+                            <div class="rating_people" v-if="movieApi.original_title">
+                              <a target="_blank"
+                                 :href="url_metacritic+'/movie/'+getMetacriticName(movieApi.original_title)">
+                                Metacritic -->
+                              </a>
+                            </div>
                           </div>
                         </div>
                       </div>
                     </div>
-                  </div>
-                  <!--烂番茄评分-->
-                  <div v-if="imdbApi.Ratings.length!=0" class="rating_wrap clearbox">
-                    <div class="clearfix">
-                      <div class="rating_logo ll">
-                        <a :href="url_tomato" target="_blank">
-                          烂番茄
-                        </a>
-                      </div>
-                      <div class="output-btn-wrap rr" style="">
-                      </div>
-                    </div>
-                    <div class="rating_self clearfix" v-if="imdbApi.Ratings[1]">
-                      <strong class="ll rating_num">{{imdbApi.Ratings[1].Value|fixPercent()}}</strong>
-                      <span content="10.0"></span>
-                      <div class="rating_right " v-if="imdbApi.Ratings[1]">
-                        <div :class="'ll bigstar '+getBigRateTypeForTomatoes(imdbApi.Ratings[1].Value)"></div>
-                        <div class="rating_sum">
-                          <a target="_blank" :href="url_tomato+'/m/'+getTomatoName(movieApi.original_title)">
-                            --> RTomatoes
+                    <!--烂番茄评分-->
+                    <div v-if="item.Source=='Metacritic'" class="rating_wrap clearbox" v-for="item in imdbApi.Ratings">
+                      <div class="clearfix">
+                        <div class="rating_logo ll">
+                          <a :href="url_tomato" target="_blank">
+                            烂番茄
                           </a>
+                        </div>
+                        <div class="output-btn-wrap rr" style="">
+                        </div>
+                      </div>
+                      <div class="rating_self clearfix">
+                        <strong class="ll rating_num">{{item.Value|fixPercent()}}</strong>
+                        <span content="10.0"></span>
+                        <div class="rating_right ">
+                          <div :class="'ll bigstar '+getBigRateTypeForTomatoes(item.Value)"></div>
+                          <div class="rating_sum" v-if="movieApi.original_title">
+                            <a target="_blank" :href="url_tomato+'/m/'+getTomatoName(movieApi.original_title)">
+                              RTomatoes -->
+                            </a>
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -321,8 +324,9 @@
               <div id="songs-section">
                 <div class="mod-hd">
                   <h2>
-                    <i class>网易云音乐单曲 < {{item.name}} > 热门评论......<a :href="url_netease+'/song?id='+item.id"
-                                                                    target="_blank"><i style="font-size:13px;">查看更多</i></a></i>
+                    <i class>网易云音乐单曲 <span style="color:#79078f">< {{item.name}} ></span> 热门评论......<a
+                      :href="url_netease+'/song?id='+item.id"
+                      target="_blank"><i style="font-size:13px;">查看更多</i></a></i>
                     <span class="pl">
                 </span>
                   </h2>
@@ -355,8 +359,9 @@
               <div id="albums-section">
                 <div class="mod-hd">
                   <h2>
-                    <i class>网易云音乐专辑 < {{item.name}} > 热门评论......<a :href="url_netease+'/album?id='+item.id"
-                                                                    target="_blank"><i style="font-size:13px;">查看更多</i></a>
+                    <i class>网易云音乐专辑 <span style="color:#79078f">< {{item.name}} ></span> 热门评论......<a
+                      :href="url_netease+'/album?id='+item.id"
+                      target="_blank"><i style="font-size:13px;">查看更多</i></a>
                     </i>
                     <span class="pl">
                 </span>
@@ -386,12 +391,13 @@
                 </div>
               </div>
             </div>
-            <div id="all-playlists" v-for="item in neteaseAlbums" v-if="item.data.hotComments.length !== 0">
+            <div id="all-playlists" v-for="item in neteasePlaylists" v-if="item.data.hotComments.length !== 0">
               <div id="playlists-section">
                 <div class="mod-hd">
                   <h2>
-                    <i class>网易云音乐歌单 < {{item.name}} > 热门评论......<a :href="url_netease+'/playlist?id='+item.id"
-                                                                    target="_blank"><i style="font-size:13px;">查看更多</i></a></i>
+                    <i class>网易云音乐歌单 <span style="color:#79078f">< {{item.name}} ></span> 热门评论......<a
+                      :href="url_netease+'/playlist?id='+item.id"
+                      target="_blank"><i style="font-size:13px;">查看更多</i></a></i>
                     <span class="pl">
                 </span>
                   </h2>
@@ -441,12 +447,16 @@
     name: 'subject',
     data: function () {
       return {
-        // IMDB url
         url_imdb: url_imdb,
         url_douban: url_douban,
         url_netease: url_netease,
         url_metacritic: url_metacritic,
         url_tomato: url_tomato,
+        // 网易云最大展示数
+        numOfSongs: 2,
+        numOfAlbums: 3,
+        numOfPlaylists: 4,
+        // 演员的展开与收起
         brandOrFold: true,
         subTitle: " (1s)",
         neteaseSearch: {},
@@ -474,241 +484,308 @@
       }
     },
     created: function () {
-      // 标记是否成功获得douban API数据
-      let isDoubanApi = false;
-      // axios主要执行流程------------------start
       // 获取 movie API
-      this.$jsonp(url_api_douban + "/v2/movie/subject/" + this.$route.params.movieId + "?" + apikey_api_douban).then(responseApi => {
-        console.log("movie douban API :");
-        console.log(responseApi);
-        if (!(responseApi.status == 400 || responseApi.status == 403 || responseApi.status == 404)) {
-          this.movieApi = responseApi;
-          // 获取电影基础资料 加 IMDB 相关
-          getMovieBase(this.$route.params.movieId, this, responseApi);
-          // 更新服务端 评分
-          updateRate(responseApi.id, responseApi.rating.average);
-          // 获取网易云音乐 通过movieApi 电影搜索相关
-          getNetease(responseApi.title, this);
-        } else {
-          // 获取APi失败，获取 movie base
-          getMovieBase(this.$route.params.movieId, this, null);
-        }
-        if (responseApi.id.length > 3) {
-          isDoubanApi = true;
-        }
-      }).catch(error => {
-        console.log("during get movie douban api failed...");
-        console.log(error);
-        // 获取APi失败，再次获取 movie base
-        if (!isDoubanApi) {
-          console.log("get movieApi fail, get movie base again...");
-          getMovieBase(this.$route.params.movieId, this, null);
-        }
-      });
-      // axios主要执行流程------------------end
+      this.getMovieApi(this.$route.params.movieId);
+
+    },
+
+    methods: {
 
       // axios 方法集合---------------------start
-      // 从服务器获取 movieBase
+
+      // 从豆瓣电影API获取电影信息
+      getMovieApi: function (movieId) {
+        this.$jsonp(url_api_douban + "/v2/movie/subject/" + movieId,{
+          params:{
+            apikey:apikey_api_douban
+          }
+        }).then(responseApi => {
+          if (responseApi.id) {
+            console.log("movie douban API :");
+            console.log(responseApi);
+            this.movieApi = responseApi;
+            /**
+             * 获取 movie base
+             * 获取 IMDB
+             * 获取 netease songs albums playlists
+             * 更新 rate
+             * 更新 movie base
+             *
+             */
+            // 第一级axios流程
+            // param2==null ： 更新base
+            this.getMovieBase(movieId, responseApi);
+          }
+          // 获取movie API 失败
+          else {
+            // 第二级axios流程
+            // param2!=null ： 不更新base
+            this.getMovieBase(movieId, null);
+            console.log("get movie api fail....(server error)")
+          }
+        }).catch(error => {
+          console.log("during get movie douban api fail...");
+          console.log(error);
+        });
+      },
 
       // 从服务器获取电影基础信息
-      function getMovieBase(movieId, _this, responseApi) {
+      getMovieBase: function (movieId, responseApi) {
         axios.get(url_ssm_base + "/subject/" + movieId).then(responseBase => {
-          console.log("movie base :");
-          console.log(responseBase);
           // 服务端有这部电影
-          if (responseBase.data.code == 200 && responseBase.data.message == "OK") {
-            _this.movieBase = responseBase.data.data;
-            // 设置标题
-            document.title = responseBase.data.data.name + _this.subTitle;
-            // 获取 imdb 相关
-            if (_this.movieBase.imdbId != '') {
-              getImdb(_this.movieBase.imdbId, _this);
-            } else {
-              console.log("sorry there is no imdbID...");
-            }
-          }
-          // 服务端没有这部电影
-          // base上传------------------start
-          else if (responseBase.data.message == "NONE") {
-            if (responseApi != null) {
-              console.log("no movie base...");
-              // API赋值base-----start
-              _this.movieBase.movieId = responseApi.id;
-              _this.movieBase.movieId = responseApi.id;
-              _this.movieBase.name = responseApi.title;
-              _this.movieBase.rate = responseApi.rating.average;
-              _this.movieBase.alias = responseApi.aka.toString().replace(/,/g, "/");
-              for (let i = 0; i < responseApi.directors.length; i++) {
-                _this.movieBase.directors.push({
-                  "actorId": responseApi.directors[i].id,
-                  "name": responseApi.directors[i].name
-                });
-              }
-              for (let i = 0; i < responseApi.writers.length; i++) {
-                _this.movieBase.writers.push({
-                  "actorId": responseApi.writers[i].id,
-                  "name": responseApi.writers[i].name
-                });
-              }
-              for (let i = 0; i < responseApi.casts.length; i++) {
-                _this.movieBase.leadingactors.push({
-                  "actorId": responseApi.casts[i].id,
-                  "name": responseApi.casts[i].name
-                });
-              }
-              for (let i = 0; i < responseApi.pubdates.length; i++) {
-                _this.movieBase.releasetimes.push({timeArea: responseApi.pubdates[i]});
-              }
-              for (let i = 0; i < responseApi.genres.length; i++) {
-                _this.movieBase.types.push({typeName: responseApi.genres[i]});
-              }
-              for (let i = 0; i < responseApi.tags.length; i++) {
-                _this.movieBase.tags.push({"tagName": responseApi.tags[i]});
-              }
+          if (responseBase.data && responseBase.data.code && responseBase.data.message) {
+            if (responseBase.data.code == 200 && responseBase.data.message == "success") {
+              console.log("movie base :");
+              console.log(responseBase);
+              this.movieBase = responseBase.data.data;
               // 设置标题
-              document.title = responseApi.title + _this.subTitle;
-              // API赋值base-----end
-              axios.post(url_ssm_base + "/subject/addMovieAll", _this.movieBase).then(
-                response => {
-                  if (response.data.code == 200 && response.data.message == "success") {
-                    console.log("update movie base success...");
-                    console.log(_this.movieBase);
-                  } else if (response.data.message == "fail") {
-                    console.log("update movie base fail...(server fail)");
-                  }
-                }
-              ).catch(error => {
-                console.log("update movie base fail...(client fail)");
-                console.log(error);
-              });
+              document.title = responseBase.data.data.name + this.subTitle;
+              // 获取 imdb 相关
+              // 豆瓣API没有imdbID...所以仅此情况可以获取
+              if (this.movieBase.imdbId && this.movieBase.imdbId != '') {
+                this.getImdb(this.movieBase.imdbId);
+              } else {
+                console.log("sorry there is no imdbID from base...");
+              }
             }
+            // 服务端没有这部电影
+            else if (responseBase.data.message == "fail") {
+              console.log("get moviebase failed...(server error)");
+              // 需要更新base
+              if (responseApi) {
+                console.log("there is no movie base...");
+                // 更新服务器 base
+                this.updateMovieBase(responseApi);
+                // 设置标题
+                document.title = responseApi.title + this.subTitle;
+              }
+            }
+          }else {
+            console.log("get moviebase failed...(connect error)");
           }
-          // 获取网易云音乐 通过moviebase 电影搜索相关
-          getNetease(_this.movieBase.name, _this);
-          // base上传------------------end
+          // 更新服务端 评分
+          this.updateRate(responseApi.id, responseApi.rating.average);
+          // 获取网易云音乐 通过 moviebase 电影搜索相关
+          this.getNetease(this.movieBase.name);
         }).catch(error => {
           console.log("during get movie base failed...(client fail)");
           console.log(error);
         });
-      }
+      },
+
+      // movie base 上传到服务器
+      updateMovieBase: function (responseApi) {
+        // 先赋值base
+        this.copyBase(responseApi);
+        // 更新
+        axios.post(url_ssm_base + "/subject/addMovieAll", this.movieBase).then(
+          response => {
+            if (response.data && response.data.code && response.data.message) {
+              if (response.data.code == 200 && response.data.message == "success") {
+                console.log("update movie base success...");
+                console.log(this.movieBase);
+              } else if (response.data.message == "fail") {
+                console.log("update movie base fail...(server fail)");
+              }
+            } else {
+              console.log("update movie base fail...(connect fail)");
+            }
+          }).catch(error => {
+          console.log("update movie base fail...(client fail)");
+          console.log(error);
+        });
+      },
+
+      // api的值给base
+      copyBase: function (responseApi) {
+        this.movieBase.movieId = responseApi.id;
+        this.movieBase.name = responseApi.title;
+        if (responseApi.rating) {
+          this.movieBase.rate = responseApi.rating.average;
+        }
+        if (responseApi.aka && responseApi.aka != '') {
+          this.movieBase.alias = responseApi.aka.toString().replace(/,/g, "/");
+        }
+        if (responseApi.directors) {
+          for (let i = 0; i < responseApi.directors.length; i++) {
+            this.movieBase.directors.push({
+              "actorId": responseApi.directors[i].id,
+              "name": responseApi.directors[i].name
+            });
+          }
+        }
+        if (responseApi.writers) {
+          for (let i = 0; i < responseApi.writers.length; i++) {
+            this.movieBase.writers.push({
+              "actorId": responseApi.writers[i].id,
+              "name": responseApi.writers[i].name
+            });
+          }
+        }
+        if (responseApi.casts) {
+          for (let i = 0; i < responseApi.casts.length; i++) {
+            this.movieBase.leadingactors.push({
+              "actorId": responseApi.casts[i].id,
+              "name": responseApi.casts[i].name
+            });
+          }
+        }
+        if (responseApi.pubdates) {
+          for (let i = 0; i < responseApi.pubdates.length; i++) {
+            this.movieBase.releasetimes.push({timeArea: responseApi.pubdates[i]});
+          }
+        }
+        if (responseApi.genres) {
+          for (let i = 0; i < responseApi.genres.length; i++) {
+            this.movieBase.types.push({typeName: responseApi.genres[i]});
+          }
+        }
+        if (responseApi.tags) {
+          for (let i = 0; i < responseApi.tags.length; i++) {
+            this.movieBase.tags.push({"tagName": responseApi.tags[i]});
+          }
+        }
+      },
 
       // rate 上传至服务器
-      function updateRate(movieId, rate) {
+      updateRate: function (movieId, rate) {
         axios.get(url_ssm_base + "/subject/updateRate", {
           params: {
             movieId: movieId,
             rate: rate
           }
         }).then(response => {
-          if (response.data.code == 200 && response.data.message == "success") {
-            console.log("update movie rate success...");
-          } else if (response.data.message == "fail") {
-            console.log("update movie rate fail...(service error)");
+          if (response.data && response.data.code && response.data.message) {
+            if (response.data.code == 200 && response.data.message == "success") {
+              console.log("update movie rate success...");
+            } else if (response.data.message == "fail") {
+              console.log("update movie rate fail...(service error)");
+            }
+          } else {
+            console.log("update movie rate fail...(connect error)");
           }
         }).catch(error => {
           console.log("update movie rate fail...");
           console.log(error);
         });
-      }
+      },
 
       // 获取网易云音乐 电影搜索相关
-      function getNetease(movieName, _this) {
+      getNetease: function (movieName) {
         axios.get(url_api_netease + "/search/suggest?keywords=" + movieName).then(result => {
-          console.log("netease movie search:");
-          console.log(result);
-          _this.neteaseSearch = result.data;
-          if (result.data.result != null) {
-            // 获取网易云音乐 歌曲评论
-            if (result.data.result.songs != null) {
-              let songs = result.data.result.songs;
-              for (let i = 0; i < songs.length && i < 2; i++) {
-                getNeteaseSongs(songs[i].id, _this, songs[i].name);
+          if (result.data) {
+            console.log("netease movie search:");
+            console.log(result);
+            this.neteaseSearch = result.data;
+            if (result.data.result) {
+              // 获取网易云音乐 歌曲评论
+              if (result.data.result.songs) {
+                let songs = result.data.result.songs;
+                for (let i = 0; i < songs.length && i < this.numOfSongs; i++) {
+                  this.getNeteaseSongs(songs[i].id, songs[i].name);
+                }
+                console.log("netease songs comments:");
+                console.log(this.neteaseSongs);
               }
-              console.log("netease songs comments:");
-              console.log(_this.neteaseSongs);
-            }
-            // 获取网易云音乐 专辑评论
-            if (result.data.result.albums != null) {
-              let albums = result.data.result.albums;
-              for (let i = 0; i < albums.length && i < 2; i++) {
-                getNeteaseAlbums(albums[i].id, _this, albums[i].name);
+              // 获取网易云音乐 专辑评论
+              if (result.data.result.albums) {
+                let albums = result.data.result.albums;
+                for (let i = 0; i < albums.length && i < this.numOfAlbums; i++) {
+                  this.getNeteaseAlbums(albums[i].id, albums[i].name);
+                }
+                console.log("netease albums comments:");
+                console.log(this.neteaseAlbums);
               }
-              console.log("netease albums comments:");
-              console.log(_this.neteaseAlbums);
-            }
-            // 获取网易云音乐 歌单评论
-            if (result.data.result.playlists != null) {
-              let playlists = result.data.result.playlists;
-              for (let i = 0; i < playlists.length && i < 2; i++) {
-                getNeteasePlaylists(playlists[i].id, _this, playlists[i].name);
+              // 获取网易云音乐 歌单评论
+              if (result.data.result.playlists) {
+                let playlists = result.data.result.playlists;
+                for (let i = 0; i < playlists.length && i < this.numOfPlaylists; i++) {
+                  this.getNeteasePlaylists(playlists[i].id, playlists[i].name);
+                }
+                console.log("netease playlist comments:");
+                console.log(this.neteasePlaylists);
               }
-              console.log("netease playlist comments:");
-              console.log(_this.neteasePlaylists);
             }
+          } else {
+            console.log("during get netease serch failed...(server error)");
           }
         }).catch(error => {
           console.log("during get netease serch failed...");
           console.log(error);
         });
-      }
+      },
 
       // 获取网易云音乐 歌曲评论
-      function getNeteaseSongs(song_id, _this, name) {
+      getNeteaseSongs: function (song_id, name) {
         axios.get(url_api_netease + "/comment/music?id=" + song_id).then(resultSongs => {
-          if (resultSongs.data != null) {
-            _this.neteaseSongs.push({
+          if (resultSongs.data) {
+            this.neteaseSongs.push({
               id: song_id,
               name: name,
               data: resultSongs.data
             });
+            // console success 在 netease search 方法
+          } else {
+            console.log("get netease song " + song_id + " failed...(server error)");
           }
         }).catch(error => {
           console.log("get netease song-" + song_id + " 's comments failed:");
           console.log(error);
         });
-      }
+      },
 
       // 获取网易云音乐 专辑评论
-      function getNeteaseAlbums(album_id, _this, name) {
+      getNeteaseAlbums: function (album_id, name) {
         axios.get(url_api_netease + "/comment/album?id=" + album_id).then(resultAlbums => {
-          if (resultAlbums.data != null) {
-            _this.neteaseAlbums.push({
+          if (resultAlbums.data) {
+            this.neteaseAlbums.push({
               id: album_id,
               name: name,
               data: resultAlbums.data
             });
+            // console success 在 netease search 方法
+          } else {
+            console.log("get netease album " + album_id + " failed...(server error)");
           }
         }).catch(error => {
           console.log("get netease album-" + album_id + " 's comments failed:");
           console.log(error);
         });
-      }
+      },
 
       // 获取网易云音乐 歌单评论
-      function getNeteasePlaylists(playlist_id, _this, name) {
+      getNeteasePlaylists: function (playlist_id, name) {
         axios.get(url_api_netease + "/comment/playlist?id=" + playlist_id).then(resultPlaylists => {
-          if (resultPlaylists.data != null) {
-            _this.neteasePlaylists.push({
+          if (resultPlaylists.data) {
+            this.neteasePlaylists.push({
               id: playlist_id,
               name: name,
               data: resultPlaylists.data
             });
+            // console success 在 netease search 方法
+          } else {
+            console.log("get netease playlist " + playlist_id + " failed...(server error)");
           }
         }).catch(error => {
           console.log("get netease playlist-" + playlist_id + " 's comments failed:");
           console.log(error);
         });
       }
+      ,
 
       // 获取IMDB信息
-      function getImdb(imdbId, _this) {
-        axios.get(url_omdb + "/?" + apikey_omdb + "&plot=full&i=" + imdbId).then(response => {
-          if (response.data) {
-            if (response.data.imdbID) {
-              _this.imdbApi = response.data;
-              console.log("imdb Api :");
-              console.log(response.data);
-            }
+      getImdb: function (imdbId) {
+        axios.get(url_omdb + "/",{
+          params:{
+            apikey:apikey_omdb,
+            plot:'full',
+            i:imdbId
+          }
+        }).then(response => {
+          if (response.data && response.data.imdbID) {
+            this.imdbApi = response.data;
+            console.log("imdb Api :");
+            console.log(response.data);
           } else {
             console.log("get imdb api fail...(server fail)");
           }
@@ -717,28 +794,33 @@
           console.log(error);
         });
       }
+      ,
 
       // axios 方法集合---------------------end
 
-    },
-    methods: {
-      // 展开更多actors
+      // 判断是否展开更多actors
       moreActor: function () {
         if (this.brandOrFold) {
           this.brandOrFold = false;
         } else {
           this.brandOrFold = true;
         }
-      },
+      }
+      ,
+
       // 获取 metacritic 对应的电影名
       getMetacriticName(val) {
         return val.toString().replace(/ |: /g, '-').toLowerCase();
-      },
+      }
+      ,
+
       // 获取 rottentomato 对应的电影名
       getTomatoName(val) {
         return val.toString().replace(/ |: /g, '_').toLowerCase();
-      },
-      // 评分图标
+      }
+      ,
+
+      // 返回 豆瓣电影 小星星
       getRateType: function (rate) {
         switch (rate) {
           case 1.0:
@@ -759,7 +841,10 @@
           default:
             return '';
         }
-      },
+      }
+      ,
+
+      // 返回 豆瓣电影 大星星
       getBigRateType: function (rate) {
         if (rate <= 10 && rate > 9) {
           return 'bigstar45';
@@ -780,7 +865,10 @@
         } else {
           return 'bigstar5';
         }
-      },
+      }
+      ,
+
+      // 返回 烂番茄 星星
       getBigRateTypeForTomatoes: function (rateT) {
         let rate = parseFloat(rateT.toString().replace(/%/g, '')) / 10;
         if (rate <= 10 && rate > 9) {
@@ -802,7 +890,10 @@
         } else {
           return 'bigTomato5';
         }
-      },
+      }
+      ,
+
+      // 返回 Imdb 星星
       getBigRateTypeForImdb: function (rate) {
         if (rate <= 10 && rate > 9) {
           return 'bigImdbStar45';
@@ -823,7 +914,10 @@
         } else {
           return 'bigImdbStar5';
         }
-      },
+      }
+      ,
+
+      // 返回 metacritic 星星
       getBigRateTypeForMetacritic: function (rateM) {
         let rate = parseFloat(rateM.toString().replace(/\/100/g, '')) / 10;
         if (rate <= 10 && rate > 9) {
@@ -846,14 +940,19 @@
           return 'bigMetacriticStar5';
         }
       }
-    },
+    }
+    ,
+
     filters: {
-      // 判断 origin_name 是不是英文名
+
+      // 判断 origin_name 是不是英文名，中文名就不要重复了
       isEnglish: function (val) {
         let first = val.toString().charAt(0);
         return ((first >= 'A' && first <= 'Z') || (first >= 'a' && first <= 'z')) ? val.toString() : '';
-      },
-      // 时间戳转换
+      }
+      ,
+
+      // 网易云音乐 Unix时间戳 转换
       formatDate: function (value) {
         if (!value) return '';
         let date = new Date(value);
@@ -863,73 +962,36 @@
         let hour = date.getHours();
         let minute = date.getMinutes();
         return year + '-' + month + '-' + day + ' ' + hour + ':' + minute;
-      },
-      // 千分位转换
+      }
+      ,
+
+      // 豆瓣评价人数千分位转换
       thousands: function (val) {
         return val.toString().replace(/(\d)(?=(?:\d{3})+$)/g, '$1,');
-      },
+      }
+      ,
+
       // 烂番茄去除百分号并且两个数之间加小数点
       fixPercent: function (val) {
         return parseFloat(val.toString().replace(/%/g, '')) / 10;
-      },
+      }
+      ,
+
       // Metacritic 去除斜杠
       fixSlish: function (val) {
         return parseFloat(val.toString().replace(/\/100/g, '')) / 10;
       }
-    },
-    // 页面渲染完成后...
+
+    }
+    ,
+
+    // 渲染页面之后
     mounted: function () {
 
-    },
+    }
+    ,
   }
 </script>
 <style>
   @import "../../static/douban/css/subject.css";
-  /*字体*/
-  .attrs {
-    font-size: 13px;
-  }
-
-  .subject #mainpic {
-    margin-right: 15px;
-    margin-bottom: 65px;
-  }
-
-  .review-short {
-    font-size: 13px;
-    text-indent: 26px;
-  }
-
-  /*summary换行*/
-  .summary {
-    font-size: 13px;
-    text-indent: 26px;
-    white-space: pre-line;
-  }
-
-  .article .related-info h2, #celebrities h2, .related-pic h2, #recommendations h2 {
-    margin-top: 0px;
-    margin-bottom: 0px;
-  }
-
-  .related-pic {
-    margin-top: 20px;
-    margin-bottom: 20px;
-  }
-
-  .related-celebrities {
-    margin-top: 20px;
-  }
-
-  .pl {
-    color: #0aa236;
-  }
-
-  h1 {
-    color: #f7097a;
-  }
-
-  #interest_sectl .rating_num {
-    color: #f7097a;
-  }
 </style>
