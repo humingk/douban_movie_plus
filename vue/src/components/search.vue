@@ -79,7 +79,7 @@
 <script>
   import axios from 'axios';
   import {
-    url_ssm_base, url_vue_base, url_douban
+    url_ssm_base, url_vue_base, url_douban,url_api_douban,apikey_api_douban
   } from '../config';
 
   export default {
@@ -90,6 +90,7 @@
         url_vue_base: url_vue_base,
         busy: true,
         subTitle: " - 1s - 搜索",
+        apiResult:{},
         sResult: [],
         // 目前已收到的电影条数
         start: 0,
@@ -110,6 +111,8 @@
       this.getSearchResult(this.$route.query.search_text, this.start, this.count);
       // 定时器 是否搜到电影
       this.isMovieSearched(this.$route.query.search_text);
+
+      this.getApiSearch(this.$route.query.search_text, this.start, this.count);
     },
     methods: {
 
@@ -159,6 +162,22 @@
           }
         }).catch(error => {
           console.log("get search result fail...");
+          console.log(error);
+        });
+      },
+
+      // API 搜索结果
+      getApiSearch:function(keyword,start,count){
+        this.$jsonp(url_api_douban+"/v2/movie/search?q="+keyword+"&start="+start+"&count="+count).then(response=>{
+          if (response.count && response.count != 0) {
+            console.log("douban movie search:");
+            console.log(response);
+            this.apiResult = response;
+          } else {
+            console.log("get douban movie search fail...(server error)");
+          }
+        }).catch(error => {
+          console.log("get douban movie search fail...");
           console.log(error);
         });
       },

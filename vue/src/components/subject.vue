@@ -459,6 +459,9 @@
         // 演员的展开与收起
         brandOrFold: true,
         subTitle: " (1s)",
+        bookSearch: {},
+        bookComments:{},
+        bookReviews:{},
         neteaseSearch: {},
         neteaseSongs: [],
         neteaseAlbums: [],
@@ -495,11 +498,8 @@
 
       // 从豆瓣电影API获取电影信息
       getMovieApi: function (movieId) {
-        this.$jsonp(url_api_douban + "/v2/movie/subject/" + movieId,{
-          params:{
-            apikey:apikey_api_douban
-          }
-        }).then(responseApi => {
+        // params集合会导致获取信息不全,采用url拼接
+        this.$jsonp(url_api_douban + "/v2/movie/subject/" + movieId + "?apikey=" + apikey_api_douban).then(responseApi => {
           if (responseApi.id) {
             console.log("movie douban API :");
             console.log(responseApi);
@@ -560,13 +560,15 @@
                 document.title = responseApi.title + this.subTitle;
               }
             }
-          }else {
+          } else {
             console.log("get moviebase failed...(connect error)");
           }
           // 更新服务端 评分
           this.updateRate(responseApi.id, responseApi.rating.average);
           // 获取网易云音乐 通过 moviebase 电影搜索相关
           this.getNetease(this.movieBase.name);
+          // 获取豆瓣图书信息 start count
+          this.getBookSearch(this.movieBase.name,0,1);
         }).catch(error => {
           console.log("during get movie base failed...(client fail)");
           console.log(error);
@@ -666,6 +668,58 @@
           }
         }).catch(error => {
           console.log("update movie rate fail...");
+          console.log(error);
+        });
+      },
+
+      // 豆瓣书籍搜索信息
+      getBookSearch: function (keyword,start,count) {
+        this.$jsonp(url_api_douban+"/v2/book/search?q="+keyword+"&start="+start+"&count="+count+"&apikey="+apikey_api_douban).then(response=>{
+          if (response.count && response.count != 0) {
+            console.log("douban book search:");
+            console.log(response);
+            this.bookSearch = response;
+            // 获取原著短评
+            this.getBookComments(this.bookSearch.books[0].id,0,5);
+            // 获取原著影评
+            this.getBookReviews(this.bookSearch.books[0].id,0,5);
+          } else {
+            console.log("get douban book search fail...(server error)");
+          }
+        }).catch(error => {
+          console.log("get douban book search fail...");
+          console.log(error);
+        });
+      },
+
+      // 获取原著短评信息
+      getBookComments:function(bookId,start,count){
+        this.$jsonp(url_api_douban+"/v2/book/"+bookId+"/comments?start="+start+"&count="+count+"&apikey="+apikey_api_douban).then(response=>{
+          if (response.count && response.count != 0) {
+            console.log("douban book comments:");
+            console.log(response);
+            this.bookComments = response;
+          } else {
+            console.log("get douban book comments fail...(server error)");
+          }
+        }).catch(error => {
+          console.log("get douban book comments fail...");
+          console.log(error);
+        });
+      },
+
+      // 获取原著长评信息
+      getBookReviews:function(bookId,start,count){
+        this.$jsonp(url_api_douban+"/v2/book/"+bookId+"/reviews?start="+start+"&count="+count+"&apikey="+apikey_api_douban).then(response=>{
+          if (response.count && response.count != 0) {
+            console.log("douban book reviews:");
+            console.log(response);
+            this.bookReviews = response;
+          } else {
+            console.log("get douban book reviews fail...(server error)");
+          }
+        }).catch(error => {
+          console.log("get douban book reviews fail...");
           console.log(error);
         });
       },
@@ -775,11 +829,11 @@
 
       // 获取IMDB信息
       getImdb: function (imdbId) {
-        axios.get(url_omdb + "/",{
-          params:{
-            apikey:apikey_omdb,
-            plot:'full',
-            i:imdbId
+        axios.get(url_omdb + "/", {
+          params: {
+            apikey: apikey_omdb,
+            plot: 'full',
+            i: imdbId
           }
         }).then(response => {
           if (response.data && response.data.imdbID) {

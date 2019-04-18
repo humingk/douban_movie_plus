@@ -43,6 +43,7 @@
                     :class="{selectback:index==now}"
                     class="search-select-option search-select-list"
                     @mouseover="selectHover(index)"
+                    @mouseout="resetNow()"
                     @click="selectClick(index)"
                     :key="item.movieId">
                   <span><strong>{{item.name}}</strong></span>
@@ -100,15 +101,9 @@
         // 当前选中电影
         now: -1,
         // 实时获取的搜索提示
-        searchResult: [
-          {
-            movieId: "",
-            name: "",
-            alias: "",
-            imdbId: "",
-            rate: ""
-          }
-        ],
+        searchResult: [],
+        // 原始输入的关键字
+        oldKeyword:""
       }
     },
 
@@ -148,16 +143,7 @@
                 this.searchResult = response.data.data;
               } else if (response.data.message == "fail") {
                 // 初始化
-                // this.searchResult=null;
-                this.searchResult = [
-                  {
-                    movieId: "",
-                    name: "",
-                    alias: "",
-                    imdbId: "",
-                    rate: ""
-                  }
-                ];
+                this.searchResult = [];
                 this.searchResult.push({
                   movieId: "404",
                   rate: "11",
@@ -167,20 +153,14 @@
               }
             } else {
               // 初始化
-              this.searchResult = [
-                {
-                  movieId: "404",
-                  name: "",
-                  alias: "",
-                  imdbId: "",
-                  rate: ""
-                }
-              ];
+              this.searchResult = [];
               this.searchResult.push({
                 movieId: "403",
                 name: '连接服务器失败...请与管理员联系...'
               });
             }
+            // 上下选择期间保留原始输入关键字
+            this.oldKeyword=this.keyword;
           }).catch(error => {
             console.log("search tips fail...");
             console.log(error);
@@ -202,10 +182,11 @@
         }
         if (this.searchResult) {
           // 服务器找不到此电影的情况
-          if (this.searchResult.length == 2 && (this.searchResult[0].rate == "11" || this.searchResult[1].rate == "11")) {
-            this.now = 1;
+          if((this.searchResult[this.now] && this.searchResult[this.now].movieId == '404') ||
+            (this.searchResult.length == 1 && this.searchResult[0].rate == "11")) {
+            this.now = 0;
           } else {
-            this.keyword = this.searchResult[this.now].name;
+            // this.keyword = this.searchResult[this.now].name;
           }
         }
       },
@@ -215,12 +196,13 @@
         if (this.now == -1) {
           return;
         }
-        // 从第一个向上到输入框，清空输入框
+        // 从第一个向上到输入框，输入框赋值原始关键字
         else if (this.now == 0) {
-          this.keyword = "";
+          this.now--;
+          this.keyword = this.oldKeyword;
         } else if (this.searchResult) {
           this.now--;
-          this.keyword = this.searchResult[this.now].name;
+          // this.keyword = this.searchResult[this.now].name;
         }
       },
 
@@ -245,7 +227,8 @@
         else {
           if (this.searchResult) {
             // 服务器没有此电影，跳转豆瓣电影官网搜索
-            if (this.searchResult[this.now].movieId == '404') {
+            if ((this.searchResult[this.now] && this.searchResult[this.now].movieId == '404') ||
+              (this.searchResult.length == 1 && this.searchResult[0].rate == "11")){
               // 是否在搜索页面搜索
               if(this.$route.path=="/subject_search"){
                 // 本页面跳转
@@ -261,20 +244,19 @@
         }
       },
 
-      // 鼠标悬在对应条目 实时改变now
+      // 鼠标悬在对应条目 实时改变now，但不改变输入框关键字
       selectHover: function (index) {
         this.now = index;
-        if (this.searchResult && !(this.searchResult[this.now].movieId == '404')) {
-          this.keyword = this.searchResult[this.now].name;
-        }
+        // if (this.searchResult && !(this.searchResult[this.now].movieId == '404')) {
+          // this.keyword = this.searchResult[this.now].name;
+        // }
       },
 
       // 点击搜索提示框 对应电影条目
       selectClick: function (index) {
         // 404 情况
         if ( (this.searchResult[this.now] && this.searchResult[this.now].movieId == '404') ||
-          (this.searchResult.length == 2 &&
-            (this.searchResult[0].rate == "11" || this.searchResult[1].rate == "11"))) {
+          (this.searchResult.length == 1 && this.searchResult[0].rate == "11")) {
           // 是否在搜索页面搜索
           if(this.$route.path=="/subject_search"){
             // 本页面跳转
@@ -288,13 +270,13 @@
         }
       },
 
-      // 清理搜索提示框
+      // 清理搜索提示框,赋值旧关键字
       clearInput: function () {
         // 设置定时器，为了避免在点击提示框对应电影的时候被清理
         setTimeout(clear => {
-          this.keyword = "";
+          this.keyword = this.oldKeyword;
           this.searchResult = null;
-        }, 180);
+        }, 300);
       }
     },
 

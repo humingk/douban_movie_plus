@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import home from '../components/home'
 import subject from "../components/subject";
 import search from '../components/search'
+import celebrity from '../components/celebrity'
 
 Vue.use(Router);
 
@@ -24,5 +25,10 @@ export default new Router({
       name:'search',
       component:search
     },
+    {
+      path:'/celebrity/:actorId',
+      name:'celebrity',
+      component:celebrity
+    }
   ]
 })
