@@ -22,7 +22,9 @@
     "vue-jsonp": "^0.1.8",
     "less": "^3.9.0",
     "less-loader": "^4.1.0",
-    "vue-infinite-scroll": "^2.0.2"
+    "vue-infinite-scroll": "^2.0.2",
+    "vue-aplayer": "^1.6.1",
+    "color-thief": "^2.0.2"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",

@@ -173,6 +173,8 @@
             console.log("douban movie search:");
             console.log(response);
             this.apiResult = response;
+
+
           } else {
             console.log("get douban movie search fail...(server error)");
           }

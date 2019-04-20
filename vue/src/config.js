@@ -8,6 +8,8 @@ let url_netease = "https://music.163.com";
 let url_imdb= "https://www.imdb.com";
 // 豆瓣
 let url_douban= "https://movie.douban.com";
+// 豆瓣读书
+let url_douban_book="https://book.douban.com";
 // metacritic
 let url_metacritic= "https://www.metacritic.com";
 // tomato
@@ -18,6 +20,7 @@ let url_tomato= "https://www.rottentomatoes.com";
 
 // neteaseMusic api url
 let url_api_netease = "http://localhost:3000";
+
 
 // IMDB OMDB api url
 let url_omdb = "http://www.omdbapi.com";
@@ -44,6 +47,7 @@ export {
   url_netease,
   url_imdb,
   url_douban,
+  url_douban_book,
   url_metacritic,
   url_tomato,
   url_api_netease,
