@@ -72,9 +72,13 @@
                     <span class="pl" v-if="movieBase.movieId">豆瓣电影: </span>
                     <span class="attrs"><a target="_blank"
                                            :href="url_douban+'/subject/'+movieBase.movieId">{{movieBase.movieId}}</a></span><br>
-                    <span class="pl" v-if="movieBase.imdbId">IMDB: </span>
-                    <span class="attrs"><a target="_blank"
-                                           :href="url_imdb+'/title/'+movieBase.imdbId">{{movieBase.imdbId}}</a></span>
+                    <span v-if="movieBase.imdbId || imdbApi.imdbID">
+                    <span class="pl">IMDB: </span>
+                    <span class="attrs" v-if="movieBase.imdbId"><a target="_blank"
+                                                                   :href="url_imdb+'/title/'+movieBase.imdbId">{{movieBase.imdbId}}</a></span>
+                      <span class="attrs" v-if="!movieBase.imdbId && imdbApi.imdbID"><a target="_blank"
+                                                                                        :href="url_imdb+'/title/'+imdbApi.imdbID">{{imdbApi.imdbID}}</a></span>
+                    </span>
                   </div>
                 </div>
                 <div id="interest_sectl">
@@ -134,8 +138,8 @@
                       </div>
                     </div>
                   </div>
+                  <!--Metacritic-->
                   <div v-if="imdbApi.Ratings && imdbApi.Ratings.length>1">
-                    <!--Metacritic-->
                     <div v-if="item.Source=='Rotten Tomatoes'" class="rating_wrap clearbox"
                          v-for="item in imdbApi.Ratings">
                       <div class="clearfix">
@@ -148,7 +152,8 @@
                         </div>
                       </div>
                       <div class="rating_self clearfix">
-                        <strong class="ll rating_num">{{item.Value|fixSlish()}}</strong>
+                        <strong class="ll rating_num" v-if="item.Value!='20%'">{{item.Value|fixSlish()}}</strong>
+                        <strong class="ll rating_num" v-if="item.Value=='20%'">囧</strong>
                         <span content="10.0"></span>
                         <div class="rating_right ">
                           <div :class="'ll bigstar '+getBigRateTypeForMetacritic(item.Value)"></div>
@@ -163,7 +168,6 @@
                         </div>
                       </div>
                     </div>
-                    <!--烂番茄评分-->
                     <div v-if="item.Source=='Metacritic'" class="rating_wrap clearbox" v-for="item in imdbApi.Ratings">
                       <div class="clearfix">
                         <div class="rating_logo ll">
@@ -439,11 +443,95 @@
                 </div>
               </div>
             </div>
+
+            <!--书籍评论-->
+            <div id="book-comments-section"
+                 v-if="bookComments && bookComments.comments && bookComments.comments.length!=0">
+              <div class="mod-hd">
+                <h2>
+                  <i class>原著相关 <span style="color:#79078f"><a
+                    :href="url_douban_book+'/subject/'+bookComments.bookId"
+                    target="_blank">< {{bookComments.bookName}} ></a></span> 热门短评......</i>
+                  <span class="pl">
+                  <a :href="url_douban_book+'/subject/'+bookComments.bookId+'/comments'"
+                     target="_blank">(共计{{bookComments.total?bookComments.total:"..."}}条)</a>
+                </span>
+                </h2>
+              </div>
+              <div class="mod-bd">
+                <div class="tab-bd">
+                  <div id="book-hot-comments" class="tab">
+                    <div class="comment-item" v-for=" (item,index) in bookComments.comments" v-if="index < 5">
+                      <div class="comment">
+                        <h3>
+                            <span class="comment-vote">
+                              <span class="votes">{{item.votes}} 有用</span>
+                            </span>
+                          <span class="comment-info">
+                            <a :href="url_douban_book+'/people/'+item.author.id" target="_blank" class="">{{item.author.name}}</a>
+                            <span v-if="item.rating && item.rating.value"
+                                  :class="getRateType(item.rating.value)+' rating'"></span>
+                            <span class="comment-time">{{item.published}}</span>
+                          </span>
+                        </h3>
+                        <p class="">
+                          <span class="short">{{item.summary}}</span>
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div id="book-reviews-section" v-if="bookReviews && bookReviews.reviews && bookReviews.reviews.length!=0">
+              <section class="reviews mod movie-content">
+                <header>
+                  <h2>
+                    <i class>原著相关 <span style="color:#79078f"><a
+                      :href="url_douban_book+'/subject/'+bookReviews.bookId"
+                      target="_blank">< {{bookReviews.bookName}} ></a></span> 热门书评......</i>
+                    <span class="pl">
+                                    <a :href="url_douban+'/subject/'+movieBase.movieId+'/reviews'" target="_blank">
+                    (共计{{bookReviews.total?bookReviews.total:"..."}}条)
+                                    </a>
+                  </span>
+                  </h2>
+                </header>
+                <div class="review-list">
+                  <div v-for="(item,index) in bookReviews.reviews"
+                       v-if="index < 5 && item.summary && item.summary.toString().charAt(0)!='{'"
+                       class="main review-item">
+                    <header class="main-hd">
+                      <a :href="url_douban_book+'/people/'+item.author.id" class="avator">
+                        <img width="24" height="24" :src="item.author.avatar">
+                      </a>
+                      <a :href="url_douban_book+'/people/'+item.author.id" class="name"
+                         target="_blank">{{item.author.name}}</a>
+                      <span v-if="item.rating && item.rating.value"
+                            :class="getRateType(item.rating.value)+' main-title-rating'"></span>
+                      <!--影评时间-->
+                      <span class="main-meta">
+                      <span class="comment-time">{{item.updated}}</span>
+                    </span>
+                    </header>
+                    <div class="main-bd">
+                      <h2>
+                        <a :href="item.alt" target="_blank">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{item.title}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                      </h2>
+                      <div class="review-short">
+                        {{item.summary}}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+            </div>
             <br>
           </div>
           <div class="aside" style="position: static; left: 712px; right: auto; bottom: 300px; top: auto;">
             <!--mp3-->
-            <div id="musicAbout" v-if="isMusicAllOk" style="margin-bottom: 20px">
+            <div id="musicAbout" v-if="isMusicAllOk && neteaseMusic && neteaseMusic.length!=0 "
+                 style="margin-bottom: 20px">
               <h2>
                 <i>配乐 / 相关 <a style="color:#79078f" :href="url_netease+'/#/search/m/?s='+neteaseSearchKeyword"
                               target="_blank">< {{neteaseSearchKeyword}} > </a></i>
@@ -458,7 +546,8 @@
               >
               </aplayer>
             </div>
-            <div id="musicPlaylist" v-if="isMusicAllOk" style="margin-bottom: 20px">
+            <div id="musicPlaylist" v-if="isMusicAllOk && neteasePlaylistSongs && neteasePlaylistSongs.length!=0 "
+                 style="margin-bottom: 20px">
               <h2>
                 <i>歌单 / 相关 <a style="color:#79078f" :href="url_netease+'/#/playlist?id='+neteasePlaylistSongsId"
                               target="_blank">< {{neteasePlaylistSongsName}} > </a></i>
@@ -472,7 +561,8 @@
               >
               </aplayer>
             </div>
-            <div id="musicAlbum" v-if="isMusicAllOk" style="margin-bottom: 20px">
+            <div id="musicAlbum" v-if="isMusicAllOk && neteaseAlbumSongs && neteaseAlbumSongs.length!=0"
+                 style="margin-bottom: 20px">
               <h2>
                 <i>专辑 / 相关 <a style="color:#79078f" :href="url_netease+'/#/album?id='+neteaseAlbumSongsId"
                               target="_blank">< {{neteaseAlbumSongsName}} > </a></i>
@@ -569,6 +659,8 @@
         bookComments: {},
         bookReviews: {},
         neteaseSearch: {},
+        // netease成功获取的标志
+        flagForNetease: false,
         // music 计数器
         musicOk: 0,
         // music 准备
@@ -595,6 +687,8 @@
         neteaseSongs: [],
         neteaseAlbums: [],
         neteasePlaylists: [],
+        // imdb 获取成功标志
+        flagForImdb: false,
         imdbApi: {
           imdbId: "",
           Ratings: []
@@ -669,13 +763,15 @@
               this.movieBase = responseBase.data.data;
               // 设置标题
               document.title = responseBase.data.data.name + this.subTitle;
+              // 更新服务端 评分 (服务器没有此电影时候,更新base包括rate)
+              this.updateRate(responseApi.id, responseApi.rating.average);
               // 获取 imdb 相关
               // 豆瓣API没有imdbID...所以仅此情况可以获取
-              if (this.movieBase.imdbId && this.movieBase.imdbId != '') {
-                this.getImdb(this.movieBase.imdbId);
-              } else {
-                console.log("sorry there is no imdbID from base...");
-              }
+              // if (this.movieBase.imdbId && this.movieBase.imdbId != '') {
+              //   this.getImdb(this.movieBase.imdbId);
+              // } else {
+              //   console.log("sorry there is no imdbID from base...");
+              // }
             }
             // 服务端没有这部电影
             else if (responseBase.data.message == "fail") {
@@ -692,12 +788,40 @@
           } else {
             console.log("get moviebase failed...(connect error)");
           }
-          // 更新服务端 评分
-          this.updateRate(responseApi.id, responseApi.rating.average);
+          // 获取IMDB api
+          // base已有imdbId
+
+          // IMDB 搜索关键字
+          let keywordsForImdb = [];
+          keywordsForImdb.push(responseApi.original_title ? responseApi.original_title : "");
+          if (responseApi.aka && responseApi.aka.length != 0) {
+            for (let i = 0; i < responseApi.aka.length; i++) {
+              // 仅英语情况下才有用
+              if (this.isEnglishForKeyword(responseApi.aka[i])) {
+                keywordsForImdb.push(responseApi.aka[i]);
+              }
+            }
+          }
+          if (this.movieBase.imdbId && this.movieBase.imdbId != '') {
+            // 通过imdb ID 获取 IMDB信息
+            this.getImdbById(this.movieBase.imdbId);
+          }
+          // base没有imdbId
+          else {
+            // 通过imdb keyword year 获取 IMDB信息
+            this.getImdbByKeyword(keywordsForImdb, responseApi.year ? responseApi.year : null, 0);
+          }
           // 获取网易云音乐 通过 moviebase 电影搜索相关
           // this.getNetease(this.movieBase.name);
-          this.neteaseSearchKeyword = this.fixSearchKeyword(this.movieBase.name);
-          this.getNetease(this.neteaseSearchKeyword);
+          let keywordsForNetease = [];
+          keywordsForNetease.push(this.fixSearchKeyword(this.movieBase.name));
+          keywordsForNetease.push(responseApi.original_title ? responseApi.original_title : null);
+          if (responseApi.aka && responseApi.aka.length != 0) {
+            for (let i = 0; i < responseApi.aka.length; i++) {
+              keywordsForNetease.push(responseApi.aka[i])
+            }
+          }
+          this.getNetease(keywordsForNetease, 0);
           // 获取豆瓣图书信息 start count
           this.getBookSearch(this.movieBase.name, 0, this.numOfBooks);
         }).catch(error => {
@@ -801,17 +925,19 @@
       },
       // 豆瓣书籍搜索信息
       getBookSearch: function (keyword, start, count) {
+        keyword = this.fixSearchKeyword(keyword);
+        console.log("douban book search keyword: " + keyword+" (success)");
         this.$jsonp(url_api_douban + "/v2/book/search?q=" + keyword + "&start=" + start + "&count=" + count + "&apikey=" + apikey_api_douban).then(response => {
           if (response.count && response.count != 0) {
             console.log("douban book search:");
             console.log(response);
             this.bookSearch = response;
             // 获取原著短评
-            this.getBookComments(this.bookSearch.books[0].id, 0, 5);
+            this.getBookComments(this.bookSearch.books[0].id, this.bookSearch.books[0].title, 0, 5);
             // 获取原著影评
-            this.getBookReviews(this.bookSearch.books[0].id, 0, 5);
+            this.getBookReviews(this.bookSearch.books[0].id, this.bookSearch.books[0].title, 0, 5);
           } else {
-            console.log("get douban book search fail...(server error)");
+            console.log("douban book search keyword: " + keyword+" (fail)");
           }
         }).catch(error => {
           console.log("get douban book search fail...");
@@ -819,12 +945,14 @@
         });
       },
       // 获取原著短评信息
-      getBookComments: function (bookId, start, count) {
+      getBookComments: function (bookId, bookName, start, count) {
         this.$jsonp(url_api_douban + "/v2/book/" + bookId + "/comments?start=" + start + "&count=" + count + "&apikey=" + apikey_api_douban).then(response => {
           if (response.count && response.count != 0) {
             console.log("douban book comments:");
             console.log(response);
             this.bookComments = response;
+            this.bookComments.bookId = bookId;
+            this.bookComments.bookName = bookName;
           } else {
             console.log("get douban book comments fail...(server error)");
           }
@@ -834,12 +962,14 @@
         });
       },
       // 获取原著长评信息
-      getBookReviews: function (bookId, start, count) {
+      getBookReviews: function (bookId, bookName, start, count) {
         this.$jsonp(url_api_douban + "/v2/book/" + bookId + "/reviews?start=" + start + "&count=" + count + "&apikey=" + apikey_api_douban).then(response => {
           if (response.count && response.count != 0) {
             console.log("douban book reviews:");
             console.log(response);
             this.bookReviews = response;
+            this.bookReviews.bookId = bookId;
+            this.bookReviews.bookName = bookName;
           } else {
             console.log("get douban book reviews fail...(server error)");
           }
@@ -848,75 +978,89 @@
           console.log(error);
         });
       },
-      // 获取网易云音乐 电影搜索相关
-      getNetease: function (movieName) {
-        axios.get(url_api_netease + "/search/suggest?keywords=" + movieName).then(result => {
-          if (result.data) {
-            console.log("netease movie search:");
-            console.log(result);
-            this.neteaseSearch = result.data;
-            if (result.data.result) {
-              // 获取网易云音乐 歌曲评论 歌曲播放信息列表
-              if (result.data.result.songs) {
-                let songs = result.data.result.songs;
-                // music加载计数器
-                this.musicOk += songs.length;
-                for (let i = 0; i < songs.length; i++) {
-                  // 限制获取评论对应歌曲个数
-                  if (i < this.numOfSongs) {
-                    this.getNeteaseSongs(songs[i].id, songs[i].name);
+      // 获取网易云音乐 电影搜索相关 由于需要循环异步axios,此处采用递归代替循环
+      getNetease: function (keywords, now) {
+        // 不能超出keywords 仍未成功获取netease
+        if (now < keywords.length && !this.flagForNetease) {
+          axios.get(url_api_netease + "/search/suggest?keywords=" + keywords[now]).then(result => {
+            if (result.data) {
+              this.neteaseSearch = result.data;
+              if (result.data.result && result.data.result.order && result.data.result.order.length!=0) {
+                // 获取成功标志
+                this.flagForNetease = true;
+                // 搜索关键字
+                this.neteaseSearchKeyword=keywords[now];
+                console.log("netease movie search:");
+                console.log(result);
+                console.log("netease search keywords: " + keywords[now] + "(success)");
+                // 获取网易云音乐 歌曲评论 歌曲播放信息列表
+                if (result.data.result.songs) {
+                  let songs = result.data.result.songs;
+                  // music加载计数器
+                  this.musicOk += songs.length;
+                  for (let i = 0; i < songs.length; i++) {
+                    // 限制获取评论对应歌曲个数
+                    if (i < this.numOfSongs) {
+                      this.getNeteaseSongs(songs[i].id, songs[i].name);
+                    }
+                    // 歌曲 封面 -> 歌词
+                    this.getNeteaseSongPic(songs[i].id, songs[i].name, songs[i].artists ? songs[i].artists[0].name : null, 0);
                   }
-                  // 歌曲 封面 -> 歌词
-                  this.getNeteaseSongPic(songs[i].id, songs[i].name, songs[i].artists ? songs[i].artists[0].name : null, 0);
+                  console.log("netease songs comments:");
+                  console.log(this.neteaseSongs);
                 }
-                console.log("netease songs comments:");
-                console.log(this.neteaseSongs);
+                // 获取网易云音乐 专辑评论
+                if (result.data.result.albums) {
+                  let albums = result.data.result.albums;
+                  //获取第一个专辑的所有歌曲播放信息
+                  if (albums.length && albums.length != 0) {
+                    this.neteaseAlbumSongsId = albums[0].id;
+                    this.neteaseAlbumSongsName = albums[0].name;
+                    this.getNeteaseAlbumSongs(albums[0].id);
+                  }
+                  for (let i = 0; i < albums.length && i < this.numOfAlbums; i++) {
+                    this.getNeteaseAlbums(albums[i].id, albums[i].name);
+                  }
+                  console.log("netease albums comments:");
+                  console.log(this.neteaseAlbums);
+                }
+                // 获取网易云音乐 歌单评论
+                if (result.data.result.playlists) {
+                  let playlists = result.data.result.playlists;
+                  //获取第一个歌单的所有歌曲播放信息
+                  if (playlists.length && playlists.length != 0) {
+                    this.neteasePlaylistSongsId = playlists[0].id;
+                    this.neteasePlaylistSongsName = playlists[0].name;
+                    this.getNeteasePlaylistSongs(playlists[0].id);
+                  }
+                  for (let i = 0; i < playlists.length && i < this.numOfPlaylists; i++) {
+                    this.getNeteasePlaylists(playlists[i].id, playlists[i].name);
+                  }
+                  console.log("netease playlist comments:");
+                  console.log(this.neteasePlaylists);
+                }
               }
-              // 获取网易云音乐 专辑评论
-              if (result.data.result.albums) {
-                let albums = result.data.result.albums;
-                //获取第一个专辑的所有歌曲播放信息
-                if (albums.length && albums.length != 0) {
-                  this.neteaseAlbumSongsId = albums[0].id;
-                  this.neteaseAlbumSongsName = albums[0].name;
-                  this.getNeteaseAlbumSongs(albums[0].id);
-                }
-                for (let i = 0; i < albums.length && i < this.numOfAlbums; i++) {
-                  this.getNeteaseAlbums(albums[i].id, albums[i].name);
-                }
-                console.log("netease albums comments:");
-                console.log(this.neteaseAlbums);
+              // 获取失败,继续递归调用下一个
+              else {
+                console.log("netease search keywords: " + keywords[now] + "(fail)");
+                this.getNetease(keywords, ++now);
               }
-              // 获取网易云音乐 歌单评论
-              if (result.data.result.playlists) {
-                let playlists = result.data.result.playlists;
-                //获取第一个歌单的所有歌曲播放信息
-                if (playlists.length && playlists.length != 0) {
-                  this.neteasePlaylistSongsId = playlists[0].id;
-                  this.neteasePlaylistSongsName = playlists[0].name;
-                  this.getNeteasePlaylistSongs(playlists[0].id);
-                }
-                for (let i = 0; i < playlists.length && i < this.numOfPlaylists; i++) {
-                  this.getNeteasePlaylists(playlists[i].id, playlists[i].name);
-                }
-                console.log("netease playlist comments:");
-                console.log(this.neteasePlaylists);
-              }
+            } else {
+              console.log("during get netease search failed...(server error)");
             }
-          } else {
-            console.log("during get netease serch failed...(server error)");
-          }
-        }).catch(error => {
-          console.log("during get netease serch failed...");
-          console.log(error);
-        });
+          }).catch(error => {
+            console.log("during get netease search failed...");
+            console.log(error);
+          });
+        }
+
       },
 
       // 获取网易云歌曲 封面
       getNeteaseSongPic: function (song_id, songName, artistName, type) {
         axios.get(url_api_netease + "/song/detail?ids=" + song_id).then(resultMusic => {
-          console.log("detail");
-          console.log(resultMusic);
+          // console.log("detail");
+          // console.log(resultMusic);
           if (resultMusic.data) {
             // 歌词
             this.getNeteaseMusic(song_id, songName, artistName, type,
@@ -984,7 +1128,7 @@
         });
       },
 
-      // 获取网易云音乐 播放信息 歌词
+      // 获取网易云音乐 歌词 ==> 播放信息
       getNeteaseMusic: function (song_id, songName, artistName, type, picUrl) {
         axios.get(url_api_netease + "/lyric?id=" + song_id).then(resultMusic => {
           if (resultMusic.data) {
@@ -992,9 +1136,8 @@
               title: songName,
               artist: artistName,
               src: url_netease + "/song/media/outer/url?id=" + song_id + ".mp3",
-              lrc: (resultMusic.data.lrc && resultMusic.data.lrc.lyric) ? resultMusic.data.lrc.lyric : null,
-              pic: picUrl ? picUrl : null,
-              // theme:'pic'
+              lrc: (resultMusic.data.lrc && resultMusic.data.lrc.lyric) ? resultMusic.data.lrc.lyric : "",
+              pic: picUrl ? picUrl : "",
             });
             // music加载计数器复原
             this.musicOk--;
@@ -1066,8 +1209,9 @@
         });
       }
       ,
-      // 获取IMDB信息
-      getImdb: function (imdbId) {
+
+      // 获取IMDB信息 通过imdb ID
+      getImdbById: function (imdbId) {
         axios.get(url_omdb + "/", {
           params: {
             apikey: apikey_omdb,
@@ -1075,19 +1219,78 @@
             i: imdbId
           }
         }).then(response => {
-          if (response.data && response.data.imdbID) {
+          if (response.data && response.data.Title) {
             this.imdbApi = response.data;
-            console.log("imdb Api :");
+            console.log("imdb Api by imdbId :");
             console.log(response.data);
           } else {
-            console.log("get imdb api fail...(server fail)");
+            console.log("get imdb api by imdbId fail...(server fail)");
           }
         }).catch(error => {
-          console.log("get imdb api fail...");
+          console.log("get imdb api by imdbId fail...");
           console.log(error);
         });
-      }
-      ,
+      },
+
+      // 获取IMDB信息 通过keyword year 因为循环调用异步axios,故此处采用递归代替循环
+      getImdbByKeyword: function (keywords, year, now) {
+        // 还未获取IMDB 且 不超出keywords
+        if (!this.flagForImdb && now < keywords.length) {
+          axios.get(url_omdb + "/", {
+            params: {
+              apikey: apikey_omdb,
+              plot: 'full',
+              t: keywords[now],
+              y: year
+            }
+          }).then(response => {
+            if (response.data && response.data.imdbID) {
+              // 获取成功标志
+              this.flagForImdb = true;
+              console.log("imdbApi search keyword: " + keywords[now] + " (success)");
+              this.imdbApi = response.data;
+              console.log("imdb Api by title :");
+              console.log(response.data);
+              // 更新服务器的imdbId
+              this.updateImdbId(this.$route.params.movieId, response.data.imdbID ? response.data.imdbID : null);
+            }
+            // 获取失败,再次递归调用
+            else {
+              console.log("imdbApi search keyword: " + keywords[now] + " (fail)");
+              this.getImdbByKeyword(keywords, year, ++now);
+            }
+          }).catch(error => {
+            console.log("get imdb api by title fail...");
+            console.log(error);
+          });
+        }
+      },
+
+      // 更新服务器的imdbId
+      updateImdbId: function (movieId, imdbId) {
+        if (imdbId) {
+          axios.get(url_ssm_base + "/subject/updateImdbId", {
+            params: {
+              movieId: movieId,
+              imdbId: imdbId
+            }
+          }).then(response => {
+            if (response.data && response.data.code && response.data.message) {
+              if (response.data.code == 200 && response.data.message == "success") {
+                console.log("update movie imdbId success...");
+              } else if (response.data.message == "fail") {
+                console.log("update movie imdbId fail...(service error)");
+              }
+            } else {
+              console.log("update movie imdbId fail...(connect error)");
+            }
+          }).catch(error => {
+            console.log("update movie imdbId fail...");
+            console.log(error);
+          });
+        }
+      },
+
       // axios 方法集合---------------------end
       // 判断是否展开更多actors
       moreActor: function () {
@@ -1110,20 +1313,20 @@
       ,
       // 返回 豆瓣电影 小星星
       getRateType: function (rate) {
-        switch (rate) {
-          case 1.0:
+        switch (parseInt(rate)) {
+          case 1:
             return 'allstar10';
             break;
-          case 2.0:
+          case 2:
             return 'allstar20';
             break;
-          case 3.0:
+          case 3:
             return 'allstar30';
             break;
-          case 4.0:
+          case 4:
             return 'allstar40';
             break;
-          case 5.0:
+          case 5:
             return 'allstar50';
             break;
           default:
@@ -1224,23 +1427,33 @@
           return 'bigMetacriticStar5';
         }
       },
-      // 搜索关键字精简(网易云搜索)
+      // 搜索关键字精简(网易云搜索,豆瓣读书搜索)
       fixSearchKeyword: function (val) {
-        // 中文冒号 英文冒号
-        return val.toString().split(/[：|:]/)[0];
+        // 中文冒号 英文冒号 空格
+        let keyword = val.toString().split(/[：|:|\s]/)[0];
+        return keyword;
       },
 
       getRandomMusic(num) {
         return parseInt(Math.random() * num);
       },
 
+      // 判断 origin_name 是不是英文名，中文名就不要重复了
+      isEnglishForKeyword: function (val) {
+        let first = val.toString().charAt(0);
+        if ((first >= 'A' && first <= 'Z') || (first >= 'a' && first <= 'z')) {
+          return true;
+        } else {
+          return false;
+        }
+      }
     }
     ,
     filters: {
       // 判断 origin_name 是不是英文名，中文名就不要重复了
       isEnglish: function (val) {
         let first = val.toString().charAt(0);
-        return ((first >= 'A' && first <= 'Z') || (first >= 'a' && first <= 'z')) ? val.toString() : '';
+        return ((first >= 'A' && first <= 'Z') || (first >= 'a' && first <= 'z')) ? val.toString() : "";
       }
       ,
       // 网易云音乐 Unix时间戳 转换
@@ -1272,7 +1485,6 @@
     },
     // 渲染页面之后
     mounted: function () {
-
     }
   }
 </script>

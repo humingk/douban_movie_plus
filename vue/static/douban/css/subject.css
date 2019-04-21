@@ -286,6 +286,12 @@ div.comment-item .comment-vote{float:right;}
 #comments-section .comment-item{padding:14px 0;}
 #comments-section .comment-item:last-of-type:before{height:0;}
 
+#book-comments-section{margin-bottom:20px;}
+#book-comments-section .mod-hd{margin-top:16px;overflow:hidden;*zoom:1;}
+#book-comments-section .mod-hd h2{margin-top:0;}
+#book-comments-section .comment-item{padding:14px 0;}
+#book-comments-section .comment-item:last-of-type:before{height:0;}
+
 #playlists-section{margin-bottom:30px;}
 #playlists-section .mod-hd{margin-top:16px;overflow:hidden;*zoom:1;}
 #playlists-section .mod-hd h2{margin-top:0;}

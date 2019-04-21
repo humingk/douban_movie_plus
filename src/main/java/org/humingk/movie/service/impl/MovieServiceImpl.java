@@ -149,6 +149,25 @@ public class MovieServiceImpl implements MovieService {
     }
 
     /**
+     * 更新imdbId
+     *
+     * @param movieId
+     * @param imdbId
+     * @return
+     */
+    @Override
+    public boolean updateImdbIdByMovieId(int movieId, String imdbId) {
+        try {
+            movieMapper.updateImdbIdByPrimaryKey(movieId, imdbId);
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+
+    /**
      * 向数据库添加movieAll
      *
      * @param movieAll

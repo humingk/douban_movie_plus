@@ -43,6 +43,15 @@ public interface MovieService {
      */
     boolean updateRateByMovieId(int movieId,float rate);
 
+    /**
+     * 更新imdbId
+     *
+     * @param movieId
+     * @param imdbId
+     * @return
+     */
+    boolean updateImdbIdByMovieId(int movieId,String imdbId);
+
 
     /**
      * 向数据库添加movieAll

@@ -52,6 +52,13 @@
     where movie.movie_id = #{movieId,jdbcType=INTEGER}
   </update>
 
+  <!--更新电影imdbId-->
+  <update id="updateImdbIdByPrimaryKey">
+    update movie
+    set movie.imdb_id = #{imdbId,jdbcType=CHAR}
+    where movie.movie_id = #{movieId,jdbcType=INTEGER}
+  </update>
+
     <!--根据电影名返回电影集合-->
     <select id="selectMoviesByName" parameterType="java.lang.String" resultMap="BaseResultMap">
     select movie.*

@@ -142,14 +142,24 @@
               if (response.data.message == "success") {
                 this.searchResult = response.data.data;
               } else if (response.data.message == "fail") {
+
                 // 初始化
                 this.searchResult = [];
+
                 this.searchResult.push({
                   movieId: "404",
                   rate: "11",
-                  name: "请点击此处跳转到 < 豆瓣电影 > 搜索页面",
-                  alias: "PS 在豆瓣找到你心仪的电影后，在域名'douban'后面加'1s'即可跳转到本站 ~ ~ ~"
+                  name: "请回车进入搜索页面",
+                  alias: "PS  智能提示采用本站数据,搜索结果采用豆瓣电影官网数据..."
                 });
+
+                // this.searchResult.push({
+                //   movieId: "404",
+                //   rate: "11",
+                //   name: "请点击此处跳转到 < 豆瓣电影 > 搜索页面",
+                //   alias: "PS 在豆瓣找到你心仪的电影后，在域名'douban'后面加'1s'即可跳转到本站 ~ ~ ~"
+                // });
+
               }
             } else {
               // 初始化
@@ -181,6 +191,7 @@
           this.now = 0;
         }
         if (this.searchResult) {
+
           // 服务器找不到此电影的情况
           if((this.searchResult[this.now] && this.searchResult[this.now].movieId == '404') ||
             (this.searchResult.length == 1 && this.searchResult[0].rate == "11")) {
@@ -188,6 +199,7 @@
           } else {
             // this.keyword = this.searchResult[this.now].name;
           }
+
         }
       },
 
@@ -230,13 +242,18 @@
             if ((this.searchResult[this.now] && this.searchResult[this.now].movieId == '404') ||
               (this.searchResult.length == 1 && this.searchResult[0].rate == "11")){
               // 是否在搜索页面搜索
+
+              // 无电影跳转
               if(this.$route.path=="/subject_search"){
                 // 本页面跳转
-                window.location.href=this.url_douban + "/subject_search?search_text=" + this.keyword;
+                // window.location.href=this.url_douban + "/subject_search?search_text=" + this.keyword;
+                window.location.href="/subject_search?search_text=" + this.keyword;
               }else {
                 // 新页面跳转
-                window.open(this.url_douban + "/subject_search?search_text=" + this.keyword);
+                // window.open(this.url_douban + "/subject_search?search_text=" + this.keyword);
+                window.open("/subject_search?search_text=" + this.keyword);
               }
+
             } else {
               window.open("/subject/" + this.searchResult[this.now].movieId);
             }
@@ -260,10 +277,12 @@
           // 是否在搜索页面搜索
           if(this.$route.path=="/subject_search"){
             // 本页面跳转
-            window.location.href=this.url_douban + "/subject_search?search_text=" + this.keyword;
+            // window.location.href=this.url_douban + "/subject_search?search_text=" + this.keyword;
+            window.location.href="/subject_search?search_text=" + this.keyword;
           }else {
             // 新页面跳转
-            window.open(this.url_douban + "/subject_search?search_text=" + this.keyword);
+            // window.open(this.url_douban + "/subject_search?search_text=" + this.keyword);
+            window.open("/subject_search?search_text=" + this.keyword);
           }
         } else {
           window.open("/subject/" + this.searchResult[index].movieId);

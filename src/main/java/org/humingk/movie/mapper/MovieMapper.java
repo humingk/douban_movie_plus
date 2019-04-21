@@ -26,6 +26,15 @@ public interface MovieMapper {
     void updateRateByPrimaryKey(@Param("movieId") Integer movieId, @Param("rate") float rate);
 
     /**
+     * 更新 imdbId
+     *
+     * @param movieId
+     * @param imdbId
+     */
+    void updateImdbIdByPrimaryKey(@Param("movieId") Integer movieId, @Param("imdbId") String imdbId);
+
+
+    /**
      * 更新电影基本资料
      * @param movieId
      * @param name

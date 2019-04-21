@@ -91,11 +91,32 @@ public class MovieController {
     @ResponseBody
     public Result updateRate(@RequestParam("movieId") int movieId, @RequestParam("rate") float rate) {
         if(movieService.updateRateByMovieId(movieId, rate)){
-            logger.info("更新rate成功...");
+            logger.info("更新rate成功...movieId: "+movieId);
             return Result.createMessage(200,"success",null);
         }else {
-            logger.info("更新rate成功...");
+            logger.info("更新rate失败...movieId: "+movieId);
             return Result.createMessage(200,"fail",null);
         }
     }
+
+    /**
+     * 更新 imdbId
+     *
+     * @param movieId
+     * @param imdbId
+     * @return
+     */
+    @RequestMapping(value = "updateImdbId", method = RequestMethod.GET)
+    @ResponseBody
+    public Result updateImdbid(@RequestParam("movieId") int movieId, @RequestParam("imdbId") String imdbId) {
+
+        if(movieService.updateImdbIdByMovieId(movieId, imdbId)){
+            logger.info("更新imdbId成功...movieId: "+movieId);
+            return Result.createMessage(200,"success",null);
+        }else {
+            logger.info("更新imdbId失败...movieid: "+movieId);
+            return Result.createMessage(200,"fail",null);
+        }
+    }
+
 }
