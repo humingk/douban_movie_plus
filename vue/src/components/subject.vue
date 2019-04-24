@@ -620,6 +620,66 @@
                 </div>
               </div>
             </div>
+            <!--资源信息-->
+            <div :id="'Btbtby_'+index" v-if="btbtdyResource && btbtdyResource.length!=0"
+                 style="margin-top: 10px;margin-bottom: 20px;"
+                 v-for="(res,index) in btbtdyResource">
+              <h2>
+                <i class="">资源 / 相关 <a style="color:#79078f" :href="url_btbtdy+'/btdy/dy'+res.movieId+'.html'"
+                                       target="_blank">< {{res.movieName}}
+                  > </a></i>
+              </h2>
+              <div
+                style="box-shadow: 3px 5px 10px 0 rgba(192,192,192,0.2);transition: 0.3s;width: 100%;border-radius: 3px;margin-left: 5px;">
+                <div v-if="res.p720">
+                  <h3 class="resourceTitle"><i>720P</i>
+                  </h3>
+                  <div v-for="(item,index) in res.p720" class="resourceNext">
+                  <span>
+                  <a :href="item.resourceUrl" style="font-size: 13px">{{item.resourceName}}</a><br>
+                </span>
+                  </div>
+                </div>
+                <div v-if="res.p1080">
+                  <h3 class="resourceTitle"><i>1080P</i>
+                  </h3>
+                  <div v-for="(item,index) in res.p1080" class="resourceNext">
+                  <span>
+                  <a :href="item.resourceUrl" style="font-size: 13px">{{item.resourceName}}</a><br>
+                </span>
+                  </div>
+                </div>
+                <div v-if="res.k4">
+                  <h3 class="resourceTitle"><i>4K</i>
+                  </h3>
+                  <div v-for="(item,index) in res.k4" class="resourceNext">
+                  <span>
+                  <a :href="item.resourceUrl" style="font-size: 13px">{{item.resourceName}}</a><br>
+                </span>
+                  </div>
+                </div>
+                <div v-if="res.ed2k">
+                  <h3 class="resourceTitle"><i>ED2K</i>
+                  </h3>
+                  <div v-for="(item,index) in res.ed2k" class="resourceNext">
+                  <span>
+                  <a :href="item.resourceUrl" style="font-size: 13px">{{item.resourceName}}</a><br>
+                </span>
+                  </div>
+                </div>
+                <div v-if="res.blue">
+                  <h3 class="resourceTitle"><i>BluRay</i>
+                  </h3>
+                  <div v-for="(item,index) in res.blue" class="resourceNext">
+                  <span>
+                  <a :href="item.resourceUrl" style="font-size: 13px">{{item.resourceName}}</a><br>
+                </span>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
           </div>
         </div>
       </div>
@@ -630,7 +690,7 @@
   import axios from 'axios'
   import {
     url_ssm_base, url_netease, url_imdb, url_douban, url_douban_book, url_metacritic, url_tomato,
-    url_api_netease, url_omdb, apikey_omdb, url_api_douban, apikey_api_douban,
+    url_btbtdy,url_loldytt, url_api_netease, url_omdb, apikey_omdb, url_api_douban, apikey_api_douban,
   } from '../config';
   // MP3播放器
   import Aplayer from '../../node_modules/vue-aplayer';
@@ -646,6 +706,8 @@
         url_netease: url_netease,
         url_metacritic: url_metacritic,
         url_tomato: url_tomato,
+        url_btbtdy: url_btbtdy,
+        url_loldytt:url_loldytt,
         // 网易云最大展示数
         numOfSongs: 2,
         numOfAlbums: 3,
@@ -687,6 +749,10 @@
         neteaseSongs: [],
         neteaseAlbums: [],
         neteasePlaylists: [],
+        // Btbtdy资源
+        btbtdyResource: [],
+        // Loldytt资源
+        loldyttResource:[],
         // imdb 获取成功标志
         flagForImdb: false,
         imdbApi: {
@@ -788,8 +854,17 @@
           } else {
             console.log("get moviebase failed...(connect error)");
           }
-          // 获取IMDB api
-          // base已有imdbId
+
+          // 获取电影资源信息
+          if (this.movieBase.name) {
+            this.getBtbtdyResource(this.movieBase.name);
+            this.getLoldyttResource(this.movieBase.name);
+          } else if (responseApi.title) {
+            this.getBtbtdyResource(responseApi.title);
+            this.getLoldyttResource(responseApi.title);
+          } else {
+            console.log("there is no name to get movie resource...")
+          }
 
           // IMDB 搜索关键字
           let keywordsForImdb = [];
@@ -926,7 +1001,7 @@
       // 豆瓣书籍搜索信息
       getBookSearch: function (keyword, start, count) {
         keyword = this.fixSearchKeyword(keyword);
-        console.log("douban book search keyword: " + keyword+" (success)");
+        console.log("douban book search keyword: " + keyword + " (success)");
         this.$jsonp(url_api_douban + "/v2/book/search?q=" + keyword + "&start=" + start + "&count=" + count + "&apikey=" + apikey_api_douban).then(response => {
           if (response.count && response.count != 0) {
             console.log("douban book search:");
@@ -937,7 +1012,7 @@
             // 获取原著影评
             this.getBookReviews(this.bookSearch.books[0].id, this.bookSearch.books[0].title, 0, 5);
           } else {
-            console.log("douban book search keyword: " + keyword+" (fail)");
+            console.log("douban book search keyword: " + keyword + " (fail)");
           }
         }).catch(error => {
           console.log("get douban book search fail...");
@@ -985,11 +1060,11 @@
           axios.get(url_api_netease + "/search/suggest?keywords=" + keywords[now]).then(result => {
             if (result.data) {
               this.neteaseSearch = result.data;
-              if (result.data.result && result.data.result.order && result.data.result.order.length!=0) {
+              if (result.data.result && result.data.result.order && result.data.result.order.length != 0) {
                 // 获取成功标志
                 this.flagForNetease = true;
                 // 搜索关键字
-                this.neteaseSearchKeyword=keywords[now];
+                this.neteaseSearchKeyword = keywords[now];
                 console.log("netease movie search:");
                 console.log(result);
                 console.log("netease search keywords: " + keywords[now] + "(success)");
@@ -1290,6 +1365,55 @@
           });
         }
       },
+
+      // 获取Btbtdy电影资源信息
+      getBtbtdyResource: function (keyword) {
+        axios.get(url_ssm_base + "/subject/getBtbtdyResource", {
+          params: {
+            keyword: keyword
+          }
+        }).then(response => {
+          if (response.data && response.data.code && response.data.message) {
+            if (response.data.code == 200 && response.data.message == "success") {
+              console.log("movie resource:");
+              console.log(response.data);
+              this.btbtdyResource.push(response.data.data);
+            } else if (response.data.message == "fail") {
+              console.log("get movie btbtdy resource fail...(service error)");
+            }
+          } else {
+            console.log("get movie btbtdy resource fail...(connect error)");
+          }
+        }).catch(error => {
+          console.log("get movie btbtdy resource fail...");
+          console.log(error);
+        });
+      },
+
+      // 获取Loldytt电影资源信息
+      getLoldyttResource: function (keyword) {
+        axios.get(url_ssm_base + "/subject/getLoldyttResource", {
+          params: {
+            keyword: keyword
+          }
+        }).then(response => {
+          if (response.data && response.data.code && response.data.message) {
+            if (response.data.code == 200 && response.data.message == "success") {
+              console.log("movie resource:");
+              console.log(response.data);
+              this.loldyttResource.push(response.data.data);
+            } else if (response.data.message == "fail") {
+              console.log("get movie loldytt resource fail...(service error)");
+            }
+          } else {
+            console.log("get movie loldytt resource fail...(connect error)");
+          }
+        }).catch(error => {
+          console.log("get movie loldytt resource fail...");
+          console.log(error);
+        });
+      },
+
 
       // axios 方法集合---------------------end
       // 判断是否展开更多actors

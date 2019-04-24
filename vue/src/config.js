@@ -14,7 +14,10 @@ let url_douban_book="https://book.douban.com";
 let url_metacritic= "https://www.metacritic.com";
 // tomato
 let url_tomato= "https://www.rottentomatoes.com";
-
+// BT电影天堂
+let url_btbtdy="http://www.btbtdy.me";
+// LOL电影天堂
+let url_loldytt="http://www.loldyttw.com";
 
 //---------API
 
@@ -50,6 +53,8 @@ export {
   url_douban_book,
   url_metacritic,
   url_tomato,
+  url_btbtdy,
+  url_loldytt,
   url_api_netease,
   url_omdb,
   apikey_omdb,

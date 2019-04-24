@@ -4,6 +4,11 @@ import org.humingk.movie.entity.*;
 
 import java.util.List;
 
+/**
+ * 电影详细信息
+ *
+ * @author humin
+ */
 public class MovieAll {
     private Integer movieId;
 

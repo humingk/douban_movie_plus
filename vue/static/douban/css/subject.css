@@ -520,3 +520,10 @@ a{cursor:pointer;}
 /*! CSS Used from: https://img3.doubanio.com/misc/mixed_static/72c832a012d60695.css */
 *:active{outline:none;}
 ::-webkit-input-placeholder{color:#ccc;}
+
+.resourceTitle{
+  background-color: white;color:#f7097a;border-color: #afa4a4;border-bottom: 1px solid;
+}
+.resourceNext{
+  border-bottom: 1px solid;border-bottom-color: #c0c0c0;border-top-color:white;
+}
