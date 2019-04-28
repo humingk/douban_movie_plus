@@ -17,8 +17,9 @@ let url_tomato= "https://www.rottentomatoes.com";
 // BT电影天堂
 let url_btbtdy="http://www.btbtdy.me";
 // LOL电影天堂
-let url_loldytt="http://www.loldyttw.com";
-
+let url_loldytt="http://www.loldytt.tv";
+// 站长邮箱
+let url_email="humingk@qq.com";
 //---------API
 
 // neteaseMusic api url
@@ -55,6 +56,7 @@ export {
   url_tomato,
   url_btbtdy,
   url_loldytt,
+  url_email,
   url_api_netease,
   url_omdb,
   apikey_omdb,

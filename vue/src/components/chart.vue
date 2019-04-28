@@ -1,12 +1,12 @@
 <template>
-  <div id="celebrityCom">
+  <div id="chartCom">
     正在开发中...敬请期待...
   </div>
      
 </template>
 <script>
   export default {
-    name: "celebrity",
+    name: "chart",
     data() {
       return {}
     },

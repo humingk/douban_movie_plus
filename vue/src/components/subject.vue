@@ -49,7 +49,7 @@
                     </span>
                     <span class="pl" v-if="movieBase.types.length">类型: </span>
                     <span class="attrs" v-for="(item,index) in movieBase.types"><a target="_blank"
-                                                                                   :href="'/type/'+item.typeName">{{item.typeName}}</a>{{ index === movieBase.types.length-1 ? "" : " / " }}</span><br>
+                                                                                   :href="'/tag/'+item.typeName">{{item.typeName}}</a>{{ index === movieBase.types.length-1 ? "" : " / " }}</span><br>
                     <span class="tagsInfo">
                       <div style="width: 34px;float: left;">
                     <span class="pl" v-if="movieBase.tags.length">标签: </span>
@@ -620,18 +620,38 @@
                 </div>
               </div>
             </div>
-            <!--资源信息-->
-            <div :id="'Btbtby_'+index" v-if="btbtdyResource && btbtdyResource.length!=0"
+
+            <div id="mit" v-show="(btbtdyResource && btbtdyResource.length!=0) || (loldyttResource && loldyttResource.length!=0)"
+                 style="margin-top: 10px;margin-bottom: 20px;">
+              <h2>
+                <i class="" style="color:#f7097a">严正声明 </i>
+              </h2>
+              <div style="box-shadow: 2px 3px 6px 0 rgba(0,0,0,0.2);transition: 0.3s;width: 100%;border-radius: 3px;min-height: 120px;margin-left: 5px;">
+                <span style="font-size: 13px">
+                本站为开源项目,遵守<b style="color: red">MIT</b>开源协议!<br>
+                本站以下内容均为<b style="color:red">友情链接</b>,非本站所有!<br>
+
+                友情链接原则:<br>
+                  1. 仅供影视相关从业人员学习交流,不做任何商业用途.<br>
+                  2. 只收录稀缺的经典冷门影视作品.<br>
+                  2. 拒绝收录近期正在上映的电影!<br>
+
+                若发现任何上述违规现象,请<a :href="'mailto:'+url_email+'?subject='+movieBase.name+'('+movieBase.movieId+')侵犯版权'">联系本人</a>.将立即删除!<br>
+                </span>
+              </div>
+
+            </div>
+
+            <!--btbtdy 资源信息-->
+            <div :id="'btbtby_'+index" v-show="btbtdyResource && btbtdyResource.length!=0"
                  style="margin-top: 10px;margin-bottom: 20px;"
                  v-for="(res,index) in btbtdyResource">
               <h2>
-                <i class="">资源 / 相关 <a style="color:#79078f" :href="url_btbtdy+'/btdy/dy'+res.movieId+'.html'"
-                                       target="_blank">< {{res.movieName}}
-                  > </a></i>
+                <i class="">友情链接 <span style="color:#79078f"><a target="_blank" :href="url_btbtdy+'/btdy/dy'+res.movieId+'.html'">< {{res.movieName}} ></a> </span></i>
               </h2>
               <div
                 style="box-shadow: 3px 5px 10px 0 rgba(192,192,192,0.2);transition: 0.3s;width: 100%;border-radius: 3px;margin-left: 5px;">
-                <div v-if="res.p720">
+                <div v-show="res.p720 && res.p720.length!=0">
                   <h3 class="resourceTitle"><i>720P</i>
                   </h3>
                   <div v-for="(item,index) in res.p720" class="resourceNext">
@@ -640,7 +660,7 @@
                 </span>
                   </div>
                 </div>
-                <div v-if="res.p1080">
+                <div v-show="res.p1080 && res.p1080.length!=0">
                   <h3 class="resourceTitle"><i>1080P</i>
                   </h3>
                   <div v-for="(item,index) in res.p1080" class="resourceNext">
@@ -649,7 +669,7 @@
                 </span>
                   </div>
                 </div>
-                <div v-if="res.k4">
+                <div v-show="res.k4 && res.k4.length!=0">
                   <h3 class="resourceTitle"><i>4K</i>
                   </h3>
                   <div v-for="(item,index) in res.k4" class="resourceNext">
@@ -658,7 +678,7 @@
                 </span>
                   </div>
                 </div>
-                <div v-if="res.ed2k">
+                <div v-show="res.ed2k && res.ed2k.length!=0">
                   <h3 class="resourceTitle"><i>ED2K</i>
                   </h3>
                   <div v-for="(item,index) in res.ed2k" class="resourceNext">
@@ -667,7 +687,7 @@
                 </span>
                   </div>
                 </div>
-                <div v-if="res.blue">
+                <div v-show="res.blue && res.blue.length!=0">
                   <h3 class="resourceTitle"><i>BluRay</i>
                   </h3>
                   <div v-for="(item,index) in res.blue" class="resourceNext">
@@ -676,10 +696,37 @@
                 </span>
                   </div>
                 </div>
-
               </div>
             </div>
-
+            <!--loldytt 资源信息-->
+            <div :id="'loldytt_'+index" v-show="loldyttResource && loldyttResource.length!=0"
+                 style="margin-top: 10px;margin-bottom: 20px;"
+                 v-for="(res,index) in loldyttResource">
+              <h2>
+                <i class="">友情链接<span  style="color:#79078f"><a target="_blank" :href="res.movieUrl">< {{res.movieName}} ></a></span> </i>
+              </h2>
+              <div
+                style="box-shadow: 3px 5px 10px 0 rgba(192,192,192,0.2);transition: 0.3s;width: 100%;border-radius: 3px;margin-left: 5px;">
+                <div v-show="res.thunder && res.thunder.length!=0">
+                  <h3 class="resourceTitle"><i>迅雷链接</i>
+                  </h3>
+                  <div v-for="(item,index) in res.thunder" class="resourceNext">
+                  <span>
+                  <a :href="item.resourceUrl" style="font-size: 13px;max-width: 350px;word-wrap: break-word">{{item.resourceName}}</a><br>
+                </span>
+                  </div>
+                </div>
+                <div v-show="res.magnet && res.magnet.length!=0">
+                  <h3 class="resourceTitle"><i>磁力链接</i>
+                  </h3>
+                  <div v-for="(item,index) in res.magnet" class="resourceNext">
+                  <span>
+                  <a :href="item.resourceUrl" style="font-size: 13px ;max-width: 350px;word-wrap: break-word">{{item.resourceName}}</a><br>
+                </span>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -690,7 +737,7 @@
   import axios from 'axios'
   import {
     url_ssm_base, url_netease, url_imdb, url_douban, url_douban_book, url_metacritic, url_tomato,
-    url_btbtdy,url_loldytt, url_api_netease, url_omdb, apikey_omdb, url_api_douban, apikey_api_douban,
+    url_email,url_btbtdy,url_loldytt, url_api_netease, url_omdb, apikey_omdb, url_api_douban, apikey_api_douban,
   } from '../config';
   // MP3播放器
   import Aplayer from '../../node_modules/vue-aplayer';
@@ -708,15 +755,16 @@
         url_tomato: url_tomato,
         url_btbtdy: url_btbtdy,
         url_loldytt:url_loldytt,
-        // 网易云最大展示数
+        url_email:url_email,
+        // 网易云音乐评论最大展示数
         numOfSongs: 2,
-        numOfAlbums: 3,
-        numOfPlaylists: 4,
+        numOfAlbums: 2,
+        numOfPlaylists: 2,
         // 书籍最大展示数
         numOfBooks: 3,
         // 演员的展开与收起
         brandOrFold: true,
-        subTitle: " (1s)",
+        subTitle: " +1s",
         bookSearch: {},
         bookComments: {},
         bookReviews: {},
@@ -1375,9 +1423,9 @@
         }).then(response => {
           if (response.data && response.data.code && response.data.message) {
             if (response.data.code == 200 && response.data.message == "success") {
-              console.log("movie resource:");
+              console.log("movie btbtdy resource:");
               console.log(response.data);
-              this.btbtdyResource.push(response.data.data);
+              this.btbtdyResource=response.data.data;
             } else if (response.data.message == "fail") {
               console.log("get movie btbtdy resource fail...(service error)");
             }
@@ -1401,7 +1449,7 @@
             if (response.data.code == 200 && response.data.message == "success") {
               console.log("movie resource:");
               console.log(response.data);
-              this.loldyttResource.push(response.data.data);
+              this.loldyttResource=response.data.data;
             } else if (response.data.message == "fail") {
               console.log("get movie loldytt resource fail...(service error)");
             }

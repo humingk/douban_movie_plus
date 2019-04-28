@@ -61,22 +61,16 @@
         <div class="nav-items">
           <ul>
             <li>
-              <a href="/mine" target="_blank">个人中心</a>
+              <a href="/people" target="_blank">个人中心</a>
             </li>
             <li>
               <a href="/chart" target="_blank">排行榜</a>
             </li>
             <li>
-              <a href="/explore" target="_blank">选电影</a>
-            </li>
-            <li>
-              <a href="/subject/1292720" target="_blank">阿甘正传</a>
+              <a href="/tag" target="_blank">分类</a>
             </li>
             <li>
               <a href="/subject/1889243" target="_blank">星际穿越</a>
-            </li>
-            <li>
-              <a href="/subject_search?search_text=星球大战" target="_blank">搜索页面</a>
             </li>
           </ul>
         </div>
@@ -103,18 +97,18 @@
         // 实时获取的搜索提示
         searchResult: [],
         // 原始输入的关键字
-        oldKeyword:""
+        oldKeyword: ""
       }
     },
 
     // 向父组件传值
     props: {},
 
-    created:function(){
+    created: function () {
 
       // 跳转到搜索页面,保留关键字
-      if(this.$route.path=="/subject_search"){
-        this.keyword=this.$route.query.search_text;
+      if (this.$route.path == "/subject_search") {
+        this.keyword = this.$route.query.search_text;
       }
     },
     methods: {
@@ -133,9 +127,9 @@
           if (isFocus == "yes") {
             this.keyword = this.$refs.searchInput.value;
           }
-          axios.get(url_ssm_base + "/searchTips",{
-            params:{
-              keyword:this.keyword
+          axios.get(url_ssm_base + "/searchTips", {
+            params: {
+              keyword: this.keyword
             }
           }).then(response => {
             if (response.data.code == 200) {
@@ -170,7 +164,7 @@
               });
             }
             // 上下选择期间保留原始输入关键字
-            this.oldKeyword=this.keyword;
+            this.oldKeyword = this.keyword;
           }).catch(error => {
             console.log("search tips fail...");
             console.log(error);
@@ -193,7 +187,7 @@
         if (this.searchResult) {
 
           // 服务器找不到此电影的情况
-          if((this.searchResult[this.now] && this.searchResult[this.now].movieId == '404') ||
+          if ((this.searchResult[this.now] && this.searchResult[this.now].movieId == '404') ||
             (this.searchResult.length == 1 && this.searchResult[0].rate == "11")) {
             this.now = 0;
           } else {
@@ -227,10 +221,10 @@
         // 直接搜索页跳转
         else if (this.now == -1) {
           // 是否在搜索页面搜索
-          if(this.$route.path=="/subject_search"){
+          if (this.$route.path == "/subject_search") {
             // 本页面跳转
-            window.location.href="/subject_search?search_text=" + this.keyword;
-          }else {
+            window.location.href = "/subject_search?search_text=" + this.keyword;
+          } else {
             // 新页面跳转
             window.open("/subject_search?search_text=" + this.keyword);
           }
@@ -240,15 +234,15 @@
           if (this.searchResult) {
             // 服务器没有此电影，跳转豆瓣电影官网搜索
             if ((this.searchResult[this.now] && this.searchResult[this.now].movieId == '404') ||
-              (this.searchResult.length == 1 && this.searchResult[0].rate == "11")){
+              (this.searchResult.length == 1 && this.searchResult[0].rate == "11")) {
               // 是否在搜索页面搜索
 
               // 无电影跳转
-              if(this.$route.path=="/subject_search"){
+              if (this.$route.path == "/subject_search") {
                 // 本页面跳转
                 // window.location.href=this.url_douban + "/subject_search?search_text=" + this.keyword;
-                window.location.href="/subject_search?search_text=" + this.keyword;
-              }else {
+                window.location.href = "/subject_search?search_text=" + this.keyword;
+              } else {
                 // 新页面跳转
                 // window.open(this.url_douban + "/subject_search?search_text=" + this.keyword);
                 window.open("/subject_search?search_text=" + this.keyword);
@@ -265,21 +259,21 @@
       selectHover: function (index) {
         this.now = index;
         // if (this.searchResult && !(this.searchResult[this.now].movieId == '404')) {
-          // this.keyword = this.searchResult[this.now].name;
+        // this.keyword = this.searchResult[this.now].name;
         // }
       },
 
       // 点击搜索提示框 对应电影条目
       selectClick: function (index) {
         // 404 情况
-        if ( (this.searchResult[this.now] && this.searchResult[this.now].movieId == '404') ||
+        if ((this.searchResult[this.now] && this.searchResult[this.now].movieId == '404') ||
           (this.searchResult.length == 1 && this.searchResult[0].rate == "11")) {
           // 是否在搜索页面搜索
-          if(this.$route.path=="/subject_search"){
+          if (this.$route.path == "/subject_search") {
             // 本页面跳转
             // window.location.href=this.url_douban + "/subject_search?search_text=" + this.keyword;
-            window.location.href="/subject_search?search_text=" + this.keyword;
-          }else {
+            window.location.href = "/subject_search?search_text=" + this.keyword;
+          } else {
             // 新页面跳转
             // window.open(this.url_douban + "/subject_search?search_text=" + this.keyword);
             window.open("/subject_search?search_text=" + this.keyword);

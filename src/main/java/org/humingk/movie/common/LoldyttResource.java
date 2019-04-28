@@ -10,7 +10,8 @@ import java.util.List;
 public class LoldyttResource {
     private String movieName;
     private String movieUrl;
-    private List<Resource> resources;
+    private List<Resource> magnet;
+    private List<Resource> thunder;
 
     public String getMovieName() {
         return movieName;
@@ -28,11 +29,20 @@ public class LoldyttResource {
         this.movieUrl = movieUrl;
     }
 
-    public List<Resource> getResources() {
-        return resources;
+
+    public List<Resource> getThunder() {
+        return thunder;
     }
 
-    public void setResources(List<Resource> resources) {
-        this.resources = resources;
+    public void setThunder(List<Resource> thunder) {
+        this.thunder = thunder;
+    }
+
+    public List<Resource> getMagnet() {
+        return magnet;
+    }
+
+    public void setMagnet(List<Resource> magnet) {
+        this.magnet = magnet;
     }
 }

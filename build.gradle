@@ -124,7 +124,6 @@ dependencies {
     compile group: 'com.alibaba', name: 'fastjson', version: '1.2.33'
     // net sf json
 
-
     // webmagic 简易的爬虫框架
     compile group: 'us.codecraft', name: 'webmagic-core', version: '0.7.3'
     compile group: 'us.codecraft', name: 'webmagic-extension', version: '0.7.3'

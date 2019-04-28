@@ -4,11 +4,14 @@ import home from '../components/home'
 import subject from "../components/subject";
 import search from '../components/search'
 import celebrity from '../components/celebrity'
+import tag from '../components/tag'
+import chart from '../components/chart'
+import people from '../components/people'
 
 Vue.use(Router);
 
 export default new Router({
-  mode:'history',
+  mode: 'history',
   routes: [
     {
       path: '/',
@@ -16,19 +19,34 @@ export default new Router({
       component: home
     },
     {
-      path:'/subject/:movieId',
-      name:'subject',
-      component:subject
+      path: '/subject/:movieId',
+      name: 'subject',
+      component: subject
     },
     {
-      path:'/subject_search',
-      name:'search',
-      component:search
+      path: '/subject_search',
+      name: 'search',
+      component: search
     },
     {
-      path:'/celebrity/:actorId',
-      name:'celebrity',
-      component:celebrity
+      path: '/celebrity/:actorId',
+      name: 'celebrity',
+      component: celebrity
+    },
+    {
+      path:'/tag/:tagName',
+      name:'tag',
+      component:tag
+    },
+    {
+      path:'/chart',
+      name:'chart',
+      component:chart
+    },
+    {
+      path:'/people/:userId',
+      name:'people',
+      component:people
     }
   ]
 })

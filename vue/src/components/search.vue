@@ -94,7 +94,7 @@
         url_douban: url_douban,
         url_vue_base: url_vue_base,
         busy: true,
-        subTitle: " - 1s - 搜索",
+        subTitle: " + 1s + 搜索",
         apiResult: {},
         sResult: [],
         // 目前已收到的电影条数

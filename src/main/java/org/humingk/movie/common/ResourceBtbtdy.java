@@ -96,11 +96,15 @@ public class ResourceBtbtdy {
     public List<BtbtdyResource> getResource(String keyword, int max) {
         List<BtbtdyResource> btbtdyResources = new ArrayList<>();
         Map<String, String> movies = getMovieList(keyword, max);
-        for (String key : movies.keySet()) {
-            BtbtdyResource btbtdyResource = getMovie(key, movies.get(key));
-            if (btbtdyResource != null) {
-                btbtdyResources.add(btbtdyResource);
+        if (movies!=null) {
+            for (String key : movies.keySet()) {
+                BtbtdyResource btbtdyResource = getMovie(key, movies.get(key));
+                if (btbtdyResource != null) {
+                    btbtdyResources.add(btbtdyResource);
+                }
             }
+        }else {
+            return null;
         }
         return btbtdyResources;
     }
@@ -269,9 +273,9 @@ public class ResourceBtbtdy {
                                     String movieUrl = nodeForUrl.getNodeValue();
                                     Matcher matcher = URL_ID.matcher(movieUrl);
                                     if (matcher.find()) {
-                                        int movieId=Integer.valueOf(matcher.group(0));
-                                        String realUrl=BASE_URL+"/vidlist/"+movieId+".html";
-                                        movies.put(movieName,realUrl);
+                                        int movieId = Integer.valueOf(matcher.group(0));
+                                        String realUrl = BASE_URL + "/vidlist/" + movieId + ".html";
+                                        movies.put(movieName, realUrl);
                                         logger.info("(BT电影天堂)获取电影...movie name: " + movieName);
                                         logger.info("(BT电影天堂)获取电影...movie url: " + movieUrl);
                                     }

@@ -116,13 +116,18 @@ public class MovieController {
     @ResponseBody
     public Result getLoldyttResource(@RequestParam("keyword") String keyword) {
         try {
-            logger.info("(LOL电影天堂)获取电影资源信息成功,共计  个电影...keyword: " + keyword);
-            logger.info("(LOL电影天堂)获取电影资源信息失败...keyword: " + keyword);
-            return Result.createMessage(200, "success", null);
+            ResourceLoldytt resourceLoldytt = new ResourceLoldytt();
+            List<LoldyttResource> loldyttResources = resourceLoldytt.getResource(keyword, 1);
+            if (loldyttResources != null && loldyttResources.size() != 0) {
+                logger.info("(LOL电影天堂)获取电影资源信息成功,共计 " + loldyttResources.size() + " 个电影...keyword: " + keyword);
+                return Result.createMessage(200, "success", loldyttResources);
+            }else {
+                logger.info("(LOL电影天堂)获取电影资源信息失败...keyword: " + keyword);
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return Result.createMessage(200, "success", null);
+        return Result.createMessage(200, "fail", null);
     }
 
     /**

@@ -35,27 +35,28 @@ public class ResourceDygod {
      * 电影天堂
      * .com太慢了
      */
-    public static final String BASE_URL="https://www.dygod.net";
+    public static final String BASE_URL = "https://www.dygod.net";
 
     /**
      * 是否搜索到电影
      */
-    public static final String XPATH_IS_SEARCHED="//div/@id";
+    public static final String XPATH_IS_SEARCHED = "//div/@id";
 
     /**
      * 电影列表
      */
-    public static final String XPATH_MOVIE_LIST="//div[@class='co_content8']//ul";
+    public static final String XPATH_MOVIE_LIST = "//div[@class='co_content8']//ul";
 
     /**
      * 电影 url
      */
-    public static final String XPATH_MOVIE_URL=".//a";
+    public static final String XPATH_MOVIE_URL = ".//a";
 
     /**
      * 电影 title
      */
-    public static final String XPATH_MOVIE_TITLE=".//a/@href";
+    public static final String XPATH_MOVIE_TITLE = ".//a/@href";
+
     /**
      * 获取资源
      *
@@ -63,7 +64,7 @@ public class ResourceDygod {
      * @return
      */
     public List<String> getResource(String keyword) {
-        String url=BASE_URL+"/e/search/index.php";
+        String url = BASE_URL + "/e/search/index.php";
 
         StringBuilder html = new StringBuilder();
         // PrintWriter以字符为单位，支持汉字
@@ -75,7 +76,7 @@ public class ResourceDygod {
             URL realURL = new URL(url);
 
             // 打开和URL之间的连接
-            HttpURLConnection connection = (HttpURLConnection)realURL.openConnection();
+            HttpURLConnection connection = (HttpURLConnection) realURL.openConnection();
             // 发送POST请求
             connection.setDoOutput(true);
             connection.setDoInput(true);
@@ -84,28 +85,29 @@ public class ResourceDygod {
             // 请求头
 //            connection.setRequestProperty("cookie","pescdlastsearchtime=1555937235");
             connection.setRequestProperty("accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3");
-            connection.setRequestProperty("accept-encoding","gzip, deflate, br");
-            connection.setRequestProperty("accept-language","zh-CN,zh;q=0.9,en;q=0.8");
+            connection.setRequestProperty("accept-encoding", "gzip, deflate, br");
+            connection.setRequestProperty("accept-language", "zh-CN,zh;q=0.9,en;q=0.8");
             connection.setRequestProperty("user-agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.103 Safari/537.36");
             connection.setRequestProperty("content-type", "application/x-www-form-urlencoded");
-            connection.setRequestProperty("origin","https://www.dygod.net");
-            connection.setRequestProperty("referer","https://www.dygod.net/index.html");
+            connection.setRequestProperty("origin", "https://www.dygod.net");
+            connection.setRequestProperty("referer", "https://www.dygod.net/index.html");
+            connection.setRequestProperty("cookie", "selxulastsearchtime=" + (System.currentTimeMillis() - 300 * 60 * 1000) / 1000);
             // 获取URLConnection对象对应的输出流
             out = new PrintWriter(connection.getOutputStream());
 //            String resParm="show=title%2Csmalltext&tempid=1&keyboard="+ URLEncoder.encode(keyword,"gb2312") +"&Submit=%C1%A2%BC%B4%CB%D1%CB%F7\n";
-            String resParm="show=title&tempid=1&keyboard="+ URLEncoder.encode(keyword,"gb2312") +"&Submit=%C1%A2%BC%B4%CB%D1%CB%F7";
+            String resParm = "show=title&tempid=1&keyboard=" + URLEncoder.encode(keyword, "gb2312") + "&Submit=%C1%A2%BC%B4%CB%D1%CB%F7";
             System.out.println(resParm);
             // 发送请求参数
             out.print(resParm);
             // flush输出流的缓冲
             out.flush();
             // 定义BufferedReader输入流来读取URL的响应
-            in = new BufferedReader(new InputStreamReader(connection.getInputStream(),"gb2312"));
+            in = new BufferedReader(new InputStreamReader(connection.getInputStream(), "gb2312"));
             String line;
-            while((line = in.readLine()) != null){
+            while ((line = in.readLine()) != null) {
                 html.append(line);
             }
-//            System.out.println(html.toString());
+            System.out.println(html.toString());
             System.out.println("==================");
             // 解析网页
             TagNode tagNode = new HtmlCleaner().clean(html.toString());
@@ -115,12 +117,12 @@ public class ResourceDygod {
             XPath xPath = XPathFactory.newInstance().newXPath();
 
             // 判断是否有结果
-            String isSearched=(String) xPath.evaluate(XPATH_IS_SEARCHED,document, XPathConstants.STRING);
-            String test=(String)xPath.evaluate("//*[@id='header']/div/div[3]/div[2]/div[1]/div[5]/div[2]/ul/table[1]/tbody/tr[2]/td[2]/b/a/text()",document,XPathConstants.STRING);
+            String isSearched = (String) xPath.evaluate(XPATH_IS_SEARCHED, document, XPathConstants.STRING);
+            String test = (String) xPath.evaluate("//*[@id='header']/div/div[3]/div[2]/div[1]/div[5]/div[2]/ul/table[1]/tbody/tr[2]/td[2]/b/a/text()", document, XPathConstants.STRING);
             System.out.println("================");
             System.out.println(test);
-            if("header".equals(isSearched)){
-                logger.info("(电影天堂)搜索到结果...keyword: "+keyword);
+            if ("header".equals(isSearched)) {
+                logger.info("(电影天堂)搜索到结果...keyword: " + keyword);
                 int movieSum;
 
                 Object resultForMovie = xPath.evaluate(XPATH_MOVIE_LIST, document, XPathConstants.NODESET);
@@ -130,24 +132,23 @@ public class ResourceDygod {
                         Node node = nodeListForMovie.item(i);
                         if (node != null && node.getNodeType() == Node.ELEMENT_NODE) {
                             Element element = (Element) node;
-                            try{
+                            try {
                                 Node nodeForName = (Node) xPath.evaluate(XPATH_MOVIE_TITLE, element, XPathConstants.NODE);
-                                String movieName=nodeForName.getNodeValue();
+                                String movieName = nodeForName.getNodeValue();
                                 Node nodeForUrl = (Node) xPath.evaluate(XPATH_MOVIE_URL, element, XPathConstants.NODE);
-                                String movieUrl=BASE_URL+nodeForUrl.getNodeValue();
-                                logger.info("movieName: "+movieName);
-                                logger.info("movieUrl: "+movieUrl);
-                            }catch (Exception e){
+                                String movieUrl = BASE_URL + nodeForUrl.getNodeValue();
+                                logger.info("movieName: " + movieName);
+                                logger.info("movieUrl: " + movieUrl);
+                            } catch (Exception e) {
                                 e.printStackTrace();
                             }
                         }
                     }
                 }
 
-            }else {
-                logger.info("(电影天堂)搜索不到结果...keyword: "+keyword);
+            } else {
+                logger.info("(电影天堂)搜索不到结果...keyword: " + keyword);
             }
-
 
 
         } catch (MalformedURLException e) {
@@ -159,11 +160,11 @@ public class ResourceDygod {
         } catch (XPathExpressionException e) {
             e.printStackTrace();
         } finally {
-            if(out != null){
+            if (out != null) {
                 out.close();
             }
             try {
-                if( in != null) {
+                if (in != null) {
                     in.close();
                 }
             } catch (IOException e) {
