@@ -1,0 +1,86 @@
+/*! CSS Used from: https://img3.doubanio.com/f/shire/bf61b1fa02f564a4a8f809da7c7179b883a56146/css/douban.css */
+div,h1{margin:0;padding:0;}
+img{border:0;}
+h1{font-size:100%;font-weight:normal;}
+a{cursor:pointer;}
+a:link{color:#37a;text-decoration:none;}
+a:visited{color:#669;text-decoration:none;}
+a:hover{color:#fff;text-decoration:none;background:#37a;}
+a:active{color:#fff;text-decoration:none;background:#f93;}
+a img{border-width:0;vertical-align:middle;}
+#wrapper{width:950px;margin:0 auto;}
+a{cursor:pointer;}
+a:link{color:#37a;text-decoration:none;}
+a:visited{color:#666699;text-decoration:none;}
+a:hover{color:#FFFFFF;text-decoration:none;background:#37a;}
+a:active{color:#FFFFFF;text-decoration:none;background:#FF9933;}
+a img{border-width:0;vertical-align:middle;}
+h1{word-wrap:break-word;display:block;font-size:25px;font-weight:bold;color:#494949;margin:0;padding:0 0 15px 0;line-height:1.1;}
+.pl{font:12px Arial, Helvetica, sans-serif;line-height:150%;color:#666666;}
+.gact{color:#BBBBBB;font-size:12px;text-align:center;cursor:pointer;}
+.gact a:link{color:#BBBBBB;font-size:12px;text-decoration:none;text-align:center;}
+.gact a:visited{color:#BBBBBB;font-size:12px;text-decoration:none;text-align:center;}
+.gact a:hover{color:#FFFFFF;font-size:12px;border-left:1px solid #FF9999;border-top:1px solid #FF9999;border-right:1px solid #FF3333;border-bottom:1px solid #FF3333;background-color:#773333;text-align:center;}
+.paginator{font:14px Arial, Helvetica, sans-serif;color:#aaa;margin:20px 0;line-height:150%;text-align:center;}
+.paginator a,.thispage{padding:0px 4px;margin:2px;}
+.paginator .prev{margin-right:20px;}
+.paginator .next{margin-left:20px;}
+.paginator .thispage{color:#fff;background:#83BF73;}
+.paginator .thispage{color:#fff;background:#83BF73;}
+
+/*豆瓣Allstars*/
+.allstar50,.allstar40,.allstar20,.allstar30,.allstar10{display:inline-block;*display:inline;zoom:1;background:url(../../images/star/doubanStars.png) no-repeat;background:-webkit-image-set(url(../../images/star/doubanStars.png) 1x, url(../../images/star/doubanStars.png) 2x) no-repeat;background:-moz-image-set(url(../../images/star/doubanStars.png) 1x, url(../../images/star/doubanStars.png) 2x) no-repeat;background:-o-image-set(url(../../images/star/doubanStars.png) 1x, url(../../images/star/doubanStars.png) 2x) no-repeat;background:-ms-image-set(url(../../images/star/doubanStars.png) 1x, url(../../images/star/doubanStars.png) 2x) no-repeat;width:55px;height:11px;margin:0 3px 0 0;overflow:hidden;}
+.allstar50{background-position:0 0px;}
+.allstar40{background-position:0 -22px;}
+.allstar30{background-position:0 -44px;}
+.allstar20{background-position:0 -66px;}
+.allstar10{background-position:0 -88px;}
+
+/*! CSS Used from: Embedded */
+#wrapper{width:1040px;box-sizing:border-box;}
+@media (max-width: 1024px){
+  #wrapper{width:1000px;}
+}
+/*! CSS Used from: Embedded */
+#root{min-height:500px;}
+/*! CSS Used from: Embedded */
+h1{font-size:2em;margin:.67em 0;}
+a{background-color:transparent;-webkit-text-decoration-skip:objects;}
+img{border-style:none;}
+/*! CSS Used from: Embedded */
+.hxNRHc{margin:10px 0px;}
+.hxNRHc,.hxNRHc span{line-height:1;}
+.hRIaFd{margin-bottom:30px;}
+/*.hRIaFd .item-root{display:flex;flex-wrap:wrap;position:relative;-webkit-box-pack:justify;justify-content:space-between;}*/
+.hRIaFd .item-root{display:flex;flex-wrap:wrap;-webkit-box-pack:justify;justify-content:space-between;}
+.hRIaFd .cover-link{background:none;width:65px;max-height:97px;margin-right:15px;}
+.hRIaFd .cover{width:65px;max-height:97px;}
+.hRIaFd .detail{flex:1 1 0%;min-width:0px;}
+/*.hRIaFd .detail .title{font-size:14px;font-weight:500;overflow:visible;position:relative;top:-1px;}*/
+.hRIaFd .detail .title{font-size:14px;font-weight:500;overflow:visible;top:-1px;}
+.hRIaFd .detail .title-text{display:inline;vertical-align:middle;line-height:1.5;}
+.hRIaFd .detail .meta{margin-top:7px;color:rgb(153, 153, 153);font-size:12px;line-height:1.5;overflow:visible;}
+.hRIaFd .detail .meta.abstract{margin-top:10px;line-height:1;}
+.jVmQgr .status-text{margin-right:15px;font-size:12px;line-height:1;text-align:left;display:inline-block;}
+.jWOXeW .rating{margin:10px 0px;}
+.jWOXeW .detail .meta{max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;overflow-wrap:normal;display:block;}
+.jWOXeW .detail .meta.abstract{margin-top:-3px;line-height:1.5;}
+.jWOXeW .detail .meta.abstract_2{margin-top:0px;}
+.jWOXeW ._dpth8dwb5{margin:7px 0px 0px;display:inline-block;}
+.jWOXeW ._dpth8dwb5 .status-text{color:rgb(102, 102, 102);}
+.eszZtj{margin:60px 0px 20px;}
+.eszZtj a{font-size:14px;}
+.eszZtj a.activate,.eszZtj a.activate:hover{text-decoration:none;cursor:default;background:rgb(131, 191, 115);pointer-events:none;}
+.eszZtj .prev.activate{color:rgb(170, 170, 170);background-color:inherit;}
+/*.ksdtVX{margin-bottom:25px;}*/
+/*.ksdtVX .title{font-size:14px;text-align:left;color:rgb(0, 119, 34);margin-bottom:14px;}*/
+/*.ksdtVX .link{margin-bottom:11px;}*/
+.eSyqVy{font-size:14px;}
+.dkpfYo{display:none;position:fixed;left:0px;top:0px;width:100%;height:100%;border:none;z-index:999;}
+.hbWVez ._b6i42sib8{overflow:hidden;}
+.hbWVez ._wqlzpvxb7{font-size:25px;font-weight:bold;margin-bottom:30px;padding:0px;color:rgb(73, 73, 73);}
+.hbWVez ._rvqzudtbb{width:675px;float:left;padding-top:15px;}
+.hbWVez ._bgvkis2bc{width:300px;float:right;margin-bottom:30px;}
+.hbWVez ._esy1yfgbf{margin-bottom:20px;}
+/*! CSS Used from: https://img3.doubanio.com/dae/accounts/resources/0246c88/movie/bundle.css */
+a{cursor:pointer;}
