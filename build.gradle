@@ -133,6 +133,23 @@ dependencies {
 
 
 }
+// gradle 不能使用注释中的中文
+// 编码 GBK 的不可映射字符
+// 编译JAVA文件时采用UTF-8
+tasks.withType(JavaCompile) {
+    options.encoding = "UTF-8"
+}
+
+javadoc {
+    options{
+        encoding "UTF-8"
+        charSet 'UTF-8'
+        author true
+        version true
+        links "http://docs.oracle.com/javase/7/docs/api"
+        title "豆瓣电影1s"
+    }
+}
 
 // gradle可以调用ant任务，ant启动Mybatis Generator
 

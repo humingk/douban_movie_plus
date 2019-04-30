@@ -1,7 +1,7 @@
 // vue的url
-let url_vue_base = "http://localhost:8081";
+let url_vue_base = "https://movie.doubans.com";
 // ssm的url
-let url_ssm_base = "http://localhost:8080";
+let url_ssm_base = "https://movie.doubans.com:8082";
 // neteaseMusic base url
 let url_netease = "https://music.163.com";
 // IMDB
@@ -22,9 +22,9 @@ let url_loldytt="http://www.loldytt.tv";
 let url_email="humingk@qq.com";
 //---------API
 
-// neteaseMusic api url
-let url_api_netease = "http://localhost:3000";
-
+// neteaseMusic 第三方api url
+// neteaseThirdApi 会通过nginx转发到本地的3000
+let url_api_netease = "https://movie.doubans.com/neteaseThirdApi";
 
 // IMDB OMDB api url
 let url_omdb = "http://www.omdbapi.com";
