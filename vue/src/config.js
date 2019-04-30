@@ -27,7 +27,9 @@ let url_email="humingk@qq.com";
 let url_api_netease = "https://movie.doubans.com/neteaseThirdApi";
 
 // IMDB OMDB api url
-let url_omdb = "http://www.omdbapi.com";
+// omdbApi 通过 nginx 转发到 www.omdbapi.com
+// let url_omdb = "http://www.omdbapi.com";
+let url_omdb = "https://movie.doubans.com/omdbApi";
 // apikey=
 let apikey_omdb = "e409ce71";
 
