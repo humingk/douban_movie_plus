@@ -1,7 +1,8 @@
 // vue的url
 let url_vue_base = "https://movie.doubans.com";
 // ssm的url
-let url_ssm_base = "https://movie.doubans.com:8082";
+// ssmApi 通过nginx转发到本地的 8082
+let url_ssm_base = "https://movie.doubans.com/ssmApi";
 // neteaseMusic base url
 let url_netease = "https://music.163.com";
 // IMDB
