@@ -648,8 +648,7 @@
                  style="margin-top: 10px;margin-bottom: 20px;"
                  v-for="(res,index) in btbtdyResource">
               <h2>
-                <i class="">友情链接 <span style="color:#79078f"><a target="_blank"
-                                                                :href="url_btbtdy+'/btdy/dy'+res.movieId+'.html'">< {{res.movieName}} ></a> </span></i>
+                <i class="">友情链接 <span style="color:#79078f">< {{res.movieName}} > </span></i>
               </h2>
               <div
                 style="box-shadow: 3px 5px 10px 0 rgba(192,192,192,0.2);transition: 0.3s;width: 100%;border-radius: 3px;margin-left: 5px;">
@@ -705,7 +704,7 @@
                  style="margin-top: 10px;margin-bottom: 20px;"
                  v-for="(res,index) in loldyttResource">
               <h2>
-                <i class="">友情链接<span style="color:#79078f"><a target="_blank" :href="res.movieUrl">< {{res.movieName}} ></a></span>
+                <i class="">友情链接<span style="color:#79078f">< {{res.movieName}} ></span>
                 </i>
               </h2>
               <div

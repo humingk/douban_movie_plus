@@ -30,7 +30,7 @@
               <input @click="search()">
             </div>
             <div @keyup.esc="clearInput"></div>
-            <div id="search_suggest" class="search-select">
+            <div id="search_suggest" style="position:fixed;margin:5px 300px 0 0;width: 465px;">
               <transition-group name="itemfade" tag="ul" mode="out-in"
                                 v-cloak :modal-append-to-body="false">
                 <li v-for="(item,index) in searchResult"

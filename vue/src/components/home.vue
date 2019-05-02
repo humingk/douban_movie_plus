@@ -3,6 +3,7 @@
     <div id="wrapper">
       <div id="content">
         <div id="grid-16-8 clearfix">
+          <!--正在上映-->
           <div id="screening" class="s" data-dstat-areaid="70" data-dstat-mode="click,expose">
             <div class="screening-hd">
               <h2>正在热映
@@ -13,6 +14,93 @@
             <div class="screening-bd" v-if="inTheaters.subjects">
               <div data-v-3e982be2="" class="list-wp">
                 <a v-for="item in inTheaters.subjects"
+                   data-v-2c455d87="" data-v-3e982be2="" target="_blank"
+                   :href="'/subject/'+item.id"
+                   class="item">
+                  <div data-v-2c455d87="" data-id="26728669" class="cover-wp">
+              <span data-v-2c455d87="" class="pic">
+                <img data-v-2c455d87="" :src="item.images.large" rel="noreferrer"
+                     :alt="item.title" x="movie:cover_x" y="1920">
+              </span>
+                  </div>
+                  <p data-v-2c455d87="">
+              <span data-v-2c455d87="">
+                <strong>{{item.title}}</strong>
+              </span>
+                    <span data-v-2c455d87="" class="rate">{{item.rating.average}}</span>
+                  </p>
+                </a>
+              </div>
+            </div>
+          </div>
+          <!--周热门-->
+          <div id="weekly" class="s" data-dstat-areaid="70" data-dstat-mode="click,expose">
+            <div class="screening-hd">
+              <h2>豆瓣电影本周口碑榜
+                <span><a :href="url_douban+'/chart'">查看更多>></a></span>
+              </h2>
+            </div>
+            <div class="screening-bd" v-if="weekly.subjects">
+              <div data-v-3e982be2="" class="list-wp">
+                <a v-for="item in weekly.subjects"
+                   data-v-2c455d87="" data-v-3e982be2="" target="_blank"
+                   :href="'/subject/'+item.id"
+                   class="item">
+                  <div data-v-2c455d87="" data-id="26728669" class="cover-wp">
+              <span data-v-2c455d87="" class="pic">
+                <img data-v-2c455d87="" :src="item.subject.images.large" rel="noreferrer"
+                     :alt="item.subject.title" x="movie:cover_x" y="1920">
+              </span>
+                  </div>
+                  <p data-v-2c455d87="">
+              <span data-v-2c455d87="">
+                <strong>{{item.subject.title}}</strong>
+              </span>
+                    <span data-v-2c455d87="" class="rate">{{item.subject.rating.average}}</span>
+                  </p>
+                </a>
+              </div>
+            </div>
+          </div>
+          <!--北美票房榜-->
+          <div id="usbox" class="s" data-dstat-areaid="70" data-dstat-mode="click,expose">
+            <div class="screening-hd">
+              <h2>北美电影票房榜
+                <span><a :href="url_douban+'/chart'">查看更多>></a></span>
+              </h2>
+            </div>
+            <div class="screening-bd" v-if="usBox.subjects">
+              <div data-v-3e982be2="" class="list-wp">
+                <a v-for="item in usBox.subjects"
+                   data-v-2c455d87="" data-v-3e982be2="" target="_blank"
+                   :href="'/subject/'+item.id"
+                   class="item">
+                  <div data-v-2c455d87="" data-id="26728669" class="cover-wp">
+              <span data-v-2c455d87="" class="pic">
+                <img data-v-2c455d87="" :src="item.subject.images.large" rel="noreferrer"
+                     :alt="item.subject.title" x="movie:cover_x" y="1920">
+              </span>
+                  </div>
+                  <p data-v-2c455d87="">
+              <span data-v-2c455d87="">
+                <strong>{{item.subject.title}}</strong>
+              </span>
+                    <span data-v-2c455d87="" class="rate">{{item.subject.rating.average}}</span>
+                  </p>
+                </a>
+              </div>
+            </div>
+          </div>
+          <!--top250-->
+          <div id="top250" class="s" data-dstat-areaid="70" data-dstat-mode="click,expose">
+            <div class="screening-hd">
+              <h2>豆瓣电影 Top250
+                <span><a :href="url_douban+'/top250'">查看更多>></a></span>
+              </h2>
+            </div>
+            <div class="screening-bd" v-if="top250.subjects">
+              <div data-v-3e982be2="" class="list-wp">
+                <a v-for="item in top250.subjects"
                    data-v-2c455d87="" data-v-3e982be2="" target="_blank"
                    :href="'/subject/'+item.id"
                    class="item">
