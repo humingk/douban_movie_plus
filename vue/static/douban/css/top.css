@@ -33,9 +33,10 @@ a{cursor:pointer;}
 .nav{width:100%;min-width:1040px;overflow:hidden;zoom:1;margin-bottom:20px;}
 .nav .nav-wrap{border-bottom:1px solid #e5ebe4;}
 .nav .nav-primary{width:1040px;margin:0 auto;overflow:visible!important;position:relative;padding:10px 0 5px;zoom:1;}
-.nav .nav-logo{float:left;height:45px;width:175px;margin:0 5px 0 0;}
-.nav .nav-logo a{display:block;width:100%;height:100%;overflow:hidden;line-height:100em;}
-.nav .nav-logo a:hover,.nav .nav-logo a:active{background:none!important;}
+.nav .nav-logo{float:left;height:45px;width:150px;}
+/*.nav .nav-logo{float:left;height:45px;width:175px;margin:0 5px 0 0;}*/
+/*.nav .nav-logo a{display:block;width:100%;height:100%;line-height:100em;}*/
+/*.nav .nav-logo a:hover,.nav .nav-logo a:active{background:none!important;}*/
 legend{color:#000;}
 label{font-family:Tahoma;vertical-align:middle;}
 fieldset{border:1px solid #ddd;padding:0 10px;margin-bottom:15px;}
@@ -61,12 +62,6 @@ form{margin:0;padding:0;border:0px;}
 }
 #db-nav-movie{position:relative;background-color:#e3f5f4;}
 #db-nav-movie .nav-wrap{border-color:#e3ebec;}
-#db-nav-movie .nav-logo{
-  background:url(../../images/logo_background.png) no-repeat 0 12px;
-  background-image:-webkit-image-set(url(../../images/logo.png) 1x, url(../../images/logo.png) 2x);
-  background-image:-moz-image-set(url(//img3.doubanio.com/dae/accounts/resources/0246c88/movie/assets/lg_movie_a12_2.png) 1x, url(//img3.doubanio.com/dae/accounts/resources/0246c88/movie/assets/lg_movie@2x.png) 2x);
-  background-image:-ms-image-set(url(//img3.doubanio.com/dae/accounts/resources/0246c88/movie/assets/lg_movie_a12_2.png) 1x, url(//img3.doubanio.com/dae/accounts/resources/0246c88/movie/assets/lg_movie@2x.png) 2x);
-  background-image:-o-image-set(url(//img3.doubanio.com/dae/accounts/resources/0246c88/movie/assets/lg_movie_a12_2.png) 1x, url(//img3.doubanio.com/dae/accounts/resources/0246c88/movie/assets/lg_movie@2x.png) 2x);}
 #db-nav-movie a:link,#db-nav-movie a:visited{color:#27a;text-decoration:none;}
 #db-nav-movie a:active,#db-nav-movie a:hover{background-color:#27a;color:#fff;}
 #db-nav-movie a.movieannual2018{position:absolute;width:186px;height:96px;top:10px;left:50%;margin-left:200px;background:url(//img3.doubanio.com/dae/accounts/resources/0246c88/movie/assets/annual_2018.png) center/contain no-repeat;}
@@ -80,4 +75,8 @@ form{margin:0;padding:0;border:0px;}
 .selectback {
   background-color: #c7cbff !important;
   cursor: pointer
+}
+
+.search_suggest{
+  position:fixed;margin:5px 300px 0 0;width: 465px;
 }

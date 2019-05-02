@@ -528,7 +528,7 @@
             </div>
             <br>
           </div>
-          <div class="aside" style="position: static; left: 712px; right: auto; bottom: 300px; top: auto;">
+          <div class="aside" style="position: absolute; margin-left: 690px;">
             <!--mp3-->
             <div id="musicAbout" v-if="isMusicAllOk && neteaseMusic && neteaseMusic.length!=0 "
                  style="margin-bottom: 20px">
@@ -538,7 +538,6 @@
               </h2>
               <!--:music="neteaseMusic[getRandomMusic(neteaseMusic.length-1)]"-->
               <aplayer
-                autoplay
                 :music="neteaseMusic[0]"
                 :list="neteaseMusic"
                 :showLrc="showLrc"
@@ -554,6 +553,7 @@
               </h2>
               <!--:music="neteasePlaylistSongs[getRandomMusic(neteasePlaylistSongs.length-1)]"-->
               <aplayer
+                autoplay
                 :music="neteasePlaylistSongs[0]"
                 :list="neteasePlaylistSongs"
                 :showLrc="showLrc"
@@ -621,25 +621,26 @@
               </div>
             </div>
 
-            <div id="mit" v-show="(btbtdyResource && btbtdyResource.length!=0) || (loldyttResource && loldyttResource.length!=0)"
+            <div id="mit"
+                 v-show="(btbtdyResource && btbtdyResource.length!=0) || (loldyttResource && loldyttResource.length!=0)"
                  style="margin-top: 10px;margin-bottom: 20px;">
               <h2>
                 <i class="" style="color:#f7097a">严正声明 </i>
               </h2>
-              <div style="box-shadow: 2px 3px 6px 0 rgba(0,0,0,0.2);transition: 0.3s;width: 100%;border-radius: 3px;min-height: 120px;margin-left: 5px;">
+              <div
+                style="box-shadow: 2px 3px 6px 0 rgba(0,0,0,0.2);transition: 0.3s;width: 100%;border-radius: 3px;min-height: 120px;margin-left: 5px;">
                 <span style="font-size: 13px">
                 本站为开源项目,遵守<b style="color: red">MIT</b>开源协议!<br>
-                本站以下内容均为<b style="color:red">友情链接</b>,非本站所有!<br>
+                本站以下链接均为<b style="color:red">友情链接</b>,解释权非本站所有!<br>
 
                 友情链接原则:<br>
-                  1. 仅供影视相关从业人员学习交流,不做任何商业用途.<br>
-                  2. 只收录稀缺的经典冷门影视作品.<br>
-                  2. 拒绝收录近期正在上映的电影!<br>
+                  &nbsp;&nbsp;1. 仅供学习交流,不做任何商业用途.<br>
+                  &nbsp;&nbsp;2. 仅收录经典冷门影视作品.<br>
+                  &nbsp;&nbsp;3. 拒绝收录近期上映的电影!<br>
 
-                若发现任何上述违规现象,请<a :href="'mailto:'+url_email+'?subject='+movieBase.name+'('+movieBase.movieId+')侵犯版权'">联系本人</a>.将立即删除!<br>
+                若发现任何上述违规现象,请<a :href="'mailto:'+url_email+'?subject='+movieBase.name+'('+movieBase.movieId+')侵犯版权'">联系站长</a>.将立即删除!<br>
                 </span>
               </div>
-
             </div>
 
             <!--btbtdy 资源信息-->
@@ -647,7 +648,8 @@
                  style="margin-top: 10px;margin-bottom: 20px;"
                  v-for="(res,index) in btbtdyResource">
               <h2>
-                <i class="">友情链接 <span style="color:#79078f"><a target="_blank" :href="url_btbtdy+'/btdy/dy'+res.movieId+'.html'">< {{res.movieName}} ></a> </span></i>
+                <i class="">友情链接 <span style="color:#79078f"><a target="_blank"
+                                                                :href="url_btbtdy+'/btdy/dy'+res.movieId+'.html'">< {{res.movieName}} ></a> </span></i>
               </h2>
               <div
                 style="box-shadow: 3px 5px 10px 0 rgba(192,192,192,0.2);transition: 0.3s;width: 100%;border-radius: 3px;margin-left: 5px;">
@@ -703,7 +705,8 @@
                  style="margin-top: 10px;margin-bottom: 20px;"
                  v-for="(res,index) in loldyttResource">
               <h2>
-                <i class="">友情链接<span  style="color:#79078f"><a target="_blank" :href="res.movieUrl">< {{res.movieName}} ></a></span> </i>
+                <i class="">友情链接<span style="color:#79078f"><a target="_blank" :href="res.movieUrl">< {{res.movieName}} ></a></span>
+                </i>
               </h2>
               <div
                 style="box-shadow: 3px 5px 10px 0 rgba(192,192,192,0.2);transition: 0.3s;width: 100%;border-radius: 3px;margin-left: 5px;">
@@ -737,7 +740,7 @@
   import axios from 'axios'
   import {
     url_ssm_base, url_netease, url_imdb, url_douban, url_douban_book, url_metacritic, url_tomato,
-    url_email,url_btbtdy,url_loldytt, url_api_netease, url_omdb, apikey_omdb, url_api_douban, apikey_api_douban,
+    url_email, url_btbtdy, url_loldytt, url_api_netease, url_omdb, apikey_omdb, url_api_douban, apikey_api_douban,
   } from '../config';
   // MP3播放器
   import Aplayer from '../../node_modules/vue-aplayer';
@@ -754,8 +757,8 @@
         url_metacritic: url_metacritic,
         url_tomato: url_tomato,
         url_btbtdy: url_btbtdy,
-        url_loldytt:url_loldytt,
-        url_email:url_email,
+        url_loldytt: url_loldytt,
+        url_email: url_email,
         // 网易云音乐评论最大展示数
         numOfSongs: 2,
         numOfAlbums: 2,
@@ -800,7 +803,7 @@
         // Btbtdy资源
         btbtdyResource: [],
         // Loldytt资源
-        loldyttResource:[],
+        loldyttResource: [],
         // imdb 获取成功标志
         flagForImdb: false,
         imdbApi: {
@@ -1251,30 +1254,20 @@
         });
       },
 
-      // 获取网易云音乐 歌词 ==> 播放信息
+      // 获取网易云音乐  ==> 播放信息(获取歌词影响加载速度)
       getNeteaseMusic: function (song_id, songName, artistName, type, picUrl) {
-        axios.get(url_api_netease + "/lyric?id=" + song_id).then(resultMusic => {
-          if (resultMusic.data) {
-            (type == 0 ? this.neteaseMusic : (type == 1 ? this.neteasePlaylistSongs : this.neteaseAlbumSongs)).push({
-              title: songName,
-              artist: artistName,
-              src: url_netease + "/song/media/outer/url?id=" + song_id + ".mp3",
-              lrc: (resultMusic.data.lrc && resultMusic.data.lrc.lyric) ? resultMusic.data.lrc.lyric : "",
-              pic: picUrl ? picUrl : "",
-            });
-            // music加载计数器复原
-            this.musicOk--;
-            // 是否是加载最后一个music
-            if (this.musicOk == 0) {
-              this.isMusicAllOk = true;
-            }
-          } else {
-            console.log("get netease music lyric " + song_id + " failed...(server error)");
-          }
-        }).catch(error => {
-          console.log("get netease music-" + song_id + " 's music lyric failed:");
-          console.log(error);
+        (type == 0 ? this.neteaseMusic : (type == 1 ? this.neteasePlaylistSongs : this.neteaseAlbumSongs)).push({
+          title: songName,
+          artist: artistName,
+          src: url_netease + "/song/media/outer/url?id=" + song_id + ".mp3",
+          pic: picUrl ? picUrl : "",
         });
+        // music加载计数器复原
+        this.musicOk--;
+        // 是否是加载最后一个music
+        if (this.musicOk == 0) {
+          this.isMusicAllOk = true;
+        }
       },
 
       // 获取网易云音乐 歌曲评论
@@ -1425,7 +1418,7 @@
             if (response.data.code == 200 && response.data.message == "success") {
               console.log("movie btbtdy resource:");
               console.log(response.data);
-              this.btbtdyResource=response.data.data;
+              this.btbtdyResource = response.data.data;
             } else if (response.data.message == "fail") {
               console.log("get movie btbtdy resource fail...(service error)");
             }
@@ -1449,7 +1442,7 @@
             if (response.data.code == 200 && response.data.message == "success") {
               console.log("movie resource:");
               console.log(response.data);
-              this.loldyttResource=response.data.data;
+              this.loldyttResource = response.data.data;
             } else if (response.data.message == "fail") {
               console.log("get movie loldytt resource fail...(service error)");
             }

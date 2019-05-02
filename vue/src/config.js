@@ -1,8 +1,37 @@
+
+// 测试环境-------------------
+
+// // 基础url
+// let base_site="http://localhost";
+// // vue的url
+// let url_vue_base = base_site+":8081";
+// // ssm的url
+// let url_ssm_base = base_site+":8080";
+// // neteaseMusicApi url
+// let url_api_netease = base_site+":3000";
+// // omdbApi url
+// let url_omdb = "http://www.omdbapi.com";
+// // omdbApi apikey
+// let apikey_omdb = "e409ce71";
+
+
+// 生产环境-------------------
+
+// 基础url
+let base_site = "https://movie.doubans.com";
 // vue的url
-let url_vue_base = "https://movie.doubans.com";
-// ssm的url
-// ssmApi 通过nginx转发到本地的 8082
-let url_ssm_base = "https://movie.doubans.com/ssmApi";
+let url_vue_base = base_site;
+// ssm的url ssmApi nginx转发本地8082
+let url_ssm_base = base_site+"/ssmApi";
+// neteaseMusicApi url neteaseThirdApi nginx转发本地3000
+let url_api_netease = "https://movie.doubans.com/neteaseThirdApi";
+// omdbApi url nginx转发www.omdbapi.com
+let url_omdb = "https://movie.doubans.com/omdbApi";
+// omdbApi apikey
+let apikey_omdb = "e409ce71";
+
+// 其他-------------------------
+
 // neteaseMusic base url
 let url_netease = "https://music.163.com";
 // IMDB
@@ -21,24 +50,10 @@ let url_btbtdy="http://www.btbtdy.me";
 let url_loldytt="http://www.loldytt.tv";
 // 站长邮箱
 let url_email="humingk@qq.com";
-//---------API
-
-// neteaseMusic 第三方api url
-// neteaseThirdApi 会通过nginx转发到本地的3000
-let url_api_netease = "https://movie.doubans.com/neteaseThirdApi";
-
-// IMDB OMDB api url
-// omdbApi 通过 nginx 转发到 www.omdbapi.com
-// let url_omdb = "http://www.omdbapi.com";
-let url_omdb = "https://movie.doubans.com/omdbApi";
-// apikey=
-let apikey_omdb = "e409ce71";
-
 // 吉卜力工作室 API
 let url_gbl = "https://ghibliapi.herokuapp.com";
 // 时光网 API url
 let url_time = "https://api-m.mtime.cn";
-
 // 豆瓣V2 API url apiKey
 let url_api_douban = "https://api.douban.com";
 // apikey=
