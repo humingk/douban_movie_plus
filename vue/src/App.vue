@@ -20,5 +20,8 @@
 </script>
 
 <style>
-
+  /*滚动条产生跳动*/
+  body{
+    overflow-y: scroll;
+  }
 </style>

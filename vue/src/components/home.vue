@@ -1,248 +1,60 @@
 <template>
-  <div id="home" v-if="inTheaters.title!=''">
+  <div id="home">
     <div id="wrapper">
       <div id="content">
         <div id="grid-16-8 clearfix">
-          <!--正在上映-->
-          <div id="screening" class="s" data-dstat-areaid="70" data-dstat-mode="click,expose">
-            <div class="screening-hd">
-              <h2>正在热映
-                <span><a :href="url_douban+'/cinema/nowplaying'">全部正在热映>></a></span>
-                <span><a :href="url_douban+'/cinema/later'">即将上映>></a></span>
-              </h2>
-            </div>
-            <div class="screening-bd" v-if="inTheaters.subjects">
-              <div data-v-3e982be2="" class="list-wp">
-                <a v-for="item in inTheaters.subjects"
-                   data-v-2c455d87="" data-v-3e982be2="" target="_blank"
-                   :href="'/subject/'+item.id"
-                   class="item">
-                  <div data-v-2c455d87="" data-id="26728669" class="cover-wp">
-              <span data-v-2c455d87="" class="pic">
-                <img data-v-2c455d87="" :src="item.images.large" rel="noreferrer"
-                     :alt="item.title" x="movie:cover_x" y="1920">
-              </span>
-                  </div>
-                  <p data-v-2c455d87="">
-              <span data-v-2c455d87="">
-                <strong>{{item.title}}</strong>
-              </span>
-                    <span data-v-2c455d87="" class="rate">{{item.rating.average}}</span>
-                  </p>
-                </a>
-              </div>
-            </div>
+          <div class="homeTabList">
+            <span :class="'homeTab '+isCurrent('inTheaters')" @click="changeCurrent('inTheaters')">正在热映</span>
+            <span :class="'homeTab '+isCurrent('doubanNew')" @click="changeCurrent('doubanNew')">最新上映</span>
+            <span :class="'homeTab '+isCurrent('weekly')" @click="changeCurrent('weekly')">本周口碑</span>
+            <span :class="'homeTab '+isCurrent('usBox')" @click="changeCurrent('usBox')">北美票房</span>
+            <span :class="'homeTab '+isCurrent('top250')" @click="changeCurrent('top250')">Top250</span>
           </div>
-          <!--周热门-->
-          <div id="weekly" class="s" data-dstat-areaid="70" data-dstat-mode="click,expose">
-            <div class="screening-hd">
-              <h2>豆瓣电影本周口碑榜
-                <span><a :href="url_douban+'/chart'">查看更多>></a></span>
-              </h2>
-            </div>
-            <div class="screening-bd" v-if="weekly.subjects">
-              <div data-v-3e982be2="" class="list-wp">
-                <a v-for="item in weekly.subjects"
-                   data-v-2c455d87="" data-v-3e982be2="" target="_blank"
-                   :href="'/subject/'+item.id"
-                   class="item">
-                  <div data-v-2c455d87="" data-id="26728669" class="cover-wp">
-              <span data-v-2c455d87="" class="pic">
-                <img data-v-2c455d87="" :src="item.subject.images.large" rel="noreferrer"
-                     :alt="item.subject.title" x="movie:cover_x" y="1920">
-              </span>
-                  </div>
-                  <p data-v-2c455d87="">
-              <span data-v-2c455d87="">
-                <strong>{{item.subject.title}}</strong>
-              </span>
-                    <span data-v-2c455d87="" class="rate">{{item.subject.rating.average}}</span>
-                  </p>
-                </a>
-              </div>
-            </div>
-          </div>
-          <!--北美票房榜-->
-          <div id="usbox" class="s" data-dstat-areaid="70" data-dstat-mode="click,expose">
-            <div class="screening-hd">
-              <h2>北美电影票房榜
-                <span><a :href="url_douban+'/chart'">查看更多>></a></span>
-              </h2>
-            </div>
-            <div class="screening-bd" v-if="usBox.subjects">
-              <div data-v-3e982be2="" class="list-wp">
-                <a v-for="item in usBox.subjects"
-                   data-v-2c455d87="" data-v-3e982be2="" target="_blank"
-                   :href="'/subject/'+item.id"
-                   class="item">
-                  <div data-v-2c455d87="" data-id="26728669" class="cover-wp">
-              <span data-v-2c455d87="" class="pic">
-                <img data-v-2c455d87="" :src="item.subject.images.large" rel="noreferrer"
-                     :alt="item.subject.title" x="movie:cover_x" y="1920">
-              </span>
-                  </div>
-                  <p data-v-2c455d87="">
-              <span data-v-2c455d87="">
-                <strong>{{item.subject.title}}</strong>
-              </span>
-                    <span data-v-2c455d87="" class="rate">{{item.subject.rating.average}}</span>
-                  </p>
-                </a>
-              </div>
-            </div>
-          </div>
-          <!--top250-->
-          <div id="top250" class="s" data-dstat-areaid="70" data-dstat-mode="click,expose">
-            <div class="screening-hd">
-              <h2>豆瓣电影 Top250
-                <span><a :href="url_douban+'/top250'">查看更多>></a></span>
-              </h2>
-            </div>
-            <div class="screening-bd" v-if="top250.subjects">
-              <div data-v-3e982be2="" class="list-wp">
-                <a v-for="item in top250.subjects"
-                   data-v-2c455d87="" data-v-3e982be2="" target="_blank"
-                   :href="'/subject/'+item.id"
-                   class="item">
-                  <div data-v-2c455d87="" data-id="26728669" class="cover-wp">
-              <span data-v-2c455d87="" class="pic">
-                <img data-v-2c455d87="" :src="item.images.large" rel="noreferrer"
-                     :alt="item.title" x="movie:cover_x" y="1920">
-              </span>
-                  </div>
-                  <p data-v-2c455d87="">
-              <span data-v-2c455d87="">
-                <strong>{{item.title}}</strong>
-              </span>
-                    <span data-v-2c455d87="" class="rate">{{item.rating.average}}</span>
-                  </p>
-                </a>
-              </div>
-            </div>
-          </div>
+          <inTheaters :is="current" keep-alive></inTheaters>
         </div>
       </div>
     </div>
   </div>
 </template>
 <script>
-  import axios from 'axios';
-  import {
-    url_api_douban, apikey_api_douban, url_douban
-  } from '../config';
+  import inTheaters from './homeDetail/inTheater';
+  import doubanNew from './homeDetail/doubanNew';
+  import usBox from './homeDetail/usBox';
+  import weekly from './homeDetail/weekly';
+  import top250 from './homeDetail/top250';
 
   export default {
     name: 'home',
     data: function () {
       return {
-        url_douban: url_douban,
-        top250: {},
-        weekly: {},
-        new: {},
-        usBox: {},
-        inTheaters: {
-          count: "",
-          start: "",
-          subjects: [],
-          title: "",
-          total: ""
-        }
+        current: "inTheaters"
       }
     },
 
+    components: {
+      inTheaters,
+      doubanNew,
+      usBox,
+      weekly,
+      top250
+    },
+
     created: function () {
-      // 获取豆瓣Api 最近上映 start count
-      this.getInTheaters(0, 14);
-      // Top250
-      this.getTop250(0,14);
-      // weekly
-      this.getWeekly();
-      // new
-      this.getNew();
-      // us box
-      this.getUsBox();
+
     },
 
     methods: {
-      // 获取豆瓣Api 最近上映
-      getInTheaters: function (start, count) {
-        // params集合会导致获取信息不全,采用url拼接
-        this.$jsonp(url_api_douban + "/v2/movie/in_theaters?start=" + start + "&count=" + count + "&apikey=" + apikey_api_douban).then(response => {
-          if (response.total && response.total != 0) {
-            console.log("douban theaters: ");
-            console.log(response);
-            this.inTheaters = response;
-          } else {
-            console.log("get in theaters failed...count 0...(server error)");
-          }
-        }).catch(error => {
-          console.log("get in theaters failed...");
-          console.log(error);
-        });
+      // 切换组件
+      changeCurrent: function (current) {
+        this.current = current;
       },
-
-      // api top250
-      getTop250: function (start,count) {
-        this.$jsonp(url_api_douban + "/v2/movie/top250?start="+start+"&count="+count).then(response => {
-          if (response.count && response.count != 0) {
-            console.log("douban top250: ");
-            console.log(response);
-            this.top250 = response;
-          } else {
-            console.log("get top250 failed...count 0...(server error)");
-          }
-        }).catch(error => {
-          console.log("get top250 failed...");
-          console.log(error);
-        });
-      },
-
-      // 周热榜
-      getWeekly: function () {
-        this.$jsonp(url_api_douban + "/v2/movie/weekly?apikey=" + apikey_api_douban).then(response => {
-          if (response.subjects && response.subjects.length != 0) {
-            console.log("douban weekly: ");
-            console.log(response);
-            this.weekly = response;
-          } else {
-            console.log("get weekly failed...count 0...(server error)");
-          }
-        }).catch(error => {
-          console.log("get weekly failed...");
-          console.log(error);
-        });
-      },
-
-      // 新片榜
-      getNew: function () {
-        this.$jsonp(url_api_douban + "/v2/movie/new_movies?apikey=" + apikey_api_douban).then(response => {
-          if (response.subjects && response.subjects.length != 0) {
-            console.log("douban new movies: ");
-            console.log(response);
-            this.new = response;
-          } else {
-            console.log("get new movies failed...count 0...(server error)");
-          }
-        }).catch(error => {
-          console.log("get new movies failed...");
-          console.log(error);
-        });
-      },
-
-      // 北美票房榜
-      getUsBox: function () {
-        this.$jsonp(url_api_douban + "/v2/movie/us_box").then(response => {
-          if (response.subjects && response.subjects.length != 0) {
-            console.log("douban us box: ");
-            console.log(response);
-            this.usBox = response;
-          } else {
-            console.log("get us box failed...count 0...(server error)");
-          }
-        }).catch(error => {
-          console.log("get us box failed...");
-          console.log(error);
-        });
+      // 当前选中栏
+      isCurrent: function (current) {
+        if (current == this.current) {
+          return "tabBoder";
+        }else {
+          return "";
+        }
       }
     }
   }

@@ -261,7 +261,7 @@
               <ul class="related-pic-bd wide_videos">
                 <li v-for="(item,index) in movieApi.photos">
                   <a :href="item.alt" target="_blank">
-                    <img :src="item.image" alt="图片" rel="noreferrer" style="padding: 8px;box-sizing: border-box">
+                    <img :src="item.cover | getSmallPhoto" alt="图片" rel="noreferrer" style="padding: 8px;box-sizing: border-box">
                   </a>
                 </li>
               </ul>
@@ -536,7 +536,6 @@
                 <i>配乐 / 相关 <a style="color:#79078f" :href="url_netease+'/#/search/m/?s='+neteaseSearchKeyword"
                               target="_blank">< {{neteaseSearchKeyword}} > </a></i>
               </h2>
-              <!--:music="neteaseMusic[getRandomMusic(neteaseMusic.length-1)]"-->
               <aplayer
                 :music="neteaseMusic[0]"
                 :list="neteaseMusic"
@@ -551,7 +550,6 @@
                 <i>歌单 / 相关 <a style="color:#79078f" :href="url_netease+'/#/playlist?id='+neteasePlaylistSongsId"
                               target="_blank">< {{neteasePlaylistSongsName}} > </a></i>
               </h2>
-              <!--:music="neteasePlaylistSongs[getRandomMusic(neteasePlaylistSongs.length-1)]"-->
               <aplayer
                 autoplay
                 :music="neteasePlaylistSongs[0]"
@@ -835,6 +833,7 @@
     },
     methods: {
       // axios 方法集合---------------------start
+
       // 从豆瓣电影API获取电影信息
       getMovieApi: function (movieId) {
         // params集合会导致获取信息不全,采用url拼接
@@ -954,6 +953,7 @@
           console.log(error);
         });
       },
+
       // movie base 上传到服务器
       updateMovieBase: function (responseApi) {
         // 先赋值base
@@ -1454,7 +1454,6 @@
         });
       },
 
-
       // axios 方法集合---------------------end
       // 判断是否展开更多actors
       moreActor: function () {
@@ -1463,18 +1462,7 @@
         } else {
           this.brandOrFold = true;
         }
-      }
-      ,
-      // 获取 metacritic 对应的电影名
-      getMetacriticName(val) {
-        return val.toString().replace(/ |: /g, '-').toLowerCase();
-      }
-      ,
-      // 获取 rottentomato 对应的电影名
-      getTomatoName(val) {
-        return val.toString().replace(/ |: /g, '_').toLowerCase();
-      }
-      ,
+      },
       // 返回 豆瓣电影 小星星
       getRateType: function (rate) {
         switch (parseInt(rate)) {
@@ -1598,10 +1586,6 @@
         return keyword;
       },
 
-      getRandomMusic(num) {
-        return parseInt(Math.random() * num);
-      },
-
       // 判断 origin_name 是不是英文名，中文名就不要重复了
       isEnglishForKeyword: function (val) {
         let first = val.toString().charAt(0);
@@ -1610,7 +1594,15 @@
         } else {
           return false;
         }
-      }
+      },
+      // 获取 metacritic 对应的电影名
+      getMetacriticName: function (val) {
+        return val.toString().replace(/ |: /g, '-').toLowerCase();
+      },
+      // 获取 rottentomato 对应的电影名
+      getTomatoName: function (val) {
+        return val.toString().replace(/ |: /g, '_').toLowerCase();
+      },
     }
     ,
     filters: {
@@ -1645,6 +1637,11 @@
       // Metacritic 去除斜杠
       fixSlish: function (val) {
         return parseFloat(val.toString().replace(/\/100/g, '')) / 10;
+      },
+      
+      // 获取更小的图片链接 sqs => sqxs
+      getSmallPhoto:function (val) {
+        return val.toString().replace(/sqs/g,'sqxs');
       }
     },
     // 渲染页面之后
