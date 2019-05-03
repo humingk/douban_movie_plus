@@ -8,7 +8,7 @@
       <div data-v-3e982be2="" class="list-wp">
         <a v-for="item in usBox.subjects"
            data-v-2c455d87="" data-v-3e982be2="" target="_blank"
-           :href="'/subject/'+item.id"
+           :href="'/subject/'+item.subject.id"
            class="item">
           <div data-v-2c455d87="" data-id="26728669" class="cover-wp">
               <span data-v-2c455d87="" class="pic">

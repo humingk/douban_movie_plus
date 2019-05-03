@@ -1,101 +1,116 @@
-# douban_movie
+# 项目地址
 
-**更改为SSM框架，自己写**
+https://movie.doubans.com
 
----
+# 技术栈
 
+- 后端框架 SpringMVC + Spring + Mybatis
+- 后端服务器 Tomcat
+- 前端框架 Vue
+- 前端服务器 Nginx
+- 权限认证 Shiro
+- 数据库 MySQL
+- 持久爬虫 Python Request
+- 实时爬虫 Java Jsoup 
+- 数据处理 Regexp + Xpath 
 
+# SSM 目录
+```
+├── java
+|  └── org
+|     └── humingk
+|        └── movie
+|           ├── common                          # 工具类目录
+|           |  ├── AddSession.java
+|           |  ├── BtbtdyResource.java
+|           |  ├── JsonUtil.java
+|           |  ├── LoldyttResource.java
+|           |  ├── MessageCode.java
+|           |  ├── MovieAll.java
+|           |  ├── Resource.java
+|           |  ├── ResourceBtbtdy.java
+|           |  ├── ResourceDygod.java
+|           |  ├── ResourceLoldytt.java
+|           |  ├── Result.java
+|           |  ├── ResultMessage.java
+|           |  └── WishAndSeen.java
+|           ├── config                          # 配置类目录
+|           |  ├── corsFilter.java
+|           |  ├── DataSourceInitializer.java
+|           |  └── RememberMeFilter.java
+|           ├── controller                      # 控制类目录
+|           |  ├── ActorController.java
+|           |  ├── IndexController.java
+|           |  ├── MovieController.java
+|           |  ├── PeopleController.java
+|           |  └── UserController.java
+|           ├── entity                          # 实体类目录
+|           |  ├── Actor.java
+|           |  ├── Movie.java
+|           |  └── ...
+|           ├── exception
+|           |  └── NoMovieException.java
+|           ├── mapper                          # 持久层接口类目录
+|           |  ├── ActorMapper.java
+|           |  ├── MovieMapper.java
+|           |  ├── ...
+|           ├── realm                           # shiro 管理类目录
+|           |  └── MyRealm.java                 
+|           └── service                         # 业务接口类目录
+|              ├── ActorService.java
+|              ├── MovieService.java
+|              ├── ShiroService.java
+|              └── UserService.java
+|              ├── impl                         # 业务实现类目录
+|              |  ├── ActorServiceImpl.java
+|              |  ├── MovieServiceImpl.java
+|              |  ├── ShiroServiceImpl.java
+|              |  └── UserServiceImpl.java
+├── resources
+|  ├── log4j2.xml
+|  ├── mapper                                   # 持久层对应接口sql实现目录
+|  |  ├── ActorMapper.xml
+|  |  ├── MovieMapper.xml
+|  |  └── ...
+|  ├── mybatis                                  # mybatis配置目录
+|  |  ├── generatorConfig.xml
+|  |  ├── jdbc.properties
+|  |  └── mybatis-config.xml
+|  ├── spring                                   # spring配置目录
+|  |  ├── ehcache-shiro.xml
+|  |  ├── spring-mapper.xml
+|  |  ├── spring-mvc.xml
+|  |  ├── spring-service.xml
+|  |  └── spring-shiro.xml
+|  └── sql                                      # mysql建表目录
+|     └── douban_movie.sql
+└── webapp
+   ├── ...
+```
 
-一、人员分工
-===
-应刘老师要求，每个人都要参与到整个过程中，故此分工只是个大概方向，仅代表相应方向任务多一点而已。
-
-更多分工详见[0.初期分工.md](/doc/task_list/0.初期分工.md)
-
-二、细节须知
-===
-
-1. **代码注释** 每个方法的参数以及返回值，每段较复杂逻辑代码都要写详细的注释。
-
-2. **文件注释** 每个代码文件头部都要有详细注释（包括**作者**，**文件说明**，时间等等，风格自定）。
-
-3. **命名规范** 文件名、变量名、方法名等等都取**小写**的英文名全称（**不要简写**），多词用下划线连接。
-
-4. **技术分享** 有比较好的技术教程可以将网址上传至**wiki页面**大家共享，另外，仓库中有不完善需要改进的尽可随意添加修改。
-  
-更多细节详见[detail.md](/doc/detail.md)
-
-三、任务节点（拟定）
-===
-
-## 9.17-12.9(第四周-第十五周)
-
-#### 第四周
-- 设计组给出需求分析，大家讨论确定v1.0版本
-
-#### 第五周
-- 根据需求分析给出前端页面分工，开始前端页面编写
-
-Dreamweaver软件？
-
-- 开始程序建模
-
-Rational Rose软件，适合比较简单的项目功能模块建模。
-
-#### 第六周-第七周
-- 前端页面编写，页面设计
-
-- 根据需求分析进行数据库建模
-
-PowerDesigner软件，生成数据库Report比较方便。
-
-mysql
-
-#### 第八周-第九周
-
-- 代码模块编写，模块测试
-
-#### 第十周
-- 网站整合
-
-- 联合测试
-
-#### 第十一周
-- 网站部署到服务器
-
-- 讨论添加新需求给出v2.0方案
-
-#### 第十二周
-
-- 前端页面编写
-
-- 程序建模
-
-- 数据库建模
-
-#### 第十三周
-- 代码模块编写，模块测试
-
-- 网站整合
-
-- 联合测试
-
-- 网站部署到服务器
-#### 第十四周
-- 讨论添加新需求给出v3.0方案
-
-- 前端页面编写
-
-- 程序建模
-
-- 数据库建模
-#### 第十五周
-- 代码模块编写，模块测试
-
-- 网站整合
-
-- 联合测试
-
-- 网站部署到服务器
-
-更多细节详见[deadline.md](/doc/deadline.md)
+# Vue 目录
+```
+├── App.vue                                     # 根组件
+├── assets
+|  └── css
+├── common
+├── components                                  # 公共组件目录
+|  ├── celebrity.vue
+|  ├── chart.vue
+|  ├── home.vue
+|  ├── homeDetail                               # 主页子组件目录
+|  |  ├── doubanNew.vue
+|  |  ├── inTheater.vue
+|  |  ├── top250.vue
+|  |  ├── usBox.vue
+|  |  └── weekly.vue
+|  ├── people.vue
+|  ├── search.vue
+|  ├── subject.vue
+|  ├── tag.vue
+|  └── top.vue
+├── config.js                                   # 全局变量配置
+├── main.js
+└── router                                      # 路由目录
+   └── index.js
+```

@@ -63,7 +63,7 @@ html h2{font-size:16px;}
 .screening-hd{
   margin-bottom: 5px;font-size: 14px;
   text-align: right;
-  margin-right: 55px;
+  margin-right: 70px;
 }
 #screening,#weekly,#usbox,#top250,#new{margin-bottom:20px;}
 #screening h2,#weekly h2,#usbox h2,#top250 h2,#new h2{color:#f7097a;font-size: 24px;}
@@ -121,7 +121,7 @@ div{margin:0;padding:0;}
 /*.list-wp[data-v-3e982be2]{overflow:auto;margin-top:40px;zoom:1;}*/
 .list-wp[data-v-3e982be2]{overflow:auto;margin-top:0px;zoom:1;}
 a[data-v-2c455d87]{text-decoration:none;}
-.item[data-v-2c455d87]{display:inline-block;vertical-align:top;color:#37a;font-size:13px;text-align:left;margin-top:auto 0;padding:0;width:145px;}
+.item[data-v-2c455d87]{display:inline-block;vertical-align:top;color:#37a;font-size:13px;text-align:left;margin-top:auto 0;padding:0;width:140px;}
 .item[data-v-2c455d87]:active,.item[data-v-2c455d87]:hover,.item[data-v-2c455d87]:link,.item[data-v-2c455d87]:visited{background:none;color:#258dcd;}
 .item .rate[data-v-2c455d87]{color:#ffac2d;}
 .item p[data-v-2c455d87]{overflow:hidden;color:#333;line-height:18px;padding-right:15px;margin:8px 0 20px;}
