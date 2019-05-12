@@ -3,9 +3,9 @@
     <div id="wrapper">
       <div id="content">
         <h1>
-          <span>{{movieBase.name}}</span>
-          <span v-if="movieApi.original_title"> {{movieApi.original_title|isEnglish()}}</span>
-          <span class="year" v-if="movieApi.year">({{movieApi.year}})</span>
+          <span style="color: #f7097a;">{{movieBase.name}}</span>
+          <span style="color: #f7097a;" v-if="movieApi.original_title"> {{movieApi.original_title|isEnglish()}}</span>
+          <span  class="year" v-if="movieApi.year">({{movieApi.year}})</span>
           <span v-if="!movieApi.id" style="font-size: 16px">(资料不全,查看更多请<a
             :href="url_douban+'/subject/'+movieBase.movieId" target="_blank">点击此处</a>去豆瓣电影)</span>
         </h1>
