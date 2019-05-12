@@ -34,7 +34,7 @@ a:hover{color:#FFFFFF;text-decoration:none;background:#37a;}
 a:active{color:#FFFFFF;text-decoration:none;background:#FF9933;}
 a img{border-width:0;vertical-align:middle;}
 table{border-collapse:collapse;border:none;padding:0;margin:0;}
-h1{word-wrap:break-word;display:block;font-size:25px;font-weight:bold;color:#494949;margin:0;padding:0 0 15px 0;line-height:1.1;}
+h1{word-wrap:break-word;display:block;font-size:25px;font-weight:bold;margin:0;padding:0 0 15px 0;line-height:1.1;}
 h1 .year{color:#888;}
 h3{margin-left:4px;font:14px Arial, Helvetica, sans-serif;color:#666666;margin-bottom:1px;line-height:1.8;background-color:#f2fbf2;}
 ul{list-style-type:none;margin:0;padding:0;}

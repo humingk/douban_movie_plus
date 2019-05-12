@@ -54,7 +54,7 @@ https://movie.doubans.com
 |           |  ├── ActorMapper.java
 |           |  ├── MovieMapper.java
 |           |  ├── ...
-|           ├── realm                           # shiro 管理类目录
+|           ├── realm                           # shiro管理类目录
 |           |  └── MyRealm.java                 
 |           └── service                         # 业务接口类目录
 |              ├── ActorService.java
@@ -88,7 +88,7 @@ https://movie.doubans.com
    ├── ...
 ```
 
-# Vue 目录
+# VUE 目录
 ```
 ├── App.vue                                     # 根组件
 ├── assets
@@ -114,3 +114,7 @@ https://movie.doubans.com
 └── router                                      # 路由目录
    └── index.js
 ```
+
+# sql-UML
+
+...

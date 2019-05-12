@@ -1,37 +1,35 @@
 
 // 测试环境-------------------
 
-// // 基础url
-// let base_site="http://localhost";
-// // vue的url
-// let url_vue_base = base_site+":8081";
-// // ssm的url
-// let url_ssm_base = base_site+":8080";
-// // neteaseMusicApi url
-// let url_api_netease = base_site+":3000";
-// // omdbApi url
-// let url_omdb = "http://www.omdbapi.com";
-// // omdbApi apikey
-// let apikey_omdb = "e409ce71";
+// 基础url
+let base_site="http://localhost";
+// vue的url
+let url_vue_base = base_site+":8081";
+// ssm的url
+let url_ssm_base = base_site+":8080";
+// neteaseMusicApi url
+let url_api_netease = base_site+":3000";
+// omdbApi url
+let url_omdb = "http://www.omdbapi.com";
 
 
 // 生产环境-------------------
 
-// 基础url
-let base_site = "https://movie.doubans.com";
-// vue的url
-let url_vue_base = base_site;
-// ssm的url ssmApi nginx转发本地8082
-let url_ssm_base = base_site+"/ssmApi";
-// neteaseMusicApi url neteaseThirdApi nginx转发本地3000
-let url_api_netease = "https://movie.doubans.com/neteaseThirdApi";
-// omdbApi url nginx转发www.omdbapi.com
-let url_omdb = "https://movie.doubans.com/omdbApi";
-// omdbApi apikey
-let apikey_omdb = "e409ce71";
+// // 基础url
+// let base_site = "https://movie.doubans.com";
+// // vue的url
+// let url_vue_base = base_site;
+// // ssm的url ssmApi nginx转发本地8082
+// let url_ssm_base = base_site+"/ssmApi";
+// // neteaseMusicApi url neteaseThirdApi nginx转发本地3000
+// let url_api_netease = "https://movie.doubans.com/neteaseThirdApi";
+// // omdbApi url nginx转发www.omdbapi.com
+// let url_omdb = "https://movie.doubans.com/omdbApi";
 
 // 其他-------------------------
 
+// omdbApi apikey
+let apikey_omdb = "e409ce71";
 // neteaseMusic base url
 let url_netease = "https://music.163.com";
 // IMDB

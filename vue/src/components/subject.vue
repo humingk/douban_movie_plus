@@ -31,7 +31,7 @@
                     <span class="pl" v-if="movieBase.leadingactors.length">演员: </span>
                       </div>
                       <div style="overflow:hidden">
-                    <span class="attrs" v-for="(item,index) in movieBase.leadingactors" v-if="index < 10">
+                    <span class="attrs" v-for="(item,index) in movieBase.leadingactors" v-if="index < 6">
                       <a target="_blank" :href="'/celebrity/'+item.actorId">{{item.name}}</a>
                       {{ index === movieBase.leadingactors.length-1 ? "" : " / " }}
                     </span>
@@ -761,7 +761,7 @@
         numOfAlbums: 2,
         numOfPlaylists: 2,
         // 书籍最大展示数
-        numOfBooks: 3,
+        numOfBooks: 2,
         // 演员的展开与收起
         brandOrFold: true,
         subTitle: " +1s",

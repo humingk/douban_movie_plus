@@ -29,6 +29,11 @@
         <!-- 关闭连接后不自动commit -->
         <property name="autoCommitOnClose" value="false" />
 
+        <!--减少连接池内连接生存周期-->
+        <!--解决mysql 8 小时 空闲后自动断开连接的问题-->
+        <!--导致网页需要刷新一次重新建立JDBC连接后才能正常访问-->
+        <property name="maxIdleTime" value="1800"></property>
+
         <!-- 获取连接超时时间 -->
         <!--<property name="checkoutTimeout" value="10000" />-->
 

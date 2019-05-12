@@ -2,7 +2,7 @@
   <!--北美票房榜-->
   <div id="usbox" v-if="usBox.subjects && usBox.subjects.length!=0" class="s" data-dstat-areaid="70" data-dstat-mode="click,expose">
     <div class="screening-hd">
-        <span><a :href="url_douban+'/chart'">查看更多>></a></span>
+        <span><a :href="url_douban+'/chart'" target="_blank">查看更多>></a></span>
     </div>
     <div class="screening-bd" v-if="usBox.subjects">
       <div data-v-3e982be2="" class="list-wp">
