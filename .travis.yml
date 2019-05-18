@@ -8,4 +8,4 @@ script:
   - gradle codeCoverageReport
 after_success:
   - codecov
-  - bash bash <(curl -s https://codecov.io/bash) -t f7fdfa04-4055-4179-97f8-432854676f23
+  - bash <(curl -s https://codecov.io/bash) -t f7fdfa04-4055-4179-97f8-432854676f23
