@@ -3,4 +3,4 @@ install: true
 jdk:
   - oraclejdk8
 script:
-  - gradle ./gradle war --scan -s
+  - gradle build --scan -s
