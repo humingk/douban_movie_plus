@@ -12,9 +12,9 @@ import java.io.IOException;
  *
  * @author humin
  */
-public class corsFilter implements Filter {
+public class CorsFilter implements Filter {
 
-    private static final Logger logger = LoggerFactory.getLogger(corsFilter.class);
+    private static final Logger logger = LoggerFactory.getLogger(CorsFilter.class);
 
     @Override
     public void doFilter(

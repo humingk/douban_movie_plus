@@ -90,7 +90,7 @@
     <!--跨域请求过滤器-->
     <filter>
         <filter-name>cors</filter-name>
-        <filter-class>org.humingk.movie.config.corsFilter</filter-class>
+        <filter-class>org.humingk.movie.config.CorsFilter</filter-class>
     </filter>
     <filter-mapping>
         <filter-name>cors</filter-name>
