@@ -199,6 +199,10 @@ task mybatisGenerate << {
 // https://codecov.io/gh/humingk/douban_movie
 
 task codeCoverageReport(type: JacocoReport) {
+    // 需指定生成的类文件位置和源文件位置
+    classDirectories = files('build/classes')
+    sourceDirectories = files('src/main/java')
+
     executionData fileTree(project.rootDir.absolutePath).include("**/build/jacoco/*.exec")
 
     subprojects.each {
