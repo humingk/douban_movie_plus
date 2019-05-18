@@ -1,5 +1,6 @@
 <div align=center><img src="./image/logo.png"/></div>
 
+[![Build Status](https://travis-ci.org/humingk/douban_movie.svg?branch=master)](https://travis-ci.org/humingk/douban_movie)
 
 # 项目地址
 
