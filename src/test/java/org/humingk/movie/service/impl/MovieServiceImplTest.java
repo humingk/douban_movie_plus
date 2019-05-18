@@ -19,7 +19,7 @@ public class MovieServiceImplTest extends TestBase {
 
     @Test
     public void getMovieAllOfMovieByAlias() {
-        List<MovieAll> movieAlls = movieService.getMovieAllsOfMovieByAlias("爱丽丝");
+        List<MovieAll> movieAlls = movieService.getMovieAllsOfMovieByAlias("爱丽丝",0,10);
 
         if (movieAlls != null) {
             for (int i = 0; i < movieAlls.size(); i++) {
