@@ -20,6 +20,11 @@ configurations {
     mybatisGenerator
 }
 
+// log4j 多依赖
+configurations.all {
+    exclude module: 'slf4j-log4j12'
+}
+
 dependencies {
     // mybatis 逆向工程依赖包
     mybatisGenerator 'org.mybatis.generator:mybatis-generator-core:1.3.5'
@@ -111,8 +116,9 @@ dependencies {
     compile group: 'org.apache.shiro', name: 'shiro-ehcache', version: '1.3.2'
 
     // Junit测试
-    testCompile group: 'junit', name: 'junit', version: '4.11'
     testCompile group: 'junit', name: 'junit', version: '4.12'
+    //servlet test
+    compile group: 'javax.servlet', name: 'javax.servlet-api', version: '4.0.1'
 
     // jackson
     compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.6.0'

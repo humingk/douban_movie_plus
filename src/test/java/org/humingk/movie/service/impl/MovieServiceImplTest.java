@@ -1,5 +1,6 @@
 package org.humingk.movie.service.impl;
 
+import org.humingk.movie.baseTest;
 import org.humingk.movie.common.MovieAll;
 import org.humingk.movie.entity.*;
 import org.humingk.movie.service.MovieService;
@@ -10,7 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
-public class MovieServiceImplTest {
+public class MovieServiceImplTest extends baseTest {
     @Autowired
     private MovieService movieService;
 
@@ -19,7 +20,7 @@ public class MovieServiceImplTest {
     @Test
     public void getMovieAllOfMovieByAlias() {
         try {
-            List<MovieAll> movieAlls = movieService.getMovieAllsOfMovieByAlias("爱", 2, 5);
+            List<MovieAll> movieAlls = movieService.getMovieAllsOfMovieByAlias("爱心", 2, 5);
             if (movieAlls != null) {
                 for (int i = 0; i < movieAlls.size(); i++) {
                     if (movieAlls.get(i) != null) {
@@ -88,21 +89,41 @@ public class MovieServiceImplTest {
 
     @Test
     public void getMovieByNameStart() {
-//        try {
-//            if (movies != null) {
-//                for (Movie movie : movies) {
-//                    if (movie.getName() != null) {
-//                        logger.info("======================================");
-//                        logger.info("name        " + movie.getName());
-//                        logger.info("id          " + movie.getMovieId());
-//                        logger.info("rate        " + movie.getRate());
-//                    }
-//                }
-//            } else {
-//
-//            }
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
+        List<Movie> movies = movieService.getMoviesByNameStart("爱心");
+        try {
+            if (movies != null) {
+                for (Movie movie : movies) {
+                    if (movie.getName() != null) {
+                        logger.info("======================================");
+                        logger.info("name        " + movie.getName());
+                        logger.info("id          " + movie.getMovieId());
+                        logger.info("rate        " + movie.getRate());
+                    }
+                }
+            } else {
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void getMovieAllByMovieId(){
+
+    }
+
+    @Test
+    public void updateRateByMovieId(){
+
+    }
+    @Test
+    public void updateImdbIdByMovieId(){
+
+    }
+
+    @Test
+    public void addMovieAll(){
+
     }
 }

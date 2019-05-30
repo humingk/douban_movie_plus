@@ -42,8 +42,8 @@
         </logger>
 
         <!--控制台日志输出等级-->
-        <!--<root level="info" includeLocation="true">-->
-        <root level="debug" includeLocation="true">
+        <root level="info" includeLocation="true">
+<!--        <root level="debug" includeLocation="true">-->
             <appender-ref ref="Console"/>
         </root>
     </Loggers>

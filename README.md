@@ -25,7 +25,55 @@ https://movie.doubans.com
 - 持久爬虫 Python - Request
 - 实时爬虫 Java - Jsoup 
 
+# 安装方式
+
+## ssm 安装
+
+### 环境
+
+- SpringMVC+Spring+Mybatis
+
+- [Gradle](https://gradle.org/releases/)
+
+### 克隆仓库
+
+```bash
+git clone https://github.com/humingk/douban_movie
+
+```
+
+待续...
+
+## vue 安装
+
+### 环境
+
+- [Node.js](https://nodejs.org/zh-cn/download/)
+- [Vue](https://cn.vuejs.org/v2/guide/installation.html)
+
+### 克隆仓库
+
+```bash
+git clone https://github.com/humingk/douban_movie_vue
+```
+
+### 安装依赖包
+
+```bash
+cd douban_movie_vue
+npm install
+```
+
+### 启动
+
+```bash
+npm run dev
+```
+
+
+
 # SSM 目录
+
 ```
 ├── java
 |  └── org

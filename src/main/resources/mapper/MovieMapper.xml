@@ -8,33 +8,6 @@
         <result column="imdb_id" jdbcType="CHAR" property="imdbId"/>
         <result column="alias" jdbcType="VARCHAR" property="alias"/>
     </resultMap>
-    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from movie
-    where movie_id = #{movieId,jdbcType=INTEGER}
-  </delete>
-    <insert id="insert" parameterType="org.humingk.movie.entity.Movie">
-    insert into movie (movie_id, name, rate, 
-      imdb_id, alias)
-    values (#{movieId,jdbcType=INTEGER}, #{name,jdbcType=CHAR}, #{rate,jdbcType=REAL}, 
-      #{imdbId,jdbcType=CHAR}, #{alias,jdbcType=VARCHAR})
-  </insert>
-    <update id="updateByPrimaryKey" parameterType="org.humingk.movie.entity.Movie">
-    update movie
-    set name = #{name,jdbcType=CHAR},
-      rate = #{rate,jdbcType=REAL},
-      imdb_id = #{imdbId,jdbcType=CHAR},
-      alias = #{alias,jdbcType=VARCHAR}
-    where movie_id = #{movieId,jdbcType=INTEGER}
-  </update>
-    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select movie_id, name, rate, imdb_id, alias
-    from movie
-    where movie_id = #{movieId,jdbcType=INTEGER}
-  </select>
-    <select id="selectAll" resultMap="BaseResultMap">
-    select movie_id, name, rate, imdb_id, alias
-    from movie
-  </select>
 
     <!--根据movieAll更新movie-->
     <insert id="updateMovieBaseByMovieAll">
