@@ -25,6 +25,22 @@ https://movie.doubans.com
 - 持久爬虫 Python - Request
 - 实时爬虫 Java - Jsoup 
 
+# 使用方式
+
+- 从首页访问
+
+  https://movie.doubans.com
+
+- 从豆瓣电影官网访问(推荐)
+
+  例如:
+
+  在二级域名 douban 后面加一个s即可跳转访问
+
+  [https://movie.douban`s`.com/subject/1889243](https://movie.doubans.com/subject/1889243)
+
+  ​	
+
 # 安装方式
 
 ## ssm 安装
