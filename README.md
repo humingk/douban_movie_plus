@@ -1,15 +1,13 @@
 <div align="center">
 <img src="./image/logo.png"/>
 </div>
-
 <div align="center">
-<a href="https://travis-ci.org/humingk/douban_movie)"><img src="https://travis-ci.org/humingk/douban_movie.svg?branch=master" alt="Build Status"></a>
+<a href="https://travis-ci.org/humingk/douban_movie"><img src="https://travis-ci.org/humingk/douban_movie.svg?branch=master" alt="Build Status"></a>
 <a href="https://codebeat.co/projects/github-com-humingk-douban_movie-master"><img src="https://codebeat.co/badges/d666efdf-fbf8-479f-a8ed-dfcb833f0016" alt="codebeat badge"></a>
 <a href="https://codecov.io/gh/humingk/douban_movie"><img src="https://codecov.io/gh/humingk/douban_movie/branch/master/graph/badge.svg" alt="codecov]"></a>
 <a href=""><img src="https://img.shields.io/github/license/mashape/apistatus.svg" alt="license"></a>
 <a href=""><img src="https://img.shields.io/badge/language-java%20python%20javascript-green.svg" alt="language"></a>
 </div>
-
 # 项目地址
 
 https://movie.doubans.com
@@ -31,7 +29,7 @@ https://movie.doubans.com
 
   https://movie.doubans.com
 
-- 从豆瓣电影官网访问(推荐)
+- 从豆瓣电影官网访问(**推荐**)
 
   例如:
 

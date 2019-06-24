@@ -1,0 +1,6 @@
+.gradle/
+out/
+.idea
+log/
+build/**
+update.sh
