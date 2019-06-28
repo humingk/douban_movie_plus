@@ -2,7 +2,7 @@ package org.humingk.movie.common.resource.pojo;
 
 import java.util.List;
 
-public class DygodPojo {
+public class LoldyttPojo {
     private String movieName;
     private String movieUrl;
     /**
@@ -30,13 +30,6 @@ public class DygodPojo {
         this.movieUrl = movieUrl;
     }
 
-    public List<Resource> getMagnet() {
-        return magnet;
-    }
-
-    public void setMagnet(List<Resource> magnet) {
-        this.magnet = magnet;
-    }
 
     public List<Resource> getThunder() {
         return thunder;
@@ -45,4 +38,13 @@ public class DygodPojo {
     public void setThunder(List<Resource> thunder) {
         this.thunder = thunder;
     }
+
+    public List<Resource> getMagnet() {
+        return magnet;
+    }
+
+    public void setMagnet(List<Resource> magnet) {
+        this.magnet = magnet;
+    }
+
 }
