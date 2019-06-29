@@ -1,6 +1,6 @@
-package org.humingk.movie.common.movieResource;
+package org.humingk.movie.common.resource;
 
-import org.humingk.movie.common.movieResource.resource.Resource;
+import org.humingk.movie.common.resource.resource.Resource;
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -44,14 +44,26 @@ public abstract class AbstractMovieResourceAdapter implements MovieResourceTarge
     }};
 
     /**
-     * 通过搜索关键字获取资源列表
+     * 通过搜索关键字获取所有网站资源
      *
      * @param keyword 搜索关键字
      * @param max     电影最大条数
      * @return
      */
     @Override
-    public <T> List<T> getResource(String keyword, int max) {
+    public MovieAllResource getMovieAllResource(String keyword, int max) {
+        return null;
+    }
+
+    /**
+     * 通过搜索关键字获取某网站资源列表
+     *
+     * @param keyword 搜索关键字
+     * @param max     电影最大条数
+     * @return
+     */
+    @Override
+    public <T> List<T> getMovieResource(String keyword, int max) {
         List<T> result = null;
         // 获取电影搜索列表
         Map<String, String> movies = getMovieList(keyword, max);
@@ -125,8 +137,6 @@ public abstract class AbstractMovieResourceAdapter implements MovieResourceTarge
     public Document httpUrlConnRequest(String url, String data, String method) {
         Document doc = null;
         try {
-            OutputStream outStream;
-            OutputStreamWriter out;
             URL realUrl = new URL(url);
             // 打开和URL之间的连接
             HttpURLConnection conn = (HttpURLConnection) realUrl.openConnection();
@@ -138,8 +148,8 @@ public abstract class AbstractMovieResourceAdapter implements MovieResourceTarge
             conn.addRequestProperty("accept", headers.get("accept"));
             conn.addRequestProperty("user-Agent", headers.get("user-Agent"));
             conn.addRequestProperty("content-type", headers.get("content-type"));
-            outStream = conn.getOutputStream();
-            out = new OutputStreamWriter(outStream);
+            OutputStream outStream = conn.getOutputStream();
+            OutputStreamWriter out = new OutputStreamWriter(outStream);
             //参数输出
             out.write(data);
             // flush输出流的缓冲

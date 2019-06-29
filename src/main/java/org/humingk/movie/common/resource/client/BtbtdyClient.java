@@ -1,8 +1,8 @@
-package org.humingk.movie.common.movieResource.client;
+package org.humingk.movie.common.resource.client;
 
-import org.humingk.movie.common.movieResource.AbstractMovieResourceAdapter;
-import org.humingk.movie.common.movieResource.resource.BtbtdyResource;
-import org.humingk.movie.common.movieResource.resource.Resource;
+import org.humingk.movie.common.resource.AbstractMovieResourceAdapter;
+import org.humingk.movie.common.resource.resource.BtbtdyResource;
+import org.humingk.movie.common.resource.resource.Resource;
 import org.jsoup.Connection;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -83,11 +83,11 @@ public class BtbtdyClient extends AbstractMovieResourceAdapter {
      */
     @Override
     public <T> T getMovie(String movieName, String movieUrl) {
-        T result = null;
+        BtbtdyResource result = null;
         try {
             Document doc = jsoupRequest(movieUrl, Connection.Method.GET);
             if (doc != null) {
-                result=new T();
+                result = new BtbtdyResource();
                 result.setMovieName(movieName);
                 result.setMovieUrl(movieUrl);
                 //不同清晰度的下载链接列表
@@ -145,26 +145,10 @@ public class BtbtdyClient extends AbstractMovieResourceAdapter {
                 result.setK4(k4);
                 result.setBlue(blue);
                 result.setUnknown(unknown);
-                return result;
             }
         } catch (Exception e) {
             logger.error("", e);
         }
-        return null;
-    }
-
-    public static void main(String[] args) {
-        BtbtdyClient x = new BtbtdyClient();
-        List<BtbtdyResource> pojos = x.getResource("蜘蛛侠", 3);
-        for (BtbtdyResource i : pojos) {
-            System.out.println(i.getMovieName());
-            for (Resource j : i.getP720()) {
-                System.out.println(j.getResourceName() + ":" + j.getResourceUrl());
-            }
-            for (Resource j : i.getP1080()) {
-                System.out.println(j.getResourceName() + ":" + j.getResourceUrl());
-            }
-        }
-
+        return (T) result;
     }
 }

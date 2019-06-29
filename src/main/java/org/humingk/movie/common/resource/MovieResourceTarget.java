@@ -1,6 +1,6 @@
-package org.humingk.movie.common.movieResource;
+package org.humingk.movie.common.resource;
 
-import org.humingk.movie.common.movieResource.resource.Resource;
+import org.humingk.movie.common.resource.resource.Resource;
 import org.jsoup.Connection;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
@@ -15,13 +15,30 @@ import java.util.Map;
  */
 public interface MovieResourceTarget {
     /**
-     * 通过搜索关键字获取资源列表
+     * 通过搜索关键字获取所有网站资源
      *
      * @param keyword 搜索关键字
      * @param max     电影最大条数
      * @return
      */
-    <T> List<T> getResource(String keyword, int max);
+    MovieAllResource getMovieAllResource(String keyword, int max);
+
+    /**
+     * 通过搜索关键字获取某网站资源列表
+     *
+     * @param keyword 搜索关键字
+     * @param max     电影最大条数
+     * @return
+     */
+    <T> List<T> getMovieResource(String keyword, int max);
+
+    /**
+     * 获取电影搜索列表
+     *
+     * @param keyword 搜索关键字
+     * @param max     搜索结果保留最大数
+     */
+    Map<String, String> getMovieList(String keyword, int max);
 
     /**
      * 通过指定电影url获取资源
@@ -48,14 +65,6 @@ public interface MovieResourceTarget {
      * @param method 请求类型 默认get
      */
     Document httpUrlConnRequest(String url, String data, String method);
-
-    /**
-     * 获取电影搜索列表
-     *
-     * @param keyword 搜索关键字
-     * @param max     搜索结果保留最大数
-     */
-    Map<String, String> getMovieList(String keyword, int max);
 
     /**
      * 解析 MovieAllResource 为迅雷链接与磁力链接

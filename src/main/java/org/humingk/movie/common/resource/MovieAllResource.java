@@ -1,9 +1,9 @@
-package org.humingk.movie.common.movieResource;
+package org.humingk.movie.common.resource;
 
-import org.humingk.movie.common.movieResource.resource.BtbtdyResource;
-import org.humingk.movie.common.movieResource.resource.DygodResource;
-import org.humingk.movie.common.movieResource.resource.LoldyttResource;
-import org.humingk.movie.common.movieResource.resource.Xl720Resource;
+import org.humingk.movie.common.resource.resource.BtbtdyResource;
+import org.humingk.movie.common.resource.resource.DygodResource;
+import org.humingk.movie.common.resource.resource.LoldyttResource;
+import org.humingk.movie.common.resource.resource.Xl720Resource;
 
 /**
  * 与搜索关键字相关的电影资源

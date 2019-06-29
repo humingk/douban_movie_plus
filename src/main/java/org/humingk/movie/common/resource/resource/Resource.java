@@ -1,4 +1,4 @@
-package org.humingk.movie.common.movieResource.resource;
+package org.humingk.movie.common.resource.resource;
 
 /**
  * @author humingk

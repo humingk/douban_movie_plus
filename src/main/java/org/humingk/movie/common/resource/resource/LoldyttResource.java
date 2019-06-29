@@ -1,11 +1,11 @@
-package org.humingk.movie.common.movieResource.resource;
+package org.humingk.movie.common.resource.resource;
 
 import java.util.List;
 
 /**
- * @author lzx
+ * @author humingk
  */
-public class Xl720Resource {
+public class LoldyttResource {
     private String movieName;
     private String movieUrl;
     /**
@@ -33,13 +33,6 @@ public class Xl720Resource {
         this.movieUrl = movieUrl;
     }
 
-    public List<Resource> getMagnet() {
-        return magnet;
-    }
-
-    public void setMagnet(List<Resource> magnet) {
-        this.magnet = magnet;
-    }
 
     public List<Resource> getThunder() {
         return thunder;
@@ -48,4 +41,13 @@ public class Xl720Resource {
     public void setThunder(List<Resource> thunder) {
         this.thunder = thunder;
     }
+
+    public List<Resource> getMagnet() {
+        return magnet;
+    }
+
+    public void setMagnet(List<Resource> magnet) {
+        this.magnet = magnet;
+    }
+
 }
