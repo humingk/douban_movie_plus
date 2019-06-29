@@ -2,7 +2,7 @@ package org.humingk.movie.common.resource;
 
 import org.humingk.movie.baseTest;
 import org.humingk.movie.common.resource.client.BtbtdyClient;
-import org.humingk.movie.common.resource.resource.BtbtdyResource;
+import org.humingk.movie.common.resource.pojo.BtbtdyResource;
 import org.junit.Test;
 
 import java.util.List;
@@ -11,6 +11,7 @@ public class AbstractMovieResourceAdapterTest extends baseTest {
 
     @Test
     public void getMovieAllResource() {
+        new AbstractMovieResourceAdapterTest().getMovieAllResource();
     }
     @Test
     public void getResource() {

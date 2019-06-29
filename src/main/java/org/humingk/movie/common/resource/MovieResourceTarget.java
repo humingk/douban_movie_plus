@@ -1,12 +1,13 @@
 package org.humingk.movie.common.resource;
 
-import org.humingk.movie.common.resource.resource.Resource;
+import org.humingk.movie.common.resource.pojo.Movie;
+import org.humingk.movie.common.resource.pojo.MovieMap;
+import org.humingk.movie.common.resource.pojo.Resource;
 import org.jsoup.Connection;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * 获取电影资源接口
@@ -15,39 +16,27 @@ import java.util.Map;
  */
 public interface MovieResourceTarget {
     /**
-     * 通过搜索关键字获取所有网站资源
+     * 获取client类型
      *
-     * @param keyword 搜索关键字
-     * @param max     电影最大条数
      * @return
      */
-    MovieAllResource getMovieAllResource(String keyword, int max);
+    String getClientType();
 
     /**
-     * 通过搜索关键字获取某网站资源列表
-     *
-     * @param keyword 搜索关键字
-     * @param max     电影最大条数
-     * @return
-     */
-    <T> List<T> getMovieResource(String keyword, int max);
-
-    /**
-     * 获取电影搜索列表
+     * 获取电影搜索表
      *
      * @param keyword 搜索关键字
      * @param max     搜索结果保留最大数
      */
-    Map<String, String> getMovieList(String keyword, int max);
+    MovieMap getMovieMap(String keyword, int max);
 
     /**
      * 通过指定电影url获取资源
      *
-     * @param movieName
-     * @param movieUrl
+     * @param moviePojo
      * @return
      */
-    <T> T getMovie(String movieName, String movieUrl);
+    <T> T getMovie(Movie moviePojo);
 
     /**
      * 1. Jsoup方式请求

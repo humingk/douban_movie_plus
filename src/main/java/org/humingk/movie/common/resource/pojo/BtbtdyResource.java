@@ -1,4 +1,4 @@
-package org.humingk.movie.common.resource.resource;
+package org.humingk.movie.common.resource.pojo;
 
 import java.util.List;
 
@@ -6,8 +6,7 @@ import java.util.List;
  * @author humingk
  */
 public class BtbtdyResource {
-    private String movieName;
-    private String movieUrl;
+    private Movie movie;
     /**
      * 720p下载地址
      */
@@ -39,14 +38,6 @@ public class BtbtdyResource {
      * 未知下载地址
      */
     public static final String UNKNOWN_TYPE = "未知";
-
-    public String getMovieName() {
-        return movieName;
-    }
-
-    public void setMovieName(String movieName) {
-        this.movieName = movieName;
-    }
 
     public List<Resource> getP720() {
         return p720;
@@ -96,11 +87,11 @@ public class BtbtdyResource {
         this.ed2k = ed2k;
     }
 
-    public String getMovieUrl() {
-        return movieUrl;
+    public Movie getMovie() {
+        return movie;
     }
 
-    public void setMovieUrl(String movieUrl) {
-        this.movieUrl = movieUrl;
+    public void setMovie(Movie movie) {
+        this.movie = movie;
     }
 }

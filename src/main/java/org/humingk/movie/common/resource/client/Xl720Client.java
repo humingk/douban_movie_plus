@@ -1,8 +1,10 @@
 package org.humingk.movie.common.resource.client;
 
 import org.humingk.movie.common.resource.AbstractMovieResourceAdapter;
-import org.humingk.movie.common.resource.resource.Resource;
-import org.humingk.movie.common.resource.resource.Xl720Resource;
+import org.humingk.movie.common.resource.pojo.Movie;
+import org.humingk.movie.common.resource.pojo.MovieMap;
+import org.humingk.movie.common.resource.pojo.Resource;
+import org.humingk.movie.common.resource.pojo.Xl720Resource;
 import org.jsoup.Connection;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
@@ -10,9 +12,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * 获取 xl720 资源信息
@@ -22,9 +22,23 @@ import java.util.Map;
 public class Xl720Client extends AbstractMovieResourceAdapter {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     /**
+     * client类型
+     */
+    public static final String CLIENT_TYPE = "xl720";
+    /**
      * 基本 url
      */
     private static final String BASE_URL = "https://www.xl720.com";
+
+    /**
+     * 获取client类型
+     *
+     * @return
+     */
+    @Override
+    public String getClientType() {
+        return CLIENT_TYPE;
+    }
 
     /**
      * 获取电影搜索列表
@@ -33,8 +47,9 @@ public class Xl720Client extends AbstractMovieResourceAdapter {
      * @param max     搜索结果保留最大数
      */
     @Override
-    public Map<String, String> getMovieList(String keyword, int max) {
-        Map<String, String> result = null;
+    public MovieMap getMovieMap(String keyword, int max) {
+        MovieMap result = null;
+        List<Movie> movies = null;
         String url = BASE_URL + "/?s=" + keyword;
         try {
             // 获取电影搜索网页
@@ -43,13 +58,15 @@ public class Xl720Client extends AbstractMovieResourceAdapter {
             Elements elements = doc.getElementsByClass("entry-title  postli-1");
             Elements movieList = elements.select("a");
             if (movieList.size() != 0) {
-                result = new LinkedHashMap<>();
+                result = new MovieMap(getClientType());
+                movies = new ArrayList<>();
                 for (int i = 0; i < max && i < movieList.size(); i++) {
                     String movieName = movieList.get(i).attr("title");
                     String movieUrl = movieList.get(i).attr("href");
-                    result.put(movieName, movieUrl);
+                    movies.add(new Movie(movieName, movieUrl));
                     logger.debug("(迅雷电影天堂)获取电影 " + movieName + " ...keyword: " + keyword);
                 }
+                result.setMovies(movies);
                 logger.debug("(迅雷电影天堂)获取电影搜索列表成功,共 " + movieList.size() + " 条...keyword: " + keyword);
             } else {
                 logger.debug("(迅雷电影天堂)获取电影搜索列表失败...keyword: " + keyword);
@@ -63,12 +80,13 @@ public class Xl720Client extends AbstractMovieResourceAdapter {
     /**
      * 通过指定电影url获取资源
      *
-     * @param movieName
-     * @param movieUrl
+     * @param moviePojo
      * @return
      */
     @Override
-    public <T> T getMovie(String movieName, String movieUrl) {
+    public <T> T getMovie(Movie moviePojo) {
+        String movieName = moviePojo.getMovieName();
+        String movieUrl = moviePojo.getMovieUrl();
         Xl720Resource result = null;
         try {
             Document doc = jsoupRequest(movieUrl, Connection.Method.GET);
@@ -78,8 +96,7 @@ public class Xl720Client extends AbstractMovieResourceAdapter {
             Elements movieList2 = doc.select("div.ztxt a");
             if (movieList1.size() != 0 || movieList2.size() != 0) {
                 result = new Xl720Resource();
-                result.setMovieName(movieName);
-                result.setMovieUrl(movieUrl);
+                result.setMovie(moviePojo);
                 // 解析迅雷链接和磁力链接
                 parseResource(movieList1, thunder, magnet);
                 parseResource(movieList2, thunder, magnet);

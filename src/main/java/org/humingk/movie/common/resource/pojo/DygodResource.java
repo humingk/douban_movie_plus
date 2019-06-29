@@ -1,4 +1,4 @@
-package org.humingk.movie.common.resource.resource;
+package org.humingk.movie.common.resource.pojo;
 
 import java.util.List;
 
@@ -6,8 +6,7 @@ import java.util.List;
  * @author humingk
  */
 public class DygodResource {
-    private String movieName;
-    private String movieUrl;
+    private Movie movie;
     /**
      * 磁力链接
      */
@@ -16,22 +15,6 @@ public class DygodResource {
      * 迅雷链接
      */
     private List<Resource> thunder;
-
-    public String getMovieName() {
-        return movieName;
-    }
-
-    public void setMovieName(String movieName) {
-        this.movieName = movieName;
-    }
-
-    public String getMovieUrl() {
-        return movieUrl;
-    }
-
-    public void setMovieUrl(String movieUrl) {
-        this.movieUrl = movieUrl;
-    }
 
     public List<Resource> getMagnet() {
         return magnet;
@@ -47,5 +30,13 @@ public class DygodResource {
 
     public void setThunder(List<Resource> thunder) {
         this.thunder = thunder;
+    }
+
+    public Movie getMovie() {
+        return movie;
+    }
+
+    public void setMovie(Movie movie) {
+        this.movie = movie;
     }
 }

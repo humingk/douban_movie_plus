@@ -1,9 +1,6 @@
-package org.humingk.movie.common.resource;
+package org.humingk.movie.common.resource.pojo;
 
-import org.humingk.movie.common.resource.resource.BtbtdyResource;
-import org.humingk.movie.common.resource.resource.DygodResource;
-import org.humingk.movie.common.resource.resource.LoldyttResource;
-import org.humingk.movie.common.resource.resource.Xl720Resource;
+import java.util.List;
 
 /**
  * 与搜索关键字相关的电影资源
@@ -11,7 +8,14 @@ import org.humingk.movie.common.resource.resource.Xl720Resource;
  * @author humingk
  */
 public class MovieAllResource {
+    /**
+     * 电影关键字
+     */
     private String movieKeywords;
+    /**
+     * 电影表列表
+     */
+    private List<MovieMap> movieMapList;
 
     private BtbtdyResource btbtdyResource;
 
@@ -59,5 +63,13 @@ public class MovieAllResource {
 
     public void setXl720Resource(Xl720Resource xl720Resource) {
         this.xl720Resource = xl720Resource;
+    }
+
+    public List<MovieMap> getMovieMapList() {
+        return movieMapList;
+    }
+
+    public void setMovieMapList(List<MovieMap> movieMapList) {
+        this.movieMapList = movieMapList;
     }
 }

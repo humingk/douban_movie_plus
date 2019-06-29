@@ -1,6 +1,6 @@
 package org.humingk.movie.common.resource;
 
-import org.humingk.movie.common.resource.resource.Resource;
+import org.humingk.movie.common.resource.pojo.Resource;
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -12,13 +12,20 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 /**
  * 获取电影资源抽象类
+ * <p>
+ * 必须实现的三个方法
+ * <p>
+ * 1. getClientType() 获取client类型
+ * <p>
+ * 2. getMovieMap() 获取电影表
+ * <p>
+ * 3. getMovie() 获取电影资源
  *
  * @author lzx
  * @author humingk
@@ -33,52 +40,14 @@ public abstract class AbstractMovieResourceAdapter implements MovieResourceTarge
      * 以magnet开头
      */
     private static final String MAGNET_START = "magnet";
-
     /**
      * 请求头
      */
     private static final Map<String, String> headers = new HashMap<String, String>() {{
         put("accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3");
-        put("user-agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.103 Safari/537.36");
         put("content-type", "application/x-www-form-urlencoded");
+        put("user-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36");
     }};
-
-    /**
-     * 通过搜索关键字获取所有网站资源
-     *
-     * @param keyword 搜索关键字
-     * @param max     电影最大条数
-     * @return
-     */
-    @Override
-    public MovieAllResource getMovieAllResource(String keyword, int max) {
-        return null;
-    }
-
-    /**
-     * 通过搜索关键字获取某网站资源列表
-     *
-     * @param keyword 搜索关键字
-     * @param max     电影最大条数
-     * @return
-     */
-    @Override
-    public <T> List<T> getMovieResource(String keyword, int max) {
-        List<T> result = null;
-        // 获取电影搜索列表
-        Map<String, String> movies = getMovieList(keyword, max);
-        if (movies != null && movies.size() != 0) {
-            result = new ArrayList<>();
-            for (String key : movies.keySet()) {
-                // 获取电影下载链接
-                T movie = getMovie(key, movies.get(key));
-                if (movie != null) {
-                    result.add(movie);
-                }
-            }
-        }
-        return result;
-    }
 
     /**
      * 解析 MovieAllResource 为迅雷链接与磁力链接
@@ -116,7 +85,7 @@ public abstract class AbstractMovieResourceAdapter implements MovieResourceTarge
         try {
             doc = Jsoup.connect(url)
                     .header("accept", headers.get("accept"))
-                    .header("user-agent", headers.get("user-agent"))
+                    .header("user-agent", headers.get("user-Agent"))
                     .header("content-type", headers.get("content-type"))
                     .method(method)
                     .get();
@@ -146,8 +115,8 @@ public abstract class AbstractMovieResourceAdapter implements MovieResourceTarge
             // 提交模式
             conn.setRequestMethod(method);
             conn.addRequestProperty("accept", headers.get("accept"));
-            conn.addRequestProperty("user-Agent", headers.get("user-Agent"));
             conn.addRequestProperty("content-type", headers.get("content-type"));
+            conn.addRequestProperty("user-Agent", headers.get("user-Agent"));
             OutputStream outStream = conn.getOutputStream();
             OutputStreamWriter out = new OutputStreamWriter(outStream);
             //参数输出

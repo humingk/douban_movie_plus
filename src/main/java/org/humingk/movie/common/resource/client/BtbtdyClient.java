@@ -1,8 +1,10 @@
 package org.humingk.movie.common.resource.client;
 
 import org.humingk.movie.common.resource.AbstractMovieResourceAdapter;
-import org.humingk.movie.common.resource.resource.BtbtdyResource;
-import org.humingk.movie.common.resource.resource.Resource;
+import org.humingk.movie.common.resource.pojo.BtbtdyResource;
+import org.humingk.movie.common.resource.pojo.Movie;
+import org.humingk.movie.common.resource.pojo.MovieMap;
+import org.humingk.movie.common.resource.pojo.Resource;
 import org.jsoup.Connection;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -11,9 +13,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -26,6 +26,11 @@ import java.util.regex.Pattern;
 public class BtbtdyClient extends AbstractMovieResourceAdapter {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     /**
+     * client类型
+     */
+    public static final String CLIENT_TYPE = "btbtdy";
+    public static final Object test = BtbtdyClient.class;
+    /**
      * 网站 url
      */
     private static final String BASE_URL = "http://www.btbtdy.me";
@@ -35,14 +40,25 @@ public class BtbtdyClient extends AbstractMovieResourceAdapter {
     private static final Pattern URL_ID = Pattern.compile("(\\d+)");
 
     /**
+     * 获取client类型
+     *
+     * @return
+     */
+    @Override
+    public String getClientType() {
+        return CLIENT_TYPE;
+    }
+
+    /**
      * 获取电影搜索列表
      *
      * @param keyword 搜索关键字
      * @param max     搜索结果保留最大数
      */
     @Override
-    public Map<String, String> getMovieList(String keyword, int max) {
-        Map<String, String> result = null;
+    public MovieMap getMovieMap(String keyword, int max) {
+        MovieMap result = null;
+        List<Movie> movies = null;
         String url = BASE_URL + "/search/" + keyword + ".html";
         try {
             // 获取电影搜索网页
@@ -51,7 +67,8 @@ public class BtbtdyClient extends AbstractMovieResourceAdapter {
             Elements elements = doc.getElementsByClass("list_so");
             Elements movieList = elements.select("dd.lf a");
             if (movieList.size() != 0) {
-                result = new LinkedHashMap<>();
+                result = new MovieMap(getClientType());
+                movies = new ArrayList<>();
                 for (int i = 0; i < max && i < movieList.size(); i++) {
                     String movieName = movieList.get(i).attr("title");
                     // 用正则表达式匹配url中的电影ID
@@ -60,10 +77,11 @@ public class BtbtdyClient extends AbstractMovieResourceAdapter {
                         int movieId = Integer.valueOf(matcher.group(0));
                         // 拼接新的电影url
                         String movieUrl = BASE_URL + "/vidlist/" + movieId + ".html";
-                        result.put(movieName, movieUrl);
+                        movies.add(new Movie(movieName, movieUrl));
                         logger.debug("(BT电影天堂)获取电影 " + movieName + " ...url: " + movieUrl);
                     }
                 }
+                result.setMovies(movies);
                 logger.debug("(BT电影天堂)获取电影搜索列表成功,共 " + movieList.size() + " 条...keyword: " + keyword);
             } else {
                 logger.debug("(BT电影天堂)获取电影搜索列表失败...keyword: " + keyword);
@@ -77,19 +95,19 @@ public class BtbtdyClient extends AbstractMovieResourceAdapter {
     /**
      * 通过指定电影url获取资源
      *
-     * @param movieName
-     * @param movieUrl
+     * @param moviePojo
      * @return
      */
     @Override
-    public <T> T getMovie(String movieName, String movieUrl) {
+    public <T> T getMovie(Movie moviePojo) {
+        String movieName = moviePojo.getMovieName();
+        String movieUrl = moviePojo.getMovieUrl();
         BtbtdyResource result = null;
         try {
             Document doc = jsoupRequest(movieUrl, Connection.Method.GET);
             if (doc != null) {
                 result = new BtbtdyResource();
-                result.setMovieName(movieName);
-                result.setMovieUrl(movieUrl);
+                result.setMovie(moviePojo);
                 //不同清晰度的下载链接列表
                 List<Resource> p720 = new ArrayList<>();
                 List<Resource> p1080 = new ArrayList<>();
