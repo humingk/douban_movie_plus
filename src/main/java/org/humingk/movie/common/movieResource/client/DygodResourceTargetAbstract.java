@@ -1,8 +1,8 @@
-package org.humingk.movie.common.resource.impl;
+package org.humingk.movie.common.movieResource.client;
 
-import org.humingk.movie.common.resource.movieResource;
-import org.humingk.movie.common.resource.pojo.DygodPojo;
-import org.humingk.movie.common.resource.pojo.Resource;
+import org.humingk.movie.common.movieResource.AbstractMovieResourceAdapter;
+import org.humingk.movie.common.movieResource.resource.DygodResource;
+import org.humingk.movie.common.movieResource.resource.Resource;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 import org.slf4j.Logger;
@@ -19,7 +19,7 @@ import java.util.Map;
  *
  * @author lzx
  */
-public class DygodResource extends movieResource {
+public class DygodResourceTargetAbstract extends AbstractMovieResourceAdapter {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     private static final String BASE_URL = "https://www.dygod.net";
@@ -38,26 +38,26 @@ public class DygodResource extends movieResource {
         try {
             data = "show=title&tempid=1&keyboard=" + URLEncoder.encode(keyword, "gb2312") + "&Submit=%C1%A2%BC%B4%CB%D1%CB%F7";
         } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
+            logger.error("",e);
         }
-        Document doc = postRequest(url, data);
+        Document doc = httpUrlConnRequest(url, data);
         Elements movieList = doc.select("table.tbspan a");
         try {
             if (movieList.size() != 0) {
-                logger.info("(电影天堂)获取电影搜索列表成功,共 " + movieList.size() + " 条...keyword: " + keyword);
+                logger.debug("(电影天堂)获取电影搜索列表成功,共 " + movieList.size() + " 条...keyword: " + keyword);
                 for (int i = 0; i < max && i < movieList.size(); i++) {
                     String movieName = movieList.get(i).attr("title");
                     String movieUrl = BASE_URL + movieList.get(i).attr("href");
                     movies.put(movieName, movieUrl);
-                    logger.info("(电影天堂)获取电影 " + movieName + " ...url: " + movieUrl);
+                    logger.debug("(电影天堂)获取电影 " + movieName + " ...url: " + movieUrl);
                 }
                 return movies;
             }
             else{
-                logger.info("(电影天堂)获取电影搜索列表失败...keyword: " + keyword);
+                logger.debug("(电影天堂)获取电影搜索列表失败...keyword: " + keyword);
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("",e);
         }
         return null;
     }
@@ -68,27 +68,28 @@ public class DygodResource extends movieResource {
      * @param movieUrl
      * @return
      */
-    public DygodPojo getMovie(String movieName, String movieUrl) {
-        DygodPojo dygodPojo =  new DygodPojo();
+    @Override
+    public DygodResource getMovie(String movieName, String movieUrl) {
+        DygodResource dygodPojo =  new DygodResource();
         dygodPojo.setMovieName(movieName);
         dygodPojo.setMovieUrl(movieUrl);
-        Document doc = getRequest(movieUrl);
+        Document doc = jsoupRequest(movieUrl);
         // 解析网页
         try {
             List<Resource> thunder = new ArrayList<>();
             List<Resource> magnet = new ArrayList<>();
             Elements movieList = doc.select("div#Zoom table a");
             if (movieList.size() != 0 ) {
-                logger.info("(电影天堂)获取电影资源成功,共 " + movieList.size() + " 条...movieName: " + movieName);
+                logger.debug("(电影天堂)获取电影资源成功,共 " + movieList.size() + " 条...movieName: " + movieName);
                 parseResource(movieList, thunder, magnet);
                 dygodPojo.setThunder(thunder);
                 dygodPojo.setMagnet(magnet);
                 return dygodPojo;
             } else {
-                logger.info("(电影天堂)获取电影资源失败...movieName: " + movieName);
+                logger.debug("(电影天堂)获取电影资源失败...movieName: " + movieName);
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("",e);
         }
         return null;
     }
@@ -100,12 +101,13 @@ public class DygodResource extends movieResource {
      * @param max     电影最大条数
      * @return
      */
-    public List<DygodPojo> getResource(String keyword, int max) {
-        List<DygodPojo> dygodPojos = new ArrayList<>();
+    @Override
+    public List<DygodResource> getResource(String keyword, int max) {
+        List<DygodResource> dygodPojos = new ArrayList<>();
         Map<String, String> movies = getMovieList(keyword, max);
         if (movies != null && movies.size() != 0) {
             for (String key : movies.keySet()) {
-                DygodPojo dygodPojo = getMovie(key, movies.get(key));
+                DygodResource dygodPojo = getMovie(key, movies.get(key));
                 if (dygodPojo != null) {
                     dygodPojos.add(dygodPojo);
                 }
@@ -116,9 +118,9 @@ public class DygodResource extends movieResource {
     }
 
     public static void main(String[] args) {
-        DygodResource x = new DygodResource();
-        List<DygodPojo> pojos = x.getResource("权力的游戏", 3);
-        for(DygodPojo i : pojos){
+        DygodResourceTargetAbstract x = new DygodResourceTargetAbstract();
+        List<DygodResource> pojos = x.getResource("权力的游戏", 3);
+        for(DygodResource i : pojos){
             System.out.println(i.getMovieName());
             for(Resource j : i.getThunder()){
                 System.out.println(j.getResourceName()+":"+j.getResourceUrl());

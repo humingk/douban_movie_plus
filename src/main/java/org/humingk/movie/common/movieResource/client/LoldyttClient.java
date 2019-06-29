@@ -1,8 +1,8 @@
-package org.humingk.movie.common.resource.impl;
+package org.humingk.movie.common.movieResource.client;
 
-import org.humingk.movie.common.resource.movieResource;
-import org.humingk.movie.common.resource.pojo.LoldyttPojo;
-import org.humingk.movie.common.resource.pojo.Resource;
+import org.humingk.movie.common.movieResource.AbstractMovieResourceAdapter;
+import org.humingk.movie.common.movieResource.resource.LoldyttResource;
+import org.humingk.movie.common.movieResource.resource.Resource;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
@@ -21,7 +21,7 @@ import java.util.Map;
  *
  * @author lzx
  */
-public class LoldyttResource extends movieResource {
+public class LoldyttClient extends AbstractMovieResourceAdapter {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     /**
      * 基本 url
@@ -35,14 +35,15 @@ public class LoldyttResource extends movieResource {
      * @param max     电影最大条数
      * @return
      */
-    public List<LoldyttPojo> getResource(String keyword, int max) {
-        List<LoldyttPojo> loldyttPojos = new ArrayList<>();
+    @Override
+    public List<LoldyttResource> getResource(String keyword, int max) {
+        List<LoldyttResource> loldyttPojos = new ArrayList<>();
         // 获取电影搜索列表
         Map<String, String> movies = getMovieList(keyword, max);
         if (movies != null && movies.size() != 0) {
             for (String key : movies.keySet()) {
                 // 获取电影下载链接
-                LoldyttPojo loldyttPojo = getMovie(key, movies.get(key));
+                LoldyttResource loldyttPojo = getMovie(key, movies.get(key));
                 if (loldyttPojo != null) {
                     loldyttPojos.add(loldyttPojo);
                 }
@@ -68,29 +69,29 @@ public class LoldyttResource extends movieResource {
         try {
             data = "keyword=" + URLEncoder.encode(keyword, "gb2312");
         } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
+            logger.error("",e);
         }
         // 获取电影搜索网页
-        doc = postRequest(url, data);
+        doc = httpUrlConnRequest(url, data);
         // 解析搜索页面，获取每部电影的链接
         try {
             Elements elements = doc.select("div.solb");
             Elements movieList = elements.select("ol a");
             if (movieList.size() != 0) {
-                logger.info("(LOL电影天堂)获取电影搜索列表成功,共 " + movieList.size() + " 条...keyword: " + keyword);
+                logger.debug("(LOL电影天堂)获取电影搜索列表成功,共 " + movieList.size() + " 条...keyword: " + keyword);
                 for (int i = 0; i < max && i < movieList.size(); i++) {
                     String movieName = movieList.get(i).text();
                     String movieUrl = movieList.get(i).attr("href");
                     movies.put(movieName, movieUrl);
-                    logger.info("(LOL电影天堂)获取电影 " + movieName + " ...keyword: " + keyword);
+                    logger.debug("(LOL电影天堂)获取电影 " + movieName + " ...keyword: " + keyword);
                 }
                 return movies;
             }
             else{
-                logger.info("(LOL电影天堂)获取电影搜索列表失败...keyword: " + keyword);
+                logger.debug("(LOL电影天堂)获取电影搜索列表失败...keyword: " + keyword);
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("",e);
         }
         return null;
     }
@@ -102,37 +103,38 @@ public class LoldyttResource extends movieResource {
      * @param movieUrl
      * @return
      */
-    public LoldyttPojo getMovie(String movieName, String movieUrl) {
-        LoldyttPojo loldyttPojo =  new LoldyttPojo();
+    @Override
+    public LoldyttResource getMovie(String movieName, String movieUrl) {
+        LoldyttResource loldyttPojo =  new LoldyttResource();
         loldyttPojo.setMovieName(movieName);
         loldyttPojo.setMovieUrl(movieUrl);
         List<Resource> thunder = new ArrayList<>();
         List<Resource> magnet = new ArrayList<>();
-        Document doc = getRequest(movieUrl);
+        Document doc = jsoupRequest(movieUrl);
         // 解析网页，获取下载链接
         try {
             Element movieAll = doc.getElementById("liebiao");
             Elements movieList = movieAll.select("div.con4 li a");
             if (movieList.size() != 0 ) {
-                logger.info("(LOL电影天堂)获取电影资源成功,共 " + movieList.size() + " 条...movieName: " + movieName);
+                logger.debug("(LOL电影天堂)获取电影资源成功,共 " + movieList.size() + " 条...movieName: " + movieName);
                 // 解析迅雷链接和磁力链接
                 parseResource(movieList, thunder, magnet);
                 loldyttPojo.setThunder(thunder);
                 loldyttPojo.setMagnet(magnet);
                 return loldyttPojo;
             } else {
-                logger.info("(LOL电影天堂)获取电影资源失败...movieName: " + movieName);
+                logger.debug("(LOL电影天堂)获取电影资源失败...movieName: " + movieName);
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("",e);
         }
         return null;
     }
 
     public static void main(String[] args) {
-        LoldyttResource x = new LoldyttResource();
-        List<LoldyttPojo> pojos = x.getResource("星际穿越", 3);
-        for(LoldyttPojo i : pojos){
+        LoldyttClient x = new LoldyttClient();
+        List<LoldyttResource> pojos = x.getResource("星际穿越", 3);
+        for(LoldyttResource i : pojos){
             System.out.println(i.getMovieName());
             for(Resource j : i.getMagnet()){
                 System.out.println(j.getResourceName()+":"+j.getResourceUrl());

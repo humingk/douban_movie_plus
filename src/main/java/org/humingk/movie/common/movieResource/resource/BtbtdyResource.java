@@ -1,41 +1,44 @@
-package org.humingk.movie.common.resource.pojo;
+package org.humingk.movie.common.movieResource.resource;
 
 import java.util.List;
 
-public class BtbtdyPojo {
+/**
+ * @author humingk
+ */
+public class BtbtdyResource {
     private String movieName;
     private String movieUrl;
     /**
      * 720p下载地址
      */
     private List<Resource> p720;
-    public static final String P720_TYPE ="720p下载地址";
+    public static final String P720_TYPE = "720p下载地址";
     /**
      * 1080p下载地址
      */
     private List<Resource> p1080;
-    public static final String P1080_TYPE ="1080p下载地址";
+    public static final String P1080_TYPE = "1080p下载地址";
     /**
      * 4k下载地址
      */
     private List<Resource> k4;
-    public static final String K4_TYPE ="4k下载地址";
+    public static final String K4_TYPE = "4k下载地址";
     /**
      * ED2K下载地址
      */
     private List<Resource> ed2k;
-    public static final String ED2K_TYPE ="ED2K下载地址";
+    public static final String ED2K_TYPE = "ED2K下载地址";
     /**
      * 蓝光原盘下载地址
      */
     private List<Resource> blue;
-    public static final String BLUE_TYPE ="蓝光原盘下载地址";
+    public static final String BLUE_TYPE = "蓝光原盘下载地址";
 
     private List<Resource> unknown;
     /**
      * 未知下载地址
      */
-    public static final String UNKNOWN_TYPE ="未知";
+    public static final String UNKNOWN_TYPE = "未知";
 
     public String getMovieName() {
         return movieName;

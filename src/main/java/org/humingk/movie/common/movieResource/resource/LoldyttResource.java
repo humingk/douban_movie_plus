@@ -1,8 +1,11 @@
-package org.humingk.movie.common.resource.pojo;
+package org.humingk.movie.common.movieResource.resource;
 
 import java.util.List;
 
-public class Xl720Pojo {
+/**
+ * @author humingk
+ */
+public class LoldyttResource {
     private String movieName;
     private String movieUrl;
     /**
@@ -30,13 +33,6 @@ public class Xl720Pojo {
         this.movieUrl = movieUrl;
     }
 
-    public List<Resource> getMagnet() {
-        return magnet;
-    }
-
-    public void setMagnet(List<Resource> magnet) {
-        this.magnet = magnet;
-    }
 
     public List<Resource> getThunder() {
         return thunder;
@@ -45,4 +41,13 @@ public class Xl720Pojo {
     public void setThunder(List<Resource> thunder) {
         this.thunder = thunder;
     }
+
+    public List<Resource> getMagnet() {
+        return magnet;
+    }
+
+    public void setMagnet(List<Resource> magnet) {
+        this.magnet = magnet;
+    }
+
 }

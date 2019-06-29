@@ -1,8 +1,11 @@
-package org.humingk.movie.common.resource.pojo;
+package org.humingk.movie.common.movieResource.resource;
 
 import java.util.List;
 
-public class DygodPojo {
+/**
+ * @author humingk
+ */
+public class DygodResource {
     private String movieName;
     private String movieUrl;
     /**

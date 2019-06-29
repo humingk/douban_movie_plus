@@ -1,5 +1,8 @@
-package org.humingk.movie.common.resource.pojo;
+package org.humingk.movie.common.movieResource.resource;
 
+/**
+ * @author humingk
+ */
 public class Resource {
     private String resourceName;
     private String resourceUrl;
