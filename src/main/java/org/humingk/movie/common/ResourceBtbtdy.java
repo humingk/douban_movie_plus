@@ -29,7 +29,7 @@ import java.util.regex.Pattern;
 /**
  * 获取Btbtdy 资源信息
  *
- * @author humin
+ * @author humingk
  */
 public class ResourceBtbtdy {
 
@@ -130,9 +130,9 @@ public class ResourceBtbtdy {
             Connection connect = Jsoup.connect(url);
             html = connect.get().body().html();
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.error("",e);
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("",e);
         }
         TagNode tagNode = new HtmlCleaner().clean(html);
         try {
@@ -180,7 +180,7 @@ public class ResourceBtbtdy {
                                                         logger.info("resource url: " + nodeForUrl.getNodeValue());
                                                     }
                                                 } catch (Exception e) {
-                                                    e.printStackTrace();
+                                                    logger.error("",e);
                                                 }
                                             }
                                         }
@@ -209,7 +209,7 @@ public class ResourceBtbtdy {
                                     }
                                 }
                             } catch (Exception e) {
-                                e.printStackTrace();
+                                logger.error("",e);
                             }
                         }
                     }
@@ -220,11 +220,11 @@ public class ResourceBtbtdy {
                 }
             }
         } catch (ParserConfigurationException e) {
-            e.printStackTrace();
+            logger.error("",e);
         } catch (XPathExpressionException e) {
-            e.printStackTrace();
+            logger.error("",e);
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("",e);
         }
         return null;
     }
@@ -245,9 +245,9 @@ public class ResourceBtbtdy {
             Connection connect = Jsoup.connect(url);
             html = connect.get().body().html();
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.error("",e);
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("",e);
         }
         TagNode tagNode = new HtmlCleaner().clean(html);
         try {
@@ -281,7 +281,7 @@ public class ResourceBtbtdy {
                                     }
                                 }
                             } catch (Exception e) {
-                                e.printStackTrace();
+                                logger.error("",e);
                             }
                         }
                     }
@@ -292,7 +292,7 @@ public class ResourceBtbtdy {
                 }
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("",e);
         }
         return null;
     }

@@ -10,7 +10,7 @@ import java.io.IOException;
 /**
  * 跨域请求过滤器
  *
- * @author humin
+ * @author humingk
  */
 public class CorsFilter implements Filter {
 

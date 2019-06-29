@@ -21,7 +21,7 @@ import javax.servlet.ServletResponse;
  * <p>
  * 故实现一个过滤器，拦截 rememberMe功能的请求
  *
- * @author humin
+ * @author humingk
  */
 public class RememberMeFilter extends FormAuthenticationFilter {
 
@@ -67,7 +67,7 @@ public class RememberMeFilter extends FormAuthenticationFilter {
             }
             return subject.isAuthenticated() || subject.isRemembered();
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("",e);
             return false;
         }
     }

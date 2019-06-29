@@ -17,7 +17,7 @@ import java.util.Map;
 /**
  * 获取 loldytt 资源信息
  *
- * @author humin
+ * @author humingk
  */
 public class ResourceLoldytt {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -77,7 +77,7 @@ public class ResourceLoldytt {
                     .method(Connection.Method.POST)
                     .post();
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("",e);
         }
         try {
             Elements elements = doc.select("div.solb");
@@ -95,7 +95,7 @@ public class ResourceLoldytt {
                 logger.info("(LOL电影天堂)获取电影搜索列表失败...keyword: " + keyword);
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("",e);
         }
         return null;
     }
@@ -117,7 +117,7 @@ public class ResourceLoldytt {
                     .method(Connection.Method.GET)
                     .get();
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("",e);
         }
         // 解析网页
         try {
@@ -137,7 +137,7 @@ public class ResourceLoldytt {
                 logger.info("(LOL电影天堂)获取电影资源失败...movieName: " + movieName);
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("",e);
         }
         return null;
     }

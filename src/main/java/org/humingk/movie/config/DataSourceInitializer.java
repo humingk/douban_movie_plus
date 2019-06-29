@@ -11,7 +11,7 @@ import java.sql.SQLException;
 /**
  * 用于初始化 c3p0 pool
  *
- * @author humin
+ * @author humingk
  */
 public class DataSourceInitializer implements ApplicationListener<ContextRefreshedEvent> {
     private final Logger logger= LoggerFactory.getLogger(this.getClass());
@@ -27,7 +27,7 @@ public class DataSourceInitializer implements ApplicationListener<ContextRefresh
             dataSource.getConnection().close();
             logger.info("dataSource:连接关闭");
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.error("",e);
         }
     }
 }

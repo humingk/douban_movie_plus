@@ -13,7 +13,7 @@ import java.util.List;
 
 
 /**
- * @author humin
+ * @author humingk
  */
 @Controller
 @RequestMapping("/subject")
@@ -55,7 +55,7 @@ public class MovieController {
                 return Result.createMessage(200, "fail", null);
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("",e);
             return null;
         }
     }
@@ -101,7 +101,7 @@ public class MovieController {
                 logger.info("(BT电影天堂)获取电影资源信息失败...keyword: " + keyword);
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("",e);
         }
         return Result.createMessage(200, "fail", null);
     }
@@ -125,7 +125,7 @@ public class MovieController {
                 logger.info("(LOL电影天堂)获取电影资源信息失败...keyword: " + keyword);
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("",e);
         }
         return Result.createMessage(200, "fail", null);
     }

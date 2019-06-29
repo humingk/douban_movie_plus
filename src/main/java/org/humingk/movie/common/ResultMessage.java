@@ -1,7 +1,7 @@
 package org.humingk.movie.common;
 
 /**
- * @author humin
+ * @author humingk
  */
 public class ResultMessage {
     private int code;

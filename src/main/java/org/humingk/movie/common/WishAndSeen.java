@@ -96,7 +96,7 @@ public class WishAndSeen {
 
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                logger.error("",e);
             }
         }
         return movies;
@@ -117,10 +117,10 @@ public class WishAndSeen {
             Connection connect = Jsoup.connect(url);
             html = connect.get().body().html();
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.error("",e);
             return false;
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("",e);
             return false;
         }
         TagNode tagNode = new HtmlCleaner().clean(html);
@@ -158,7 +158,7 @@ public class WishAndSeen {
                                 movieId=Integer.valueOf(matcherForId.group(0));
                             }
                         } catch (Exception e) {
-                            e.printStackTrace();
+                            logger.error("",e);
                         }
 
                         // 解析 rate
@@ -172,7 +172,7 @@ public class WishAndSeen {
                                 }
                             }
                         } catch (Exception e) {
-                            e.printStackTrace();
+                            logger.error("",e);
                         }
                     }
                     movies.put(movieId,rate);
@@ -182,7 +182,7 @@ public class WishAndSeen {
             }
         } catch (
                 Exception e) {
-            e.printStackTrace();
+            logger.error("",e);
             return false;
         }
         return re;

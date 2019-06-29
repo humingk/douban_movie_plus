@@ -7,7 +7,8 @@ import org.humingk.movie.entity.Movie;
 import java.util.List;
 
 /**
- * @author humin
+ * @author humingk
+ * @author J1anbo
  */
 public interface ActorService {
     Actor getActorByActorId(int actorId);

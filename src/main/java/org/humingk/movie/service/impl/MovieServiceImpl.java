@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @author humin
+ * @author humingk
  */
 @Transactional
 @Service
@@ -68,7 +68,7 @@ public class MovieServiceImpl implements MovieService {
             movieAll.setReleasetimes(releasetimeMapper.selectReleasetimesOfMovieById(movieId));
             return movieAll;
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("",e);
         }
         return null;
     }
@@ -104,7 +104,7 @@ public class MovieServiceImpl implements MovieService {
                 return movieAlls;
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("",e);
         }
         return null;
     }
@@ -126,7 +126,7 @@ public class MovieServiceImpl implements MovieService {
             }
             return movies;
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("",e);
         }
         return null;
     }
@@ -143,7 +143,7 @@ public class MovieServiceImpl implements MovieService {
             movieMapper.updateRateByPrimaryKey(movieId, rate);
             return true;
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("",e);
             return false;
         }
     }
@@ -161,7 +161,7 @@ public class MovieServiceImpl implements MovieService {
             movieMapper.updateImdbIdByPrimaryKey(movieId, imdbId);
             return true;
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("",e);
             return false;
         }
     }
@@ -228,7 +228,7 @@ public class MovieServiceImpl implements MovieService {
             }
             return true;
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("",e);
         }
         return false;
     }

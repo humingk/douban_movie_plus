@@ -26,7 +26,7 @@ import java.util.List;
 /**
  * 获取电影天堂资源
  *
- * @author humin
+ * @author humingk
  */
 public class ResourceDygod {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -140,7 +140,7 @@ public class ResourceDygod {
                                 logger.info("movieName: " + movieName);
                                 logger.info("movieUrl: " + movieUrl);
                             } catch (Exception e) {
-                                e.printStackTrace();
+                                logger.error("",e);
                             }
                         }
                     }
@@ -152,13 +152,13 @@ public class ResourceDygod {
 
 
         } catch (MalformedURLException e) {
-            e.printStackTrace();
+            logger.error("",e);
         } catch (IOException e2) {
             e2.printStackTrace();
         } catch (ParserConfigurationException e) {
-            e.printStackTrace();
+            logger.error("",e);
         } catch (XPathExpressionException e) {
-            e.printStackTrace();
+            logger.error("",e);
         } finally {
             if (out != null) {
                 out.close();
@@ -168,7 +168,7 @@ public class ResourceDygod {
                     in.close();
                 }
             } catch (IOException e) {
-                e.printStackTrace();
+                logger.error("",e);
             }
         }
         return null;

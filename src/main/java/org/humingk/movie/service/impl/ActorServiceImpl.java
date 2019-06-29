@@ -6,6 +6,8 @@ import org.humingk.movie.entity.Movie;
 import org.humingk.movie.mapper.ActorMapper;
 import org.humingk.movie.mapper.MovieMapper;
 import org.humingk.movie.service.ActorService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,13 +15,13 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.*;
 
 /**
- * @author humin
+ * @author humingk
  * @author J1anbo
- * @see humingk
  */
 @Transactional
 @Service
 public class ActorServiceImpl implements ActorService {
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
     private ActorMapper actorMapper;
@@ -28,44 +30,44 @@ public class ActorServiceImpl implements ActorService {
 
     @Override
     public Actor getActorByActorId(int actorId) {
-        try{
-            Actor actor=actorMapper.selectByPrimaryKey(actorId);
+        try {
+            Actor actor = actorMapper.selectByPrimaryKey(actorId);
             return actor;
-        }catch (Exception e){
-            e.printStackTrace();
+        } catch (Exception e) {
+            logger.error("", e);
         }
         return null;
     }
 
     @Override
     public List<Movie> getMoviesByDirectorId(int actorId) {
-        try{
-            List<Movie> movies =movieMapper.selectMoviesByDirectorId(actorId);
+        try {
+            List<Movie> movies = movieMapper.selectMoviesByDirectorId(actorId);
             return movies;
-        }catch (Exception e){
-            e.printStackTrace();
+        } catch (Exception e) {
+            logger.error("", e);
         }
         return null;
     }
 
     @Override
     public List<Movie> getMoviesByWriterId(int actorId) {
-        try{
-            List<Movie> movies =movieMapper.selectMoviesByWriterId(actorId);
+        try {
+            List<Movie> movies = movieMapper.selectMoviesByWriterId(actorId);
             return movies;
-        }catch (Exception e){
-            e.printStackTrace();
+        } catch (Exception e) {
+            logger.error("", e);
         }
         return null;
     }
 
     @Override
     public List<Movie> getMoviesByLeadingactorId(int actorId) {
-        try{
-            List<Movie> movies =movieMapper.selectMoviesByLeadingactorId(actorId);
+        try {
+            List<Movie> movies = movieMapper.selectMoviesByLeadingactorId(actorId);
             return movies;
-        }catch (Exception e){
-            e.printStackTrace();
+        } catch (Exception e) {
+            logger.error("", e);
         }
         return null;
     }
@@ -77,8 +79,8 @@ public class ActorServiceImpl implements ActorService {
      * @return
      */
     @Override
-    public List<List<Movie>> getAllMoviesByActorId(int actorId){
-        try{
+    public List<List<Movie>> getAllMoviesByActorId(int actorId) {
+        try {
             List<List<Movie>> movies = new ArrayList();
             //获取主演电影列表
             List<Movie> leadingactorMovies = getMoviesByLeadingactorId(actorId);
@@ -92,7 +94,7 @@ public class ActorServiceImpl implements ActorService {
             movies.add(directerMovies);
             return movies;
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("", e);
         }
         return null;
     }
@@ -104,9 +106,9 @@ public class ActorServiceImpl implements ActorService {
      * @return
      */
     @Override
-    public List<CooperationActor> getCoomovieByActorId(int actorId){
+    public List<CooperationActor> getCoomovieByActorId(int actorId) {
         List<CooperationActor> coomovieList = new ArrayList<CooperationActor>();
-        try{
+        try {
             //获取该id相关的所有电影
             List<Integer> allMovie = getMovieIdByMovie(getMoviesByLeadingactorId(actorId));
             allMovie.addAll(getMovieIdByMovie(getMoviesByWriterId(actorId)));
@@ -118,7 +120,7 @@ public class ActorServiceImpl implements ActorService {
 
             List<Actor> actorList = null;
             //遍历该电影相关的每一个人的id
-            for(int id:allMovie){
+            for (int id : allMovie) {
                 actorList = actorMapper.selectDirectorsOfMovieById(id);
                 actorList.addAll(actorMapper.selectWritersOfMovieById(id));
                 actorList.addAll(actorMapper.selectLeadingactorsOfMovieById(id));
@@ -127,14 +129,14 @@ public class ActorServiceImpl implements ActorService {
                 actorList.clear();
                 actorList.addAll(h);
                 //在coomovieList中遍历该人员是否存在
-                for(Actor actor:actorList){
-                    int index = indexOfActor(coomovieList,actor);
+                for (Actor actor : actorList) {
+                    int index = indexOfActor(coomovieList, actor);
                     Movie tempMovie = movieMapper.selectMovieBaseById(id);
                     //该人员第一次出现，添加新的Ccoomovie
-                    if(index == -1){
+                    if (index == -1) {
                         List<Movie> temp = new ArrayList<Movie>();
                         temp.add(tempMovie);
-                        coomovieList.add(new CooperationActor(actor,temp));
+                        coomovieList.add(new CooperationActor(actor, temp));
                     }
                     //该人员已存在，直接修改
                     else {
@@ -144,8 +146,8 @@ public class ActorServiceImpl implements ActorService {
                 actorList.clear();
             }
             //在结果列表中去掉搜索的actor
-            for(int i = 0;i < coomovieList.size();i++){
-                if(coomovieList.get(i).getActor().getActorId().equals(actorId)){
+            for (int i = 0; i < coomovieList.size(); i++) {
+                if (coomovieList.get(i).getActor().getActorId().equals(actorId)) {
                     coomovieList.remove(i);
                     break;
                 }
@@ -157,7 +159,7 @@ public class ActorServiceImpl implements ActorService {
                     int diff = u2.getMovieCount() - u1.getMovieCount();
                     if (diff > 0) {
                         return 1;
-                    }else if (diff < 0) {
+                    } else if (diff < 0) {
                         return -1;
                     }
                     return 0; //相等为0
@@ -165,7 +167,7 @@ public class ActorServiceImpl implements ActorService {
             });
             return coomovieList;
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("", e);
         }
         return null;
     }
@@ -176,9 +178,9 @@ public class ActorServiceImpl implements ActorService {
      * @param list
      * @return
      */
-    public List<Integer> getMovieIdByMovie(List<Movie> list){
+    public List<Integer> getMovieIdByMovie(List<Movie> list) {
         List<Integer> newList = new ArrayList<Integer>();
-        for(Movie m:list){
+        for (Movie m : list) {
             newList.add(m.getMovieId());
         }
         return newList;
@@ -191,8 +193,8 @@ public class ActorServiceImpl implements ActorService {
      * @param actor
      * @return
      */
-    public int indexOfActor(List<CooperationActor> coomovieList, Actor actor){
-        for(int i = 0;i<coomovieList.size();i++) {
+    public int indexOfActor(List<CooperationActor> coomovieList, Actor actor) {
+        for (int i = 0; i < coomovieList.size(); i++) {
             if (coomovieList.get(i).getActor().getActorId().equals(actor.getActorId())) {
                 return i;
             }

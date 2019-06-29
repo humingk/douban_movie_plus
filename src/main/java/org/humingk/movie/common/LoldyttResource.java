@@ -5,7 +5,7 @@ import java.util.List;
 /**
  * Loldytt电影资源类
  *
- * @author humin
+ * @author humingk
  */
 public class LoldyttResource {
     private String movieName;

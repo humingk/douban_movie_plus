@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * 电影详细信息
  *
- * @author humin
+ * @author humingk
  */
 public class MovieAll {
     private Integer movieId;

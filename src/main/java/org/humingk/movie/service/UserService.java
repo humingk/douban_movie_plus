@@ -8,7 +8,7 @@ import java.util.List;
 
 /**
  * user Info 不包括 password
- * @author humin
+ * @author humingk
  */
 public interface UserService {
     /**

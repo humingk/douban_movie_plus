@@ -41,7 +41,7 @@ public class MovieControllerTest extends baseTest {
                     .andReturn();
             logger.info(result.getResponse().getContentAsString());
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("",e);
         }
     }
 
@@ -56,7 +56,7 @@ public class MovieControllerTest extends baseTest {
                     .andReturn();
             logger.info(result.getResponse().getContentAsString());
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("",e);
         }
     }
 
@@ -71,7 +71,7 @@ public class MovieControllerTest extends baseTest {
                     .andReturn();
             logger.info(result.getResponse().getContentAsString());
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("",e);
         }
     }
 
@@ -86,7 +86,7 @@ public class MovieControllerTest extends baseTest {
                     .andReturn();
             logger.info(result.getResponse().getContentAsString());
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("",e);
         }
     }
 
@@ -101,7 +101,7 @@ public class MovieControllerTest extends baseTest {
                     .andReturn();
             logger.info(result.getResponse().getContentAsString());
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("",e);
         }
     }
 
@@ -116,7 +116,7 @@ public class MovieControllerTest extends baseTest {
                     .andReturn();
             logger.info(result.getResponse().getContentAsString());
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("",e);
         }
     }
 }

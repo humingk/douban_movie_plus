@@ -19,7 +19,7 @@ import javax.annotation.Resource;
 import java.util.List;
 
 /**
- * @author humin
+ * @author humingk
  */
 
 @Component
@@ -76,7 +76,7 @@ public class MyRealm extends AuthorizingRealm {
             logger.info("user.permission:" + info.getStringPermissions());
 
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("",e);
         }
         return null;
     }
@@ -114,7 +114,7 @@ public class MyRealm extends AuthorizingRealm {
                     this.getClass().getSimpleName());
             return info;
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("",e);
         }
         return null;
     }

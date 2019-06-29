@@ -13,7 +13,7 @@ import org.slf4j.LoggerFactory;
  * 判断当前url页面通过rememberMe访问的时候
  * 是否有session，没有session的话添加一个
  *
- * @author humin
+ * @author humingk
  */
 public class AddSession {
 
@@ -50,7 +50,7 @@ public class AddSession {
                 }
             }
         }catch (Exception e){
-            e.printStackTrace();
+            logger.error("",e);
         }
         return false;
     }

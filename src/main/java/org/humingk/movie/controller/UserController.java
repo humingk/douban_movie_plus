@@ -24,7 +24,7 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.List;
 
 /**
- * @author humin
+ * @author humingk
  */
 @Controller
 @RequestMapping(value = "/")
@@ -96,7 +96,7 @@ public class UserController {
         } catch (AuthenticationException e) {
             // 登陆失败
             modelAndView.setViewName("redirect:/login");
-            e.printStackTrace();
+            logger.error("",e);
         }
         return modelAndView;
     }
@@ -121,7 +121,7 @@ public class UserController {
             User user = new User(email, label, name, password, phone);
             shiroService.insertNormalUser(user);
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("",e);
         }
 
         modelAndView.setViewName("redirect:/people/" + label);

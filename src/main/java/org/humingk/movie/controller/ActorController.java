@@ -1,23 +1,22 @@
 package org.humingk.movie.controller;
 
 
+import org.humingk.movie.common.CooperationActor;
+import org.humingk.movie.common.Result;
 import org.humingk.movie.entity.Actor;
 import org.humingk.movie.entity.Movie;
 import org.humingk.movie.service.ActorService;
-import org.humingk.movie.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import org.humingk.movie.common.*;
 
 import java.util.List;
 
 /**
- * @author humin
+ * @author humingk
  * @author J1anbo
- * @see humingk
  */
 @Controller
 @RequestMapping("/celebrity")
@@ -26,8 +25,6 @@ public class ActorController {
 
     @Autowired
     private ActorService actorService;
-    @Autowired
-    private UserService userService;
 
     /**
      * 根据url中的actorId 返回Result,并携带actor
@@ -50,7 +47,7 @@ public class ActorController {
                 logger.info("ID: " + actorId + " 没有这个演员");
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("",e);
         }
         return Result.createMessage(200, "fail", null);
 
@@ -70,7 +67,7 @@ public class ActorController {
             List<List<Movie>> movies = actorService.getAllMoviesByActorId(Integer.parseInt(id));
             return Result.createMessage(200,"success",movies);
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("",e);
         }
         return Result.createMessage(200,"fail",null);
     }
@@ -89,7 +86,7 @@ public class ActorController {
             List<CooperationActor> coomovieList = actorService.getCoomovieByActorId(Integer.parseInt(id));
             return Result.createMessage(200,"success",coomovieList);
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("",e);
         }
         return Result.createMessage(200,"fail",null);
     }

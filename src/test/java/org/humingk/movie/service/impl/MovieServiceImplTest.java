@@ -83,7 +83,7 @@ public class MovieServiceImplTest extends baseTest {
                 }
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("",e);
         }
     }
 
@@ -104,7 +104,7 @@ public class MovieServiceImplTest extends baseTest {
 
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("",e);
         }
     }
 

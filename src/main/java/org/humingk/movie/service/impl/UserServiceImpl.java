@@ -15,7 +15,7 @@ import java.util.HashMap;
 import java.util.List;
 
 /**
- * @author humin
+ * @author humingk
  */
 @Transactional
 @Service
@@ -100,7 +100,7 @@ public class UserServiceImpl implements UserService {
                 return true;
             }
         }catch (Exception e){
-            e.printStackTrace();
+            logger.error("",e);
             return false;
         }
         return false;

@@ -5,7 +5,7 @@ import java.util.List;
 /**
  * Btbtdy电影资源类
  *
- * @author humin
+ * @author humingk
  */
 public class BtbtdyResource {
     private String movieName;

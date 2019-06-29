@@ -6,7 +6,7 @@ import org.humingk.movie.common.MovieAll;
 import java.util.List;
 
 /**
- * @author humin
+ * @author humingk
  */
 public interface MovieService {
 

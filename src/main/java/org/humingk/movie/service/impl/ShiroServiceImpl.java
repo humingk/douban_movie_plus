@@ -20,7 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 /**
- * @author humin
+ * @author humingk
  */
 @Transactional
 @Service
@@ -94,7 +94,7 @@ public class ShiroServiceImpl implements ShiroService {
             int roleId = roleMapper.selectByRoleName(USER).getRoleId();
             userRoleMapper.insert(new UserRole(userId, roleId));
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("",e);
         }
 
     }

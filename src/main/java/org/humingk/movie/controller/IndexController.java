@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import java.util.List;
 
 /**
- * @author humin
+ * @author humingk
  */
 @Controller
 @RequestMapping(value = "/")
