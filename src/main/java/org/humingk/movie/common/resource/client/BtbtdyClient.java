@@ -109,15 +109,13 @@ public class BtbtdyClient extends AbstractMovieResourceAdapter {
                     Elements urlList = type.select("a.d1");
                     List<Resource> resources = new ArrayList<>();
                     if (nameList.size() != 0 && urlList.size() != 0) {
-                        logger.debug("(BT电影天堂)获取电影资源成功,共 " + nameList.size() + " 条...movieName: " + movieName + "...type:" + resourceType);
                         for (int i = 0; i < nameList.size() && i < urlList.size(); i++) {
                             String resourceUrl = urlList.get(i).attr("href");
                             String resourceName = nameList.get(i).attr("title");
                             Resource resource = new Resource(resourceName, resourceUrl);
                             resources.add(resource);
-                            logger.debug("获取电影资源...resourceName: " + resourceName);
-                            logger.debug("获取电影资源...resourceUrl: " + resourceUrl);
                         }
+                        logger.debug("(BT电影天堂)获取电影资源成功,共 " + nameList.size() + " 条...movieName: " + movieName + "...type:" + resourceType);
                         // 根据资源的清晰度，对链接分类
                         switch (resourceType) {
                             case BtbtdyResource.P720_TYPE:

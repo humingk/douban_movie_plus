@@ -1,6 +1,9 @@
 package org.humingk.movie.service.impl;
 
 import org.humingk.movie.common.MovieAll;
+import org.humingk.movie.common.resource.AbstractMovieResourceAdapter;
+import org.humingk.movie.common.resource.pojo.MovieAllResource;
+import org.humingk.movie.common.resource.pojo.MovieMap;
 import org.humingk.movie.entity.Movie;
 import org.humingk.movie.entity.Releasetime;
 import org.humingk.movie.entity.Tag;
@@ -23,7 +26,7 @@ import java.util.List;
 @Service
 public class MovieServiceImpl implements MovieService {
 
-    private final Logger logger= LoggerFactory.getLogger(this.getClass());
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
     private MovieMapper movieMapper;
@@ -68,7 +71,7 @@ public class MovieServiceImpl implements MovieService {
             movieAll.setReleasetimes(releasetimeMapper.selectReleasetimesOfMovieById(movieId));
             return movieAll;
         } catch (Exception e) {
-            logger.error("",e);
+            logger.error("", e);
         }
         return null;
     }
@@ -83,9 +86,9 @@ public class MovieServiceImpl implements MovieService {
      * @return
      */
     @Override
-    public List<MovieAll> getMovieAllsOfMovieByAlias(String s,int start,int count) {
+    public List<MovieAll> getMovieAllsOfMovieByAlias(String s, int start, int count) {
         try {
-            List<Movie> movies = movieMapper.selectMoviesByAlias(s,start,count);
+            List<Movie> movies = movieMapper.selectMoviesByAlias(s, start, count);
             if (movies != null) {
                 List<MovieAll> movieAlls = new ArrayList<>();
                 for (Movie movie : movies) {
@@ -104,7 +107,7 @@ public class MovieServiceImpl implements MovieService {
                 return movieAlls;
             }
         } catch (Exception e) {
-            logger.error("",e);
+            logger.error("", e);
         }
         return null;
     }
@@ -126,7 +129,7 @@ public class MovieServiceImpl implements MovieService {
             }
             return movies;
         } catch (Exception e) {
-            logger.error("",e);
+            logger.error("", e);
         }
         return null;
     }
@@ -143,7 +146,7 @@ public class MovieServiceImpl implements MovieService {
             movieMapper.updateRateByPrimaryKey(movieId, rate);
             return true;
         } catch (Exception e) {
-            logger.error("",e);
+            logger.error("", e);
             return false;
         }
     }
@@ -161,7 +164,7 @@ public class MovieServiceImpl implements MovieService {
             movieMapper.updateImdbIdByPrimaryKey(movieId, imdbId);
             return true;
         } catch (Exception e) {
-            logger.error("",e);
+            logger.error("", e);
             return false;
         }
     }
@@ -228,8 +231,43 @@ public class MovieServiceImpl implements MovieService {
             }
             return true;
         } catch (Exception e) {
-            logger.error("",e);
+            logger.error("", e);
         }
         return false;
+    }
+
+    /**
+     * 通过关键字获取电影资源:电影表列表
+     *
+     * @param keyword     搜索关键字
+     * @param dateType    电影上映时间类型
+     *                    0 新电影始终请求电影表列表和电影资源---搜索后列表搜索标记记为未搜索，资源搜索标志记为未搜索
+     *                    1 未知时间电影有选择请求电影表列表，始终请求电影资源---搜索后列表搜索标记记为已搜索，资源搜索标记记为未搜索
+     *                    2 老电影有选择请求电影列表列表和电影资源---搜索后列表搜索标记记为已搜索，资源搜索标记记为已搜索
+     * @param movieMapMax 电影表最大数
+     * @param threadMax   线程最大数
+     * @return
+     */
+    @Override
+    public List<MovieMap<? extends AbstractMovieResourceAdapter>> getResourceMapList(
+            String keyword, int dateType, int movieMapMax, int threadMax) {
+        return null;
+    }
+
+    /**
+     * 通过关键字获取电影资源:电影表列表/电影资源
+     *
+     * @param keyword   搜索关键字
+     * @param dateType  电影上映时间类型
+     *                  0 新电影始终请求电影表列表和电影资源---搜索后列表搜索标记记为未搜索，资源搜索标志记为未搜索
+     *                  1 未知时间电影有选择请求电影表列表，始终请求电影资源---搜索后列表搜索标记记为已搜索，资源搜索标记记为未搜索
+     *                  2 老电影有选择请求电影列表列表和电影资源---搜索后列表搜索标记记为已搜索，资源搜索标记记为已搜索
+     * @param threadMax 线程最大数
+     * @return
+     */
+    @Override
+    public MovieAllResource getMovieAllResource(
+            String keyword, int dateType, int threadMax) {
+        return null;
     }
 }
