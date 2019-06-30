@@ -1,4 +1,7 @@
-package org.humingk.movie.common.resource.pojo;
+package org.humingk.movie.common.resource.pojo.site;
+
+import org.humingk.movie.common.resource.pojo.ClientResource;
+import org.humingk.movie.common.resource.pojo.Resource;
 
 import java.util.List;
 
@@ -6,8 +9,7 @@ import java.util.List;
  * @author lzx
  * @author humingk
  */
-public class Xl720Resource {
-    private Movie movie;
+public class Xl720Resource extends ClientResource {
     /**
      * 磁力链接
      */
@@ -33,11 +35,4 @@ public class Xl720Resource {
         this.thunder = thunder;
     }
 
-    public Movie getMovie() {
-        return movie;
-    }
-
-    public void setMovie(Movie movie) {
-        this.movie = movie;
-    }
 }

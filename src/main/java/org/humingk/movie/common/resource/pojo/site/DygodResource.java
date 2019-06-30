@@ -1,12 +1,14 @@
-package org.humingk.movie.common.resource.pojo;
+package org.humingk.movie.common.resource.pojo.site;
+
+import org.humingk.movie.common.resource.pojo.ClientResource;
+import org.humingk.movie.common.resource.pojo.Resource;
 
 import java.util.List;
 
 /**
  * @author humingk
  */
-public class DygodResource {
-    private Movie movie;
+public class DygodResource extends ClientResource {
     /**
      * 磁力链接
      */
@@ -32,11 +34,4 @@ public class DygodResource {
         this.thunder = thunder;
     }
 
-    public Movie getMovie() {
-        return movie;
-    }
-
-    public void setMovie(Movie movie) {
-        this.movie = movie;
-    }
 }

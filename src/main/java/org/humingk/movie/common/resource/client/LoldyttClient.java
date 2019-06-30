@@ -1,7 +1,7 @@
 package org.humingk.movie.common.resource.client;
 
 import org.humingk.movie.common.resource.AbstractMovieResourceAdapter;
-import org.humingk.movie.common.resource.pojo.LoldyttResource;
+import org.humingk.movie.common.resource.pojo.site.LoldyttResource;
 import org.humingk.movie.common.resource.pojo.Movie;
 import org.humingk.movie.common.resource.pojo.MovieMap;
 import org.humingk.movie.common.resource.pojo.Resource;
@@ -25,23 +25,9 @@ import java.util.List;
 public class LoldyttClient extends AbstractMovieResourceAdapter {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     /**
-     * client类型
-     */
-    public static final String CLIENT_TYPE = "loldytt";
-    /**
      * 基本 url
      */
     private static final String BASE_URL = "https://www.loldytt.tv";
-
-    /**
-     * 获取client类型
-     *
-     * @return
-     */
-    @Override
-    public String getClientType() {
-        return CLIENT_TYPE;
-    }
 
     /**
      * 获取电影搜索列表
@@ -50,8 +36,8 @@ public class LoldyttClient extends AbstractMovieResourceAdapter {
      * @param max     搜索结果保留最大数
      */
     @Override
-    public MovieMap getMovieMap(String keyword, int max) {
-        MovieMap result = null;
+    public MovieMap<LoldyttClient> getMovieMap(String keyword, int max) {
+        MovieMap<LoldyttClient> result = null;
         List<Movie> movies = null;
         String url = BASE_URL + "/search/index.asp";
         try {
@@ -63,7 +49,7 @@ public class LoldyttClient extends AbstractMovieResourceAdapter {
             Elements elements = doc.select("div.solb");
             Elements movieList = elements.select("ol a");
             if (movieList.size() != 0) {
-                result = new MovieMap(getClientType());
+                result = new MovieMap<>(keyword, LoldyttClient.class);
                 movies = new ArrayList<>();
                 for (int i = 0; i < max && i < movieList.size(); i++) {
                     String movieName = movieList.get(i).text();
@@ -89,7 +75,7 @@ public class LoldyttClient extends AbstractMovieResourceAdapter {
      * @return
      */
     @Override
-    public <T> T getMovie(Movie moviePojo) {
+    public LoldyttResource getMovie(Movie moviePojo) {
         String movieName = moviePojo.getMovieName();
         String movieUrl = moviePojo.getMovieUrl();
         LoldyttResource result = null;
@@ -115,6 +101,6 @@ public class LoldyttClient extends AbstractMovieResourceAdapter {
         } catch (Exception e) {
             logger.error("", e);
         }
-        return (T) result;
+        return result;
     }
 }

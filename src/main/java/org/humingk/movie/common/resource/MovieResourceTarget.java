@@ -1,5 +1,6 @@
 package org.humingk.movie.common.resource;
 
+import org.humingk.movie.common.resource.pojo.ClientResource;
 import org.humingk.movie.common.resource.pojo.Movie;
 import org.humingk.movie.common.resource.pojo.MovieMap;
 import org.humingk.movie.common.resource.pojo.Resource;
@@ -16,19 +17,12 @@ import java.util.List;
  */
 public interface MovieResourceTarget {
     /**
-     * 获取client类型
-     *
-     * @return
-     */
-    String getClientType();
-
-    /**
      * 获取电影搜索表
      *
      * @param keyword 搜索关键字
      * @param max     搜索结果保留最大数
      */
-    MovieMap getMovieMap(String keyword, int max);
+    <T extends AbstractMovieResourceAdapter> MovieMap<T> getMovieMap(String keyword, int max);
 
     /**
      * 通过指定电影url获取资源
@@ -36,7 +30,7 @@ public interface MovieResourceTarget {
      * @param moviePojo
      * @return
      */
-    <T> T getMovie(Movie moviePojo);
+    <T extends ClientResource> T getMovie(Movie moviePojo);
 
     /**
      * 1. Jsoup方式请求

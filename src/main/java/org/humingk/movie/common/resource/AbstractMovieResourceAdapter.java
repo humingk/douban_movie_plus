@@ -19,13 +19,11 @@ import java.util.Map;
 /**
  * 获取电影资源抽象类
  * <p>
- * 必须实现的三个方法
+ * 子类必须实现的两个方法
  * <p>
- * 1. getClientType() 获取client类型
+ * 1. getMovieMap() 获取电影表列表
  * <p>
- * 2. getMovieMap() 获取电影表
- * <p>
- * 3. getMovie() 获取电影资源
+ * 2. getMovie() 获取电影资源
  *
  * @author lzx
  * @author humingk

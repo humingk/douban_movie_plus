@@ -4,7 +4,7 @@ import org.humingk.movie.common.resource.AbstractMovieResourceAdapter;
 import org.humingk.movie.common.resource.pojo.Movie;
 import org.humingk.movie.common.resource.pojo.MovieMap;
 import org.humingk.movie.common.resource.pojo.Resource;
-import org.humingk.movie.common.resource.pojo.Xl720Resource;
+import org.humingk.movie.common.resource.pojo.site.Xl720Resource;
 import org.jsoup.Connection;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
@@ -31,24 +31,14 @@ public class Xl720Client extends AbstractMovieResourceAdapter {
     private static final String BASE_URL = "https://www.xl720.com";
 
     /**
-     * 获取client类型
-     *
-     * @return
-     */
-    @Override
-    public String getClientType() {
-        return CLIENT_TYPE;
-    }
-
-    /**
      * 获取电影搜索列表
      *
      * @param keyword 搜索关键字
      * @param max     搜索结果保留最大数
      */
     @Override
-    public MovieMap getMovieMap(String keyword, int max) {
-        MovieMap result = null;
+    public MovieMap<Xl720Client> getMovieMap(String keyword, int max) {
+        MovieMap<Xl720Client> result = null;
         List<Movie> movies = null;
         String url = BASE_URL + "/?s=" + keyword;
         try {
@@ -58,7 +48,7 @@ public class Xl720Client extends AbstractMovieResourceAdapter {
             Elements elements = doc.getElementsByClass("entry-title  postli-1");
             Elements movieList = elements.select("a");
             if (movieList.size() != 0) {
-                result = new MovieMap(getClientType());
+                result = new MovieMap<>(keyword, Xl720Client.class);
                 movies = new ArrayList<>();
                 for (int i = 0; i < max && i < movieList.size(); i++) {
                     String movieName = movieList.get(i).attr("title");
@@ -84,7 +74,7 @@ public class Xl720Client extends AbstractMovieResourceAdapter {
      * @return
      */
     @Override
-    public <T> T getMovie(Movie moviePojo) {
+    public Xl720Resource getMovie(Movie moviePojo) {
         String movieName = moviePojo.getMovieName();
         String movieUrl = moviePojo.getMovieUrl();
         Xl720Resource result = null;
@@ -109,6 +99,6 @@ public class Xl720Client extends AbstractMovieResourceAdapter {
         } catch (Exception e) {
             logger.error("", e);
         }
-        return (T) result;
+        return result;
     }
 }

@@ -1,7 +1,7 @@
 package org.humingk.movie.common.resource.client;
 
 import org.humingk.movie.common.resource.AbstractMovieResourceAdapter;
-import org.humingk.movie.common.resource.pojo.DygodResource;
+import org.humingk.movie.common.resource.pojo.site.DygodResource;
 import org.humingk.movie.common.resource.pojo.Movie;
 import org.humingk.movie.common.resource.pojo.MovieMap;
 import org.humingk.movie.common.resource.pojo.Resource;
@@ -24,23 +24,9 @@ import java.util.List;
 public class DygodClient extends AbstractMovieResourceAdapter {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     /**
-     * client类型
-     */
-    public static final String CLIENT_TYPE = "dygod";
-    /**
      * 基本 URL
      */
     private static final String BASE_URL = "https://www.dygod.net";
-
-    /**
-     * 获取client类型
-     *
-     * @return
-     */
-    @Override
-    public String getClientType() {
-        return CLIENT_TYPE;
-    }
 
     /**
      * 获取电影搜索列表
@@ -49,8 +35,8 @@ public class DygodClient extends AbstractMovieResourceAdapter {
      * @param max     搜索结果保留最大数
      */
     @Override
-    public MovieMap getMovieMap(String keyword, int max) {
-        MovieMap result = null;
+    public MovieMap<DygodClient> getMovieMap(String keyword, int max) {
+        MovieMap<DygodClient> result = null;
         List<Movie> movies = null;
         String url = BASE_URL + "/e/search/index.php";
         try {
@@ -58,7 +44,7 @@ public class DygodClient extends AbstractMovieResourceAdapter {
             Document doc = httpUrlConnRequest(url, data, "POST");
             Elements movieList = doc.select("table.tbspan a");
             if (movieList.size() != 0) {
-                result = new MovieMap(getClientType());
+                result = new MovieMap<>(keyword,DygodClient.class);
                 movies = new ArrayList<>();
                 for (int i = 0; i < max && i < movieList.size(); i++) {
                     String movieName = movieList.get(i).attr("title");
@@ -84,7 +70,7 @@ public class DygodClient extends AbstractMovieResourceAdapter {
      * @return
      */
     @Override
-    public <T> T getMovie(Movie moviePojo) {
+    public DygodResource getMovie(Movie moviePojo) {
         String movieName = moviePojo.getMovieName();
         String movieUrl = moviePojo.getMovieUrl();
         DygodResource result = null;
@@ -108,6 +94,6 @@ public class DygodClient extends AbstractMovieResourceAdapter {
         } catch (Exception e) {
             logger.error("", e);
         }
-        return (T) result;
+        return result;
     }
 }

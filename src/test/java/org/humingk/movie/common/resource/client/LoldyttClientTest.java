@@ -1,10 +1,10 @@
 package org.humingk.movie.common.resource.client;
 
 import org.humingk.movie.baseTest;
-import org.humingk.movie.common.resource.pojo.LoldyttResource;
+import org.humingk.movie.common.resource.pojo.Movie;
+import org.humingk.movie.common.resource.pojo.MovieMap;
+import org.humingk.movie.common.resource.pojo.site.LoldyttResource;
 import org.junit.Test;
-
-import java.util.Map;
 
 public class LoldyttClientTest extends baseTest {
 
@@ -14,11 +14,11 @@ public class LoldyttClientTest extends baseTest {
 
     @Test
     public void getMovie() {
-        Map<String, String> movies = new LoldyttClient().getMovieMap("星际", 3);
-        for (String key : movies.keySet()) {
-            LoldyttResource movie = new LoldyttClient().getMovie(key, movies.get(key));
-            System.out.println(movie.getMovieName());
-            System.out.println(movie.getMovieUrl());
+        MovieMap<LoldyttClient> movieMap = new LoldyttClient().getMovieMap("星际穿越", 3);
+        for (Movie movie : movieMap.getMovies()) {
+            System.out.println(movie.getMovieName() + " " + movie.getMovieUrl());
+            LoldyttResource loldyttResource = new LoldyttClient().getMovie(movie);
+            System.out.println();
         }
     }
 }

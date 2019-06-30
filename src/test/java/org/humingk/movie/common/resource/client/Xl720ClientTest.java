@@ -1,10 +1,10 @@
 package org.humingk.movie.common.resource.client;
 
 import org.humingk.movie.baseTest;
-import org.humingk.movie.common.resource.pojo.Xl720Resource;
+import org.humingk.movie.common.resource.pojo.Movie;
+import org.humingk.movie.common.resource.pojo.MovieMap;
+import org.humingk.movie.common.resource.pojo.site.Xl720Resource;
 import org.junit.Test;
-
-import java.util.Map;
 
 public class Xl720ClientTest extends baseTest {
 
@@ -14,11 +14,11 @@ public class Xl720ClientTest extends baseTest {
 
     @Test
     public void getMovie() {
-        Map<String, String> movies = new Xl720Client().getMovieMap("星际", 3);
-        for (String key : movies.keySet()) {
-            Xl720Resource movie = new Xl720Client().getMovie(key, movies.get(key));
-            System.out.println(movie.getMovieName());
-            System.out.println(movie.getMovieUrl());
+        MovieMap<Xl720Client> movieMap = new Xl720Client().getMovieMap("星际穿越", 3);
+        for (Movie movie : movieMap.getMovies()) {
+            System.out.println(movie.getMovieName() + " " + movie.getMovieUrl());
+            Xl720Resource xl720Resource=new Xl720Client().getMovie(movie);
+            System.out.println();
         }
     }
 }

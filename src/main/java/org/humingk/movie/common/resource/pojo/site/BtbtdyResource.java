@@ -1,12 +1,14 @@
-package org.humingk.movie.common.resource.pojo;
+package org.humingk.movie.common.resource.pojo.site;
+
+import org.humingk.movie.common.resource.pojo.ClientResource;
+import org.humingk.movie.common.resource.pojo.Resource;
 
 import java.util.List;
 
 /**
  * @author humingk
  */
-public class BtbtdyResource {
-    private Movie movie;
+public class BtbtdyResource extends ClientResource {
     /**
      * 720p下载地址
      */
@@ -85,13 +87,5 @@ public class BtbtdyResource {
 
     public void setEd2k(List<Resource> ed2k) {
         this.ed2k = ed2k;
-    }
-
-    public Movie getMovie() {
-        return movie;
-    }
-
-    public void setMovie(Movie movie) {
-        this.movie = movie;
     }
 }

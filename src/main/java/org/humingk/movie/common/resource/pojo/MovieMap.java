@@ -1,5 +1,7 @@
 package org.humingk.movie.common.resource.pojo;
 
+import org.humingk.movie.common.resource.AbstractMovieResourceAdapter;
+
 import java.util.List;
 
 /**
@@ -7,11 +9,15 @@ import java.util.List;
  *
  * @author humingk
  */
-public class MovieMap {
+public class MovieMap<T extends AbstractMovieResourceAdapter> {
+    /**
+     * 搜索关键字
+     */
+    private String keyword;
     /**
      * client类型
      */
-    private String clientType;
+    private Class<T> clientType;
     /**
      * client对应电影列表
      */
@@ -20,22 +26,17 @@ public class MovieMap {
     public MovieMap() {
     }
 
-    public MovieMap(String clientType) {
+    public MovieMap(String keyword, Class<T> clientType) {
+        this.keyword = keyword;
         this.clientType = clientType;
     }
 
-    public MovieMap(String clientType, List<Movie> movies) {
+    public MovieMap(String keyword, Class<T> clientType, List<Movie> movies) {
+        this.keyword = keyword;
         this.clientType = clientType;
         this.movies = movies;
     }
 
-    public String getClientType() {
-        return clientType;
-    }
-
-    public void setClientType(String clientType) {
-        this.clientType = clientType;
-    }
 
     public List<Movie> getMovies() {
         return movies;
@@ -43,5 +44,21 @@ public class MovieMap {
 
     public void setMovies(List<Movie> movies) {
         this.movies = movies;
+    }
+
+    public Class<T> getClientType() {
+        return clientType;
+    }
+
+    public void setClientType(Class<T> clientType) {
+        this.clientType = clientType;
+    }
+
+    public String getKeyword() {
+        return keyword;
+    }
+
+    public void setKeyword(String keyword) {
+        this.keyword = keyword;
     }
 }

@@ -1,10 +1,10 @@
 package org.humingk.movie.common.resource.client;
 
 import org.humingk.movie.common.resource.AbstractMovieResourceAdapter;
-import org.humingk.movie.common.resource.pojo.BtbtdyResource;
 import org.humingk.movie.common.resource.pojo.Movie;
 import org.humingk.movie.common.resource.pojo.MovieMap;
 import org.humingk.movie.common.resource.pojo.Resource;
+import org.humingk.movie.common.resource.pojo.site.BtbtdyResource;
 import org.jsoup.Connection;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -26,11 +26,6 @@ import java.util.regex.Pattern;
 public class BtbtdyClient extends AbstractMovieResourceAdapter {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     /**
-     * client类型
-     */
-    public static final String CLIENT_TYPE = "btbtdy";
-    public static final Object test = BtbtdyClient.class;
-    /**
      * 网站 url
      */
     private static final String BASE_URL = "http://www.btbtdy.me";
@@ -40,24 +35,14 @@ public class BtbtdyClient extends AbstractMovieResourceAdapter {
     private static final Pattern URL_ID = Pattern.compile("(\\d+)");
 
     /**
-     * 获取client类型
-     *
-     * @return
-     */
-    @Override
-    public String getClientType() {
-        return CLIENT_TYPE;
-    }
-
-    /**
      * 获取电影搜索列表
      *
      * @param keyword 搜索关键字
      * @param max     搜索结果保留最大数
      */
     @Override
-    public MovieMap getMovieMap(String keyword, int max) {
-        MovieMap result = null;
+    public MovieMap<BtbtdyClient> getMovieMap(String keyword, int max) {
+        MovieMap<BtbtdyClient> result = null;
         List<Movie> movies = null;
         String url = BASE_URL + "/search/" + keyword + ".html";
         try {
@@ -67,7 +52,7 @@ public class BtbtdyClient extends AbstractMovieResourceAdapter {
             Elements elements = doc.getElementsByClass("list_so");
             Elements movieList = elements.select("dd.lf a");
             if (movieList.size() != 0) {
-                result = new MovieMap(getClientType());
+                result = new MovieMap<>(keyword, BtbtdyClient.class);
                 movies = new ArrayList<>();
                 for (int i = 0; i < max && i < movieList.size(); i++) {
                     String movieName = movieList.get(i).attr("title");
@@ -99,7 +84,7 @@ public class BtbtdyClient extends AbstractMovieResourceAdapter {
      * @return
      */
     @Override
-    public <T> T getMovie(Movie moviePojo) {
+    public BtbtdyResource getMovie(Movie moviePojo) {
         String movieName = moviePojo.getMovieName();
         String movieUrl = moviePojo.getMovieUrl();
         BtbtdyResource result = null;
@@ -167,6 +152,6 @@ public class BtbtdyClient extends AbstractMovieResourceAdapter {
         } catch (Exception e) {
             logger.error("", e);
         }
-        return (T) result;
+        return result;
     }
 }
