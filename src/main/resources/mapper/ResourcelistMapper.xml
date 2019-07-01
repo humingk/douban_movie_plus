@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.humingk.movie.mapper.ResourcelistMapper">
+  <resultMap id="BaseResultMap" type="org.humingk.movie.entity.Resourcelist">
+    <id column="resourcelist_id" jdbcType="INTEGER" property="resourcelistId" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from resourcelist
+    where resourcelist_id = #{resourcelistId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="org.humingk.movie.entity.Resourcelist">
+    insert into resourcelist (resourcelist_id)
+    values (#{resourcelistId,jdbcType=INTEGER})
+  </insert>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select resourcelist_id
+    from resourcelist
+  </select>
+</mapper>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.humingk.movie.mapper.MoviefromMapper">
+  <resultMap id="BaseResultMap" type="org.humingk.movie.entity.Moviefrom">
+    <id column="moviefrom_id" jdbcType="INTEGER" property="moviefromId" />
+    <result column="moviefrom_name" jdbcType="VARCHAR" property="moviefromName" />
+    <result column="moviefrom_url" jdbcType="VARCHAR" property="moviefromUrl" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from moviefrom
+    where moviefrom_id = #{moviefromId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="org.humingk.movie.entity.Moviefrom">
+    insert into moviefrom (moviefrom_id, moviefrom_name, moviefrom_url
+      )
+    values (#{moviefromId,jdbcType=INTEGER}, #{moviefromName,jdbcType=VARCHAR}, #{moviefromUrl,jdbcType=VARCHAR}
+      )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="org.humingk.movie.entity.Moviefrom">
+    update moviefrom
+    set moviefrom_name = #{moviefromName,jdbcType=VARCHAR},
+      moviefrom_url = #{moviefromUrl,jdbcType=VARCHAR}
+    where moviefrom_id = #{moviefromId,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select moviefrom_id, moviefrom_name, moviefrom_url
+    from moviefrom
+    where moviefrom_id = #{moviefromId,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select moviefrom_id, moviefrom_name, moviefrom_url
+    from moviefrom
+  </select>
+</mapper>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.humingk.movie.mapper.ResourcelistResourcetypeMapper">
+  <resultMap id="BaseResultMap" type="org.humingk.movie.entity.ResourcelistResourcetype">
+    <id column="resourcelist_resourcetype_id" jdbcType="INTEGER" property="resourcelistResourcetypeId" />
+    <result column="resourcelist_id" jdbcType="INTEGER" property="resourcelistId" />
+    <result column="resourcetype_id" jdbcType="INTEGER" property="resourcetypeId" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from resourcelist_resourcetype
+    where resourcelist_resourcetype_id = #{resourcelistResourcetypeId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="org.humingk.movie.entity.ResourcelistResourcetype">
+    insert into resourcelist_resourcetype (resourcelist_resourcetype_id, resourcelist_id, 
+      resourcetype_id)
+    values (#{resourcelistResourcetypeId,jdbcType=INTEGER}, #{resourcelistId,jdbcType=INTEGER}, 
+      #{resourcetypeId,jdbcType=INTEGER})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="org.humingk.movie.entity.ResourcelistResourcetype">
+    update resourcelist_resourcetype
+    set resourcelist_id = #{resourcelistId,jdbcType=INTEGER},
+      resourcetype_id = #{resourcetypeId,jdbcType=INTEGER}
+    where resourcelist_resourcetype_id = #{resourcelistResourcetypeId,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select resourcelist_resourcetype_id, resourcelist_id, resourcetype_id
+    from resourcelist_resourcetype
+    where resourcelist_resourcetype_id = #{resourcelistResourcetypeId,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select resourcelist_resourcetype_id, resourcelist_id, resourcetype_id
+    from resourcelist_resourcetype
+  </select>
+</mapper>

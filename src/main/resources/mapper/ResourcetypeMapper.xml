@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.humingk.movie.mapper.ResourcetypeMapper">
+  <resultMap id="BaseResultMap" type="org.humingk.movie.entity.Resourcetype">
+    <id column="resourcetype_id" jdbcType="INTEGER" property="resourcetypeId" />
+    <result column="resourcetype_name" jdbcType="CHAR" property="resourcetypeName" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from resourcetype
+    where resourcetype_id = #{resourcetypeId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="org.humingk.movie.entity.Resourcetype">
+    insert into resourcetype (resourcetype_id, resourcetype_name)
+    values (#{resourcetypeId,jdbcType=INTEGER}, #{resourcetypeName,jdbcType=CHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="org.humingk.movie.entity.Resourcetype">
+    update resourcetype
+    set resourcetype_name = #{resourcetypeName,jdbcType=CHAR}
+    where resourcetype_id = #{resourcetypeId,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select resourcetype_id, resourcetype_name
+    from resourcetype
+    where resourcetype_id = #{resourcetypeId,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select resourcetype_id, resourcetype_name
+    from resourcetype
+  </select>
+</mapper>

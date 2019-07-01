@@ -288,7 +288,7 @@ create table movie_review
 create table keyword
 (
     keyword_id        int(10)  NOT NULL auto_increment,
-    keyword_content   char(20) Not NULL default "",
+    keyword_content   char(20) Not NULL default '',
     moviemap_flag     int(1)   NOT NULL default 0,
     resourcelist_flag int(1)   NOT NULL default 0,
     primary key (keyword_id),
@@ -302,8 +302,8 @@ create table keyword
 create table moviefrom
 (
     moviefrom_id   int(10)      NOT NULL auto_increment,
-    moviefrom_name varchar(200) NOT NULL default "",
-    moviefrom_url  varchar(200) NOT NULL default "",
+    moviefrom_name varchar(200) NOT NULL default '',
+    moviefrom_url  varchar(200) NOT NULL default '',
     primary key (moviefrom_id),
     index moviefrom_name (moviefrom_name),
     index moviefrom_url (moviefrom_url)
@@ -355,7 +355,7 @@ create table resourcelist_moviefrom
 create table resourcetype
 (
     resourcetype_id   int(3)   NOT NULL auto_increment,
-    resourcetype_name char(20) NOT NULL default "",
+    resourcetype_name char(20) NOT NULL default '',
     primary key (resourcetype_id),
     index resourcelist_name (resourcetype_name)
 ) ENGINE = InnoDB
@@ -377,8 +377,8 @@ create table resourcelist_resourcetype
 create table resource
 (
     resource_id   int(10)      NOT NULL auto_increment,
-    resource_name varchar(200) NOT NULL default "",
-    resource_url  varchar(500) NOT NULL default "",
+    resource_name varchar(200) NOT NULL default '',
+    resource_url  varchar(500) NOT NULL default '',
     primary key (resource_id),
     index resource_name (resource_name),
     index resource_url (resource_url)

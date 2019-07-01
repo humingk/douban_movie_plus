@@ -251,6 +251,10 @@ public class MovieServiceImpl implements MovieService {
     @Override
     public List<MovieMap<? extends AbstractMovieResourceAdapter>> getResourceMapList(
             String keyword, int dateType, int movieMapMax, int threadMax) {
+
+
+
+
         return null;
     }
 

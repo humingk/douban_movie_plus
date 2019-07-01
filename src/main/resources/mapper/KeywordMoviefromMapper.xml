@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.humingk.movie.mapper.KeywordMoviefromMapper">
+  <resultMap id="BaseResultMap" type="org.humingk.movie.entity.KeywordMoviefrom">
+    <id column="keyword_id" jdbcType="INTEGER" property="keywordId" />
+    <id column="moviefrom_id" jdbcType="INTEGER" property="moviefromId" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="map">
+    delete from keyword_moviefrom
+    where keyword_id = #{keywordId,jdbcType=INTEGER}
+      and moviefrom_id = #{moviefromId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="org.humingk.movie.entity.KeywordMoviefrom">
+    insert into keyword_moviefrom (keyword_id, moviefrom_id)
+    values (#{keywordId,jdbcType=INTEGER}, #{moviefromId,jdbcType=INTEGER})
+  </insert>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select keyword_id, moviefrom_id
+    from keyword_moviefrom
+  </select>
+</mapper>

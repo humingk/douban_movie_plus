@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.humingk.movie.mapper.ResourceResourcelistResourcetypeMapper">
+  <resultMap id="BaseResultMap" type="org.humingk.movie.entity.ResourceResourcelistResourcetype">
+    <id column="resource_id" jdbcType="INTEGER" property="resourceId" />
+    <id column="resourcelist_resourcetype_id" jdbcType="INTEGER" property="resourcelistResourcetypeId" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="map">
+    delete from resource_resourcelist_resourcetype
+    where resource_id = #{resourceId,jdbcType=INTEGER}
+      and resourcelist_resourcetype_id = #{resourcelistResourcetypeId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="org.humingk.movie.entity.ResourceResourcelistResourcetype">
+    insert into resource_resourcelist_resourcetype (resource_id, resourcelist_resourcetype_id
+      )
+    values (#{resourceId,jdbcType=INTEGER}, #{resourcelistResourcetypeId,jdbcType=INTEGER}
+      )
+  </insert>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select resource_id, resourcelist_resourcetype_id
+    from resource_resourcelist_resourcetype
+  </select>
+</mapper>
