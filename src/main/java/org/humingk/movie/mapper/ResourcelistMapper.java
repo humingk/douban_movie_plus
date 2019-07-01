@@ -8,5 +8,9 @@ public interface ResourcelistMapper {
 
     int insert(Resourcelist record);
 
+    Resourcelist selectByPrimaryKey(Integer resourcelistId);
+
     List<Resourcelist> selectAll();
+
+    int updateByPrimaryKey(Resourcelist record);
 }

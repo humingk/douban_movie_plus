@@ -1,16 +1,16 @@
 package org.humingk.movie.entity;
 
-public class KeywordResourcelist {
-    private Integer keywordId;
+public class ResourceResourcelist {
+    private String resourceUrl;
 
     private Integer resourcelistId;
 
-    public Integer getKeywordId() {
-        return keywordId;
+    public String getResourceUrl() {
+        return resourceUrl;
     }
 
-    public void setKeywordId(Integer keywordId) {
-        this.keywordId = keywordId;
+    public void setResourceUrl(String resourceUrl) {
+        this.resourceUrl = resourceUrl == null ? null : resourceUrl.trim();
     }
 
     public Integer getResourcelistId() {

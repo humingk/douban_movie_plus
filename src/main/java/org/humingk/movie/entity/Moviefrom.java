@@ -1,18 +1,16 @@
 package org.humingk.movie.entity;
 
 public class Moviefrom {
-    private Integer moviefromId;
+    private String moviefromUrl;
 
     private String moviefromName;
 
-    private String moviefromUrl;
-
-    public Integer getMoviefromId() {
-        return moviefromId;
+    public String getMoviefromUrl() {
+        return moviefromUrl;
     }
 
-    public void setMoviefromId(Integer moviefromId) {
-        this.moviefromId = moviefromId;
+    public void setMoviefromUrl(String moviefromUrl) {
+        this.moviefromUrl = moviefromUrl == null ? null : moviefromUrl.trim();
     }
 
     public String getMoviefromName() {
@@ -21,13 +19,5 @@ public class Moviefrom {
 
     public void setMoviefromName(String moviefromName) {
         this.moviefromName = moviefromName == null ? null : moviefromName.trim();
-    }
-
-    public String getMoviefromUrl() {
-        return moviefromUrl;
-    }
-
-    public void setMoviefromUrl(String moviefromUrl) {
-        this.moviefromUrl = moviefromUrl == null ? null : moviefromUrl.trim();
     }
 }

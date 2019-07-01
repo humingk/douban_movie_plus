@@ -3,7 +3,7 @@ package org.humingk.movie.entity;
 public class ResourcelistMoviefrom {
     private Integer resourcelistId;
 
-    private Integer moviefromId;
+    private String moviefromUrl;
 
     public Integer getResourcelistId() {
         return resourcelistId;
@@ -13,11 +13,11 @@ public class ResourcelistMoviefrom {
         this.resourcelistId = resourcelistId;
     }
 
-    public Integer getMoviefromId() {
-        return moviefromId;
+    public String getMoviefromUrl() {
+        return moviefromUrl;
     }
 
-    public void setMoviefromId(Integer moviefromId) {
-        this.moviefromId = moviefromId;
+    public void setMoviefromUrl(String moviefromUrl) {
+        this.moviefromUrl = moviefromUrl == null ? null : moviefromUrl.trim();
     }
 }

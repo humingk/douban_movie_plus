@@ -3,19 +3,19 @@
 <mapper namespace="org.humingk.movie.mapper.ResourcelistMoviefromMapper">
   <resultMap id="BaseResultMap" type="org.humingk.movie.entity.ResourcelistMoviefrom">
     <id column="resourcelist_id" jdbcType="INTEGER" property="resourcelistId" />
-    <id column="moviefrom_id" jdbcType="INTEGER" property="moviefromId" />
+    <id column="moviefrom_url" jdbcType="VARCHAR" property="moviefromUrl" />
   </resultMap>
   <delete id="deleteByPrimaryKey" parameterType="map">
     delete from resourcelist_moviefrom
     where resourcelist_id = #{resourcelistId,jdbcType=INTEGER}
-      and moviefrom_id = #{moviefromId,jdbcType=INTEGER}
+      and moviefrom_url = #{moviefromUrl,jdbcType=VARCHAR}
   </delete>
   <insert id="insert" parameterType="org.humingk.movie.entity.ResourcelistMoviefrom">
-    insert into resourcelist_moviefrom (resourcelist_id, moviefrom_id)
-    values (#{resourcelistId,jdbcType=INTEGER}, #{moviefromId,jdbcType=INTEGER})
+    insert into resourcelist_moviefrom (resourcelist_id, moviefrom_url)
+    values (#{resourcelistId,jdbcType=INTEGER}, #{moviefromUrl,jdbcType=VARCHAR})
   </insert>
   <select id="selectAll" resultMap="BaseResultMap">
-    select resourcelist_id, moviefrom_id
+    select resourcelist_id, moviefrom_url
     from resourcelist_moviefrom
   </select>
 </mapper>

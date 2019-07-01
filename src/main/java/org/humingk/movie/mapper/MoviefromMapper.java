@@ -4,11 +4,11 @@ import java.util.List;
 import org.humingk.movie.entity.Moviefrom;
 
 public interface MoviefromMapper {
-    int deleteByPrimaryKey(Integer moviefromId);
+    int deleteByPrimaryKey(String moviefromUrl);
 
     int insert(Moviefrom record);
 
-    Moviefrom selectByPrimaryKey(Integer moviefromId);
+    Moviefrom selectByPrimaryKey(String moviefromUrl);
 
     List<Moviefrom> selectAll();
 

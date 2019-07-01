@@ -1,16 +1,13 @@
 package org.humingk.movie.mapper;
 
 import java.util.List;
+import org.apache.ibatis.annotations.Param;
 import org.humingk.movie.entity.ResourcelistResourcetype;
 
 public interface ResourcelistResourcetypeMapper {
-    int deleteByPrimaryKey(Integer resourcelistResourcetypeId);
+    int deleteByPrimaryKey(@Param("resourcelistId") Integer resourcelistId, @Param("resourcetypeId") Integer resourcetypeId);
 
     int insert(ResourcelistResourcetype record);
 
-    ResourcelistResourcetype selectByPrimaryKey(Integer resourcelistResourcetypeId);
-
     List<ResourcelistResourcetype> selectAll();
-
-    int updateByPrimaryKey(ResourcelistResourcetype record);
 }

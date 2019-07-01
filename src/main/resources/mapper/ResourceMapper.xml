@@ -2,33 +2,29 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.humingk.movie.mapper.ResourceMapper">
   <resultMap id="BaseResultMap" type="org.humingk.movie.entity.Resource">
-    <id column="resource_id" jdbcType="INTEGER" property="resourceId" />
+    <id column="resource_url" jdbcType="VARCHAR" property="resourceUrl" />
     <result column="resource_name" jdbcType="VARCHAR" property="resourceName" />
-    <result column="resource_url" jdbcType="VARCHAR" property="resourceUrl" />
   </resultMap>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from resource
-    where resource_id = #{resourceId,jdbcType=INTEGER}
+    where resource_url = #{resourceUrl,jdbcType=VARCHAR}
   </delete>
   <insert id="insert" parameterType="org.humingk.movie.entity.Resource">
-    insert into resource (resource_id, resource_name, resource_url
-      )
-    values (#{resourceId,jdbcType=INTEGER}, #{resourceName,jdbcType=VARCHAR}, #{resourceUrl,jdbcType=VARCHAR}
-      )
+    insert into resource (resource_url, resource_name)
+    values (#{resourceUrl,jdbcType=VARCHAR}, #{resourceName,jdbcType=VARCHAR})
   </insert>
   <update id="updateByPrimaryKey" parameterType="org.humingk.movie.entity.Resource">
     update resource
-    set resource_name = #{resourceName,jdbcType=VARCHAR},
-      resource_url = #{resourceUrl,jdbcType=VARCHAR}
-    where resource_id = #{resourceId,jdbcType=INTEGER}
+    set resource_name = #{resourceName,jdbcType=VARCHAR}
+    where resource_url = #{resourceUrl,jdbcType=VARCHAR}
   </update>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select resource_id, resource_name, resource_url
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select resource_url, resource_name
     from resource
-    where resource_id = #{resourceId,jdbcType=INTEGER}
+    where resource_url = #{resourceUrl,jdbcType=VARCHAR}
   </select>
   <select id="selectAll" resultMap="BaseResultMap">
-    select resource_id, resource_name, resource_url
+    select resource_url, resource_name
     from resource
   </select>
 </mapper>

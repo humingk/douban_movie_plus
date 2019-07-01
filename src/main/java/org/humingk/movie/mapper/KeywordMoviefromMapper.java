@@ -5,7 +5,7 @@ import org.apache.ibatis.annotations.Param;
 import org.humingk.movie.entity.KeywordMoviefrom;
 
 public interface KeywordMoviefromMapper {
-    int deleteByPrimaryKey(@Param("keywordId") Integer keywordId, @Param("moviefromId") Integer moviefromId);
+    int deleteByPrimaryKey(@Param("keywordContent") String keywordContent, @Param("moviefromUrl") String moviefromUrl);
 
     int insert(KeywordMoviefrom record);
 

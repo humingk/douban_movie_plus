@@ -4,11 +4,11 @@ import java.util.List;
 import org.humingk.movie.entity.Resource;
 
 public interface ResourceMapper {
-    int deleteByPrimaryKey(Integer resourceId);
+    int deleteByPrimaryKey(String resourceUrl);
 
     int insert(Resource record);
 
-    Resource selectByPrimaryKey(Integer resourceId);
+    Resource selectByPrimaryKey(String resourceUrl);
 
     List<Resource> selectAll();
 

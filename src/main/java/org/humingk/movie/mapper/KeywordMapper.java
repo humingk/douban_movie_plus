@@ -4,11 +4,11 @@ import java.util.List;
 import org.humingk.movie.entity.Keyword;
 
 public interface KeywordMapper {
-    int deleteByPrimaryKey(Integer keywordId);
+    int deleteByPrimaryKey(String keywordContent);
 
     int insert(Keyword record);
 
-    Keyword selectByPrimaryKey(Integer keywordId);
+    Keyword selectByPrimaryKey(String keywordContent);
 
     List<Keyword> selectAll();
 

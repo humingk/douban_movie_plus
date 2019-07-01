@@ -279,6 +279,22 @@ create table movie_review
   DEFAULT charset = utf8mb4;
 
 # 资源信息 ---------------------------
+/*
+ 测试用
+
+        drop table resource_resourcelist;
+        drop table resource_resourcetype;
+        drop table resource;
+        drop table resourcelist_resourcetype;
+        drop table resourcetype;
+        drop table resourcelist_moviefrom;
+        drop table resourcelist;
+        drop table keyword_moviefrom;
+        drop table moviefrom;
+        drop table keyword;
+
+ */
+
 
 # 搜索关键字
 /*
@@ -287,12 +303,10 @@ create table movie_review
  */
 create table keyword
 (
-    keyword_id        int(10)  NOT NULL auto_increment,
-    keyword_content   char(20) Not NULL default '',
+    keyword_content   char(50) Not NULL,
     moviemap_flag     int(1)   NOT NULL default 0,
     resourcelist_flag int(1)   NOT NULL default 0,
-    primary key (keyword_id),
-    index keyword_content (keyword_content),
+    primary key (keyword_content),
     index moviemap_flag (moviemap_flag),
     index resourcelist_flag (resourcelist_flag)
 ) ENGINE = InnoDB
@@ -301,53 +315,42 @@ create table keyword
 # 电影资源来源页面信息
 create table moviefrom
 (
-    moviefrom_id   int(10)      NOT NULL auto_increment,
+    moviefrom_url  varchar(200) NOT NULL,
     moviefrom_name varchar(200) NOT NULL default '',
-    moviefrom_url  varchar(200) NOT NULL default '',
-    primary key (moviefrom_id),
-    index moviefrom_name (moviefrom_name),
-    index moviefrom_url (moviefrom_url)
+    primary key (moviefrom_url),
+    index moviefrom_name (moviefrom_name)
 ) ENGINE = InnoDB
   DEFAULT charset = utf8mb4;
 
 # 电影表列表
 create table keyword_moviefrom
 (
-    keyword_id   int(10) NOT NULL,
-    moviefrom_id int(10) NOT NULL,
-    primary key (keyword_id, moviefrom_id),
-    foreign key (keyword_id) references keyword (keyword_id),
-    foreign key (moviefrom_id) references moviefrom (moviefrom_id)
+    keyword_content char(50)     Not NULL,
+    moviefrom_url   varchar(200) NOT NULL,
+    primary key (keyword_content, moviefrom_url),
+    foreign key (keyword_content) references keyword (keyword_content),
+    foreign key (moviefrom_url) references moviefrom (moviefrom_url)
 ) ENGINE = InnoDB
   DEFAULT charset = utf8mb4;
 
 # 电影资源列表
 create table resourcelist
 (
-    resourcelist_id int(10) NOT NULL auto_increment,
-    primary key (resourcelist_id)
-) ENGINE = InnoDB
-  DEFAULT charset = utf8mb4;
-
-# 一个关键字对应的所有资源列表
-create table keyword_resourcelist
-(
-    keyword_id      int(10) NOT NULL,
-    resourcelist_id int(10) NOT NULL,
-    primary key (keyword_id, resourcelist_id),
-    foreign key (keyword_id) references keyword (keyword_id),
-    foreign key (resourcelist_id) references resourcelist (resourcelist_id)
+    keyword_content char(50) Not NULL,
+    resourcelist_id int(10)  NOT NULL auto_increment,
+    primary key (resourcelist_id),
+    foreign key (keyword_content) references keyword (keyword_content)
 ) ENGINE = InnoDB
   DEFAULT charset = utf8mb4;
 
 # 一个资源列表对应的所有资源所在页面
 create table resourcelist_moviefrom
 (
-    resourcelist_id int(10) NOT NULL,
-    moviefrom_id    int(10) NOT NULL,
-    primary key (resourcelist_id, moviefrom_id),
+    resourcelist_id int(10)      NOT NULL,
+    moviefrom_url   varchar(200) NOT NULL,
+    primary key (resourcelist_id, moviefrom_url),
     foreign key (resourcelist_id) references resourcelist (resourcelist_id),
-    foreign key (moviefrom_id) references moviefrom (moviefrom_id)
+    foreign key (moviefrom_url) references moviefrom (moviefrom_url)
 ) ENGINE = InnoDB
   DEFAULT charset = utf8mb4;
 
@@ -364,10 +367,9 @@ create table resourcetype
 # 一个资源列表对应的所有资源类型
 create table resourcelist_resourcetype
 (
-    resourcelist_resourcetype_id int(10) NOT NULL auto_increment,
-    resourcelist_id              int(10) NOT NULL,
-    resourcetype_id              int(3)  NOT NULL,
-    primary key (resourcelist_resourcetype_id),
+    resourcelist_id int(10) NOT NULL,
+    resourcetype_id int(3)  NOT NULL,
+    primary key (resourcelist_id, resourcetype_id),
     foreign key (resourcelist_id) references resourcelist (resourcelist_id),
     foreign key (resourcetype_id) references resourcetype (resourcetype_id)
 ) ENGINE = InnoDB
@@ -376,22 +378,31 @@ create table resourcelist_resourcetype
 # 资源
 create table resource
 (
-    resource_id   int(10)      NOT NULL auto_increment,
+    resource_url  varchar(500) NOT NULL,
     resource_name varchar(200) NOT NULL default '',
-    resource_url  varchar(500) NOT NULL default '',
-    primary key (resource_id),
-    index resource_name (resource_name),
-    index resource_url (resource_url)
+    primary key (resource_url),
+    index resource_name (resource_name)
 ) ENGINE = InnoDB
   DEFAULT charset = utf8mb4;
 
-# 某种类型对应的资源列表的所有资源
-create table resource_resourcelist_resourcetype
+# resource类型
+create table resource_resourcetype
 (
-    resource_id                  int(10) NOT NULL,
-    resourcelist_resourcetype_id int(10) NOT NULL,
-    primary key (resource_id, resourcelist_resourcetype_id),
-    foreign key (resource_id) references resource (resource_id),
-    foreign key (resourcelist_resourcetype_id) references resourcelist_resourcetype (resourcelist_resourcetype_id)
+    resource_url    varchar(500) NOT NULL,
+    resourcetype_id int(3)       NOT NULL,
+    primary key (resource_url, resourcetype_id),
+    foreign key (resource_url) references resource (resource_url),
+    foreign key (resourcetype_id) references resourcetype (resourcetype_id)
+) ENGINE = InnoDB
+  DEFAULT charset = utf8mb4;
+
+# resource所属resourcelsit
+create table resource_resourcelist
+(
+    resource_url    varchar(500) NOT NULL,
+    resourcelist_id int(10)      NOT NULL,
+    primary key (resource_url, resourcelist_id),
+    foreign key (resource_url) references resource (resource_url),
+    foreign key (resourcelist_id) references resourcelist (resourcelist_id)
 ) ENGINE = InnoDB
   DEFAULT charset = utf8mb4;

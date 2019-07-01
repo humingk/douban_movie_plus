@@ -1,23 +1,23 @@
 package org.humingk.movie.entity;
 
 public class KeywordMoviefrom {
-    private Integer keywordId;
+    private String keywordContent;
 
-    private Integer moviefromId;
+    private String moviefromUrl;
 
-    public Integer getKeywordId() {
-        return keywordId;
+    public String getKeywordContent() {
+        return keywordContent;
     }
 
-    public void setKeywordId(Integer keywordId) {
-        this.keywordId = keywordId;
+    public void setKeywordContent(String keywordContent) {
+        this.keywordContent = keywordContent == null ? null : keywordContent.trim();
     }
 
-    public Integer getMoviefromId() {
-        return moviefromId;
+    public String getMoviefromUrl() {
+        return moviefromUrl;
     }
 
-    public void setMoviefromId(Integer moviefromId) {
-        this.moviefromId = moviefromId;
+    public void setMoviefromUrl(String moviefromUrl) {
+        this.moviefromUrl = moviefromUrl == null ? null : moviefromUrl.trim();
     }
 }

@@ -2,35 +2,33 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.humingk.movie.mapper.KeywordMapper">
   <resultMap id="BaseResultMap" type="org.humingk.movie.entity.Keyword">
-    <id column="keyword_id" jdbcType="INTEGER" property="keywordId" />
-    <result column="keyword_content" jdbcType="CHAR" property="keywordContent" />
+    <id column="keyword_content" jdbcType="CHAR" property="keywordContent" />
     <result column="moviemap_flag" jdbcType="INTEGER" property="moviemapFlag" />
     <result column="resourcelist_flag" jdbcType="INTEGER" property="resourcelistFlag" />
   </resultMap>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from keyword
-    where keyword_id = #{keywordId,jdbcType=INTEGER}
+    where keyword_content = #{keywordContent,jdbcType=CHAR}
   </delete>
   <insert id="insert" parameterType="org.humingk.movie.entity.Keyword">
-    insert into keyword (keyword_id, keyword_content, moviemap_flag, 
-      resourcelist_flag)
-    values (#{keywordId,jdbcType=INTEGER}, #{keywordContent,jdbcType=CHAR}, #{moviemapFlag,jdbcType=INTEGER}, 
-      #{resourcelistFlag,jdbcType=INTEGER})
+    insert into keyword (keyword_content, moviemap_flag, resourcelist_flag
+      )
+    values (#{keywordContent,jdbcType=CHAR}, #{moviemapFlag,jdbcType=INTEGER}, #{resourcelistFlag,jdbcType=INTEGER}
+      )
   </insert>
   <update id="updateByPrimaryKey" parameterType="org.humingk.movie.entity.Keyword">
     update keyword
-    set keyword_content = #{keywordContent,jdbcType=CHAR},
-      moviemap_flag = #{moviemapFlag,jdbcType=INTEGER},
+    set moviemap_flag = #{moviemapFlag,jdbcType=INTEGER},
       resourcelist_flag = #{resourcelistFlag,jdbcType=INTEGER}
-    where keyword_id = #{keywordId,jdbcType=INTEGER}
+    where keyword_content = #{keywordContent,jdbcType=CHAR}
   </update>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select keyword_id, keyword_content, moviemap_flag, resourcelist_flag
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select keyword_content, moviemap_flag, resourcelist_flag
     from keyword
-    where keyword_id = #{keywordId,jdbcType=INTEGER}
+    where keyword_content = #{keywordContent,jdbcType=CHAR}
   </select>
   <select id="selectAll" resultMap="BaseResultMap">
-    select keyword_id, keyword_content, moviemap_flag, resourcelist_flag
+    select keyword_content, moviemap_flag, resourcelist_flag
     from keyword
   </select>
 </mapper>
