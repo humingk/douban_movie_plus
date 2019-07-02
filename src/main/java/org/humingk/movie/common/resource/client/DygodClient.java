@@ -1,10 +1,9 @@
 package org.humingk.movie.common.resource.client;
 
 import org.humingk.movie.common.resource.AbstractMovieResourceAdapter;
-import org.humingk.movie.common.resource.pojo.site.DygodResource;
-import org.humingk.movie.common.resource.pojo.Movie;
-import org.humingk.movie.common.resource.pojo.MovieMap;
-import org.humingk.movie.common.resource.pojo.Resource;
+import org.humingk.movie.common.resource.type.ClientType;
+import org.humingk.movie.entity.Resource;
+import org.humingk.movie.entity.Search;
 import org.jsoup.Connection;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
@@ -12,7 +11,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.net.URLEncoder;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -29,70 +27,55 @@ public class DygodClient extends AbstractMovieResourceAdapter {
     private static final String BASE_URL = "https://www.dygod.net";
 
     /**
-     * 获取电影搜索列表
+     * 通过关键字获取电影搜索结果
      *
      * @param keyword 搜索关键字
-     * @param max     搜索结果保留最大数
+     * @param max     每个网站电影搜索结果最大数
      */
     @Override
-    public MovieMap<DygodClient> getMovieMap(String keyword, int max) {
-        MovieMap<DygodClient> result = null;
-        List<Movie> movies = null;
+    public List<Search> getMovieSearch(String keyword, int max) {
+        List<Search> result = null;
         String url = BASE_URL + "/e/search/index.php";
         try {
             String data = "show=title&tempid=1&keyboard=" + URLEncoder.encode(keyword, "gb2312") + "&Submit=%C1%A2%BC%B4%CB%D1%CB%F7";
             Document doc = httpUrlConnRequest(url, data, "POST");
             Elements movieList = doc.select("table.tbspan a");
             if (movieList.size() != 0) {
-                result = new MovieMap<>(keyword,DygodClient.class);
-                movies = new ArrayList<>();
-                for (int i = 0; i < max && i < movieList.size(); i++) {
-                    String movieName = movieList.get(i).attr("title");
-                    String movieUrl = BASE_URL + movieList.get(i).attr("href");
-                    movies.add(new Movie(movieName, movieUrl));
-                    logger.debug("(电影天堂)获取电影 " + movieName + " ...url: " + movieUrl);
-                }
-                result.setMovies(movies);
+                // 解析搜索页面
+                result = parseSearch(keyword, ClientType.CLIENT_DYGOD, max, BASE_URL, movieList);
                 logger.debug("(电影天堂)获取电影搜索列表成功,共 " + movieList.size() + " 条...keyword: " + keyword);
-            } else {
-                logger.debug("(电影天堂)获取电影搜索列表失败...keyword: " + keyword);
             }
         } catch (Exception e) {
-            logger.error("", e);
+            logger.error("(电影天堂)获取电影搜索列表失败...keyword: " + keyword, e);
         }
         return result;
     }
 
+
     /**
-     * 通过指定电影url获取资源
+     * 通过电影url获取电影资源
      *
-     * @param moviePojo
+     * @param search 搜索页面信息
      * @return
      */
     @Override
-    public DygodResource getMovie(Movie moviePojo) {
-        String movieName = moviePojo.getMovieName();
-        String movieUrl = moviePojo.getMovieUrl();
-        DygodResource result = null;
+    public List<Resource> getMovieResource(Search search) {
+        List<Resource> result = null;
         try {
-            Document doc = jsoupRequest(movieUrl, Connection.Method.GET);
+            Document doc = jsoupRequest(search.getMovieUrl(), Connection.Method.GET);
             Elements movieList = doc.select("div#Zoom table a");
             if (movieList.size() != 0) {
-                result = new DygodResource();
-                result.setMovie(moviePojo);
-                // 资源分类
-                List<Resource> thunder = new ArrayList<>();
-                List<Resource> magnet = new ArrayList<>();
                 // 解析迅雷链接和磁力链接
-                parseResource(movieList, thunder, magnet);
-                result.setThunder(thunder);
-                result.setMagnet(magnet);
-                logger.debug("(电影天堂)获取电影资源成功,共 " + movieList.size() + " 条...movieName: " + movieName);
-            } else {
-                logger.debug("(电影天堂)获取电影资源失败...movieName: " + movieName);
+                result = parseMagnetAndThunder(search.getKeyword(), ClientType.CLIENT_DYGOD, movieList);
+                logger.debug("(电影天堂)获取电影资源成功...keyword: " + search.getKeyword()
+                        + " size: " + movieList.size()
+                        + " movieName: " + search.getMovieName() +
+                        " movieUrl: " + search.getMovieUrl());
             }
         } catch (Exception e) {
-            logger.error("", e);
+            logger.error("(电影天堂)获取电影资源失败...keyword: " + search.getKeyword()
+                    + " movieName: " + search.getMovieName() +
+                    " movieUrl: " + search.getMovieUrl(), e);
         }
         return result;
     }

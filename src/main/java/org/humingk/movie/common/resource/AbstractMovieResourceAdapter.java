@@ -1,9 +1,12 @@
 package org.humingk.movie.common.resource;
 
-import org.humingk.movie.common.resource.pojo.Resource;
+import org.humingk.movie.common.resource.type.ResourceType;
+import org.humingk.movie.entity.Resource;
+import org.humingk.movie.entity.Search;
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,6 +15,7 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -21,26 +25,15 @@ import java.util.Map;
  * <p>
  * 子类必须实现的两个方法
  * <p>
- * 1. getMovieMap() 获取电影表列表
+ * 1. getMovieSearch() 获取电影搜索结果
  * <p>
- * 2. getMovie() 获取电影资源
+ * 2. getMovieResource() 获取电影资源
  *
  * @author lzx
  * @author humingk
  */
 public abstract class AbstractMovieResourceAdapter implements MovieResourceTarget {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
-    /**
-     * 以thunder开头
-     */
-    private static final String THUNDER_START = "thunder";
-    /**
-     * 以magnet开头
-     */
-    private static final String MAGNET_START = "magnet";
-    /**
-     * 请求头
-     */
     private static final Map<String, String> headers = new HashMap<String, String>() {{
         put("accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3");
         put("content-type", "application/x-www-form-urlencoded");
@@ -48,26 +41,60 @@ public abstract class AbstractMovieResourceAdapter implements MovieResourceTarge
     }};
 
     /**
-     * 解析 MovieAllResource 为迅雷链接与磁力链接
+     * 解析搜索页面
      *
+     * @param keyword
+     * @param clientType
+     * @param max
+     * @param base_url
      * @param elements
-     * @param thunders
-     * @param magnets
+     * @return
      */
     @Override
-    public void parseResource(Elements elements, List<Resource> thunders, List<Resource> magnets) {
-        for (int i = 0; i < elements.size(); i++) {
-            String resourceName = elements.get(i).attr("title");
-            String resourceUrl = elements.get(i).attr("href");
-            Resource resource = new Resource(resourceName, resourceUrl);
-            if (resourceUrl.startsWith(THUNDER_START)) {
-                thunders.add(resource);
-            } else if (resourceUrl.startsWith(MAGNET_START)) {
-                magnets.add(resource);
+    public List<Search> parseSearch(String keyword, int clientType, int max, String base_url, Elements elements) {
+        List<Search> result = new ArrayList<>();
+        for (int i = 0; i < max && i < elements.size(); i++) {
+            String movieName = elements.get(i).attr("title");
+            String movieUrl = null;
+            if (base_url == "fullpath") {
+                movieUrl = elements.get(i).attr("href");
+            } else {
+                movieUrl = base_url + elements.get(i).attr("href");
             }
-            logger.debug("获取电影资源...resourceName: " + resourceName);
-            logger.debug("获取电影资源...resourceUrl: " + resourceUrl);
+            result.add(new Search(keyword, movieName, movieUrl, clientType));
         }
+        logger.debug("获取电影搜索列表成功,clientType:" + clientType + " keyword: " + keyword + "size: " + elements.size());
+        return result;
+    }
+
+
+    /**
+     * 解析磁力资源和迅雷资源
+     *
+     * @param keywrod
+     * @param clientType
+     * @param elements
+     * @return
+     */
+    @Override
+    public List<Resource> parseMagnetAndThunder(String keywrod, int clientType, Elements elements) throws Exception {
+        List<Resource> result = new ArrayList<>();
+        for (Element element : elements) {
+            String resourceName = element.attr("title");
+            String resourceUrl = element.attr("href");
+            Resource resource = new Resource(resourceName, resourceUrl);
+            if (resourceUrl.startsWith("thunder")) {
+                resource.setResourceType(ResourceType.RESOURCE_THUNDER);
+            } else if (resourceUrl.startsWith("magnet")) {
+                resource.setResourceType(ResourceType.RESOURCE_MAGNET);
+            } else {
+                resource.setResourceType(ResourceType.RESOURCE_UNKNOWN);
+            }
+            resource.setKeyword(keywrod);
+            resource.setClientType(clientType);
+            result.add(resource);
+        }
+        return result;
     }
 
     /**
@@ -77,20 +104,13 @@ public abstract class AbstractMovieResourceAdapter implements MovieResourceTarge
      * @param method 请求类型 默认get
      */
     @Override
-    public Document jsoupRequest(String url, Connection.Method method) {
-        Document doc = null;
-        // 获取网页
-        try {
-            doc = Jsoup.connect(url)
-                    .header("accept", headers.get("accept"))
-                    .header("user-agent", headers.get("user-Agent"))
-                    .header("content-type", headers.get("content-type"))
-                    .method(method)
-                    .get();
-        } catch (Exception e) {
-            logger.error("", e);
-        }
-        return doc;
+    public Document jsoupRequest(String url, Connection.Method method) throws Exception {
+        return Jsoup.connect(url)
+                .header("accept", headers.get("accept"))
+                .header("user-agent", headers.get("user-Agent"))
+                .header("content-type", headers.get("content-type"))
+                .method(method)
+                .get();
     }
 
     /**
@@ -101,30 +121,24 @@ public abstract class AbstractMovieResourceAdapter implements MovieResourceTarge
      * @param method 请求类型 默认get
      */
     @Override
-    public Document httpUrlConnRequest(String url, String data, String method) {
-        Document doc = null;
-        try {
-            URL realUrl = new URL(url);
-            // 打开和URL之间的连接
-            HttpURLConnection conn = (HttpURLConnection) realUrl.openConnection();
-            // 发送POST请求必须设置如下两行
-            conn.setDoOutput(true);
-            conn.setDoInput(true);
-            // 提交模式
-            conn.setRequestMethod(method);
-            conn.addRequestProperty("accept", headers.get("accept"));
-            conn.addRequestProperty("content-type", headers.get("content-type"));
-            conn.addRequestProperty("user-Agent", headers.get("user-Agent"));
-            OutputStream outStream = conn.getOutputStream();
-            OutputStreamWriter out = new OutputStreamWriter(outStream);
-            //参数输出
-            out.write(data);
-            // flush输出流的缓冲
-            out.flush();
-            doc = Jsoup.parse(conn.getInputStream(), "GBK", url);
-        } catch (Exception e) {
-            logger.error("", e);
-        }
-        return doc;
+    public Document httpUrlConnRequest(String url, String data, String method) throws Exception {
+        URL realUrl = new URL(url);
+        // 打开和URL之间的连接
+        HttpURLConnection conn = (HttpURLConnection) realUrl.openConnection();
+        // 发送POST请求必须设置如下两行
+        conn.setDoOutput(true);
+        conn.setDoInput(true);
+        // 提交模式
+        conn.setRequestMethod(method);
+        conn.addRequestProperty("accept", headers.get("accept"));
+        conn.addRequestProperty("content-type", headers.get("content-type"));
+        conn.addRequestProperty("user-Agent", headers.get("user-Agent"));
+        OutputStream outStream = conn.getOutputStream();
+        OutputStreamWriter out = new OutputStreamWriter(outStream);
+        //参数输出
+        out.write(data);
+        // flush输出流的缓冲
+        out.flush();
+        return Jsoup.parse(conn.getInputStream(), "GBK", url);
     }
 }

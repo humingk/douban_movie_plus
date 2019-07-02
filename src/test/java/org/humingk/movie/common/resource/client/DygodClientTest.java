@@ -1,24 +1,27 @@
 package org.humingk.movie.common.resource.client;
 
 import org.humingk.movie.baseTest;
-import org.humingk.movie.common.resource.pojo.Movie;
-import org.humingk.movie.common.resource.pojo.MovieMap;
-import org.humingk.movie.common.resource.pojo.site.DygodResource;
+import org.humingk.movie.entity.Resource;
+import org.humingk.movie.entity.Search;
 import org.junit.Test;
+
+import java.util.List;
 
 public class DygodClientTest extends baseTest {
 
     @Test
-    public void getMovieList() {
+    public void getMovieSearch() {
     }
 
     @Test
-    public void getMovie() {
-        MovieMap<DygodClient> movieMap = new DygodClient().getMovieMap("星际穿越", 3);
-        for (Movie movie : movieMap.getMovies()) {
-            System.out.println(movie.getMovieName() + " " + movie.getMovieUrl());
-            DygodResource dygodResource=new DygodClient().getMovie(movie);
-            System.out.println();
+    public void getMovieResource() {
+        List<Search> searcheList = new DygodClient().getMovieSearch("星际穿越", 3);
+        for (Search search : searcheList) {
+            System.out.println(search.toString());
+            List<Resource> resourceList = new DygodClient().getMovieResource(search);
+            for (Resource resource : resourceList) {
+                System.out.println(resource.toString());
+            }
         }
     }
 }

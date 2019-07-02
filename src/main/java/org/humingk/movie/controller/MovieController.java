@@ -3,9 +3,8 @@ package org.humingk.movie.controller;
 import org.humingk.movie.common.AddSession;
 import org.humingk.movie.common.MovieAll;
 import org.humingk.movie.common.Result;
-import org.humingk.movie.common.resource.AbstractMovieResourceAdapter;
-import org.humingk.movie.common.resource.pojo.MovieAllResource;
-import org.humingk.movie.common.resource.pojo.MovieMap;
+import org.humingk.movie.entity.Resource;
+import org.humingk.movie.entity.Search;
 import org.humingk.movie.service.MovieService;
 import org.humingk.movie.service.ResourceService;
 import org.humingk.movie.service.UserService;
@@ -113,17 +112,17 @@ public class MovieController {
         try {
             // 请求电影表列表
             if (requestType == 0) {
-                List<MovieMap<? extends AbstractMovieResourceAdapter>> movieMapList =
-                        resourceService.getResourceMapList(keyword, dateType, 3, 5);
-                if (movieMapList != null) {
-                    return Result.createMessage(200, "success", movieMapList);
+                List<Search> searchList =
+                        resourceService.getResourceSearch(keyword, dateType, 3, 5);
+                if (searchList != null) {
+                    return Result.createMessage(200, "success", searchList);
                 }
             }
             // 请求电影资源
             else if (requestType == 1) {
-                MovieAllResource movieAllResource = resourceService.getMovieAllResource(keyword, dateType, 10);
-                if (movieAllResource != null) {
-                    return Result.createMessage(200, "success", movieAllResource);
+                List<Resource> resourceList = resourceService.getResourceAll(keyword, dateType, 10);
+                if (resourceList != null) {
+                    return Result.createMessage(200, "success", resourceList);
                 }
             }
         } catch (Exception e) {

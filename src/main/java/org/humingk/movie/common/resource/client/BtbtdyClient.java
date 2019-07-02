@@ -1,10 +1,10 @@
 package org.humingk.movie.common.resource.client;
 
 import org.humingk.movie.common.resource.AbstractMovieResourceAdapter;
-import org.humingk.movie.common.resource.pojo.Movie;
-import org.humingk.movie.common.resource.pojo.MovieMap;
-import org.humingk.movie.common.resource.pojo.Resource;
-import org.humingk.movie.common.resource.pojo.site.BtbtdyResource;
+import org.humingk.movie.common.resource.type.ClientType;
+import org.humingk.movie.common.resource.type.ResourceType;
+import org.humingk.movie.entity.Resource;
+import org.humingk.movie.entity.Search;
 import org.jsoup.Connection;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -35,25 +35,23 @@ public class BtbtdyClient extends AbstractMovieResourceAdapter {
     private static final Pattern URL_ID = Pattern.compile("(\\d+)");
 
     /**
-     * 获取电影搜索列表
+     * 通过关键字获取电影搜索结果
      *
      * @param keyword 搜索关键字
-     * @param max     搜索结果保留最大数
+     * @param max     每个网站电影搜索结果最大数
      */
     @Override
-    public MovieMap<BtbtdyClient> getMovieMap(String keyword, int max) {
-        MovieMap<BtbtdyClient> result = null;
-        List<Movie> movies = null;
+    public List<Search> getMovieSearch(String keyword, int max) {
+        List<Search> result = null;
         String url = BASE_URL + "/search/" + keyword + ".html";
         try {
             // 获取电影搜索网页
             Document doc = jsoupRequest(url, Connection.Method.GET);
-            // 解析搜索页面，获取每部电影的链接
             Elements elements = doc.getElementsByClass("list_so");
             Elements movieList = elements.select("dd.lf a");
             if (movieList.size() != 0) {
-                result = new MovieMap<>(keyword, BtbtdyClient.class);
-                movies = new ArrayList<>();
+                result = new ArrayList<>();
+                // 解析搜索页面，获取每部电影的链接
                 for (int i = 0; i < max && i < movieList.size(); i++) {
                     String movieName = movieList.get(i).attr("title");
                     // 用正则表达式匹配url中的电影ID
@@ -62,93 +60,78 @@ public class BtbtdyClient extends AbstractMovieResourceAdapter {
                         int movieId = Integer.valueOf(matcher.group(0));
                         // 拼接新的电影url
                         String movieUrl = BASE_URL + "/vidlist/" + movieId + ".html";
-                        movies.add(new Movie(movieName, movieUrl));
-                        logger.debug("(BT电影天堂)获取电影 " + movieName + " ...url: " + movieUrl);
+                        result.add(new Search(keyword, movieName, movieUrl, ClientType.CLIENT_BTBTDY));
                     }
                 }
-                result.setMovies(movies);
                 logger.debug("(BT电影天堂)获取电影搜索列表成功,共 " + movieList.size() + " 条...keyword: " + keyword);
-            } else {
-                logger.debug("(BT电影天堂)获取电影搜索列表失败...keyword: " + keyword);
             }
         } catch (Exception e) {
-            logger.error("", e);
+            logger.error("(BT电影天堂)获取电影搜索列表失败...keyword: " + keyword, e);
         }
         return result;
     }
 
     /**
-     * 通过指定电影url获取资源
+     * 通过电影url获取电影资源
      *
-     * @param moviePojo
+     * @param search 搜索页面信息
      * @return
      */
     @Override
-    public BtbtdyResource getMovie(Movie moviePojo) {
-        String movieName = moviePojo.getMovieName();
-        String movieUrl = moviePojo.getMovieUrl();
-        BtbtdyResource result = null;
+    public List<Resource> getMovieResource(Search search) {
+        List<Resource> result = null;
+        String keyword = search.getKeyword();
         try {
-            Document doc = jsoupRequest(movieUrl, Connection.Method.GET);
+            Document doc = jsoupRequest(search.getMovieUrl(), Connection.Method.GET);
             if (doc != null) {
-                result = new BtbtdyResource();
-                result.setMovie(moviePojo);
-                //不同清晰度的下载链接列表
-                List<Resource> p720 = new ArrayList<>();
-                List<Resource> p1080 = new ArrayList<>();
-                List<Resource> k4 = new ArrayList<>();
-                List<Resource> blue = new ArrayList<>();
-                List<Resource> ed2k = new ArrayList<>();
-                List<Resource> unknown = new ArrayList<>();
-                // 解析电影网页，获取资源清晰度类别
+                result = new ArrayList<>();
+                // 解析电影网页
                 Elements typeList = doc.select("div.p_list");
                 for (Element type : typeList) {
                     String resourceType = type.select("h2").text();
-                    // 获取资源名称和下载链接，它们的a标签是分开的，故分别获取两个列表
                     Elements nameList = type.select("a[class^=ico]");
                     Elements urlList = type.select("a.d1");
-                    List<Resource> resources = new ArrayList<>();
                     if (nameList.size() != 0 && urlList.size() != 0) {
                         for (int i = 0; i < nameList.size() && i < urlList.size(); i++) {
                             String resourceUrl = urlList.get(i).attr("href");
                             String resourceName = nameList.get(i).attr("title");
+                            // 资源表
                             Resource resource = new Resource(resourceName, resourceUrl);
-                            resources.add(resource);
+                            resource.setKeyword(keyword);
+                            resource.setClientType(ClientType.CLIENT_BTBTDY);
+                            int resourceTypeId = ResourceType.RESOURCE_UNKNOWN;
+                            // 根据资源的清晰度，对链接分类
+                            switch (resourceType) {
+                                case "720p下载地址":
+                                    resourceTypeId = ResourceType.RESOURCE_P720;
+                                    break;
+                                case "1080p下载地址":
+                                    resourceTypeId = ResourceType.RESOURCE_P1080;
+                                    break;
+                                case "ED2K下载地址":
+                                    resourceTypeId = ResourceType.RESOURCE_ED2K;
+                                    break;
+                                case "4k下载地址":
+                                    resourceTypeId = ResourceType.RESOURCE_K4;
+                                    break;
+                                case "蓝光原盘下载地址":
+                                    resourceTypeId = ResourceType.RESOURCE_BLUE;
+                                    break;
+                            }
+                            resource.setResourceType(resourceTypeId);
+                            result.add(resource);
                         }
-                        logger.debug("(BT电影天堂)获取电影资源成功,共 " + nameList.size() + " 条...movieName: " + movieName + "...type:" + resourceType);
-                        // 根据资源的清晰度，对链接分类
-                        switch (resourceType) {
-                            case BtbtdyResource.P720_TYPE:
-                                p720.addAll(resources);
-                                break;
-                            case BtbtdyResource.P1080_TYPE:
-                                p1080.addAll(resources);
-                                break;
-                            case BtbtdyResource.ED2K_TYPE:
-                                ed2k.addAll(resources);
-                                break;
-                            case BtbtdyResource.K4_TYPE:
-                                k4.addAll(resources);
-                                break;
-                            case BtbtdyResource.BLUE_TYPE:
-                                blue.addAll(resources);
-                                break;
-                            default:
-                                unknown.addAll(resources);
-                        }
-                    } else {
-                        logger.debug("(BT电影天堂)获取电影资源失败...movieName: " + movieName);
                     }
                 }
-                result.setP720(p720);
-                result.setP1080(p1080);
-                result.setEd2k(ed2k);
-                result.setK4(k4);
-                result.setBlue(blue);
-                result.setUnknown(unknown);
+                logger.debug("(BT电影天堂)获取电影资源成功...keyword: " + search.getKeyword()
+                        + " size: " + typeList.size()
+                        + " movieName: " + search.getMovieName() +
+                        " movieUrl: " + search.getMovieUrl());
             }
         } catch (Exception e) {
-            logger.error("", e);
+            logger.error("(BT电影天堂)获取电影资源失败...keyword: " + search.getKeyword()
+                    + " movieName: " + search.getMovieName() +
+                    " movieUrl: " + search.getMovieUrl(), e);
         }
         return result;
     }

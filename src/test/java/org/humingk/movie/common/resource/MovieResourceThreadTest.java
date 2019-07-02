@@ -1,26 +1,30 @@
 package org.humingk.movie.common.resource;
 
 import org.humingk.movie.baseTest;
-import org.humingk.movie.common.resource.pojo.MovieAllResource;
-import org.humingk.movie.common.resource.pojo.MovieMap;
+import org.humingk.movie.entity.Resource;
+import org.humingk.movie.entity.Search;
 import org.junit.Test;
 
 import java.util.List;
 
+import static org.junit.Assert.*;
+
 public class MovieResourceThreadTest extends baseTest {
 
     @Test
-    public void getMovieMapListByKeyword() {
-        List<MovieMap<? extends AbstractMovieResourceAdapter>> movieMapList =
-                new MovieResourceThread().getMovieMapListByKeyword("星际穿越", 3, 5);
-        System.out.println();
+    public void getResourceSearch() {
     }
 
     @Test
-    public void getMovieResourceByMovieMapList() {
-        List<MovieMap<? extends AbstractMovieResourceAdapter>> movieMapList =
-                new MovieResourceThread().getMovieMapListByKeyword("星际穿越", 3, 5);
-        MovieAllResource movieAllResource = new MovieResourceThread().getMovieResourceByMovieMapList(5, movieMapList);
-        System.out.println();
+    public void getResourceAll() {
+        List<Search> searchList = new MovieResourceThread().getResourceSearch("星际穿越", 3, 5);
+        for (Search search : searchList) {
+            System.out.println(search.toString());
+        }
+        System.out.println("---------------------------------");
+        List<Resource> resourceList = new MovieResourceThread().getResourceAll(10, searchList);
+        for (Resource resource : resourceList) {
+            System.out.println(resource.toString());
+        }
     }
 }

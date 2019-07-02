@@ -1,24 +1,27 @@
 package org.humingk.movie.common.resource.client;
 
 import org.humingk.movie.baseTest;
-import org.humingk.movie.common.resource.pojo.Movie;
-import org.humingk.movie.common.resource.pojo.MovieMap;
-import org.humingk.movie.common.resource.pojo.site.BtbtdyResource;
+import org.humingk.movie.entity.Resource;
+import org.humingk.movie.entity.Search;
 import org.junit.Test;
+
+import java.util.List;
 
 public class BtbtdyClientTest extends baseTest {
 
     @Test
-    public void getMovieList() {
+    public void getMovieSearch() {
     }
 
     @Test
-    public void getMovie() {
-        MovieMap<BtbtdyClient> movieMap = new BtbtdyClient().getMovieMap("星际穿越", 3);
-        for (Movie movie : movieMap.getMovies()) {
-            System.out.println(movie.getMovieName() + " " + movie.getMovieUrl());
-            BtbtdyResource btbtdyResource=new BtbtdyClient().getMovie(movie);
-            System.out.println();
+    public void getMovieResource() {
+        List<Search> searcheList = new BtbtdyClient().getMovieSearch("星际穿越", 3);
+        for (Search search : searcheList) {
+            System.out.println(search.toString());
+            List<Resource> resourceList = new BtbtdyClient().getMovieResource(search);
+            for (Resource resource : resourceList) {
+                System.out.println(resource.toString());
+            }
         }
     }
 }

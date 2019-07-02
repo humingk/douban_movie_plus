@@ -354,19 +354,8 @@
         <!--所有table已添加 被注释-->
         <!--        资源-->
         <table schema="douban_movie" tableName="keyword" domainObjectName="Keyword"></table>
-        <table schema="douban_movie" tableName="moviefrom" domainObjectName="Moviefrom"></table>
-        <table schema="douban_movie" tableName="keyword_moviefrom" domainObjectName="KeywordMoviefrom"></table>
-        <table schema="douban_movie" tableName="resourcelist" domainObjectName="Resourcelist"></table>
-        <table schema="douban_movie" tableName="resourcelist_moviefrom"
-               domainObjectName="ResourcelistMoviefrom"></table>
-        <table schema="douban_movie" tableName="resourcetype" domainObjectName="Resourcetype"></table>
-        <table schema="douban_movie" tableName="resourcelist_resourcetype"
-               domainObjectName="ResourcelistResourcetype"></table>
+        <table schema="douban_movie" tableName="search" domainObjectName="Search"></table>
         <table schema="douban_movie" tableName="resource" domainObjectName="Resource"></table>
-        <table schema="douban_movie" tableName="resource_resourcetype"
-               domainObjectName="ResourceResourcetype"></table>
-        <table schema="douban_movie" tableName="resource_resourcelist"
-               domainObjectName="ResourceResourcelist"></table>
 
     </context>
 </generatorConfiguration>

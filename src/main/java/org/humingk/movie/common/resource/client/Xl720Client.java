@@ -1,17 +1,15 @@
 package org.humingk.movie.common.resource.client;
 
 import org.humingk.movie.common.resource.AbstractMovieResourceAdapter;
-import org.humingk.movie.common.resource.pojo.Movie;
-import org.humingk.movie.common.resource.pojo.MovieMap;
-import org.humingk.movie.common.resource.pojo.Resource;
-import org.humingk.movie.common.resource.pojo.site.Xl720Resource;
+import org.humingk.movie.common.resource.type.ClientType;
+import org.humingk.movie.entity.Resource;
+import org.humingk.movie.entity.Search;
 import org.jsoup.Connection;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -22,24 +20,19 @@ import java.util.List;
 public class Xl720Client extends AbstractMovieResourceAdapter {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     /**
-     * client类型
-     */
-    public static final String CLIENT_TYPE = "xl720";
-    /**
      * 基本 url
      */
     private static final String BASE_URL = "https://www.xl720.com";
 
     /**
-     * 获取电影搜索列表
+     * 通过关键字获取电影搜索结果
      *
      * @param keyword 搜索关键字
-     * @param max     搜索结果保留最大数
+     * @param max     每个网站电影搜索结果最大数
      */
     @Override
-    public MovieMap<Xl720Client> getMovieMap(String keyword, int max) {
-        MovieMap<Xl720Client> result = null;
-        List<Movie> movies = null;
+    public List<Search> getMovieSearch(String keyword, int max) {
+        List<Search> result = null;
         String url = BASE_URL + "/?s=" + keyword;
         try {
             // 获取电影搜索网页
@@ -48,56 +41,42 @@ public class Xl720Client extends AbstractMovieResourceAdapter {
             Elements elements = doc.getElementsByClass("entry-title  postli-1");
             Elements movieList = elements.select("a");
             if (movieList.size() != 0) {
-                result = new MovieMap<>(keyword, Xl720Client.class);
-                movies = new ArrayList<>();
-                for (int i = 0; i < max && i < movieList.size(); i++) {
-                    String movieName = movieList.get(i).attr("title");
-                    String movieUrl = movieList.get(i).attr("href");
-                    movies.add(new Movie(movieName, movieUrl));
-                    logger.debug("(迅雷电影天堂)获取电影 " + movieName + " ...keyword: " + keyword);
-                }
-                result.setMovies(movies);
-                logger.debug("(迅雷电影天堂)获取电影搜索列表成功,共 " + movieList.size() + " 条...keyword: " + keyword);
-            } else {
-                logger.debug("(迅雷电影天堂)获取电影搜索列表失败...keyword: " + keyword);
+                // 解析搜索页面
+                result = parseSearch(keyword, ClientType.CLIENT_XL720, max, "fullpath", movieList);
+                logger.debug("(Xl720)获取电影搜索列表成功,共 " + movieList.size() + " 条...keyword: " + keyword);
             }
         } catch (Exception e) {
-            logger.error("", e);
+            logger.error("(Xl720)获取电影搜索列表失败...keyword: " + keyword, e);
         }
         return result;
     }
 
     /**
-     * 通过指定电影url获取资源
+     * 通过电影url获取电影资源
      *
-     * @param moviePojo
+     * @param search 搜索页面信息
      * @return
      */
     @Override
-    public Xl720Resource getMovie(Movie moviePojo) {
-        String movieName = moviePojo.getMovieName();
-        String movieUrl = moviePojo.getMovieUrl();
-        Xl720Resource result = null;
+    public List<Resource> getMovieResource(Search search) {
+        List<Resource> result = null;
         try {
-            Document doc = jsoupRequest(movieUrl, Connection.Method.GET);
-            List<Resource> thunder = new ArrayList<>();
-            List<Resource> magnet = new ArrayList<>();
+            Document doc = jsoupRequest(search.getMovieUrl(), Connection.Method.GET);
             Elements movieList1 = doc.select("div.down_btn a");
             Elements movieList2 = doc.select("div.ztxt a");
             if (movieList1.size() != 0 || movieList2.size() != 0) {
-                result = new Xl720Resource();
-                result.setMovie(moviePojo);
                 // 解析迅雷链接和磁力链接
-                parseResource(movieList1, thunder, magnet);
-                parseResource(movieList2, thunder, magnet);
-                result.setThunder(thunder);
-                result.setMagnet(magnet);
-                logger.debug("(迅雷电影天堂)获取电影资源成功,共 " + (movieList1.size() + movieList2.size()) + " 条...movieName: " + movieName);
-            } else {
-                logger.debug("(迅雷电影天堂)获取电影资源失败...movieName: " + movieName);
+                result = parseMagnetAndThunder(search.getKeyword(), ClientType.CLIENT_XL720, movieList1);
+                result.addAll(parseMagnetAndThunder(search.getKeyword(), ClientType.CLIENT_XL720, movieList2));
+                logger.debug("(Xl720)获取电影资源成功...keyword: " + search.getKeyword()
+                        + " size: " + (movieList1.size() + movieList2.size())
+                        + " movieName: " + search.getMovieName() +
+                        " movieUrl: " + search.getMovieUrl());
             }
         } catch (Exception e) {
-            logger.error("", e);
+            logger.error("(Xl720)获取电影资源失败...keyword: " + search.getKeyword()
+                    + " movieName: " + search.getMovieName() +
+                    " movieUrl: " + search.getMovieUrl(), e);
         }
         return result;
     }

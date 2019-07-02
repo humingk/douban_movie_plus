@@ -1,19 +1,16 @@
 package org.humingk.movie.common.resource;
 
-import org.humingk.movie.common.resource.client.BtbtdyClient;
-import org.humingk.movie.common.resource.client.DygodClient;
-import org.humingk.movie.common.resource.client.LoldyttClient;
-import org.humingk.movie.common.resource.client.Xl720Client;
-import org.humingk.movie.common.resource.pojo.ClientResource;
-import org.humingk.movie.common.resource.pojo.Movie;
-import org.humingk.movie.common.resource.pojo.MovieAllResource;
-import org.humingk.movie.common.resource.pojo.MovieMap;
+import org.humingk.movie.common.resource.client.*;
+import org.humingk.movie.common.resource.type.ClientType;
+import org.humingk.movie.entity.Resource;
+import org.humingk.movie.entity.Search;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Future;
 
@@ -27,62 +24,54 @@ import static java.util.concurrent.Executors.newFixedThreadPool;
 public class MovieResourceThread {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     /**
-     * client列表
+     * client表
      */
-    List<AbstractMovieResourceAdapter> clients = Arrays.asList(
-            new BtbtdyClient(), new DygodClient(), new LoldyttClient(), new Xl720Client()
-    );
+    private Map<Integer, AbstractMovieResourceAdapter> clientMap;
 
-    /**
-     * 泛型对象实例化
-     *
-     * @param c
-     * @param <T>
-     * @return
-     * @throws InstantiationException
-     * @throws IllegalAccessException
-     */
-    private static <T> T newTclass(Class<T> c) throws InstantiationException, IllegalAccessException {
-        T t = c.newInstance();
-        return t;
+    public MovieResourceThread() {
+        clientMap = new LinkedHashMap<>();
+        clientMap.put(ClientType.CLIENT_BTBTDY, new BtbtdyClient());
+        clientMap.put(ClientType.CLIENT_DYGOD, new DygodClient());
+        clientMap.put(ClientType.CLIENT_LOLDYTT, new LoldyttClient());
+        clientMap.put(ClientType.CLIENT_XL720, new Xl720Client());
     }
 
     /**
-     * 通过关键字多线程获取电影表列表
+     * 通过关键字多线程获取电影搜索结果
      *
-     * @param keyword     搜索关键字
-     * @param movieMapMax 电影了列表中表中电影个数限制
-     * @param threadMax   线程最大数
+     * @param keyword        搜索关键字
+     * @param movieSearchMax 每个网站电影搜索结果最大数
+     * @param threadMax      线程最大数
      * @return
      */
-    public List<MovieMap<? extends AbstractMovieResourceAdapter>> getMovieMapListByKeyword(
-            String keyword, int movieMapMax, int threadMax) {
-        List<MovieMap<? extends AbstractMovieResourceAdapter>> result = null;
+    public List<Search> getResourceSearch(
+            String keyword, int movieSearchMax, int threadMax) {
+        List<Search> result = null;
         try {
             ExecutorService service = newFixedThreadPool(threadMax);
-            List<Future<MovieMap<? extends AbstractMovieResourceAdapter>>> futureList = new ArrayList<>();
+            List<Future<List<Search>>> futureList = new ArrayList<>();
             // 多线程添加任务
-            for (AbstractMovieResourceAdapter client : clients) {
-                Future<MovieMap<? extends AbstractMovieResourceAdapter>> future = service.submit(() ->
-                        client.getMovieMap(keyword, movieMapMax)
-                );
-                futureList.add(future);
+            for (int clientType : clientMap.keySet()) {
+                try {
+                    Future<List<Search>> future = service.submit(() ->
+                            clientMap.get(clientType).getMovieSearch(keyword, movieSearchMax)
+                    );
+                    futureList.add(future);
+                } catch (Exception e) {
+                    logger.error("多线程获取搜索结果，某网站失败,clientType: " + clientType, e);
+                }
             }
             // 多线程返回结果
             result = new ArrayList<>();
-            for (Future<MovieMap<? extends AbstractMovieResourceAdapter>> future : futureList) {
+            for (Future<List<Search>> future : futureList) {
                 if (future.get() != null) {
-                    result.add(future.get());
-                    // 测试
-                    System.out.println(future.get().getClientType());
-                    for (Movie movie : future.get().getMovies()) {
-                        System.out.println(movie.getMovieName() + " " + movie.getMovieUrl());
-                    }
+                    result.addAll(future.get());
                 }
             }
             service.shutdown();
+            logger.debug("多线程获取搜索结果成功,keyword:" + keyword + " size:" + result.size());
         } catch (Exception e) {
-            logger.error("", e);
+            logger.error("多线程获取搜索结果失败,keyword:" + keyword, e);
         }
         return result;
     }
@@ -90,40 +79,42 @@ public class MovieResourceThread {
     /**
      * 通过电影表列表多线程获取电影资源信息
      *
-     * @param threadMax    线程最大数
-     * @param movieMapList 电影表列表
+     * @param threadMax  线程最大数
+     * @param searchList 电影表列表
      * @return
      */
-    public MovieAllResource getMovieResourceByMovieMapList(
-            int threadMax, List<MovieMap<? extends AbstractMovieResourceAdapter>> movieMapList) {
-        MovieAllResource result = null;
+    public List<Resource> getResourceAll(
+            int threadMax, List<Search> searchList) {
+        List<Resource> result = null;
         String keyword = null;
-        List<ClientResource<? extends ClientResource>> resourceList = null;
         try {
             ExecutorService service = newFixedThreadPool(threadMax);
-            List<Future<ClientResource<? extends ClientResource>>> futureList = new ArrayList<>();
+            List<Future<List<Resource>>> futureList = new ArrayList<>();
             // 多线程添加任务
-            for (MovieMap<? extends AbstractMovieResourceAdapter> movieMap : movieMapList) {
-                for (Movie movie : movieMap.getMovies()) {
-                    Future<ClientResource<? extends ClientResource>> future = service.submit(() ->
-                            newTclass(movieMap.getClientType()).getMovie(movie)
+            for (Search search : searchList) {
+                try {
+
+                    Future<List<Resource>> future = service.submit(() ->
+                            clientMap.get(search.getClientType()).getMovieResource(search)
                     );
                     futureList.add(future);
+                } catch (Exception e) {
+                    logger.error("多线程获取电影资源，某电影页面失败,keyword: " + search.getKeyword()
+                            + " movieUrl: " + search.getMovieUrl(), e);
                 }
             }
             // 多线程返回结果
-            result = new MovieAllResource();
-            resourceList = new ArrayList<>();
-            for (Future<ClientResource<? extends ClientResource>> future : futureList) {
+            result = new ArrayList<>();
+            for (Future<List<Resource>> future : futureList) {
                 if (future.get() != null) {
-                    resourceList.add(future.get());
+                    result.addAll(future.get());
+                    keyword = future.get().get(0).getKeyword();
                 }
             }
-            result.setMovieMapList(movieMapList);
-            result.setResourceList(resourceList);
             service.shutdown();
+            logger.debug("多线程获取电影资源成功,keyword:" + keyword + " size:" + result.size());
         } catch (Exception e) {
-            logger.error("", e);
+            logger.error("多线程获取电影资源失败,keyword:" + keyword);
         }
         return result;
     }
