@@ -21,13 +21,13 @@ import java.util.List;
 @Controller
 @RequestMapping("/celebrity")
 public class ActorController {
-    private final Logger logger= LoggerFactory.getLogger(this.getClass());
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
     private ActorService actorService;
 
     /**
-     * 根据url中的actorId 返回Result,并携带actor
+     * 根据url中的actorId 返回actor
      *
      * @param actorId
      * @return
@@ -39,15 +39,15 @@ public class ActorController {
             actor = actorService.getActorByActorId(actorId);
             // 成功获取演员，返回电影信息
             if (actor != null) {
-                    logger.info("ID: " + actor.getActorId() + " Name: " + actor.getName() + " 有这个演员");
+                logger.debug("ID: " + actor.getActorId() + " Name: " + actor.getName() + " 有这个演员");
                 return Result.createMessage(200, "success", actor);
             }
             //获取演员失败，返回添加演员确认信息
             else {
-                logger.info("ID: " + actorId + " 没有这个演员");
+                logger.debug("ID: " + actorId + " 没有这个演员");
             }
         } catch (Exception e) {
-            logger.error("",e);
+            logger.error("", e);
         }
         return Result.createMessage(200, "fail", null);
 
@@ -56,38 +56,41 @@ public class ActorController {
     /**
      * 根据演员id返回该演员参与的所有电影
      *
-     * @param id
+     * @param actorId
      * @return
      */
     @RequestMapping(value = "getAllMoviesByActorId", method = RequestMethod.GET)
     @ResponseBody
-    public Result getAllMoviesByActorId(@RequestParam("id") String id){
-        try{
+    public Result getAllMoviesByActorId(@RequestParam("actorId") int actorId) {
+        try {
             //获取主演电影列表
-            List<List<Movie>> movies = actorService.getAllMoviesByActorId(Integer.parseInt(id));
-            return Result.createMessage(200,"success",movies);
+            List<Movie> movieList = actorService.getAllMoviesByActorId(actorId);
+            return Result.createMessage(200, "success", movieList);
         } catch (Exception e) {
-            logger.error("",e);
+            logger.error("", e);
         }
-        return Result.createMessage(200,"fail",null);
+        return Result.createMessage(200, "fail", null);
     }
 
     /**
      * 根据演员id返回与改演员合作的所有人员及电影
      *
-     * @param id
+     * @param actorId
+     * @param max     合作次数最大值
      * @return
      */
-    @RequestMapping(value = "getCoomovieByActorId", method = RequestMethod.GET)
+    @RequestMapping(value = "getCooperationActors", method = RequestMethod.GET)
     @ResponseBody
-    public Result getCoomovieByActorId(@RequestParam("id") String id){
-        try{
+    public Result getCooperationActors(@RequestParam("actorId") int actorId, @RequestParam("max") int max) {
+        try {
             //获取合作电影列表
-            List<CooperationActor> coomovieList = actorService.getCoomovieByActorId(Integer.parseInt(id));
-            return Result.createMessage(200,"success",coomovieList);
+            CooperationActor cooperationActor = actorService.getCoperationActor(actorId, max);
+            if (cooperationActor != null) {
+                return Result.createMessage(200, "success", cooperationActor);
+            }
         } catch (Exception e) {
-            logger.error("",e);
+            logger.error("", e);
         }
-        return Result.createMessage(200,"fail",null);
+        return Result.createMessage(200, "fail", null);
     }
 }

@@ -7,8 +7,6 @@ import org.junit.Test;
 
 import java.util.List;
 
-import static org.junit.Assert.*;
-
 public class MovieResourceThreadTest extends baseTest {
 
     @Test
@@ -17,7 +15,7 @@ public class MovieResourceThreadTest extends baseTest {
 
     @Test
     public void getResourceAll() {
-        List<Search> searchList = new MovieResourceThread().getResourceSearch("星际穿越", 3, 5);
+        List<Search> searchList = new MovieResourceThread().getResourceSearch("星际穿越", 1, 5);
         for (Search search : searchList) {
             System.out.println(search.toString());
         }

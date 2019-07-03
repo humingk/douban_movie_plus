@@ -15,6 +15,14 @@ public interface ActorService {
 
     /**
      * 根据演员id获取所有的电影
+     *
+     * @param actorId
+     * @return
+     */
+    List<Movie> getAllMoviesByActorId(int actorId);
+
+    /**
+     * 根据演员id获取所有的电影
      * @param actorId
      * @return
      */
@@ -24,7 +32,12 @@ public interface ActorService {
 
     List<Movie> getMoviesByLeadingactorId(int actorId);
 
-    List<List<Movie>> getAllMoviesByActorId(int actorId);
-
-    List<CooperationActor> getCoomovieByActorId(int actorId);
+    /**
+     * 返回某演员合作过的演员及其相关电影
+     *
+     * @param actorId
+     * @param max     合作次数最大值
+     * @return
+     */
+    CooperationActor getCoperationActor(int actorId, int max);
 }

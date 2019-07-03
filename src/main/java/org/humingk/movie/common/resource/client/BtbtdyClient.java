@@ -66,7 +66,7 @@ public class BtbtdyClient extends AbstractMovieResourceAdapter {
                 logger.debug("(BT电影天堂)获取电影搜索列表成功,共 " + movieList.size() + " 条...keyword: " + keyword);
             }
         } catch (Exception e) {
-            logger.error("(BT电影天堂)获取电影搜索列表失败...keyword: " + keyword, e);
+            logger.error("(BT电影天堂)获取电影搜索列表失败...keyword: " + keyword + " searchUrl: " + url, e);
         }
         return result;
     }

@@ -46,19 +46,19 @@ public class MovieController {
         try {
             // 给用户添加session
             if (AddSession.add(userService)) {
-                logger.info("添加session成功");
+                logger.debug("添加session成功");
             } else {
-                logger.info("添加session失败");
+                logger.debug("添加session失败");
             }
             movieAll = movieService.getMovieAllByMovieId(movieId);
             // 成功获取电影，返回电影信息
             if (movieAll != null) {
-                logger.info("ID: " + movieAll.getMovieId() + " Name: " + movieAll.getName() + " 有这个电影");
+                logger.debug("ID: " + movieAll.getMovieId() + " Name: " + movieAll.getName() + " 有这个电影");
                 return Result.createMessage(200, "success", movieAll);
             }
             //获取电影失败，返回添加电影确认信息
             else {
-                logger.info("ID: " + movieId + " 没有这个电影");
+                logger.debug("ID: " + movieId + " 没有这个电影");
                 return Result.createMessage(200, "fail", null);
             }
         } catch (Exception e) {
@@ -78,13 +78,13 @@ public class MovieController {
     public Result addMovieAll(@RequestBody MovieAll movieAll) {
         // 添加成功
         if (movieService.addMovieAll(movieAll)) {
-            logger.info("从doubanAPI添加电影信息成功");
+            logger.debug("从doubanAPI添加电影信息成功");
             return Result.createMessage(200, "success", null);
             // 将movieAll返回
         }
         // 添加失败
         else {
-            logger.info("从doubanAPI添加电影信息失败");
+            logger.debug("从doubanAPI添加电影信息失败");
             return Result.createMessage(200, "fail", null);
         }
     }
@@ -113,14 +113,14 @@ public class MovieController {
             // 请求电影表列表
             if (requestType == 0) {
                 List<Search> searchList =
-                        resourceService.getResourceSearch(keyword, dateType, 3, 5);
+                        resourceService.getResourceSearch(keyword, dateType, 1, 5);
                 if (searchList != null) {
                     return Result.createMessage(200, "success", searchList);
                 }
             }
             // 请求电影资源
             else if (requestType == 1) {
-                List<Resource> resourceList = resourceService.getResourceAll(keyword, dateType, 10);
+                List<Resource> resourceList = resourceService.getResourceAll(keyword, dateType, 1, 10);
                 if (resourceList != null) {
                     return Result.createMessage(200, "success", resourceList);
                 }
@@ -141,10 +141,10 @@ public class MovieController {
     @ResponseBody
     public Result updateRate(@RequestParam("movieId") int movieId, @RequestParam("rate") float rate) {
         if (movieService.updateRateByMovieId(movieId, rate)) {
-            logger.info("更新rate成功...movieId: " + movieId);
+            logger.debug("更新rate成功...movieId: " + movieId);
             return Result.createMessage(200, "success", null);
         } else {
-            logger.info("更新rate失败...movieId: " + movieId);
+            logger.debug("更新rate失败...movieId: " + movieId);
             return Result.createMessage(200, "fail", null);
         }
     }
@@ -161,10 +161,10 @@ public class MovieController {
     public Result updateImdbid(@RequestParam("movieId") int movieId, @RequestParam("imdbId") String imdbId) {
 
         if (movieService.updateImdbIdByMovieId(movieId, imdbId)) {
-            logger.info("更新imdbId成功...movieId: " + movieId);
+            logger.debug("更新imdbId成功...movieId: " + movieId);
             return Result.createMessage(200, "success", null);
         } else {
-            logger.info("更新imdbId失败...movieid: " + movieId);
+            logger.debug("更新imdbId失败...movieid: " + movieId);
             return Result.createMessage(200, "fail", null);
         }
     }

@@ -73,10 +73,10 @@ public class UserController {
             // 便于全局获取Userinfo
             session.setAttribute("currentUser", JsonUtil.toJson(userInfo));
 
-            logger.info("登录成功,添加session");
-            logger.info("session sessionID: "+session.getId());
-            logger.info("session  account: "+((User)subject.getPrincipal()).getEmail());
-            logger.info("session currentUser: "+session.getAttribute("currentUser").toString());
+            logger.debug("登录成功,添加session");
+            logger.debug("session sessionID: "+session.getId());
+            logger.debug("session  account: "+((User)subject.getPrincipal()).getEmail());
+            logger.debug("session currentUser: "+session.getAttribute("currentUser").toString());
 
             // 管理员用户
             if (subject.hasRole(ADMIN)) {

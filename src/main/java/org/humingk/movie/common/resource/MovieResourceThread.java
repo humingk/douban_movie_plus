@@ -13,6 +13,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 
 import static java.util.concurrent.Executors.newFixedThreadPool;
 
@@ -30,9 +32,9 @@ public class MovieResourceThread {
 
     public MovieResourceThread() {
         clientMap = new LinkedHashMap<>();
-        clientMap.put(ClientType.CLIENT_BTBTDY, new BtbtdyClient());
+//        clientMap.put(ClientType.CLIENT_BTBTDY, new BtbtdyClient());
         clientMap.put(ClientType.CLIENT_DYGOD, new DygodClient());
-        clientMap.put(ClientType.CLIENT_LOLDYTT, new LoldyttClient());
+//        clientMap.put(ClientType.CLIENT_LOLDYTT, new LoldyttClient());
         clientMap.put(ClientType.CLIENT_XL720, new Xl720Client());
     }
 
@@ -52,24 +54,24 @@ public class MovieResourceThread {
             List<Future<List<Search>>> futureList = new ArrayList<>();
             // 多线程添加任务
             for (int clientType : clientMap.keySet()) {
-                try {
-                    Future<List<Search>> future = service.submit(() ->
-                            clientMap.get(clientType).getMovieSearch(keyword, movieSearchMax)
-                    );
-                    futureList.add(future);
-                } catch (Exception e) {
-                    logger.error("多线程获取搜索结果，某网站失败,clientType: " + clientType, e);
-                }
+                Future<List<Search>> future = service.submit(() ->
+                        clientMap.get(clientType).getMovieSearch(keyword, movieSearchMax)
+                );
+                futureList.add(future);
             }
             // 多线程返回结果
             result = new ArrayList<>();
             for (Future<List<Search>> future : futureList) {
-                if (future.get() != null) {
-                    result.addAll(future.get());
+                try {
+                    result.addAll(future.get(2, TimeUnit.SECONDS));
+                } catch (TimeoutException e) {
+                    logger.error("多线程获取搜索结果，某网站搜索超时", e);
+                } catch (Exception e) {
+                    logger.error("多线程获取搜索结果，某网站搜索失败", e);
                 }
             }
             service.shutdown();
-            logger.debug("多线程获取搜索结果成功,keyword:" + keyword + " size:" + result.size());
+            logger.info("多线程获取搜索结果成功,keyword:" + keyword + " size:" + result.size());
         } catch (Exception e) {
             logger.error("多线程获取搜索结果失败,keyword:" + keyword, e);
         }
@@ -86,35 +88,31 @@ public class MovieResourceThread {
     public List<Resource> getResourceAll(
             int threadMax, List<Search> searchList) {
         List<Resource> result = null;
-        String keyword = null;
         try {
             ExecutorService service = newFixedThreadPool(threadMax);
             List<Future<List<Resource>>> futureList = new ArrayList<>();
             // 多线程添加任务
             for (Search search : searchList) {
-                try {
-
-                    Future<List<Resource>> future = service.submit(() ->
-                            clientMap.get(search.getClientType()).getMovieResource(search)
-                    );
-                    futureList.add(future);
-                } catch (Exception e) {
-                    logger.error("多线程获取电影资源，某电影页面失败,keyword: " + search.getKeyword()
-                            + " movieUrl: " + search.getMovieUrl(), e);
-                }
+                Future<List<Resource>> future = service.submit(() ->
+                        clientMap.get(search.getClientType()).getMovieResource(search)
+                );
+                futureList.add(future);
             }
             // 多线程返回结果
             result = new ArrayList<>();
             for (Future<List<Resource>> future : futureList) {
-                if (future.get() != null) {
-                    result.addAll(future.get());
-                    keyword = future.get().get(0).getKeyword();
+                try {
+                    result.addAll(future.get(2, TimeUnit.SECONDS));
+                } catch (TimeoutException e) {
+                    logger.error("多线程获取电影资源，某网站某电影页面请求超时", e);
+                } catch (Exception e) {
+                    logger.error("多线程获取电影资源，某网站某电影页面失败", e);
                 }
             }
             service.shutdown();
-            logger.debug("多线程获取电影资源成功,keyword:" + keyword + " size:" + result.size());
+            logger.info("多线程获取电影资源成功,keyword:" + searchList.get(0).getKeyword() + " size:" + result.size());
         } catch (Exception e) {
-            logger.error("多线程获取电影资源失败,keyword:" + keyword);
+            logger.error("多线程获取电影资源失败,keyword:" + searchList.get(0).getKeyword());
         }
         return result;
     }

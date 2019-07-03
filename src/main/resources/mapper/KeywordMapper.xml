@@ -10,12 +10,6 @@
     delete from keyword
     where keyword = #{keyword,jdbcType=CHAR}
   </delete>
-    <insert id="insert" parameterType="org.humingk.movie.entity.Keyword">
-    insert into keyword (keyword, search_flag, resource_flag
-      )
-    values (#{keyword,jdbcType=CHAR}, #{searchFlag,jdbcType=INTEGER}, #{resourceFlag,jdbcType=INTEGER}
-      )
-  </insert>
     <update id="updateByPrimaryKey" parameterType="org.humingk.movie.entity.Keyword">
     update keyword
     set search_flag = #{searchFlag,jdbcType=INTEGER},
@@ -32,9 +26,11 @@
     from keyword
   </select>
 
-    <insert id="replace" parameterType="org.humingk.movie.entity.Keyword">
-    replace into keyword (keyword, search_flag, resource_flag)
+    <!--    插入更新操作-->
+    <insert id="insertAndUpdate">
+    insert into keyword (keyword, search_flag, resource_flag)
     values (#{keyword,jdbcType=CHAR}, #{searchFlag,jdbcType=INTEGER}, #{resourceFlag,jdbcType=INTEGER})
+    on duplicate key update search_flag=#{searchFlag,jdbcType=INTEGER}, resource_flag=#{resourceFlag,jdbcType=INTEGER}
   </insert>
 
     <!--  通过keyword更新searchFlag-->

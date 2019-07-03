@@ -46,7 +46,7 @@ public class Xl720Client extends AbstractMovieResourceAdapter {
                 logger.debug("(Xl720)获取电影搜索列表成功,共 " + movieList.size() + " 条...keyword: " + keyword);
             }
         } catch (Exception e) {
-            logger.error("(Xl720)获取电影搜索列表失败...keyword: " + keyword, e);
+            logger.error("(Xl720)获取电影搜索列表失败...keyword: " + keyword + " searchUrl: " + url, e);
         }
         return result;
     }

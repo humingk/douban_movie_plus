@@ -38,6 +38,9 @@ public abstract class AbstractMovieResourceAdapter implements MovieResourceTarge
         put("accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3");
         put("content-type", "application/x-www-form-urlencoded");
         put("user-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36");
+        put("Accept-Encoding", "gzip,deflate");
+        put("Accept-Language", "zh-CN,zh;q=0.9,en;q=0.8");
+        put("Connection", "keep-alive");
     }};
 
     /**
@@ -109,6 +112,9 @@ public abstract class AbstractMovieResourceAdapter implements MovieResourceTarge
                 .header("accept", headers.get("accept"))
                 .header("user-agent", headers.get("user-Agent"))
                 .header("content-type", headers.get("content-type"))
+                .header("Accept-Encoding", headers.get("Accept-Encoding"))
+                .header("Accept-Language", headers.get("Accept-Language"))
+                .header("Connection", headers.get("Connection"))
                 .method(method)
                 .get();
     }
@@ -133,6 +139,9 @@ public abstract class AbstractMovieResourceAdapter implements MovieResourceTarge
         conn.addRequestProperty("accept", headers.get("accept"));
         conn.addRequestProperty("content-type", headers.get("content-type"));
         conn.addRequestProperty("user-Agent", headers.get("user-Agent"));
+        conn.addRequestProperty("Accept-Encoding", headers.get("Accept-Encoding"));
+        conn.addRequestProperty("Accept-Language", headers.get("Accept-Language"));
+        conn.addRequestProperty("Connection", headers.get("Connection"));
         OutputStream outStream = conn.getOutputStream();
         OutputStreamWriter out = new OutputStreamWriter(outStream);
         //参数输出

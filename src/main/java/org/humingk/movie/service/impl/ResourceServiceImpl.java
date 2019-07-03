@@ -49,7 +49,7 @@ public class ResourceServiceImpl implements ResourceService {
             String keyword, int searchFlag, int resourceFlag, List<Search> searchList) {
         try {
             // keyword
-            keywordMapper.replace(new Keyword(keyword, searchFlag, resourceFlag));
+            keywordMapper.insertAndUpdate(keyword, searchFlag, resourceFlag);
             // search
             for (Search search : searchList) {
                 searchMapper.insert(search);
@@ -76,21 +76,37 @@ public class ResourceServiceImpl implements ResourceService {
             String keyword, int dateType, int movieSearchMax, int threadMax) {
         List<Search> result = null;
         try {
+            // 始终请求搜索电影列表
             if (dateType == 0) {
+                // 实时爬虫获取电影搜索列表
                 result = new MovieResourceThread().getResourceSearch(keyword, movieSearchMax, threadMax);
+                // 数据库加入关键字，搜索列表，searchFlag标记为未搜索
                 setSearchList(keyword, 0, 0, result);
-            } else if (dateType == 1 || dateType == 2) {
+            }
+            // 看情况请求搜索电影列表
+            else if (dateType == 1 || dateType == 2) {
                 Keyword keywordEntity = keywordMapper.selectByPrimaryKey(keyword);
+                // 数据库已有关键字
                 if (keywordEntity != null) {
-                    // 从数据库获取搜索结果
-                    if (keywordEntity.getSearchFlag() == 1) {
-                        result = searchMapper.selectByKeyword(keyword);
-                    }
-                    // 实时爬虫
-                    else if (keywordEntity.getSearchFlag() == 0) {
+                    // 虽有关键字，但需要刷新
+                    if (keywordEntity.getSearchFlag() == 0) {
+                        // 实时爬虫获取电影搜索列表
                         result = new MovieResourceThread().getResourceSearch(keyword, movieSearchMax, threadMax);
+                        // 数据库加入关键字，搜索列表，searchFlag标记为已搜索
                         setSearchList(keyword, 1, 0, result);
                     }
+                    // 有关键字且不需要刷新
+                    else if (keywordEntity.getSearchFlag() == 1) {
+                        // 从数据库获取搜索结果
+                        result = searchMapper.selectByKeyword(keyword);
+                    }
+                }
+                // 数据库没有关键字
+                else {
+                    // 实时爬虫获取搜索结果
+                    result = new MovieResourceThread().getResourceSearch(keyword, movieSearchMax, threadMax);
+                    // 数据库加入关键字，搜索列表，searchFlag标记为已搜索
+                    setSearchList(keyword, 1, 0, result);
                 }
             }
         } catch (Exception e) {
@@ -117,36 +133,56 @@ public class ResourceServiceImpl implements ResourceService {
     /**
      * 通过关键字获取电影资源---电影资源
      *
-     * @param keyword   搜索关键字
-     * @param dateType  电影上映时间类型
-     *                  0 新电影始终请求电影表列表和电影资源---搜索后列表搜索标记记为未搜索，资源搜索标志记为未搜索
-     *                  1 未知时间电影有选择请求电影表列表，始终请求电影资源---搜索后列表搜索标记记为已搜索，资源搜索标记记为未搜索
-     *                  2 老电影有选择请求电影列表列表和电影资源---搜索后列表搜索标记记为已搜索，资源搜索标记记为已搜索
-     * @param threadMax 线程最大数
+     * @param keyword        搜索关键字
+     * @param dateType       电影上映时间类型
+     *                       0 新电影始终请求电影表列表和电影资源---搜索后列表搜索标记记为未搜索，资源搜索标志记为未搜索
+     *                       1 未知时间电影有选择请求电影表列表，始终请求电影资源---搜索后列表搜索标记记为已搜索，资源搜索标记记为未搜索
+     *                       2 老电影有选择请求电影列表列表和电影资源---搜索后列表搜索标记记为已搜索，资源搜索标记记为已搜索
+     * @param movieSearchMax 电影搜索最大数(仅用于没有获取过电影搜索结果情况)
+     * @param threadMax      线程最大数
      * @return
      */
     @Override
     public List<Resource> getResourceAll(
-            String keyword, int dateType, int threadMax) {
+            String keyword, int dateType, int movieSearchMax, int threadMax) {
         List<Resource> result = null;
         try {
             Keyword keywordEntity = keywordMapper.selectByPrimaryKey(keyword);
-            if (keywordEntity != null) {
+            // 数据库没有关键字，先获取电影列表再获取电影资源
+            if (keywordEntity == null) {
+                // 获取电影搜索列表
+                getResourceSearch(keyword, dateType, movieSearchMax, threadMax);
+                // 获取电影搜索资源
+                result = getResourceAll(keyword, dateType, movieSearchMax, threadMax);
+            }
+            // 数据库有关键字
+            else {
+                // 始终实时爬虫请求电影资源
                 if (dateType == 0 || dateType == 1) {
+                    // 从数据库获取搜索列表
                     List<Search> searchList = searchMapper.selectByKeyword(keyword);
+                    // 实时爬虫获取电影资源
                     result = new MovieResourceThread().getResourceAll(threadMax, searchList);
+                    // 存放电影资源
+                    setResourceList(result);
                     // 更新resourceFlag为未搜索
                     keywordMapper.updateResourceFlag(keyword, 0);
-                    setResourceList(result);
-                } else if (dateType == 2) {
-                    // 从数据库获取电影资源
+                }
+                // 看情况请求电影资源
+                else if (dateType == 2) {
+                    // 数据库已有电影资源
                     if (keywordEntity.getResourceFlag() == 1) {
+                        // 从数据库获取电影资源
                         result = resourceMapper.selectByKeyword(keyword);
                     }
-                    // 实时爬虫(会出现这种情况??)
+                    // 数据库虽有电影资源但需要更新
                     else if (keywordEntity.getResourceFlag() == 0) {
+                        // 从数据库获取电影列表
                         List<Search> searchList = searchMapper.selectByKeyword(keyword);
+                        // 实时爬虫获取电影资源
                         result = new MovieResourceThread().getResourceAll(threadMax, searchList);
+                        // 更新数据库电影资源
+                        setResourceList(result);
                         // 更新resourceFlag为已搜索
                         keywordMapper.updateResourceFlag(keyword, 1);
                     }

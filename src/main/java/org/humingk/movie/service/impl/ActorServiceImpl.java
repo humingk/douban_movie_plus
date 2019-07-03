@@ -72,6 +72,7 @@ public class ActorServiceImpl implements ActorService {
         return null;
     }
 
+
     /**
      * 根据演员id获取该演员所参与的所有电影
      *
@@ -79,126 +80,66 @@ public class ActorServiceImpl implements ActorService {
      * @return
      */
     @Override
-    public List<List<Movie>> getAllMoviesByActorId(int actorId) {
+    public List<Movie> getAllMoviesByActorId(int actorId) {
+        List<Movie> result = new ArrayList<>();
         try {
-            List<List<Movie>> movies = new ArrayList();
-            //获取主演电影列表
-            List<Movie> leadingactorMovies = getMoviesByLeadingactorId(actorId);
-            //获取编剧电影列表
-            List<Movie> writerMovies = getMoviesByWriterId(actorId);
-            //获取导演电影列表
-            List<Movie> directerMovies = getMoviesByDirectorId(actorId);
-
-            movies.add(leadingactorMovies);
-            movies.add(writerMovies);
-            movies.add(directerMovies);
-            return movies;
+            List<Movie> movieList = getMoviesByDirectorId(actorId);
+            if (movieList != null) {
+                result.addAll(movieList);
+            }
+            movieList = getMoviesByWriterId(actorId);
+            if (movieList != null) {
+                result.addAll(movieList);
+            }
+            movieList = getMoviesByLeadingactorId(actorId);
+            if (movieList != null) {
+                result.addAll(movieList);
+            }
         } catch (Exception e) {
             logger.error("", e);
         }
-        return null;
+        return result;
     }
 
     /**
-     * 根据演员id获取与他合作的所有人员及电影的CooperationActor列表
+     * 返回某演员合作过的演员及其相关电影
      *
      * @param actorId
+     * @param max     合作次数最大值
      * @return
      */
     @Override
-    public List<CooperationActor> getCoomovieByActorId(int actorId) {
-        List<CooperationActor> coomovieList = new ArrayList<CooperationActor>();
+    public CooperationActor getCoperationActor(int actorId, int max) {
+        CooperationActor result = null;
+        Map<Integer, Actor> actorMap = new LinkedHashMap<>();
+        Map<Integer, Movie> movieMap = new LinkedHashMap<>();
+        Map<Integer, Set<Integer>> actorMovieMap = new LinkedHashMap<>();
         try {
-            //获取该id相关的所有电影
-            List<Integer> allMovie = getMovieIdByMovie(getMoviesByLeadingactorId(actorId));
-            allMovie.addAll(getMovieIdByMovie(getMoviesByWriterId(actorId)));
-            allMovie.addAll(getMovieIdByMovie(getMoviesByDirectorId(actorId)));
-            //数据去重
-            HashSet h = new HashSet(allMovie);
-            allMovie.clear();
-            allMovie.addAll(h);
-
-            List<Actor> actorList = null;
-            //遍历该电影相关的每一个人的id
-            for (int id : allMovie) {
-                actorList = actorMapper.selectDirectorsOfMovieById(id);
-                actorList.addAll(actorMapper.selectWritersOfMovieById(id));
-                actorList.addAll(actorMapper.selectLeadingactorsOfMovieById(id));
-                //actorList去重
-                h = new HashSet(actorList);
-                actorList.clear();
-                actorList.addAll(h);
-                //在coomovieList中遍历该人员是否存在
+            // 该演员参演的所有电影
+            List<Movie> movieList = getAllMoviesByActorId(actorId);
+            for (Movie movie : movieList) {
+                // 电影表
+                movieMap.put(movie.getMovieId(), movie);
+                List<Actor> actorList = actorMapper.selectDirectorsOfMovieById(movie.getMovieId());
                 for (Actor actor : actorList) {
-                    int index = indexOfActor(coomovieList, actor);
-                    Movie tempMovie = movieMapper.selectMovieBaseById(id);
-                    //该人员第一次出现，添加新的Ccoomovie
-                    if (index == -1) {
-                        List<Movie> temp = new ArrayList<Movie>();
-                        temp.add(tempMovie);
-                        coomovieList.add(new CooperationActor(actor, temp));
+                    // 演员表
+                    actorMap.put(actor.getActorId(), actor);
+                    // 新建actor对应的set
+                    if (actorMovieMap.get(actorId) == null) {
+                        actorMovieMap.put(actor.getActorId(), new LinkedHashSet<>());
                     }
-                    //该人员已存在，直接修改
-                    else {
-                        coomovieList.get(index).getMovies().add(tempMovie);
-                    }
-                }
-                actorList.clear();
-            }
-            //在结果列表中去掉搜索的actor
-            for (int i = 0; i < coomovieList.size(); i++) {
-                if (coomovieList.get(i).getActor().getActorId().equals(actorId)) {
-                    coomovieList.remove(i);
-                    break;
+                    // 演员电影表
+                    actorMovieMap.get(actor.getActorId()).add(movie.getMovieId());
                 }
             }
-            //cooperationList根据CooperationActor元素num排序
-            Collections.sort(coomovieList, new Comparator<CooperationActor>() {
-                @Override
-                public int compare(CooperationActor u1, CooperationActor u2) {
-                    int diff = u2.getMovieCount() - u1.getMovieCount();
-                    if (diff > 0) {
-                        return 1;
-                    } else if (diff < 0) {
-                        return -1;
-                    }
-                    return 0; //相等为0
-                }
-            });
-            return coomovieList;
+            result.setActorMap(actorMap);
+            result.setMovieMap(movieMap);
+            result.setActorMovieMap(actorMovieMap);
+            // 根据合作次数排序演员
+
         } catch (Exception e) {
             logger.error("", e);
         }
-        return null;
-    }
-
-    /**
-     * 接受Movie列表，返回MOvieId列表
-     *
-     * @param list
-     * @return
-     */
-    public List<Integer> getMovieIdByMovie(List<Movie> list) {
-        List<Integer> newList = new ArrayList<Integer>();
-        for (Movie m : list) {
-            newList.add(m.getMovieId());
-        }
-        return newList;
-    }
-
-    /**
-     * 返回List<Coomovie>中是Actor的位置
-     *
-     * @param coomovieList
-     * @param actor
-     * @return
-     */
-    public int indexOfActor(List<CooperationActor> coomovieList, Actor actor) {
-        for (int i = 0; i < coomovieList.size(); i++) {
-            if (coomovieList.get(i).getActor().getActorId().equals(actor.getActorId())) {
-                return i;
-            }
-        }
-        return -1;
+        return result;
     }
 }

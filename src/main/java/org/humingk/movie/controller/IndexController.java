@@ -59,10 +59,10 @@ public class IndexController {
     public Result searchTips(@RequestParam("keyword") String keyword) {
         List<Movie> movies = movieService.getMoviesByNameStart(keyword);
         if (movies.size() != 0) {
-            logger.info(keyword + " 返回此关键字的电影简称");
+            logger.debug(keyword + " 返回此关键字的电影简称");
             return Result.createMessage(200, "success", movies);
         } else {
-            logger.info(keyword + " 没有此关键字的电影简称");
+            logger.debug(keyword + " 没有此关键字的电影简称");
             return Result.createMessage(200, "fail", null);
         }
     }
@@ -82,10 +82,10 @@ public class IndexController {
         try {
             List<MovieAll> movieAlls = movieService.getMovieAllsOfMovieByAlias(keyword,start,count);
             if (movieAlls.size() > 0) {
-                logger.info(keyword+" 返回此关键字电影 第 "+start+" 条,共 "+count+" 条，累计 "+movieAlls.size()+" 条");
+                logger.debug(keyword+" 返回此关键字电影 第 "+start+" 条,共 "+count+" 条，累计 "+movieAlls.size()+" 条");
                 return Result.createMessage(200, "success", movieAlls);
             } else {
-                logger.info(keyword+" 无此关键字电影 ");
+                logger.debug(keyword+" 无此关键字电影 ");
                 return Result.createMessage(200, "fail", null);
             }
         } catch (Exception e) {

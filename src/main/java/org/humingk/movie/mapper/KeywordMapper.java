@@ -8,7 +8,6 @@ import java.util.List;
 public interface KeywordMapper {
     int deleteByPrimaryKey(String keyword);
 
-    int insert(Keyword record);
 
     Keyword selectByPrimaryKey(String keyword);
 
@@ -16,7 +15,16 @@ public interface KeywordMapper {
 
     int updateByPrimaryKey(Keyword record);
 
-    int replace(Keyword record);
+
+    /**
+     * 插入和更新
+     *
+     * @param keyword
+     * @param searchFlag
+     * @param resourceFlag
+     * @return
+     */
+    int insertAndUpdate(@Param("keyword") String keyword, @Param("searchFlag") int searchFlag, @Param("resourceFlag") int resourceFlag);
 
     /**
      * 更新searchFlag

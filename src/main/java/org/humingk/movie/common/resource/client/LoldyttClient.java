@@ -56,7 +56,7 @@ public class LoldyttClient extends AbstractMovieResourceAdapter {
                 logger.debug("(LOL电影天堂)获取电影搜索列表成功,共 " + movieList.size() + " 条...keyword: " + keyword);
             }
         } catch (Exception e) {
-            logger.error("(LOL电影天堂)获取电影搜索列表失败...keyword: " + keyword, e);
+            logger.error("(LOL电影天堂)获取电影搜索列表失败...keyword: " + keyword + " searchUrl: " + url, e);
         }
         return result;
     }
