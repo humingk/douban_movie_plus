@@ -16,8 +16,6 @@ public class CooperationActor {
     private Map<Integer, Actor> actorMap;
     private Map<Integer, Movie> movieMap;
     private Map<Integer, Set<Integer>> actorMovieMap;
-    private int actorCount;
-    private int movieCount;
 
     public Map<Integer, Actor> getActorMap() {
         return actorMap;
@@ -33,22 +31,6 @@ public class CooperationActor {
 
     public void setMovieMap(Map<Integer, Movie> movieMap) {
         this.movieMap = movieMap;
-    }
-
-    public int getActorCount() {
-        return actorCount;
-    }
-
-    public void setActorCount(int actorCount) {
-        this.actorCount = actorCount;
-    }
-
-    public int getMovieCount() {
-        return movieCount;
-    }
-
-    public void setMovieCount(int movieCount) {
-        this.movieCount = movieCount;
     }
 
     public Map<Integer, Set<Integer>> getActorMovieMap() {

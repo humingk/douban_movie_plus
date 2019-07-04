@@ -1,5 +1,5 @@
 <div align="center">
-<img src="./image/logo.png"/>
+<img src="./image/logo2-2.jpg"/>
 </div>
 <div align="center">
 <a href="https://travis-ci.org/humingk/douban_movie"><img src="https://travis-ci.org/humingk/douban_movie.svg?branch=master" alt="Build Status"></a>
@@ -8,6 +8,7 @@
 <a href=""><img src="https://img.shields.io/github/license/mashape/apistatus.svg" alt="license"></a>
 <a href=""><img src="https://img.shields.io/badge/language-java%20python%20javascript-green.svg" alt="language"></a>
 </div>
+
 # 项目地址
 
 https://movie.doubans.com

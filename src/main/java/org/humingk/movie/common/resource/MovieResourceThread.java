@@ -32,9 +32,9 @@ public class MovieResourceThread {
 
     public MovieResourceThread() {
         clientMap = new LinkedHashMap<>();
-//        clientMap.put(ClientType.CLIENT_BTBTDY, new BtbtdyClient());
+        clientMap.put(ClientType.CLIENT_BTBTDY, new BtbtdyClient());
         clientMap.put(ClientType.CLIENT_DYGOD, new DygodClient());
-//        clientMap.put(ClientType.CLIENT_LOLDYTT, new LoldyttClient());
+        clientMap.put(ClientType.CLIENT_LOLDYTT, new LoldyttClient());
         clientMap.put(ClientType.CLIENT_XL720, new Xl720Client());
     }
 

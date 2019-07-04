@@ -97,6 +97,7 @@ public class MovieController {
      * @param requestType 请求类型
      *                    0 电影表列表
      *                    1 电影资源
+     * @param searchMax   每个网站搜索列表最大数
      * @param dateType    电影上映时间类型
      *                    0 新电影始终请求电影表列表和电影资源---搜索后列表搜索标记记为未搜索，资源搜索标志记为未搜索
      *                    1 未知时间电影有选择请求电影表列表，始终请求电影资源---搜索后列表搜索标记记为已搜索，资源搜索标记记为未搜索
@@ -108,19 +109,20 @@ public class MovieController {
     public Result getResource(
             @RequestParam("keyword") String keyword,
             @RequestParam("requestType") int requestType,
+            @RequestParam("searchMax") int searchMax,
             @RequestParam("dateType") int dateType) {
         try {
             // 请求电影表列表
             if (requestType == 0) {
                 List<Search> searchList =
-                        resourceService.getResourceSearch(keyword, dateType, 1, 5);
+                        resourceService.getResourceSearch(keyword, dateType, searchMax, 5);
                 if (searchList != null) {
                     return Result.createMessage(200, "success", searchList);
                 }
             }
             // 请求电影资源
             else if (requestType == 1) {
-                List<Resource> resourceList = resourceService.getResourceAll(keyword, dateType, 1, 10);
+                List<Resource> resourceList = resourceService.getResourceAll(keyword, dateType, searchMax, 10);
                 if (resourceList != null) {
                     return Result.createMessage(200, "success", resourceList);
                 }

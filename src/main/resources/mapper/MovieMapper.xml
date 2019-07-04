@@ -25,8 +25,8 @@
     where movie.movie_id = #{movieId,jdbcType=INTEGER}
   </update>
 
-  <!--更新电影imdbId-->
-  <update id="updateImdbIdByPrimaryKey">
+    <!--更新电影imdbId-->
+    <update id="updateImdbIdByPrimaryKey">
     update movie
     set movie.imdb_id = #{imdbId,jdbcType=CHAR}
     where movie.movie_id = #{movieId,jdbcType=INTEGER}
@@ -97,5 +97,4 @@
     on movie.movie_id = movie_leadingactor.movie_id
     where movie_leadingactor.leadingactor_id=#{actorId,jdbcType=INTEGER}
   </select>
-
 </mapper>

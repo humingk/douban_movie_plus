@@ -33,7 +33,7 @@ public interface MovieMapper {
      * @param alias
      */
     void updateMovieBaseByMovieAll(@Param("movieId") Integer movieId, @Param("name") String name,
-                                   @Param("rate") float rate,@Param("imdbId") String imdbId,
+                                   @Param("rate") float rate, @Param("imdbId") String imdbId,
                                    @Param("alias") String alias);
 
     /**
@@ -44,7 +44,7 @@ public interface MovieMapper {
      * @param count
      * @return
      */
-    List<Movie> selectMoviesByAlias(@Param("name") String name,@Param("start")int start,@Param("count")int count);
+    List<Movie> selectMoviesByAlias(@Param("name") String name, @Param("start") int start, @Param("count") int count);
 
     /**
      * 根据电影名称开头的关键字模糊搜索
@@ -63,27 +63,15 @@ public interface MovieMapper {
     Movie selectMovieBaseById(Integer movieId);
 
     /**
-     *根据导演ID查找所有的电影list
+     * 根据actorId获取电影列表
      *
-     * @param directorId
      * @return
      */
-    List<Movie> selectMoviesByDirectorId(Integer directorId);
 
-    /**
-     * 根据编剧ID查找所有的电影list
-     *
-     * @param writerId
-     * @return
-     */
-    List<Movie> selectMoviesByWriterId(Integer writerId);
+    List<Movie> selectMoviesByDirectorId(@Param("actorId") Integer actorId);
 
-    /**
-     * 根据演员ID查找所有的电影list
-     *
-     * @param leadingactorId
-     * @return
-     */
-    List<Movie> selectMoviesByLeadingactorId(Integer leadingactorId);
+    List<Movie> selectMoviesByWriterId(@Param("actorId") Integer actorId);
+
+    List<Movie> selectMoviesByLeadingactorId(@Param("actorId") Integer actorId);
 
 }

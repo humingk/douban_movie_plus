@@ -6,6 +6,7 @@ import org.humingk.movie.common.Result;
 import org.humingk.movie.entity.Actor;
 import org.humingk.movie.entity.Movie;
 import org.humingk.movie.service.ActorService;
+import org.humingk.movie.service.MovieService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,8 @@ public class ActorController {
 
     @Autowired
     private ActorService actorService;
+    @Autowired
+    private MovieService movieService;
 
     /**
      * 根据url中的actorId 返回actor
@@ -64,7 +67,7 @@ public class ActorController {
     public Result getAllMoviesByActorId(@RequestParam("actorId") int actorId) {
         try {
             //获取主演电影列表
-            List<Movie> movieList = actorService.getAllMoviesByActorId(actorId);
+            List<Movie> movieList = movieService.getAllMoviesByActorId(actorId);
             return Result.createMessage(200, "success", movieList);
         } catch (Exception e) {
             logger.error("", e);
@@ -76,15 +79,15 @@ public class ActorController {
      * 根据演员id返回与改演员合作的所有人员及电影
      *
      * @param actorId
-     * @param max     合作次数最大值
+     * @param cooperationMin     合作次数最小值
      * @return
      */
     @RequestMapping(value = "getCooperationActors", method = RequestMethod.GET)
     @ResponseBody
-    public Result getCooperationActors(@RequestParam("actorId") int actorId, @RequestParam("max") int max) {
+    public Result getCooperationActors(@RequestParam("actorId") int actorId, @RequestParam("cooperationMin") int cooperationMin) {
         try {
             //获取合作电影列表
-            CooperationActor cooperationActor = actorService.getCoperationActor(actorId, max);
+            CooperationActor cooperationActor = actorService.getCoperationActor(actorId, cooperationMin);
             if (cooperationActor != null) {
                 return Result.createMessage(200, "success", cooperationActor);
             }

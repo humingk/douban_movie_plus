@@ -1,10 +1,7 @@
 package org.humingk.movie.service.impl;
 
 import org.humingk.movie.common.MovieAll;
-import org.humingk.movie.entity.Movie;
-import org.humingk.movie.entity.Releasetime;
-import org.humingk.movie.entity.Tag;
-import org.humingk.movie.entity.Type;
+import org.humingk.movie.entity.*;
 import org.humingk.movie.mapper.*;
 import org.humingk.movie.service.MovieService;
 import org.slf4j.Logger;
@@ -60,9 +57,9 @@ public class MovieServiceImpl implements MovieService {
         try {
             // 提取电影信息
             MovieAll movieAll = new MovieAll(movieMapper.selectMovieBaseById(movieId));
-            movieAll.setDirectors(actorMapper.selectDirectorsOfMovieById(movieId));
-            movieAll.setWriters(actorMapper.selectWritersOfMovieById(movieId));
-            movieAll.setLeadingactors(actorMapper.selectLeadingactorsOfMovieById(movieId));
+            movieAll.setDirectors(actorMapper.selectDirectorsByMovieId(movieId));
+            movieAll.setWriters(actorMapper.selectWritersByMovieId(movieId));
+            movieAll.setLeadingactors(actorMapper.selectLeadingactorsByMovieId(movieId));
             movieAll.setTypes(typeMapper.selectTypesOfMovieById(movieId));
             movieAll.setTags(tagMapper.selectTagsOfMovieById(movieId));
             movieAll.setReleasetimes(releasetimeMapper.selectReleasetimesOfMovieById(movieId));
@@ -92,9 +89,9 @@ public class MovieServiceImpl implements MovieService {
                     if (movie != null) {
                         Integer movieId = movie.getMovieId();
                         MovieAll movieAll = new MovieAll(movieMapper.selectMovieBaseById(movieId));
-                        movieAll.setDirectors(actorMapper.selectDirectorsOfMovieById(movieId));
-                        movieAll.setWriters(actorMapper.selectWritersOfMovieById(movieId));
-                        movieAll.setLeadingactors(actorMapper.selectLeadingactorsOfMovieById(movieId));
+                        movieAll.setDirectors(actorMapper.selectDirectorsByMovieId(movieId));
+                        movieAll.setWriters(actorMapper.selectWritersByMovieId(movieId));
+                        movieAll.setLeadingactors(actorMapper.selectLeadingactorsByMovieId(movieId));
                         movieAll.setTypes(typeMapper.selectTypesOfMovieById(movieId));
                         movieAll.setTags(tagMapper.selectTagsOfMovieById(movieId));
                         movieAll.setReleasetimes(releasetimeMapper.selectReleasetimesOfMovieById(movieId));
@@ -232,4 +229,66 @@ public class MovieServiceImpl implements MovieService {
         }
         return false;
     }
+
+    /**
+     * 根据演员id获取该演员所参与的所有电影
+     *
+     * @param actorId
+     * @return
+     */
+    @Override
+    public List<Movie> getAllMoviesByActorId(int actorId) {
+        List<Movie> result = new ArrayList<>();
+        try {
+            List<Movie> movieList = getMoviesByDirectorId(actorId);
+            if (movieList != null) {
+                result.addAll(movieList);
+            }
+            movieList = getMoviesByWriterId(actorId);
+            if (movieList != null) {
+                result.addAll(movieList);
+            }
+            movieList = getMoviesByLeadingactorId(actorId);
+            if (movieList != null) {
+                result.addAll(movieList);
+            }
+        } catch (Exception e) {
+            logger.error("", e);
+        }
+        return result;
+    }
+
+    @Override
+    public List<Movie> getMoviesByDirectorId(int actorId) {
+        try {
+            List<Movie> movies = movieMapper.selectMoviesByDirectorId(actorId);
+            return movies;
+        } catch (Exception e) {
+            logger.error("", e);
+        }
+        return null;
+    }
+
+    @Override
+    public List<Movie> getMoviesByWriterId(int actorId) {
+        try {
+            List<Movie> movies = movieMapper.selectMoviesByWriterId(actorId);
+            return movies;
+        } catch (Exception e) {
+            logger.error("", e);
+        }
+        return null;
+    }
+
+    @Override
+    public List<Movie> getMoviesByLeadingactorId(int actorId) {
+        try {
+            List<Movie> movies = movieMapper.selectMoviesByLeadingactorId(actorId);
+            return movies;
+        } catch (Exception e) {
+            logger.error("", e);
+        }
+        return null;
+    }
+
 }

@@ -63,5 +63,19 @@ public interface MovieService {
      */
     Boolean addMovieAll(MovieAll movieAll);
 
+    /**
+     * 根据演员id获取所有的电影
+     *
+     * @param actorId
+     * @return
+     */
+    List<Movie> getAllMoviesByActorId(int actorId);
+
+    List<Movie> getMoviesByDirectorId(int actorId);
+
+    List<Movie> getMoviesByWriterId(int actorId);
+
+    List<Movie> getMoviesByLeadingactorId(int actorId);
+
 }
 

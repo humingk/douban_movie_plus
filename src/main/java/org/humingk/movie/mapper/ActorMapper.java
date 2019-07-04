@@ -20,13 +20,13 @@ public interface ActorMapper {
 
     void updateActorsByMovieAll(@Param("actorId") int actorId,@Param("name") String name);
 
+
+
     // 根据movieId查找所有的actor
 
-    List<Actor> selectDirectorsOfMovieById(Integer movieId);
+    List<Actor> selectDirectorsByMovieId(Integer movieId);
 
-    List<Actor> selectWritersOfMovieById(Integer movieId);
+    List<Actor> selectWritersByMovieId(Integer movieId);
 
-    List<Actor> selectLeadingactorsOfMovieById(Integer movieId);
-
-
+    List<Actor> selectLeadingactorsByMovieId(Integer movieId);
 }

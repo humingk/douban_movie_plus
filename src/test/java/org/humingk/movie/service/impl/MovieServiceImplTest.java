@@ -83,7 +83,7 @@ public class MovieServiceImplTest extends baseTest {
                 }
             }
         } catch (Exception e) {
-            logger.error("",e);
+            logger.error("", e);
         }
     }
 
@@ -104,26 +104,43 @@ public class MovieServiceImplTest extends baseTest {
 
             }
         } catch (Exception e) {
-            logger.error("",e);
+            logger.error("", e);
         }
     }
 
     @Test
-    public void getMovieAllByMovieId(){
+    public void getMovieAllByMovieId() {
 
     }
 
     @Test
-    public void updateRateByMovieId(){
-
-    }
-    @Test
-    public void updateImdbIdByMovieId(){
+    public void updateRateByMovieId() {
 
     }
 
     @Test
-    public void addMovieAll(){
+    public void updateImdbIdByMovieId() {
 
+    }
+
+    @Test
+    public void addMovieAll() {
+
+    }
+
+    @Test
+    public void getAllActorsByMovieId() {
+    }
+
+    @Test
+    public void getDirectorsByMovieId() {
+    }
+
+    @Test
+    public void getWritersByMovieId() {
+    }
+
+    @Test
+    public void getLeadingactorsByMovieId() {
     }
 }

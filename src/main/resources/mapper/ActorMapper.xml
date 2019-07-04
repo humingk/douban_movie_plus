@@ -46,10 +46,10 @@
 
     <!--=====================-->
 
-    <!--根据电影id返回所有的演员-->
+    <!--    根据movieId返回演员-->
 
     <!--导演-->
-    <select id="selectDirectorsOfMovieById" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    <select id="selectDirectorsByMovieId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select actor.*
     from actor
     inner join movie_director
@@ -57,14 +57,14 @@
   </select>
 
     <!--编剧-->
-    <select id="selectWritersOfMovieById" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    <select id="selectWritersByMovieId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
      select actor.*
      FROM actor,movie_writer
      where movie_writer.writer_id=actor.actor_id and movie_writer.movie_id=#{movieId,jdbcType=INTEGER}
   </select>
 
     <!--主演-->
-    <select id="selectLeadingactorsOfMovieById" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    <select id="selectLeadingactorsByMovieId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select actor.*
     from actor
     inner join movie_leadingactor
@@ -77,6 +77,4 @@
         actor(actor_id, name)
             values (#{actorId,jdbcType=INTEGER}, #{name,jdbcType=CHAR})
     </insert>
-
-
 </mapper>
