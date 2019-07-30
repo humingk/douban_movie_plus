@@ -191,4 +191,4 @@ npm run dev
 
 # 数据库ER关系图
 
-![ER关系图](./image/sql_er.png)
+![ER关系图](./image/sql_er_2.0.png)
