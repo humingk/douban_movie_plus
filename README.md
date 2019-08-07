@@ -1,5 +1,5 @@
 <div align="center">
-<img src="./image/logo2-2.jpg"/>
+<img src="./image/logo3.png"/>
 </div>
 <div align="center">
 <a href="https://travis-ci.org/humingk/douban_movie"><img src="https://travis-ci.org/humingk/douban_movie.svg?branch=master" alt="Build Status"></a>
