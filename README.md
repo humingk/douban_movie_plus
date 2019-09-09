@@ -13,22 +13,13 @@
 
 https://movie.doubans.com
 
-# 技术栈
+# 该网站相比于[豆瓣电影](https://movie.douban.com)官网的亮点
 
-- 后端框架 SpringMVC + Spring + Mybatis
-- 后端服务器 Tomcat
-- 前端框架 Vue
-- 前端服务器 Nginx
-- 权限认证 Shiro
-- 数据库 MySQL
-- 持久爬虫 Python - Request
-- 实时爬虫 Java - Jsoup 
+- 前端采用Vue框架，后端采用SSM框架
+- 包括部分API的整合，能给资深影迷们带来沉浸式的体验
+- 包括电影资源模块，能一键获取其他网站的资源
 
 # 使用方式
-
-- 从首页访问
-
-  https://movie.doubans.com
 
 - 从豆瓣电影官网访问(**推荐**)
 
@@ -38,7 +29,9 @@ https://movie.doubans.com
 
   [https://movie.douban`s`.com/subject/1889243](https://movie.doubans.com/subject/1889243)
 
-  ​	
+- 从首页访问
+
+  https://movie.doubans.com
 
 # 安装方式
 
@@ -53,7 +46,7 @@ https://movie.doubans.com
 ### 克隆仓库
 
 ```bash
-git clone https://github.com/humingk/douban_movie
+git clone https://github.com/humingk/douban_movie_plus
 
 ```
 
@@ -85,7 +78,16 @@ npm install
 npm run dev
 ```
 
+# 技术栈
 
+- 后端框架 SpringMVC + Spring + Mybatis
+- 后端服务器 Tomcat
+- 前端框架 Vue
+- 前端服务器 Nginx
+- 权限认证 Shiro
+- 数据库 MySQL
+- 持久爬虫 Python - Request
+- 实时爬虫 Java - Jsoup 
 
 # SSM 目录
 
@@ -95,16 +97,16 @@ npm run dev
 |     └── humingk
 |        └── movie
 |           ├── common                          # 工具类目录
+|           |  ├── resource						  # 电影资源模块
+|           |    |  └── client	
+|           |    |  └── type
+|           |    |  └── AbstractMovieResourceAdapter.java
+|           |    |  └── MovieResourceTarget.java
+|           |    |  └──MovieResourceThread.java
 |           |  ├── AddSession.java
-|           |  ├── BtbtdyResource.java
 |           |  ├── JsonUtil.java
-|           |  ├── LoldyttResource.java
 |           |  ├── MessageCode.java
 |           |  ├── MovieAll.java
-|           |  ├── Resource.java
-|           |  ├── ResourceBtbtdy.java
-|           |  ├── ResourceDygod.java
-|           |  ├── ResourceLoldytt.java
 |           |  ├── Result.java
 |           |  ├── ResultMessage.java
 |           |  └── WishAndSeen.java
@@ -189,6 +191,6 @@ npm run dev
    └── index.js
 ```
 
-# 数据库ER关系图
+# 数据库关系模型
 
 ![ER关系图](./image/sql_er_2.0.png)
