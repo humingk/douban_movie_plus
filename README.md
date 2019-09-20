@@ -9,15 +9,16 @@
 <a href=""><img src="https://img.shields.io/badge/language-java%20python%20javascript-green.svg" alt="language"></a>
 </div>
 
-# 项目地址
+# 网站地址
 
 https://movie.doubans.com
 
-# 该网站相比于[豆瓣电影](https://movie.douban.com)官网的亮点
+# 相比于[豆瓣电影](https://movie.douban.com)官网:
 
 - 前端采用Vue框架，后端采用SSM框架
 - 包括部分API的整合，能给资深影迷们带来沉浸式的体验
 - 包括电影资源模块，能一键获取其他网站的资源
+- ...
 
 # 使用方式
 
@@ -33,51 +34,6 @@ https://movie.doubans.com
 
   https://movie.doubans.com
 
-# 安装方式
-
-## ssm 安装
-
-### 环境
-
-- SpringMVC+Spring+Mybatis
-
-- [Gradle](https://gradle.org/releases/)
-
-### 克隆仓库
-
-```bash
-git clone https://github.com/humingk/douban_movie_plus
-
-```
-
-待续...
-
-## vue 安装
-
-### 环境
-
-- [Node.js](https://nodejs.org/zh-cn/download/)
-- [Vue](https://cn.vuejs.org/v2/guide/installation.html)
-
-### 克隆仓库
-
-```bash
-git clone https://github.com/humingk/douban_movie_vue
-```
-
-### 安装依赖包
-
-```bash
-cd douban_movie_vue
-npm install
-```
-
-### 启动
-
-```bash
-npm run dev
-```
-
 # 技术栈
 
 - 后端框架 SpringMVC + Spring + Mybatis
@@ -88,6 +44,52 @@ npm run dev
 - 数据库 MySQL
 - 持久爬虫 Python - Request
 - 实时爬虫 Java - Jsoup 
+
+# 项目框架图
+
+![](./image/structure.png)
+
+# 数据库关系模型
+
+![ER关系图](./image/sql_er_2.0.png)
+
+# 安装方式
+
+## ssm 安装
+
+### 环境
+
+- SpringMVC+Spring+Mybatis
+
+- [Gradle](https://gradle.org/releases/)
+
+### 安装步骤
+
+```bash
+git clone https://github.com/humingk/douban_movie_plus
+待续...
+
+```
+
+## vue 安装
+
+### 环境
+
+- [Node.js](https://nodejs.org/zh-cn/download/)
+- [Vue](https://cn.vuejs.org/v2/guide/installation.html)
+
+### 安装步骤
+
+```bash
+# 克隆仓库
+git clone https://github.com/humingk/douban_movie_vue
+# 安装依赖包
+cd douban_movie_vue
+npm install
+# 启动
+npm run dev
+
+```
 
 # SSM 目录
 
@@ -190,7 +192,3 @@ npm run dev
 └── router                                      # 路由目录
    └── index.js
 ```
-
-# 数据库关系模型
-
-![ER关系图](./image/sql_er_2.0.png)
