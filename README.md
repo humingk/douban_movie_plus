@@ -161,7 +161,7 @@ npm run dev
 |  |  ├── spring-service.xml
 |  |  └── spring-shiro.xml
 |  └── sql                                      # mysql建表目录
-|     └── douban_movie.sql
+|     └── movie.sql
 └── webapp
    ├── ...
 ```

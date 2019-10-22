@@ -4,3 +4,4 @@ out/
 log/
 build/**
 update.sh
+douban_movie_*.sql
