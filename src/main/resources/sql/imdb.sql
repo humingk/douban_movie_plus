@@ -434,4 +434,3 @@ numVotes      | 7
 
  */
 
-alter table iactor add PRIMARY key(iactor_id);
