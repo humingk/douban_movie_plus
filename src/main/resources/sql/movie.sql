@@ -576,8 +576,6 @@ values (0, '未知', 'unknown');
 create table celebrity_scene
 (
     id                  bigint unsigned not null primary key,
-    # 场景详情ID
-    id_scene            bigint unsigned not null default 0,
     # 场景电影对应的豆瓣名人ID
     id_celebrity_douban bigint unsigned not null default 0,
     # 场景名人中文名
@@ -585,7 +583,6 @@ create table celebrity_scene
     # 场景名人英文名
     name_en             varchar(255)    not null default '',
 
-    index (id_scene),
     unique (id_celebrity_douban),
     index (name_zh),
     index (name_en)
@@ -924,31 +921,23 @@ create table image_place
     id_place    bigint unsigned not null default 0,
     # 图片链接
     url_image   varchar(1000)   not null default '',
-    # 图片原始名称
-    name_origin varchar(255)    not null default '',
     # 图片描述
     description varchar(255)    not null default '',
 
-    index (id_place),
-    index (name_origin)
+    index (id_place)
 ) ENGINE = InnoDB
   default charset = utf8mb4;
 
-# 图片（场景-场景图片）
-create table image_scene
+# 图片（场景-场景详情的剧照）
+create table image_scene_detail
 (
-    id          bigint unsigned not null auto_increment primary key,
-    # 场景ID
-    id_scene    bigint unsigned not null default 0,
+    id              bigint unsigned not null auto_increment primary key,
+    # 场景详情ID
+    id_scene_detail bigint unsigned not null default 0,
     # 图片链接
-    url_image   varchar(1000)   not null default '',
-    # 图片原始名称
-    name_origin varchar(255)    not null default '',
-    # 图片描述
-    description varchar(255)    not null default '',
+    url_image       varchar(1000)   not null default '',
 
-    index (id_scene),
-    index (name_origin)
+    index (id_scene_detail)
 ) ENGINE = InnoDB
   default charset = utf8mb4;
 
@@ -1155,8 +1144,11 @@ create table place
     # 地点海报图链接
     url_poster         varchar(1000)     not null default '',
     # 地点地球位置图链接
+    url_earth          varchar(1000)     not null default '',
+    # 地点卫星图链接
+    url_satellite      varchar(1000)     not null default '',
+    # 地点地图
     url_map            varchar(1000)     not null default '',
-
 
     index (id_type_place),
     index (id_continent_place),
@@ -1460,8 +1452,6 @@ alter table celebrity_douban_to_classic
 alter table movie_scene
     add foreign key (id_movie_douban) references movie_douban (id);
 alter table celebrity_scene
-    add foreign key (id_scene) references scene (id);
-alter table celebrity_scene
     add foreign key (id_celebrity_douban) references celebrity_douban (id);
 alter table scene
     add foreign key (id_movie_scene) references movie_scene (id);
@@ -1513,8 +1503,8 @@ alter table image_movie_douban
     add foreign key (id_movie_douban) references movie_douban (id);
 alter table image_place
     add foreign key (id_place) references place (id);
-alter table image_scene
-    add foreign key (id_scene) references scene (id);
+alter table image_scene_detail
+    add foreign key (id_scene_detail) references scene_detail (id);
 alter table place
     add foreign key (id_type_place) references type_place (id);
 alter table place
