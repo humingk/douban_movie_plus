@@ -129,42 +129,34 @@ values (1, '未知', 'unknown');
 # IMDB电影 
 create table movie_imdb
 (
-    id                  bigint unsigned  not null primary key,
+    id                  bigint unsigned      not null primary key,
     # 影片种类/类型  (电影、电视剧、电视剧的单集...)
-    id_type_video       tinyint unsigned not null default 1,
+    id_type_video       tinyint unsigned     not null default 1,
     # imdb海报
-    id_image_movie_imdb bigint unsigned  not null default 1,
+    id_image_movie_imdb bigint unsigned      not null default 1,
     # IMDB电影英文名
-    name_en             varchar(255)     not null default '',
+    name_en             varchar(255)         not null default '',
+    # IMDB电影发行年份 、 电视剧首集播放年份
+    start_year          smallint(4) unsigned not null default 0,
+    # IMDB电影发行年份 、 最后一集播放年份
+    end_year            smallint(4) unsigned not null default 0,
+    # 是否是成人电影 0-不是 1-是
+    is_adult            tinyint(1)           not null default 0,
+    # IMDB电影原始名
+    name_origin         varchar(255)         not null default '',
+    # IMDB电影片长 分钟
+    runtime             smallint unsigned    not null default 0,
 
     index (id_type_video),
     index (id_image_movie_imdb),
-    index (name_en)
-) ENGINE = InnoDB
-  default charset = utf8mb4;
-insert into movie_imdb(id, name_en)
-values (0, 'unknown');
-
-# IMDB电影详情
-create table detail_of_movie_imdb
-(
-    id          bigint unsigned      not null primary key,
-    # IMDB电影发行年份 、 电视剧首集播放年份
-    start_year  smallint(4) unsigned not null default 0,
-    # IMDB电影发行年份 、 最后一集播放年份
-    end_year    smallint(4) unsigned not null default 0,
-    # 是否是成人电影 0-不是 1-是
-    is_adult    tinyint(1)           not null default 0,
-    # IMDB电影原始名
-    name_origin varchar(255)         not null default '',
-    # IMDB电影片长 分钟
-    runtime     smallint unsigned    not null default 0,
-
+    index (name_en),
     index (start_year desc),
     index (end_year desc),
     index (name_origin)
 ) ENGINE = InnoDB
   default charset = utf8mb4;
+insert into movie_imdb(id, name_en)
+values (0, 'unknown');
 
 # IMDB电影评分
 create table rate_imdb
@@ -207,47 +199,39 @@ create table movie_imdb_to_type_movie
 # 豆瓣电影 
 create table movie_douban
 (
-    id                    bigint unsigned  not null primary key,
+    id                    bigint unsigned   not null primary key,
     # 影片种类/类型-ID  (电影、电视剧、电视剧的单集...)
-    id_type_video         tinyint unsigned not null default 1,
+    id_type_video         tinyint unsigned  not null default 1,
     # 豆瓣电影海报ID
-    id_image_movie_douban bigint unsigned  not null default 1,
+    id_image_movie_douban bigint unsigned   not null default 1,
     # 豆瓣电影的IMDB-ID
-    id_movie_imdb         bigint unsigned  not null default 0,
+    id_movie_imdb         bigint unsigned   not null default 0,
     # 豆瓣电影中文名
-    name_zh               varchar(255)     not null default '',
+    name_zh               varchar(255)      not null default '',
     # 豆瓣电影英文名
-    name_en               varchar(255)     not null default '',
+    name_en               varchar(255)      not null default '',
+    # 豆瓣电影其他文名
+    name_other            varchar(255)      not null default '',
+    # 豆瓣电影别称 以/为间隔的字符串
+    name_alias            varchar(1000)     not null default '',
+    # 豆瓣电影运行片长 分钟
+    runtime               smallint unsigned not null default 0,
+    # 豆瓣电视剧总集数 1-默认为一集（电影）(豆瓣电影不同于IMDB，豆瓣的电视剧ID和集为上下级关系)
+    set_sum               smallint unsigned not null default 1,
 
     index (id_type_video),
     index (id_image_movie_douban),
     index (id_movie_imdb),
     index (name_zh),
-    index (name_en)
+    index (name_en),
+    index (name_other),
+    index (name_alias(255))
 ) ENGINE = InnoDB
   default charset = utf8mb4;
 insert into movie_douban(id, name_zh)
 values (0, '未知');
 
-# 豆瓣电影详情
-create table detail_of_movie_douban
-(
-    id         bigint unsigned   not null primary key,
-    # 豆瓣电影其他文名
-    name_other varchar(255)      not null default '',
-    # 豆瓣电影别称 以/为间隔的字符串
-    name_alias varchar(1000)     not null default '',
-    # 豆瓣电影运行片长 分钟
-    runtime    smallint unsigned not null default 0,
-    # 豆瓣电视剧总集数 1-默认为一集（电影）(豆瓣电影不同于IMDB，豆瓣的电视剧ID和集为上下级关系)
-    set_sum    smallint unsigned not null default 1,
-
-    index (name_other),
-    index (name_alias(255))
-) ENGINE = InnoDB
-  default charset = utf8mb4;
-
-# 豆瓣电影评分 
+# 豆瓣电影评分
 create table rate_douban
 (
     id           bigint unsigned not null primary key,
@@ -499,6 +483,20 @@ create table celebrity_douban
     name_zh                   varchar(255)      not null default '',
     # 英文名
     name_en                   varchar(255)      not null default '',
+    # 其他外文名
+    name_other                varchar(255)      not null default '',
+    # 更多中文名 以 / 为间隔
+    name_zh_more              varchar(1000)     not null default '',
+    # 更多英文名 以 / 为间隔
+    name_en_more              varchar(1000)     not null default '',
+    # 更多外文名 以 / 为间隔
+    name_other_more           varchar(1000)     not null default '',
+    # 性别 0-女 1-男 2-其他
+    sex                       tinyint(1)        not null default 2,
+    # 生日日期
+    birth_date                date,
+    # 描述
+    description               varchar(1000)     not null default '',
 
     index (id_celebrity_imdb),
     index (id_country_imdb),
@@ -507,29 +505,7 @@ create table celebrity_douban
     index (id_image_celebrity_douban),
     index (name_zh),
     index (name_en, id_celebrity_imdb),
-    index (id_celebrity_imdb)
-) ENGINE = InnoDB
-  default charset = utf8mb4;
-
-# 豆瓣名人详情
-create table detail_of_celebrity_douban
-(
-    id              bigint unsigned not null primary key,
-    # 其他外文名
-    name_other      varchar(255)    not null default '',
-    # 更多中文名 以 / 为间隔
-    name_zh_more    varchar(1000)   not null default '',
-    # 更多英文名 以 / 为间隔
-    name_en_more    varchar(1000)   not null default '',
-    # 更多外文名 以 / 为间隔
-    name_other_more varchar(1000)   not null default '',
-    # 性别 0-女 1-男 2-其他
-    sex             tinyint(1)      not null default 2,
-    # 生日日期
-    birth_date      date,
-    # 描述
-    description     varchar(1000)   not null default '',
-
+    index (id_celebrity_imdb),
     index (name_other),
     index (name_zh_more(255)),
     index (name_en_more(255)),
@@ -1304,6 +1280,28 @@ create table place
     # 地点位于地球上的位置图-id
     id_image_place_earth bigint unsigned   not null default 1,
 
+    # 经度
+    longitude            decimal(10, 8)    not null default 0.00000000,
+    # 纬度
+    latitude             decimal(10, 8)    not null default 0.00000000,
+
+    # 中文名
+    name_zh              varchar(255)      not null default '',
+    # 英文名
+    name_en              varchar(255)      not null default '',
+    # 其他语言名
+    name_other           varchar(255)      not null default '',
+    # 别名
+    alias                varchar(255)      not null default '',
+    # 中文地址
+    address_zh           varchar(255)      not null default '',
+    # 英文地址
+    address_en           varchar(255)      not null default '',
+    # 地点描述
+    description          varchar(1000)     not null default '',
+    # 电话号码
+    phone                varchar(255)      not null default '',
+
     index (id_type_place),
     index (id_continent_place),
     index (id_country_place),
@@ -1311,37 +1309,7 @@ create table place
     index (id_city_place),
     index (id_area_place),
     index (id_image_place),
-    index (id_image_place_earth)
-) ENGINE = InnoDB
-  default charset = utf8mb4;
-
-# 地点详情
-create table detail_of_place
-(
-    id          bigint unsigned not null primary key,
-
-    # 经度
-    longitude   decimal(10, 8)  not null default 0.00000000,
-    # 纬度
-    latitude    decimal(10, 8)  not null default 0.00000000,
-
-    # 中文名
-    name_zh     varchar(255)    not null default '',
-    # 英文名
-    name_en     varchar(255)    not null default '',
-    # 其他语言名
-    name_other  varchar(255)    not null default '',
-    # 别名
-    alias       varchar(255)    not null default '',
-    # 中文地址
-    address_zh  varchar(255)    not null default '',
-    # 英文地址
-    address_en  varchar(255)    not null default '',
-    # 地点描述
-    description varchar(1000)   not null default '',
-    # 电话号码
-    phone       varchar(255)    not null default '',
-
+    index (id_image_place_earth),
     index (longitude),
     index (latitude)
 ) ENGINE = InnoDB
