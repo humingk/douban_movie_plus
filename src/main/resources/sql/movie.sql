@@ -36,7 +36,9 @@
 
  IMDB转换SQL语句
 
- PS:id含有 auto_increment 属性的表，id=1均为默认值-未知
+ PS:
+ id含有 auto_increment 属性的表，id=1均为默认值-未知
+ id不含有 auto_increment 属性的表，id=0均为默认值-未知
  */
 
 
@@ -129,26 +131,25 @@ values (1, '未知', 'unknown');
 # IMDB电影 
 create table movie_imdb
 (
-    id                  bigint unsigned      not null primary key,
+    id            bigint unsigned      not null primary key,
     # 影片种类/类型  (电影、电视剧、电视剧的单集...)
-    id_type_video       tinyint unsigned     not null default 1,
-    # imdb海报
-    id_image_movie_imdb bigint unsigned      not null default 1,
+    id_type_video tinyint unsigned     not null default 1,
     # IMDB电影英文名
-    name_en             varchar(255)         not null default '',
+    name_en       varchar(255)         not null default '',
     # IMDB电影发行年份 、 电视剧首集播放年份
-    start_year          smallint(4) unsigned not null default 0,
+    start_year    smallint(4) unsigned not null default 0,
     # IMDB电影发行年份 、 最后一集播放年份
-    end_year            smallint(4) unsigned not null default 0,
+    end_year      smallint(4) unsigned not null default 0,
     # 是否是成人电影 0-不是 1-是
-    is_adult            tinyint(1)           not null default 0,
+    is_adult      tinyint(1)           not null default 0,
     # IMDB电影原始名
-    name_origin         varchar(255)         not null default '',
+    name_origin   varchar(255)         not null default '',
     # IMDB电影片长 分钟
-    runtime             smallint unsigned    not null default 0,
+    runtime       smallint unsigned    not null default 0,
+    # imdb海报
+    url_poster    varchar(1000)        not null default '',
 
     index (id_type_video),
-    index (id_image_movie_imdb),
     index (name_en),
     index (start_year desc),
     index (end_year desc),
@@ -199,37 +200,37 @@ create table movie_imdb_to_type_movie
 # 豆瓣电影 
 create table movie_douban
 (
-    id                    bigint unsigned   not null primary key,
+    id            bigint unsigned   not null primary key,
     # 影片种类/类型-ID  (电影、电视剧、电视剧的单集...)
-    id_type_video         tinyint unsigned  not null default 1,
-    # 豆瓣电影海报ID
-    id_image_movie_douban bigint unsigned   not null default 1,
+    id_type_video tinyint unsigned  not null default 1,
     # 豆瓣电影的IMDB-ID
-    id_movie_imdb         bigint unsigned   not null default 0,
+    id_movie_imdb bigint unsigned   not null default 0,
     # 豆瓣电影中文名
-    name_zh               varchar(255)      not null default '',
+    name_zh       varchar(255)      not null default '',
     # 豆瓣电影英文名
-    name_en               varchar(255)      not null default '',
+    name_en       varchar(255)      not null default '',
     # 豆瓣电影其他文名
-    name_other            varchar(255)      not null default '',
+    name_other    varchar(255)      not null default '',
     # 豆瓣电影别称 以/为间隔的字符串
-    name_alias            varchar(1000)     not null default '',
+    name_alias    varchar(1000)     not null default '',
     # 豆瓣电影运行片长 分钟
-    runtime               smallint unsigned not null default 0,
+    runtime       smallint unsigned not null default 0,
     # 豆瓣电视剧总集数 1-默认为一集（电影）(豆瓣电影不同于IMDB，豆瓣的电视剧ID和集为上下级关系)
-    set_sum               smallint unsigned not null default 1,
+    set_sum       smallint unsigned not null default 1,
+    # 豆瓣电影海报ID
+    url_poster    varchar(1000)     not null default '',
+
 
     index (id_type_video),
-    index (id_image_movie_douban),
-    index (id_movie_imdb),
+    unique (id_movie_imdb),
     index (name_zh),
     index (name_en),
     index (name_other),
     index (name_alias(255))
 ) ENGINE = InnoDB
   default charset = utf8mb4;
-insert into movie_douban(id, name_zh)
-values (0, '未知');
+insert into movie_douban(id, name_zh, name_en)
+values (0, '未知', 'unknown');
 
 # 豆瓣电影评分
 create table rate_douban
@@ -387,18 +388,6 @@ create table movie_douban_to_review_douban
 ) ENGINE = InnoDB
   default charset = utf8mb4;
 
-# 豆瓣电影-图片
-create table movie_douban_to_image_movie_douban
-(
-    id_movie_douban       bigint unsigned not null,
-    id_image_movie_douban bigint unsigned not null,
-    # 此图的描述
-    description           varchar(255)    not null default '',
-
-    primary key (id_movie_douban, id_image_movie_douban)
-) ENGINE = InnoDB
-  default charset = utf8mb4;
-
 # 电影 end ========================================================================================
 
 # 名人 start ========================================================================================
@@ -444,6 +433,8 @@ create table celebrity_imdb
     index (name_en)
 ) ENGINE = InnoDB
   default charset = utf8mb4;
+insert into celebrity_imdb(id, name_en)
+values (0, 'unknown');
 
 # 2.IMDB名人关系表---------------------------------------
 
@@ -468,50 +459,51 @@ create table movie_imdb_to_celebrity_imdb
 # 豆瓣名人
 create table celebrity_douban
 (
-    id                        bigint unsigned   not null primary key,
+    id                bigint unsigned   not null primary key,
     # IMDB-ID 
-    id_celebrity_imdb         bigint unsigned   not null default 0,
+    id_celebrity_imdb bigint unsigned   not null default 0,
     # 出生国家
-    id_country_imdb           smallint unsigned not null default 60000,
+    id_country_imdb   smallint unsigned not null default 1,
     # 出生州/省
-    id_state_imdb             int unsigned      not null default 99999999,
+    id_state_imdb     int unsigned      not null default 1,
     # 出生城市
-    id_city_imdb              int unsigned      not null default 99999999,
-    # 豆瓣影人海报ID
-    id_image_celebrity_douban bigint unsigned   not null default 1,
+    id_city_imdb      int unsigned      not null default 1,
     # 中文名
-    name_zh                   varchar(255)      not null default '',
+    name_zh           varchar(255)      not null default '',
     # 英文名
-    name_en                   varchar(255)      not null default '',
+    name_en           varchar(255)      not null default '',
     # 其他外文名
-    name_other                varchar(255)      not null default '',
+    name_other        varchar(255)      not null default '',
     # 更多中文名 以 / 为间隔
-    name_zh_more              varchar(1000)     not null default '',
+    name_zh_more      varchar(1000)     not null default '',
     # 更多英文名 以 / 为间隔
-    name_en_more              varchar(1000)     not null default '',
+    name_en_more      varchar(1000)     not null default '',
     # 更多外文名 以 / 为间隔
-    name_other_more           varchar(1000)     not null default '',
+    name_other_more   varchar(1000)     not null default '',
     # 性别 0-女 1-男 2-其他
-    sex                       tinyint(1)        not null default 2,
+    sex               tinyint(1)        not null default 2,
     # 生日日期
-    birth_date                date,
+    birth_date        date,
     # 描述
-    description               varchar(1000)     not null default '',
+    description       varchar(1000)     not null default '',
+    # 豆瓣影人海报链接
+    url_portrait      varchar(1000)     not null default '',
 
-    index (id_celebrity_imdb),
+    unique (id_celebrity_imdb),
     index (id_country_imdb),
     index (id_state_imdb),
     index (id_city_imdb),
-    index (id_image_celebrity_douban),
     index (name_zh),
-    index (name_en, id_celebrity_imdb),
-    index (id_celebrity_imdb),
+    index (name_en),
     index (name_other),
     index (name_zh_more(255)),
     index (name_en_more(255)),
     index (name_other_more(255))
 ) ENGINE = InnoDB
   default charset = utf8mb4;
+insert into celebrity_douban(id, name_zh, name_en)
+values (0, '未知', 'unknown');
+
 
 # 2.豆瓣名人关系表---------------------------------------
 
@@ -537,18 +529,6 @@ create table movie_douban_to_celebrity_douban
 ) ENGINE = InnoDB
   default charset = utf8mb4;
 
-# 豆瓣名人-图片
-create table celebrity_douban_to_image_celebrity_douban
-(
-    id_celebrity_douban       bigint unsigned not null,
-    id_image_celebrity_douban bigint unsigned not null,
-    # 此图的描述
-    description               varchar(255)    not null default '',
-
-    primary key (id_celebrity_douban, id_image_celebrity_douban)
-) ENGINE = InnoDB
-  default charset = utf8mb4;
-
 # 豆瓣电影经典台词-名人
 create table celebrity_douban_to_classic
 (
@@ -570,58 +550,58 @@ create table celebrity_douban_to_classic
 # 场景电影
 create table movie_scene
 (
-    id                       bigint unsigned      not null primary key,
+    id              bigint unsigned      not null primary key,
     # 场景电影对应的豆瓣电影ID
-    id_movie_douban          bigint unsigned      not null default 0,
-    # 场景电影海报ID
-    id_image_movie_scene     bigint unsigned      not null default 1,
-    # 场景电影静态地图ID
-    id_image_movie_map_scene bigint unsigned      not null default 1,
+    id_movie_douban bigint unsigned      not null default 0,
     # 场景电影中文名
-    name_zh                  varchar(255)         not null default '',
+    name_zh         varchar(255)         not null default '',
     # 场景电影英文名
-    name_en                  varchar(255)         not null default '',
+    name_en         varchar(255)         not null default '',
     # 上映时间
-    start_year               smallint(4) unsigned not null default 0,
+    start_year      smallint(4) unsigned not null default 0,
     # 场景电影拍摄地点大致描述
-    description              varchar(1000)        not null default '',
+    description     varchar(1000)        not null default '',
+    # 场景电影地点分布图链接
+    url_map         varchar(1000)        not null default '',
 
-    index (id_movie_douban),
-    index (id_image_movie_scene),
-    index (id_image_movie_map_scene),
+    unique (id_movie_douban),
     index (name_zh),
     index (name_en)
 ) ENGINE = InnoDB
   default charset = utf8mb4;
+insert into movie_scene(id, name_zh, name_en)
+values (0, '未知', 'unknown');
 
 # 场景名人
 create table celebrity_scene
 (
     id                  bigint unsigned not null primary key,
     # 场景详情ID
-    id_scene            bigint unsigned not null,
+    id_scene            bigint unsigned not null default 0,
     # 场景电影对应的豆瓣名人ID
-    id_celebrity_douban bigint unsigned not null,
+    id_celebrity_douban bigint unsigned not null default 0,
     # 场景名人中文名
     name_zh             varchar(255)    not null default '',
     # 场景名人英文名
     name_en             varchar(255)    not null default '',
 
     index (id_scene),
-    index (id_celebrity_douban),
+    unique (id_celebrity_douban),
     index (name_zh),
     index (name_en)
 ) ENGINE = InnoDB
   default charset = utf8mb4;
+insert into celebrity_scene(id, name_zh, name_en)
+values (0, '未知', 'unknown');
 
 # 场景
 create table scene
 (
     id             bigint unsigned not null primary key,
     # 场景对应的场景电影ID
-    id_movie_scene bigint unsigned not null default 1,
+    id_movie_scene bigint unsigned not null default 0,
     # 场景对应的地点ID
-    id_place       bigint unsigned not null default 1,
+    id_place       bigint unsigned not null default 0,
     # 场景中文名
     name_zh        varchar(255)    not null default '',
     # 场景发生在电影中的时间 秒
@@ -633,17 +613,19 @@ create table scene
     index (happen_time asc)
 ) ENGINE = InnoDB
   default charset = utf8mb4;
+insert into scene(id, name_zh)
+values (0, '未知');
 
-# 场景详情 （一个场景对应多个场景详情）
+# 场景详情 （一个场景可能对应多个场景详情）
 create table scene_detail
 (
     id             bigint unsigned not null primary key,
     # 场景详情对应的场景ID
-    id_scene       bigint unsigned not null,
+    id_scene       bigint unsigned not null default 0,
     # 场景详情对应的场景电影ID
-    id_movie_scene bigint unsigned not null default 1,
+    id_movie_scene bigint unsigned not null default 0,
     # 场景对应的地点ID
-    id_place       bigint unsigned not null default 1,
+    id_place       bigint unsigned not null default 0,
     # 场景发生在电影中的时间 秒
     happen_time    int unsigned    not null default 0,
     # 场景描述
@@ -655,6 +637,8 @@ create table scene_detail
     index (happen_time asc)
 ) ENGINE = InnoDB
   default charset = utf8mb4;
+insert into scene_detail(id, description)
+values (0, '未知');
 
 # 2.电影片场关系表---------------------------------------
 
@@ -699,7 +683,7 @@ create table permission
     # 权限名称
     name_zh     varchar(255) not null default '',
     # 权限路径
-    path_src    varchar(255) not null,
+    path_src    varchar(255) not null default 'x',
     # 权限描述
     description varchar(255) not null default '',
 
@@ -822,74 +806,71 @@ create table user_douban_to_classic_douban
 # 电影资源网站 
 create table website_resource
 (
-    id          tinyint unsigned not null auto_increment primary key,
+    id          smallint unsigned not null auto_increment primary key,
     # 网站中文名
-    name_zh     varchar(255)     not null default '',
+    name_zh     varchar(255)      not null default '',
     # 网站英文名
-    name_en     varchar(255)     not null default '',
+    name_en     varchar(255)      not null default '',
     # 网站是否为正版合法网站 0-否 1-是
-    is_legal    tinyint(1)       not null default 0,
+    is_legal    tinyint(1)        not null default 0,
+    # 网站能否在线播放资源 0-否 1-是
+    is_online   tinyint(1)        not null default 0,
     # 网站官网地址
-    website_src varchar(255)     not null default '',
+    website_src varchar(255)      not null default '',
     # 网站描述
-    description varchar(255)     not null default '',
+    description varchar(255)      not null default '',
 
     index (name_zh),
     index (name_en)
 ) ENGINE = InnoDB
   default charset = utf8mb4;
-insert into website_resource
-values (1, '未知', 'unknown', 1, '', '');
+insert into website_resource(id, name_zh, name_en)
+values (1, '未知', 'unknown');
 
 
-# 电影资源类型 (vip免费播放、磁力链接...) 
+# 电影资源类型 (免费播放、vip免费播放、磁力链接...)
 create table type_resource
 (
-    id        tinyint unsigned not null auto_increment primary key,
+    id          smallint unsigned not null auto_increment primary key,
     # 资源类型中文名
-    name_zh   varchar(255)     not null default '',
-    # 资源类型英文名
-    name_en   varchar(255)     not null default '',
-    # 跳转链接前半部分 （first + keyword + last 即为资源链接）
-    src_first varchar(1000)    not null default '',
-    # 跳转链接后半部分
-    src_last  varchar(1000)    not null default '',
+    name_zh     varchar(255)      not null default '',
+    # 资源类型描述
+    description varchar(255)      not null default '',
 
-    index (name_zh),
-    index (name_en)
+    index (name_zh)
 ) ENGINE = InnoDB
   default charset = utf8mb4;
 insert into type_resource
-values (1, '未知', 'unknown', '', '');
+values (1, '未知', '');
 
 # 电影资源
 create table resource_movie
 (
-    id                  bigint unsigned  not null auto_increment primary key,
+    id                  bigint unsigned   not null auto_increment primary key,
     # 资源对应的电影
-    id_movie_douban     bigint unsigned  not null default 0,
+    id_movie_douban     bigint unsigned   not null default 0,
     # 资源可信度 0~10 0为完全不可信 1为完全可信
-    reliability         tinyint unsigned not null default 0,
+    reliability         tinyint unsigned  not null default 0,
     # 资源所属网站
-    id_website_resource tinyint unsigned not null default 1,
+    id_website_resource smallint unsigned not null default 1,
     # 资源所属类型
-    id_type_resource    tinyint unsigned not null default 1,
-    # 资源链接的跳转关键字 （first + keyword + last 即为资源链接）
-    keyword             varchar(1000)    not null default '',
-    # 资源原始名称
-    name_origin         varchar(255)     not null default '',
+    id_type_resource    smallint unsigned not null default 1,
+    # 资源链接
+    url_resource        varchar(1000)     not null default '',
+    # 资源中文名
+    name_zh             varchar(255)      not null default '',
     # 资源描述
-    description         varchar(255)     not null default '',
+    description         varchar(255)      not null default '',
 
     index (id_movie_douban),
     index (reliability desc),
     index (id_website_resource),
     index (id_type_resource),
-    index (name_origin)
+    index (name_zh)
 ) ENGINE = InnoDB
   default charset = utf8mb4;
-insert into resource_movie
-values (1, 0, 0, 1, 1, '', '未知', '');
+insert into resource_movie(id, name_zh)
+values (1, '未知');
 
 # 2.电影资源关系表---------------------------------------
 
@@ -898,213 +879,78 @@ values (1, 0, 0, 1, 1, '', '未知', '');
 
 # 1.图片资源基础表---------------------------------------
 
-# 图片资源网站 
-create table website_image
-(
-    id          tinyint unsigned not null auto_increment primary key,
-    # 网站中文名
-    name_zh     varchar(255)     not null default '',
-    # 网站英文名
-    name_en     varchar(255)     not null default '',
-    # 网站官网地址
-    website_src varchar(255)     not null default '',
-    # 网站描述
-    description varchar(255)     not null default '',
 
-    index (name_zh),
-    index (name_en)
-) ENGINE = InnoDB
-  default charset = utf8mb4;
-insert into website_image
-values (1, '未知', 'unknown', '', '');
-
-# 图片类型 
-create table type_image
-(
-    id        smallint unsigned not null auto_increment primary key,
-    # 图片类型名称
-    name_zh   varchar(255)      not null default '',
-    # 图片url前半部分 (first + keyword + last 即为图片地址)
-    src_first varchar(1000)     not null default '',
-    # 图片url后半部分
-    src_last  varchar(1000)     not null default '',
-
-    index (name_zh)
-) ENGINE = InnoDB
-  default charset = utf8mb4;
-insert into type_image
-values (1, '未知', '', '');
-
-# 图片（地点所有图片专属）(包括海报) 
-create table image_place
-(
-    id               bigint unsigned     not null auto_increment primary key,
-    # 图片的类型 
-    id_type_image    smallint unsigned   not null default 1,
-    # 图片所属网站 
-    id_website_image tinyint unsigned    not null default 1,
-    # 图片是否是海报 0-不是 1-是
-    is_poster        tinyint(1) unsigned not null default 0,
-    # 图片url关键字
-    keyword          varchar(255)        not null default '',
-    # 图片原始名称
-    name_origin      varchar(255)        not null default '',
-    # 图片描述
-    description      varchar(255)        not null default '',
-
-    index (id_type_image),
-    index (id_website_image),
-    index (name_origin)
-) ENGINE = InnoDB
-  default charset = utf8mb4;
-insert into image_place
-values (1, 1, 1, 0, '', '未知', '');
-
-# 图片（地点于地球位置专属）
-create table image_place_earth
-(
-    id               bigint unsigned   not null auto_increment primary key,
-    # 图片的类型 
-    id_type_image    smallint unsigned not null default 1,
-    # 图片所属网站 
-    id_website_image tinyint unsigned  not null default 1,
-    # 图片url关键字
-    keyword          varchar(255)      not null default '',
-    # 图片原始名称
-    name_origin      varchar(255)      not null default '',
-    # 图片描述
-    description      varchar(255)      not null default '',
-
-    index (id_type_image),
-    index (id_website_image),
-    index (name_origin)
-) ENGINE = InnoDB
-  default charset = utf8mb4;
-insert into image_place_earth
-values (1, 1, 1, '', '未知', '');
-
-# 图片（场景电影所有地点静态地图专属）
-create table image_movie_map_scene
-(
-    id               bigint unsigned   not null auto_increment primary key,
-    # 图片的类型 
-    id_type_image    smallint unsigned not null default 1,
-    # 图片所属网站 
-    id_website_image tinyint unsigned  not null default 1,
-    # 图片url关键字
-    keyword          varchar(255)      not null default '',
-    # 图片原始名称
-    name_origin      varchar(255)      not null default '',
-    # 图片描述
-    description      varchar(255)      not null default '',
-
-    index (id_type_image),
-    index (id_website_image),
-    index (name_origin)
-) ENGINE = InnoDB
-  default charset = utf8mb4;
-insert into image_movie_map_scene
-values (1, 1, 1, '', '未知', '');
-
-# 图片（豆瓣电影所有图片专属）(包括海报) 
+# 图片（豆瓣电影-电影图片）
 create table image_movie_douban
 (
-    id               bigint unsigned     not null auto_increment primary key,
-    # 图片的类型 
-    id_type_image    smallint unsigned   not null default 1,
-    # 图片所属网站 
-    id_website_image tinyint unsigned    not null default 1,
-    # 图片是否是海报 0-不是 1-是
-    is_poster        tinyint(1) unsigned not null default 0,
-    # 图片url关键字
-    keyword          varchar(255)        not null default '',
+    id              bigint unsigned not null auto_increment primary key,
+    # 豆瓣电影ID
+    id_movie_douban bigint unsigned not null default 0,
+    # 图片链接
+    url_image       varchar(1000)   not null default '',
     # 图片原始名称
-    name_origin      varchar(255)        not null default '',
+    name_origin     varchar(255)    not null default '',
     # 图片描述
-    description      varchar(255)        not null default '',
+    description     varchar(255)    not null default '',
 
-    index (id_type_image),
-    index (id_website_image),
+    index (id_movie_douban),
     index (name_origin)
 ) ENGINE = InnoDB
   default charset = utf8mb4;
-insert into image_movie_douban
-values (1, 1, 1, 0, '', '未知', '');
 
-# 图片（IMDB电影所有图片专属）(包括海报)
-create table image_movie_imdb
-(
-    id               bigint unsigned     not null auto_increment primary key,
-    # 图片的类型
-    id_type_image    smallint unsigned   not null default 1,
-    # 图片所属网站
-    id_website_image tinyint unsigned    not null default 1,
-    # 图片是否是海报 0-不是 1-是
-    is_poster        tinyint(1) unsigned not null default 0,
-    # 图片url关键字
-    keyword          varchar(255)        not null default '',
-    # 图片原始名称
-    name_origin      varchar(255)        not null default '',
-    # 图片描述
-    description      varchar(255)        not null default '',
-
-    index (id_type_image),
-    index (id_website_image),
-    index (name_origin)
-) ENGINE = InnoDB
-  default charset = utf8mb4;
-insert into image_movie_imdb
-values (1, 1, 1, 0, '', '未知', '');
-
-# 图片（豆瓣名人所有图片专属）(包括海报) 
+# 图片（豆瓣电影-影人图片）
 create table image_celebrity_douban
 (
-    id               bigint unsigned     not null auto_increment primary key,
-    # 图片的类型 
-    id_type_image    smallint unsigned   not null default 1,
-    # 图片所属网站 
-    id_website_image tinyint unsigned    not null default 1,
-    # 图片是否是海报 0-不是 1-是
-    is_poster        tinyint(1) unsigned not null default 0,
-    # 图片url关键字
-    keyword          varchar(255)        not null default '',
+    id                  bigint unsigned not null auto_increment primary key,
+    # 豆瓣影人ID
+    id_celebrity_douban bigint unsigned not null default 0,
+    # 图片链接
+    url_image           varchar(1000)   not null default '',
     # 图片原始名称
-    name_origin      varchar(255)        not null default '',
+    name_origin         varchar(255)    not null default '',
     # 图片描述
-    description      varchar(255)        not null default '',
+    description         varchar(255)    not null default '',
 
-    index (id_type_image),
-    index (id_website_image),
+    index (id_celebrity_douban),
     index (name_origin)
 ) ENGINE = InnoDB
   default charset = utf8mb4;
-insert into image_celebrity_douban
-values (1, 1, 1, 0, '', '未知', '');
 
-# 图片（场景电影所有图片专属）(包括海报) 
-create table image_movie_scene
+# 图片（场景-地点图片）
+create table image_place
 (
-    id               bigint unsigned     not null auto_increment primary key,
-    # 图片的类型 
-    id_type_image    smallint unsigned   not null default 1,
-    # 图片所属网站 
-    id_website_image tinyint unsigned    not null default 1,
-    # 图片是否是海报 0-不是 1-是
-    is_poster        tinyint(1) unsigned not null default 0,
-    # 图片url关键字
-    keyword          varchar(255)        not null default '',
+    id          bigint unsigned not null auto_increment primary key,
+    # 场景地点ID
+    id_place    bigint unsigned not null default 0,
+    # 图片链接
+    url_image   varchar(1000)   not null default '',
     # 图片原始名称
-    name_origin      varchar(255)        not null default '',
+    name_origin varchar(255)    not null default '',
     # 图片描述
-    description      varchar(255)        not null default '',
+    description varchar(255)    not null default '',
 
-    index (id_type_image),
-    index (id_website_image),
+    index (id_place),
     index (name_origin)
 ) ENGINE = InnoDB
   default charset = utf8mb4;
-insert into image_movie_scene
-values (1, 1, 1, 0, '', '未知', '');
+
+# 图片（场景-场景图片）
+create table image_scene
+(
+    id          bigint unsigned not null auto_increment primary key,
+    # 场景ID
+    id_scene    bigint unsigned not null default 0,
+    # 图片链接
+    url_image   varchar(1000)   not null default '',
+    # 图片原始名称
+    name_origin varchar(255)    not null default '',
+    # 图片描述
+    description varchar(255)    not null default '',
+
+    index (id_scene),
+    index (name_origin)
+) ENGINE = InnoDB
+  default charset = utf8mb4;
 
 # 2.图片资源关系表---------------------------------------
 
@@ -1129,6 +975,8 @@ create table continent_place
     unique index (name_en)
 ) ENGINE = InnoDB
   default charset = utf8mb4;
+insert into continent_place
+values (0, '未知', 'unknown');
 
 # 国家（地点专属）
 create table country_place
@@ -1143,6 +991,8 @@ create table country_place
     unique index (name_en)
 ) ENGINE = InnoDB
   default charset = utf8mb4;
+insert into country_place
+values (0, '未知', 'unknown');
 
 # 国家（imdb专属）
 create table country_imdb
@@ -1158,7 +1008,7 @@ create table country_imdb
 ) ENGINE = InnoDB
   default charset = utf8mb4;
 insert into country_imdb
-values (60000, '未知', 'unknown');
+values (1, '未知', 'unknown');
 
 # 州/省(地点专属)
 create table state_place
@@ -1173,6 +1023,8 @@ create table state_place
     unique index (name_en)
 ) ENGINE = InnoDB
   default charset = utf8mb4;
+insert into state_place
+values (0, '未知', 'unknown');
 
 # 州/省(imdb专属)
 create table state_imdb
@@ -1188,7 +1040,7 @@ create table state_imdb
 ) ENGINE = InnoDB
   default charset = utf8mb4;
 insert into state_imdb
-values (99999999, '未知', 'unknown');
+values (1, '未知', 'unknown');
 
 # 城市(地点专属)
 create table city_place
@@ -1203,6 +1055,8 @@ create table city_place
     unique index (name_en)
 ) ENGINE = InnoDB
   default charset = utf8mb4;
+insert into city_place
+values (0, '未知', 'unknown');
 
 # 城市(imdb专属)
 create table city_imdb
@@ -1218,7 +1072,7 @@ create table city_imdb
 ) ENGINE = InnoDB
   default charset = utf8mb4;
 insert into city_imdb
-values (99999999, '未知', 'unknown');
+values (1, '未知', 'unknown');
 
 # 地区(地点专属)
 create table area_place
@@ -1233,6 +1087,8 @@ create table area_place
     unique index (name_en)
 ) ENGINE = InnoDB
   default charset = utf8mb4;
+insert into area_place
+values (0, '未知', 'unknown');
 
 # 地区 (豆瓣电影专属)
 create table area_douban
@@ -1244,8 +1100,6 @@ create table area_douban
     unique index (name_zh)
 ) ENGINE = InnoDB
   default charset = utf8mb4;
-insert into area_douban
-values (1, '未知');
 
 # 地点类型 (地点专属)
 create table type_place
@@ -1257,50 +1111,52 @@ create table type_place
     unique index (name_zh)
 ) ENGINE = InnoDB
   default charset = utf8mb4;
+insert into type_place
+values (0, '未知');
 
 # 地点 
 create table place
 (
-    id                   bigint unsigned   not null primary key,
+    id                 bigint unsigned   not null primary key,
     # 地点类型-id
-    id_type_place        smallint unsigned not null default 9999,
+    id_type_place      smallint unsigned not null default 0,
     # 地点范围-洲-id
-    id_continent_place   tinyint unsigned  not null default 99,
+    id_continent_place tinyint unsigned  not null default 0,
     # 地点范围-国家-id
-    id_country_place     smallint unsigned not null default 9999,
+    id_country_place   smallint unsigned not null default 0,
     # 地点范围-州/省-id
-    id_state_place       int unsigned      not null default 99999999,
+    id_state_place     int unsigned      not null default 0,
     # 地点范围-城市-id
-    id_city_place        int unsigned      not null default 99999999,
+    id_city_place      int unsigned      not null default 0,
     # 地点范围-地区-id
-    id_area_place        int unsigned      not null default 99999999,
-
-    # 地点的主页海报图-id
-    id_image_place       bigint unsigned   not null default 1,
-    # 地点位于地球上的位置图-id
-    id_image_place_earth bigint unsigned   not null default 1,
+    id_area_place      int unsigned      not null default 0,
 
     # 经度
-    longitude            decimal(10, 8)    not null default 0.00000000,
+    longitude          decimal(10, 8)    not null default 0.00000000,
     # 纬度
-    latitude             decimal(10, 8)    not null default 0.00000000,
+    latitude           decimal(10, 8)    not null default 0.00000000,
 
     # 中文名
-    name_zh              varchar(255)      not null default '',
+    name_zh            varchar(255)      not null default '',
     # 英文名
-    name_en              varchar(255)      not null default '',
+    name_en            varchar(255)      not null default '',
     # 其他语言名
-    name_other           varchar(255)      not null default '',
+    name_other         varchar(255)      not null default '',
     # 别名
-    alias                varchar(255)      not null default '',
+    alias              varchar(255)      not null default '',
     # 中文地址
-    address_zh           varchar(255)      not null default '',
+    address_zh         varchar(255)      not null default '',
     # 英文地址
-    address_en           varchar(255)      not null default '',
+    address_en         varchar(255)      not null default '',
     # 地点描述
-    description          varchar(1000)     not null default '',
+    description        varchar(1000)     not null default '',
     # 电话号码
-    phone                varchar(255)      not null default '',
+    phone              varchar(255)      not null default '',
+    # 地点海报图链接
+    url_poster         varchar(1000)     not null default '',
+    # 地点地球位置图链接
+    url_map            varchar(1000)     not null default '',
+
 
     index (id_type_place),
     index (id_continent_place),
@@ -1308,26 +1164,14 @@ create table place
     index (id_state_place),
     index (id_city_place),
     index (id_area_place),
-    index (id_image_place),
-    index (id_image_place_earth),
     index (longitude),
     index (latitude)
 ) ENGINE = InnoDB
   default charset = utf8mb4;
+insert into place(id, name_zh, name_en)
+values (0, '未知', 'unknown');
 
 # 2.地点区域关系表---------------------------------------
-
-# 地点-图片
-create table place_to_image_place
-(
-    id_place       bigint unsigned not null,
-    id_image_place bigint unsigned not null,
-    # 此实景图的描述
-    description    varchar(255)    not null default '',
-
-    primary key (id_place, id_image_place)
-) ENGINE = InnoDB
-  default charset = utf8mb4;
 
 # 区域 end ========================================================================================
 
@@ -1345,15 +1189,17 @@ CREATE TABLE user_netease
     index (name_zh)
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8mb4;
+insert into user_netease(id, name_zh)
+values (0, '未知');
 
 # 歌单
 CREATE TABLE playlist
 (
     id              bigint unsigned   NOT NULL primary key,
     # 推荐搜索之歌单所属豆瓣电影ID
-    id_movie_douban bigint unsigned   not null,
+    id_movie_douban bigint unsigned   not null default 0,
     # 歌单所属用户ID
-    id_user_netease bigint unsigned   not null,
+    id_user_netease bigint unsigned   not null default 0,
     # 歌单中文名
     name_zh         varchar(255)      not null default '',
     # 歌单歌曲总数
@@ -1376,7 +1222,7 @@ CREATE TABLE album
 (
     id              bigint unsigned   NOT NULL primary key,
     # 推荐搜索之专辑所属豆瓣电影ID
-    id_movie_douban bigint unsigned   not null,
+    id_movie_douban bigint unsigned   not null default 0,
     # 专辑中文名
     name_zh         varchar(255)      not null default '',
     # 专辑歌曲总数
@@ -1536,11 +1382,11 @@ create table song_to_singer
 # 音乐 end ========================================================================================
 
 # 外键关系 start ========================================================================================
+
 /*
+
 alter table movie_imdb
     add foreign key (id_type_video) references type_video (id);
-alter table movie_imdb
-    add foreign key (id_image_movie_imdb) references image_movie_imdb (id);
 alter table movie_imdb_to_type_movie
     add foreign key (id_movie_imdb) references movie_imdb (id);
 alter table movie_imdb_to_type_movie
@@ -1549,8 +1395,6 @@ alter table movie_douban
     add foreign key (id_movie_imdb) references movie_imdb (id);
 alter table movie_douban
     add foreign key (id_type_video) references type_video (id);
-alter table movie_douban
-    add foreign key (id_image_movie_douban) references image_movie_douban (id);
 alter table classic_douban
     add foreign key (id_movie_douban) references movie_douban (id);
 alter table rate_douban
@@ -1583,10 +1427,6 @@ alter table movie_douban_to_review_douban
     add foreign key (id_movie_douban) references movie_douban (id);
 alter table movie_douban_to_review_douban
     add foreign key (id_review_douban) references review_douban (id);
-alter table movie_douban_to_image_movie_douban
-    add foreign key (id_movie_douban) references movie_douban (id);
-alter table movie_douban_to_image_movie_douban
-    add foreign key (id_image_movie_douban) references image_movie_douban (id);
 alter table rate_imdb
     add foreign key (id) references movie_imdb (id);
 alter table movie_imdb_to_celebrity_imdb
@@ -1603,8 +1443,6 @@ alter table celebrity_douban
     add foreign key (id_state_imdb) references state_imdb (id);
 alter table celebrity_douban
     add foreign key (id_city_imdb) references city_imdb (id);
-alter table celebrity_douban
-    add foreign key (id_image_celebrity_douban) references image_celebrity_douban (id);
 alter table celebrity_douban_to_profession
     add foreign key (id_celebrity_douban) references celebrity_douban (id);
 alter table celebrity_douban_to_profession
@@ -1615,20 +1453,12 @@ alter table movie_douban_to_celebrity_douban
     add foreign key (id_celebrity_douban) references celebrity_douban (id);
 alter table movie_douban_to_celebrity_douban
     add foreign key (id_profession) references profession (id);
-alter table celebrity_douban_to_image_celebrity_douban
-    add foreign key (id_celebrity_douban) references celebrity_douban (id);
-alter table celebrity_douban_to_image_celebrity_douban
-    add foreign key (id_image_celebrity_douban) references image_celebrity_douban (id);
 alter table celebrity_douban_to_classic
     add foreign key (id_celebrity_douban) references celebrity_douban (id);
 alter table celebrity_douban_to_classic
     add foreign key (id_classic_douban) references classic_douban (id);
 alter table movie_scene
     add foreign key (id_movie_douban) references movie_douban (id);
-alter table movie_scene
-    add foreign key (id_image_movie_scene) references image_movie_scene (id);
-alter table movie_scene
-    add foreign key (id_image_movie_map_scene) references image_movie_map_scene (id);
 alter table celebrity_scene
     add foreign key (id_scene) references scene (id);
 alter table celebrity_scene
@@ -1677,34 +1507,14 @@ alter table resource_movie
     add foreign key (id_website_resource) references website_resource (id);
 alter table resource_movie
     add foreign key (id_type_resource) references type_resource (id);
-alter table image_place
-    add foreign key (id_type_image) references type_image (id);
-alter table image_place
-    add foreign key (id_website_image) references website_image (id);
-alter table image_place_earth
-    add foreign key (id_type_image) references type_image (id);
-alter table image_place_earth
-    add foreign key (id_website_image) references website_image (id);
-alter table image_movie_map_scene
-    add foreign key (id_type_image) references type_image (id);
-alter table image_movie_map_scene
-    add foreign key (id_website_image) references website_image (id);
-alter table image_movie_douban
-    add foreign key (id_type_image) references type_image (id);
-alter table image_movie_douban
-    add foreign key (id_website_image) references website_image (id);
-alter table image_movie_imdb
-    add foreign key (id_type_image) references type_image (id);
-alter table image_movie_imdb
-    add foreign key (id_website_image) references website_image (id);
 alter table image_celebrity_douban
-    add foreign key (id_type_image) references type_image (id);
-alter table image_celebrity_douban
-    add foreign key (id_website_image) references website_image (id);
-alter table image_movie_scene
-    add foreign key (id_type_image) references type_image (id);
-alter table image_movie_scene
-    add foreign key (id_website_image) references website_image (id);
+    add foreign key (id_celebrity_douban) references celebrity_douban (id);
+alter table image_movie_douban
+    add foreign key (id_movie_douban) references movie_douban (id);
+alter table image_place
+    add foreign key (id_place) references place (id);
+alter table image_scene
+    add foreign key (id_scene) references scene (id);
 alter table place
     add foreign key (id_type_place) references type_place (id);
 alter table place
@@ -1717,14 +1527,6 @@ alter table place
     add foreign key (id_city_place) references city_place (id);
 alter table place
     add foreign key (id_area_place) references area_place (id);
-alter table place
-    add foreign key (id_image_place) references image_place (id);
-alter table place
-    add foreign key (id_image_place_earth) references image_place_earth (id);
-alter table place_to_image_place
-    add foreign key (id_place) references place (id);
-alter table place_to_image_place
-    add foreign key (id_image_place) references image_place (id);
 alter table playlist_to_tag_netease
     add foreign key (id_playlist) references playlist (id);
 alter table playlist_to_tag_netease
@@ -1763,7 +1565,8 @@ alter table album_to_singer
     add foreign key (id_album) references album (id);
 alter table album_to_singer
     add foreign key (id_singer) references singer (id);
-*/
+
+ */
 
 # 外键关系 end ========================================================================================
 
