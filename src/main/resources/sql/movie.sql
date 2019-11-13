@@ -27,12 +27,15 @@
  图片资源相关
 
  区域：
- 地点区域相关
+ 场景区域相关
+ 其他区域相关
 
  音乐：
  网易云音乐相关
 
  选择是否添加外键关系
+
+ 表初始化
 
  IMDB转换SQL语句
 
@@ -57,7 +60,7 @@ create table type_video
     # 影片类型英文名
     name_en varchar(255)     not null default '',
 
-    unique index (name_zh, name_en),
+    index (name_zh),
     index (name_en)
 ) ENGINE = InnoDB
   default charset = utf8mb4;
@@ -71,7 +74,7 @@ create table award_movie
     # 奖项名称
     name_zh varchar(255)      not null default '',
 
-    unique index (name_zh)
+    index (name_zh)
 ) ENGINE = InnoDB
   default charset = utf8mb4;
 insert into award_movie
@@ -84,7 +87,7 @@ create table type_award
     # 奖项类别名称
     name_zh varchar(255)      not null default '',
 
-    unique index (name_zh)
+    index (name_zh)
 ) ENGINE = InnoDB
   default charset = utf8mb4;
 insert into type_award
@@ -99,7 +102,7 @@ create table type_movie
     # 类型英文名
     name_en varchar(255)      not null default '',
 
-    unique index (name_zh, name_en),
+    index (name_zh),
     index (name_en)
 ) ENGINE = InnoDB
   default charset = utf8mb4;
@@ -115,7 +118,7 @@ create table tag_movie
     # 标签英文名
     name_en varchar(255) not null default '',
 
-    unique index (name_zh, name_en),
+    index (name_zh),
     index (name_en)
 ) ENGINE = InnoDB
   default charset = utf8mb4;
@@ -222,7 +225,7 @@ create table movie_douban
 
 
     index (id_type_video),
-    unique (id_movie_imdb),
+    index (id_movie_imdb),
     index (name_zh),
     index (name_en),
     index (name_other),
@@ -405,7 +408,7 @@ create table profession
     # 职业英文名
     name_en varchar(255)     not null default '',
 
-    unique index (name_zh, name_en),
+    index (name_zh),
     index (name_en)
 ) ENGINE = InnoDB
   default charset = utf8mb4;
@@ -489,7 +492,7 @@ create table celebrity_douban
     # 豆瓣影人海报链接
     url_portrait      varchar(1000)     not null default '',
 
-    unique (id_celebrity_imdb),
+    index (id_celebrity_imdb),
     index (id_country_imdb),
     index (id_state_imdb),
     index (id_city_imdb),
@@ -564,7 +567,7 @@ create table movie_scene
     # 场景电影地点分布图链接
     url_map         varchar(1000)        not null default '',
 
-    unique (id_movie_douban),
+    index (id_movie_douban),
     index (name_zh),
     index (name_en)
 ) ENGINE = InnoDB
@@ -583,7 +586,7 @@ create table celebrity_scene
     # 场景名人英文名
     name_en             varchar(255)    not null default '',
 
-    unique (id_celebrity_douban),
+    index (id_celebrity_douban),
     index (name_zh),
     index (name_en)
 ) ENGINE = InnoDB
@@ -598,14 +601,14 @@ create table scene
     # 场景对应的场景电影ID
     id_movie_scene bigint unsigned not null default 0,
     # 场景对应的地点ID
-    id_place       bigint unsigned not null default 0,
+    id_place_scene bigint unsigned not null default 0,
     # 场景中文名
     name_zh        varchar(255)    not null default '',
     # 场景发生在电影中的时间 秒
     happen_time    int unsigned    not null default 0,
 
     index (id_movie_scene),
-    index (id_place),
+    index (id_place_scene),
     index (name_zh),
     index (happen_time asc)
 ) ENGINE = InnoDB
@@ -621,8 +624,6 @@ create table scene_detail
     id_scene       bigint unsigned not null default 0,
     # 场景详情对应的场景电影ID
     id_movie_scene bigint unsigned not null default 0,
-    # 场景对应的地点ID
-    id_place       bigint unsigned not null default 0,
     # 场景发生在电影中的时间 秒
     happen_time    int unsigned    not null default 0,
     # 场景描述
@@ -630,7 +631,6 @@ create table scene_detail
 
     index (id_scene),
     index (id_movie_scene),
-    index (id_place),
     index (happen_time asc)
 ) ENGINE = InnoDB
   default charset = utf8mb4;
@@ -685,7 +685,7 @@ create table permission
     description varchar(255) not null default '',
 
     index (name_zh),
-    unique index (path_src)
+    unique (path_src)
 ) ENGINE = InnoDB
   default charset = utf8mb4;
 insert into permission
@@ -722,7 +722,7 @@ create table user_douban
     # 注册邮箱
     email    varchar(255) not null default '',
 
-    unique index (domain),
+    unique (domain),
     index (name_zh),
     index (phone),
     index (email)
@@ -913,18 +913,18 @@ create table image_celebrity_douban
 ) ENGINE = InnoDB
   default charset = utf8mb4;
 
-# 图片（场景-地点图片）
-create table image_place
+# 图片（场景地点-地点图片）
+create table image_place_scene
 (
-    id          bigint unsigned not null auto_increment primary key,
+    id             bigint unsigned not null auto_increment primary key,
     # 场景地点ID
-    id_place    bigint unsigned not null default 0,
+    id_place_scene bigint unsigned not null default 0,
     # 图片链接
-    url_image   varchar(1000)   not null default '',
+    url_image      varchar(1000)   not null default '',
     # 图片描述
-    description varchar(255)    not null default '',
+    description    varchar(255)    not null default '',
 
-    index (id_place)
+    index (id_place_scene)
 ) ENGINE = InnoDB
   default charset = utf8mb4;
 
@@ -947,183 +947,27 @@ create table image_scene_detail
 
 # 区域 start ========================================================================================
 
-# 地点区域相关 ---------------------------------------------------------------------------------
+# 场景区域相关 ---------------------------------------------------------------------------------
 
 # 1.地点区域基础表---------------------------------------
 
-# 洲 (地点专属)
-create table continent_place
-(
-    id      tinyint unsigned not null primary key,
-    # 洲中文名
-    name_zh varchar(255)     not null default '',
-    # 洲英文名
-    name_en varchar(255)     not null default '',
-
-    unique index (name_zh),
-    unique index (name_en)
-) ENGINE = InnoDB
-  default charset = utf8mb4;
-insert into continent_place
-values (0, '未知', 'unknown');
-
-# 国家（地点专属）
-create table country_place
-(
-    id      smallint unsigned not null primary key,
-    # 国家中文名
-    name_zh varchar(255)      not null default '',
-    # 国家英文名
-    name_en varchar(255)      not null default '',
-
-    unique index (name_zh),
-    unique index (name_en)
-) ENGINE = InnoDB
-  default charset = utf8mb4;
-insert into country_place
-values (0, '未知', 'unknown');
-
-# 国家（imdb专属）
-create table country_imdb
-(
-    id      smallint unsigned not null auto_increment primary key,
-    # 国家中文名
-    name_zh varchar(255)      not null default '',
-    # 国家英文名
-    name_en varchar(255)      not null default '',
-
-    unique index (name_zh),
-    unique index (name_en)
-) ENGINE = InnoDB
-  default charset = utf8mb4;
-insert into country_imdb
-values (1, '未知', 'unknown');
-
-# 州/省(地点专属)
-create table state_place
-(
-    id      int unsigned not null primary key,
-    # 州中文名
-    name_zh varchar(255) not null default '',
-    # 州英文名
-    name_en varchar(255) not null default '',
-
-    unique index (name_zh),
-    unique index (name_en)
-) ENGINE = InnoDB
-  default charset = utf8mb4;
-insert into state_place
-values (0, '未知', 'unknown');
-
-# 州/省(imdb专属)
-create table state_imdb
-(
-    id      int unsigned not null auto_increment primary key,
-    # 州中文名
-    name_zh varchar(255) not null default '',
-    # 州英文名
-    name_en varchar(255) not null default '',
-
-    unique index (name_zh),
-    unique index (name_en)
-) ENGINE = InnoDB
-  default charset = utf8mb4;
-insert into state_imdb
-values (1, '未知', 'unknown');
-
-# 城市(地点专属)
-create table city_place
-(
-    id      int unsigned not null primary key,
-    # 城市中文名
-    name_zh varchar(255) not null default '',
-    # 城市英文名
-    name_en varchar(255) not null default '',
-
-    unique index (name_zh),
-    unique index (name_en)
-) ENGINE = InnoDB
-  default charset = utf8mb4;
-insert into city_place
-values (0, '未知', 'unknown');
-
-# 城市(imdb专属)
-create table city_imdb
-(
-    id      int unsigned not null auto_increment primary key,
-    # 城市中文名
-    name_zh varchar(255) not null default '',
-    # 城市英文名
-    name_en varchar(255) not null default '',
-
-    unique index (name_zh),
-    unique index (name_en)
-) ENGINE = InnoDB
-  default charset = utf8mb4;
-insert into city_imdb
-values (1, '未知', 'unknown');
-
-# 地区(地点专属)
-create table area_place
-(
-    id      int unsigned not null primary key,
-    # 地区中文名
-    name_zh varchar(255) not null default '',
-    # 地区英文名
-    name_en varchar(255) not null default '',
-
-    unique index (name_zh),
-    unique index (name_en)
-) ENGINE = InnoDB
-  default charset = utf8mb4;
-insert into area_place
-values (0, '未知', 'unknown');
-
-# 地区 (豆瓣电影专属)
-create table area_douban
-(
-    id      int unsigned not null auto_increment primary key,
-    # 地区中文名
-    name_zh varchar(255) not null default '',
-
-    unique index (name_zh)
-) ENGINE = InnoDB
-  default charset = utf8mb4;
-
-# 地点类型 (地点专属)
-create table type_place
-(
-    id      smallint unsigned not null primary key,
-    # 地点类型名称
-    name_zh varchar(255)      not null default '',
-
-    unique index (name_zh)
-) ENGINE = InnoDB
-  default charset = utf8mb4;
-insert into type_place
-values (0, '未知');
-
-# 地点 
-create table place
+# 地点
+create table place_scene
 (
     id                 bigint unsigned   not null primary key,
-    # 地点类型-id
-    id_type_place      smallint unsigned not null default 0,
     # 地点范围-洲-id
-    id_continent_place tinyint unsigned  not null default 0,
+    id_continent_scene tinyint unsigned  not null default 0,
     # 地点范围-国家-id
-    id_country_place   smallint unsigned not null default 0,
+    id_country_scene   smallint unsigned not null default 0,
     # 地点范围-州/省-id
-    id_state_place     int unsigned      not null default 0,
+    id_state_scene     int unsigned      not null default 0,
     # 地点范围-城市-id
-    id_city_place      int unsigned      not null default 0,
-    # 地点范围-地区-id
-    id_area_place      int unsigned      not null default 0,
+    id_city_scene      int unsigned      not null default 0,
 
     # 经度
-    longitude          decimal(10, 8)    not null default 0.00000000,
+    longitude          decimal(11, 8)    not null default 0.00000000,
     # 纬度
-    latitude           decimal(10, 8)    not null default 0.00000000,
+    latitude           decimal(11, 8)    not null default 0.00000000,
 
     # 中文名
     name_zh            varchar(255)      not null default '',
@@ -1139,6 +983,10 @@ create table place
     address_en         varchar(255)      not null default '',
     # 地点描述
     description        varchar(1000)     not null default '',
+    # 区域中文
+    area_zh            varchar(255)      not null default '',
+    # 区域英文
+    area_en            varchar(255)      not null default '',
     # 电话号码
     phone              varchar(255)      not null default '',
     # 地点海报图链接
@@ -1150,20 +998,172 @@ create table place
     # 地点地图
     url_map            varchar(1000)     not null default '',
 
-    index (id_type_place),
-    index (id_continent_place),
-    index (id_country_place),
-    index (id_state_place),
-    index (id_city_place),
-    index (id_area_place),
+    index (id_continent_scene),
+    index (id_country_scene),
+    index (id_state_scene),
+    index (id_city_scene),
     index (longitude),
     index (latitude)
 ) ENGINE = InnoDB
   default charset = utf8mb4;
-insert into place(id, name_zh, name_en)
+insert into place_scene(id, name_zh, name_en)
+values (0, '未知', 'unknown');
+
+# 场景地点类型 (场景地点专属)
+create table type_place_scene
+(
+    id      smallint unsigned not null primary key,
+    # 地点类型名称
+    name_zh varchar(255)      not null default '',
+
+    index (name_zh)
+) ENGINE = InnoDB
+  default charset = utf8mb4;
+insert into type_place_scene
+values (0, '未知');
+
+# 洲 (场景专属)
+create table continent_scene
+(
+    id      tinyint unsigned not null primary key,
+    # 洲中文名
+    name_zh varchar(255)     not null default '',
+    # 洲英文名
+    name_en varchar(255)     not null default '',
+
+    index (name_zh),
+    index (name_en)
+) ENGINE = InnoDB
+  default charset = utf8mb4;
+insert into continent_scene
+values (0, '未知', 'unknown');
+
+# 国家（场景专属）
+create table country_scene
+(
+    id      smallint unsigned not null primary key,
+    # 国家中文名
+    name_zh varchar(255)      not null default '',
+    # 国家英文名
+    name_en varchar(255)      not null default '',
+
+    index (name_zh),
+    index (name_en)
+) ENGINE = InnoDB
+  default charset = utf8mb4;
+insert into country_scene
+values (0, '未知', 'unknown');
+
+# 州/省(场景地点专属)
+create table state_scene
+(
+    id      int unsigned not null primary key,
+    # 州中文名
+    name_zh varchar(255) not null default '',
+    # 州英文名
+    name_en varchar(255) not null default '',
+
+    index (name_zh),
+    index (name_en)
+) ENGINE = InnoDB
+  default charset = utf8mb4;
+insert into state_scene
+values (0, '未知', 'unknown');
+
+# 城市(场景地点专属)
+create table city_scene
+(
+    id      int unsigned not null primary key,
+    # 城市中文名
+    name_zh varchar(255) not null default '',
+    # 城市英文名
+    name_en varchar(255) not null default '',
+
+    index (name_zh),
+    index (name_en)
+) ENGINE = InnoDB
+  default charset = utf8mb4;
+insert into city_scene
 values (0, '未知', 'unknown');
 
 # 2.地点区域关系表---------------------------------------
+
+# 场景地点-场景地点类型
+CREATE TABLE place_scene_to_type_place_scene
+(
+    id_place_scene      bigint unsigned   NOT NULL,
+    id_type_place_scene smallint unsigned NOT NULL,
+
+    primary key (id_place_scene, id_type_place_scene)
+) ENGINE = InnoDB
+  DEFAULT CHARSET = utf8mb4;
+
+# 其他区域相关 ---------------------------------------------------------------------------------
+# 1.其他区域基础表---------------------------------------
+
+# 国家（imdb专属）
+create table country_imdb
+(
+    id      smallint unsigned not null auto_increment primary key,
+    # 国家中文名
+    name_zh varchar(255)      not null default '',
+    # 国家英文名
+    name_en varchar(255)      not null default '',
+
+    index (name_zh),
+    index (name_en)
+) ENGINE = InnoDB
+  default charset = utf8mb4;
+insert into country_imdb
+values (1, '未知', 'unknown');
+
+
+# 州/省(imdb专属)
+create table state_imdb
+(
+    id      int unsigned not null auto_increment primary key,
+    # 州中文名
+    name_zh varchar(255) not null default '',
+    # 州英文名
+    name_en varchar(255) not null default '',
+
+    index (name_zh),
+    index (name_en)
+) ENGINE = InnoDB
+  default charset = utf8mb4;
+insert into state_imdb
+values (1, '未知', 'unknown');
+
+
+# 城市(imdb专属)
+create table city_imdb
+(
+    id      int unsigned not null auto_increment primary key,
+    # 城市中文名
+    name_zh varchar(255) not null default '',
+    # 城市英文名
+    name_en varchar(255) not null default '',
+
+    index (name_zh),
+    index (name_en)
+) ENGINE = InnoDB
+  default charset = utf8mb4;
+insert into city_imdb
+values (1, '未知', 'unknown');
+
+
+# 地区 (豆瓣电影专属)
+create table area_douban
+(
+    id      int unsigned not null auto_increment primary key,
+    # 地区中文名
+    name_zh varchar(255) not null default '',
+
+    index (name_zh)
+) ENGINE = InnoDB
+  default charset = utf8mb4;
+
+# 2.其他区域关系表---------------------------------------
 
 # 区域 end ========================================================================================
 
@@ -1456,11 +1456,9 @@ alter table celebrity_scene
 alter table scene
     add foreign key (id_movie_scene) references movie_scene (id);
 alter table scene
-    add foreign key (id_place) references place (id);
+    add foreign key (id_place_scene) references place_scene (id);
 alter table scene_detail
     add foreign key (id_movie_scene) references movie_scene (id);
-alter table scene_detail
-    add foreign key (id_place) references place (id);
 alter table scene_detail
     add foreign key (id_scene) references scene (id);
 alter table user_douban_to_role
@@ -1501,22 +1499,22 @@ alter table image_celebrity_douban
     add foreign key (id_celebrity_douban) references celebrity_douban (id);
 alter table image_movie_douban
     add foreign key (id_movie_douban) references movie_douban (id);
-alter table image_place
-    add foreign key (id_place) references place (id);
+alter table image_place_scene
+    add foreign key (id_place_scene) references place_scene (id);
 alter table image_scene_detail
     add foreign key (id_scene_detail) references scene_detail (id);
-alter table place
-    add foreign key (id_type_place) references type_place (id);
-alter table place
-    add foreign key (id_continent_place) references continent_place (id);
-alter table place
-    add foreign key (id_country_place) references country_place (id);
-alter table place
-    add foreign key (id_state_place) references state_place (id);
-alter table place
-    add foreign key (id_city_place) references city_place (id);
-alter table place
-    add foreign key (id_area_place) references area_place (id);
+alter table place_scene_to_type_place_scene
+    add foreign key (id_place_scene) references place_scene (id);
+alter table place_scene_to_type_place_scene
+    add foreign key (id_type_place_scene) references type_place_scene (id);
+alter table place_scene
+    add foreign key (id_continent_scene) references continent_scene (id);
+alter table place_scene
+    add foreign key (id_country_scene) references country_scene (id);
+alter table place_scene
+    add foreign key (id_state_scene) references state_scene (id);
+alter table place_scene
+    add foreign key (id_city_scene) references city_scene (id);
 alter table playlist_to_tag_netease
     add foreign key (id_playlist) references playlist (id);
 alter table playlist_to_tag_netease
@@ -1556,7 +1554,7 @@ alter table album_to_singer
 alter table album_to_singer
     add foreign key (id_singer) references singer (id);
 
- */
+*/
 
 # 外键关系 end ========================================================================================
 
@@ -1604,3 +1602,10 @@ on duplicate key update id_movie_imdb=tconst;
  */
 
 # IMDB转换 end ========================================================================================
+
+# 表初始化 start ========================================================================================
+
+# 场景地点类型
+
+
+# 表初始化 end ========================================================================================
