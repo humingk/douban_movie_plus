@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.humingk.movie.mapper.SceneMapper">
+  <resultMap id="BaseResultMap" type="org.humingk.movie.entity.Scene">
+    <constructor>
+      <idArg column="id" javaType="java.lang.Long" jdbcType="BIGINT" />
+      <arg column="id_movie_scene" javaType="java.lang.Long" jdbcType="BIGINT" />
+      <arg column="id_place_scene" javaType="java.lang.Long" jdbcType="BIGINT" />
+      <arg column="name_zh" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="happen_time" javaType="java.lang.Integer" jdbcType="INTEGER" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, id_movie_scene, id_place_scene, name_zh, happen_time
+  </sql>
+  <select id="selectByExample" parameterType="org.humingk.movie.entity.SceneExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from scene
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from scene
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from scene
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="org.humingk.movie.entity.SceneExample">
+    delete from scene
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="org.humingk.movie.entity.Scene">
+    insert into scene (id, id_movie_scene, id_place_scene, 
+      name_zh, happen_time)
+    values (#{id,jdbcType=BIGINT}, #{idMovieScene,jdbcType=BIGINT}, #{idPlaceScene,jdbcType=BIGINT}, 
+      #{nameZh,jdbcType=VARCHAR}, #{happenTime,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="org.humingk.movie.entity.Scene">
+    insert into scene
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="idMovieScene != null">
+        id_movie_scene,
+      </if>
+      <if test="idPlaceScene != null">
+        id_place_scene,
+      </if>
+      <if test="nameZh != null">
+        name_zh,
+      </if>
+      <if test="happenTime != null">
+        happen_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="idMovieScene != null">
+        #{idMovieScene,jdbcType=BIGINT},
+      </if>
+      <if test="idPlaceScene != null">
+        #{idPlaceScene,jdbcType=BIGINT},
+      </if>
+      <if test="nameZh != null">
+        #{nameZh,jdbcType=VARCHAR},
+      </if>
+      <if test="happenTime != null">
+        #{happenTime,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="org.humingk.movie.entity.SceneExample" resultType="java.lang.Long">
+    select count(*) from scene
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update scene
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.idMovieScene != null">
+        id_movie_scene = #{record.idMovieScene,jdbcType=BIGINT},
+      </if>
+      <if test="record.idPlaceScene != null">
+        id_place_scene = #{record.idPlaceScene,jdbcType=BIGINT},
+      </if>
+      <if test="record.nameZh != null">
+        name_zh = #{record.nameZh,jdbcType=VARCHAR},
+      </if>
+      <if test="record.happenTime != null">
+        happen_time = #{record.happenTime,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update scene
+    set id = #{record.id,jdbcType=BIGINT},
+      id_movie_scene = #{record.idMovieScene,jdbcType=BIGINT},
+      id_place_scene = #{record.idPlaceScene,jdbcType=BIGINT},
+      name_zh = #{record.nameZh,jdbcType=VARCHAR},
+      happen_time = #{record.happenTime,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="org.humingk.movie.entity.Scene">
+    update scene
+    <set>
+      <if test="idMovieScene != null">
+        id_movie_scene = #{idMovieScene,jdbcType=BIGINT},
+      </if>
+      <if test="idPlaceScene != null">
+        id_place_scene = #{idPlaceScene,jdbcType=BIGINT},
+      </if>
+      <if test="nameZh != null">
+        name_zh = #{nameZh,jdbcType=VARCHAR},
+      </if>
+      <if test="happenTime != null">
+        happen_time = #{happenTime,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.humingk.movie.entity.Scene">
+    update scene
+    set id_movie_scene = #{idMovieScene,jdbcType=BIGINT},
+      id_place_scene = #{idPlaceScene,jdbcType=BIGINT},
+      name_zh = #{nameZh,jdbcType=VARCHAR},
+      happen_time = #{happenTime,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

@@ -1,0 +1,70 @@
+package org.humingk.movie.entity;
+
+public class MovieImdbToCelebrityImdb {
+    private Long idMovieImdb;
+
+    private Long idCelebrityImdb;
+
+    private Byte idProfession;
+
+    public MovieImdbToCelebrityImdb(Long idMovieImdb, Long idCelebrityImdb, Byte idProfession) {
+        this.idMovieImdb = idMovieImdb;
+        this.idCelebrityImdb = idCelebrityImdb;
+        this.idProfession = idProfession;
+    }
+
+    public MovieImdbToCelebrityImdb() {
+        super();
+    }
+
+    public Long getIdMovieImdb() {
+        return idMovieImdb;
+    }
+
+    public void setIdMovieImdb(Long idMovieImdb) {
+        this.idMovieImdb = idMovieImdb;
+    }
+
+    public Long getIdCelebrityImdb() {
+        return idCelebrityImdb;
+    }
+
+    public void setIdCelebrityImdb(Long idCelebrityImdb) {
+        this.idCelebrityImdb = idCelebrityImdb;
+    }
+
+    public Byte getIdProfession() {
+        return idProfession;
+    }
+
+    public void setIdProfession(Byte idProfession) {
+        this.idProfession = idProfession;
+    }
+
+    @Override
+    public boolean equals(Object that) {
+        if (this == that) {
+            return true;
+        }
+        if (that == null) {
+            return false;
+        }
+        if (getClass() != that.getClass()) {
+            return false;
+        }
+        MovieImdbToCelebrityImdb other = (MovieImdbToCelebrityImdb) that;
+        return (this.getIdMovieImdb() == null ? other.getIdMovieImdb() == null : this.getIdMovieImdb().equals(other.getIdMovieImdb()))
+            && (this.getIdCelebrityImdb() == null ? other.getIdCelebrityImdb() == null : this.getIdCelebrityImdb().equals(other.getIdCelebrityImdb()))
+            && (this.getIdProfession() == null ? other.getIdProfession() == null : this.getIdProfession().equals(other.getIdProfession()));
+    }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((getIdMovieImdb() == null) ? 0 : getIdMovieImdb().hashCode());
+        result = prime * result + ((getIdCelebrityImdb() == null) ? 0 : getIdCelebrityImdb().hashCode());
+        result = prime * result + ((getIdProfession() == null) ? 0 : getIdProfession().hashCode());
+        return result;
+    }
+}

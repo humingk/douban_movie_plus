@@ -5,11 +5,11 @@
 
 <generatorConfiguration>
 
-    <!-- 可以用于加载配置项或者配置文件，在整个配置文件中就可以使用${propertyKey}的方式来引用配置项
-    resource：配置资源加载地址，使用resource，MBG从classpath开始找，比如com/myproject/generatorConfig.properties
-    url：配置资源加载地质，使用URL的方式，比如file:///C:/myfolder/generatorConfig.properties.
-    注意，两个属性只能选址一个;-->
-    <!--<properties resource="mybatis/jdbc.properties"></properties>-->
+    <properties resource="application-dev.properties"/>
+
+    <!-- 一个数据库一个context,context的子元素必须按照它给出的顺序
+    property*,plugin*,commentGenerator?,jdbcConnection,javaTypeResolver?,
+    javaModelGenerator,sqlMapGenerator?,javaClientGenerator?,table+ -->
 
     <!-- defaultModelType:指定生成对象的样式
     1，conditional：类似hierarchical；
@@ -18,8 +18,7 @@
     targetRuntime:
     1，MyBatis3：默认的值，生成基于MyBatis3.x以上版本的内容，包括XXXBySample；
     2，MyBatis3Simple：类似MyBatis3，只是不生成XXXBySample；-->
-
-    <context id="default" targetRuntime="MyBatis3Simple" defaultModelType="flat">
+    <context id="default" targetRuntime="MyBatis3" defaultModelType="flat">
 
         <!-- 自动识别数据库关键字，默认false，如果设置为true，根据SqlReservedWords中定义的关键字列表；
     一般保留默认值，遇到数据库关键字（Java关键字），使用columnOverride覆盖-->
@@ -38,27 +37,32 @@
         <property name="beginningDelimiter" value="`"/>
         <property name="endingDelimiter" value="`"/>
 
+        <!-- 这个插件给生成的Java模型对象增加了equals和hashCode方法 -->
+        <plugin type="org.mybatis.generator.plugins.EqualsHashCodePlugin"/>
+
         <commentGenerator>
             <!-- 是否去除自动生成的注释 true：是 ： false:否 -->
-            <property name="suppressDate" value="true"/>
             <property name="suppressAllComments" value="true"/>
-
+            <!-- 注释中是否去除时间戳 -->
+            <property name="suppressDate" value="true"/>
+            <!-- 添加表中字段的注释，只有suppressAllComments为false时才生效-->
+            <property name="addRemarkComments" value="true"/>
             <property name="javaFileEncoding" value="utf-8"/>
         </commentGenerator>
 
         <!--数据库连接的信息：驱动类、连接地址、用户名、密码-->
-        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
-                        connectionURL="jdbc:mysql://localhost:3306/douban_movie"
-                        userId="root"
-                        password="1233">
-        </jdbcConnection>
+        <jdbcConnection driverClass="${spring.datasource.driverClassName}"
+                        connectionURL="${spring.datasource.url}"
+                        userId="${spring.datasource.username}"
+                        password="${spring.datasource.password}">
 
-        <!--使用jdbc.properties失败-->
-        <!--<jdbcConnection driverClass="${jdbc.driverClassName}"-->
-        <!--connectionURL="${jdbc.url}"-->
-        <!--userId="${jdbc.username}"-->
-        <!--password="${jdbc.password}">-->
-        <!--</jdbcConnection>-->
+            <!--高版本的 mysql-connector-java 需要设置
+            nullCatalogMeansCurrent=true
+            避免不能识别主键
+            https://www.jianshu.com/p/dbeeac29ff27
+            -->
+            <property name="nullCatalogMeansCurrent" value="true"/>
+        </jdbcConnection>
 
         <!-- java类型处理器
             用于处理DB中的类型到Java中的类型，默认使用JavaTypeResolverDefaultImpl；
@@ -74,9 +78,20 @@
                     scale=0;length<5：使用Short；
              -->
             <property name="forceBigDecimals" value="false"/>
+            <!--默认false
+    false，将所有 JDBC 的时间类型解析为 java.util.Date
+    true，将 JDBC 的时间类型按如下规则解析
+        DATE	                -> java.time.LocalDate
+        TIME	                -> java.time.LocalTime
+        TIMESTAMP               -> java.time.LocalDateTime
+        TIME_WITH_TIMEZONE  	-> java.time.OffsetTime
+        TIMESTAMP_WITH_TIMEZONE	-> java.time.OffsetDateTime
+    -->
+            <!--            <property name="useJSR310Types" value="false"/>-->
+
         </javaTypeResolver>
 
-        <!-- java模型创建器，是必须要的元素
+        <!-- java模型创建器
             负责：1，key类（见context的defaultModelType）；2，java类；3，查询类
             targetPackage：生成的类要放的包，真实的包受enableSubPackages属性控制；
             targetProject：目标项目，指定一个存在的目录下，生成的内容会放到指定目录中，如果目录不存在，MBG不会自动建目录
@@ -88,7 +103,7 @@
 
             <!--  for MyBatis3/MyBatis3Simple
                 自动为每一个生成的类创建一个构造方法，构造方法包含了所有的field；而不是使用setter；-->
-            <property name="constructorBased" value="false"/>
+            <property name="constructorBased" value="true"/>
 
             <!-- 设置是否在getter方法中，对String类型字段调用trim()方法 -->
             <property name="trimStrings" value="true"/>
@@ -282,7 +297,80 @@
 
         <!--</table>-->
 
-        <table tableName="album_netease" domainObjectName="AlbumNetease"/>
+        <!--        <table tableName="album_netease" domainObjectName="AlbumNetease"/>-->
+
+        <!--        mysql select 复制后　用正则    -->
+        <!--        将                           -->
+        <!--        \|\s*([a-z_]*)(\s*)\|       -->
+        <!--        替换为：                     -->
+        <!--        <table tableName="$1"/>     -->
+
+        <table tableName="album_netease"/>
+        <table tableName="album_netease"/>
+        <table tableName="alias_celebrity_douban"/>
+        <table tableName="alias_movie_douban"/>
+        <table tableName="artist_netease"/>
+        <table tableName="artist_netease_to_album_netease"/>
+        <table tableName="artist_netease_to_song_netease"/>
+        <table tableName="award_movie"/>
+        <table tableName="celebrity_douban"/>
+        <table tableName="celebrity_douban_to_classic"/>
+        <table tableName="celebrity_imdb"/>
+        <table tableName="celebrity_scene"/>
+        <table tableName="city_scene"/>
+        <table tableName="classic_douban"/>
+        <table tableName="comment_movie_douban"/>
+        <table tableName="comment_netease"/>
+        <table tableName="continent_scene"/>
+        <table tableName="country_scene"/>
+        <table tableName="image_celebrity_douban"/>
+        <table tableName="image_movie_douban"/>
+        <table tableName="image_place_scene"/>
+        <table tableName="image_scene_detail"/>
+        <table tableName="movie_douban"/>
+        <table tableName="movie_douban_to_award_movie"/>
+        <table tableName="movie_douban_to_celebrity_douban"/>
+        <table tableName="movie_douban_to_review_movie_douban"/>
+        <table tableName="movie_douban_to_type_movie"/>
+        <table tableName="movie_imdb"/>
+        <table tableName="movie_imdb_to_celebrity_imdb"/>
+        <table tableName="movie_imdb_to_type_movie"/>
+        <table tableName="movie_netease"/>
+        <table tableName="movie_scene"/>
+        <table tableName="movie_scene_to_celebrity_scene"/>
+        <table tableName="movie_zhihu"/>
+        <table tableName="permission"/>
+        <table tableName="place_scene"/>
+        <table tableName="place_scene_to_type_place_scene"/>
+        <table tableName="playlist_netease"/>
+        <table tableName="profession"/>
+        <table tableName="question_zhihu"/>
+        <table tableName="rate_imdb"/>
+        <table tableName="rate_movie_douban"/>
+        <table tableName="resource_movie"/>
+        <table tableName="review_movie_douban"/>
+        <table tableName="role"/>
+        <table tableName="role_to_permission"/>
+        <table tableName="scene"/>
+        <table tableName="scene_detail"/>
+        <table tableName="scene_detail_to_celebrity_scene"/>
+        <table tableName="song_netease"/>
+        <table tableName="song_netease_to_album_netease"/>
+        <table tableName="song_netease_to_playlist_netease"/>
+        <table tableName="state_scene"/>
+        <table tableName="tag_movie"/>
+        <table tableName="trailer_movie_douban"/>
+        <table tableName="type_movie"/>
+        <table tableName="type_place_scene"/>
+        <table tableName="type_resource"/>
+        <table tableName="type_video"/>
+        <table tableName="user_douban"/>
+        <table tableName="user_douban_to_classic_douban"/>
+        <table tableName="user_douban_to_movie_douban"/>
+        <table tableName="user_douban_to_review_movie_douban"/>
+        <table tableName="user_douban_to_role"/>
+        <table tableName="user_netease"/>
+        <table tableName="website_resource"/>
 
 
     </context>
