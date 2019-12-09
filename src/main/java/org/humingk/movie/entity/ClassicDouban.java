@@ -93,4 +93,19 @@ public class ClassicDouban {
         result = prime * result + ((getAgreeVote() == null) ? 0 : getAgreeVote().hashCode());
         return result;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(getClass().getSimpleName());
+        sb.append(" [");
+        sb.append("Hash = ").append(hashCode());
+        sb.append(", id=").append(id);
+        sb.append(", idMovieDouban=").append(idMovieDouban);
+        sb.append(", content=").append(content);
+        sb.append(", happenTime=").append(happenTime);
+        sb.append(", agreeVote=").append(agreeVote);
+        sb.append("]");
+        return sb.toString();
+    }
 }

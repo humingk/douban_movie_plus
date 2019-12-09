@@ -54,4 +54,16 @@ public class RoleToPermission {
         result = prime * result + ((getIdPermission() == null) ? 0 : getIdPermission().hashCode());
         return result;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(getClass().getSimpleName());
+        sb.append(" [");
+        sb.append("Hash = ").append(hashCode());
+        sb.append(", idRole=").append(idRole);
+        sb.append(", idPermission=").append(idPermission);
+        sb.append("]");
+        return sb.toString();
+    }
 }

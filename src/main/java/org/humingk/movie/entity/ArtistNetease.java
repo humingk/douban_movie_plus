@@ -67,4 +67,17 @@ public class ArtistNetease {
         result = prime * result + ((getUrlPortrait() == null) ? 0 : getUrlPortrait().hashCode());
         return result;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(getClass().getSimpleName());
+        sb.append(" [");
+        sb.append("Hash = ").append(hashCode());
+        sb.append(", id=").append(id);
+        sb.append(", nameZh=").append(nameZh);
+        sb.append(", urlPortrait=").append(urlPortrait);
+        sb.append("]");
+        return sb.toString();
+    }
 }

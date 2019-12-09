@@ -106,4 +106,20 @@ public class MovieDoubanToAwardMovie {
         result = prime * result + ((getIsNominated() == null) ? 0 : getIsNominated().hashCode());
         return result;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(getClass().getSimpleName());
+        sb.append(" [");
+        sb.append("Hash = ").append(hashCode());
+        sb.append(", idMovieDouban=").append(idMovieDouban);
+        sb.append(", idAwardMovie=").append(idAwardMovie);
+        sb.append(", idCelebrityDouban=").append(idCelebrityDouban);
+        sb.append(", typeAward=").append(typeAward);
+        sb.append(", awardTh=").append(awardTh);
+        sb.append(", isNominated=").append(isNominated);
+        sb.append("]");
+        return sb.toString();
+    }
 }

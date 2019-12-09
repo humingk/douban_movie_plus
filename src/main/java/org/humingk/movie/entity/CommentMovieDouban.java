@@ -93,4 +93,19 @@ public class CommentMovieDouban {
         result = prime * result + ((getContent() == null) ? 0 : getContent().hashCode());
         return result;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(getClass().getSimpleName());
+        sb.append(" [");
+        sb.append("Hash = ").append(hashCode());
+        sb.append(", idMovieDouban=").append(idMovieDouban);
+        sb.append(", idUserDouban=").append(idUserDouban);
+        sb.append(", agreeVote=").append(agreeVote);
+        sb.append(", createDate=").append(createDate);
+        sb.append(", content=").append(content);
+        sb.append("]");
+        return sb.toString();
+    }
 }

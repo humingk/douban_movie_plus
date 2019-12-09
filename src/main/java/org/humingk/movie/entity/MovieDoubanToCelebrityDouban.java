@@ -80,4 +80,18 @@ public class MovieDoubanToCelebrityDouban {
         result = prime * result + ((getSort() == null) ? 0 : getSort().hashCode());
         return result;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(getClass().getSimpleName());
+        sb.append(" [");
+        sb.append("Hash = ").append(hashCode());
+        sb.append(", idMovieDouban=").append(idMovieDouban);
+        sb.append(", idCelebrityDouban=").append(idCelebrityDouban);
+        sb.append(", idProfession=").append(idProfession);
+        sb.append(", sort=").append(sort);
+        sb.append("]");
+        return sb.toString();
+    }
 }

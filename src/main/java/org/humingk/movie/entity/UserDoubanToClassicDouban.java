@@ -80,4 +80,18 @@ public class UserDoubanToClassicDouban {
         result = prime * result + ((getDescription() == null) ? 0 : getDescription().hashCode());
         return result;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(getClass().getSimpleName());
+        sb.append(" [");
+        sb.append("Hash = ").append(hashCode());
+        sb.append(", idUserDouban=").append(idUserDouban);
+        sb.append(", idClassicDouban=").append(idClassicDouban);
+        sb.append(", recordDatetime=").append(recordDatetime);
+        sb.append(", description=").append(description);
+        sb.append("]");
+        return sb.toString();
+    }
 }

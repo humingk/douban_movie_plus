@@ -303,4 +303,35 @@ public class PlaceScene {
         result = prime * result + ((getUrlMap() == null) ? 0 : getUrlMap().hashCode());
         return result;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(getClass().getSimpleName());
+        sb.append(" [");
+        sb.append("Hash = ").append(hashCode());
+        sb.append(", id=").append(id);
+        sb.append(", idContinentScene=").append(idContinentScene);
+        sb.append(", idCountryScene=").append(idCountryScene);
+        sb.append(", idStateScene=").append(idStateScene);
+        sb.append(", idCityScene=").append(idCityScene);
+        sb.append(", longitude=").append(longitude);
+        sb.append(", latitude=").append(latitude);
+        sb.append(", nameZh=").append(nameZh);
+        sb.append(", nameEn=").append(nameEn);
+        sb.append(", nameOther=").append(nameOther);
+        sb.append(", alias=").append(alias);
+        sb.append(", addressZh=").append(addressZh);
+        sb.append(", addressEn=").append(addressEn);
+        sb.append(", description=").append(description);
+        sb.append(", areaZh=").append(areaZh);
+        sb.append(", areaEn=").append(areaEn);
+        sb.append(", phone=").append(phone);
+        sb.append(", urlPoster=").append(urlPoster);
+        sb.append(", urlEarth=").append(urlEarth);
+        sb.append(", urlSatellite=").append(urlSatellite);
+        sb.append(", urlMap=").append(urlMap);
+        sb.append("]");
+        return sb.toString();
+    }
 }

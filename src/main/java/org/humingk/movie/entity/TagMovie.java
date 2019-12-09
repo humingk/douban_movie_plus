@@ -54,4 +54,16 @@ public class TagMovie {
         result = prime * result + ((getNameZh() == null) ? 0 : getNameZh().hashCode());
         return result;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(getClass().getSimpleName());
+        sb.append(" [");
+        sb.append("Hash = ").append(hashCode());
+        sb.append(", idMovieDouban=").append(idMovieDouban);
+        sb.append(", nameZh=").append(nameZh);
+        sb.append("]");
+        return sb.toString();
+    }
 }

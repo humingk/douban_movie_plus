@@ -108,4 +108,20 @@ public class MovieZhihu {
         result = prime * result + ((getMaoyanScore() == null) ? 0 : getMaoyanScore().hashCode());
         return result;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(getClass().getSimpleName());
+        sb.append(" [");
+        sb.append("Hash = ").append(hashCode());
+        sb.append(", id=").append(id);
+        sb.append(", idMovieDouban=").append(idMovieDouban);
+        sb.append(", nameZh=").append(nameZh);
+        sb.append(", zhihuScore=").append(zhihuScore);
+        sb.append(", zhihuVote=").append(zhihuVote);
+        sb.append(", maoyanScore=").append(maoyanScore);
+        sb.append("]");
+        return sb.toString();
+    }
 }

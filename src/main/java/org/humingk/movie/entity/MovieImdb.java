@@ -170,4 +170,24 @@ public class MovieImdb {
         result = prime * result + ((getSummary() == null) ? 0 : getSummary().hashCode());
         return result;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(getClass().getSimpleName());
+        sb.append(" [");
+        sb.append("Hash = ").append(hashCode());
+        sb.append(", id=").append(id);
+        sb.append(", idTypeVideo=").append(idTypeVideo);
+        sb.append(", nameEn=").append(nameEn);
+        sb.append(", startYear=").append(startYear);
+        sb.append(", isAdult=").append(isAdult);
+        sb.append(", nameOrigin=").append(nameOrigin);
+        sb.append(", runtime=").append(runtime);
+        sb.append(", urlPoster=").append(urlPoster);
+        sb.append(", idMovieDouban=").append(idMovieDouban);
+        sb.append(", summary=").append(summary);
+        sb.append("]");
+        return sb.toString();
+    }
 }

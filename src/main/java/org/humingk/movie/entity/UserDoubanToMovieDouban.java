@@ -95,4 +95,19 @@ public class UserDoubanToMovieDouban {
         result = prime * result + ((getIsSeen() == null) ? 0 : getIsSeen().hashCode());
         return result;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(getClass().getSimpleName());
+        sb.append(" [");
+        sb.append("Hash = ").append(hashCode());
+        sb.append(", idUserDouban=").append(idUserDouban);
+        sb.append(", idMovieDouban=").append(idMovieDouban);
+        sb.append(", score=").append(score);
+        sb.append(", isWish=").append(isWish);
+        sb.append(", isSeen=").append(isSeen);
+        sb.append("]");
+        return sb.toString();
+    }
 }

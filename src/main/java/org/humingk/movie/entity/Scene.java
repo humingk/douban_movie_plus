@@ -93,4 +93,19 @@ public class Scene {
         result = prime * result + ((getHappenTime() == null) ? 0 : getHappenTime().hashCode());
         return result;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(getClass().getSimpleName());
+        sb.append(" [");
+        sb.append("Hash = ").append(hashCode());
+        sb.append(", id=").append(id);
+        sb.append(", idMovieScene=").append(idMovieScene);
+        sb.append(", idPlaceScene=").append(idPlaceScene);
+        sb.append(", nameZh=").append(nameZh);
+        sb.append(", happenTime=").append(happenTime);
+        sb.append("]");
+        return sb.toString();
+    }
 }

@@ -134,4 +134,22 @@ public class RateMovieDouban {
         result = prime * result + ((getScore1() == null) ? 0 : getScore1().hashCode());
         return result;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(getClass().getSimpleName());
+        sb.append(" [");
+        sb.append("Hash = ").append(hashCode());
+        sb.append(", id=").append(id);
+        sb.append(", score=").append(score);
+        sb.append(", vote=").append(vote);
+        sb.append(", score5=").append(score5);
+        sb.append(", score4=").append(score4);
+        sb.append(", score3=").append(score3);
+        sb.append(", score2=").append(score2);
+        sb.append(", score1=").append(score1);
+        sb.append("]");
+        return sb.toString();
+    }
 }

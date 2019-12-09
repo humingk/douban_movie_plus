@@ -54,4 +54,16 @@ public class SceneDetailToCelebrityScene {
         result = prime * result + ((getIdCelebrityScene() == null) ? 0 : getIdCelebrityScene().hashCode());
         return result;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(getClass().getSimpleName());
+        sb.append(" [");
+        sb.append("Hash = ").append(hashCode());
+        sb.append(", idSceneDetail=").append(idSceneDetail);
+        sb.append(", idCelebrityScene=").append(idCelebrityScene);
+        sb.append("]");
+        return sb.toString();
+    }
 }

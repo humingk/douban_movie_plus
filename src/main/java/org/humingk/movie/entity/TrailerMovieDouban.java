@@ -67,4 +67,17 @@ public class TrailerMovieDouban {
         result = prime * result + ((getUrlVideo() == null) ? 0 : getUrlVideo().hashCode());
         return result;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(getClass().getSimpleName());
+        sb.append(" [");
+        sb.append("Hash = ").append(hashCode());
+        sb.append(", id=").append(id);
+        sb.append(", idMovieDouban=").append(idMovieDouban);
+        sb.append(", urlVideo=").append(urlVideo);
+        sb.append("]");
+        return sb.toString();
+    }
 }

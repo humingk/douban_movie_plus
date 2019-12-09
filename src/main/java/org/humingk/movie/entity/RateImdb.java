@@ -95,4 +95,19 @@ public class RateImdb {
         result = prime * result + ((getMtcScore() == null) ? 0 : getMtcScore().hashCode());
         return result;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(getClass().getSimpleName());
+        sb.append(" [");
+        sb.append("Hash = ").append(hashCode());
+        sb.append(", id=").append(id);
+        sb.append(", imdbScore=").append(imdbScore);
+        sb.append(", imdbVote=").append(imdbVote);
+        sb.append(", tomatoScore=").append(tomatoScore);
+        sb.append(", mtcScore=").append(mtcScore);
+        sb.append("]");
+        return sb.toString();
+    }
 }

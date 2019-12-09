@@ -145,4 +145,23 @@ public class ResourceMovie {
         result = prime * result + ((getUrlResource() == null) ? 0 : getUrlResource().hashCode());
         return result;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(getClass().getSimpleName());
+        sb.append(" [");
+        sb.append("Hash = ").append(hashCode());
+        sb.append(", id=").append(id);
+        sb.append(", idMovieDouban=").append(idMovieDouban);
+        sb.append(", idMovieImdb=").append(idMovieImdb);
+        sb.append(", idWebsiteResource=").append(idWebsiteResource);
+        sb.append(", idTypeResource=").append(idTypeResource);
+        sb.append(", nameZh=").append(nameZh);
+        sb.append(", createYear=").append(createYear);
+        sb.append(", nameOrigin=").append(nameOrigin);
+        sb.append(", urlResource=").append(urlResource);
+        sb.append("]");
+        return sb.toString();
+    }
 }

@@ -80,4 +80,18 @@ public class CelebrityImdb {
         result = prime * result + ((getIdCelebrityDouban() == null) ? 0 : getIdCelebrityDouban().hashCode());
         return result;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(getClass().getSimpleName());
+        sb.append(" [");
+        sb.append("Hash = ").append(hashCode());
+        sb.append(", id=").append(id);
+        sb.append(", nameEn=").append(nameEn);
+        sb.append(", birthYear=").append(birthYear);
+        sb.append(", idCelebrityDouban=").append(idCelebrityDouban);
+        sb.append("]");
+        return sb.toString();
+    }
 }

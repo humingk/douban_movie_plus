@@ -67,4 +67,17 @@ public class AliasCelebrityDouban {
         result = prime * result + ((getIsNikename() == null) ? 0 : getIsNikename().hashCode());
         return result;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(getClass().getSimpleName());
+        sb.append(" [");
+        sb.append("Hash = ").append(hashCode());
+        sb.append(", idCelebrityDouban=").append(idCelebrityDouban);
+        sb.append(", nameAlias=").append(nameAlias);
+        sb.append(", isNikename=").append(isNikename);
+        sb.append("]");
+        return sb.toString();
+    }
 }

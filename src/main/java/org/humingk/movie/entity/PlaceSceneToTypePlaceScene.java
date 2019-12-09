@@ -54,4 +54,16 @@ public class PlaceSceneToTypePlaceScene {
         result = prime * result + ((getIdTypePlaceScene() == null) ? 0 : getIdTypePlaceScene().hashCode());
         return result;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(getClass().getSimpleName());
+        sb.append(" [");
+        sb.append("Hash = ").append(hashCode());
+        sb.append(", idPlaceScene=").append(idPlaceScene);
+        sb.append(", idTypePlaceScene=").append(idTypePlaceScene);
+        sb.append("]");
+        return sb.toString();
+    }
 }

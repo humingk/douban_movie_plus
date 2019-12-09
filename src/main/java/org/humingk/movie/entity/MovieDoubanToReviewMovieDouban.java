@@ -54,4 +54,16 @@ public class MovieDoubanToReviewMovieDouban {
         result = prime * result + ((getIdReviewMovieDouban() == null) ? 0 : getIdReviewMovieDouban().hashCode());
         return result;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(getClass().getSimpleName());
+        sb.append(" [");
+        sb.append("Hash = ").append(hashCode());
+        sb.append(", idMovieDouban=").append(idMovieDouban);
+        sb.append(", idReviewMovieDouban=").append(idReviewMovieDouban);
+        sb.append("]");
+        return sb.toString();
+    }
 }

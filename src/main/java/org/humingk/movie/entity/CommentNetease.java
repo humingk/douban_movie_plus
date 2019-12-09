@@ -106,4 +106,20 @@ public class CommentNetease {
         result = prime * result + ((getAgreeVote() == null) ? 0 : getAgreeVote().hashCode());
         return result;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(getClass().getSimpleName());
+        sb.append(" [");
+        sb.append("Hash = ").append(hashCode());
+        sb.append(", idSongNetease=").append(idSongNetease);
+        sb.append(", id=").append(id);
+        sb.append(", idUserNetease=").append(idUserNetease);
+        sb.append(", createDatetime=").append(createDatetime);
+        sb.append(", content=").append(content);
+        sb.append(", agreeVote=").append(agreeVote);
+        sb.append("]");
+        return sb.toString();
+    }
 }

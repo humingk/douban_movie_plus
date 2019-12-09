@@ -93,4 +93,19 @@ public class ImageCelebrityDouban {
         result = prime * result + ((getWidth() == null) ? 0 : getWidth().hashCode());
         return result;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(getClass().getSimpleName());
+        sb.append(" [");
+        sb.append("Hash = ").append(hashCode());
+        sb.append(", id=").append(id);
+        sb.append(", idCelebrityDouban=").append(idCelebrityDouban);
+        sb.append(", sort=").append(sort);
+        sb.append(", length=").append(length);
+        sb.append(", width=").append(width);
+        sb.append("]");
+        return sb.toString();
+    }
 }

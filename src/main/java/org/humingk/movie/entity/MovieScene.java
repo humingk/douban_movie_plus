@@ -119,4 +119,21 @@ public class MovieScene {
         result = prime * result + ((getUrlMap() == null) ? 0 : getUrlMap().hashCode());
         return result;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(getClass().getSimpleName());
+        sb.append(" [");
+        sb.append("Hash = ").append(hashCode());
+        sb.append(", id=").append(id);
+        sb.append(", idMovieDouban=").append(idMovieDouban);
+        sb.append(", nameZh=").append(nameZh);
+        sb.append(", nameEn=").append(nameEn);
+        sb.append(", startYear=").append(startYear);
+        sb.append(", description=").append(description);
+        sb.append(", urlMap=").append(urlMap);
+        sb.append("]");
+        return sb.toString();
+    }
 }

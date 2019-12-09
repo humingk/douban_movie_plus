@@ -67,4 +67,17 @@ public class Role {
         result = prime * result + ((getDescription() == null) ? 0 : getDescription().hashCode());
         return result;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(getClass().getSimpleName());
+        sb.append(" [");
+        sb.append("Hash = ").append(hashCode());
+        sb.append(", id=").append(id);
+        sb.append(", nameZh=").append(nameZh);
+        sb.append(", description=").append(description);
+        sb.append("]");
+        return sb.toString();
+    }
 }

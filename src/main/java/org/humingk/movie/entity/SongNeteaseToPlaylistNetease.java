@@ -67,4 +67,17 @@ public class SongNeteaseToPlaylistNetease {
         result = prime * result + ((getSongPop() == null) ? 0 : getSongPop().hashCode());
         return result;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(getClass().getSimpleName());
+        sb.append(" [");
+        sb.append("Hash = ").append(hashCode());
+        sb.append(", idSongNetease=").append(idSongNetease);
+        sb.append(", idPlaylistNetease=").append(idPlaylistNetease);
+        sb.append(", songPop=").append(songPop);
+        sb.append("]");
+        return sb.toString();
+    }
 }

@@ -54,4 +54,16 @@ public class AliasMovieDouban {
         result = prime * result + ((getNameAlias() == null) ? 0 : getNameAlias().hashCode());
         return result;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(getClass().getSimpleName());
+        sb.append(" [");
+        sb.append("Hash = ").append(hashCode());
+        sb.append(", idMovieDouban=").append(idMovieDouban);
+        sb.append(", nameAlias=").append(nameAlias);
+        sb.append("]");
+        return sb.toString();
+    }
 }

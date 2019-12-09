@@ -40,6 +40,17 @@
         <!-- 这个插件给生成的Java模型对象增加了equals和hashCode方法 -->
         <plugin type="org.mybatis.generator.plugins.EqualsHashCodePlugin"/>
 
+        <!--生成mapper.xml时覆盖原文件-->
+        <plugin type="org.mybatis.generator.plugins.UnmergeableXmlMappersPlugin"/>
+
+        <!-- toString -->
+        <plugin type="org.mybatis.generator.plugins.ToStringPlugin"/>
+
+        <!-- 分页插件 -->
+        <!--        该插件在内存中分页,影响性能,采用 PageHelper 分页插件-->
+        <!-- https://github.com/pagehelper/Mybatis-PageHelper -->
+        <!--        <plugin type="org.mybatis.generator.plugins.RowBoundsPlugin" />-->
+
         <commentGenerator>
             <!-- 是否去除自动生成的注释 true：是 ： false:否 -->
             <property name="suppressAllComments" value="true"/>

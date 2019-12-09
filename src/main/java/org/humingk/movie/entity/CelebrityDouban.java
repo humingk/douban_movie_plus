@@ -142,4 +142,22 @@ public class CelebrityDouban {
         result = prime * result + ((getSummary() == null) ? 0 : getSummary().hashCode());
         return result;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(getClass().getSimpleName());
+        sb.append(" [");
+        sb.append("Hash = ").append(hashCode());
+        sb.append(", id=").append(id);
+        sb.append(", idCelebrityImdb=").append(idCelebrityImdb);
+        sb.append(", nameZh=").append(nameZh);
+        sb.append(", nameOrigin=").append(nameOrigin);
+        sb.append(", sex=").append(sex);
+        sb.append(", birthDate=").append(birthDate);
+        sb.append(", urlPortrait=").append(urlPortrait);
+        sb.append(", summary=").append(summary);
+        sb.append("]");
+        return sb.toString();
+    }
 }

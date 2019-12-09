@@ -80,4 +80,18 @@ public class AlbumNetease {
         result = prime * result + ((getUrlCover() == null) ? 0 : getUrlCover().hashCode());
         return result;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(getClass().getSimpleName());
+        sb.append(" [");
+        sb.append("Hash = ").append(hashCode());
+        sb.append(", id=").append(id);
+        sb.append(", nameZh=").append(nameZh);
+        sb.append(", total=").append(total);
+        sb.append(", urlCover=").append(urlCover);
+        sb.append("]");
+        return sb.toString();
+    }
 }

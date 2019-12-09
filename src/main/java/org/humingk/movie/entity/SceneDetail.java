@@ -93,4 +93,19 @@ public class SceneDetail {
         result = prime * result + ((getDescription() == null) ? 0 : getDescription().hashCode());
         return result;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(getClass().getSimpleName());
+        sb.append(" [");
+        sb.append("Hash = ").append(hashCode());
+        sb.append(", id=").append(id);
+        sb.append(", idScene=").append(idScene);
+        sb.append(", idMovieScene=").append(idMovieScene);
+        sb.append(", happenTime=").append(happenTime);
+        sb.append(", description=").append(description);
+        sb.append("]");
+        return sb.toString();
+    }
 }

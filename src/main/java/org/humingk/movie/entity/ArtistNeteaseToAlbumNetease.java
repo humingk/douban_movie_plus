@@ -54,4 +54,16 @@ public class ArtistNeteaseToAlbumNetease {
         result = prime * result + ((getIdAlbumNetease() == null) ? 0 : getIdAlbumNetease().hashCode());
         return result;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(getClass().getSimpleName());
+        sb.append(" [");
+        sb.append("Hash = ").append(hashCode());
+        sb.append(", idArtistNetease=").append(idArtistNetease);
+        sb.append(", idAlbumNetease=").append(idAlbumNetease);
+        sb.append("]");
+        return sb.toString();
+    }
 }
