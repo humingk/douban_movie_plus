@@ -1,106 +1,83 @@
 package org.humingk.movie.tool;
 
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.util.Base64Utils;
-import sun.misc.BASE64Decoder;
+import com.alibaba.fastjson.JSON;
 
 import javax.crypto.Cipher;
-import javax.crypto.KeyGenerator;
-import javax.crypto.SecretKey;
-import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
-import java.nio.charset.StandardCharsets;
-import java.security.NoSuchAlgorithmException;
-import java.security.SecureRandom;
+
 
 /**
- * AES工具类
+ * AES 加密解密工具类
  *
  * @author humingk
  */
 public class AesUtils {
-
-    private static final String KEY_ALGORITHM = "AES";
-    /**
-     * 默认加密算法
-     */
-    private static final String DEFAULT_CIPHER_ALGORITHM = "AES/ECB/PKCS5Padding";
-    @Value("${aes.password}")
-    private static final String PASSWORD = "";
-
+    private static final String KEY_AES = "AES";
+    private static final String KEY = "youaretheapofmye";
 
     /**
-     * AES 加密
+     * AES加密
      *
      * @param data
-     * @param password
      * @return
+     * @throws Exception
      */
-    public static String encrypt(String data, String password) {
-        try {
-            // 密码器
-            Cipher cipher = Cipher.getInstance(DEFAULT_CIPHER_ALGORITHM);
-            byte[] byteContent = data.getBytes(StandardCharsets.UTF_8);
-            // 加密器加密模式初始化
-            cipher.init(Cipher.ENCRYPT_MODE, getSecretKey(password));
-            // 加密
-            byte[] result = cipher.doFinal(byteContent);
-            return Base64Utils.encodeToString(result);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return "";
+    public static String encrypt(String data) throws Exception {
+        SecretKeySpec secretKeySpec = new SecretKeySpec(KEY.getBytes(), KEY_AES);
+        Cipher cipher = Cipher.getInstance(KEY_AES);
+        cipher.init(Cipher.ENCRYPT_MODE, secretKeySpec);
+        return byte2hex(cipher.doFinal(data.getBytes()));
     }
 
     /**
-     * AES 解密
+     * AES解密
      *
      * @param data
-     * @param password
      * @return
+     * @throws Exception
      */
-    public static String decrypt(String data, String password) {
-        try {
-            // 密码器
-            Cipher cipher = Cipher.getInstance(DEFAULT_CIPHER_ALGORITHM);
-            // 加密器加密模式初始化
-            cipher.init(Cipher.DECRYPT_MODE, getSecretKey(password));
-            // 解密
-            byte[] result = cipher.doFinal(Base64Utils.decodeFromString(data));
-            return new String(result, StandardCharsets.UTF_8);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return "";
+    public static String decrypt(String data) throws Exception {
+        SecretKeySpec secretKeySpec = new SecretKeySpec(KEY.getBytes(), KEY_AES);
+        Cipher cipher = Cipher.getInstance(KEY_AES);
+        cipher.init(Cipher.DECRYPT_MODE, secretKeySpec);
+        return new String(cipher.doFinal(hex2byte(data)));
     }
 
-    /**
-     * 由密码生成加密秘钥
-     *
-     * @param password
-     * @return
-     */
-    private static SecretKeySpec getSecretKey(String password) {
-        KeyGenerator keyGenerator = null;
-        try {
-            // 指定算法的密钥生成器
-            keyGenerator = KeyGenerator.getInstance(KEY_ALGORITHM);
-            // AES密钥长度 128
-            keyGenerator.init(128, new SecureRandom(password.getBytes()));
-            // 生成密钥
-            SecretKey secretKey = keyGenerator.generateKey();
-            // 转换为AES秘钥
-            return new SecretKeySpec(secretKey.getEncoded(), KEY_ALGORITHM);
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
+    private static byte[] hex2byte(String stringhex) {
+        if (stringhex == null) {
+            return null;
         }
-        return null;
+        int length = stringhex.length();
+        if (length % 2 == 1) {
+            return null;
+        }
+        byte[] bytes = new byte[length / 2];
+        for (int i = 0; i != length / 2; i++) {
+            bytes[i] = (byte) Integer.parseInt(stringhex.substring(i * 2, i * 2 + 2),
+                    16);
+        }
+        return bytes;
     }
 
-    public static void main(String[] args) {
-        String s = "sahsfdfkjkydks";
-        String se = AesUtils.encrypt(s, "123456");
-        String sd = AesUtils.decrypt(se, "123456");
+    private static String byte2hex(byte[] bytes) {
+        StringBuilder stringBuilder = new StringBuilder();
+        String temp;
+        for (int n = 0; n < bytes.length; n++) {
+            temp = (Integer.toHexString(bytes[n] & 0XFF));
+            if (temp.length() == 1) {
+                stringBuilder.append("0").append(temp);
+            } else {
+                stringBuilder.append(temp);
+            }
+        }
+        return stringBuilder.toString().toUpperCase();
+    }
+
+
+    public static void main(String[] args) throws Exception {
+        String s = "{\"keyword\":\"星际\",\"offset\":0,\"limit\":5}";
+        String se = AesUtils.encrypt(s);
+        String sd = AesUtils.decrypt(se);
         System.out.println(s);
         System.out.println(se);
         System.out.println(sd);
