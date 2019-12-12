@@ -375,11 +375,12 @@
         <table tableName="type_place_scene"/>
         <table tableName="type_resource"/>
         <table tableName="type_video"/>
+        <table tableName="user"/>
         <table tableName="user_douban"/>
         <table tableName="user_douban_to_classic_douban"/>
         <table tableName="user_douban_to_movie_douban"/>
         <table tableName="user_douban_to_review_movie_douban"/>
-        <table tableName="user_douban_to_role"/>
+        <table tableName="user_to_role"/>
         <table tableName="user_netease"/>
         <table tableName="website_resource"/>
 

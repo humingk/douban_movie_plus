@@ -11,8 +11,6 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 /**
- * 豆瓣电影业务逻辑实现
- *
  * @author humingk
  */
 @Service

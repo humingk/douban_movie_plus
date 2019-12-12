@@ -630,6 +630,20 @@ create table scene_detail_to_celebrity_scene
 
 # 1.公共用户基础表---------------------------------------
 
+# 用户
+create table user
+(
+    id       varchar(255) not null primary key,
+    # 邮箱
+    email    varchar(255) not null,
+    # 密码
+    password varchar(255) not null,
+
+    unique (email),
+    index (password)
+) ENGINE = InnoDB
+  default charset = utf8mb4;
+
 # 用户角色
 create table role
 (
@@ -665,6 +679,16 @@ values (1, '未知', 'x', '');
 
 # 2.公共用户关系表---------------------------------------
 
+# 用户-角色
+create table user_to_role
+(
+    id_user varchar(255)     not null,
+    id_role tinyint unsigned not null,
+
+    primary key (id_user, id_role)
+) ENGINE = InnoDB
+  default charset = utf8mb4;
+
 # 角色-权限
 create table role_to_permission
 (
@@ -691,16 +715,6 @@ create table user_douban
   default charset = utf8mb4;
 
 # 2.豆瓣用户关系表---------------------------------------
-
-# 豆瓣用户-角色
-create table user_douban_to_role
-(
-    id_user_douban varchar(255)     not null,
-    id_role        tinyint unsigned not null,
-
-    primary key (id_user_douban, id_role)
-) ENGINE = InnoDB
-  default charset = utf8mb4;
 
 # 豆瓣用户-电影
 create table user_douban_to_movie_douban
@@ -1558,12 +1572,17 @@ alter table scene_detail_to_celebrity_scene
 alter table scene_detail_to_celebrity_scene
     add foreign key (id_celebrity_scene) references celebrity_scene (id);
 
-alter table user_douban_to_role
+alter table user_to_role
+    add foreign key (id_user) references user (id);
+alter table user_to_role
     add foreign key (id_role) references role (id);
 alter table role_to_permission
     add foreign key (id_role) references role (id);
 alter table role_to_permission
     add foreign key (id_permission) references permission (id);
+alter table user
+    add foreign key (id) references user_douban (id);
+
 
 alter table user_douban_to_movie_douban
     add foreign key (id_user_douban) references user_douban (id);
@@ -1613,11 +1632,11 @@ alter table place_scene
 alter table movie_netease
     add foreign key (id_movie_douban) references movie_douban (id);
 alter table song_netease
-	add foreign key (id) references movie_netease(id);
-alter table song_album
-	add foreign key (id) references movie_netease(id);
-alter table song_playlist
-	add foreign key (id) references movie_netease(id);
+    add foreign key (id) references movie_netease (id_netease);
+alter table album_netease
+    add foreign key (id) references movie_netease (id_netease);
+alter table playlist_netease
+    add foreign key (id) references movie_netease (id_netease);
 alter table comment_netease
     add foreign key (id_song_netease) references song_netease (id);
 alter table comment_netease

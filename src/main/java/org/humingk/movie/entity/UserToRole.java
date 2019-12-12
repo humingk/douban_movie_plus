@@ -1,25 +1,25 @@
 package org.humingk.movie.entity;
 
-public class UserDoubanToRole {
-    private String idUserDouban;
+public class UserToRole {
+    private String idUser;
 
     private Byte idRole;
 
-    public UserDoubanToRole(String idUserDouban, Byte idRole) {
-        this.idUserDouban = idUserDouban;
+    public UserToRole(String idUser, Byte idRole) {
+        this.idUser = idUser;
         this.idRole = idRole;
     }
 
-    public UserDoubanToRole() {
+    public UserToRole() {
         super();
     }
 
-    public String getIdUserDouban() {
-        return idUserDouban;
+    public String getIdUser() {
+        return idUser;
     }
 
-    public void setIdUserDouban(String idUserDouban) {
-        this.idUserDouban = idUserDouban == null ? null : idUserDouban.trim();
+    public void setIdUser(String idUser) {
+        this.idUser = idUser == null ? null : idUser.trim();
     }
 
     public Byte getIdRole() {
@@ -41,8 +41,8 @@ public class UserDoubanToRole {
         if (getClass() != that.getClass()) {
             return false;
         }
-        UserDoubanToRole other = (UserDoubanToRole) that;
-        return (this.getIdUserDouban() == null ? other.getIdUserDouban() == null : this.getIdUserDouban().equals(other.getIdUserDouban()))
+        UserToRole other = (UserToRole) that;
+        return (this.getIdUser() == null ? other.getIdUser() == null : this.getIdUser().equals(other.getIdUser()))
             && (this.getIdRole() == null ? other.getIdRole() == null : this.getIdRole().equals(other.getIdRole()));
     }
 
@@ -50,7 +50,7 @@ public class UserDoubanToRole {
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + ((getIdUserDouban() == null) ? 0 : getIdUserDouban().hashCode());
+        result = prime * result + ((getIdUser() == null) ? 0 : getIdUser().hashCode());
         result = prime * result + ((getIdRole() == null) ? 0 : getIdRole().hashCode());
         return result;
     }
@@ -61,7 +61,7 @@ public class UserDoubanToRole {
         sb.append(getClass().getSimpleName());
         sb.append(" [");
         sb.append("Hash = ").append(hashCode());
-        sb.append(", idUserDouban=").append(idUserDouban);
+        sb.append(", idUser=").append(idUser);
         sb.append(", idRole=").append(idRole);
         sb.append("]");
         return sb.toString();

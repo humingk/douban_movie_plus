@@ -6,10 +6,8 @@ import org.humingk.movie.annotation.AesDecrypt;
 import org.humingk.movie.service.MovieDoubanService;
 import org.humingk.movie.tool.Result;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
 
 /**
  * 搜索控制器
@@ -31,7 +29,7 @@ public class SearchController {
      */
     @RequestMapping(value = "search_tips", method = RequestMethod.POST)
     @AesDecrypt
-    public Result searchTips(@RequestParam("params") String params) {
+    public Result searchTips(@RequestParam String params) {
         JSONObject jsonObject = JSON.parseObject(params);
         return new Result(200, "success",
                 movieDoubanService.getMovieDoubanListByNameStart(

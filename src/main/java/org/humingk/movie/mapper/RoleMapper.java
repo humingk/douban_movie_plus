@@ -1,6 +1,7 @@
 package org.humingk.movie.mapper;
 
 import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 import org.humingk.movie.entity.Role;
 import org.humingk.movie.entity.RoleExample;
@@ -27,4 +28,14 @@ public interface RoleMapper {
     int updateByPrimaryKeySelective(Role record);
 
     int updateByPrimaryKey(Role record);
+
+//    -------------
+
+    /**
+     * 根据用户ID获取角色列表
+     *
+     * @param id
+     * @return
+     */
+    List<Role> selectRoleListByUserId(String id);
 }
