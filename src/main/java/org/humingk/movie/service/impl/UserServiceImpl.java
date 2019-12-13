@@ -1,87 +1,44 @@
 package org.humingk.movie.service.impl;
 
-import org.humingk.movie.entity.*;
-import org.humingk.movie.mapper.*;
 import org.humingk.movie.service.UserService;
+import org.humingk.movie.service.security.MyUserDetailsService;
+import org.humingk.movie.tool.JwtTokenUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 /**
+ * 用户业务逻辑实现
+ *
  * @author humingk
  */
 @Service
 public class UserServiceImpl implements UserService {
     @Autowired
-    private UserMapper userMapper;
+    private AuthenticationManager authenticationManager;
     @Autowired
-    private RoleMapper roleMapper;
+    private MyUserDetailsService myUserDetailsService;
     @Autowired
-    private PermissionMapper permissionMapper;
-    @Autowired
-    private UserToRoleMapper userToRoleMapper;
-    @Autowired
-    private RoleToPermissionMapper roleToPermissionMapper;
+    private JwtTokenUtils jwtTokenUtils;
 
     /**
-     * 根据邮箱获取用户信息
+     * 用户登录
      *
-     * @param email
+     * @param username
+     * @param password
      * @return
      */
     @Override
-    public User getUserByEmail(String email) {
-        UserExample example = new UserExample();
-        example.or().andEmailEqualTo(email);
-        return userMapper.selectByExample(example).get(0);
-    }
-
-    /**
-     * 根据角色ID获取角色
-     *
-     * @param id
-     * @return
-     */
-    @Override
-    public Role getRoleById(int id) {
-        return roleMapper.selectByPrimaryKey((byte) id);
-    }
-
-    /**
-     * 根据用户ID获取该用户的角色列表
-     *
-     * @param id
-     * @return
-     */
-    @Override
-    public List<Role> getRoleListByUserId(String id) {
-        return roleMapper.selectRoleListByUserId(id);
-    }
-
-    /**
-     * 根据用户ID获取用户-角色列表
-     *
-     * @param id
-     * @return
-     */
-    @Override
-    public List<UserToRole> getUserToRoleListByUserId(String id) {
-        UserToRoleExample example = new UserToRoleExample();
-        example.or().andIdUserEqualTo(id);
-        return userToRoleMapper.selectByExample(example);
-    }
-
-    /**
-     * 根据角色ID获取角色-权限列表
-     *
-     * @param id
-     * @return
-     */
-    @Override
-    public List<RoleToPermission> getRoleToPermission(int id) {
-        RoleToPermissionExample example = new RoleToPermissionExample();
-        example.or().andIdRoleEqualTo((byte) id);
-        return roleToPermissionMapper.selectByExample(example);
+    public String login(String username, String password) throws AuthenticationException {
+        UsernamePasswordAuthenticationToken upToken = new UsernamePasswordAuthenticationToken(username, password);
+        final Authentication authentication = authenticationManager.authenticate(upToken);
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+        UserDetails userDetails = myUserDetailsService.loadUserByUsername(username);
+        return jwtTokenUtils.generateToken(userDetails);
     }
 }

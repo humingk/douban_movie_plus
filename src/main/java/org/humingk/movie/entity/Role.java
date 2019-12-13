@@ -5,7 +5,7 @@ import org.springframework.security.core.GrantedAuthority;
 /**
  * Spring Security 专用Role类
  * <p>
- * GrantedAuthority接口:  用户获取权限认证
+ * GrantedAuthority:  用户获取权限认证
  *
  * @author humingk
  */

@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * Spring Security 专用User类
  * <p>
- * UserDetail接口:    实现Spring Security认证信息的核心接口,用户获取权限认证
+ * UserDetail:    实现Spring Security认证信息的核心接口,用于获取用户对应的所有的角色
  *
  * @author humingk
  */

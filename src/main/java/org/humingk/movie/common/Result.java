@@ -1,4 +1,4 @@
-package org.humingk.movie.tool;
+package org.humingk.movie.common;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -23,4 +23,10 @@ public class Result {
      * json数据
      */
     private Object data;
+
+    public Result(Object data) {
+        this.code = Code.SUCCESS;
+        this.msg = Message.SUCCESS;
+        this.data = data;
+    }
 }

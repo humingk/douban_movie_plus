@@ -1,13 +1,14 @@
 package org.humingk.movie.aspect;
 
 import com.alibaba.fastjson.JSONObject;
-import lombok.extern.java.Log;
+import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
+import org.humingk.movie.common.Code;
+import org.humingk.movie.common.Result;
 import org.humingk.movie.tool.AesUtils;
-import org.humingk.movie.tool.Result;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
@@ -25,7 +26,7 @@ import java.util.Map;
  */
 @Aspect
 @Component
-@Log
+@Slf4j
 public class AesDecryptAspect {
 
     /**
@@ -60,8 +61,8 @@ public class AesDecryptAspect {
                     put("args", joinPoint.getArgs());
                 }
             };
-            log.warning("decrypt failed,:" + new JSONObject(logMap));
-            return new Result(200, "kiss my ass :)", "");
+            log.warn("decrypt failed:{}", new JSONObject(logMap));
+            return new Result(Code.SUCCESS, "kiss my ass :)", "");
         }
     }
 }

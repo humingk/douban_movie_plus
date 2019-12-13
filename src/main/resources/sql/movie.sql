@@ -666,7 +666,7 @@ create table permission
     # 权限名称
     name_zh     varchar(255) not null default '',
     # 权限路径
-    path_src    varchar(255) not null default 'x',
+    path_src    varchar(255) not null,
     # 权限描述
     description varchar(255) not null default '',
 
@@ -674,8 +674,6 @@ create table permission
     unique (path_src)
 ) ENGINE = InnoDB
   default charset = utf8mb4;
-insert into permission
-values (1, '未知', 'x', '');
 
 # 2.公共用户关系表---------------------------------------
 
