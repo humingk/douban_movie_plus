@@ -1,4 +1,4 @@
-package org.humingk.movie.service.security;
+package org.humingk.movie.security.service;
 
 import org.humingk.movie.entity.Role;
 import org.humingk.movie.entity.User;

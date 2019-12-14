@@ -8,7 +8,7 @@ import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.humingk.movie.common.Code;
 import org.humingk.movie.common.Result;
-import org.humingk.movie.tool.AesUtils;
+import org.humingk.movie.Utils.AesUtil;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
@@ -49,7 +49,7 @@ public class AesDecryptAspect {
         // 请求参数
         Object[] args = joinPoint.getArgs();
         try {
-            args[0] = AesUtils.decrypt(args[0].toString());
+            args[0] = AesUtil.decrypt(args[0].toString());
             return joinPoint.proceed(args);
         } catch (Exception e) {
             ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();

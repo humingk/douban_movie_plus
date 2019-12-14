@@ -1,93 +1,11 @@
 package org.humingk.movie.entity;
 
-import org.springframework.security.core.userdetails.UserDetails;
-
-import java.io.Serializable;
-import java.util.List;
-
-/**
- * Spring Security 专用User类
- * <p>
- * UserDetail:    实现Spring Security认证信息的核心接口,用于获取用户对应的所有的角色
- *
- * @author humingk
- */
-public class User implements UserDetails, Serializable {
+public class User {
     private String id;
 
     private String email;
 
     private String password;
-
-    /**
-     * 用户对应的角色列表
-     */
-    private List<Role> authorities;
-
-    /**
-     * 此处实际获取用户登录邮箱
-     *
-     * @return
-     */
-    @Override
-    public String getUsername() {
-        return getEmail();
-    }
-
-    /**
-     * 获取该用户的所有角色
-     *
-     * @return
-     */
-    @Override
-    public List<Role> getAuthorities() {
-        return authorities;
-    }
-
-    public void setAuthorities(List<Role> authorities) {
-        this.authorities = authorities;
-    }
-
-    /**
-     * 账号是否未过期
-     *
-     * @return true:未过期
-     */
-    @Override
-    public boolean isAccountNonExpired() {
-        return true;
-    }
-
-    /**
-     * 账号是否未被锁定
-     *
-     * @return true:未锁定
-     */
-    @Override
-    public boolean isAccountNonLocked() {
-        return false;
-    }
-
-    /**
-     * 密码是否未过期
-     *
-     * @return true:未过期
-     */
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return false;
-    }
-
-    /**
-     * 用户是否可用
-     *
-     * @return true:可用
-     */
-    @Override
-    public boolean isEnabled() {
-        return false;
-    }
-
 
     public User(String id, String email, String password) {
         this.id = id;
@@ -115,7 +33,6 @@ public class User implements UserDetails, Serializable {
         this.email = email == null ? null : email.trim();
     }
 
-    @Override
     public String getPassword() {
         return password;
     }
@@ -137,8 +54,8 @@ public class User implements UserDetails, Serializable {
         }
         User other = (User) that;
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
-                && (this.getEmail() == null ? other.getEmail() == null : this.getEmail().equals(other.getEmail()))
-                && (this.getPassword() == null ? other.getPassword() == null : this.getPassword().equals(other.getPassword()));
+            && (this.getEmail() == null ? other.getEmail() == null : this.getEmail().equals(other.getEmail()))
+            && (this.getPassword() == null ? other.getPassword() == null : this.getPassword().equals(other.getPassword()));
     }
 
     @Override

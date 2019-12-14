@@ -1,8 +1,8 @@
 package org.humingk.movie.service.impl;
 
 import org.humingk.movie.service.UserService;
-import org.humingk.movie.service.security.MyUserDetailsService;
-import org.humingk.movie.tool.JwtTokenUtils;
+import org.humingk.movie.security.service.MyUserDetailsService;
+import org.humingk.movie.security.utils.JwtTokenUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -24,7 +24,7 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private MyUserDetailsService myUserDetailsService;
     @Autowired
-    private JwtTokenUtils jwtTokenUtils;
+    private JwtTokenUtil jwtTokenUtils;
 
     /**
      * 用户登录

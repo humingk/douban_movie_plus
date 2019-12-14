@@ -1,4 +1,4 @@
-package org.humingk.movie.service.impl.security;
+package org.humingk.movie.security.service.impl;
 
 import lombok.extern.slf4j.Slf4j;
 import org.humingk.movie.entity.Role;
@@ -6,19 +6,22 @@ import org.humingk.movie.entity.User;
 import org.humingk.movie.entity.UserExample;
 import org.humingk.movie.mapper.RoleMapper;
 import org.humingk.movie.mapper.UserMapper;
-import org.humingk.movie.service.security.MyUserDetailsService;
+import org.humingk.movie.security.common.SecurityRole;
+import org.humingk.movie.security.common.SecurityUser;
+import org.humingk.movie.security.service.MyUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
 import java.util.List;
 
 /**
  * @author humingk
  */
 @Slf4j
-@Service("userDetailsService")
+@Service
 public class MyUserDetailsServiceImpl implements MyUserDetailsService {
     @Autowired
     private UserMapper userMapper;
@@ -58,13 +61,15 @@ public class MyUserDetailsServiceImpl implements MyUserDetailsService {
      */
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = getUserByEmail(username);
-        if (user != null) {
-            List<Role> roleList = getRoleListByUserId(user.getId());
-            user.setAuthorities(roleList);
+        SecurityUser securityUser = (SecurityUser) getUserByEmail(username);
+        if (securityUser != null) {
+            List<Role> roleList = getRoleListByUserId(securityUser.getId());
+            List<SecurityRole> securityRoleList = Arrays.asList(roleList.toArray(new SecurityRole[0]));
+            securityUser.setAuthorities(securityRoleList);
+            return securityUser;
         } else {
             log.warn("此用户不存在,{}", username);
+            return null;
         }
-        return user;
     }
 }

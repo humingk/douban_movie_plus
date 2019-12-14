@@ -1,30 +1,11 @@
 package org.humingk.movie.entity;
 
-import org.springframework.security.core.GrantedAuthority;
-
-/**
- * Spring Security 专用Role类
- * <p>
- * GrantedAuthority:  用户获取权限认证
- *
- * @author humingk
- */
-public class Role implements GrantedAuthority {
+public class Role {
     private Byte id;
 
     private String nameZh;
 
     private String description;
-
-    /**
-     * 获取角色名(权限点)
-     *
-     * @return
-     */
-    @Override
-    public String getAuthority() {
-        return getNameZh();
-    }
 
     public Role(Byte id, String nameZh, String description) {
         this.id = id;
@@ -73,8 +54,8 @@ public class Role implements GrantedAuthority {
         }
         Role other = (Role) that;
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
-                && (this.getNameZh() == null ? other.getNameZh() == null : this.getNameZh().equals(other.getNameZh()))
-                && (this.getDescription() == null ? other.getDescription() == null : this.getDescription().equals(other.getDescription()));
+            && (this.getNameZh() == null ? other.getNameZh() == null : this.getNameZh().equals(other.getNameZh()))
+            && (this.getDescription() == null ? other.getDescription() == null : this.getDescription().equals(other.getDescription()));
     }
 
     @Override

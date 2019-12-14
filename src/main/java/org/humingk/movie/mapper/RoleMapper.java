@@ -1,10 +1,10 @@
 package org.humingk.movie.mapper;
 
-import java.util.List;
-
 import org.apache.ibatis.annotations.Param;
 import org.humingk.movie.entity.Role;
 import org.humingk.movie.entity.RoleExample;
+
+import java.util.List;
 
 public interface RoleMapper {
     long countByExample(RoleExample example);
@@ -29,7 +29,7 @@ public interface RoleMapper {
 
     int updateByPrimaryKey(Role record);
 
-//    -------------
+    //    -------------
 
     /**
      * 根据用户ID获取角色列表

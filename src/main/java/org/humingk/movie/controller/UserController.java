@@ -1,15 +1,10 @@
 package org.humingk.movie.controller;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
-import org.humingk.movie.annotation.AesDecrypt;
 import org.humingk.movie.common.Result;
 import org.humingk.movie.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.core.AuthenticationException;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @author humingk
@@ -20,13 +15,37 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @AesDecrypt
-    @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public Result login(@RequestParam("params") String params) {
-        JSONObject jsonObject = JSON.parseObject(params);
-        return new Result(userService.login(
-                jsonObject.getString("username"),
-                jsonObject.getString("password")
-        ));
+    /**
+     * 用户登录
+     *
+     * @param username
+     * @param password
+     * @return
+     * @throws AuthenticationException
+     */
+    //    @AesDecrypt
+    @RequestMapping(value = "login", method = RequestMethod.POST)
+    public Result login(
+            @RequestParam("username") String username,
+            @RequestParam("password") String password
+    ) throws AuthenticationException {
+        return new Result(userService.login(username, password));
+//        JSONObject jsonObject = JSON.parseObject(params);
+//        return new Result(userService.login(
+//                jsonObject.getString("username"),
+//                jsonObject.getString("password")
+//        ));
     }
+
+    /**
+     * 用户页面
+     *
+     * @param userId
+     * @return
+     */
+    @RequestMapping(value = "people/{userId}", method = RequestMethod.POST)
+    public Result people(@PathVariable("userId") String userId) {
+        return new Result(userId);
+    }
+
 }

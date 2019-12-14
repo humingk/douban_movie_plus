@@ -1,7 +1,8 @@
-package org.humingk.movie.config.security;
+package org.humingk.movie.security.config;
 
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
-import org.humingk.movie.tool.JwtTokenUtils;
+import org.humingk.movie.security.utils.JwtTokenUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -20,13 +21,14 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author humingk
  */
+@Slf4j
 @Component
 public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
     @Autowired
     private UserDetailsService userDetailsService;
 
     @Autowired
-    private JwtTokenUtils jwtTokenUtils;
+    private JwtTokenUtil jwtTokenUtils;
 
     /**
      * 验证令牌的是否合法
@@ -41,6 +43,8 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
         try {
             if (StringUtils.isNotEmpty(authHeader)) {
                 String username = jwtTokenUtils.getUsernameFromToken(authHeader);
+                log.info("user:{}", username);
+                jwtTokenUtils.validateToken(authHeader);
                 if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
                     UserDetails userDetails = this.userDetailsService.loadUserByUsername(username);
                     if (jwtTokenUtils.validateToken(authHeader)) {

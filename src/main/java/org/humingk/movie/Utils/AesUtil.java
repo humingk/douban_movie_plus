@@ -1,6 +1,4 @@
-package org.humingk.movie.tool;
-
-import com.alibaba.fastjson.JSON;
+package org.humingk.movie.Utils;
 
 import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
@@ -11,7 +9,7 @@ import javax.crypto.spec.SecretKeySpec;
  *
  * @author humingk
  */
-public class AesUtils {
+public class AesUtil {
     private static final String KEY_AES = "AES";
     private static final String KEY = "youaretheapofmye";
 
@@ -76,8 +74,8 @@ public class AesUtils {
 
     public static void main(String[] args) throws Exception {
         String s = "{\"keyword\":\"星际\",\"offset\":0,\"limit\":5}";
-        String se = AesUtils.encrypt(s);
-        String sd = AesUtils.decrypt(se);
+        String se = AesUtil.encrypt(s);
+        String sd = AesUtil.decrypt(se);
         System.out.println(s);
         System.out.println(se);
         System.out.println(sd);

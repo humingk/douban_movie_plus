@@ -1,4 +1,4 @@
-package org.humingk.movie.service.security;
+package org.humingk.movie.security.service;
 
 import org.springframework.security.access.ConfigAttribute;
 import org.springframework.security.web.access.intercept.FilterInvocationSecurityMetadataSource;
@@ -6,8 +6,11 @@ import org.springframework.security.web.access.intercept.FilterInvocationSecurit
 import java.util.Collection;
 
 /**
- * FilterInvocationSecurityMetadataSource:
- * 用来储存请求与权限的对应关系
+ * 所有用户-权限对应关系
+ * <p>
+ * 继承FilterInvocationSecurityMetadataSource:
+ * <p>
+ * 用来从数据库中获取请求与权限的对应关系
  *
  * @author humingk
  */

@@ -1,4 +1,4 @@
-package org.humingk.movie.config.security;
+package org.humingk.movie.security.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.SecurityMetadataSource;
@@ -12,9 +12,9 @@ import javax.servlet.*;
 import java.io.IOException;
 
 /**
- * security 过滤器
+ * security 拦截器
  * <p>
- * AbstractSecurityInterceptor:     实现了对受保护对象的访问进行拦截的抽象类
+ * 继承 AbstractSecurityInterceptor:     实现了对受保护对象的访问进行拦截的抽象类
  *
  * @author humingk
  */
@@ -28,17 +28,22 @@ public class MyFilterSecurityInterceptor extends AbstractSecurityInterceptor imp
         super.setAccessDecisionManager(myAccessDecisionManager);
     }
 
+    /**
+     * 拦截
+     *
+     * @param servletRequest
+     * @param servletResponse
+     * @param filterChain
+     * @throws IOException
+     * @throws ServletException
+     */
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
 
         FilterInvocation filterInvocation = new FilterInvocation(servletRequest, servletResponse, filterChain);
-        invoke(filterInvocation);
-    }
-
-    private void invoke(FilterInvocation filterInvocation) throws IOException, ServletException {
         InterceptorStatusToken token = super.beforeInvocation(filterInvocation);
         try {
-            // 执行下一个拦截器
+            // 下一个拦截器
             filterInvocation.getChain().doFilter(filterInvocation.getRequest(), filterInvocation.getResponse());
         } finally {
             super.afterInvocation(token, null);
