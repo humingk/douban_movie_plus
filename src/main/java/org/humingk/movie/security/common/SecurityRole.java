@@ -1,5 +1,7 @@
 package org.humingk.movie.security.common;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
 import org.humingk.movie.entity.Role;
 import org.springframework.security.core.GrantedAuthority;
 
@@ -10,6 +12,8 @@ import org.springframework.security.core.GrantedAuthority;
  *
  * @author humingk
  */
+@Data
+@AllArgsConstructor
 public class SecurityRole extends Role implements GrantedAuthority {
 
     /**
@@ -20,6 +24,10 @@ public class SecurityRole extends Role implements GrantedAuthority {
     @Override
     public String getAuthority() {
         return getNameZh();
+    }
+
+    public SecurityRole(Role role) {
+        super(role.getId(), role.getNameZh(), role.getDescription());
     }
 
 }

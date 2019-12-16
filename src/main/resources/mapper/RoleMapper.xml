@@ -84,7 +84,7 @@
     </if>
   </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Byte" resultMap="BaseResultMap">
-    select 
+    select
     <include refid="Base_Column_List" />
     from role
     where id = #{id,jdbcType=TINYINT}
@@ -183,13 +183,13 @@
 
 <!--  -->
 
-  <select id="selectRoleListByUserId" parameterType="java.lang.String" resultType="org.humingk.movie.entity.Role">
+  <select id="selectRoleListByUserId" parameterType="java.lang.String" resultMap="BaseResultMap">
     select
-      id, name_zh, description
+      role.id, role.name_zh, role.description
     from role
            inner join user_to_role
                       on role.id=user_to_role.id_role
-    where id_user=#{id,jdbcType=VARCHAR}
+    where user_to_role.id_user=#{id,jdbcType=VARCHAR}
   </select>
 
 </mapper>

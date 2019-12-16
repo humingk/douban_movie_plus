@@ -1,13 +1,17 @@
-package org.humingk.movie.service.impl;
+package org.humingk.movie.security.service.impl;
 
-import org.humingk.movie.service.UserService;
+import lombok.extern.slf4j.Slf4j;
+import org.humingk.movie.common.Result;
+import org.humingk.movie.common.StatusAndMessage;
+import org.humingk.movie.exception.MyException;
 import org.humingk.movie.security.service.MyUserDetailsService;
+import org.humingk.movie.security.service.UserService;
 import org.humingk.movie.security.utils.JwtTokenUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
@@ -17,6 +21,7 @@ import org.springframework.stereotype.Service;
  *
  * @author humingk
  */
+@Slf4j
 @Service
 public class UserServiceImpl implements UserService {
     @Autowired
@@ -34,11 +39,16 @@ public class UserServiceImpl implements UserService {
      * @return
      */
     @Override
-    public String login(String username, String password) throws AuthenticationException {
+    public Result login(String username, String password) {
         UsernamePasswordAuthenticationToken upToken = new UsernamePasswordAuthenticationToken(username, password);
-        final Authentication authentication = authenticationManager.authenticate(upToken);
-        SecurityContextHolder.getContext().setAuthentication(authentication);
-        UserDetails userDetails = myUserDetailsService.loadUserByUsername(username);
-        return jwtTokenUtils.generateToken(userDetails);
+        try {
+            final Authentication authentication = authenticationManager.authenticate(upToken);
+            SecurityContextHolder.getContext().setAuthentication(authentication);
+            UserDetails userDetails = myUserDetailsService.loadUserByUsername(username);
+            return Result.success(jwtTokenUtils.generateToken(userDetails));
+        } catch (BadCredentialsException e) {
+            log.error("认证失败,username:" + username, e);
+            throw new MyException(StatusAndMessage.UNAUTHORIZED);
+        }
     }
 }

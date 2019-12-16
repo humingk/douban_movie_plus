@@ -39,7 +39,7 @@ public class LogAspect {
 
     /**
      * 前置通知:
-     * controller层所有方法调用日志
+     * controller层所有方法调用日志,记录请求信息
      *
      * @param joinPoint
      */

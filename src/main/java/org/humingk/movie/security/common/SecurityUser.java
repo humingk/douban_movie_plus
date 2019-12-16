@@ -1,6 +1,7 @@
 package org.humingk.movie.security.common;
 
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import org.humingk.movie.entity.User;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -14,6 +15,7 @@ import java.util.List;
  *
  * @author humingk
  */
+@Data
 @AllArgsConstructor
 public class SecurityUser extends User implements UserDetails, Serializable {
     /**
@@ -41,7 +43,8 @@ public class SecurityUser extends User implements UserDetails, Serializable {
         return authorities;
     }
 
-    public void setAuthorities(List<SecurityRole> authorities) {
+    public SecurityUser(User user, List<SecurityRole> authorities) {
+        super(user.getId(), user.getEmail(), user.getPassword());
         this.authorities = authorities;
     }
 

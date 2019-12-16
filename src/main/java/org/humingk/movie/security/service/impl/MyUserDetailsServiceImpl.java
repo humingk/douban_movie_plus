@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.humingk.movie.entity.Role;
 import org.humingk.movie.entity.User;
 import org.humingk.movie.entity.UserExample;
+import org.humingk.movie.exception.MyException;
 import org.humingk.movie.mapper.RoleMapper;
 import org.humingk.movie.mapper.UserMapper;
 import org.humingk.movie.security.common.SecurityRole;
@@ -14,8 +15,10 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
+
+import static org.humingk.movie.common.StatusAndMessage.NOUSER;
 
 /**
  * @author humingk
@@ -38,7 +41,14 @@ public class MyUserDetailsServiceImpl implements MyUserDetailsService {
     public User getUserByEmail(String email) {
         UserExample example = new UserExample();
         example.or().andEmailEqualTo(email);
-        return userMapper.selectByExample(example).get(0);
+        List<User> userList = userMapper.selectByExample(example);
+        if (userList.size() == 1) {
+            return userList.get(0);
+        } else if (userList.size() == 0) {
+            throw new MyException(NOUSER, "email: " + email);
+        } else {
+            throw new MyException();
+        }
     }
 
     /**
@@ -61,15 +71,15 @@ public class MyUserDetailsServiceImpl implements MyUserDetailsService {
      */
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        SecurityUser securityUser = (SecurityUser) getUserByEmail(username);
-        if (securityUser != null) {
-            List<Role> roleList = getRoleListByUserId(securityUser.getId());
-            List<SecurityRole> securityRoleList = Arrays.asList(roleList.toArray(new SecurityRole[0]));
-            securityUser.setAuthorities(securityRoleList);
-            return securityUser;
-        } else {
-            log.warn("此用户不存在,{}", username);
-            return null;
+        User user = getUserByEmail(username);
+        List<Role> roleList = getRoleListByUserId(user.getId());
+        if (roleList.size() == 0) {
+            throw new MyException();
         }
+        List<SecurityRole> securityRoleList = new ArrayList<>();
+        for (Role role : roleList) {
+            securityRoleList.add(new SecurityRole(role));
+        }
+        return new SecurityUser(user, securityRoleList);
     }
 }

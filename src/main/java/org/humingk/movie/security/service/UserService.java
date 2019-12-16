@@ -1,4 +1,6 @@
-package org.humingk.movie.service;
+package org.humingk.movie.security.service;
+
+import org.humingk.movie.common.Result;
 
 /**
  * 用户管理业务接口
@@ -13,5 +15,5 @@ public interface UserService {
      * @param password
      * @return
      */
-    String login(String username, String password);
+    Result login(String username, String password);
 }

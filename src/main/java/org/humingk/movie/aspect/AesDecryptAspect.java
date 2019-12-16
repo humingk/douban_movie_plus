@@ -6,7 +6,6 @@ import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
-import org.humingk.movie.common.Code;
 import org.humingk.movie.common.Result;
 import org.humingk.movie.Utils.AesUtil;
 import org.springframework.stereotype.Component;
@@ -62,7 +61,7 @@ public class AesDecryptAspect {
                 }
             };
             log.warn("decrypt failed:{}", new JSONObject(logMap));
-            return new Result(Code.SUCCESS, "kiss my ass :)", "");
+            return Result.error("kiss my ass :)");
         }
     }
 }

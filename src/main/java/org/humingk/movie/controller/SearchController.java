@@ -34,7 +34,7 @@ public class SearchController {
     @RequestMapping(value = "search_tips", method = RequestMethod.POST)
     public Result searchTips(@RequestParam String params) {
         JSONObject jsonObject = JSON.parseObject(params);
-        return new Result(movieDoubanService.getMovieDoubanListByNameStart(
+        return Result.success(movieDoubanService.getMovieDoubanListByNameStart(
                 jsonObject.getString("keyword"),
                 jsonObject.getInteger("offset"),
                 jsonObject.getInteger("limit")
