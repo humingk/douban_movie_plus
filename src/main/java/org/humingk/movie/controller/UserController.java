@@ -1,9 +1,10 @@
 package org.humingk.movie.controller;
 
 import org.humingk.movie.common.Result;
-import org.humingk.movie.security.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * @author humingk
@@ -11,29 +12,16 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/")
 public class UserController {
-    @Autowired
-    private UserService userService;
 
     /**
-     * 用户登录
+     * 用户登录页面
      *
-     * @param username
-     * @param password
      * @return
      */
     //    @AesDecrypt
-    @RequestMapping(value = "login", method = RequestMethod.POST)
-    public Result login(
-            @RequestParam("username") String username,
-            @RequestParam("password") String password) {
-        return Result.success(userService.login(username, password));
-
-//        JSONObject jsonObject = JSON.parseObject(params);
-//        return new Result(userService.login(
-//                jsonObject.getString("username"),
-//                jsonObject.getString("password")
-//        ));
-
+    @RequestMapping(value = "login", method = RequestMethod.GET)
+    public Result login() {
+        return Result.success("login page");
     }
 
     /**

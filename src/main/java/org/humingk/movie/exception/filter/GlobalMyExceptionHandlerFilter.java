@@ -29,11 +29,11 @@ import java.io.IOException;
 public class GlobalMyExceptionHandlerFilter extends OncePerRequestFilter {
 
     @Override
-    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException, RuntimeException {
+    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         try {
             filterChain.doFilter(request, response);
         } catch (MyException e) {
-            log.warn(String.format("已知异常, %d: {}", e.getStatus()), e.getMessage());
+            log.warn(String.format("已知异常,%d: {}", e.getStatus()), e.getMessage());
             ResultResponse.error(response, e);
         }
     }

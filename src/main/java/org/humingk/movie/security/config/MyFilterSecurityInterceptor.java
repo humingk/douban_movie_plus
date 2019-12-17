@@ -2,6 +2,7 @@ package org.humingk.movie.security.config;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.access.SecurityMetadataSource;
 import org.springframework.security.access.intercept.AbstractSecurityInterceptor;
 import org.springframework.security.access.intercept.InterceptorStatusToken;
@@ -40,7 +41,7 @@ public class MyFilterSecurityInterceptor extends AbstractSecurityInterceptor imp
      * @throws ServletException
      */
     @Override
-    public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
+    public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException, AccessDeniedException {
 
         FilterInvocation filterInvocation = new FilterInvocation(servletRequest, servletResponse, filterChain);
         InterceptorStatusToken token = super.beforeInvocation(filterInvocation);
