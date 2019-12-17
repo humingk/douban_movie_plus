@@ -1,7 +1,6 @@
 package org.humingk.movie.security.service.impl;
 
 import lombok.extern.slf4j.Slf4j;
-import org.humingk.movie.common.Result;
 import org.humingk.movie.common.StatusAndMessage;
 import org.humingk.movie.exception.MyException;
 import org.humingk.movie.security.service.MyUserDetailsService;
@@ -39,13 +38,13 @@ public class UserServiceImpl implements UserService {
      * @return
      */
     @Override
-    public Result login(String username, String password) {
+    public String login(String username, String password) {
         UsernamePasswordAuthenticationToken upToken = new UsernamePasswordAuthenticationToken(username, password);
         try {
             final Authentication authentication = authenticationManager.authenticate(upToken);
             SecurityContextHolder.getContext().setAuthentication(authentication);
             UserDetails userDetails = myUserDetailsService.loadUserByUsername(username);
-            return Result.success(jwtTokenUtils.generateToken(userDetails));
+            return jwtTokenUtils.generateToken(userDetails);
         } catch (BadCredentialsException e) {
             log.error("认证失败,username:" + username, e);
             throw new MyException(StatusAndMessage.UNAUTHORIZED);

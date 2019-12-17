@@ -35,11 +35,12 @@ public class JwtTokenFilter extends OncePerRequestFilter {
     public static final String HEADER_STRING = "Authorization";
 
     @Override
-    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws ServletException, IOException {
+    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws ServletException, IOException, RuntimeException {
         String token = request.getHeader(HEADER_STRING);
-        if (null != token) {
+        if (token != null) {
             String username = jwtTokenUtils.getUsernameFromToken(token);
             if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
+                // 加载该用户的所有权限点
                 UserDetails userDetails = userDetailsService.loadUserByUsername(username);
                 if (jwtTokenUtils.validateToken(token, userDetails)) {
                     UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(

@@ -42,7 +42,7 @@ public class UserController {
      * @param userId
      * @return
      */
-    @RequestMapping(value = "people/{userId}", method = RequestMethod.POST)
+    @RequestMapping(value = "people/{userId}", method = RequestMethod.GET)
     public Result people(@PathVariable("userId") String userId) {
         return Result.success(userId);
     }

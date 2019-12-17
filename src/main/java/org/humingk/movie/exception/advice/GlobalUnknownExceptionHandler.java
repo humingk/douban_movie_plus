@@ -1,4 +1,4 @@
-package org.humingk.movie.advice;
+package org.humingk.movie.exception.advice;
 
 import lombok.extern.slf4j.Slf4j;
 import org.humingk.movie.common.Result;

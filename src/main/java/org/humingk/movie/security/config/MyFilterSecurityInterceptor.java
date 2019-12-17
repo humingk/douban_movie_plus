@@ -1,5 +1,6 @@
 package org.humingk.movie.security.config;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.SecurityMetadataSource;
 import org.springframework.security.access.intercept.AbstractSecurityInterceptor;
@@ -18,6 +19,7 @@ import java.io.IOException;
  *
  * @author humingk
  */
+@Slf4j
 @Component
 public class MyFilterSecurityInterceptor extends AbstractSecurityInterceptor implements Filter {
     @Autowired

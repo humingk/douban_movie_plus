@@ -26,11 +26,11 @@ public enum StatusAndMessage {
     /**
      * 服务器拒绝提供服务
      */
-    FORBIDDEN(403, "forbidden"),
+    FORBIDDEN(403, "服务器拒绝提供服务"),
     /**
      * 请求资源失败,不存在
      */
-    NOTFOUND(404, "not found"),
+    NOTFOUND(404, "找不到此资源"),
     /**
      * 服务器处理失败,内部错误
      */

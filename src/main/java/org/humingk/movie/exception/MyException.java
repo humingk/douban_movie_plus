@@ -63,7 +63,7 @@ public class MyException extends RuntimeException {
      */
     public MyException(StatusAndMessage statusAndMessage, String message) {
         this.status = statusAndMessage.status;
-        this.message = statusAndMessage.message + " " + message;
+        this.message = statusAndMessage.message + "," + message;
     }
 
 }

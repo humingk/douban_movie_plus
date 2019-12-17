@@ -1,4 +1,4 @@
-package org.humingk.movie.advice;
+package org.humingk.movie.exception.advice;
 
 import lombok.extern.slf4j.Slf4j;
 import org.humingk.movie.common.Result;
@@ -7,10 +7,7 @@ import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-import org.springframework.web.servlet.NoHandlerFoundException;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
-
-import javax.servlet.http.HttpServletRequest;
 
 /**
  * 全局自定义异常处理类
@@ -40,17 +37,5 @@ public class GlobalMyExceptionHandler extends ResponseEntityExceptionHandler {
     public Result myExceptionHandler(MyException e) {
         log.error("已知异常,status:" + e.getStatus() + " ,message:{}", e.getMessage());
         return Result.error(e);
-    }
-
-    /**
-     * 404 not found
-     *
-     * @param e
-     * @return
-     */
-    @ExceptionHandler(NoHandlerFoundException.class)
-    public Result notFoundExceptionHandler(HttpServletRequest request, Exception e) {
-        log.warn("找不到此页面,url:" + request.getRequestURI(), e);
-        return Result.notFound();
     }
 }

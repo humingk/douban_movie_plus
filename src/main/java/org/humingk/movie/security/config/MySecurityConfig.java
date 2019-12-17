@@ -10,6 +10,7 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
@@ -28,37 +29,9 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 //@EnableWebSecurity
 @EnableGlobalMethodSecurity(securedEnabled = true, prePostEnabled = true)
 public class MySecurityConfig extends WebSecurityConfigurerAdapter {
+
     @Autowired
     private MyUserDetailsService myUserDetailsService;
-
-    /**
-     * web url 拦截
-     *
-     * @param web
-     * @throws Exception
-     */
-    @Override
-    public void configure(WebSecurity web) throws Exception {
-        web.ignoring().antMatchers("/**");
-    }
-
-    /**
-     * httpSecurity url 拦截
-     *
-     * @param httpSecurity
-     * @throws Exception
-     */
-    @Override
-    protected void configure(HttpSecurity httpSecurity) throws Exception {
-
-        // url过滤
-        httpSecurity.authorizeRequests()
-                .antMatchers("/**").permitAll();
-
-        // 自定义token过滤器验证请求的token是否合法
-        httpSecurity.addFilterBefore(authenticationTokenFilterBean(), UsernamePasswordAuthenticationFilter.class);
-        httpSecurity.headers().cacheControl();
-    }
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception {
@@ -88,6 +61,46 @@ public class MySecurityConfig extends WebSecurityConfigurerAdapter {
 //                return str.equals(DigestUtils.md5DigestAsHex(charSequence.toString().getBytes()));
             }
         });
+    }
+
+    /**
+     * web url 拦截
+     *
+     * @param web
+     * @throws Exception
+     */
+    @Override
+    public void configure(WebSecurity web) throws Exception {
+        // 临时禁用security
+//        web.ignoring().antMatchers("/**");
+    }
+
+    /**
+     * httpSecurity url 拦截
+     *
+     * @param httpSecurity
+     * @throws Exception
+     */
+    @Override
+    protected void configure(HttpSecurity httpSecurity) throws Exception {
+        httpSecurity
+                // 禁用csrf,登录时不需要_csrf参数
+                .cors().and().csrf().disable()
+                // 禁用HttpSession,使用JWT
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
+                // url过滤
+                .authorizeRequests()
+                // 登录注册路径任何人都能访问
+                .antMatchers("/login", "/register").permitAll()
+                // people路径需要用户已登录才能访问
+//                .antMatchers("/people/**").hasRole("user");
+                // people路径需要token验证才能访问
+                .antMatchers("/people/**").authenticated();
+
+
+        // 自定义token过滤器验证请求的token是否合法
+        httpSecurity.addFilterBefore(authenticationTokenFilterBean(), UsernamePasswordAuthenticationFilter.class);
+        httpSecurity.headers().cacheControl();
     }
 
     @Bean

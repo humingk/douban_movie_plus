@@ -26,13 +26,13 @@ public class JwtTokenUtil implements Serializable {
     private static final String CLAIM_KEY_USERNAME = "sub";
 
     /**
-     * 5天(毫秒)
+     * token过期时间 5天(毫秒)
      */
     private static final long EXPIRATION_TIME = 432000000;
     /**
      * JWT密码
      */
-    private static final String SECRET = "secret";
+    private static final String SECRET = "youaretheappleofmyeyes";
 
 
     /**
