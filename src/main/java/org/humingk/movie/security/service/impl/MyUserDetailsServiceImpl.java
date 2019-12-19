@@ -45,7 +45,8 @@ public class MyUserDetailsServiceImpl implements MyUserDetailsService {
         if (userList.size() == 1) {
             return userList.get(0);
         } else if (userList.size() == 0) {
-            throw new MyException(NOUSER, "email: " + email);
+            log.warn("无此用户,email:{}", email);
+            throw new MyException(NOUSER, email);
         } else {
             throw new MyException();
         }

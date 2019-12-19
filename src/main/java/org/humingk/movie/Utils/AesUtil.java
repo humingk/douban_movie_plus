@@ -2,6 +2,8 @@ package org.humingk.movie.Utils;
 
 import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -73,11 +75,18 @@ public class AesUtil {
 
 
     public static void main(String[] args) throws Exception {
-        String s = "{\"keyword\":\"星际\",\"offset\":0,\"limit\":5}";
-        String se = AesUtil.encrypt(s);
-        String sd = AesUtil.decrypt(se);
-        System.out.println(s);
-        System.out.println(se);
-        System.out.println(sd);
+        ArrayList list = new ArrayList() {
+            {
+                add("{\"keyword\":\"星际\",\"offset\":0,\"limit\":5}");
+            }
+        };
+        for (Object str : list) {
+            String se = AesUtil.encrypt((String) str);
+            String sd = AesUtil.decrypt(se);
+            System.out.println("=======================================");
+            System.out.println("origin:  " + str);
+            System.out.println("encrypt: " + se);
+            System.out.println("decrypt: " + sd);
+        }
     }
 }

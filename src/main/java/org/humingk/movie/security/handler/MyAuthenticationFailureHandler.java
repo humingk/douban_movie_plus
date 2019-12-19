@@ -24,7 +24,7 @@ public class MyAuthenticationFailureHandler implements AuthenticationFailureHand
 
     @Override
     public void onAuthenticationFailure(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, AuthenticationException e) throws IOException, ServletException {
-        log.warn("已知异常,用户登录失败,email:{}", httpServletRequest.getAttribute("username"));
+        log.warn("用户登录失败,email:{}", httpServletRequest.getAttribute("username"));
         ResultResponse.error(httpServletResponse, new MyException(StatusAndMessage.UNAUTHORIZED));
     }
 }

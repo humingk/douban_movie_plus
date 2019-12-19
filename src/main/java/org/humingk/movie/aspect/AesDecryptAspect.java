@@ -8,6 +8,8 @@ import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.humingk.movie.common.Result;
 import org.humingk.movie.Utils.AesUtil;
+import org.humingk.movie.common.StatusAndMessage;
+import org.humingk.movie.exception.MyException;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
@@ -61,7 +63,7 @@ public class AesDecryptAspect {
                 }
             };
             log.warn("decrypt failed:{}", new JSONObject(logMap));
-            return Result.error("kiss my ass :)");
+            throw new MyException(StatusAndMessage.BADREQUEST);
         }
     }
 }

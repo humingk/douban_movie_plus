@@ -1,6 +1,7 @@
-package org.humingk.movie.security.config;
+package org.humingk.movie.security.filter;
 
 import lombok.extern.slf4j.Slf4j;
+import org.humingk.movie.security.config.MyAccessDecisionManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.access.SecurityMetadataSource;
@@ -41,16 +42,12 @@ public class MyFilterSecurityInterceptor extends AbstractSecurityInterceptor imp
      * @throws ServletException
      */
     @Override
-    public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException, AccessDeniedException {
-
+    public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException, RuntimeException{
         FilterInvocation filterInvocation = new FilterInvocation(servletRequest, servletResponse, filterChain);
         InterceptorStatusToken token = super.beforeInvocation(filterInvocation);
-        try {
-            // 下一个拦截器
-            filterInvocation.getChain().doFilter(filterInvocation.getRequest(), filterInvocation.getResponse());
-        } finally {
-            super.afterInvocation(token, null);
-        }
+        // 下一个拦截器
+        filterInvocation.getChain().doFilter(filterInvocation.getRequest(), filterInvocation.getResponse());
+        super.afterInvocation(token, null);
     }
 
     @Override

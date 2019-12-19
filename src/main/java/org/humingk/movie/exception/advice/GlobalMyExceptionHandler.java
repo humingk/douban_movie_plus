@@ -35,7 +35,6 @@ public class GlobalMyExceptionHandler extends ResponseEntityExceptionHandler {
      */
     @ExceptionHandler(MyException.class)
     public Result myExceptionHandler(MyException e) {
-        log.error("已知异常,status:" + e.getStatus() + " ,message:{}", e.getMessage());
         return Result.error(e);
     }
 }

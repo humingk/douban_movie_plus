@@ -1,7 +1,7 @@
 package org.humingk.movie.security.config;
 
 import lombok.extern.slf4j.Slf4j;
-import org.humingk.movie.security.handler.MyAuthenticationAccessDeniedHandler;
+import org.humingk.movie.security.filter.JwtTokenFilter;
 import org.humingk.movie.security.handler.MyAuthenticationFailureHandler;
 import org.humingk.movie.security.handler.MyAuthenticationSucessHandler;
 import org.humingk.movie.security.service.MyUserDetailsService;
@@ -13,6 +13,7 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
@@ -34,14 +35,14 @@ import javax.sql.DataSource;
  */
 @Slf4j
 @Configuration
-//@EnableWebSecurity
+@EnableWebSecurity
 @EnableGlobalMethodSecurity(securedEnabled = true, prePostEnabled = true)
 public class MySecurityConfig extends WebSecurityConfigurerAdapter {
 
     /**
-     * 记住我过期时间(秒) 5天
+     * 记住我过期时间(秒) 30天
      */
-    private static final int TOKEN_VALIDITY_SECONDS = 432000;
+    private static final int TOKEN_VALIDITY_SECONDS = 2419200;
 
     /**
      * 数据源
@@ -57,13 +58,6 @@ public class MySecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private MyAuthenticationFailureHandler myAuthenticationFailureHandler;
-
-    /**
-     * 自定义AccessDeniedException处理
-     */
-    @Autowired
-    private MyAuthenticationAccessDeniedHandler myAuthenticationAccessDeniedHandler;
-
 
     /**
      * token 持久化
@@ -119,7 +113,7 @@ public class MySecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     /**
-     * web url 拦截
+     * 配置Spring security的Filter链
      *
      * @param web
      * @throws Exception
@@ -128,12 +122,10 @@ public class MySecurityConfig extends WebSecurityConfigurerAdapter {
     public void configure(WebSecurity web) throws Exception {
         // 临时禁用security
 //        web.ignoring().antMatchers("/**");
-
-        web.ignoring().antMatchers("/resources/**");
     }
 
     /**
-     * httpSecurity url 拦截
+     * 配置如何通过拦截器保护请求
      *
      * @param httpSecurity
      * @throws Exception
@@ -142,9 +134,10 @@ public class MySecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity httpSecurity) throws Exception {
         // 自定义token过滤器验证请求的token是否合法
         httpSecurity.addFilterBefore(authenticationTokenFilterBean(), UsernamePasswordAuthenticationFilter.class);
+
         httpSecurity
 
-                // 用户登录
+                // 用户登录(调用security默认的登录页面)
                 .formLogin()
                 // 登录页面跳转
 //                .loginPage("/login")
@@ -152,15 +145,11 @@ public class MySecurityConfig extends WebSecurityConfigurerAdapter {
                 .loginProcessingUrl("/loginForm")
                 // 登录成功后执行
                 .successHandler(myAuthenticationSucessHandler)
-                // 登录失败后执行
-                .failureHandler(myAuthenticationFailureHandler)
                 // 登陆成功后跳转
                 .successForwardUrl("/")
-                // 登录时报后跳转
-                .failureForwardUrl("/login")
 
-                // AccessDeniedException拦截处理
-                .and().exceptionHandling().accessDeniedHandler(myAuthenticationAccessDeniedHandler)
+                // 登出后跳转登录页面
+                .and().logout().logoutSuccessUrl("/login")
 
                 // 记住我
                 .and().rememberMe()
@@ -180,6 +169,7 @@ public class MySecurityConfig extends WebSecurityConfigurerAdapter {
 
                 // 禁用csrf,登录时不需要_csrf参数
                 .and().cors().and().csrf().disable();
+
     }
 
     @Bean

@@ -1,5 +1,6 @@
 package org.humingk.movie.security.config;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.access.AccessDecisionManager;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.access.ConfigAttribute;
@@ -7,6 +8,7 @@ import org.springframework.security.authentication.InsufficientAuthenticationExc
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Component;
+import sun.rmi.runtime.Log;
 
 import java.util.Collection;
 
@@ -19,6 +21,7 @@ import java.util.Collection;
  *
  * @author humingk
  */
+@Slf4j
 @Component
 public class MyAccessDecisionManager implements AccessDecisionManager {
     /**
@@ -43,7 +46,7 @@ public class MyAccessDecisionManager implements AccessDecisionManager {
                 }
             }
             // 循环完毕,没有权限
-            throw new AccessDeniedException("当前访问没有权限,用户:" + authentication.getName());
+            throw new AccessDeniedException("当前用户访问没有权限,email:" + authentication.getName());
         }
     }
 

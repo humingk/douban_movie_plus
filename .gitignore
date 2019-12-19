@@ -1,5 +1,5 @@
 ### add ###
-*.log
+log/
 
 ###
 HELP.md
