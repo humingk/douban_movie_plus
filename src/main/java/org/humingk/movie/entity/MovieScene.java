@@ -1,6 +1,8 @@
 package org.humingk.movie.entity;
 
-public class MovieScene {
+import java.io.Serializable;
+
+public class MovieScene implements Serializable {
     private Long id;
 
     private Long idMovieDouban;
@@ -14,6 +16,8 @@ public class MovieScene {
     private String description;
 
     private String urlMap;
+
+    private static final long serialVersionUID = 1L;
 
     public MovieScene(Long id, Long idMovieDouban, String nameZh, String nameEn, Short startYear, String description, String urlMap) {
         this.id = id;
@@ -133,6 +137,7 @@ public class MovieScene {
         sb.append(", startYear=").append(startYear);
         sb.append(", description=").append(description);
         sb.append(", urlMap=").append(urlMap);
+        sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();
     }

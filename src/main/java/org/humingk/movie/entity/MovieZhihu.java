@@ -1,8 +1,9 @@
 package org.humingk.movie.entity;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
-public class MovieZhihu {
+public class MovieZhihu implements Serializable {
     private Long id;
 
     private Long idMovieDouban;
@@ -14,6 +15,8 @@ public class MovieZhihu {
     private Integer zhihuVote;
 
     private BigDecimal maoyanScore;
+
+    private static final long serialVersionUID = 1L;
 
     public MovieZhihu(Long id, Long idMovieDouban, String nameZh, BigDecimal zhihuScore, Integer zhihuVote, BigDecimal maoyanScore) {
         this.id = id;
@@ -121,6 +124,7 @@ public class MovieZhihu {
         sb.append(", zhihuScore=").append(zhihuScore);
         sb.append(", zhihuVote=").append(zhihuVote);
         sb.append(", maoyanScore=").append(maoyanScore);
+        sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();
     }

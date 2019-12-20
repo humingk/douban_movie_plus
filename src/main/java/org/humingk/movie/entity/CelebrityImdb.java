@@ -1,6 +1,8 @@
 package org.humingk.movie.entity;
 
-public class CelebrityImdb {
+import java.io.Serializable;
+
+public class CelebrityImdb implements Serializable {
     private Long id;
 
     private String nameEn;
@@ -8,6 +10,8 @@ public class CelebrityImdb {
     private Short birthYear;
 
     private Long idCelebrityDouban;
+
+    private static final long serialVersionUID = 1L;
 
     public CelebrityImdb(Long id, String nameEn, Short birthYear, Long idCelebrityDouban) {
         this.id = id;
@@ -91,6 +95,7 @@ public class CelebrityImdb {
         sb.append(", nameEn=").append(nameEn);
         sb.append(", birthYear=").append(birthYear);
         sb.append(", idCelebrityDouban=").append(idCelebrityDouban);
+        sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();
     }

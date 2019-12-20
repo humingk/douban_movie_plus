@@ -1,11 +1,15 @@
 package org.humingk.movie.entity;
 
-public class ArtistNetease {
+import java.io.Serializable;
+
+public class ArtistNetease implements Serializable {
     private Long id;
 
     private String nameZh;
 
     private String urlPortrait;
+
+    private static final long serialVersionUID = 1L;
 
     public ArtistNetease(Long id, String nameZh, String urlPortrait) {
         this.id = id;
@@ -77,6 +81,7 @@ public class ArtistNetease {
         sb.append(", id=").append(id);
         sb.append(", nameZh=").append(nameZh);
         sb.append(", urlPortrait=").append(urlPortrait);
+        sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();
     }

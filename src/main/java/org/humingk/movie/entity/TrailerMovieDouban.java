@@ -1,11 +1,15 @@
 package org.humingk.movie.entity;
 
-public class TrailerMovieDouban {
+import java.io.Serializable;
+
+public class TrailerMovieDouban implements Serializable {
     private Long id;
 
     private Long idMovieDouban;
 
     private String urlVideo;
+
+    private static final long serialVersionUID = 1L;
 
     public TrailerMovieDouban(Long id, Long idMovieDouban, String urlVideo) {
         this.id = id;
@@ -77,6 +81,7 @@ public class TrailerMovieDouban {
         sb.append(", id=").append(id);
         sb.append(", idMovieDouban=").append(idMovieDouban);
         sb.append(", urlVideo=").append(urlVideo);
+        sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();
     }

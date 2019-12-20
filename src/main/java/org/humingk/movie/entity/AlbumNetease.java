@@ -1,6 +1,8 @@
 package org.humingk.movie.entity;
 
-public class AlbumNetease {
+import java.io.Serializable;
+
+public class AlbumNetease implements Serializable {
     private Long id;
 
     private String nameZh;
@@ -8,6 +10,8 @@ public class AlbumNetease {
     private Short total;
 
     private String urlCover;
+
+    private static final long serialVersionUID = 1L;
 
     public AlbumNetease(Long id, String nameZh, Short total, String urlCover) {
         this.id = id;
@@ -91,6 +95,7 @@ public class AlbumNetease {
         sb.append(", nameZh=").append(nameZh);
         sb.append(", total=").append(total);
         sb.append(", urlCover=").append(urlCover);
+        sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();
     }

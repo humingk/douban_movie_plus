@@ -1,11 +1,12 @@
 package org.humingk.movie.mapper;
 
+import java.util.List;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.humingk.movie.entity.Role;
 import org.humingk.movie.entity.RoleExample;
 
-import java.util.List;
-
+@Mapper
 public interface RoleMapper {
     long countByExample(RoleExample example);
 

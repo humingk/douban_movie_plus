@@ -1,11 +1,15 @@
 package org.humingk.movie.entity;
 
-public class AliasCelebrityDouban {
+import java.io.Serializable;
+
+public class AliasCelebrityDouban implements Serializable {
     private Long idCelebrityDouban;
 
     private String nameAlias;
 
     private Boolean isNikename;
+
+    private static final long serialVersionUID = 1L;
 
     public AliasCelebrityDouban(Long idCelebrityDouban, String nameAlias, Boolean isNikename) {
         this.idCelebrityDouban = idCelebrityDouban;
@@ -77,6 +81,7 @@ public class AliasCelebrityDouban {
         sb.append(", idCelebrityDouban=").append(idCelebrityDouban);
         sb.append(", nameAlias=").append(nameAlias);
         sb.append(", isNikename=").append(isNikename);
+        sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();
     }

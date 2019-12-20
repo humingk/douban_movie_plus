@@ -1,6 +1,8 @@
 package org.humingk.movie.entity;
 
-public class CommentNetease {
+import java.io.Serializable;
+
+public class CommentNetease implements Serializable {
     private Long idSongNetease;
 
     private Long id;
@@ -12,6 +14,8 @@ public class CommentNetease {
     private String content;
 
     private Integer agreeVote;
+
+    private static final long serialVersionUID = 1L;
 
     public CommentNetease(Long idSongNetease, Long id, Long idUserNetease, Long createDatetime, String content, Integer agreeVote) {
         this.idSongNetease = idSongNetease;
@@ -119,6 +123,7 @@ public class CommentNetease {
         sb.append(", createDatetime=").append(createDatetime);
         sb.append(", content=").append(content);
         sb.append(", agreeVote=").append(agreeVote);
+        sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();
     }

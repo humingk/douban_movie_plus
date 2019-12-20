@@ -51,7 +51,6 @@ public class AesDecryptAspect {
         Object[] args = joinPoint.getArgs();
         try {
             args[0] = AesUtil.decrypt(args[0].toString());
-            return joinPoint.proceed(args);
         } catch (Exception e) {
             ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
             HttpServletRequest request = attributes.getRequest();
@@ -62,8 +61,10 @@ public class AesDecryptAspect {
                     put("args", joinPoint.getArgs());
                 }
             };
+            log.error(e.getMessage(), e);
             log.warn("decrypt failed:{}", new JSONObject(logMap));
             throw new MyException(StatusAndMessage.BADREQUEST);
         }
+        return joinPoint.proceed(args);
     }
 }

@@ -1,8 +1,9 @@
 package org.humingk.movie.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class PersistentLogins {
+public class PersistentLogins implements Serializable {
     private String series;
 
     private String username;
@@ -10,6 +11,8 @@ public class PersistentLogins {
     private String token;
 
     private Date lastUsed;
+
+    private static final long serialVersionUID = 1L;
 
     public PersistentLogins(String series, String username, String token, Date lastUsed) {
         this.series = series;
@@ -93,6 +96,7 @@ public class PersistentLogins {
         sb.append(", username=").append(username);
         sb.append(", token=").append(token);
         sb.append(", lastUsed=").append(lastUsed);
+        sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();
     }

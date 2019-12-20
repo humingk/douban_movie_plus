@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.humingk.movie.exception.MyException;
 
+import java.io.Serializable;
+
 import static org.humingk.movie.common.StatusAndMessage.*;
 
 /**
@@ -13,7 +15,7 @@ import static org.humingk.movie.common.StatusAndMessage.*;
  */
 @Data
 @AllArgsConstructor
-public class Result {
+public class Result implements Serializable {
     /**
      * 状态码
      */

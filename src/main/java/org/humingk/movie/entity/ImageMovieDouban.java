@@ -1,6 +1,8 @@
 package org.humingk.movie.entity;
 
-public class ImageMovieDouban {
+import java.io.Serializable;
+
+public class ImageMovieDouban implements Serializable {
     private Long id;
 
     private Long idMovieDouban;
@@ -10,6 +12,8 @@ public class ImageMovieDouban {
     private Integer length;
 
     private Integer width;
+
+    private static final long serialVersionUID = 1L;
 
     public ImageMovieDouban(Long id, Long idMovieDouban, Byte sort, Integer length, Integer width) {
         this.id = id;
@@ -105,6 +109,7 @@ public class ImageMovieDouban {
         sb.append(", sort=").append(sort);
         sb.append(", length=").append(length);
         sb.append(", width=").append(width);
+        sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();
     }

@@ -1,6 +1,8 @@
 package org.humingk.movie.entity;
 
-public class PlaylistNetease {
+import java.io.Serializable;
+
+public class PlaylistNetease implements Serializable {
     private Long id;
 
     private String nameZh;
@@ -12,6 +14,8 @@ public class PlaylistNetease {
     private String urlCover;
 
     private String description;
+
+    private static final long serialVersionUID = 1L;
 
     public PlaylistNetease(Long id, String nameZh, Short total, Integer playCount, String urlCover, String description) {
         this.id = id;
@@ -119,6 +123,7 @@ public class PlaylistNetease {
         sb.append(", playCount=").append(playCount);
         sb.append(", urlCover=").append(urlCover);
         sb.append(", description=").append(description);
+        sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();
     }

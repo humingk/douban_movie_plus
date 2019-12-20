@@ -1,10 +1,12 @@
 package org.humingk.movie.mapper;
 
 import java.util.List;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.humingk.movie.entity.TypeMovie;
 import org.humingk.movie.entity.TypeMovieExample;
 
+@Mapper
 public interface TypeMovieMapper {
     long countByExample(TypeMovieExample example);
 

@@ -1,10 +1,12 @@
 package org.humingk.movie.mapper;
 
 import java.util.List;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.humingk.movie.entity.CelebrityScene;
 import org.humingk.movie.entity.CelebritySceneExample;
 
+@Mapper
 public interface CelebritySceneMapper {
     long countByExample(CelebritySceneExample example);
 

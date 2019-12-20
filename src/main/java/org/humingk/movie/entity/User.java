@@ -1,11 +1,15 @@
 package org.humingk.movie.entity;
 
-public class User {
+import java.io.Serializable;
+
+public class User implements Serializable {
     private String id;
 
     private String email;
 
     private String password;
+
+    private static final long serialVersionUID = 1L;
 
     public User(String id, String email, String password) {
         this.id = id;
@@ -77,6 +81,7 @@ public class User {
         sb.append(", id=").append(id);
         sb.append(", email=").append(email);
         sb.append(", password=").append(password);
+        sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();
     }

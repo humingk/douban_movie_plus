@@ -1,9 +1,13 @@
 package org.humingk.movie.entity;
 
-public class RoleToPermission {
+import java.io.Serializable;
+
+public class RoleToPermission implements Serializable {
     private Byte idRole;
 
     private Integer idPermission;
+
+    private static final long serialVersionUID = 1L;
 
     public RoleToPermission(Byte idRole, Integer idPermission) {
         this.idRole = idRole;
@@ -63,6 +67,7 @@ public class RoleToPermission {
         sb.append("Hash = ").append(hashCode());
         sb.append(", idRole=").append(idRole);
         sb.append(", idPermission=").append(idPermission);
+        sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();
     }

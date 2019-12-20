@@ -1,11 +1,15 @@
 package org.humingk.movie.entity;
 
-public class Role {
+import java.io.Serializable;
+
+public class Role implements Serializable {
     private Byte id;
 
     private String nameZh;
 
     private String description;
+
+    private static final long serialVersionUID = 1L;
 
     public Role(Byte id, String nameZh, String description) {
         this.id = id;
@@ -77,6 +81,7 @@ public class Role {
         sb.append(", id=").append(id);
         sb.append(", nameZh=").append(nameZh);
         sb.append(", description=").append(description);
+        sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();
     }

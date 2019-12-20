@@ -1,11 +1,15 @@
 package org.humingk.movie.entity;
 
-public class MovieImdbToCelebrityImdb {
+import java.io.Serializable;
+
+public class MovieImdbToCelebrityImdb implements Serializable {
     private Long idMovieImdb;
 
     private Long idCelebrityImdb;
 
     private Byte idProfession;
+
+    private static final long serialVersionUID = 1L;
 
     public MovieImdbToCelebrityImdb(Long idMovieImdb, Long idCelebrityImdb, Byte idProfession) {
         this.idMovieImdb = idMovieImdb;
@@ -77,6 +81,7 @@ public class MovieImdbToCelebrityImdb {
         sb.append(", idMovieImdb=").append(idMovieImdb);
         sb.append(", idCelebrityImdb=").append(idCelebrityImdb);
         sb.append(", idProfession=").append(idProfession);
+        sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();
     }

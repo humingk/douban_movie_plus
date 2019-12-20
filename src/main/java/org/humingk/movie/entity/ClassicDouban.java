@@ -1,6 +1,8 @@
 package org.humingk.movie.entity;
 
-public class ClassicDouban {
+import java.io.Serializable;
+
+public class ClassicDouban implements Serializable {
     private Long id;
 
     private Long idMovieDouban;
@@ -10,6 +12,8 @@ public class ClassicDouban {
     private Integer happenTime;
 
     private Integer agreeVote;
+
+    private static final long serialVersionUID = 1L;
 
     public ClassicDouban(Long id, Long idMovieDouban, String content, Integer happenTime, Integer agreeVote) {
         this.id = id;
@@ -105,6 +109,7 @@ public class ClassicDouban {
         sb.append(", content=").append(content);
         sb.append(", happenTime=").append(happenTime);
         sb.append(", agreeVote=").append(agreeVote);
+        sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();
     }

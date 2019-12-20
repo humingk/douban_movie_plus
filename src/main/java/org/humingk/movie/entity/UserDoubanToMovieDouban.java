@@ -1,8 +1,9 @@
 package org.humingk.movie.entity;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
-public class UserDoubanToMovieDouban {
+public class UserDoubanToMovieDouban implements Serializable {
     private String idUserDouban;
 
     private Long idMovieDouban;
@@ -12,6 +13,8 @@ public class UserDoubanToMovieDouban {
     private Boolean isWish;
 
     private Boolean isSeen;
+
+    private static final long serialVersionUID = 1L;
 
     public UserDoubanToMovieDouban(String idUserDouban, Long idMovieDouban, BigDecimal score, Boolean isWish, Boolean isSeen) {
         this.idUserDouban = idUserDouban;
@@ -107,6 +110,7 @@ public class UserDoubanToMovieDouban {
         sb.append(", score=").append(score);
         sb.append(", isWish=").append(isWish);
         sb.append(", isSeen=").append(isSeen);
+        sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();
     }

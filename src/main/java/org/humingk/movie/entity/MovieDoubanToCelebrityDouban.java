@@ -1,6 +1,8 @@
 package org.humingk.movie.entity;
 
-public class MovieDoubanToCelebrityDouban {
+import java.io.Serializable;
+
+public class MovieDoubanToCelebrityDouban implements Serializable {
     private Long idMovieDouban;
 
     private Long idCelebrityDouban;
@@ -8,6 +10,8 @@ public class MovieDoubanToCelebrityDouban {
     private Byte idProfession;
 
     private Short sort;
+
+    private static final long serialVersionUID = 1L;
 
     public MovieDoubanToCelebrityDouban(Long idMovieDouban, Long idCelebrityDouban, Byte idProfession, Short sort) {
         this.idMovieDouban = idMovieDouban;
@@ -91,6 +95,7 @@ public class MovieDoubanToCelebrityDouban {
         sb.append(", idCelebrityDouban=").append(idCelebrityDouban);
         sb.append(", idProfession=").append(idProfession);
         sb.append(", sort=").append(sort);
+        sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();
     }

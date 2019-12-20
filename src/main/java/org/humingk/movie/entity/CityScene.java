@@ -1,11 +1,15 @@
 package org.humingk.movie.entity;
 
-public class CityScene {
+import java.io.Serializable;
+
+public class CityScene implements Serializable {
     private Integer id;
 
     private String nameZh;
 
     private String nameEn;
+
+    private static final long serialVersionUID = 1L;
 
     public CityScene(Integer id, String nameZh, String nameEn) {
         this.id = id;
@@ -77,6 +81,7 @@ public class CityScene {
         sb.append(", id=").append(id);
         sb.append(", nameZh=").append(nameZh);
         sb.append(", nameEn=").append(nameEn);
+        sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();
     }

@@ -1,6 +1,8 @@
 package org.humingk.movie.entity;
 
-public class ReviewMovieDouban {
+import java.io.Serializable;
+
+public class ReviewMovieDouban implements Serializable {
     private Long id;
 
     private Integer agreeVote;
@@ -12,6 +14,8 @@ public class ReviewMovieDouban {
     private String title;
 
     private String content;
+
+    private static final long serialVersionUID = 1L;
 
     public ReviewMovieDouban(Long id, Integer agreeVote, Integer againstVote, Long createDatetime, String title) {
         this.id = id;
@@ -127,6 +131,7 @@ public class ReviewMovieDouban {
         sb.append(", createDatetime=").append(createDatetime);
         sb.append(", title=").append(title);
         sb.append(", content=").append(content);
+        sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();
     }

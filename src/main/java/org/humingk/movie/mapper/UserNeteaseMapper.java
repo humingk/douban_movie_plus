@@ -1,10 +1,12 @@
 package org.humingk.movie.mapper;
 
 import java.util.List;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.humingk.movie.entity.UserNetease;
 import org.humingk.movie.entity.UserNeteaseExample;
 
+@Mapper
 public interface UserNeteaseMapper {
     long countByExample(UserNeteaseExample example);
 

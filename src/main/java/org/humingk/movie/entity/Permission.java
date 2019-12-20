@@ -1,6 +1,8 @@
 package org.humingk.movie.entity;
 
-public class Permission {
+import java.io.Serializable;
+
+public class Permission implements Serializable {
     private Integer id;
 
     private String nameZh;
@@ -8,6 +10,8 @@ public class Permission {
     private String pathSrc;
 
     private String description;
+
+    private static final long serialVersionUID = 1L;
 
     public Permission(Integer id, String nameZh, String pathSrc, String description) {
         this.id = id;
@@ -91,6 +95,7 @@ public class Permission {
         sb.append(", nameZh=").append(nameZh);
         sb.append(", pathSrc=").append(pathSrc);
         sb.append(", description=").append(description);
+        sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();
     }

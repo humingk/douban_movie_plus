@@ -1,8 +1,9 @@
 package org.humingk.movie.entity;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
-public class RateImdb {
+public class RateImdb implements Serializable {
     private Long id;
 
     private BigDecimal imdbScore;
@@ -12,6 +13,8 @@ public class RateImdb {
     private BigDecimal tomatoScore;
 
     private BigDecimal mtcScore;
+
+    private static final long serialVersionUID = 1L;
 
     public RateImdb(Long id, BigDecimal imdbScore, Integer imdbVote, BigDecimal tomatoScore, BigDecimal mtcScore) {
         this.id = id;
@@ -107,6 +110,7 @@ public class RateImdb {
         sb.append(", imdbVote=").append(imdbVote);
         sb.append(", tomatoScore=").append(tomatoScore);
         sb.append(", mtcScore=").append(mtcScore);
+        sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();
     }

@@ -7,7 +7,6 @@ import org.springframework.cache.annotation.EnableCaching;
 
 
 @SpringBootApplication
-@MapperScan("org.humingk.movie.mapper")
 public class MovieApplication {
 
     public static void main(String[] args) {

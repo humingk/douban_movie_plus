@@ -1,8 +1,9 @@
 package org.humingk.movie.entity;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
-public class PlaceScene {
+public class PlaceScene implements Serializable {
     private Long id;
 
     private Byte idContinentScene;
@@ -44,6 +45,8 @@ public class PlaceScene {
     private String urlSatellite;
 
     private String urlMap;
+
+    private static final long serialVersionUID = 1L;
 
     public PlaceScene(Long id, Byte idContinentScene, Short idCountryScene, Integer idStateScene, Integer idCityScene, BigDecimal longitude, BigDecimal latitude, String nameZh, String nameEn, String nameOther, String alias, String addressZh, String addressEn, String description, String areaZh, String areaEn, String phone, String urlPoster, String urlEarth, String urlSatellite, String urlMap) {
         this.id = id;
@@ -331,6 +334,7 @@ public class PlaceScene {
         sb.append(", urlEarth=").append(urlEarth);
         sb.append(", urlSatellite=").append(urlSatellite);
         sb.append(", urlMap=").append(urlMap);
+        sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();
     }

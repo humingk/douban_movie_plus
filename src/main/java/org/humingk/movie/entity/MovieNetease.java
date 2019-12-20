@@ -1,6 +1,8 @@
 package org.humingk.movie.entity;
 
-public class MovieNetease {
+import java.io.Serializable;
+
+public class MovieNetease implements Serializable {
     private Long idMovieDouban;
 
     private Long idNetease;
@@ -8,6 +10,8 @@ public class MovieNetease {
     private Byte neteaseType;
 
     private Byte sort;
+
+    private static final long serialVersionUID = 1L;
 
     public MovieNetease(Long idMovieDouban, Long idNetease, Byte neteaseType, Byte sort) {
         this.idMovieDouban = idMovieDouban;
@@ -91,6 +95,7 @@ public class MovieNetease {
         sb.append(", idNetease=").append(idNetease);
         sb.append(", neteaseType=").append(neteaseType);
         sb.append(", sort=").append(sort);
+        sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();
     }

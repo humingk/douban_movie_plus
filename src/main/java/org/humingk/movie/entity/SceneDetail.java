@@ -1,6 +1,8 @@
 package org.humingk.movie.entity;
 
-public class SceneDetail {
+import java.io.Serializable;
+
+public class SceneDetail implements Serializable {
     private Long id;
 
     private Long idScene;
@@ -10,6 +12,8 @@ public class SceneDetail {
     private Integer happenTime;
 
     private String description;
+
+    private static final long serialVersionUID = 1L;
 
     public SceneDetail(Long id, Long idScene, Long idMovieScene, Integer happenTime, String description) {
         this.id = id;
@@ -105,6 +109,7 @@ public class SceneDetail {
         sb.append(", idMovieScene=").append(idMovieScene);
         sb.append(", happenTime=").append(happenTime);
         sb.append(", description=").append(description);
+        sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();
     }

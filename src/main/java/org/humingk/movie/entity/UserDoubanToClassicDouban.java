@@ -1,6 +1,8 @@
 package org.humingk.movie.entity;
 
-public class UserDoubanToClassicDouban {
+import java.io.Serializable;
+
+public class UserDoubanToClassicDouban implements Serializable {
     private String idUserDouban;
 
     private Long idClassicDouban;
@@ -8,6 +10,8 @@ public class UserDoubanToClassicDouban {
     private Long recordDatetime;
 
     private String description;
+
+    private static final long serialVersionUID = 1L;
 
     public UserDoubanToClassicDouban(String idUserDouban, Long idClassicDouban, Long recordDatetime, String description) {
         this.idUserDouban = idUserDouban;
@@ -91,6 +95,7 @@ public class UserDoubanToClassicDouban {
         sb.append(", idClassicDouban=").append(idClassicDouban);
         sb.append(", recordDatetime=").append(recordDatetime);
         sb.append(", description=").append(description);
+        sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();
     }

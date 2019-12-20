@@ -1,10 +1,12 @@
 package org.humingk.movie.mapper;
 
 import java.util.List;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.humingk.movie.entity.SceneDetail;
 import org.humingk.movie.entity.SceneDetailExample;
 
+@Mapper
 public interface SceneDetailMapper {
     long countByExample(SceneDetailExample example);
 

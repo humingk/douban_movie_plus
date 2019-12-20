@@ -1,10 +1,12 @@
 package org.humingk.movie.mapper;
 
 import java.util.List;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.humingk.movie.entity.UserDoubanToReviewMovieDouban;
 import org.humingk.movie.entity.UserDoubanToReviewMovieDoubanExample;
 
+@Mapper
 public interface UserDoubanToReviewMovieDoubanMapper {
     long countByExample(UserDoubanToReviewMovieDoubanExample example);
 

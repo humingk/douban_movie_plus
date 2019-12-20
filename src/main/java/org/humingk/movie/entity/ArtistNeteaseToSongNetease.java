@@ -1,9 +1,13 @@
 package org.humingk.movie.entity;
 
-public class ArtistNeteaseToSongNetease {
+import java.io.Serializable;
+
+public class ArtistNeteaseToSongNetease implements Serializable {
     private Long idArtistNetease;
 
     private Long idSongNetease;
+
+    private static final long serialVersionUID = 1L;
 
     public ArtistNeteaseToSongNetease(Long idArtistNetease, Long idSongNetease) {
         this.idArtistNetease = idArtistNetease;
@@ -63,6 +67,7 @@ public class ArtistNeteaseToSongNetease {
         sb.append("Hash = ").append(hashCode());
         sb.append(", idArtistNetease=").append(idArtistNetease);
         sb.append(", idSongNetease=").append(idSongNetease);
+        sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();
     }

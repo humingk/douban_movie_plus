@@ -48,16 +48,7 @@ public enum StatusAndMessage {
      */
     EXAMPLE(0, "example");
 
-    private final int status;
-    private final String message;
-
-    public int status() {
-        return status;
-    }
-
-    public string message() {
-        return message;
-    }
-
+    public final int status;
+    public final String message;
 
 }

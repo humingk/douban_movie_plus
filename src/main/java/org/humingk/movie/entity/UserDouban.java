@@ -1,9 +1,13 @@
 package org.humingk.movie.entity;
 
-public class UserDouban {
+import java.io.Serializable;
+
+public class UserDouban implements Serializable {
     private String id;
 
     private String nameZh;
+
+    private static final long serialVersionUID = 1L;
 
     public UserDouban(String id, String nameZh) {
         this.id = id;
@@ -63,6 +67,7 @@ public class UserDouban {
         sb.append("Hash = ").append(hashCode());
         sb.append(", id=").append(id);
         sb.append(", nameZh=").append(nameZh);
+        sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();
     }

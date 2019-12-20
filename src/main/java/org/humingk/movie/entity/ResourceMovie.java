@@ -1,6 +1,8 @@
 package org.humingk.movie.entity;
 
-public class ResourceMovie {
+import java.io.Serializable;
+
+public class ResourceMovie implements Serializable {
     private Long id;
 
     private Long idMovieDouban;
@@ -18,6 +20,8 @@ public class ResourceMovie {
     private String nameOrigin;
 
     private String urlResource;
+
+    private static final long serialVersionUID = 1L;
 
     public ResourceMovie(Long id, Long idMovieDouban, Long idMovieImdb, Short idWebsiteResource, Short idTypeResource, String nameZh, Short createYear, String nameOrigin, String urlResource) {
         this.id = id;
@@ -161,6 +165,7 @@ public class ResourceMovie {
         sb.append(", createYear=").append(createYear);
         sb.append(", nameOrigin=").append(nameOrigin);
         sb.append(", urlResource=").append(urlResource);
+        sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();
     }

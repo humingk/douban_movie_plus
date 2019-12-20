@@ -1,9 +1,13 @@
 package org.humingk.movie.entity;
 
-public class TagMovie {
+import java.io.Serializable;
+
+public class TagMovie implements Serializable {
     private Long idMovieDouban;
 
     private String nameZh;
+
+    private static final long serialVersionUID = 1L;
 
     public TagMovie(Long idMovieDouban, String nameZh) {
         this.idMovieDouban = idMovieDouban;
@@ -63,6 +67,7 @@ public class TagMovie {
         sb.append("Hash = ").append(hashCode());
         sb.append(", idMovieDouban=").append(idMovieDouban);
         sb.append(", nameZh=").append(nameZh);
+        sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();
     }

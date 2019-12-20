@@ -1,6 +1,8 @@
 package org.humingk.movie.entity;
 
-public class QuestionZhihu {
+import java.io.Serializable;
+
+public class QuestionZhihu implements Serializable {
     private Long id;
 
     private Long idMovieDouban;
@@ -8,6 +10,8 @@ public class QuestionZhihu {
     private String nameZh;
 
     private Integer answerNum;
+
+    private static final long serialVersionUID = 1L;
 
     public QuestionZhihu(Long id, Long idMovieDouban, String nameZh, Integer answerNum) {
         this.id = id;
@@ -91,6 +95,7 @@ public class QuestionZhihu {
         sb.append(", idMovieDouban=").append(idMovieDouban);
         sb.append(", nameZh=").append(nameZh);
         sb.append(", answerNum=").append(answerNum);
+        sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();
     }

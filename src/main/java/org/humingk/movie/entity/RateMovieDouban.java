@@ -1,8 +1,9 @@
 package org.humingk.movie.entity;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
-public class RateMovieDouban {
+public class RateMovieDouban implements Serializable {
     private Long id;
 
     private BigDecimal score;
@@ -18,6 +19,8 @@ public class RateMovieDouban {
     private BigDecimal score2;
 
     private BigDecimal score1;
+
+    private static final long serialVersionUID = 1L;
 
     public RateMovieDouban(Long id, BigDecimal score, Integer vote, BigDecimal score5, BigDecimal score4, BigDecimal score3, BigDecimal score2, BigDecimal score1) {
         this.id = id;
@@ -149,6 +152,7 @@ public class RateMovieDouban {
         sb.append(", score3=").append(score3);
         sb.append(", score2=").append(score2);
         sb.append(", score1=").append(score1);
+        sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();
     }

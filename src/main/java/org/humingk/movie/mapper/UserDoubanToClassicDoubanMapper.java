@@ -1,10 +1,12 @@
 package org.humingk.movie.mapper;
 
 import java.util.List;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.humingk.movie.entity.UserDoubanToClassicDouban;
 import org.humingk.movie.entity.UserDoubanToClassicDoubanExample;
 
+@Mapper
 public interface UserDoubanToClassicDoubanMapper {
     long countByExample(UserDoubanToClassicDoubanExample example);
 

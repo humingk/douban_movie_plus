@@ -1,11 +1,15 @@
 package org.humingk.movie.entity;
 
-public class WebsiteResource {
+import java.io.Serializable;
+
+public class WebsiteResource implements Serializable {
     private Short id;
 
     private String nameZh;
 
     private String websiteSrc;
+
+    private static final long serialVersionUID = 1L;
 
     public WebsiteResource(Short id, String nameZh, String websiteSrc) {
         this.id = id;
@@ -77,6 +81,7 @@ public class WebsiteResource {
         sb.append(", id=").append(id);
         sb.append(", nameZh=").append(nameZh);
         sb.append(", websiteSrc=").append(websiteSrc);
+        sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();
     }

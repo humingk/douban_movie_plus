@@ -1,6 +1,8 @@
 package org.humingk.movie.entity;
 
-public class MovieDouban {
+import java.io.Serializable;
+
+public class MovieDouban implements Serializable {
     private Long id;
 
     private Byte idTypeVideo;
@@ -26,6 +28,8 @@ public class MovieDouban {
     private Boolean isZhihu;
 
     private String summary;
+
+    private static final long serialVersionUID = 1L;
 
     public MovieDouban(Long id, Byte idTypeVideo, Long idMovieImdb, Short startYear, String nameZh, String nameOrigin, Short runtime, Long urlPoster, Integer haveSeen, Integer wannaSee, Boolean isNetease, Boolean isZhihu) {
         this.id = id;
@@ -232,6 +236,7 @@ public class MovieDouban {
         sb.append(", isNetease=").append(isNetease);
         sb.append(", isZhihu=").append(isZhihu);
         sb.append(", summary=").append(summary);
+        sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();
     }

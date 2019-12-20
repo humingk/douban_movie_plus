@@ -1,9 +1,13 @@
 package org.humingk.movie.entity;
 
-public class SceneDetailToCelebrityScene {
+import java.io.Serializable;
+
+public class SceneDetailToCelebrityScene implements Serializable {
     private Long idSceneDetail;
 
     private Long idCelebrityScene;
+
+    private static final long serialVersionUID = 1L;
 
     public SceneDetailToCelebrityScene(Long idSceneDetail, Long idCelebrityScene) {
         this.idSceneDetail = idSceneDetail;
@@ -63,6 +67,7 @@ public class SceneDetailToCelebrityScene {
         sb.append("Hash = ").append(hashCode());
         sb.append(", idSceneDetail=").append(idSceneDetail);
         sb.append(", idCelebrityScene=").append(idCelebrityScene);
+        sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();
     }

@@ -1,9 +1,13 @@
 package org.humingk.movie.entity;
 
-public class MovieDoubanToTypeMovie {
+import java.io.Serializable;
+
+public class MovieDoubanToTypeMovie implements Serializable {
     private Long idMovieDouban;
 
     private Short idTypeMovie;
+
+    private static final long serialVersionUID = 1L;
 
     public MovieDoubanToTypeMovie(Long idMovieDouban, Short idTypeMovie) {
         this.idMovieDouban = idMovieDouban;
@@ -63,6 +67,7 @@ public class MovieDoubanToTypeMovie {
         sb.append("Hash = ").append(hashCode());
         sb.append(", idMovieDouban=").append(idMovieDouban);
         sb.append(", idTypeMovie=").append(idTypeMovie);
+        sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();
     }
