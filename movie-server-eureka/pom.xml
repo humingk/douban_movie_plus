@@ -14,26 +14,12 @@
     <name>movie-server-eureka</name>
     <description>eureka for movie</description>
 
-    <properties>
-        <java.version>1.8</java.version>
-    </properties>
 
     <dependencies>
         <!--spring cloud eureka服务注册-->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>
-            <version>${eureka.version}</version>
         </dependency>
     </dependencies>
-
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
-        </plugins>
-    </build>
-
 </project>

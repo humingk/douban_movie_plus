@@ -2,7 +2,7 @@ server:
   port: 8762
 spring:
   application:
-    name: movie-user-service
+    name: movie-service-user
 eureka:
   client:
     service-url:

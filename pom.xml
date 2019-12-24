@@ -43,123 +43,156 @@
     <!--子模块-->
     <modules>
         <module>movie-server-eureka</module>
+        <module>movie-service-common</module>
         <module>movie-service-user</module>
     </modules>
     <!--版本集合 -->
     <properties>
         <java.version>1.8</java.version>
-        <mybatis.spring.boot.version>2.1.1</mybatis.spring.boot.version>
-        <pagehelper.starter.version>1.2.13</pagehelper.starter.version>
-        <mybatis.generator.version>1.3.7</mybatis.generator.version>
+        <!--        spring boot starter -->
+        <spring-boot-starter-web.version>2.2.2.RELEASE</spring-boot-starter-web.version>
+        <spring-boot-starter-aop.version>2.2.2.RELEASE</spring-boot-starter-aop.version>
+        <spring-boot-starter-security.version>2.2.2.RELEASE</spring-boot-starter-security.version>
+        <spring-boot-starter-test.version>2.2.2.RELEASE</spring-boot-starter-test.version>
+        <spring-boot-starter-data-redis.version>2.2.2.RELEASE</spring-boot-starter-data-redis.version>
+        <mybatis-spring-boot-starter.version>2.1.1</mybatis-spring-boot-starter.version>
+        <pagehelper-spring-boot-starter.version>1.2.13</pagehelper-spring-boot-starter.version>
+
+        <!--        spring cloud starter -->
+        <spring-cloud-dependencies.version>Hoxton.RELEASE</spring-cloud-dependencies.version>
+        <spring-cloud-starter-netflix-eureka-client.version>2.2.1.RELEASE
+        </spring-cloud-starter-netflix-eureka-client.version>
+        <spring-cloud-starter-netflix-eureka-server.version>2.2.1.RELEASE
+        </spring-cloud-starter-netflix-eureka-server.version>
+
+        <!--        tools-->
+        <mybatis-generator-maven-plugin.version>1.3.7</mybatis-generator-maven-plugin.version>
         <mysql-connector-java.version>8.0.18</mysql-connector-java.version>
-        <test.version>2.2.2.RELEASE</test.version>
-        <projectlombok.version>1.18.10</projectlombok.version>
+        <lombok.version>1.18.10</lombok.version>
         <fastjson.version>1.2.62</fastjson.version>
         <jjwt.version>0.9.1</jjwt.version>
         <commons-lang3.version>3.9</commons-lang3.version>
         <commons-pool2.version>2.7.0</commons-pool2.version>
         <guava.version>28.1-jre</guava.version>
-        <cloud.version>Finchley.RELEASE</cloud.version>
-        <eureka.version>2.2.1.RELEASE</eureka.version>
+
     </properties>
-    <!--    依赖(自身及子模块调用)-->
+    <!--依赖(子模块会继承)-->
     <dependencies>
-        <!--                mybatis-->
-        <dependency>
-            <groupId>org.mybatis.spring.boot</groupId>
-            <artifactId>mybatis-spring-boot-starter</artifactId>
-            <version>${mybatis.spring.boot.version}</version>
-        </dependency>
-        <!--        web-->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
-        <!--mysql 驱动-->
-        <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <scope>runtime</scope>
-        </dependency>
         <!--测试 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
-            <version>${test.version}</version>
-        </dependency>
-        <!--spring security-->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-security</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.security</groupId>
-            <artifactId>spring-security-test</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <!--jjwt-->
-        <dependency>
-            <groupId>io.jsonwebtoken</groupId>
-            <artifactId>jjwt</artifactId>
-            <version>${jjwt.version}</version>
-        </dependency>
-        <!--mybatis generator page helper 分页插件-->
-        <dependency>
-            <groupId>com.github.pagehelper</groupId>
-            <artifactId>pagehelper-spring-boot-starter</artifactId>
-            <version>${pagehelper.starter.version}</version>
-        </dependency>
-        <!--aop -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-aop</artifactId>
-        </dependency>
-        <!--lombok工具-->
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <version>${projectlombok.version}</version>
-            <scope>provided</scope>
-        </dependency>
-        <!--fastjson-->
-        <dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>fastjson</artifactId>
-            <version>${fastjson.version}</version>
-        </dependency>
-        <!--lang3-->
-        <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-lang3</artifactId>
-            <version>${commons-lang3.version}</version>
-        </dependency>
-        <!--redis-->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-redis</artifactId>
-        </dependency>
-        <!--lang2-->
-        <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-pool2</artifactId>
-            <version>${commons-pool2.version}</version>
-        </dependency>
-        <!--google  guava-->
-        <dependency>
-            <groupId>com.google.guava</groupId>
-            <artifactId>guava</artifactId>
-            <version>${guava.version}</version>
-        </dependency>
-        <!--                    spring cloud-->
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-dependencies</artifactId>
-            <version>${cloud.version}</version>
-            <type>pom</type>
-            <scope>import</scope>
+            <version>${spring-boot-starter-test.version}</version>
         </dependency>
     </dependencies>
+
+    <!--    依赖管理(子模块需要显式继承)-->
+    <dependencyManagement>
+        <dependencies>
+            <!--                mybatis-->
+            <dependency>
+                <groupId>org.mybatis.spring.boot</groupId>
+                <artifactId>mybatis-spring-boot-starter</artifactId>
+                <version>${mybatis-spring-boot-starter.version}</version>
+            </dependency>
+            <!--        web-->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-web</artifactId>
+                <version>${spring-boot-starter-web.version}</version>
+            </dependency>
+            <!--mysql 驱动-->
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <scope>runtime</scope>
+                <version>${mysql-connector-java.version}</version>
+            </dependency>
+
+            <!--spring security-->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-security</artifactId>
+                <version>${spring-boot-starter-security.version}</version>
+            </dependency>
+            <!--jjwt-->
+            <dependency>
+                <groupId>io.jsonwebtoken</groupId>
+                <artifactId>jjwt</artifactId>
+                <version>${jjwt.version}</version>
+            </dependency>
+            <!--mybatis generator page helper 分页插件-->
+            <dependency>
+                <groupId>com.github.pagehelper</groupId>
+                <artifactId>pagehelper-spring-boot-starter</artifactId>
+                <version>${pagehelper-spring-boot-starter.version}</version>
+            </dependency>
+            <!--aop -->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-aop</artifactId>
+                <version>${spring-boot-starter-aop.version}</version>
+            </dependency>
+            <!--lombok工具-->
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${lombok.version}</version>
+                <scope>provided</scope>
+            </dependency>
+            <!--fastjson-->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>fastjson</artifactId>
+                <version>${fastjson.version}</version>
+            </dependency>
+            <!--lang3-->
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-lang3</artifactId>
+                <version>${commons-lang3.version}</version>
+            </dependency>
+            <!--redis-->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-data-redis</artifactId>
+                <version>${spring-boot-starter-data-redis.version}</version>
+            </dependency>
+            <!--lang2-->
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-pool2</artifactId>
+                <version>${commons-pool2.version}</version>
+            </dependency>
+            <!--google  guava-->
+            <dependency>
+                <groupId>com.google.guava</groupId>
+                <artifactId>guava</artifactId>
+                <version>${guava.version}</version>
+            </dependency>
+            <!--                    spring cloud-->
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud-dependencies.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <!--        eureka client-->
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+                <version>${spring-cloud-starter-netflix-eureka-client.version}</version>
+            </dependency>
+            <!--spring cloud eureka服务注册-->
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>
+                <version>${spring-cloud-starter-netflix-eureka-server.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
     <build>
         <!--插件-->
@@ -174,7 +207,7 @@
             <plugin>
                 <groupId>org.mybatis.generator</groupId>
                 <artifactId>mybatis-generator-maven-plugin</artifactId>
-                <version>${mybatis.generator.version}</version>
+                <version>${mybatis-generator-maven-plugin.version}</version>
                 <configuration>
                     <!--mybatis的代码生成器的配置文件-->
                     <configurationFile>src/main/resources/mybatis/generatorConfig.xml</configurationFile>
