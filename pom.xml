@@ -2,7 +2,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <!--    阿里源-->
+    <!--阿里源-->
     <repositories>
         <repository>
             <id>alimaven</id>
@@ -26,9 +26,9 @@
     <groupId>org.humingk</groupId>
     <artifactId>movie</artifactId>
     <version>2.1</version>
-    <!--    父依赖的打包类型为pom(其他默认为jar)-->
-    <!--    jar:    内部调用,服务-->
-    <!--    war:    需要部署的项目-->
+    <!--父依赖的打包类型为pom(其他默认为jar)-->
+    <!--jar:    内部调用,服务-->
+    <!--war:    需要部署的项目-->
     <packaging>pom</packaging>
     <name>movie</name>
     <description>douban movie plus</description>
@@ -45,11 +45,14 @@
         <module>movie-server-eureka</module>
         <module>movie-service-common</module>
         <module>movie-service-user</module>
+        <module>movie-service-zuul</module>
+        <module>movie-config-server</module>
+        <module>movie-config-client</module>
     </modules>
     <!--版本集合 -->
     <properties>
         <java.version>1.8</java.version>
-        <!--        spring boot starter -->
+        <!--spring boot starter -->
         <spring-boot-starter-web.version>2.2.2.RELEASE</spring-boot-starter-web.version>
         <spring-boot-starter-aop.version>2.2.2.RELEASE</spring-boot-starter-aop.version>
         <spring-boot-starter-security.version>2.2.2.RELEASE</spring-boot-starter-security.version>
@@ -58,14 +61,17 @@
         <mybatis-spring-boot-starter.version>2.1.1</mybatis-spring-boot-starter.version>
         <pagehelper-spring-boot-starter.version>1.2.13</pagehelper-spring-boot-starter.version>
 
-        <!--        spring cloud starter -->
+        <!--spring cloud starter -->
         <spring-cloud-dependencies.version>Hoxton.RELEASE</spring-cloud-dependencies.version>
         <spring-cloud-starter-netflix-eureka-client.version>2.2.1.RELEASE
         </spring-cloud-starter-netflix-eureka-client.version>
         <spring-cloud-starter-netflix-eureka-server.version>2.2.1.RELEASE
         </spring-cloud-starter-netflix-eureka-server.version>
+        <spring-cloud-starter-netflix-zuul.version>2.2.1.RELEASE</spring-cloud-starter-netflix-zuul.version>
+        <spring-cloud-config-server.version>2.2.1.RELEASE</spring-cloud-config-server.version>
+        <spring-cloud-starter-config.version>2.2.1.RELEASE</spring-cloud-starter-config.version>
 
-        <!--        tools-->
+        <!--tools-->
         <mybatis-generator-maven-plugin.version>1.3.7</mybatis-generator-maven-plugin.version>
         <mysql-connector-java.version>8.0.18</mysql-connector-java.version>
         <lombok.version>1.18.10</lombok.version>
@@ -78,6 +84,12 @@
     </properties>
     <!--依赖(子模块会继承)-->
     <dependencies>
+        <!--web-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+            <version>${spring-boot-starter-web.version}</version>
+        </dependency>
         <!--测试 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -87,20 +99,14 @@
         </dependency>
     </dependencies>
 
-    <!--    依赖管理(子模块需要显式继承)-->
+    <!--依赖管理(子模块需要显式继承)-->
     <dependencyManagement>
         <dependencies>
-            <!--                mybatis-->
+            <!--mybatis-->
             <dependency>
                 <groupId>org.mybatis.spring.boot</groupId>
                 <artifactId>mybatis-spring-boot-starter</artifactId>
                 <version>${mybatis-spring-boot-starter.version}</version>
-            </dependency>
-            <!--        web-->
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-starter-web</artifactId>
-                <version>${spring-boot-starter-web.version}</version>
             </dependency>
             <!--mysql 驱动-->
             <dependency>
@@ -109,7 +115,6 @@
                 <scope>runtime</scope>
                 <version>${mysql-connector-java.version}</version>
             </dependency>
-
             <!--spring security-->
             <dependency>
                 <groupId>org.springframework.boot</groupId>
@@ -159,7 +164,7 @@
                 <artifactId>spring-boot-starter-data-redis</artifactId>
                 <version>${spring-boot-starter-data-redis.version}</version>
             </dependency>
-            <!--lang2-->
+            <!--pool2-->
             <dependency>
                 <groupId>org.apache.commons</groupId>
                 <artifactId>commons-pool2</artifactId>
@@ -171,7 +176,7 @@
                 <artifactId>guava</artifactId>
                 <version>${guava.version}</version>
             </dependency>
-            <!--                    spring cloud-->
+            <!--spring cloud dependencies-->
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-dependencies</artifactId>
@@ -179,17 +184,35 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
-            <!--        eureka client-->
+            <!--eureka client-->
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
                 <version>${spring-cloud-starter-netflix-eureka-client.version}</version>
             </dependency>
-            <!--spring cloud eureka服务注册-->
+            <!--eureka server-->
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>
                 <version>${spring-cloud-starter-netflix-eureka-server.version}</version>
+            </dependency>
+            <!--zuul-->
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-starter-netflix-zuul</artifactId>
+                <version>${spring-cloud-starter-netflix-zuul.version}</version>
+            </dependency>
+            <!--            spring cloud config server-->
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-config-server</artifactId>
+                <version>${spring-cloud-config-server.version}</version>
+            </dependency>
+            <!--        spring cloud config client-->
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-starter-config</artifactId>
+                <version>${spring-cloud-starter-config.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
@@ -227,24 +250,4 @@
             </plugin>
         </plugins>
     </build>
-
-    <profiles>
-        <!--开发环境-->
-        <profile>
-            <id>dev</id>
-            <properties>
-                <profileActive>dev</profileActive>
-            </properties>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
-        </profile>
-        <!--生产环境-->
-        <profile>
-            <id>pro</id>
-            <properties>
-                <profileActive>pro</profileActive>
-            </properties>
-        </profile>
-    </profiles>
 </project>

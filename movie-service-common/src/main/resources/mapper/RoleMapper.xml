@@ -183,7 +183,7 @@
 
 
 
-  <!--  -->
+  <!---->
 
 
   <select id="selectRoleListByUserId" parameterType="java.lang.String" resultMap="BaseResultMap">

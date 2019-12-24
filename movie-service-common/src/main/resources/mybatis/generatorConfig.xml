@@ -7,11 +7,11 @@
 
     <properties resource="mybatis/mybatis-generator.properties"/>
 
-    <!-- 一个数据库一个context,context的子元素必须按照它给出的顺序
+    <!--一个数据库一个context,context的子元素必须按照它给出的顺序
     property*,plugin*,commentGenerator?,jdbcConnection,javaTypeResolver?,
     javaModelGenerator,sqlMapGenerator?,javaClientGenerator?,table+ -->
 
-    <!-- defaultModelType:指定生成对象的样式
+    <!--defaultModelType:指定生成对象的样式
     1，conditional：类似hierarchical；
     2，flat：所有内容（主键，blob）等全部生成在一个对象中；
     3，hierarchical：主键生成一个XXKey对象(key class)，Blob等单独生成一个对象，其他简单属性在一个对象中(record class)
@@ -20,49 +20,49 @@
     2，MyBatis3Simple：类似MyBatis3，只是不生成XXXBySample；-->
     <context id="default" targetRuntime="MyBatis3" defaultModelType="flat">
 
-        <!-- 自动识别数据库关键字，默认false，如果设置为true，根据SqlReservedWords中定义的关键字列表；
+        <!--自动识别数据库关键字，默认false，如果设置为true，根据SqlReservedWords中定义的关键字列表；
     一般保留默认值，遇到数据库关键字（Java关键字），使用columnOverride覆盖-->
         <property name="autoDelimitKeywords" value="false"/>
 
-        <!-- 生成的Java文件的编码 -->
+        <!--生成的Java文件的编码 -->
         <property name="javaFileEncoding" value="UTF-8"/>
 
-        <!-- 格式化java代码 -->
+        <!--格式化java代码 -->
         <property name="javaFormatter" value="org.mybatis.generator.api.dom.DefaultJavaFormatter"/>
 
-        <!-- 格式化XML代码 -->
+        <!--格式化XML代码 -->
         <property name="xmlFormatter" value="org.mybatis.generator.api.dom.DefaultXmlFormatter"/>
 
-        <!-- beginningDelimiter和endingDelimiter：指明数据库的用于标记数据库对象名的符号，比如ORACLE就是双引号，MYSQL默认是`反引号； -->
+        <!--beginningDelimiter和endingDelimiter：指明数据库的用于标记数据库对象名的符号，比如ORACLE就是双引号，MYSQL默认是`反引号； -->
         <property name="beginningDelimiter" value="`"/>
         <property name="endingDelimiter" value="`"/>
 
-        <!-- 这个插件给生成的Java模型对象增加了equals和hashCode方法 -->
+        <!--这个插件给生成的Java模型对象增加了equals和hashCode方法 -->
         <plugin type="org.mybatis.generator.plugins.EqualsHashCodePlugin"/>
 
-        <!--        实体类实现序列化接口-->
+        <!--实体类实现序列化接口-->
         <plugin type="org.mybatis.generator.plugins.SerializablePlugin"/>
 
-        <!--        mapper注解-->
+        <!--mapper注解-->
         <plugin type="org.mybatis.generator.plugins.MapperAnnotationPlugin"/>
 
         <!--生成mapper.xml时覆盖原文件-->
         <plugin type="org.mybatis.generator.plugins.UnmergeableXmlMappersPlugin"/>
 
-        <!-- toString -->
+        <!--toString -->
         <plugin type="org.mybatis.generator.plugins.ToStringPlugin"/>
 
-        <!-- 分页插件 -->
-        <!--        该插件在内存中分页,影响性能,采用 PageHelper 分页插件-->
-        <!-- https://github.com/pagehelper/Mybatis-PageHelper -->
-        <!--        <plugin type="org.mybatis.generator.plugins.RowBoundsPlugin" />-->
+        <!--分页插件 -->
+        <!--该插件在内存中分页,影响性能,采用 PageHelper 分页插件-->
+        <!--https://github.com/pagehelper/Mybatis-PageHelper -->
+        <!--<plugin type="org.mybatis.generator.plugins.RowBoundsPlugin" />-->
 
         <commentGenerator>
-            <!-- 是否去除自动生成的注释 true：是 ： false:否 -->
+            <!--是否去除自动生成的注释 true：是 ： false:否 -->
             <property name="suppressAllComments" value="true"/>
-            <!-- 注释中是否去除时间戳 -->
+            <!--注释中是否去除时间戳 -->
             <property name="suppressDate" value="true"/>
-            <!-- 添加表中字段的注释，只有suppressAllComments为false时才生效-->
+            <!--添加表中字段的注释，只有suppressAllComments为false时才生效-->
             <property name="addRemarkComments" value="true"/>
             <property name="javaFileEncoding" value="utf-8"/>
         </commentGenerator>
@@ -81,13 +81,12 @@
             <property name="nullCatalogMeansCurrent" value="true"/>
         </jdbcConnection>
 
-        <!-- java类型处理器
+        <!--java类型处理器
             用于处理DB中的类型到Java中的类型，默认使用JavaTypeResolverDefaultImpl；
             注意一点，默认会先尝试使用Integer，Long，Short等来对应DECIMAL和 NUMERIC数据类型；
         -->
         <javaTypeResolver type="org.mybatis.generator.internal.types.JavaTypeResolverDefaultImpl">
-            <!--
-                true：使用BigDecimal对应DECIMAL和 NUMERIC数据类型
+            <!--true：使用BigDecimal对应DECIMAL和 NUMERIC数据类型
                 false：默认,
                     scale>0;length>18：使用BigDecimal;
                     scale=0;length[10,18]：使用Long；
@@ -104,31 +103,31 @@
         TIME_WITH_TIMEZONE  	-> java.time.OffsetTime
         TIMESTAMP_WITH_TIMEZONE	-> java.time.OffsetDateTime
     -->
-            <!--            <property name="useJSR310Types" value="false"/>-->
+            <!--<property name="useJSR310Types" value="false"/>-->
 
         </javaTypeResolver>
 
-        <!-- java模型创建器
+        <!--java模型创建器
             负责：1，key类（见context的defaultModelType）；2，java类；3，查询类
             targetPackage：生成的类要放的包，真实的包受enableSubPackages属性控制；
             targetProject：目标项目，指定一个存在的目录下，生成的内容会放到指定目录中，如果目录不存在，MBG不会自动建目录
          -->
         <javaModelGenerator targetPackage="${config.path.entity}" targetProject="${config.path.java}">
 
-            <!-- 在targetPackage的基础上，根据数据库的schema再生成一层package，最终生成的类放在这个package下，默认为false -->
+            <!--在targetPackage的基础上，根据数据库的schema再生成一层package，最终生成的类放在这个package下，默认为false -->
             <property name="enableSubPackages" value="false"/>
 
-            <!--  for MyBatis3/MyBatis3Simple
+            <!--for MyBatis3/MyBatis3Simple
                 自动为每一个生成的类创建一个构造方法，构造方法包含了所有的field；而不是使用setter；-->
             <property name="constructorBased" value="true"/>
 
-            <!-- 设置是否在getter方法中，对String类型字段调用trim()方法 -->
+            <!--设置是否在getter方法中，对String类型字段调用trim()方法 -->
             <property name="trimStrings" value="true"/>
 
-            <!-- 建立的Model对象是否 不可改变  即生成的Model对象不会有 setter方法，只有构造方法 -->
+            <!--建立的Model对象是否 不可改变  即生成的Model对象不会有 setter方法，只有构造方法 -->
             <property name="immutable" value="false"/>
 
-            <!-- 设置一个根对象，
+            <!--设置一个根对象，
             如果设置了这个根对象，那么生成的keyClass或者recordClass会继承这个类；在Table的rootClass属性中可以覆盖该选项
             注意：如果在key class或者record class中有root class相同的属性，MBG就不会重新生成这些属性了，包括：
                 1，属性名相同，类型相同，有相同的getter/setter方法；-->
@@ -138,11 +137,11 @@
 
         <!--Mapper映射文件生成所在的目录 为每一个数据库的表生成对应的SqlMap文件 -->
         <sqlMapGenerator targetPackage="${config.path.mapper.resources}" targetProject="${config.path.resources}">
-            <!-- 是否允许子包，即targetPackage.schemaName.tableName -->
+            <!--是否允许子包，即targetPackage.schemaName.tableName -->
             <property name="enableSubPackages" value="false"/>
         </sqlMapGenerator>
 
-        <!-- 对于mybatis来说，即生成Mapper接口，注意，如果没有配置该元素，那么默认不会生成Mapper接口
+        <!--对于mybatis来说，即生成Mapper接口，注意，如果没有配置该元素，那么默认不会生成Mapper接口
             targetPackage/targetProject:同javaModelGenerator
             type：选择怎么生成mapper接口（在MyBatis3/MyBatis3Simple下）：
                 1，ANNOTATEDMAPPER：会生成使用Mapper接口+Annotation的方式创建（SQL生成在annotation中），不会生成对应的XML；
@@ -153,13 +152,13 @@
         <javaClientGenerator targetPackage="${config.path.mapper.base}" targetProject="${config.path.java}"
                              type="XMLMAPPER">
 
-            <!-- 在targetPackage的基础上，根据数据库的schema再生成一层package，最终生成的类放在这个package下，默认为false -->
+            <!--在targetPackage的基础上，根据数据库的schema再生成一层package，最终生成的类放在这个package下，默认为false -->
             <property name="enableSubPackages" value="false"/>
 
         </javaClientGenerator>
 
 
-        <!-- 选择一个table来生成相关文件，可以有一个或多个table，必须要有table元素
+        <!--选择一个table来生成相关文件，可以有一个或多个table，必须要有table元素
     选择的table会生成一下文件：
     1，SQL map文件
     2，生成一个主键类；
@@ -315,83 +314,83 @@
 
         <!--</table>-->
 
-        <!--        <table tableName="album_netease" domainObjectName="AlbumNetease"/>-->
+        <!--<table tableName="album_netease" domainObjectName="AlbumNetease"/>-->
 
-        <!--        mysql select 复制后　用正则    -->
-        <!--        将                           -->
-        <!--        \|\s*([a-z_]*)(\s*)\|       -->
-        <!--        替换为：                     -->
-        <!--        <table tableName="$1"/>     -->
+        <!--mysql select 复制后　用正则    -->
+        <!--将                           -->
+        <!--\|\s*([a-z_]*)(\s*)\|       -->
+        <!--替换为：                     -->
+        <!--<table tableName="$1"/>     -->
 
-<!--        <table tableName="album_netease"/>-->
-<!--        <table tableName="album_netease"/>-->
-<!--        <table tableName="alias_celebrity_douban"/>-->
-<!--        <table tableName="alias_movie_douban"/>-->
-<!--        <table tableName="artist_netease"/>-->
-<!--        <table tableName="artist_netease_to_album_netease"/>-->
-<!--        <table tableName="artist_netease_to_song_netease"/>-->
-<!--        <table tableName="award_movie"/>-->
-<!--        <table tableName="celebrity_douban"/>-->
-<!--        <table tableName="celebrity_douban_to_classic"/>-->
-<!--        <table tableName="celebrity_imdb"/>-->
-<!--        <table tableName="celebrity_scene"/>-->
-<!--        <table tableName="city_scene"/>-->
-<!--        <table tableName="classic_douban"/>-->
-<!--        <table tableName="comment_movie_douban"/>-->
-<!--        <table tableName="comment_netease"/>-->
-<!--        <table tableName="continent_scene"/>-->
-<!--        <table tableName="country_scene"/>-->
-<!--        <table tableName="image_celebrity_douban"/>-->
-<!--        <table tableName="image_movie_douban"/>-->
-<!--        <table tableName="image_place_scene"/>-->
-<!--        <table tableName="image_scene_detail"/>-->
-<!--        <table tableName="movie_douban"/>-->
-<!--        <table tableName="movie_douban_to_award_movie"/>-->
-<!--        <table tableName="movie_douban_to_celebrity_douban"/>-->
-<!--        <table tableName="movie_douban_to_review_movie_douban"/>-->
-<!--        <table tableName="movie_douban_to_type_movie"/>-->
-<!--        <table tableName="movie_imdb"/>-->
-<!--        <table tableName="movie_imdb_to_celebrity_imdb"/>-->
-<!--        <table tableName="movie_imdb_to_type_movie"/>-->
-<!--        <table tableName="movie_netease"/>-->
-<!--        <table tableName="movie_scene"/>-->
-<!--        <table tableName="movie_scene_to_celebrity_scene"/>-->
-<!--        <table tableName="movie_zhihu"/>-->
-<!--        <table tableName="permission"/>-->
-<!--        <table tableName="place_scene"/>-->
-<!--        <table tableName="place_scene_to_type_place_scene"/>-->
-<!--        <table tableName="playlist_netease"/>-->
-<!--        <table tableName="profession"/>-->
-<!--        <table tableName="question_zhihu"/>-->
-<!--        <table tableName="rate_imdb"/>-->
-<!--        <table tableName="rate_movie_douban"/>-->
-<!--        <table tableName="resource_movie"/>-->
-<!--        <table tableName="review_movie_douban"/>-->
-<!--        &lt;!&ndash;        &ndash;&gt;-->
-<!--        <table tableName="role"/>-->
-<!--        <table tableName="role_to_permission"/>-->
-<!--        <table tableName="scene"/>-->
-<!--        <table tableName="scene_detail"/>-->
-<!--        <table tableName="scene_detail_to_celebrity_scene"/>-->
-<!--        <table tableName="song_netease"/>-->
-<!--        <table tableName="song_netease_to_album_netease"/>-->
-<!--        <table tableName="song_netease_to_playlist_netease"/>-->
-<!--        <table tableName="state_scene"/>-->
-<!--        <table tableName="tag_movie"/>-->
-<!--        <table tableName="trailer_movie_douban"/>-->
-<!--        <table tableName="type_movie"/>-->
-<!--        <table tableName="type_place_scene"/>-->
-<!--        <table tableName="type_resource"/>-->
-<!--        <table tableName="type_video"/>-->
-<!--        <table tableName="user"/>-->
-<!--        <table tableName="user_douban"/>-->
-<!--        <table tableName="user_douban_to_classic_douban"/>-->
-<!--        <table tableName="user_douban_to_movie_douban"/>-->
-<!--        <table tableName="user_douban_to_review_movie_douban"/>-->
-<!--        <table tableName="user_to_role"/>-->
-<!--        <table tableName="user_netease"/>-->
-<!--        <table tableName="website_resource"/>-->
-<!--        <table tableName="persistent_logins"/>-->
+<!--<table tableName="album_netease"/>-->
+<!--<table tableName="album_netease"/>-->
+<!--<table tableName="alias_celebrity_douban"/>-->
+<!--<table tableName="alias_movie_douban"/>-->
+<!--<table tableName="artist_netease"/>-->
+<!--<table tableName="artist_netease_to_album_netease"/>-->
+<!--<table tableName="artist_netease_to_song_netease"/>-->
+<!--<table tableName="award_movie"/>-->
+<!--<table tableName="celebrity_douban"/>-->
+<!--<table tableName="celebrity_douban_to_classic"/>-->
+<!--<table tableName="celebrity_imdb"/>-->
+<!--<table tableName="celebrity_scene"/>-->
+<!--<table tableName="city_scene"/>-->
+<!--<table tableName="classic_douban"/>-->
+<!--<table tableName="comment_movie_douban"/>-->
+<!--<table tableName="comment_netease"/>-->
+<!--<table tableName="continent_scene"/>-->
+<!--<table tableName="country_scene"/>-->
+<!--<table tableName="image_celebrity_douban"/>-->
+<!--<table tableName="image_movie_douban"/>-->
+<!--<table tableName="image_place_scene"/>-->
+<!--<table tableName="image_scene_detail"/>-->
+<!--<table tableName="movie_douban"/>-->
+<!--<table tableName="movie_douban_to_award_movie"/>-->
+<!--<table tableName="movie_douban_to_celebrity_douban"/>-->
+<!--<table tableName="movie_douban_to_review_movie_douban"/>-->
+<!--<table tableName="movie_douban_to_type_movie"/>-->
+<!--<table tableName="movie_imdb"/>-->
+<!--<table tableName="movie_imdb_to_celebrity_imdb"/>-->
+<!--<table tableName="movie_imdb_to_type_movie"/>-->
+<!--<table tableName="movie_netease"/>-->
+<!--<table tableName="movie_scene"/>-->
+<!--<table tableName="movie_scene_to_celebrity_scene"/>-->
+<!--<table tableName="movie_zhihu"/>-->
+<!--<table tableName="permission"/>-->
+<!--<table tableName="place_scene"/>-->
+<!--<table tableName="place_scene_to_type_place_scene"/>-->
+<!--<table tableName="playlist_netease"/>-->
+<!--<table tableName="profession"/>-->
+<!--<table tableName="question_zhihu"/>-->
+<!--<table tableName="rate_imdb"/>-->
+<!--<table tableName="rate_movie_douban"/>-->
+<!--<table tableName="resource_movie"/>-->
+<!--<table tableName="review_movie_douban"/>-->
+<!--&lt;!&ndash;        &ndash;&gt;-->
+<!--<table tableName="role"/>-->
+<!--<table tableName="role_to_permission"/>-->
+<!--<table tableName="scene"/>-->
+<!--<table tableName="scene_detail"/>-->
+<!--<table tableName="scene_detail_to_celebrity_scene"/>-->
+<!--<table tableName="song_netease"/>-->
+<!--<table tableName="song_netease_to_album_netease"/>-->
+<!--<table tableName="song_netease_to_playlist_netease"/>-->
+<!--<table tableName="state_scene"/>-->
+<!--<table tableName="tag_movie"/>-->
+<!--<table tableName="trailer_movie_douban"/>-->
+<!--<table tableName="type_movie"/>-->
+<!--<table tableName="type_place_scene"/>-->
+<!--<table tableName="type_resource"/>-->
+<!--<table tableName="type_video"/>-->
+<!--<table tableName="user"/>-->
+<!--<table tableName="user_douban"/>-->
+<!--<table tableName="user_douban_to_classic_douban"/>-->
+<!--<table tableName="user_douban_to_movie_douban"/>-->
+<!--<table tableName="user_douban_to_review_movie_douban"/>-->
+<!--<table tableName="user_to_role"/>-->
+<!--<table tableName="user_netease"/>-->
+<!--<table tableName="website_resource"/>-->
+<!--<table tableName="persistent_logins"/>-->
 
 
     </context>

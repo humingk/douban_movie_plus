@@ -2,24 +2,29 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <!--父依赖-->
     <parent>
         <groupId>org.humingk</groupId>
         <artifactId>movie</artifactId>
         <version>2.1</version>
     </parent>
-    <artifactId>movie-server-eureka</artifactId>
+    <artifactId>movie-config-server</artifactId>
     <version>1.1</version>
-    <packaging>jar</packaging>
-    <name>movie-server-eureka</name>
-    <description>eureka for movie</description>
-
+    <name>movie-config-server</name>
+    <description>config server for movie</description>
 
     <dependencies>
-        <!--spring cloud eureka服务注册-->
+        <!--            spring cloud config server-->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>
+            <artifactId>spring-cloud-config-server</artifactId>
+        </dependency>
+        <!--spring cloud dependencies-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-dependencies</artifactId>
+            <type>pom</type>
+            <scope>import</scope>
         </dependency>
     </dependencies>
+
 </project>

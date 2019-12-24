@@ -1,0 +1,17 @@
+server:
+  port: 8769
+spring:
+  application:
+    name: movie-service-zuul
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+zuul:
+  routes:
+    api-a:
+      path: /api-a/**
+      serviceId: movie-service-user
+    api-b:
+      path: /api-b/**
+      serviceId: movie-service-common
