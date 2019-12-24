@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.humingk.common.mapper.MovieZhihuMapper">
+  <resultMap id="BaseResultMap" type="org.humingk.common.entity.MovieZhihu">
+    <constructor>
+      <idArg column="id" javaType="java.lang.Long" jdbcType="BIGINT" />
+      <idArg column="id_movie_douban" javaType="java.lang.Long" jdbcType="BIGINT" />
+      <arg column="name_zh" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="zhihu_score" javaType="java.math.BigDecimal" jdbcType="DECIMAL" />
+      <arg column="zhihu_vote" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="maoyan_score" javaType="java.math.BigDecimal" jdbcType="DECIMAL" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, id_movie_douban, name_zh, zhihu_score, zhihu_vote, maoyan_score
+  </sql>
+  <select id="selectByExample" parameterType="org.humingk.common.entity.MovieZhihuExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from movie_zhihu
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from movie_zhihu
+    where id = #{id,jdbcType=BIGINT}
+      and id_movie_douban = #{idMovieDouban,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="map">
+    delete from movie_zhihu
+    where id = #{id,jdbcType=BIGINT}
+      and id_movie_douban = #{idMovieDouban,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="org.humingk.common.entity.MovieZhihuExample">
+    delete from movie_zhihu
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="org.humingk.common.entity.MovieZhihu">
+    insert into movie_zhihu (id, id_movie_douban, name_zh, 
+      zhihu_score, zhihu_vote, maoyan_score
+      )
+    values (#{id,jdbcType=BIGINT}, #{idMovieDouban,jdbcType=BIGINT}, #{nameZh,jdbcType=VARCHAR}, 
+      #{zhihuScore,jdbcType=DECIMAL}, #{zhihuVote,jdbcType=INTEGER}, #{maoyanScore,jdbcType=DECIMAL}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="org.humingk.common.entity.MovieZhihu">
+    insert into movie_zhihu
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="idMovieDouban != null">
+        id_movie_douban,
+      </if>
+      <if test="nameZh != null">
+        name_zh,
+      </if>
+      <if test="zhihuScore != null">
+        zhihu_score,
+      </if>
+      <if test="zhihuVote != null">
+        zhihu_vote,
+      </if>
+      <if test="maoyanScore != null">
+        maoyan_score,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="idMovieDouban != null">
+        #{idMovieDouban,jdbcType=BIGINT},
+      </if>
+      <if test="nameZh != null">
+        #{nameZh,jdbcType=VARCHAR},
+      </if>
+      <if test="zhihuScore != null">
+        #{zhihuScore,jdbcType=DECIMAL},
+      </if>
+      <if test="zhihuVote != null">
+        #{zhihuVote,jdbcType=INTEGER},
+      </if>
+      <if test="maoyanScore != null">
+        #{maoyanScore,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="org.humingk.common.entity.MovieZhihuExample" resultType="java.lang.Long">
+    select count(*) from movie_zhihu
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update movie_zhihu
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.idMovieDouban != null">
+        id_movie_douban = #{record.idMovieDouban,jdbcType=BIGINT},
+      </if>
+      <if test="record.nameZh != null">
+        name_zh = #{record.nameZh,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zhihuScore != null">
+        zhihu_score = #{record.zhihuScore,jdbcType=DECIMAL},
+      </if>
+      <if test="record.zhihuVote != null">
+        zhihu_vote = #{record.zhihuVote,jdbcType=INTEGER},
+      </if>
+      <if test="record.maoyanScore != null">
+        maoyan_score = #{record.maoyanScore,jdbcType=DECIMAL},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update movie_zhihu
+    set id = #{record.id,jdbcType=BIGINT},
+      id_movie_douban = #{record.idMovieDouban,jdbcType=BIGINT},
+      name_zh = #{record.nameZh,jdbcType=VARCHAR},
+      zhihu_score = #{record.zhihuScore,jdbcType=DECIMAL},
+      zhihu_vote = #{record.zhihuVote,jdbcType=INTEGER},
+      maoyan_score = #{record.maoyanScore,jdbcType=DECIMAL}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="org.humingk.common.entity.MovieZhihu">
+    update movie_zhihu
+    <set>
+      <if test="nameZh != null">
+        name_zh = #{nameZh,jdbcType=VARCHAR},
+      </if>
+      <if test="zhihuScore != null">
+        zhihu_score = #{zhihuScore,jdbcType=DECIMAL},
+      </if>
+      <if test="zhihuVote != null">
+        zhihu_vote = #{zhihuVote,jdbcType=INTEGER},
+      </if>
+      <if test="maoyanScore != null">
+        maoyan_score = #{maoyanScore,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+      and id_movie_douban = #{idMovieDouban,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.humingk.common.entity.MovieZhihu">
+    update movie_zhihu
+    set name_zh = #{nameZh,jdbcType=VARCHAR},
+      zhihu_score = #{zhihuScore,jdbcType=DECIMAL},
+      zhihu_vote = #{zhihuVote,jdbcType=INTEGER},
+      maoyan_score = #{maoyanScore,jdbcType=DECIMAL}
+    where id = #{id,jdbcType=BIGINT}
+      and id_movie_douban = #{idMovieDouban,jdbcType=BIGINT}
+  </update>
+</mapper>

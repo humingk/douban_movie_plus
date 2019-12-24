@@ -1,0 +1,13 @@
+{
+  "properties": [
+    {
+      "name": "eureka.client.service-url.defaultZone",
+      "type": "java.lang.String",
+      "description": "Description for eureka.client.service-url.defaultZone."
+    },
+    {
+      "name": "eureka.client.service-url.defaultZone",
+      "type": "java.lang.String",
+      "description": "Description for eureka.client.service-url.defaultZone."
+    }
+  ] }
