@@ -1,6 +1,6 @@
 server:
   port: 8081
-debug: true
-logging:
-  level:
-    root: debug
+#debug: true
+#logging:
+#  level:
+#    root: debug

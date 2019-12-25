@@ -13,16 +13,10 @@
     <description>zuul for movie</description>
 
     <dependencies>
-        <!--eureka client-->
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
-        </dependency>
         <!--zuul-->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-netflix-zuul</artifactId>
         </dependency>
     </dependencies>
-
 </project>

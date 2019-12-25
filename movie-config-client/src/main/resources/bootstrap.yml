@@ -7,8 +7,41 @@ spring:
     name: movie-config-client
   cloud:
     config:
+      name: movie-config-client
       label: master
       # 对应 config server 中的{profile}
       profile: dev
-      # config server服务的地址
-      uri: http://localhost:8888
+      # config server服务的地址(手动指定的uri)
+      #      uri: http://localhost:8888/
+      discovery:
+        # 开启服务发现组件访问config server的功能
+        # 是否使用服务发现中的config server,默认false(使用自己指定config server的uri)
+        # 这样多份实例读取配置文件只需要config server的ID,不需要其IP地址,从而可通过负载均衡实现高可用
+        enabled: true
+        # config server 在服务发现组件中的ID
+        service-id: movie-config-server
+      # 总线
+    bus:
+      enabled: true
+      trace:
+        # 开启消息跟踪
+        enabled: true
+  # 消息中间件rabbitmq
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+management:
+  endpoint:
+    bus-refresh:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        # 暴露接口
+        include: bus-refresh

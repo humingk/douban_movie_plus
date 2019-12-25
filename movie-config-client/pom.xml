@@ -13,10 +13,20 @@
     <description>config client for movie</description>
 
     <dependencies>
-        <!--        spring cloud config client-->
+        <!--spring cloud config client-->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-config</artifactId>
+        </dependency>
+        <!--spring cloud bus amqp-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-bus-amqp</artifactId>
+        </dependency>
+        <!--actuator-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
     </dependencies>
 </project>

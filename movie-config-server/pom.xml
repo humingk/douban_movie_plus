@@ -13,17 +13,20 @@
     <description>config server for movie</description>
 
     <dependencies>
-        <!--            spring cloud config server-->
+        <!--spring cloud config server-->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-config-server</artifactId>
         </dependency>
-        <!--spring cloud dependencies-->
+        <!--spring cloud bus amqp-->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-dependencies</artifactId>
-            <type>pom</type>
-            <scope>import</scope>
+            <artifactId>spring-cloud-starter-bus-amqp</artifactId>
+        </dependency>
+        <!--actuator-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
     </dependencies>
 
