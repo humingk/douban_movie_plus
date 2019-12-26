@@ -32,6 +32,11 @@ public class MyFilterSecurityInterceptor extends AbstractSecurityInterceptor imp
         super.setAccessDecisionManager(myAccessDecisionManager);
     }
 
+    @Override
+    public void init(FilterConfig filterConfig) throws ServletException {
+
+    }
+
     /**
      * 拦截
      *
@@ -48,6 +53,11 @@ public class MyFilterSecurityInterceptor extends AbstractSecurityInterceptor imp
         // 下一个拦截器
         filterInvocation.getChain().doFilter(filterInvocation.getRequest(), filterInvocation.getResponse());
         super.afterInvocation(token, null);
+    }
+
+    @Override
+    public void destroy() {
+
     }
 
     @Override
