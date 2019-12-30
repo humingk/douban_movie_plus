@@ -42,38 +42,39 @@
     </developers>
     <!--子模块-->
     <modules>
+        <!--server-->
         <module>movie-server-eureka</module>
+        <module>movie-server-zipkin</module>
+        <!--service-->
         <module>movie-service-common</module>
+        <module>movie-service-douban</module>
         <module>movie-service-user</module>
         <module>movie-service-zuul</module>
+        <module>movie-service-api</module>
+        <!--config-->
         <module>movie-config-server</module>
         <module>movie-config-client</module>
     </modules>
-    <!--版本集合 -->
+    <!--版本管理 -->
     <properties>
         <java.version>1.8</java.version>
-        <!--spring boot starter -->
-        <spring-boot-starter-web.version>2.0.3.RELEASE</spring-boot-starter-web.version>
-        <spring-boot-starter-aop.version>2.0.3.RELEASE</spring-boot-starter-aop.version>
-        <spring-boot-starter-security.version>2.0.3.RELEASE</spring-boot-starter-security.version>
-        <spring-boot-starter-test.version>2.0.3.RELEASE</spring-boot-starter-test.version>
-        <spring-boot-starter-data-redis.version>2.0.3.RELEASE</spring-boot-starter-data-redis.version>
+        <spring-cloud-dependencies.version>Finchley.SR4</spring-cloud-dependencies.version>
+        <!--modules-config-->
+        <movie-config-server.version>1.1</movie-config-server.version>
+        <movie-config-client.version>1.1</movie-config-client.version>
+        <!--modules-server-->
+        <movie-server-eureka.version>1.1</movie-server-eureka.version>
+        <movie-server-zipkin.version>1.1</movie-server-zipkin.version>
+        <!--modules-service-->
+        <movie-service-common.version>1.1</movie-service-common.version>
+        <movie-service-douban.version>1.1</movie-service-douban.version>
+        <movie-service-user.version>1.1</movie-service-user.version>
+        <movie-service-zuul.version>1.1</movie-service-zuul.version>
+        <movie-service-api.version>1.1</movie-service-api.version>
+        <!--tools-->
+        <versions-maven-plugin.version>2.7</versions-maven-plugin.version>
         <mybatis-spring-boot-starter.version>2.0.1</mybatis-spring-boot-starter.version>
         <pagehelper-spring-boot-starter.version>1.2.13</pagehelper-spring-boot-starter.version>
-        <spring-boot-starter-actuator.version>2.0.3.RELEASE</spring-boot-starter-actuator.version>
-
-        <!--spring cloud starter -->
-        <spring-cloud-dependencies.version>Finchley.SR4</spring-cloud-dependencies.version>
-        <spring-cloud-starter-netflix-eureka-client.version>2.0.4.RELEASE
-        </spring-cloud-starter-netflix-eureka-client.version>
-        <spring-cloud-starter-netflix-eureka-server.version>2.0.4.RELEASE
-        </spring-cloud-starter-netflix-eureka-server.version>
-        <spring-cloud-starter-netflix-zuul.version>2.0.4.RELEASE</spring-cloud-starter-netflix-zuul.version>
-        <spring-cloud-config-server.version>2.0.5.RELEASE</spring-cloud-config-server.version>
-        <spring-cloud-starter-config.version>2.0.5.RELEASE</spring-cloud-starter-config.version>
-        <spring-cloud-starter-bus-amqp.version>2.0.2.RELEASE</spring-cloud-starter-bus-amqp.version>
-
-        <!--tools-->
         <mybatis-generator-maven-plugin.version>1.3.7</mybatis-generator-maven-plugin.version>
         <mysql-connector-java.version>8.0.18</mysql-connector-java.version>
         <lombok.version>1.18.10</lombok.version>
@@ -82,34 +83,80 @@
         <commons-lang3.version>3.9</commons-lang3.version>
         <commons-pool2.version>2.7.0</commons-pool2.version>
         <guava.version>28.1-jre</guava.version>
+        <zipkin-autoconfigure-ui.version>2.12.3</zipkin-autoconfigure-ui.version>
+        <zipkin-server.version>2.12.3</zipkin-server.version>
 
     </properties>
-    <!--依赖(子模块会继承)-->
+    <!--依赖(子模块需要的公共依赖，子模块默认会继承)-->
     <dependencies>
-        <!--web-->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-            <version>${spring-boot-starter-web.version}</version>
-        </dependency>
         <!--测试 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
-            <version>${spring-boot-starter-test.version}</version>
-        </dependency>
-        <!--eureka client-->
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
-            <version>${spring-cloud-starter-netflix-eureka-client.version}</version>
         </dependency>
     </dependencies>
 
-    <!--依赖管理(子模块需要显式继承)-->
+    <!--依赖管理(主要为工具，大部分为在SpringBoot和SpringCloud版本中没有默认版本的依赖包,子模块需要显式继承)-->
     <dependencyManagement>
         <dependencies>
+            <!--spring cloud 版本 (需要在management中声明一下cloud的版本，子模块才能继承cloud中的默认版本集合)-->
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud-dependencies.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <!--子模块版本-->
+            <!--modules-config-->
+            <dependency>
+                <groupId>org.humingk</groupId>
+                <artifactId>movie-config-server</artifactId>
+                <version>${movie-config-server.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.humingk</groupId>
+                <artifactId>movie-config-client</artifactId>
+                <version>${movie-config-client.version}</version>
+            </dependency>
+            <!--modules-server-->
+            <dependency>
+                <groupId>org.humingk</groupId>
+                <artifactId>movie-server-eureka</artifactId>
+                <version>${movie-server-eureka.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.humingk</groupId>
+                <artifactId>movie-server-zipkin</artifactId>
+                <version>${movie-server-zipkin.version}</version>
+            </dependency>
+            <!--modules-service-->
+            <dependency>
+                <groupId>org.humingk</groupId>
+                <artifactId>movie-service-common</artifactId>
+                <version>${movie-service-common.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.humingk</groupId>
+                <artifactId>movie-service-douban</artifactId>
+                <version>${movie-service-douban.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.humingk</groupId>
+                <artifactId>movie-service-zuul</artifactId>
+                <version>${movie-service-zuul.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.humingk</groupId>
+                <artifactId>movie-service-user</artifactId>
+                <version>${movie-service-user.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.humingk</groupId>
+                <artifactId>movie-service-api</artifactId>
+                <version>${movie-service-api.version}</version>
+            </dependency>
             <!--mybatis-->
             <dependency>
                 <groupId>org.mybatis.spring.boot</groupId>
@@ -123,12 +170,6 @@
                 <scope>runtime</scope>
                 <version>${mysql-connector-java.version}</version>
             </dependency>
-            <!--spring security-->
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-starter-security</artifactId>
-                <version>${spring-boot-starter-security.version}</version>
-            </dependency>
             <!--jjwt-->
             <dependency>
                 <groupId>io.jsonwebtoken</groupId>
@@ -140,12 +181,6 @@
                 <groupId>com.github.pagehelper</groupId>
                 <artifactId>pagehelper-spring-boot-starter</artifactId>
                 <version>${pagehelper-spring-boot-starter.version}</version>
-            </dependency>
-            <!--aop -->
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-starter-aop</artifactId>
-                <version>${spring-boot-starter-aop.version}</version>
             </dependency>
             <!--lombok工具-->
             <dependency>
@@ -166,12 +201,6 @@
                 <artifactId>commons-lang3</artifactId>
                 <version>${commons-lang3.version}</version>
             </dependency>
-            <!--redis-->
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-starter-data-redis</artifactId>
-                <version>${spring-boot-starter-data-redis.version}</version>
-            </dependency>
             <!--pool2-->
             <dependency>
                 <groupId>org.apache.commons</groupId>
@@ -184,49 +213,17 @@
                 <artifactId>guava</artifactId>
                 <version>${guava.version}</version>
             </dependency>
-            <!--spring cloud dependencies-->
+            <!--zipkin server-->
             <dependency>
-                <groupId>org.springframework.cloud</groupId>
-                <artifactId>spring-cloud-dependencies</artifactId>
-                <version>${spring-cloud-dependencies.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
+                <groupId>io.zipkin.java</groupId>
+                <artifactId>zipkin-server</artifactId>
+                <version>${zipkin-server.version}</version>
             </dependency>
-            <!--eureka server-->
+            <!--zipkin ui-->
             <dependency>
-                <groupId>org.springframework.cloud</groupId>
-                <artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>
-                <version>${spring-cloud-starter-netflix-eureka-server.version}</version>
-            </dependency>
-            <!--zuul-->
-            <dependency>
-                <groupId>org.springframework.cloud</groupId>
-                <artifactId>spring-cloud-starter-netflix-zuul</artifactId>
-                <version>${spring-cloud-starter-netflix-zuul.version}</version>
-            </dependency>
-            <!--spring cloud config server-->
-            <dependency>
-                <groupId>org.springframework.cloud</groupId>
-                <artifactId>spring-cloud-config-server</artifactId>
-                <version>${spring-cloud-config-server.version}</version>
-            </dependency>
-            <!--spring cloud config client-->
-            <dependency>
-                <groupId>org.springframework.cloud</groupId>
-                <artifactId>spring-cloud-starter-config</artifactId>
-                <version>${spring-cloud-starter-config.version}</version>
-            </dependency>
-            <!--spring cloud bus amqp-->
-            <dependency>
-                <groupId>org.springframework.cloud</groupId>
-                <artifactId>spring-cloud-starter-bus-amqp</artifactId>
-                <version>${spring-cloud-starter-bus-amqp.version}</version>
-            </dependency>
-            <!--actuator-->
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-starter-actuator</artifactId>
-                <version>${spring-boot-starter-actuator.version}</version>
+                <groupId>io.zipkin.java</groupId>
+                <artifactId>zipkin-autoconfigure-ui</artifactId>
+                <version>${zipkin-autoconfigure-ui.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
@@ -238,6 +235,13 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+
+            <!--maven version-->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>versions-maven-plugin</artifactId>
+                <version>${versions-maven-plugin.version}</version>
             </plugin>
 
             <!--mybatis generator-->

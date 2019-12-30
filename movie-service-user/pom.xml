@@ -7,9 +7,9 @@
         <artifactId>movie</artifactId>
         <version>2.1</version>
     </parent>
-    <artifactId>movie-user-service</artifactId>
-    <version>1.1</version>
-    <name>movie-user-service</name>
+    <artifactId>movie-service-user</artifactId>
+    <version>${movie-service-user.version}</version>
+    <name>movie-service-user</name>
     <description>user for movie</description>
 
     <dependencies>
@@ -17,6 +17,21 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <!--eureka client-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+        </dependency>
+        <!--zipkin client-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-zipkin</artifactId>
+        </dependency>
+        <!--feign-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-openfeign</artifactId>
         </dependency>
     </dependencies>
 

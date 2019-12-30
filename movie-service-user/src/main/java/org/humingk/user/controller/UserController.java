@@ -1,9 +1,11 @@
 package org.humingk.user.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
 
 /**
  * @author humingk
@@ -14,15 +16,35 @@ public class UserController {
     @Value("${server.port}")
     private String port;
 
+    @Autowired
+    private RestTemplate restTemplate;
+
+    @Autowired
+    private test t;
+
     /**
-     * 用户登录页面
+     * test
      *
      * @return
      */
-    @RequestMapping(value = "login", method = RequestMethod.GET)
-    public String login() {
-        return "login,from port:" + port;
+    @RequestMapping(value = "test", method = RequestMethod.GET)
+    public String test() {
+        return "(user)test,from port:" + port;
     }
 
+    /**
+     * 测试zipkin
+     *
+     * @return
+     */
+    @RequestMapping(value = "testzipkin", method = RequestMethod.GET)
+    public String test2() {
+        return restTemplate.getForObject("http://localhost:8080/login", String.class);
+    }
+
+    @RequestMapping(value = "testfeign", method = RequestMethod.GET)
+    public String test3() {
+        return t.test3();
+    }
 
 }

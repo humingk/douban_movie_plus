@@ -29,16 +29,24 @@ public class UserController {
     private String port;
 
     /**
-     * 用户登录页面
+     * test
      *
      * @return
      */
-    @RequestMapping(value = "login", method = RequestMethod.GET)
-    public String login() {
-        return "login,from port:" + port;
+    @RequestMapping(value = "test", method = RequestMethod.GET)
+    public String test() {
+        return "(common)test,from port:" + port;
     }
 
-
+    /**
+     * testfeign
+     *
+     * @return
+     */
+    @RequestMapping(value = "testfeign", method = RequestMethod.GET)
+    public String test3() {
+        return "(common)testfeign,from port:" + port;
+    }
 
     /**
      * 用户页面

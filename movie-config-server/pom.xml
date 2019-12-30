@@ -8,22 +8,27 @@
         <version>2.1</version>
     </parent>
     <artifactId>movie-config-server</artifactId>
-    <version>1.1</version>
+    <version>${movie-config-server.version}</version>
     <name>movie-config-server</name>
     <description>config server for movie</description>
 
     <dependencies>
+        <!--eureka client-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+        </dependency>
         <!--spring cloud config server-->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-config-server</artifactId>
         </dependency>
-        <!--spring cloud bus amqp-->
+        <!--spring cloud bus 总线-->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-bus-amqp</artifactId>
         </dependency>
-        <!--actuator-->
+        <!--actuator 监控-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>

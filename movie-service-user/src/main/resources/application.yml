@@ -3,6 +3,8 @@ server:
 spring:
   application:
     name: movie-service-user
+  zipkin:
+    base-url: http://localhost:9000
 eureka:
   client:
     service-url:

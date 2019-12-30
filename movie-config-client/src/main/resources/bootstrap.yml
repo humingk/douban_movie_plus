@@ -20,12 +20,6 @@ spring:
         enabled: true
         # config server 在服务发现组件中的ID
         service-id: movie-config-server
-      # 总线
-    bus:
-      enabled: true
-      trace:
-        # 开启消息跟踪
-        enabled: true
   # 消息中间件rabbitmq
   rabbitmq:
     host: localhost
@@ -36,12 +30,3 @@ eureka:
   client:
     service-url:
       defaultZone: http://localhost:8761/eureka/
-management:
-  endpoint:
-    bus-refresh:
-      enabled: true
-  endpoints:
-    web:
-      exposure:
-        # 暴露接口
-        include: bus-refresh

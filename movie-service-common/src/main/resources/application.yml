@@ -30,9 +30,12 @@ spring:
         max-wait: -1
         # 连接池中的最小空闲连接
         min-idle: 0
+  zipkin:
+    base-url: http://localhost:9000
 pagehelper:
   # page helper 方言
   helperDialect: mysql
+
 eureka:
   client:
     service-url:

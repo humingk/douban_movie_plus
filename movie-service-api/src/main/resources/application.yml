@@ -1,0 +1,32 @@
+server:
+  port: 8086
+spring:
+  application:
+    name: movie-service-api
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          # true:开启gateway服务注册中心服务发现,并且gateway根据服务名自动为每个服务创建一个router
+          # 通过服务名路径访问,eg: http://localhost:8086/MOVIE-SERVICE-COMMON/...
+          enabled: false
+          # true:请求路径服务名配置为小写
+          lower-case-service-id: true
+      # 路由转发
+      routes:
+        - id: movie-service-common
+          # douban服务负载均衡地址
+          uri: lb://movie-service-common
+          predicates:
+            - Path=/common/**
+          filters:
+              # 转发前去掉/common/
+            - StripPrefix=1
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+# gateway日志等级，转发信息
+logging:
+  level:
+    org.springframework.cloud.gateway: debug

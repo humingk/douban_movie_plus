@@ -9,7 +9,7 @@
         <version>2.1</version>
     </parent>
     <artifactId>movie-server-eureka</artifactId>
-    <version>1.1</version>
+    <version>${movie-server-eureka.version}</version>
     <packaging>jar</packaging>
     <name>movie-server-eureka</name>
     <description>eureka for movie</description>

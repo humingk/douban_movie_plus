@@ -12,10 +12,11 @@ spring:
           uri: https://github.com/humingk/douban_movie_config/
           search-paths: config
       label: master
+    # 总线
     bus:
       enabled: true
       trace:
-        # 跟踪总线事件
+        # 开启跟踪总线
         enabled: true
   # 消息中间件rabbitmq
   rabbitmq:

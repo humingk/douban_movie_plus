@@ -8,7 +8,7 @@
         <version>2.1</version>
     </parent>
     <artifactId>movie-service-zuul</artifactId>
-    <version>1.1</version>
+    <version>${movie-service-zuul.version}</version>
     <name>movie-service-zuul</name>
     <description>zuul for movie</description>
 
