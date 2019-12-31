@@ -9,8 +9,8 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
  * @author humingk
  */
 @SpringBootApplication
-@EnableFeignClients
 @EnableEurekaClient
+@EnableFeignClients
 public class MovieServiceDoubanApplication {
 
     public static void main(String[] args) {

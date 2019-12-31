@@ -14,6 +14,7 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 
 /**
@@ -46,7 +47,7 @@ public class LogAspect {
     @Before("controllerPointCut()")
     public void doBefore(JoinPoint joinPoint) {
         ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
-        HttpServletRequest request = attributes.getRequest();
+        HttpServletRequest request = Objects.requireNonNull(attributes).getRequest();
         Map logMap = new HashMap() {
             {
                 put("url", request.getRequestURL());

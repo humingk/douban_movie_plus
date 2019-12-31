@@ -23,12 +23,12 @@
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
         </dependency>
-        <!--modules-common-->
-        <dependency>
-            <groupId>org.humingk</groupId>
-            <artifactId>movie-service-common</artifactId>
-            <scope>compile</scope>
-        </dependency>
+<!--        &lt;!&ndash;modules-common&ndash;&gt;-->
+<!--        <dependency>-->
+<!--            <groupId>org.humingk</groupId>-->
+<!--            <artifactId>movie-service-common</artifactId>-->
+<!--            <scope>compile</scope>-->
+<!--        </dependency>-->
         <!--zipkin client-->
         <dependency>
             <groupId>org.springframework.cloud</groupId>

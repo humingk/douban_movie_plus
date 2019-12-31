@@ -54,6 +54,13 @@
         <!--config-->
         <module>movie-config-server</module>
         <module>movie-config-client</module>
+        <!--api-->
+        <module>movie-api/movie-api-netease</module>
+        <!--api server-->
+        <module>movie-server/movie-server-netease</module>
+        <!--api service-->
+        <module>movie-service/movie-service-netease</module>
+
     </modules>
     <!--版本管理 -->
     <properties>
@@ -94,6 +101,12 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.junit.vintage</groupId>
+                    <artifactId>junit-vintage-engine</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
     </dependencies>
 
