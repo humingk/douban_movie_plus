@@ -7,11 +7,10 @@
         <artifactId>movie</artifactId>
         <version>2.1</version>
     </parent>
-    <artifactId>movie-api-netease</artifactId>
-    <version>1.1</version>
-    <name>movie-api-netease</name>
-    <description>netease api for movie</description>
-
+    <artifactId>movie-server-douban</artifactId>
+    <version>${movie-server-douban.version}</version>
+    <name>movie-server-douban</name>
+    <description>douban server for movie</description>
     <dependencies>
         <!--web-->
         <dependency>
@@ -22,6 +21,16 @@
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+        </dependency>
+        <!--douban api-->
+        <dependency>
+            <groupId>org.humingk</groupId>
+            <artifactId>movie-api-douban</artifactId>
+        </dependency>
+        <!--douban service-->
+        <dependency>
+            <groupId>org.humingk</groupId>
+            <artifactId>movie-service-douban</artifactId>
         </dependency>
     </dependencies>
 </project>

@@ -47,7 +47,6 @@
         <module>movie-server-zipkin</module>
         <!--service-->
         <module>movie-service-common</module>
-        <module>movie-service-douban</module>
         <module>movie-service-user</module>
         <module>movie-service-zuul</module>
         <module>movie-service-api</module>
@@ -74,10 +73,15 @@
         <movie-server-zipkin.version>1.1</movie-server-zipkin.version>
         <!--modules-service-->
         <movie-service-common.version>1.1</movie-service-common.version>
-        <movie-service-douban.version>1.1</movie-service-douban.version>
         <movie-service-user.version>1.1</movie-service-user.version>
         <movie-service-zuul.version>1.1</movie-service-zuul.version>
         <movie-service-api.version>1.1</movie-service-api.version>
+        <!--modules-api-->
+        <movie-api-douban.version>1.1</movie-api-douban.version>
+        <!--modules-api-server-->
+        <movie-server-douban.version>1.1</movie-server-douban.version>
+        <!--modules-api-service-->
+        <movie-service-douban.version>1.1</movie-service-douban.version>
         <!--tools-->
         <versions-maven-plugin.version>2.7</versions-maven-plugin.version>
         <mybatis-spring-boot-starter.version>2.0.1</mybatis-spring-boot-starter.version>
@@ -152,11 +156,6 @@
             </dependency>
             <dependency>
                 <groupId>org.humingk</groupId>
-                <artifactId>movie-service-douban</artifactId>
-                <version>${movie-service-douban.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.humingk</groupId>
                 <artifactId>movie-service-zuul</artifactId>
                 <version>${movie-service-zuul.version}</version>
             </dependency>
@@ -169,6 +168,24 @@
                 <groupId>org.humingk</groupId>
                 <artifactId>movie-service-api</artifactId>
                 <version>${movie-service-api.version}</version>
+            </dependency>
+            <!--modules-api-->
+            <dependency>
+                <groupId>org.humingk</groupId>
+                <artifactId>movie-api-douban</artifactId>
+                <version>${movie-api-douban.version}</version>
+            </dependency>
+            <!--modules-api-server-->
+            <dependency>
+                <groupId>org.humingk</groupId>
+                <artifactId>movie-server-douban</artifactId>
+                <version>${movie-server-douban.version}</version>
+            </dependency>
+            <!--modules-api-service-->
+            <dependency>
+                <groupId>org.humingk</groupId>
+                <artifactId>movie-service-douban</artifactId>
+                <version>${movie-service-douban.version}</version>
             </dependency>
             <!--mybatis-->
             <dependency>

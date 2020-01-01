@@ -1,0 +1,9 @@
+server:
+  port: 10101
+spring:
+  application:
+    name: movie-api-douban
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
