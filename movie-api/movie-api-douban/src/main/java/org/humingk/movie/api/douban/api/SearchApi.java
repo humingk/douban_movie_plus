@@ -10,6 +10,7 @@ import java.util.List;
 /**
  * @author humingk
  */
+@FeignClient("movie-server-douban")
 public interface SearchApi {
     /**
      * 豆瓣电影搜索提示

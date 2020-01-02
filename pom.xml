@@ -55,10 +55,14 @@
         <module>movie-config-client</module>
         <!--api-->
         <module>movie-api/movie-api-netease</module>
+        <module>movie-api/movie-api-douban</module>
+        <module>movie-api/movie-api-subject</module>
         <!--api server-->
         <module>movie-server/movie-server-netease</module>
+        <module>movie-server/movie-server-douban</module>
         <!--api service-->
         <module>movie-service/movie-service-netease</module>
+        <module>movie-service/movie-service-douban</module>
 
     </modules>
     <!--版本管理 -->
@@ -78,6 +82,7 @@
         <movie-service-api.version>1.1</movie-service-api.version>
         <!--modules-api-->
         <movie-api-douban.version>1.1</movie-api-douban.version>
+        <movie-api-subject.version>1.1</movie-api-subject.version>
         <!--modules-api-server-->
         <movie-server-douban.version>1.1</movie-server-douban.version>
         <!--modules-api-service-->
@@ -174,6 +179,11 @@
                 <groupId>org.humingk</groupId>
                 <artifactId>movie-api-douban</artifactId>
                 <version>${movie-api-douban.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.humingk</groupId>
+                <artifactId>movie-api-subject</artifactId>
+                <version>${movie-api-subject.version}</version>
             </dependency>
             <!--modules-api-server-->
             <dependency>

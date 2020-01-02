@@ -25,7 +25,7 @@
         <!--douban api-->
         <dependency>
             <groupId>org.humingk</groupId>
-            <artifactId>movie-api-douban</artifactId>
+            <artifactId>movie-api-subject</artifactId>
         </dependency>
         <!--douban service-->
         <dependency>

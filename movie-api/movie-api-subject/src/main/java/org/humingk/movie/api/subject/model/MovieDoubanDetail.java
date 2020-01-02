@@ -1,4 +1,4 @@
-package org.humingk.common.entity.douban;
+package org.humingk.movie.api.subject.model;
 
 import org.humingk.common.entity.*;
 
