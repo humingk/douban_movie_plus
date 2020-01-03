@@ -1,10 +1,10 @@
-package org.humingk.movie.server.douban;
+package org.humingk.movie.service.gateway;
 
 import org.junit.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class MovieServerDoubanApplicationTests {
+class MovieServerGatewayApplicationTests {
 
     @Test
     void contextLoads() {

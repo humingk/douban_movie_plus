@@ -13,20 +13,21 @@
     <description>douban api for movie</description>
 
     <dependencies>
-        <dependency>
-            <groupId>org.humingk</groupId>
-            <artifactId>movie-service-common</artifactId>
-        </dependency>
         <!--feign-->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-openfeign</artifactId>
         </dependency>
-        <!--eureka client-->
+        <!--modules common-->
         <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+            <groupId>org.humingk</groupId>
+            <artifactId>movie-service-common</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-security</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
     </dependencies>
-
 </project>

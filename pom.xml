@@ -48,15 +48,13 @@
         <!--service-->
         <module>movie-service-common</module>
         <module>movie-service-user</module>
-        <module>movie-service-zuul</module>
-        <module>movie-service-api</module>
+        <module>movie-service-gateway</module>
         <!--config-->
         <module>movie-config-server</module>
         <module>movie-config-client</module>
         <!--api-->
         <module>movie-api/movie-api-netease</module>
         <module>movie-api/movie-api-douban</module>
-        <module>movie-api/movie-api-subject</module>
         <!--api server-->
         <module>movie-server/movie-server-netease</module>
         <module>movie-server/movie-server-douban</module>
@@ -78,11 +76,9 @@
         <!--modules-service-->
         <movie-service-common.version>1.1</movie-service-common.version>
         <movie-service-user.version>1.1</movie-service-user.version>
-        <movie-service-zuul.version>1.1</movie-service-zuul.version>
-        <movie-service-api.version>1.1</movie-service-api.version>
+        <movie-service-gateway.version>1.1</movie-service-gateway.version>
         <!--modules-api-->
         <movie-api-douban.version>1.1</movie-api-douban.version>
-        <movie-api-subject.version>1.1</movie-api-subject.version>
         <!--modules-api-server-->
         <movie-server-douban.version>1.1</movie-server-douban.version>
         <!--modules-api-service-->
@@ -161,29 +157,19 @@
             </dependency>
             <dependency>
                 <groupId>org.humingk</groupId>
-                <artifactId>movie-service-zuul</artifactId>
-                <version>${movie-service-zuul.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.humingk</groupId>
                 <artifactId>movie-service-user</artifactId>
                 <version>${movie-service-user.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.humingk</groupId>
-                <artifactId>movie-service-api</artifactId>
-                <version>${movie-service-api.version}</version>
+                <artifactId>movie-service-gateway</artifactId>
+                <version>${movie-service-gateway.version}</version>
             </dependency>
             <!--modules-api-->
             <dependency>
                 <groupId>org.humingk</groupId>
                 <artifactId>movie-api-douban</artifactId>
                 <version>${movie-api-douban.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.humingk</groupId>
-                <artifactId>movie-api-subject</artifactId>
-                <version>${movie-api-subject.version}</version>
             </dependency>
             <!--modules-api-server-->
             <dependency>

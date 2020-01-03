@@ -22,15 +22,26 @@
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
         </dependency>
+        <!--feign-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-openfeign</artifactId>
+        </dependency>
         <!--douban api-->
         <dependency>
             <groupId>org.humingk</groupId>
-            <artifactId>movie-api-subject</artifactId>
+            <artifactId>movie-api-douban</artifactId>
         </dependency>
         <!--douban service-->
         <dependency>
             <groupId>org.humingk</groupId>
             <artifactId>movie-service-douban</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-security</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
     </dependencies>
 </project>

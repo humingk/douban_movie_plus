@@ -1,10 +1,10 @@
 package org.humingk.user.controller;
 
+import org.humingk.common.common.Result;
+import org.humingk.movie.api.douban.SearchApi;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
 /**
@@ -20,7 +20,13 @@ public class UserController {
     private RestTemplate restTemplate;
 
     @Autowired
-    private test t;
+    private SearchApi searchApi;
+
+    @PostMapping("test_feign_api")
+    public Result testFeignApi(@RequestParam("keyword") String keyword) {
+        return searchApi.searchMovieTips(keyword);
+    }
+
 
     /**
      * test
@@ -42,9 +48,5 @@ public class UserController {
         return restTemplate.getForObject("http://localhost:8080/login", String.class);
     }
 
-    @RequestMapping(value = "testfeign", method = RequestMethod.GET)
-    public String test3() {
-        return t.test3();
-    }
 
 }

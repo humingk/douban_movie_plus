@@ -2,6 +2,7 @@ package org.humingk.common.common;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.humingk.common.exception.MyException;
 
 import java.io.Serializable;
@@ -14,6 +15,7 @@ import static org.humingk.common.common.StatusAndMessage.*;
  * @author humingk
  */
 @Data
+@NoArgsConstructor
 @AllArgsConstructor
 public class Result implements Serializable {
     /**

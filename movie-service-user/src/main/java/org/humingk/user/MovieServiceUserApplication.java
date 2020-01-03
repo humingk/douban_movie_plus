@@ -12,7 +12,7 @@ import org.springframework.web.client.RestTemplate;
  */
 @SpringBootApplication
 @EnableEurekaClient
-@EnableFeignClients
+@EnableFeignClients(basePackages = "org.humingk.movie.api.douban")
 public class MovieServiceUserApplication {
     @Bean
     public RestTemplate restTemplate() {

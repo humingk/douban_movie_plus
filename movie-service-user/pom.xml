@@ -33,6 +33,10 @@
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-openfeign</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.humingk</groupId>
+            <artifactId>movie-api-douban</artifactId>
+        </dependency>
     </dependencies>
 
 

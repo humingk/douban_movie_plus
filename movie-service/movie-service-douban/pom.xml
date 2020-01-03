@@ -22,6 +22,12 @@
         <dependency>
             <groupId>org.humingk</groupId>
             <artifactId>movie-service-common</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-security</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
     </dependencies>
 </project>

@@ -121,7 +121,7 @@ public class MySecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(WebSecurity web) throws Exception {
         // 临时禁用security
-//        web.ignoring().antMatchers("/**");
+        web.ignoring().antMatchers("/**");
     }
 
     /**

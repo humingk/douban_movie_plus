@@ -1,13 +1,11 @@
-package org.humingk.common.service.impl;
+package org.humingk.movie.service.douban.impl;
 
 import com.github.pagehelper.PageHelper;
 import org.humingk.common.entity.MovieDouban;
 import org.humingk.common.entity.MovieDoubanExample;
 import org.humingk.common.mapper.MovieDoubanMapper;
-import org.humingk.common.service.MovieDoubanService;
+import org.humingk.movie.service.douban.SearchService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.CacheConfig;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,9 +14,7 @@ import java.util.List;
  * @author humingk
  */
 @Service
-@CacheConfig(cacheNames = "movie")
-public class MovieDoubanServiceImpl implements MovieDoubanService{
-
+public class SearchServiceImpl implements SearchService {
     @Autowired
     private MovieDoubanMapper movieDoubanMapper;
 
@@ -32,7 +28,6 @@ public class MovieDoubanServiceImpl implements MovieDoubanService{
      * @return
      */
     @Override
-    @Cacheable
     public List<MovieDouban> getMovieDoubanListByNameStart(String keyword, int offset, int limit) {
         MovieDoubanExample example = new MovieDoubanExample();
         example.or().andNameZhLike(keyword + "%");
