@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.humingk.movie.dal.mapper.PersistentLoginsMapper">
+  <resultMap id="BaseResultMap" type="org.humingk.movie.dal.entity.PersistentLogins">
+    <constructor>
+      <idArg column="series" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="username" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="token" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="last_used" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    series, username, token, last_used
+  </sql>
+  <select id="selectByExample" parameterType="org.humingk.movie.dal.entity.PersistentLoginsExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from persistent_logins
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from persistent_logins
+    where series = #{series,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from persistent_logins
+    where series = #{series,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="org.humingk.movie.dal.entity.PersistentLoginsExample">
+    delete from persistent_logins
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="org.humingk.movie.dal.entity.PersistentLogins">
+    insert into persistent_logins (series, username, token, 
+      last_used)
+    values (#{series,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, #{token,jdbcType=VARCHAR}, 
+      #{lastUsed,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="org.humingk.movie.dal.entity.PersistentLogins">
+    insert into persistent_logins
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="series != null">
+        series,
+      </if>
+      <if test="username != null">
+        username,
+      </if>
+      <if test="token != null">
+        token,
+      </if>
+      <if test="lastUsed != null">
+        last_used,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="series != null">
+        #{series,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null">
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="token != null">
+        #{token,jdbcType=VARCHAR},
+      </if>
+      <if test="lastUsed != null">
+        #{lastUsed,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="org.humingk.movie.dal.entity.PersistentLoginsExample" resultType="java.lang.Long">
+    select count(*) from persistent_logins
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update persistent_logins
+    <set>
+      <if test="record.series != null">
+        series = #{record.series,jdbcType=VARCHAR},
+      </if>
+      <if test="record.username != null">
+        username = #{record.username,jdbcType=VARCHAR},
+      </if>
+      <if test="record.token != null">
+        token = #{record.token,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lastUsed != null">
+        last_used = #{record.lastUsed,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update persistent_logins
+    set series = #{record.series,jdbcType=VARCHAR},
+      username = #{record.username,jdbcType=VARCHAR},
+      token = #{record.token,jdbcType=VARCHAR},
+      last_used = #{record.lastUsed,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="org.humingk.movie.dal.entity.PersistentLogins">
+    update persistent_logins
+    <set>
+      <if test="username != null">
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="token != null">
+        token = #{token,jdbcType=VARCHAR},
+      </if>
+      <if test="lastUsed != null">
+        last_used = #{lastUsed,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where series = #{series,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.humingk.movie.dal.entity.PersistentLogins">
+    update persistent_logins
+    set username = #{username,jdbcType=VARCHAR},
+      token = #{token,jdbcType=VARCHAR},
+      last_used = #{lastUsed,jdbcType=TIMESTAMP}
+    where series = #{series,jdbcType=VARCHAR}
+  </update>
+</mapper>

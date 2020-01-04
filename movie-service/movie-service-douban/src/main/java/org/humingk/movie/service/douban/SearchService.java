@@ -1,6 +1,7 @@
 package org.humingk.movie.service.douban;
 
-import org.humingk.movie.service.common.entity.MovieDouban;
+
+import org.humingk.movie.dal.entity.MovieDouban;
 
 import java.util.List;
 

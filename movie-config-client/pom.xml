@@ -5,10 +5,9 @@
     <parent>
         <groupId>org.humingk</groupId>
         <artifactId>movie</artifactId>
-        <version>2.1</version>
+        <version>2.0.0</version>
     </parent>
     <artifactId>movie-config-client</artifactId>
-    <version>${movie-config-client.version}</version>
     <name>movie-config-client</name>
     <description>config client for movie</description>
 
@@ -17,11 +16,6 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
-        <!--eureka server-->
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
         </dependency>
         <!--spring cloud config server-->
         <dependency>

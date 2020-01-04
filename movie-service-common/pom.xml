@@ -5,10 +5,9 @@
     <parent>
         <groupId>org.humingk</groupId>
         <artifactId>movie</artifactId>
-        <version>2.1</version>
+        <version>2.0.0</version>
     </parent>
     <artifactId>movie-service-common</artifactId>
-    <version>${movie-service-common.version}</version>
     <name>movie-service-common</name>
     <description>comon for movie</description>
 
@@ -17,11 +16,6 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
-        <!--eureka server-->
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
         </dependency>
         <!--zipkin-->
         <dependency>
@@ -64,7 +58,7 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-aop</artifactId>
         </dependency>
-        <!--lombok工具-->
+        <!--lombok-->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
@@ -96,5 +90,4 @@
             <artifactId>guava</artifactId>
         </dependency>
     </dependencies>
-
 </project>

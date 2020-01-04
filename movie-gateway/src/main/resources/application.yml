@@ -1,5 +1,5 @@
 server:
-  port: 8086
+  port: 8080
 spring:
   application:
     name: movie-gateway
@@ -15,12 +15,12 @@ spring:
       # 路由转发
       routes:
         # ----------------------------------------
-        - id: movie-server-douban
+        - id: movie-server-movie
           # douban服务地址
           # lb://服务名 LoadBalancerClient过滤器，通过ribbon实现负载均衡算法
-          uri: lb://movie-server-douban
+          uri: lb://movie-server-movie
           predicates:
-            - Path=/api/douban/**
+            - Path=/api/movie/**
           filters:
             # 转发前去掉匹配path最前面的n个
             - StripPrefix=2

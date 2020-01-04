@@ -5,25 +5,50 @@
     <parent>
         <groupId>org.humingk</groupId>
         <artifactId>movie</artifactId>
-        <version>2.1</version>
+        <version>2.0.0</version>
     </parent>
     <artifactId>movie-dal</artifactId>
-    <version>${movie-dal.version}</version>
     <name>movie-dal</name>
     <description>dal for movie</description>
 
     <dependencies>
-        <!--eureka-->
+        <!--mybatis-->
         <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+            <groupId>org.mybatis.spring.boot</groupId>
+            <artifactId>mybatis-spring-boot-starter</artifactId>
         </dependency>
-        <!--zipkin-->
+        <!--mysql 驱动-->
         <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-zipkin</artifactId>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <scope>runtime</scope>
         </dependency>
     </dependencies>
-
-
+    <build>
+        <!--插件-->
+        <plugins>
+            <!--mybatis generator-->
+            <plugin>
+                <groupId>org.mybatis.generator</groupId>
+                <artifactId>mybatis-generator-maven-plugin</artifactId>
+                <version>${mybatis-generator-maven-plugin.version}</version>
+                <configuration>
+                    <!--mybatis的代码生成器的配置文件-->
+                    <configurationFile>src/main/resources/mybatis/generatorConfig.xml</configurationFile>
+                    <!--允许覆盖生成的文件-->
+                    <overwrite>true</overwrite>
+                    <!--将当前pom的依赖项添加到生成器的类路径中-->
+                    <!--<includeCompileDependencies>true</includeCompileDependencies>-->
+                </configuration>
+                <dependencies>
+                    <!--mysql的JDBC驱动 -->
+                    <dependency>
+                        <groupId>mysql</groupId>
+                        <artifactId>mysql-connector-java</artifactId>
+                        <version>${mysql-connector-java.version}</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+        </plugins>
+    </build>
 </project>

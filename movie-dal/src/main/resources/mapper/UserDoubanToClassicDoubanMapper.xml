@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.humingk.movie.dal.mapper.UserDoubanToClassicDoubanMapper">
+  <resultMap id="BaseResultMap" type="org.humingk.movie.dal.entity.UserDoubanToClassicDouban">
+    <constructor>
+      <idArg column="id_user_douban" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <idArg column="id_classic_douban" javaType="java.lang.Long" jdbcType="BIGINT" />
+      <arg column="record_datetime" javaType="java.lang.Long" jdbcType="BIGINT" />
+      <arg column="description" javaType="java.lang.String" jdbcType="VARCHAR" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id_user_douban, id_classic_douban, record_datetime, description
+  </sql>
+  <select id="selectByExample" parameterType="org.humingk.movie.dal.entity.UserDoubanToClassicDoubanExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from user_douban_to_classic_douban
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from user_douban_to_classic_douban
+    where id_user_douban = #{idUserDouban,jdbcType=VARCHAR}
+      and id_classic_douban = #{idClassicDouban,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="map">
+    delete from user_douban_to_classic_douban
+    where id_user_douban = #{idUserDouban,jdbcType=VARCHAR}
+      and id_classic_douban = #{idClassicDouban,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="org.humingk.movie.dal.entity.UserDoubanToClassicDoubanExample">
+    delete from user_douban_to_classic_douban
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="org.humingk.movie.dal.entity.UserDoubanToClassicDouban">
+    insert into user_douban_to_classic_douban (id_user_douban, id_classic_douban, record_datetime, 
+      description)
+    values (#{idUserDouban,jdbcType=VARCHAR}, #{idClassicDouban,jdbcType=BIGINT}, #{recordDatetime,jdbcType=BIGINT}, 
+      #{description,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="org.humingk.movie.dal.entity.UserDoubanToClassicDouban">
+    insert into user_douban_to_classic_douban
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="idUserDouban != null">
+        id_user_douban,
+      </if>
+      <if test="idClassicDouban != null">
+        id_classic_douban,
+      </if>
+      <if test="recordDatetime != null">
+        record_datetime,
+      </if>
+      <if test="description != null">
+        description,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="idUserDouban != null">
+        #{idUserDouban,jdbcType=VARCHAR},
+      </if>
+      <if test="idClassicDouban != null">
+        #{idClassicDouban,jdbcType=BIGINT},
+      </if>
+      <if test="recordDatetime != null">
+        #{recordDatetime,jdbcType=BIGINT},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="org.humingk.movie.dal.entity.UserDoubanToClassicDoubanExample" resultType="java.lang.Long">
+    select count(*) from user_douban_to_classic_douban
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update user_douban_to_classic_douban
+    <set>
+      <if test="record.idUserDouban != null">
+        id_user_douban = #{record.idUserDouban,jdbcType=VARCHAR},
+      </if>
+      <if test="record.idClassicDouban != null">
+        id_classic_douban = #{record.idClassicDouban,jdbcType=BIGINT},
+      </if>
+      <if test="record.recordDatetime != null">
+        record_datetime = #{record.recordDatetime,jdbcType=BIGINT},
+      </if>
+      <if test="record.description != null">
+        description = #{record.description,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update user_douban_to_classic_douban
+    set id_user_douban = #{record.idUserDouban,jdbcType=VARCHAR},
+      id_classic_douban = #{record.idClassicDouban,jdbcType=BIGINT},
+      record_datetime = #{record.recordDatetime,jdbcType=BIGINT},
+      description = #{record.description,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="org.humingk.movie.dal.entity.UserDoubanToClassicDouban">
+    update user_douban_to_classic_douban
+    <set>
+      <if test="recordDatetime != null">
+        record_datetime = #{recordDatetime,jdbcType=BIGINT},
+      </if>
+      <if test="description != null">
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id_user_douban = #{idUserDouban,jdbcType=VARCHAR}
+      and id_classic_douban = #{idClassicDouban,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.humingk.movie.dal.entity.UserDoubanToClassicDouban">
+    update user_douban_to_classic_douban
+    set record_datetime = #{recordDatetime,jdbcType=BIGINT},
+      description = #{description,jdbcType=VARCHAR}
+    where id_user_douban = #{idUserDouban,jdbcType=VARCHAR}
+      and id_classic_douban = #{idClassicDouban,jdbcType=BIGINT}
+  </update>
+</mapper>

@@ -10,7 +10,7 @@ import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
  */
 @SpringBootApplication
 @EnableEurekaClient
-@MapperScan(basePackages = {"org.humingk.movie.service.common.mapper"})
+@MapperScan(basePackages = {"org.humingk.movie.dal.mapper"})
 public class MovieServiceDoubanApplication {
 
     public static void main(String[] args) {

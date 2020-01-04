@@ -1,7 +1,0 @@
-spring:
-  application:
-    name: movie-server-douban
-eureka:
-  client:
-    service-url:
-      defaultZone: http://localhost:8761/eureka/

@@ -1,5 +1,5 @@
 server:
-  port: 11111
+  port: 10202
 spring:
   application:
     name: movie-service-netease
@@ -14,3 +14,6 @@ eureka:
   client:
     service-url:
       defaultZone: http://localhost:8761/eureka/
+pagehelper:
+  # page helper 方言
+  helperDialect: mysql

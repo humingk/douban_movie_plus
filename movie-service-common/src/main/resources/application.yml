@@ -1,10 +1,6 @@
 spring:
   application:
     name: movie-service-common
-  # aop
-  aop:
-    auto: true
-    proxy-target-class: true
   profiles:
     # dev / pro
     active: dev

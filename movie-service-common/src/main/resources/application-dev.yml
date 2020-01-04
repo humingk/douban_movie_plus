@@ -8,7 +8,7 @@ logging:
         springboot:
           mapper: debug
 server:
-  port: 8080
+  port: 11111
 spring:
   datasource:
     driverClassName: com.mysql.cj.jdbc.Driver

@@ -5,19 +5,13 @@
     <parent>
         <groupId>org.humingk</groupId>
         <artifactId>movie</artifactId>
-        <version>2.1</version>
+        <version>2.0.0</version>
     </parent>
     <artifactId>movie-gateway</artifactId>
-    <version>${movie-gateway.version}</version>
     <name>movie-gateway</name>
     <description>gateway for movie</description>
 
     <dependencies>
-        <!--eureka server-->
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
-        </dependency>
         <!--gateway-->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
