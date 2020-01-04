@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="org.humingk.common.mapper.PersistentLoginsMapper">
-  <resultMap id="BaseResultMap" type="org.humingk.common.entity.PersistentLogins">
+<mapper namespace="org.humingk.movie.service.common.mapper.PersistentLoginsMapper">
+  <resultMap id="BaseResultMap" type="org.humingk.movie.service.common.entity.PersistentLogins">
     <constructor>
       <idArg column="series" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="username" javaType="java.lang.String" jdbcType="VARCHAR" />
@@ -70,7 +70,7 @@
   <sql id="Base_Column_List">
     series, username, token, last_used
   </sql>
-  <select id="selectByExample" parameterType="org.humingk.common.entity.PersistentLoginsExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="org.humingk.movie.service.common.entity.PersistentLoginsExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -94,19 +94,19 @@
     delete from persistent_logins
     where series = #{series,jdbcType=VARCHAR}
   </delete>
-  <delete id="deleteByExample" parameterType="org.humingk.common.entity.PersistentLoginsExample">
+  <delete id="deleteByExample" parameterType="org.humingk.movie.service.common.entity.PersistentLoginsExample">
     delete from persistent_logins
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="org.humingk.common.entity.PersistentLogins">
+  <insert id="insert" parameterType="org.humingk.movie.service.common.entity.PersistentLogins">
     insert into persistent_logins (series, username, token, 
       last_used)
     values (#{series,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, #{token,jdbcType=VARCHAR}, 
       #{lastUsed,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="org.humingk.common.entity.PersistentLogins">
+  <insert id="insertSelective" parameterType="org.humingk.movie.service.common.entity.PersistentLogins">
     insert into persistent_logins
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="series != null">
@@ -137,7 +137,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="org.humingk.common.entity.PersistentLoginsExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="org.humingk.movie.service.common.entity.PersistentLoginsExample" resultType="java.lang.Long">
     select count(*) from persistent_logins
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -173,7 +173,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="org.humingk.common.entity.PersistentLogins">
+  <update id="updateByPrimaryKeySelective" parameterType="org.humingk.movie.service.common.entity.PersistentLogins">
     update persistent_logins
     <set>
       <if test="username != null">
@@ -188,7 +188,7 @@
     </set>
     where series = #{series,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="org.humingk.common.entity.PersistentLogins">
+  <update id="updateByPrimaryKey" parameterType="org.humingk.movie.service.common.entity.PersistentLogins">
     update persistent_logins
     set username = #{username,jdbcType=VARCHAR},
       token = #{token,jdbcType=VARCHAR},

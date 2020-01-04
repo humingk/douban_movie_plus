@@ -13,7 +13,7 @@
     <description>douban service for movie</description>
 
     <dependencies>
-        <!--eureka client-->
+        <!--eureka-->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>

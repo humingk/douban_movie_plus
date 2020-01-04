@@ -1,7 +1,7 @@
 package org.humingk.movie.server.douban.controller;
 
-import org.humingk.common.common.Result;
 import org.humingk.movie.api.douban.SearchApi;
+import org.humingk.movie.service.common.common.Result;
 import org.humingk.movie.service.douban.SearchService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;

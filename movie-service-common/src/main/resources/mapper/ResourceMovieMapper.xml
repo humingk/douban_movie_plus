@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="org.humingk.common.mapper.ResourceMovieMapper">
-  <resultMap id="BaseResultMap" type="org.humingk.common.entity.ResourceMovie">
+<mapper namespace="org.humingk.movie.service.common.mapper.ResourceMovieMapper">
+  <resultMap id="BaseResultMap" type="org.humingk.movie.service.common.entity.ResourceMovie">
     <constructor>
       <idArg column="id" javaType="java.lang.Long" jdbcType="BIGINT" />
       <arg column="id_movie_douban" javaType="java.lang.Long" jdbcType="BIGINT" />
@@ -76,7 +76,7 @@
     id, id_movie_douban, id_movie_imdb, id_website_resource, id_type_resource, name_zh, 
     create_year, name_origin, url_resource
   </sql>
-  <select id="selectByExample" parameterType="org.humingk.common.entity.ResourceMovieExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="org.humingk.movie.service.common.entity.ResourceMovieExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -100,13 +100,13 @@
     delete from resource_movie
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="org.humingk.common.entity.ResourceMovieExample">
+  <delete id="deleteByExample" parameterType="org.humingk.movie.service.common.entity.ResourceMovieExample">
     delete from resource_movie
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="org.humingk.common.entity.ResourceMovie">
+  <insert id="insert" parameterType="org.humingk.movie.service.common.entity.ResourceMovie">
     insert into resource_movie (id, id_movie_douban, id_movie_imdb, 
       id_website_resource, id_type_resource, name_zh, 
       create_year, name_origin, url_resource
@@ -116,7 +116,7 @@
       #{createYear,jdbcType=SMALLINT}, #{nameOrigin,jdbcType=VARCHAR}, #{urlResource,jdbcType=VARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="org.humingk.common.entity.ResourceMovie">
+  <insert id="insertSelective" parameterType="org.humingk.movie.service.common.entity.ResourceMovie">
     insert into resource_movie
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -177,7 +177,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="org.humingk.common.entity.ResourceMovieExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="org.humingk.movie.service.common.entity.ResourceMovieExample" resultType="java.lang.Long">
     select count(*) from resource_movie
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -233,7 +233,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="org.humingk.common.entity.ResourceMovie">
+  <update id="updateByPrimaryKeySelective" parameterType="org.humingk.movie.service.common.entity.ResourceMovie">
     update resource_movie
     <set>
       <if test="idMovieDouban != null">
@@ -263,7 +263,7 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="org.humingk.common.entity.ResourceMovie">
+  <update id="updateByPrimaryKey" parameterType="org.humingk.movie.service.common.entity.ResourceMovie">
     update resource_movie
     set id_movie_douban = #{idMovieDouban,jdbcType=BIGINT},
       id_movie_imdb = #{idMovieImdb,jdbcType=BIGINT},

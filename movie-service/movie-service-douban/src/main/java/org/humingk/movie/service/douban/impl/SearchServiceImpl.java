@@ -1,9 +1,9 @@
 package org.humingk.movie.service.douban.impl;
 
 import com.github.pagehelper.PageHelper;
-import org.humingk.common.entity.MovieDouban;
-import org.humingk.common.entity.MovieDoubanExample;
-import org.humingk.common.mapper.MovieDoubanMapper;
+import org.humingk.movie.service.common.entity.MovieDouban;
+import org.humingk.movie.service.common.entity.MovieDoubanExample;
+import org.humingk.movie.service.common.mapper.MovieDoubanMapper;
 import org.humingk.movie.service.douban.SearchService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

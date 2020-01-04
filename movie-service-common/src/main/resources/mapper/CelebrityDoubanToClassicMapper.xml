@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="org.humingk.common.mapper.CelebrityDoubanToClassicMapper">
-  <resultMap id="BaseResultMap" type="org.humingk.common.entity.CelebrityDoubanToClassic">
+<mapper namespace="org.humingk.movie.service.common.mapper.CelebrityDoubanToClassicMapper">
+  <resultMap id="BaseResultMap" type="org.humingk.movie.service.common.entity.CelebrityDoubanToClassic">
     <constructor>
       <idArg column="id_celebrity_douban" javaType="java.lang.Long" jdbcType="BIGINT" />
       <idArg column="id_classic_douban" javaType="java.lang.Long" jdbcType="BIGINT" />
@@ -68,7 +68,7 @@
   <sql id="Base_Column_List">
     id_celebrity_douban, id_classic_douban
   </sql>
-  <select id="selectByExample" parameterType="org.humingk.common.entity.CelebrityDoubanToClassicExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="org.humingk.movie.service.common.entity.CelebrityDoubanToClassicExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -87,17 +87,17 @@
     where id_celebrity_douban = #{idCelebrityDouban,jdbcType=BIGINT}
       and id_classic_douban = #{idClassicDouban,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="org.humingk.common.entity.CelebrityDoubanToClassicExample">
+  <delete id="deleteByExample" parameterType="org.humingk.movie.service.common.entity.CelebrityDoubanToClassicExample">
     delete from celebrity_douban_to_classic
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="org.humingk.common.entity.CelebrityDoubanToClassic">
+  <insert id="insert" parameterType="org.humingk.movie.service.common.entity.CelebrityDoubanToClassic">
     insert into celebrity_douban_to_classic (id_celebrity_douban, id_classic_douban)
     values (#{idCelebrityDouban,jdbcType=BIGINT}, #{idClassicDouban,jdbcType=BIGINT})
   </insert>
-  <insert id="insertSelective" parameterType="org.humingk.common.entity.CelebrityDoubanToClassic">
+  <insert id="insertSelective" parameterType="org.humingk.movie.service.common.entity.CelebrityDoubanToClassic">
     insert into celebrity_douban_to_classic
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="idCelebrityDouban != null">
@@ -116,7 +116,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="org.humingk.common.entity.CelebrityDoubanToClassicExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="org.humingk.movie.service.common.entity.CelebrityDoubanToClassicExample" resultType="java.lang.Long">
     select count(*) from celebrity_douban_to_classic
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="org.humingk.common.mapper.CelebrityImdbMapper">
-  <resultMap id="BaseResultMap" type="org.humingk.common.entity.CelebrityImdb">
+<mapper namespace="org.humingk.movie.service.common.mapper.CelebrityImdbMapper">
+  <resultMap id="BaseResultMap" type="org.humingk.movie.service.common.entity.CelebrityImdb">
     <constructor>
       <idArg column="id" javaType="java.lang.Long" jdbcType="BIGINT" />
       <arg column="name_en" javaType="java.lang.String" jdbcType="VARCHAR" />
@@ -70,7 +70,7 @@
   <sql id="Base_Column_List">
     id, name_en, birth_year, id_celebrity_douban
   </sql>
-  <select id="selectByExample" parameterType="org.humingk.common.entity.CelebrityImdbExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="org.humingk.movie.service.common.entity.CelebrityImdbExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -94,19 +94,19 @@
     delete from celebrity_imdb
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="org.humingk.common.entity.CelebrityImdbExample">
+  <delete id="deleteByExample" parameterType="org.humingk.movie.service.common.entity.CelebrityImdbExample">
     delete from celebrity_imdb
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="org.humingk.common.entity.CelebrityImdb">
+  <insert id="insert" parameterType="org.humingk.movie.service.common.entity.CelebrityImdb">
     insert into celebrity_imdb (id, name_en, birth_year, 
       id_celebrity_douban)
     values (#{id,jdbcType=BIGINT}, #{nameEn,jdbcType=VARCHAR}, #{birthYear,jdbcType=SMALLINT}, 
       #{idCelebrityDouban,jdbcType=BIGINT})
   </insert>
-  <insert id="insertSelective" parameterType="org.humingk.common.entity.CelebrityImdb">
+  <insert id="insertSelective" parameterType="org.humingk.movie.service.common.entity.CelebrityImdb">
     insert into celebrity_imdb
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -137,7 +137,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="org.humingk.common.entity.CelebrityImdbExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="org.humingk.movie.service.common.entity.CelebrityImdbExample" resultType="java.lang.Long">
     select count(*) from celebrity_imdb
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -173,7 +173,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="org.humingk.common.entity.CelebrityImdb">
+  <update id="updateByPrimaryKeySelective" parameterType="org.humingk.movie.service.common.entity.CelebrityImdb">
     update celebrity_imdb
     <set>
       <if test="nameEn != null">
@@ -188,7 +188,7 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="org.humingk.common.entity.CelebrityImdb">
+  <update id="updateByPrimaryKey" parameterType="org.humingk.movie.service.common.entity.CelebrityImdb">
     update celebrity_imdb
     set name_en = #{nameEn,jdbcType=VARCHAR},
       birth_year = #{birthYear,jdbcType=SMALLINT},

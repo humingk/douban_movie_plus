@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="org.humingk.common.mapper.MovieImdbToCelebrityImdbMapper">
-  <resultMap id="BaseResultMap" type="org.humingk.common.entity.MovieImdbToCelebrityImdb">
+<mapper namespace="org.humingk.movie.service.common.mapper.MovieImdbToCelebrityImdbMapper">
+  <resultMap id="BaseResultMap" type="org.humingk.movie.service.common.entity.MovieImdbToCelebrityImdb">
     <constructor>
       <idArg column="id_movie_imdb" javaType="java.lang.Long" jdbcType="BIGINT" />
       <idArg column="id_celebrity_imdb" javaType="java.lang.Long" jdbcType="BIGINT" />
@@ -69,7 +69,7 @@
   <sql id="Base_Column_List">
     id_movie_imdb, id_celebrity_imdb, id_profession
   </sql>
-  <select id="selectByExample" parameterType="org.humingk.common.entity.MovieImdbToCelebrityImdbExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="org.humingk.movie.service.common.entity.MovieImdbToCelebrityImdbExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -89,19 +89,19 @@
       and id_celebrity_imdb = #{idCelebrityImdb,jdbcType=BIGINT}
       and id_profession = #{idProfession,jdbcType=TINYINT}
   </delete>
-  <delete id="deleteByExample" parameterType="org.humingk.common.entity.MovieImdbToCelebrityImdbExample">
+  <delete id="deleteByExample" parameterType="org.humingk.movie.service.common.entity.MovieImdbToCelebrityImdbExample">
     delete from movie_imdb_to_celebrity_imdb
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="org.humingk.common.entity.MovieImdbToCelebrityImdb">
+  <insert id="insert" parameterType="org.humingk.movie.service.common.entity.MovieImdbToCelebrityImdb">
     insert into movie_imdb_to_celebrity_imdb (id_movie_imdb, id_celebrity_imdb, id_profession
       )
     values (#{idMovieImdb,jdbcType=BIGINT}, #{idCelebrityImdb,jdbcType=BIGINT}, #{idProfession,jdbcType=TINYINT}
       )
   </insert>
-  <insert id="insertSelective" parameterType="org.humingk.common.entity.MovieImdbToCelebrityImdb">
+  <insert id="insertSelective" parameterType="org.humingk.movie.service.common.entity.MovieImdbToCelebrityImdb">
     insert into movie_imdb_to_celebrity_imdb
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="idMovieImdb != null">
@@ -126,7 +126,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="org.humingk.common.entity.MovieImdbToCelebrityImdbExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="org.humingk.movie.service.common.entity.MovieImdbToCelebrityImdbExample" resultType="java.lang.Long">
     select count(*) from movie_imdb_to_celebrity_imdb
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />

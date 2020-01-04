@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="org.humingk.common.mapper.WebsiteResourceMapper">
-  <resultMap id="BaseResultMap" type="org.humingk.common.entity.WebsiteResource">
+<mapper namespace="org.humingk.movie.service.common.mapper.WebsiteResourceMapper">
+  <resultMap id="BaseResultMap" type="org.humingk.movie.service.common.entity.WebsiteResource">
     <constructor>
       <idArg column="id" javaType="java.lang.Short" jdbcType="SMALLINT" />
       <arg column="name_zh" javaType="java.lang.String" jdbcType="VARCHAR" />
@@ -69,7 +69,7 @@
   <sql id="Base_Column_List">
     id, name_zh, website_src
   </sql>
-  <select id="selectByExample" parameterType="org.humingk.common.entity.WebsiteResourceExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="org.humingk.movie.service.common.entity.WebsiteResourceExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -93,19 +93,19 @@
     delete from website_resource
     where id = #{id,jdbcType=SMALLINT}
   </delete>
-  <delete id="deleteByExample" parameterType="org.humingk.common.entity.WebsiteResourceExample">
+  <delete id="deleteByExample" parameterType="org.humingk.movie.service.common.entity.WebsiteResourceExample">
     delete from website_resource
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="org.humingk.common.entity.WebsiteResource">
+  <insert id="insert" parameterType="org.humingk.movie.service.common.entity.WebsiteResource">
     insert into website_resource (id, name_zh, website_src
       )
     values (#{id,jdbcType=SMALLINT}, #{nameZh,jdbcType=VARCHAR}, #{websiteSrc,jdbcType=VARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="org.humingk.common.entity.WebsiteResource">
+  <insert id="insertSelective" parameterType="org.humingk.movie.service.common.entity.WebsiteResource">
     insert into website_resource
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -130,7 +130,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="org.humingk.common.entity.WebsiteResourceExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="org.humingk.movie.service.common.entity.WebsiteResourceExample" resultType="java.lang.Long">
     select count(*) from website_resource
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -162,7 +162,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="org.humingk.common.entity.WebsiteResource">
+  <update id="updateByPrimaryKeySelective" parameterType="org.humingk.movie.service.common.entity.WebsiteResource">
     update website_resource
     <set>
       <if test="nameZh != null">
@@ -174,7 +174,7 @@
     </set>
     where id = #{id,jdbcType=SMALLINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="org.humingk.common.entity.WebsiteResource">
+  <update id="updateByPrimaryKey" parameterType="org.humingk.movie.service.common.entity.WebsiteResource">
     update website_resource
     set name_zh = #{nameZh,jdbcType=VARCHAR},
       website_src = #{websiteSrc,jdbcType=VARCHAR}

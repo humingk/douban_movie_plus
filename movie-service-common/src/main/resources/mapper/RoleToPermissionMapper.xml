@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="org.humingk.common.mapper.RoleToPermissionMapper">
-  <resultMap id="BaseResultMap" type="org.humingk.common.entity.RoleToPermission">
+<mapper namespace="org.humingk.movie.service.common.mapper.RoleToPermissionMapper">
+  <resultMap id="BaseResultMap" type="org.humingk.movie.service.common.entity.RoleToPermission">
     <constructor>
       <idArg column="id_role" javaType="java.lang.Byte" jdbcType="TINYINT" />
       <idArg column="id_permission" javaType="java.lang.Integer" jdbcType="INTEGER" />
@@ -68,7 +68,7 @@
   <sql id="Base_Column_List">
     id_role, id_permission
   </sql>
-  <select id="selectByExample" parameterType="org.humingk.common.entity.RoleToPermissionExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="org.humingk.movie.service.common.entity.RoleToPermissionExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -87,17 +87,17 @@
     where id_role = #{idRole,jdbcType=TINYINT}
       and id_permission = #{idPermission,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="org.humingk.common.entity.RoleToPermissionExample">
+  <delete id="deleteByExample" parameterType="org.humingk.movie.service.common.entity.RoleToPermissionExample">
     delete from role_to_permission
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="org.humingk.common.entity.RoleToPermission">
+  <insert id="insert" parameterType="org.humingk.movie.service.common.entity.RoleToPermission">
     insert into role_to_permission (id_role, id_permission)
     values (#{idRole,jdbcType=TINYINT}, #{idPermission,jdbcType=INTEGER})
   </insert>
-  <insert id="insertSelective" parameterType="org.humingk.common.entity.RoleToPermission">
+  <insert id="insertSelective" parameterType="org.humingk.movie.service.common.entity.RoleToPermission">
     insert into role_to_permission
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="idRole != null">
@@ -116,7 +116,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="org.humingk.common.entity.RoleToPermissionExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="org.humingk.movie.service.common.entity.RoleToPermissionExample" resultType="java.lang.Long">
     select count(*) from role_to_permission
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />

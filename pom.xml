@@ -42,23 +42,26 @@
     </developers>
     <!--子模块-->
     <modules>
-        <!--server-->
-        <module>movie-server-eureka</module>
-        <module>movie-server-zipkin</module>
-        <!--service-->
-        <module>movie-service-common</module>
-        <module>movie-service-user</module>
-        <module>movie-service-gateway</module>
         <!--config-->
         <module>movie-config-server</module>
         <module>movie-config-client</module>
         <!--api-->
-        <module>movie-api/movie-api-netease</module>
-        <module>movie-api/movie-api-douban</module>
-        <!--api server-->
-        <module>movie-server/movie-server-netease</module>
+        <module>movie-api</module>
+        <!--gateway-->
+        <module>movie-gateway</module>
+        <!--dal-->
+        <module>movie-dal</module>
+        <!--server-->
+        <module>movie-server-eureka</module>
+        <module>movie-server-zipkin</module>
+        <!--server list-->
         <module>movie-server/movie-server-douban</module>
-        <!--api service-->
+        <module>movie-server/movie-server-netease</module>
+        <module>movie-server/movie-server-scene</module>
+        <!--service-->
+        <module>movie-service-common</module>
+        <module>movie-service-user</module>
+        <!--service list-->
         <module>movie-service/movie-service-netease</module>
         <module>movie-service/movie-service-douban</module>
 
@@ -67,23 +70,31 @@
     <properties>
         <java.version>1.8</java.version>
         <spring-cloud-dependencies.version>Finchley.SR4</spring-cloud-dependencies.version>
-        <!--modules-config-->
+        <!--movie modules-->
+        <!--config-->
         <movie-config-server.version>1.1</movie-config-server.version>
         <movie-config-client.version>1.1</movie-config-client.version>
-        <!--modules-server-->
+        <!--api-->
+        <movie-api.version>1.1</movie-api.version>
+        <!--gateway-->
+        <movie-gateway.version>1.1</movie-gateway.version>
+        <!--dal-->
+        <movie-dal.version>1.1</movie-dal.version>
+        <!--server-->
         <movie-server-eureka.version>1.1</movie-server-eureka.version>
         <movie-server-zipkin.version>1.1</movie-server-zipkin.version>
-        <!--modules-service-->
+        <!--server list-->
+        <movie-server-douban.version>1.1</movie-server-douban.version>
+        <movie-server-netease.version>1.1</movie-server-netease.version>
+        <movie-server-scene.version>1.1</movie-server-scene.version>
+        <!--service-->
         <movie-service-common.version>1.1</movie-service-common.version>
         <movie-service-user.version>1.1</movie-service-user.version>
-        <movie-service-gateway.version>1.1</movie-service-gateway.version>
-        <!--modules-api-->
-        <movie-api-douban.version>1.1</movie-api-douban.version>
-        <!--modules-api-server-->
-        <movie-server-douban.version>1.1</movie-server-douban.version>
-        <!--modules-api-service-->
+        <!--service list-->
         <movie-service-douban.version>1.1</movie-service-douban.version>
-        <!--tools-->
+        <movie-service-netease.version>1.1</movie-service-netease.version>
+        <movie-service-scene.version>1.1</movie-service-scene.version>
+        <!--other tools-->
         <versions-maven-plugin.version>2.7</versions-maven-plugin.version>
         <mybatis-spring-boot-starter.version>2.0.1</mybatis-spring-boot-starter.version>
         <pagehelper-spring-boot-starter.version>1.2.13</pagehelper-spring-boot-starter.version>
@@ -106,12 +117,6 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.junit.vintage</groupId>
-                    <artifactId>junit-vintage-engine</artifactId>
-                </exclusion>
-            </exclusions>
         </dependency>
     </dependencies>
 
@@ -126,8 +131,8 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
-            <!--子模块版本-->
-            <!--modules-config-->
+            <!--movie modules-->
+            <!--config-->
             <dependency>
                 <groupId>org.humingk</groupId>
                 <artifactId>movie-config-server</artifactId>
@@ -138,18 +143,25 @@
                 <artifactId>movie-config-client</artifactId>
                 <version>${movie-config-client.version}</version>
             </dependency>
-            <!--modules-server-->
+            <!--api-->
             <dependency>
                 <groupId>org.humingk</groupId>
-                <artifactId>movie-server-eureka</artifactId>
-                <version>${movie-server-eureka.version}</version>
+                <artifactId>movie-api</artifactId>
+                <version>${movie-api.version}</version>
             </dependency>
+            <!--gateway-->
             <dependency>
                 <groupId>org.humingk</groupId>
-                <artifactId>movie-server-zipkin</artifactId>
-                <version>${movie-server-zipkin.version}</version>
+                <artifactId>movie-gateway</artifactId>
+                <version>${movie-gateway.version}</version>
             </dependency>
-            <!--modules-service-->
+            <!--dal-->
+            <dependency>
+                <groupId>org.humingk</groupId>
+                <artifactId>movie-dal</artifactId>
+                <version>${movie-dal.version}</version>
+            </dependency>
+            <!--service list-->
             <dependency>
                 <groupId>org.humingk</groupId>
                 <artifactId>movie-service-common</artifactId>
@@ -157,32 +169,10 @@
             </dependency>
             <dependency>
                 <groupId>org.humingk</groupId>
-                <artifactId>movie-service-user</artifactId>
-                <version>${movie-service-user.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.humingk</groupId>
-                <artifactId>movie-service-gateway</artifactId>
-                <version>${movie-service-gateway.version}</version>
-            </dependency>
-            <!--modules-api-->
-            <dependency>
-                <groupId>org.humingk</groupId>
-                <artifactId>movie-api-douban</artifactId>
-                <version>${movie-api-douban.version}</version>
-            </dependency>
-            <!--modules-api-server-->
-            <dependency>
-                <groupId>org.humingk</groupId>
-                <artifactId>movie-server-douban</artifactId>
-                <version>${movie-server-douban.version}</version>
-            </dependency>
-            <!--modules-api-service-->
-            <dependency>
-                <groupId>org.humingk</groupId>
                 <artifactId>movie-service-douban</artifactId>
                 <version>${movie-service-douban.version}</version>
             </dependency>
+            <!--other tools -->
             <!--mybatis-->
             <dependency>
                 <groupId>org.mybatis.spring.boot</groupId>

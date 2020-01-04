@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="org.humingk.common.mapper.SceneMapper">
-  <resultMap id="BaseResultMap" type="org.humingk.common.entity.Scene">
+<mapper namespace="org.humingk.movie.service.common.mapper.SceneMapper">
+  <resultMap id="BaseResultMap" type="org.humingk.movie.service.common.entity.Scene">
     <constructor>
       <idArg column="id" javaType="java.lang.Long" jdbcType="BIGINT" />
       <arg column="id_movie_scene" javaType="java.lang.Long" jdbcType="BIGINT" />
@@ -71,7 +71,7 @@
   <sql id="Base_Column_List">
     id, id_movie_scene, id_place_scene, name_zh, happen_time
   </sql>
-  <select id="selectByExample" parameterType="org.humingk.common.entity.SceneExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="org.humingk.movie.service.common.entity.SceneExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -95,19 +95,19 @@
     delete from scene
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="org.humingk.common.entity.SceneExample">
+  <delete id="deleteByExample" parameterType="org.humingk.movie.service.common.entity.SceneExample">
     delete from scene
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="org.humingk.common.entity.Scene">
+  <insert id="insert" parameterType="org.humingk.movie.service.common.entity.Scene">
     insert into scene (id, id_movie_scene, id_place_scene, 
       name_zh, happen_time)
     values (#{id,jdbcType=BIGINT}, #{idMovieScene,jdbcType=BIGINT}, #{idPlaceScene,jdbcType=BIGINT}, 
       #{nameZh,jdbcType=VARCHAR}, #{happenTime,jdbcType=INTEGER})
   </insert>
-  <insert id="insertSelective" parameterType="org.humingk.common.entity.Scene">
+  <insert id="insertSelective" parameterType="org.humingk.movie.service.common.entity.Scene">
     insert into scene
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -144,7 +144,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="org.humingk.common.entity.SceneExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="org.humingk.movie.service.common.entity.SceneExample" resultType="java.lang.Long">
     select count(*) from scene
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -184,7 +184,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="org.humingk.common.entity.Scene">
+  <update id="updateByPrimaryKeySelective" parameterType="org.humingk.movie.service.common.entity.Scene">
     update scene
     <set>
       <if test="idMovieScene != null">
@@ -202,7 +202,7 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="org.humingk.common.entity.Scene">
+  <update id="updateByPrimaryKey" parameterType="org.humingk.movie.service.common.entity.Scene">
     update scene
     set id_movie_scene = #{idMovieScene,jdbcType=BIGINT},
       id_place_scene = #{idPlaceScene,jdbcType=BIGINT},

@@ -13,7 +13,7 @@
     <description>zipkin server for movie</description>
 
     <dependencies>
-        <!--eureka client-->
+        <!--eureka server-->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>

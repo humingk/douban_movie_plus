@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="org.humingk.common.mapper.UserToRoleMapper">
-  <resultMap id="BaseResultMap" type="org.humingk.common.entity.UserToRole">
+<mapper namespace="org.humingk.movie.service.common.mapper.UserToRoleMapper">
+  <resultMap id="BaseResultMap" type="org.humingk.movie.service.common.entity.UserToRole">
     <constructor>
       <idArg column="id_user" javaType="java.lang.String" jdbcType="VARCHAR" />
       <idArg column="id_role" javaType="java.lang.Byte" jdbcType="TINYINT" />
@@ -68,7 +68,7 @@
   <sql id="Base_Column_List">
     id_user, id_role
   </sql>
-  <select id="selectByExample" parameterType="org.humingk.common.entity.UserToRoleExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="org.humingk.movie.service.common.entity.UserToRoleExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -87,17 +87,17 @@
     where id_user = #{idUser,jdbcType=VARCHAR}
       and id_role = #{idRole,jdbcType=TINYINT}
   </delete>
-  <delete id="deleteByExample" parameterType="org.humingk.common.entity.UserToRoleExample">
+  <delete id="deleteByExample" parameterType="org.humingk.movie.service.common.entity.UserToRoleExample">
     delete from user_to_role
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="org.humingk.common.entity.UserToRole">
+  <insert id="insert" parameterType="org.humingk.movie.service.common.entity.UserToRole">
     insert into user_to_role (id_user, id_role)
     values (#{idUser,jdbcType=VARCHAR}, #{idRole,jdbcType=TINYINT})
   </insert>
-  <insert id="insertSelective" parameterType="org.humingk.common.entity.UserToRole">
+  <insert id="insertSelective" parameterType="org.humingk.movie.service.common.entity.UserToRole">
     insert into user_to_role
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="idUser != null">
@@ -116,7 +116,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="org.humingk.common.entity.UserToRoleExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="org.humingk.movie.service.common.entity.UserToRoleExample" resultType="java.lang.Long">
     select count(*) from user_to_role
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />

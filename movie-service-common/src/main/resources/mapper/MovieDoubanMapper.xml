@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="org.humingk.common.mapper.MovieDoubanMapper">
-  <resultMap id="BaseResultMap" type="org.humingk.common.entity.MovieDouban">
+<mapper namespace="org.humingk.movie.service.common.mapper.MovieDoubanMapper">
+  <resultMap id="BaseResultMap" type="org.humingk.movie.service.common.entity.MovieDouban">
     <constructor>
       <idArg column="id" javaType="java.lang.Long" jdbcType="BIGINT" />
       <arg column="id_type_video" javaType="java.lang.Byte" jdbcType="TINYINT" />
@@ -17,7 +17,7 @@
       <arg column="is_zhihu" javaType="java.lang.Boolean" jdbcType="BIT" />
     </constructor>
   </resultMap>
-  <resultMap id="ResultMapWithBLOBs" type="org.humingk.common.entity.MovieDouban">
+  <resultMap id="ResultMapWithBLOBs" type="org.humingk.movie.service.common.entity.MovieDouban">
     <constructor>
       <idArg column="id" javaType="java.lang.Long" jdbcType="BIGINT" />
       <arg column="id_type_video" javaType="java.lang.Byte" jdbcType="TINYINT" />
@@ -99,7 +99,7 @@
   <sql id="Blob_Column_List">
     summary
   </sql>
-  <select id="selectByExampleWithBLOBs" parameterType="org.humingk.common.entity.MovieDoubanExample" resultMap="ResultMapWithBLOBs">
+  <select id="selectByExampleWithBLOBs" parameterType="org.humingk.movie.service.common.entity.MovieDoubanExample" resultMap="ResultMapWithBLOBs">
     select
     <if test="distinct">
       distinct
@@ -115,7 +115,7 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByExample" parameterType="org.humingk.common.entity.MovieDoubanExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="org.humingk.movie.service.common.entity.MovieDoubanExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -141,13 +141,13 @@
     delete from movie_douban
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="org.humingk.common.entity.MovieDoubanExample">
+  <delete id="deleteByExample" parameterType="org.humingk.movie.service.common.entity.MovieDoubanExample">
     delete from movie_douban
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="org.humingk.common.entity.MovieDouban">
+  <insert id="insert" parameterType="org.humingk.movie.service.common.entity.MovieDouban">
     insert into movie_douban (id, id_type_video, id_movie_imdb, 
       start_year, name_zh, name_origin, 
       runtime, url_poster, have_seen, 
@@ -159,7 +159,7 @@
       #{wannaSee,jdbcType=INTEGER}, #{isNetease,jdbcType=BIT}, #{isZhihu,jdbcType=BIT}, 
       #{summary,jdbcType=LONGVARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="org.humingk.common.entity.MovieDouban">
+  <insert id="insertSelective" parameterType="org.humingk.movie.service.common.entity.MovieDouban">
     insert into movie_douban
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -244,7 +244,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="org.humingk.common.entity.MovieDoubanExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="org.humingk.movie.service.common.entity.MovieDoubanExample" resultType="java.lang.Long">
     select count(*) from movie_douban
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -334,7 +334,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="org.humingk.common.entity.MovieDouban">
+  <update id="updateByPrimaryKeySelective" parameterType="org.humingk.movie.service.common.entity.MovieDouban">
     update movie_douban
     <set>
       <if test="idTypeVideo != null">
@@ -376,7 +376,7 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="org.humingk.common.entity.MovieDouban">
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="org.humingk.movie.service.common.entity.MovieDouban">
     update movie_douban
     set id_type_video = #{idTypeVideo,jdbcType=TINYINT},
       id_movie_imdb = #{idMovieImdb,jdbcType=BIGINT},
@@ -392,7 +392,7 @@
       summary = #{summary,jdbcType=LONGVARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="org.humingk.common.entity.MovieDouban">
+  <update id="updateByPrimaryKey" parameterType="org.humingk.movie.service.common.entity.MovieDouban">
     update movie_douban
     set id_type_video = #{idTypeVideo,jdbcType=TINYINT},
       id_movie_imdb = #{idMovieImdb,jdbcType=BIGINT},

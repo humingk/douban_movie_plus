@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="org.humingk.common.mapper.UserDoubanToMovieDoubanMapper">
-  <resultMap id="BaseResultMap" type="org.humingk.common.entity.UserDoubanToMovieDouban">
+<mapper namespace="org.humingk.movie.service.common.mapper.UserDoubanToMovieDoubanMapper">
+  <resultMap id="BaseResultMap" type="org.humingk.movie.service.common.entity.UserDoubanToMovieDouban">
     <constructor>
       <idArg column="id_user_douban" javaType="java.lang.String" jdbcType="VARCHAR" />
       <idArg column="id_movie_douban" javaType="java.lang.Long" jdbcType="BIGINT" />
@@ -71,7 +71,7 @@
   <sql id="Base_Column_List">
     id_user_douban, id_movie_douban, score, is_wish, is_seen
   </sql>
-  <select id="selectByExample" parameterType="org.humingk.common.entity.UserDoubanToMovieDoubanExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="org.humingk.movie.service.common.entity.UserDoubanToMovieDoubanExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -99,19 +99,19 @@
       and id_movie_douban = #{idMovieDouban,jdbcType=BIGINT}
       and score = #{score,jdbcType=DECIMAL}
   </delete>
-  <delete id="deleteByExample" parameterType="org.humingk.common.entity.UserDoubanToMovieDoubanExample">
+  <delete id="deleteByExample" parameterType="org.humingk.movie.service.common.entity.UserDoubanToMovieDoubanExample">
     delete from user_douban_to_movie_douban
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="org.humingk.common.entity.UserDoubanToMovieDouban">
+  <insert id="insert" parameterType="org.humingk.movie.service.common.entity.UserDoubanToMovieDouban">
     insert into user_douban_to_movie_douban (id_user_douban, id_movie_douban, score, 
       is_wish, is_seen)
     values (#{idUserDouban,jdbcType=VARCHAR}, #{idMovieDouban,jdbcType=BIGINT}, #{score,jdbcType=DECIMAL}, 
       #{isWish,jdbcType=BIT}, #{isSeen,jdbcType=BIT})
   </insert>
-  <insert id="insertSelective" parameterType="org.humingk.common.entity.UserDoubanToMovieDouban">
+  <insert id="insertSelective" parameterType="org.humingk.movie.service.common.entity.UserDoubanToMovieDouban">
     insert into user_douban_to_movie_douban
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="idUserDouban != null">
@@ -148,7 +148,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="org.humingk.common.entity.UserDoubanToMovieDoubanExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="org.humingk.movie.service.common.entity.UserDoubanToMovieDoubanExample" resultType="java.lang.Long">
     select count(*) from user_douban_to_movie_douban
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -188,7 +188,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="org.humingk.common.entity.UserDoubanToMovieDouban">
+  <update id="updateByPrimaryKeySelective" parameterType="org.humingk.movie.service.common.entity.UserDoubanToMovieDouban">
     update user_douban_to_movie_douban
     <set>
       <if test="isWish != null">
@@ -202,7 +202,7 @@
       and id_movie_douban = #{idMovieDouban,jdbcType=BIGINT}
       and score = #{score,jdbcType=DECIMAL}
   </update>
-  <update id="updateByPrimaryKey" parameterType="org.humingk.common.entity.UserDoubanToMovieDouban">
+  <update id="updateByPrimaryKey" parameterType="org.humingk.movie.service.common.entity.UserDoubanToMovieDouban">
     update user_douban_to_movie_douban
     set is_wish = #{isWish,jdbcType=BIT},
       is_seen = #{isSeen,jdbcType=BIT}

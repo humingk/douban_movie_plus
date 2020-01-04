@@ -1,6 +1,6 @@
 package org.humingk.movie.service.douban.service;
 
-import org.humingk.common.entity.MovieDouban;
+import org.humingk.movie.service.common.entity.MovieDouban;
 import org.humingk.movie.service.douban.impl.SearchServiceImpl;
 import org.junit.Test;
 import org.junit.runner.RunWith;

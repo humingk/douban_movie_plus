@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="org.humingk.common.mapper.AwardMovieMapper">
-  <resultMap id="BaseResultMap" type="org.humingk.common.entity.AwardMovie">
+<mapper namespace="org.humingk.movie.service.common.mapper.AwardMovieMapper">
+  <resultMap id="BaseResultMap" type="org.humingk.movie.service.common.entity.AwardMovie">
     <constructor>
       <idArg column="id" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="name_zh" javaType="java.lang.String" jdbcType="VARCHAR" />
@@ -68,7 +68,7 @@
   <sql id="Base_Column_List">
     id, name_zh
   </sql>
-  <select id="selectByExample" parameterType="org.humingk.common.entity.AwardMovieExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="org.humingk.movie.service.common.entity.AwardMovieExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -92,17 +92,17 @@
     delete from award_movie
     where id = #{id,jdbcType=VARCHAR}
   </delete>
-  <delete id="deleteByExample" parameterType="org.humingk.common.entity.AwardMovieExample">
+  <delete id="deleteByExample" parameterType="org.humingk.movie.service.common.entity.AwardMovieExample">
     delete from award_movie
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="org.humingk.common.entity.AwardMovie">
+  <insert id="insert" parameterType="org.humingk.movie.service.common.entity.AwardMovie">
     insert into award_movie (id, name_zh)
     values (#{id,jdbcType=VARCHAR}, #{nameZh,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="org.humingk.common.entity.AwardMovie">
+  <insert id="insertSelective" parameterType="org.humingk.movie.service.common.entity.AwardMovie">
     insert into award_movie
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -121,7 +121,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="org.humingk.common.entity.AwardMovieExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="org.humingk.movie.service.common.entity.AwardMovieExample" resultType="java.lang.Long">
     select count(*) from award_movie
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -149,7 +149,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="org.humingk.common.entity.AwardMovie">
+  <update id="updateByPrimaryKeySelective" parameterType="org.humingk.movie.service.common.entity.AwardMovie">
     update award_movie
     <set>
       <if test="nameZh != null">
@@ -158,7 +158,7 @@
     </set>
     where id = #{id,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="org.humingk.common.entity.AwardMovie">
+  <update id="updateByPrimaryKey" parameterType="org.humingk.movie.service.common.entity.AwardMovie">
     update award_movie
     set name_zh = #{nameZh,jdbcType=VARCHAR}
     where id = #{id,jdbcType=VARCHAR}

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="org.humingk.common.mapper.ReviewMovieDoubanMapper">
-  <resultMap id="BaseResultMap" type="org.humingk.common.entity.ReviewMovieDouban">
+<mapper namespace="org.humingk.movie.service.common.mapper.ReviewMovieDoubanMapper">
+  <resultMap id="BaseResultMap" type="org.humingk.movie.service.common.entity.ReviewMovieDouban">
     <constructor>
       <idArg column="id" javaType="java.lang.Long" jdbcType="BIGINT" />
       <arg column="agree_vote" javaType="java.lang.Integer" jdbcType="INTEGER" />
@@ -10,7 +10,7 @@
       <arg column="title" javaType="java.lang.String" jdbcType="VARCHAR" />
     </constructor>
   </resultMap>
-  <resultMap id="ResultMapWithBLOBs" type="org.humingk.common.entity.ReviewMovieDouban">
+  <resultMap id="ResultMapWithBLOBs" type="org.humingk.movie.service.common.entity.ReviewMovieDouban">
     <constructor>
       <idArg column="id" javaType="java.lang.Long" jdbcType="BIGINT" />
       <arg column="agree_vote" javaType="java.lang.Integer" jdbcType="INTEGER" />
@@ -84,7 +84,7 @@
   <sql id="Blob_Column_List">
     content
   </sql>
-  <select id="selectByExampleWithBLOBs" parameterType="org.humingk.common.entity.ReviewMovieDoubanExample" resultMap="ResultMapWithBLOBs">
+  <select id="selectByExampleWithBLOBs" parameterType="org.humingk.movie.service.common.entity.ReviewMovieDoubanExample" resultMap="ResultMapWithBLOBs">
     select
     <if test="distinct">
       distinct
@@ -100,7 +100,7 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByExample" parameterType="org.humingk.common.entity.ReviewMovieDoubanExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="org.humingk.movie.service.common.entity.ReviewMovieDoubanExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -126,13 +126,13 @@
     delete from review_movie_douban
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="org.humingk.common.entity.ReviewMovieDoubanExample">
+  <delete id="deleteByExample" parameterType="org.humingk.movie.service.common.entity.ReviewMovieDoubanExample">
     delete from review_movie_douban
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="org.humingk.common.entity.ReviewMovieDouban">
+  <insert id="insert" parameterType="org.humingk.movie.service.common.entity.ReviewMovieDouban">
     insert into review_movie_douban (id, agree_vote, against_vote, 
       create_datetime, title, content
       )
@@ -140,7 +140,7 @@
       #{createDatetime,jdbcType=BIGINT}, #{title,jdbcType=VARCHAR}, #{content,jdbcType=LONGVARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="org.humingk.common.entity.ReviewMovieDouban">
+  <insert id="insertSelective" parameterType="org.humingk.movie.service.common.entity.ReviewMovieDouban">
     insert into review_movie_douban
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -183,7 +183,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="org.humingk.common.entity.ReviewMovieDoubanExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="org.humingk.movie.service.common.entity.ReviewMovieDoubanExample" resultType="java.lang.Long">
     select count(*) from review_movie_douban
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -238,7 +238,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="org.humingk.common.entity.ReviewMovieDouban">
+  <update id="updateByPrimaryKeySelective" parameterType="org.humingk.movie.service.common.entity.ReviewMovieDouban">
     update review_movie_douban
     <set>
       <if test="agreeVote != null">
@@ -259,7 +259,7 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="org.humingk.common.entity.ReviewMovieDouban">
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="org.humingk.movie.service.common.entity.ReviewMovieDouban">
     update review_movie_douban
     set agree_vote = #{agreeVote,jdbcType=INTEGER},
       against_vote = #{againstVote,jdbcType=INTEGER},
@@ -268,7 +268,7 @@
       content = #{content,jdbcType=LONGVARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="org.humingk.common.entity.ReviewMovieDouban">
+  <update id="updateByPrimaryKey" parameterType="org.humingk.movie.service.common.entity.ReviewMovieDouban">
     update review_movie_douban
     set agree_vote = #{agreeVote,jdbcType=INTEGER},
       against_vote = #{againstVote,jdbcType=INTEGER},

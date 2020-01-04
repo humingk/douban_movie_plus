@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="org.humingk.common.mapper.MovieDoubanToTypeMovieMapper">
-  <resultMap id="BaseResultMap" type="org.humingk.common.entity.MovieDoubanToTypeMovie">
+<mapper namespace="org.humingk.movie.service.common.mapper.MovieDoubanToTypeMovieMapper">
+  <resultMap id="BaseResultMap" type="org.humingk.movie.service.common.entity.MovieDoubanToTypeMovie">
     <constructor>
       <idArg column="id_movie_douban" javaType="java.lang.Long" jdbcType="BIGINT" />
       <idArg column="id_type_movie" javaType="java.lang.Short" jdbcType="SMALLINT" />
@@ -68,7 +68,7 @@
   <sql id="Base_Column_List">
     id_movie_douban, id_type_movie
   </sql>
-  <select id="selectByExample" parameterType="org.humingk.common.entity.MovieDoubanToTypeMovieExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="org.humingk.movie.service.common.entity.MovieDoubanToTypeMovieExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -87,17 +87,17 @@
     where id_movie_douban = #{idMovieDouban,jdbcType=BIGINT}
       and id_type_movie = #{idTypeMovie,jdbcType=SMALLINT}
   </delete>
-  <delete id="deleteByExample" parameterType="org.humingk.common.entity.MovieDoubanToTypeMovieExample">
+  <delete id="deleteByExample" parameterType="org.humingk.movie.service.common.entity.MovieDoubanToTypeMovieExample">
     delete from movie_douban_to_type_movie
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="org.humingk.common.entity.MovieDoubanToTypeMovie">
+  <insert id="insert" parameterType="org.humingk.movie.service.common.entity.MovieDoubanToTypeMovie">
     insert into movie_douban_to_type_movie (id_movie_douban, id_type_movie)
     values (#{idMovieDouban,jdbcType=BIGINT}, #{idTypeMovie,jdbcType=SMALLINT})
   </insert>
-  <insert id="insertSelective" parameterType="org.humingk.common.entity.MovieDoubanToTypeMovie">
+  <insert id="insertSelective" parameterType="org.humingk.movie.service.common.entity.MovieDoubanToTypeMovie">
     insert into movie_douban_to_type_movie
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="idMovieDouban != null">
@@ -116,7 +116,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="org.humingk.common.entity.MovieDoubanToTypeMovieExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="org.humingk.movie.service.common.entity.MovieDoubanToTypeMovieExample" resultType="java.lang.Long">
     select count(*) from movie_douban_to_type_movie
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />

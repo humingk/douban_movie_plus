@@ -18,12 +18,12 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
-        <!--eureka client-->
+        <!--eureka-->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
         </dependency>
-        <!--zipkin client-->
+        <!--zipkin server-->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-zipkin</artifactId>
@@ -35,7 +35,7 @@
         </dependency>
         <dependency>
             <groupId>org.humingk</groupId>
-            <artifactId>movie-api-douban</artifactId>
+            <artifactId>movie-api</artifactId>
         </dependency>
     </dependencies>
 

@@ -4,10 +4,10 @@
 spring:
   application:
     # 对应 config server 中的{application}
-    name: movie-config-client
+    name: movie-config-server
   cloud:
     config:
-      name: movie-config-client
+      name: movie-config-server
       label: master
       # 对应 config server 中的{profile}
       profile: dev

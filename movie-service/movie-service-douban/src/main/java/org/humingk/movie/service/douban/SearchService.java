@@ -1,7 +1,6 @@
 package org.humingk.movie.service.douban;
 
-import org.humingk.common.entity.MovieDouban;
-import org.springframework.stereotype.Service;
+import org.humingk.movie.service.common.entity.MovieDouban;
 
 import java.util.List;
 

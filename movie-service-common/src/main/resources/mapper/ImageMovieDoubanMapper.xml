@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="org.humingk.common.mapper.ImageMovieDoubanMapper">
-  <resultMap id="BaseResultMap" type="org.humingk.common.entity.ImageMovieDouban">
+<mapper namespace="org.humingk.movie.service.common.mapper.ImageMovieDoubanMapper">
+  <resultMap id="BaseResultMap" type="org.humingk.movie.service.common.entity.ImageMovieDouban">
     <constructor>
       <idArg column="id" javaType="java.lang.Long" jdbcType="BIGINT" />
       <arg column="id_movie_douban" javaType="java.lang.Long" jdbcType="BIGINT" />
@@ -71,7 +71,7 @@
   <sql id="Base_Column_List">
     id, id_movie_douban, sort, length, width
   </sql>
-  <select id="selectByExample" parameterType="org.humingk.common.entity.ImageMovieDoubanExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="org.humingk.movie.service.common.entity.ImageMovieDoubanExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -95,19 +95,19 @@
     delete from image_movie_douban
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="org.humingk.common.entity.ImageMovieDoubanExample">
+  <delete id="deleteByExample" parameterType="org.humingk.movie.service.common.entity.ImageMovieDoubanExample">
     delete from image_movie_douban
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="org.humingk.common.entity.ImageMovieDouban">
+  <insert id="insert" parameterType="org.humingk.movie.service.common.entity.ImageMovieDouban">
     insert into image_movie_douban (id, id_movie_douban, sort, 
       length, width)
     values (#{id,jdbcType=BIGINT}, #{idMovieDouban,jdbcType=BIGINT}, #{sort,jdbcType=TINYINT}, 
       #{length,jdbcType=INTEGER}, #{width,jdbcType=INTEGER})
   </insert>
-  <insert id="insertSelective" parameterType="org.humingk.common.entity.ImageMovieDouban">
+  <insert id="insertSelective" parameterType="org.humingk.movie.service.common.entity.ImageMovieDouban">
     insert into image_movie_douban
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -144,7 +144,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="org.humingk.common.entity.ImageMovieDoubanExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="org.humingk.movie.service.common.entity.ImageMovieDoubanExample" resultType="java.lang.Long">
     select count(*) from image_movie_douban
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -184,7 +184,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="org.humingk.common.entity.ImageMovieDouban">
+  <update id="updateByPrimaryKeySelective" parameterType="org.humingk.movie.service.common.entity.ImageMovieDouban">
     update image_movie_douban
     <set>
       <if test="idMovieDouban != null">
@@ -202,7 +202,7 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="org.humingk.common.entity.ImageMovieDouban">
+  <update id="updateByPrimaryKey" parameterType="org.humingk.movie.service.common.entity.ImageMovieDouban">
     update image_movie_douban
     set id_movie_douban = #{idMovieDouban,jdbcType=BIGINT},
       sort = #{sort,jdbcType=TINYINT},

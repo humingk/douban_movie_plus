@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="org.humingk.common.mapper.UserDoubanToReviewMovieDoubanMapper">
-  <resultMap id="BaseResultMap" type="org.humingk.common.entity.UserDoubanToReviewMovieDouban">
+<mapper namespace="org.humingk.movie.service.common.mapper.UserDoubanToReviewMovieDoubanMapper">
+  <resultMap id="BaseResultMap" type="org.humingk.movie.service.common.entity.UserDoubanToReviewMovieDouban">
     <constructor>
       <idArg column="id_user_douban" javaType="java.lang.String" jdbcType="VARCHAR" />
       <idArg column="id_review_movie_douban" javaType="java.lang.Long" jdbcType="BIGINT" />
@@ -68,7 +68,7 @@
   <sql id="Base_Column_List">
     id_user_douban, id_review_movie_douban
   </sql>
-  <select id="selectByExample" parameterType="org.humingk.common.entity.UserDoubanToReviewMovieDoubanExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="org.humingk.movie.service.common.entity.UserDoubanToReviewMovieDoubanExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -87,17 +87,17 @@
     where id_user_douban = #{idUserDouban,jdbcType=VARCHAR}
       and id_review_movie_douban = #{idReviewMovieDouban,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="org.humingk.common.entity.UserDoubanToReviewMovieDoubanExample">
+  <delete id="deleteByExample" parameterType="org.humingk.movie.service.common.entity.UserDoubanToReviewMovieDoubanExample">
     delete from user_douban_to_review_movie_douban
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="org.humingk.common.entity.UserDoubanToReviewMovieDouban">
+  <insert id="insert" parameterType="org.humingk.movie.service.common.entity.UserDoubanToReviewMovieDouban">
     insert into user_douban_to_review_movie_douban (id_user_douban, id_review_movie_douban)
     values (#{idUserDouban,jdbcType=VARCHAR}, #{idReviewMovieDouban,jdbcType=BIGINT})
   </insert>
-  <insert id="insertSelective" parameterType="org.humingk.common.entity.UserDoubanToReviewMovieDouban">
+  <insert id="insertSelective" parameterType="org.humingk.movie.service.common.entity.UserDoubanToReviewMovieDouban">
     insert into user_douban_to_review_movie_douban
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="idUserDouban != null">
@@ -116,7 +116,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="org.humingk.common.entity.UserDoubanToReviewMovieDoubanExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="org.humingk.movie.service.common.entity.UserDoubanToReviewMovieDoubanExample" resultType="java.lang.Long">
     select count(*) from user_douban_to_review_movie_douban
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />

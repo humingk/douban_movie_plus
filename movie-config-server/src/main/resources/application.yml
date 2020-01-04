@@ -7,7 +7,7 @@ spring:
     config:
       server:
         # git远程仓库
-        # 访问url:  /{application}/{profile} eg: /movie-config-client/dev
+        # 访问url:  /{application}/{profile} eg: /movie-config-server/dev
         git:
           uri: https://github.com/humingk/douban_movie_config/
           search-paths: config
