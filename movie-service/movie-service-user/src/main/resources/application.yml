@@ -1,0 +1,19 @@
+server:
+  port: 10203
+spring:
+  application:
+    name: movie-service-user
+  datasource:
+    driverClassName: com.mysql.cj.jdbc.Driver
+    password: 1233
+    url: jdbc:mysql://localhost:3306/movie?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai
+    username: root
+mybatis:
+  mapper-locations: classpath:mapper/*Mapper.xml
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+pagehelper:
+  # page helper 方言
+  helperDialect: mysql

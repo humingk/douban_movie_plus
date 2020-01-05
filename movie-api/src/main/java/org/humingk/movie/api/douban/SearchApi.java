@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
  *
  * @author humingk
  */
-@FeignClient("movie-server-douban")
+@FeignClient("movie-server-movie")
 public interface SearchApi {
     /**
      * 豆瓣电影搜索提示

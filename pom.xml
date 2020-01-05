@@ -45,16 +45,14 @@
         <!--config-->
         <module>movie-config-server</module>
         <module>movie-config-client</module>
-        <!--api-->
+        <!--base-->
         <module>movie-api</module>
-        <!--gateway-->
-        <module>movie-gateway</module>
-        <!--common-->
         <module>movie-common</module>
-        <!--dal-->
         <module>movie-dal</module>
         <!--server-->
         <module>movie-server</module>
+        <module>movie-server-gateway</module>
+        <module>movie-server-auth</module>
         <module>movie-server-eureka</module>
         <module>movie-server-zipkin</module>
         <!--service-->
@@ -73,7 +71,8 @@
         <mysql-connector-java.version>8.0.18</mysql-connector-java.version>
         <lombok.version>1.18.10</lombok.version>
         <fastjson.version>1.2.62</fastjson.version>
-        <jjwt.version>0.9.1</jjwt.version>
+        <spring-security-jwt.version>1.0.10</spring-security-jwt.version>
+        <jwt.version>0.9.1</jwt.version>
         <commons-lang3.version>3.9</commons-lang3.version>
         <commons-pool2.version>2.7.0</commons-pool2.version>
         <guava.version>28.1-jre</guava.version>
@@ -119,25 +118,17 @@
                 <artifactId>movie-config-client</artifactId>
                 <version>2.0.0</version>
             </dependency>
-            <!--api-->
+            <!--base-->
             <dependency>
                 <groupId>org.humingk</groupId>
                 <artifactId>movie-api</artifactId>
                 <version>2.0.0</version>
             </dependency>
-            <!--gateway-->
-            <dependency>
-                <groupId>org.humingk</groupId>
-                <artifactId>movie-gateway</artifactId>
-                <version>2.0.0</version>
-            </dependency>
-            <!--common-->
             <dependency>
                 <groupId>org.humingk</groupId>
                 <artifactId>movie-common</artifactId>
                 <version>2.0.0</version>
             </dependency>
-            <!--dal-->
             <dependency>
                 <groupId>org.humingk</groupId>
                 <artifactId>movie-dal</artifactId>
@@ -159,6 +150,11 @@
                 <artifactId>movie-service-netease</artifactId>
                 <version>2.0.0</version>
             </dependency>
+            <dependency>
+                <groupId>org.humingk</groupId>
+                <artifactId>movie-service-user</artifactId>
+                <version>2.0.0</version>
+            </dependency>
             <!--other tools -->
             <!--mybatis-->
             <dependency>
@@ -173,11 +169,17 @@
                 <scope>runtime</scope>
                 <version>${mysql-connector-java.version}</version>
             </dependency>
-            <!--jjwt-->
+            <!--security-jwt-->
+            <dependency>
+                <groupId>org.springframework.security</groupId>
+                <artifactId>spring-security-jwt</artifactId>
+                <version>${spring-security-jwt.version}</version>
+            </dependency>
+            <!--jwt 解析-->
             <dependency>
                 <groupId>io.jsonwebtoken</groupId>
                 <artifactId>jjwt</artifactId>
-                <version>${jjwt.version}</version>
+                <version>${jwt.version}</version>
             </dependency>
             <!--mybatis generator page helper 分页插件-->
             <dependency>

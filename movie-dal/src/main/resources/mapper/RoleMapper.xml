@@ -180,4 +180,20 @@
       description = #{description,jdbcType=VARCHAR}
     where id = #{id,jdbcType=TINYINT}
   </update>
+
+
+  <!---->
+
+
+  <select id="selectRoleListByUserId" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select role.id,
+           role.name_zh,
+           role.description
+    from role
+           inner join user_to_role
+                      on role.id = user_to_role.id_role
+    where user_to_role.id_user = #{id,jdbcType=VARCHAR}
+  </select>
+
+
 </mapper>

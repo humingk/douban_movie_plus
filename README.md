@@ -1,5 +1,5 @@
 <div align="center">
-<img src="./image/logo3.png"/>
+<img src="./doc/image/logo3.png"/>
 </div>
 <div align="center">
 <a href="https://travis-ci.org/humingk/douban_movie"><img src="https://travis-ci.org/humingk/douban_movie.svg?branch=master" alt="Build Status"></a>
@@ -39,8 +39,8 @@ https://movie.doubans.com
 
 # 1.0项目框架图
 
-![](./image/structure.png)
+![](./doc/image/structure.png)
 
 # 数据库关系模型图
 
-![ER关系图](./image/movie_2.0_er.png)
+![ER关系图](./doc/image/movie_2.0_er.png)

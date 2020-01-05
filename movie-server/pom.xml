@@ -16,6 +16,7 @@
     <modules>
         <module>movie-server-movie</module>
         <module>movie-server-music</module>
+        <module>movie-server-user</module>
     </modules>
 
     <dependencies>

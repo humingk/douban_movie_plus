@@ -1,6 +1,7 @@
 package org.humingk.movie.dal.mapper;
 
 import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.humingk.movie.dal.entity.Role;
@@ -29,4 +30,11 @@ public interface RoleMapper {
     int updateByPrimaryKeySelective(Role record);
 
     int updateByPrimaryKey(Role record);
+
+
+    /**
+     * @param id
+     * @return
+     */
+    List<Role> selectRoleListByUserId(String id);
 }
