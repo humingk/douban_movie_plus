@@ -9,7 +9,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import java.util.List;
 
 /**
- * 用户所有角色
+ * 用户验证服务
  * <p>
  * 自定义UserDetailsService
  *

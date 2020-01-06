@@ -23,6 +23,8 @@ import static org.humingk.movie.common.util.StatusAndMessage.NOUSER;
 
 
 /**
+ * 用户验证服务
+ *
  * @author humingk
  */
 @Slf4j
@@ -73,12 +75,12 @@ public class MyUserDetailsServiceImpl implements MyUserDetailsService {
         User user = getUserByEmail(username);
         if (user == null) {
             log.warn("无此用户,email:{}", username);
-            throw new MyException(NOUSER, username);
+            throw new MyException(NOUSER,  "username: " + username);
         }
         List<Role> roleList = getRoleListByUserId(user.getId());
         if (roleList.size() == 0) {
             log.warn("此用户无权限,email:{}", username);
-            throw new MyException(FORBIDDEN, username);
+            throw new MyException(FORBIDDEN, "username: " + username);
         }
         List<SecurityRole> securityRoleList = new ArrayList<>();
         for (Role role : roleList) {

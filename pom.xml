@@ -71,7 +71,6 @@
         <mysql-connector-java.version>8.0.18</mysql-connector-java.version>
         <lombok.version>1.18.10</lombok.version>
         <fastjson.version>1.2.62</fastjson.version>
-        <spring-security-jwt.version>1.0.10</spring-security-jwt.version>
         <jwt.version>0.9.1</jwt.version>
         <commons-lang3.version>3.9</commons-lang3.version>
         <commons-pool2.version>2.7.0</commons-pool2.version>
@@ -168,12 +167,6 @@
                 <artifactId>mysql-connector-java</artifactId>
                 <scope>runtime</scope>
                 <version>${mysql-connector-java.version}</version>
-            </dependency>
-            <!--security-jwt-->
-            <dependency>
-                <groupId>org.springframework.security</groupId>
-                <artifactId>spring-security-jwt</artifactId>
-                <version>${spring-security-jwt.version}</version>
             </dependency>
             <!--jwt 解析-->
             <dependency>
