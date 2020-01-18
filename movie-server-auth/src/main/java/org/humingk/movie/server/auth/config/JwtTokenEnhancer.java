@@ -13,7 +13,7 @@ import java.util.Map;
  *
  * @author humingk
  */
-public class MyJwtTokenEnhancer implements TokenEnhancer {
+public class JwtTokenEnhancer implements TokenEnhancer {
     /**
      * Provides an opportunity for customization of an access token (e.g. through its additional information map) during
      * the process of creating a new token for use by a client.
@@ -25,7 +25,7 @@ public class MyJwtTokenEnhancer implements TokenEnhancer {
     @Override
     public OAuth2AccessToken enhance(OAuth2AccessToken accessToken, OAuth2Authentication authentication) {
         final Map<String, Object> info = new HashMap<>();
-        info.put("add_info1", "add_info2");
+        info.put("add_info1_key", "add_info1_value");
         ((DefaultOAuth2AccessToken) accessToken).setAdditionalInformation(info);
         return accessToken;
     }

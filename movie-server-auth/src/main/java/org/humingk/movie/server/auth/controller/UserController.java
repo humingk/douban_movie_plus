@@ -12,8 +12,24 @@ import java.security.Principal;
  */
 @RestController
 public class UserController {
-    @GetMapping("/user")
+    @GetMapping("/api/test")
+    public String api() {
+        return "test api(need token authorized)";
+    }
+
+    @GetMapping("/user_info")
     public Principal user(Principal user) {
         return user;
     }
+
+    @GetMapping("/test")
+    public String test() {
+        return "just test(nothing need)";
+    }
+
+    @GetMapping("/")
+    public String home() {
+        return "home";
+    }
+
 }

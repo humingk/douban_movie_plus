@@ -4,6 +4,7 @@ import org.humingk.movie.api.douban.SearchApi;
 import org.humingk.movie.common.entity.Result;
 import org.humingk.movie.service.douban.SearchService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -29,5 +30,10 @@ public class SearchController implements SearchApi {
     @PostMapping("/search_movie_tips")
     public Result searchMovieTips(@RequestParam("keyword") String keyword) {
         return Result.success(searchService.getMovieDoubanListByNameStart(keyword, 0, 10));
+    }
+
+    @GetMapping("/test")
+    public String test(){
+        return "test resource,nothing need,like token";
     }
 }

@@ -5,8 +5,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
@@ -20,7 +18,19 @@ import java.util.Arrays;
 /**
  * Oauth2认证授权服务配置
  * <p>
- * EnableAuthorizationServer:   声明为认证服务器
+ * EnableAuthorizationServer:   声明为认证服务器,支持请求包括：
+ * <p>
+ * /oauth/authorize：        验证接口
+ * <p>
+ * /oauth/token：            获取token
+ * <p>
+ * /oauth/confirm_access：   用户授权
+ * <p>
+ * /oauth/error：            认证失败
+ * <p>
+ * /oauth/check_token：      资源服务器用来校验token
+ * <p>
+ * /oauth/token_key：        jwt模式下获取公钥
  *
  * @author humingk
  */
@@ -64,11 +74,11 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
      * JWT-自定义JWT
      */
     @Autowired
-    private MyJwtTokenEnhancer myJwtTokenEnhancer;
+    private JwtTokenEnhancer jwtTokenEnhancer;
 
 
     /**
-     * oauth2密码模式，配置
+     * token配置，包括存储方式（JWT）、用户授权模式（密码模式）
      *
      * @param endpoints
      */
@@ -79,7 +89,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
         tokenEnhancerChain.setTokenEnhancers(
                 Arrays.asList(
                         // 自定义JWT
-                        myJwtTokenEnhancer,
+                        jwtTokenEnhancer,
                         // JWT签名秘钥
                         jwtAccessTokenConverter
                 )
@@ -97,27 +107,27 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
                 .tokenEnhancer(tokenEnhancerChain);
     }
 
-    /**
-     * 客户端验证配置
-     *
-     * @param clients
-     * @throws Exception
-     */
-    @Override
-    public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
-        clients.inMemory()
-                .withClient("client")
-                .scopes("xx")
-                .secret("client")
-                .authorizedGrantTypes("password", "authorization_code", "refresh_token")
-                .and()
-                .withClient("webapp")
-                .scopes("xx")
-                .authorizedGrantTypes("implicit");
-    }
+//    /**
+//     * 客户端验证配置
+//     *
+//     * @param clients
+//     * @throws Exception
+//     */
+//    @Override
+//    public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
+//        clients.inMemory()
+//                .withClient("client")
+//                .scopes("xx")
+//                .secret("client")
+//                .authorizedGrantTypes("password", "authorization_code", "refresh_token")
+//                .and()
+//                .withClient("webapp")
+//                .scopes("xx")
+//                .authorizedGrantTypes("implicit");
+//    }
 
     /**
-     * 单点登录，配置
+     * 单点登录，配置/oauth/token访问权限
      *
      * @param authorizationServerSecurityConfigurer
      */

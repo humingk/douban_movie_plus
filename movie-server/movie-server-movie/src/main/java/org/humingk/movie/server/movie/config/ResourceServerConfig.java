@@ -1,4 +1,4 @@
-package org.humingk.movie.server.auth.config;
+package org.humingk.movie.server.movie.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -10,7 +10,7 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.R
  * <p>
  * 主要用于oauth认证，保护需要token认证的资源
  * <p>
- * EnableResourceServer:    声明为资源服务器,且默认order=3，优先级高于WebConfig(order=100)
+ * EnableResourceServer:    声明为资源服务器
  *
  * @author humingk
  */
@@ -19,7 +19,7 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.R
 public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 
     /**
-     * 此filter chain仅对于api路径生效，仅保护api资源相关
+     * 路径过滤
      *
      * @param httpSecurity
      * @throws Exception
@@ -28,7 +28,9 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
     public void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity
                 .csrf().and().cors().disable()
-                // 拦截需要被保护的资源路径api
-                .antMatcher("/api/**").authorizeRequests().anyRequest().authenticated();
+                // 拦截需要被保护的资源路径
+                .authorizeRequests().antMatchers("/search_movie_tips/**").authenticated()
+                // 不拦截其他资源路径
+                .anyRequest().permitAll();
     }
 }

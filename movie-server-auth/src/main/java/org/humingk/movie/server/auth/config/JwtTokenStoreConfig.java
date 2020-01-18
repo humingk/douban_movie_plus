@@ -1,10 +1,7 @@
 package org.humingk.movie.server.auth.config;
 
-import org.humingk.movie.server.auth.config.MyJwtTokenEnhancer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
@@ -46,8 +43,8 @@ public class JwtTokenStoreConfig {
      * @return
      */
     @Bean
-    public MyJwtTokenEnhancer jwtTokenEnhancer() {
-        return new MyJwtTokenEnhancer();
+    public JwtTokenEnhancer jwtTokenEnhancer() {
+        return new JwtTokenEnhancer();
     }
 
 }

@@ -19,9 +19,9 @@ spring:
         - id: movie-server-auth
           uri: lb://movie-server-auth
           predicates:
-            - Path=/api/auth/**
+            - Path=/oauth/**
           filters:
-            - StripPrefix=2
+            - StripPrefix=0
         # ----------------------------------------
         # 用户
         - id: movie-server-user

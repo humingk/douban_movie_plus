@@ -23,5 +23,4 @@
             <artifactId>movie-service-user</artifactId>
         </dependency>
     </dependencies>
-
 </project>

@@ -17,5 +17,10 @@
             <groupId>org.humingk</groupId>
             <artifactId>movie-service-douban</artifactId>
         </dependency>
+        <!--security oauth2 (包含security)-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-oauth2</artifactId>
+        </dependency>
     </dependencies>
 </project>
