@@ -32,8 +32,14 @@ public class SearchController implements SearchApi {
         return Result.success(searchService.getMovieDoubanListByNameStart(keyword, 0, 10));
     }
 
-    @GetMapping("/test")
+    @GetMapping("/test1")
     public String test(){
-        return "test resource,nothing need,like token";
+        return "test resource movie,nothing need";
     }
+
+    @GetMapping("/test2")
+    public String test2(){
+        return "test resource movie,need token";
+    }
+
 }

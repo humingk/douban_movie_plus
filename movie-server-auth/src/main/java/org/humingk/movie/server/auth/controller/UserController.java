@@ -17,7 +17,7 @@ public class UserController {
         return "test api(need token authorized)";
     }
 
-    @GetMapping("/user_info")
+    @GetMapping("/user")
     public Principal user(Principal user) {
         return user;
     }
@@ -27,7 +27,7 @@ public class UserController {
         return "just test(nothing need)";
     }
 
-    @GetMapping("/")
+    @GetMapping("/home")
     public String home() {
         return "home";
     }

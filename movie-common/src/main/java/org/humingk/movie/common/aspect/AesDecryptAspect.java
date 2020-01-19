@@ -34,7 +34,7 @@ public class AesDecryptAspect {
      * 切点定义:
      * 使用@AESDecrypt注解的类or方法
      */
-    @Pointcut("@within(org.humingk.movie.service.common.annotation.AesDecrypt) || @annotation(org.humingk.movie.service.common.annotation.AesDecrypt)")
+    @Pointcut("@within(org.humingk.movie.common.annotation.AesDecrypt) || @annotation(org.humingk.movie.common.annotation.AesDecrypt)")
     public void aesDecryptPointCut() {
     }
 

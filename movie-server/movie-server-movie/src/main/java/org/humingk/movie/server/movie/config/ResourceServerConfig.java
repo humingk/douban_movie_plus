@@ -1,7 +1,9 @@
 package org.humingk.movie.server.movie.config;
 
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
 
@@ -16,6 +18,8 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.R
  */
 @Configuration
 @EnableResourceServer
+@EnableWebSecurity
+@EnableGlobalMethodSecurity(securedEnabled = true, prePostEnabled = true)
 public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 
     /**
@@ -27,10 +31,10 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
     @Override
     public void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity
-                .csrf().and().cors().disable()
-                // 拦截需要被保护的资源路径
-                .authorizeRequests().antMatchers("/search_movie_tips/**").authenticated()
-                // 不拦截其他资源路径
-                .anyRequest().permitAll();
+                .csrf().disable()
+                // 不需要保护的资源路径
+                .authorizeRequests().antMatchers("/test1/**").permitAll()
+                // 需要保护的资源路径
+                .anyRequest().authenticated();
     }
 }

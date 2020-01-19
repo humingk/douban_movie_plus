@@ -27,7 +27,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
     @Override
     public void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity
-                .csrf().and().cors().disable()
+                .csrf().disable()
                 // 拦截需要被保护的资源路径api
                 .antMatcher("/api/**").authorizeRequests().anyRequest().authenticated();
     }

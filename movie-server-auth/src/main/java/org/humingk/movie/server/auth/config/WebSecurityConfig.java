@@ -38,17 +38,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity
-                .cors().and().csrf().disable()
-                // 登录页面
-                .formLogin()
-                // 登陆成功后跳转
-                .successForwardUrl("/")
-                // 登出后跳转登录页面
-                .and().logout().logoutSuccessUrl("/login")
-                .and()
+                .csrf().disable()
                 .authorizeRequests()
                 // 不需要保护的路径
-                .antMatchers("/oauth/**", "/login/**", "/test/**").permitAll()
+                .antMatchers("/oauth/**", "/login/**", "/test/**", "/home/**").permitAll()
                 // 需要被保护的路径
                 .anyRequest().authenticated();
     }

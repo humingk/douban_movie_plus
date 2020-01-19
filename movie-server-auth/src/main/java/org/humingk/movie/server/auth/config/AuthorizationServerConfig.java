@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
@@ -107,24 +108,21 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
                 .tokenEnhancer(tokenEnhancerChain);
     }
 
-//    /**
-//     * 客户端验证配置
-//     *
-//     * @param clients
-//     * @throws Exception
-//     */
-//    @Override
-//    public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
-//        clients.inMemory()
-//                .withClient("client")
-//                .scopes("xx")
-//                .secret("client")
-//                .authorizedGrantTypes("password", "authorization_code", "refresh_token")
-//                .and()
-//                .withClient("webapp")
-//                .scopes("xx")
-//                .authorizedGrantTypes("implicit");
-//    }
+    /**
+     * 客户端验证配置
+     *
+     * @param clients
+     * @throws Exception
+     */
+    @Override
+    public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
+        clients.inMemory()
+                .withClient("client")
+                .scopes("all")
+                .secret("client")
+                .resourceIds()
+                .authorizedGrantTypes("password");
+    }
 
     /**
      * 单点登录，配置/oauth/token访问权限
@@ -134,8 +132,9 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     @Override
     public void configure(AuthorizationServerSecurityConfigurer authorizationServerSecurityConfigurer) {
         authorizationServerSecurityConfigurer
+                // 获取秘钥不需要身份认证
                 .tokenKeyAccess("permitAll()")
-                // 允许已授权用户访问check token接口
+                // 检查秘钥需要身份认证
                 .checkTokenAccess("isAuthenticated()");
     }
 }
