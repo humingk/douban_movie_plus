@@ -41,7 +41,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf().disable()
                 .authorizeRequests()
                 // 不需要保护的路径
-                .antMatchers("/oauth/**", "/login/**", "/test/**", "/home/**").permitAll()
+                .antMatchers("/user/**", "/oauth/**", "/login/**", "/test/**", "/home/**").permitAll()
                 // 需要被保护的路径
                 .anyRequest().authenticated();
     }
