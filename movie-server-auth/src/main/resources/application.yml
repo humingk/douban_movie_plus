@@ -1,3 +1,16 @@
+# 自定义信息
+custom:
+  jwt:
+    key:
+      value: youaretheappleofmyeyes
+  oauth2:
+    # 有效期 s
+    validity: 7776000
+  # 客户端
+  client:
+    id: client
+    secret: client
+    scopes: all
 server:
   port: 8006
 spring:
@@ -14,7 +27,4 @@ eureka:
       defaultZone: http://localhost:8761/eureka/
 mybatis:
   mapper-locations: classpath:mapper/*Mapper.xml
-security:
-  oauth2:
-    resource:
-      id: movie-server-auth
+

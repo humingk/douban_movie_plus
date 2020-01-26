@@ -15,21 +15,14 @@ eureka:
 security:
   oauth2:
     client:
-      client-id: movie-server-movie
-      client-secret: 1233
-      grant-type: password,refresh_token
-      scope: all
-      # 获取token
+      client-id: client
+      client-secret: client
+      # 密码模式需要用到的获取token接口
       access-token-uri: http://localhost:8006/oauth/token
-      # 验证token
-      user-authorization-uri: http://localhost:8006/oauth/authorized
     resource:
-      id: movie-server-movie
-      # 用户信息
-      user-info-uri: http://localhost:8006/user
-      # 检查token
-      token-info-uri: http://localhost:8006/oauth/check_token
-    authorization:
-      check-token-access: http://localhost:8006/oauth/check_token
+      jwt:
+        key-uri: http://localhost:8006/oauth/token_key
+        key-value: youaretheappleofmyeyes
+#       此服务端接收到客户端的请求（包含token）后，通过此接口到认证服务器做token验证
 mybatis:
   mapper-locations: classpath:mapper/*Mapper.xml

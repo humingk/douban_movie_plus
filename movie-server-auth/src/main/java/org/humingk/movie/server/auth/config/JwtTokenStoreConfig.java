@@ -1,5 +1,6 @@
 package org.humingk.movie.server.auth.config;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.oauth2.provider.token.TokenStore;
@@ -14,6 +15,9 @@ import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 @Configuration
 public class JwtTokenStoreConfig {
 
+    @Value("${custom.jwt.key.value}")
+    private String jwtKeyValue;
+
     /**
      * 注册 JWT-签名设置秘钥
      *
@@ -23,7 +27,7 @@ public class JwtTokenStoreConfig {
     public JwtAccessTokenConverter jwtAccessTokenConverter() {
         JwtAccessTokenConverter accessTokenConverter = new JwtAccessTokenConverter();
         // 配置JWT使用的秘钥,对称加密
-        accessTokenConverter.setSigningKey("youaretheappleofmyeyes");
+        accessTokenConverter.setSigningKey(jwtKeyValue);
         return accessTokenConverter;
     }
 

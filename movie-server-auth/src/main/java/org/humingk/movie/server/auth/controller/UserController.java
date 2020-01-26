@@ -1,11 +1,15 @@
 package org.humingk.movie.server.auth.controller;
 
+import io.jsonwebtoken.Jwts;
 import org.humingk.movie.common.entity.Result;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
+import java.nio.charset.StandardCharsets;
 import java.security.Principal;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -22,22 +26,16 @@ public class UserController {
         return "test api(need token authorized)";
     }
 
-    @GetMapping("/user")
-    public Principal user(Principal principal) {
-        System.out.println();
-        return principal;
-    }
-
+//    /**
+//     * 采用RemoteTokenServices方式对token验证
+//     *
+//     * @param principal
+//     * @return
+//     */
 //    @GetMapping("/user")
-//    public Result user(Principal principal) {
-////        return user;
-//        if (principal != null) {
-//            OAuth2Authentication oAuth2Authentication = (OAuth2Authentication) principal;
-//            Authentication authentication = oAuth2Authentication.getUserAuthentication();
-//            Map<String, String> details = (Map<String, String>) authentication.getDetails();
-//            Result.success(details);
-//        }
-//        return null;
+//    public Principal user(Principal principal) {
+//        System.out.println();
+//        return principal;
 //    }
 
     @GetMapping("/test")

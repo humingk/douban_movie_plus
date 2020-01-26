@@ -1,5 +1,6 @@
 package org.humingk.movie.server.auth.config;
 
+import org.humingk.movie.server.auth.entity.OauthModes;
 import org.humingk.movie.server.auth.service.MyUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -16,14 +17,13 @@ import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 
 import java.util.Arrays;
-import java.util.Map;
 
 /**
  * Oauth2认证授权服务配置
  * <p>
  * EnableAuthorizationServer:   声明为认证服务器,支持请求包括：
  * <p>
- * /oauth/authorize：        验证接口
+ * /oauth/authorize：        授权码模式认证授权接口
  * <p>
  * /oauth/token：            获取token
  * <p>
@@ -42,74 +42,19 @@ import java.util.Map;
 public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {
 
     /**
-     * 资源ID
+     * 有效期 /s 90d=7776000s
      */
-    @Value("${resource.id:spring-boot-application}")
-    private String resourceId;
+    @Value("${custom.oauth2.validity}")
+    private int validity;
 
-    /**
-     * 有效期 s
-     */
-    private static final int VALIDITY = 7776000;
+    @Value("${custom.client.id}")
+    private String clientId;
 
-    /**
-     * oauth2 几种模式
-     */
-    private static final class Modes {
-        /**
-         * 授权码模式： 第三方应用先申请一个授权码，然后再用该码获取令牌
-         * <p>
-         * 请求参数:
-         * <p>
-         * - response_type      授权类型(默认：code)
-         * - redirect_uri       重定向URL
-         * - client_id          客户端ID
-         * - scope              权限范围
-         */
-        public static final String CODE = "authorization_code";
-        /**
-         * 简化模式：省略授权码模式中的获取授权码过程
-         * <p>
-         * 请求参数：
-         * <p>
-         * - response_type      授权类型(默认：implicit)
-         * - redirect_uri       重定向URL
-         * - client_id          客户端ID
-         * - scope              权限范围
-         */
-        public static final String IMPLICIT = "implicit";
-        /**
-         * 密码模式：根据用户名和密码获取授权
-         * <p>
-         * 请求参数：
-         * <p>
-         * - grant_type         授权类型(默认：password)
-         * - username           用户名
-         * - password           密码
-         * - scope              权限范围
-         */
-        public static final String PASSWORD = "password";
-        /**
-         * 客户端模式: 针对第三方客户端应用的授权
-         * <p>
-         * 请求参数：
-         * <p>
-         * - grant_type         授权类型(默认：client_credentials)
-         * - client_id          客户端ID
-         * - client_secret      客户端密钥
-         * - scope              权限范围
-         */
-        public static final String CLIENT = "client_credentials";
-        /**
-         * 刷新token: 登录时发送两个令牌，一个用于获取数据，另一个用于更新令牌
-         * <p>
-         * 请求参数包括：
-         * - grant_type         使用的授权模式(默认：refresh_token)
-         * - refresh_token      之前收到的更新令牌
-         * - scope              权限范围
-         */
-        public static final String REFRESH = "refresh_token";
-    }
+    @Value("${custom.client.secret}")
+    private String clientSecert;
+
+    @Value("${custom.client.scopes}")
+    private String clientScopes;
 
     /**
      * 认证管理器
@@ -190,25 +135,12 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
         clients.inMemory()
-//                // 第三方客户端 账号
-//                .withClient("client")
-//                // 第三方客户端 密码
-//                .secret("client")
-//                // 第三方客户端在资源服务器的权限：read,write,all
-//                .scopes("all")
-//                // 此第三方客户端对应的资源ID
-////                .resourceIds("movie-server-auth", "movie-server-movie")
-//                // 此第三方客户端支持： 密码模式，更新令牌
-//                .authorizedGrantTypes(Modes.PASSWORD, Modes.REFRESH)
-//                // 通过此第三方登录后的有效期
-//                .accessTokenValiditySeconds(VALIDITY)
-
-                // movie-server-movie
-                .withClient("movie-server-movie")
-                .secret("1233")
-                .scopes("all")
-                .authorizedGrantTypes(Modes.PASSWORD, Modes.REFRESH)
-                .accessTokenValiditySeconds(VALIDITY);
+                // 用于password认证的客户端
+                .withClient(clientId)
+                .secret(clientSecert)
+                .scopes(clientScopes)
+                .authorizedGrantTypes(OauthModes.PASSWORD, OauthModes.REFRESH)
+                .accessTokenValiditySeconds(validity);
     }
 
     /**
@@ -219,9 +151,11 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     @Override
     public void configure(AuthorizationServerSecurityConfigurer authorizationServerSecurityConfigurer) {
         authorizationServerSecurityConfigurer
-                // 获取秘钥不需要身份认证
+                // 允许表单验证
+                .allowFormAuthenticationForClients()
+                // 允许非认证用户获取秘钥
                 .tokenKeyAccess("permitAll()")
-                // 检查秘钥不需要身份认证
+                // 允许非认证用户检查秘钥
                 .checkTokenAccess("permitAll()");
     }
 }
