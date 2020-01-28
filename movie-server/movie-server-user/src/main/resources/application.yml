@@ -12,6 +12,10 @@ spring:
     oauth2:
       client:
         registration:
+          auth:
+            client-id: client
+            client-secret: client
+            client-scopes: all
           github:
             client-id: e97fedfabcf648c19043
             client-secret: 4f6091870ca0e51b432587b557f6375732d3ac44
@@ -29,3 +33,7 @@ eureka:
       defaultZone: http://localhost:8761/eureka/
 mybatis:
   mapper-locations: classpath:mapper/*Mapper.xml
+# feign超时设置
+ribbon:
+  ReadTimeout: 100000
+  ConnectTimeout: 100000

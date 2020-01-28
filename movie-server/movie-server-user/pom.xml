@@ -12,12 +12,6 @@
     <description>user server for movie</description>
 
     <dependencies>
-        <!--        &lt;!&ndash;security oauth2 (包含security)&ndash;&gt;-->
-        <!--        <dependency>-->
-        <!--            <groupId>org.springframework.cloud</groupId>-->
-        <!--            <artifactId>spring-cloud-starter-oauth2</artifactId>-->
-        <!--        </dependency>-->
-        <!--service user-->
         <dependency>
             <groupId>org.humingk</groupId>
             <artifactId>movie-service-user</artifactId>

@@ -2,10 +2,14 @@ package org.humingk.movie.server.user;
 
 import com.alibaba.fastjson.JSONObject;
 import lombok.extern.slf4j.Slf4j;
+import org.humingk.movie.api.auth.OauthApi;
 import org.humingk.movie.common.entity.Result;
 import org.jsoup.Jsoup;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletResponse;
@@ -18,7 +22,16 @@ import java.util.Map;
  */
 @Slf4j
 @RestController
-public class UserController {
+public class LoginController {
+
+    @Value("${spring.security.oauth2.client.registration.auth.client-id}")
+    private String authClientId;
+
+    @Value("${spring.security.oauth2.client.registration.auth.client-secret}")
+    private String authClientSecret;
+
+    @Value("${spring.security.oauth2.client.registration.auth.client-scopes}")
+    private String authClientScopes;
 
     @Value("${spring.security.oauth2.client.registration.github.client-id}")
     private String githubClientId;
@@ -38,14 +51,27 @@ public class UserController {
     @Value("${spring.security.oauth2.client.registration.github.user-uri}")
     private String githubUserUri;
 
-    @GetMapping("/info")
-    public String userInfo() {
-        return "movie-server-user";
-    }
+    @Autowired
+    private OauthApi oauthApi;
 
-    @GetMapping("/home")
-    public String home() {
-        return "home";
+    /**
+     * auth 登录
+     *
+     * @param username
+     * @param password
+     * @return
+     */
+    @PostMapping("login")
+    public Result login(@RequestParam("username") String username, @RequestParam("password") String password) {
+        Map<String, String> params = new HashMap() {{
+            put("username", username);
+            put("password", password);
+            put("grant_type", "password");
+            put("scope", authClientScopes);
+            put("client_id", authClientId);
+            put("client_secret", authClientSecret);
+        }};
+        return Result.success(oauthApi.postAccessToken(params));
     }
 
 
@@ -55,7 +81,7 @@ public class UserController {
      * @param response
      * @throws IOException
      */
-    @GetMapping("github_login")
+    @GetMapping("/github_login")
     public void githubLogin(HttpServletResponse response) throws IOException {
         response.sendRedirect(githubAuthorizeUri
                 + "?response_type=code"

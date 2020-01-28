@@ -2,6 +2,7 @@ package org.humingk.movie.server.movie;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
+import org.apache.tomcat.jni.Time;
 import org.humingk.movie.api.douban.SearchApi;
 import org.humingk.movie.common.entity.Result;
 import org.humingk.movie.service.douban.SearchService;
@@ -16,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.nio.charset.StandardCharsets;
+import java.util.Timer;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author humingk
@@ -41,19 +44,19 @@ public class SearchController implements SearchApi {
     }
 
     @GetMapping("/test1")
-    public String test(){
+    public String test() {
         return "test resource movie,nothing need";
     }
 
     @GetMapping("/test2")
-    public String test2(){
+    public String test2() {
         return "test resource movie,need token";
     }
 
     @GetMapping("token")
-    public Object getToken(Authentication authentication){
+    public Object getToken(Authentication authentication) {
         authentication.getCredentials();
-        OAuth2AuthenticationDetails details = (OAuth2AuthenticationDetails)authentication.getDetails();
+        OAuth2AuthenticationDetails details = (OAuth2AuthenticationDetails) authentication.getDetails();
         String token = details.getTokenValue();
         return token;
     }
@@ -62,9 +65,9 @@ public class SearchController implements SearchApi {
     private String jwtKeyValue;
 
     @GetMapping(value = "jwt")
-    public Object jwtParser(Authentication authentication){
+    public Object jwtParser(Authentication authentication) {
         authentication.getCredentials();
-        OAuth2AuthenticationDetails details = (OAuth2AuthenticationDetails)authentication.getDetails();
+        OAuth2AuthenticationDetails details = (OAuth2AuthenticationDetails) authentication.getDetails();
         return Jwts.parser()
                 .setSigningKey(jwtKeyValue.getBytes(StandardCharsets.UTF_8))
                 .parseClaimsJws(details.getTokenValue())
