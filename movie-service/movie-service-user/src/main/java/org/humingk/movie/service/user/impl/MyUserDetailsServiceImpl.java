@@ -1,4 +1,4 @@
-package org.humingk.movie.server.auth.service.impl;
+package org.humingk.movie.service.user.impl;
 
 import lombok.extern.slf4j.Slf4j;
 import org.humingk.movie.common.exception.MyException;
@@ -7,9 +7,9 @@ import org.humingk.movie.dal.entity.User;
 import org.humingk.movie.dal.entity.UserExample;
 import org.humingk.movie.dal.mapper.RoleMapper;
 import org.humingk.movie.dal.mapper.UserMapper;
-import org.humingk.movie.server.auth.entity.SecurityRole;
-import org.humingk.movie.server.auth.entity.SecurityUser;
-import org.humingk.movie.server.auth.service.MyUserDetailsService;
+import org.humingk.movie.service.user.entity.SecurityRole;
+import org.humingk.movie.service.user.entity.SecurityUser;
+import org.humingk.movie.service.user.MyUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

@@ -1,4 +1,4 @@
-package org.humingk.movie.server.auth.entity;
+package org.humingk.movie.service.user.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

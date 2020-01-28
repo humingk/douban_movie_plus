@@ -1,18 +1,7 @@
 package org.humingk.movie.server.auth.controller;
 
-import io.jsonwebtoken.Jwts;
-import org.humingk.movie.common.entity.Result;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import javax.servlet.http.HttpServletRequest;
-import java.nio.charset.StandardCharsets;
-import java.security.Principal;
-import java.util.LinkedHashMap;
-import java.util.Map;
 
 /**
  * 用户

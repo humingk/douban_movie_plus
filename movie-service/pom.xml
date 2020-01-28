@@ -25,6 +25,11 @@
             <groupId>org.humingk</groupId>
             <artifactId>movie-dal</artifactId>
         </dependency>
+        <!--common-->
+        <dependency>
+            <groupId>org.humingk</groupId>
+            <artifactId>movie-common</artifactId>
+        </dependency>
         <!--mybatis generator page helper 分页插件-->
         <dependency>
             <groupId>com.github.pagehelper</groupId>

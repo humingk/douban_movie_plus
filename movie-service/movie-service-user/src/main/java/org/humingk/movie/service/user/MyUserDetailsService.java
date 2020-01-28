@@ -1,4 +1,4 @@
-package org.humingk.movie.server.auth.service;
+package org.humingk.movie.service.user;
 
 import org.humingk.movie.dal.entity.Role;
 import org.humingk.movie.dal.entity.User;

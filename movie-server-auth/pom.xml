@@ -17,10 +17,10 @@
             <groupId>org.humingk</groupId>
             <artifactId>movie-common</artifactId>
         </dependency>
-        <!--dal-->
+        <!--service user-->
         <dependency>
             <groupId>org.humingk</groupId>
-            <artifactId>movie-dal</artifactId>
+            <artifactId>movie-service-user</artifactId>
         </dependency>
         <!--web-->
         <dependency>
