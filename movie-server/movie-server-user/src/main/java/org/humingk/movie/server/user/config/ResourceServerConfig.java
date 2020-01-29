@@ -36,7 +36,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
         httpSecurity
                 .csrf().disable()
                 // 不需要保护的资源路径
-                .authorizeRequests().antMatchers("/*login/**").permitAll()
+                .authorizeRequests().antMatchers("/*login/**","/register/**").permitAll()
                 // 需要保护的资源路径
                 .anyRequest().authenticated();
     }

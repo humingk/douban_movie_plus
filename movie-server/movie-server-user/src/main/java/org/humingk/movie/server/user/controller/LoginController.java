@@ -5,6 +5,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.humingk.movie.api.auth.OauthApi;
 import org.humingk.movie.api.user.LoginApi;
 import org.humingk.movie.common.entity.Result;
+import org.humingk.movie.common.exception.MyException;
+import org.humingk.movie.common.util.AesUtil;
+import org.humingk.movie.common.util.StatusAndMessage;
 import org.jsoup.Jsoup;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -61,21 +64,27 @@ public class LoginController implements LoginApi {
      * auth 登录
      *
      * @param email    用户邮箱
-     * @param password 密码d
+     * @param password 密码
      * @return
      */
     @Override
     @PostMapping("login")
-    public Result login(@RequestParam("username") String email, @RequestParam("password") String password) {
-        Map<String, String> params = new HashMap() {{
-            put("username", email);
-            put("password", password);
-            put("grant_type", "password");
-            put("scope", authClientScopes);
-            put("client_id", authClientId);
-            put("client_secret", authClientSecret);
-        }};
-        return Result.success(oauthApi.postAccessToken(params));
+    public Result login(@RequestParam("username") String email,
+                        @RequestParam("password") String password) {
+        try {
+            Map<String, String> params = new HashMap() {{
+                put("username", AesUtil.decrypt(email));
+                put("password", AesUtil.decrypt(password));
+                put("grant_type", "password");
+                put("scope", authClientScopes);
+                put("client_id", authClientId);
+                put("client_secret", authClientSecret);
+            }};
+            return Result.success(oauthApi.postAccessToken(params));
+        } catch (Exception e) {
+            log.error("登录出错", e);
+            throw new MyException(StatusAndMessage.ERROR, e.getMessage());
+        }
     }
 
 
@@ -105,7 +114,8 @@ public class LoginController implements LoginApi {
      */
     @Override
     @GetMapping("/github_callback")
-    public Result githubCallback(@RequestParam("code") String code, @RequestParam("state") String state) {
+    public Result githubCallback(@RequestParam("code") String code,
+                                 @RequestParam("state") String state) {
         // github申请token的请求参数
         Map<String, String> params = new HashMap() {{
             put("grant_type", "authorization_code");
@@ -116,6 +126,7 @@ public class LoginController implements LoginApi {
         }};
         Map<String, Object> result = new HashMap<>();
         try {
+            // 申请github-token
             // eg: access_token=...&scope=&token_type=bearer
             String body = Jsoup.connect(githubAccessTokenUri)
                     .ignoreContentType(true).data(params)
@@ -126,6 +137,7 @@ public class LoginController implements LoginApi {
             }
             result.put("user_info",
                     JSONObject.parseObject(
+                            // 通过token获取github个人信息
                             Jsoup.connect(githubUserUri)
                                     .ignoreContentType(true)
                                     .data("access_token", (String) result.get("access_token"))

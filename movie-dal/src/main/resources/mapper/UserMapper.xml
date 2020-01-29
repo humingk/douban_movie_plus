@@ -181,8 +181,7 @@
     <!--    -&#45;&#45;-->
 
     <!--插入成功后将返回主键ID-->
-    <insert id="insert" useGeneratedKeys="true" keyColumn="id" keyProperty="id"
-            parameterType="org.humingk.movie.dal.entity.User">
+    <insert id="insert" parameterType="org.humingk.movie.dal.entity.User" >
         insert into user (id, email, password)
         values (#{id,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR})
     </insert>

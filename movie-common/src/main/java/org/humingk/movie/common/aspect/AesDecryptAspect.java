@@ -1,6 +1,5 @@
 package org.humingk.movie.common.aspect;
 
-import com.alibaba.fastjson.JSONObject;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -47,10 +46,12 @@ public class AesDecryptAspect {
      */
     @Around("aesDecryptPointCut()")
     public Object doAround(ProceedingJoinPoint joinPoint) throws Throwable {
-        // 请求参数
+        // 请求参数列表
         Object[] args = joinPoint.getArgs();
         try {
-            args[0] = AesUtil.decrypt(args[0].toString());
+            for (int i = 0; i < args.length; i++) {
+                args[i] = AesUtil.decrypt(args[i].toString());
+            }
         } catch (Exception e) {
             ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
             HttpServletRequest request = attributes.getRequest();
@@ -61,8 +62,7 @@ public class AesDecryptAspect {
                     put("args", joinPoint.getArgs());
                 }
             };
-            log.error(e.getMessage(), e);
-            log.warn("decrypt failed:{}", new JSONObject(logMap));
+            log.warn("decrypt failed:" + logMap.toString() + ",reason", e);
             throw new MyException(StatusAndMessage.BADREQUEST);
         }
         return joinPoint.proceed(args);

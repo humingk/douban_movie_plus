@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
@@ -137,7 +138,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
         clients.inMemory()
                 // 用于password认证的客户端
                 .withClient(clientId)
-                .secret(clientSecert)
+                .secret(new BCryptPasswordEncoder().encode(clientSecert))
                 .scopes(clientScopes)
                 .authorizedGrantTypes(OauthModes.PASSWORD, OauthModes.REFRESH)
                 .accessTokenValiditySeconds(validity);

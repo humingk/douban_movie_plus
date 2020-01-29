@@ -15,6 +15,6 @@ public class SearchApiTest {
 
     @Test
     public void searchMovieTips() {
-        System.out.println(searchApi.searchMovieTips("星际").toString());
+        System.out.println(searchApi.searchMovieTips("星际",0,10).toString());
     }
 }

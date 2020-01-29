@@ -77,6 +77,10 @@ public class AesUtil {
         ArrayList list = new ArrayList() {
             {
                 add("{\"keyword\":\"星际\",\"offset\":0,\"limit\":5}");
+                add("test1233");
+                add("1233");
+                add("douban_id");
+                add("client");
             }
         };
         for (Object str : list) {

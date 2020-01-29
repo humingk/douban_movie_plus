@@ -1,7 +1,6 @@
 package org.humingk.movie.server.movie;
 
 import io.jsonwebtoken.Jwts;
-import org.humingk.movie.api.movie.SearchApi;
 import org.humingk.movie.common.entity.Result;
 import org.humingk.movie.service.douban.service.SearchService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +8,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.provider.authentication.OAuth2AuthenticationDetails;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -19,7 +17,7 @@ import java.nio.charset.StandardCharsets;
  * @author humingk
  */
 @RestController
-public class SearchController implements SearchApi {
+public class SearchController {
 
     @Autowired
     private SearchService searchService;
@@ -29,13 +27,21 @@ public class SearchController implements SearchApi {
      * <p>
      * 根据电影名称开头的字符串找出豆瓣电影的基本信息列表
      *
-     * @param keyword
+     * @param keyword 搜索关键字
+     * @param offset  偏移量（可选，默认0）
+     * @param limit   限制数（可选，默认10）
      * @return
      */
-    @Override
-    @PostMapping("/search_movie_tips")
-    public Result searchMovieTips(@RequestParam("keyword") String keyword) {
-        return Result.success(searchService.getMovieDoubanListByNameStart(keyword, 0, 10));
+//    @Override
+    @GetMapping("search_movie_tips")
+    public Result searchMovieTips(@RequestParam("keyword") String keyword,
+                                  @RequestParam(value = "offset",
+                                          required = false,
+                                          defaultValue = "0") int offset,
+                                  @RequestParam(value = "limit",
+                                          required = false,
+                                          defaultValue = "10") int limit) {
+        return Result.success(searchService.getMovieDoubanListByNameStart(keyword, offset, limit));
     }
 
     @GetMapping("/test1")

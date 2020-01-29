@@ -1,11 +1,11 @@
 package org.humingk.movie.dal.mapper;
 
-import java.util.List;
-
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.humingk.movie.dal.entity.User;
 import org.humingk.movie.dal.entity.UserExample;
+
+import java.util.List;
 
 @Mapper
 public interface UserMapper {
@@ -36,7 +36,7 @@ public interface UserMapper {
      * 插入用户数据
      *
      * @param record
-     * @return 插入成功后返回主键值
+     * @return 插入成功后返回执行条数，插入失败则返回0
      */
-    String insert(User record);
+    int insert(User record);
 }

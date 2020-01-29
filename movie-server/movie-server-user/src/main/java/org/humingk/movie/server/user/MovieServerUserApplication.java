@@ -5,7 +5,6 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.web.bind.annotation.RestController;
 
 /**
  * @author humingk
@@ -14,8 +13,9 @@ import org.springframework.web.bind.annotation.RestController;
 @EnableEurekaClient
 @ComponentScan(basePackages = {
         "org.humingk.movie.server.user",
-        "org.humingk.movie.api"
-
+        "org.humingk.movie.service.user",
+        "org.humingk.movie.api",
+        "org.humingk.movie.common"
 })
 @MapperScan(basePackages = {
         "org.humingk.movie.service.common.mapper"

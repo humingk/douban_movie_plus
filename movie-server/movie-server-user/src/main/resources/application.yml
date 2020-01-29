@@ -38,6 +38,7 @@ security:
     client:
       client-id: client
       client-secret: client
+
       # 密码模式需要用到的获取token接口
       access-token-uri: http://localhost:8006/oauth/token
     resource:

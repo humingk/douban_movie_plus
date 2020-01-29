@@ -1,7 +1,11 @@
 package org.humingk.movie.server.user.controller;
 
 import org.humingk.movie.api.user.RegisterApi;
+import org.humingk.movie.common.annotation.AesDecrypt;
 import org.humingk.movie.common.entity.Result;
+import org.humingk.movie.dal.entity.User;
+import org.humingk.movie.service.user.service.RegisterService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -14,17 +18,25 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class RegisterController implements RegisterApi {
 
+    @Autowired
+    private RegisterService registerService;
+
     /**
      * 用户注册
      *
-     * @param email    邮箱
-     * @param password 密码
-     * @param id       豆瓣个人域名(可选)
+     * @param email        邮箱
+     * @param password     密码
+     * @param userDoubanId 豆瓣个人域名(可选)
      * @return
      */
     @Override
+    @AesDecrypt
     @PostMapping("/register")
-    public Result register(@RequestParam("username") String email, @RequestParam("password") String password, @RequestParam("id") String id) {
-        return null;
+    public Result register(@RequestParam("username") String email,
+                           @RequestParam("password") String password,
+                           @RequestParam(value = "user_douban_id",
+                                   required = false,
+                                   defaultValue = "none") String userDoubanId) {
+        return Result.success(registerService.register(new User(userDoubanId, email, password)));
     }
 }

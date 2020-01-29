@@ -32,20 +32,6 @@ public class MyGlobalFilter implements GlobalFilter, Ordered {
                 put("args", request.getQueryParams().toString());
             }
         };
-//        // 过滤未带token的api请求
-//        if (url.startsWith("/api")) {
-//            Object token = request.getHeaders().get("Authorization");
-//            if (token == null) {
-//                ServerHttpResponse response = exchange.getResponse();
-//                response.setStatusCode(HttpStatus.valueOf(StatusAndMessage.UNAUTHORIZED.status));
-//                response.getHeaders().setContentType(MediaType.APPLICATION_JSON_UTF8);
-//                logData.put("api_token", "no token");
-//                log.info("request,{}", logData);
-//                return response.writeWith(
-//                        Mono.just(response.bufferFactory().wrap("{\"message\":\"no token\"}".getBytes()))
-//                );
-//            }
-//        }
         log.info("request,{}", logData);
         // 上述为前置过滤
         return chain.filter(exchange);

@@ -1,10 +1,11 @@
 package org.humingk.movie.dal.mapper;
 
-import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.humingk.movie.dal.entity.UserToRole;
 import org.humingk.movie.dal.entity.UserToRoleExample;
+
+import java.util.List;
 
 @Mapper
 public interface UserToRoleMapper {
@@ -14,8 +15,6 @@ public interface UserToRoleMapper {
 
     int deleteByPrimaryKey(@Param("idUser") String idUser, @Param("idRole") Byte idRole);
 
-    int insert(UserToRole record);
-
     int insertSelective(UserToRole record);
 
     List<UserToRole> selectByExample(UserToRoleExample example);
@@ -23,4 +22,14 @@ public interface UserToRoleMapper {
     int updateByExampleSelective(@Param("record") UserToRole record, @Param("example") UserToRoleExample example);
 
     int updateByExample(@Param("record") UserToRole record, @Param("example") UserToRoleExample example);
+
+    // ------------
+
+    /**
+     * 插入用户-角色关系
+     *
+     * @param record
+     * @return
+     */
+    int insert(UserToRole record);
 }
