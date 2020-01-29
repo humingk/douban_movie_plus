@@ -1,7 +1,7 @@
 package org.humingk.movie.server.auth.config;
 
 import org.humingk.movie.server.auth.entity.OauthModes;
-import org.humingk.movie.service.user.MyUserDetailsService;
+import org.humingk.movie.service.user.service.MyUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;

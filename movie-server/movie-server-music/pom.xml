@@ -11,7 +11,7 @@
     <name>movie-server-music</name>
     <description>music server for movie</description>
     <dependencies>
-        <!--service douban-->
+        <!--service movie-->
         <dependency>
             <groupId>org.humingk</groupId>
             <artifactId>movie-service-douban</artifactId>

@@ -1,14 +1,11 @@
 package org.humingk.movie.server.movie;
 
-import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
-import org.apache.tomcat.jni.Time;
-import org.humingk.movie.api.douban.SearchApi;
+import org.humingk.movie.api.movie.SearchApi;
 import org.humingk.movie.common.entity.Result;
-import org.humingk.movie.service.douban.SearchService;
+import org.humingk.movie.service.douban.service.SearchService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.provider.authentication.OAuth2AuthenticationDetails;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,8 +14,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.nio.charset.StandardCharsets;
-import java.util.Timer;
-import java.util.concurrent.TimeUnit;
 
 /**
  * @author humingk
@@ -73,5 +68,4 @@ public class SearchController implements SearchApi {
                 .parseClaimsJws(details.getTokenValue())
                 .getBody();
     }
-
 }

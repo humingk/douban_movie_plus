@@ -17,7 +17,13 @@ public interface OauthApi {
     /**
      * post请求申请token
      *
-     * @param parameters
+     * @param parameters 请求参数:
+     *                   username：      用户名
+     *                   password：      密码
+     *                   grant_type：    模式
+     *                   scope：         权限范围
+     *                   client_id：     客户端ID
+     *                   client_secret： 客户端密钥
      * @return
      */
     @PostMapping("/oauth/token")

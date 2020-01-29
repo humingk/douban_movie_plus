@@ -33,6 +33,17 @@ eureka:
       defaultZone: http://localhost:8761/eureka/
 mybatis:
   mapper-locations: classpath:mapper/*Mapper.xml
+security:
+  oauth2:
+    client:
+      client-id: client
+      client-secret: client
+      # 密码模式需要用到的获取token接口
+      access-token-uri: http://localhost:8006/oauth/token
+    resource:
+      jwt:
+        key-uri: http://localhost:8006/oauth/token_key
+        key-value: youaretheappleofmyeyes
 # feign超时设置
 ribbon:
   ReadTimeout: 100000

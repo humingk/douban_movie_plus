@@ -23,6 +23,9 @@ security:
       jwt:
         key-uri: http://localhost:8006/oauth/token_key
         key-value: youaretheappleofmyeyes
-#       此服务端接收到客户端的请求（包含token）后，通过此接口到认证服务器做token验证
 mybatis:
   mapper-locations: classpath:mapper/*Mapper.xml
+# feign超时设置
+ribbon:
+  ReadTimeout: 100000
+  ConnectTimeout: 100000
