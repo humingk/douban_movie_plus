@@ -12,9 +12,9 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 /**
  * 全局自定义异常处理类
  * <p>
- * 拦截Controller层中抛出的自定义异常,包括service层
+ * 在Controller层中拦截所有抛出的自定义异常,用于日志记录和前端返回
  * <p>
- * Order:   最先处理
+ * Order:   优先级最低
  *
  * @author humingk
  */
@@ -26,15 +26,14 @@ public class GlobalMyExceptionHandler extends ResponseEntityExceptionHandler {
     /**
      * 自定义异常
      * <p>
-     * 自定义异常需要主动抛出
-     * <p>
-     * PS: 自定义异常选择性打印错误日志,在抛出异常处打印
+     * 自定义异常需要主动抛出(包括已知错误，部分未知错误)
      *
      * @param e
      * @return
      */
     @ExceptionHandler(MyException.class)
-    public Result myExceptionHandler(MyException e) {
+    public Result<Object> myExceptionHandler(MyException e) {
+        log.error("已知异常,{},{}:{}", e.getStatus(), e.getMessage(), e.getData());
         return Result.error(e);
     }
 }

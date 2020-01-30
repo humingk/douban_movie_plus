@@ -57,7 +57,6 @@
         <module>movie-server-zipkin</module>
         <!--service-->
         <module>movie-service</module>
-        <module>movie-service-common</module>
 
     </modules>
     <!--版本管理 -->
@@ -135,11 +134,6 @@
                 <version>2.0.0</version>
             </dependency>
             <!--service list-->
-            <dependency>
-                <groupId>org.humingk</groupId>
-                <artifactId>movie-service-common</artifactId>
-                <version>2.0.0</version>
-            </dependency>
             <dependency>
                 <groupId>org.humingk</groupId>
                 <artifactId>movie-service-douban</artifactId>

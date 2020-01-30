@@ -21,9 +21,6 @@ public class SearchServiceTest {
     public void getMovieDoubanListByNameStart() {
         System.out.println();
         List<MovieDouban> result = searchService.getMovieDoubanListByNameStart("星际", 0, 10);
-        System.out.println();
-        for (MovieDouban movie : result) {
-            System.out.println(movie.toString());
-        }
+        System.out.println(result.toString());
     }
 }

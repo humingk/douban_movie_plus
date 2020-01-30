@@ -13,10 +13,12 @@ import org.springframework.context.annotation.ComponentScan;
 @EnableEurekaClient
 @ComponentScan(basePackages = {
         "org.humingk.movie.server.movie",
-        "org.humingk.movie.service.douban"
+        "org.humingk.movie.service.douban",
+        "org.humingk.movie.api",
+        "org.humingk.movie.common"
 })
 @MapperScan(basePackages = {
-        "org.humingk.movie.service.common.mapper"
+        "org.humingk.movie.dal.mapper"
 })
 public class MovieServerMovieApplication {
 

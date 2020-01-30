@@ -4,10 +4,13 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import org.humingk.movie.common.enumeration.StatusAndMessage;
 import org.humingk.movie.common.exception.MyException;
-import org.humingk.movie.common.util.StatusAndMessage;
 
 import java.io.Serializable;
+
+import static org.humingk.movie.common.enumeration.StatusAndMessage.ERROR;
+import static org.humingk.movie.common.enumeration.StatusAndMessage.SUCCESS;
 
 /**
  * 返回结果封装类
@@ -18,7 +21,7 @@ import java.io.Serializable;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-public class Result implements Serializable {
+public class Result<T> implements Serializable {
     /**
      * 状态码
      */
@@ -26,111 +29,133 @@ public class Result implements Serializable {
     /**
      * 其他信息
      */
-    private Object message;
+    private String message;
     /**
-     * json数据
+     * Json格式数据，复杂嵌套对象,Json字符串
      */
-    private Object data;
+    private T data;
 
     public Result(StatusAndMessage statusAndMessage) {
         this.status = statusAndMessage.status;
         this.message = statusAndMessage.message;
-        this.data = "";
+        this.data = null;
     }
 
-    public Result(StatusAndMessage statusAndMessage, Object data) {
+    public Result(StatusAndMessage statusAndMessage, T data) {
         this.status = statusAndMessage.status;
         this.message = statusAndMessage.message;
         this.data = data;
     }
 
+    // 成功 -------------------------------------------------------------------------
+
     /**
-     * 执行成功,未返回结果
+     * 执行成功,无具体数据（可用于插入、更新等操作）
+     * <p>
+     * PS:静态方法不能访问类上定义的泛型T，可以定义在方法上
      *
      * @return
      */
-    public static Result success() {
-        return new Result(StatusAndMessage.SUCCESS);
+    public static <T> Result<T> success() {
+        return new Result<>(SUCCESS);
     }
 
     /**
-     * 执行成功,返回结果
+     * 执行成功,返回具体数据
      *
      * @param data
      * @return
      */
-    public static Result success(Object data) {
-        return new Result(StatusAndMessage.SUCCESS, data);
+    public static <T> Result<T> success(T data) {
+        return new Result<>(SUCCESS, data);
     }
 
+    // 失败 -------------------------------------------------------------------------
+
     /**
-     * 未找到相应资源
+     * 执行失败,无具体数据（可用于插入、更新等操作）
      *
      * @return
      */
-    public static Result notFound() {
-        return new Result(StatusAndMessage.NOTFOUND);
+    public static <T> Result<T> error() {
+        return new Result<>(ERROR);
     }
 
-    /**
-     * 未找到相应资源
-     *
-     * @param e
-     * @return
-     */
-    public static Result notFound(Exception e) {
-        return new Result(StatusAndMessage.NOTFOUND.status, e, "");
-    }
+    // 一、Controller层拦截抛出异常专用，包括手动抛出，被动抛出 --------------
 
+    // 1. 抛出已知异常 -------
 
     /**
-     * 业务错误,默认错误类型
-     *
-     * @return
-     */
-    public static Result error() {
-        return new Result(StatusAndMessage.ERROR);
-    }
-
-    /**
-     * 业务错误,自定义错误
-     *
-     * @param message
-     * @return
-     */
-    public static Result error(String message) {
-        return new Result(StatusAndMessage.ERROR.status, message, "");
-    }
-
-
-    /**
-     * 业务错误,其他错误类型
-     *
-     * @param statusAndMessage
-     * @return
-     */
-    public static Result error(StatusAndMessage statusAndMessage) {
-        return new Result(statusAndMessage);
-    }
-
-    /**
-     * 业务错误,其他错误类型,包括其他错误信息
-     *
-     * @param statusAndMessage
-     * @return
-     */
-    public static Result error(StatusAndMessage statusAndMessage, String message) {
-        return new Result(statusAndMessage.status, statusAndMessage.message + " : " + message, "");
-    }
-
-
-    /**
-     * 业务错误,已知错误类型
+     * 业务错误，已知错误类型，且错误由MyException封装抛出，是否返回更多的信息由MyException决定
      *
      * @param e
      * @return
      */
-    public static Result error(MyException e) {
-        return new Result(e.getStatus(), e.getMessage(), "");
+    public static <T> Result<T> error(MyException e) {
+        return new Result<>(e.getStatus(), e.getMessage(), (T) e.getData());
+    }
+
+    // 2. 抛出未知异常 -------
+
+    /**
+     * 业务错误，未知错误类型，未被封装抛出，返回更多自定义错误信息
+     *
+     * @param e
+     * @return
+     */
+    public static <T> Result<T> error(Exception e, T data) {
+        return new Result<>(ERROR.status, e.getMessage(), data);
+    }
+
+    /**
+     * 业务错误，未知错误类型，未被封装抛出，返回具体错误堆栈信息
+     *
+     * @param e
+     * @return
+     */
+    public static <T> Result<T> error(Exception e) {
+        return new Result<T>(ERROR.status, e.getMessage(), (T) e);
+    }
+
+    // 二、Controller层直接判断返回错误专用，仅包括已知错误
+
+    /**
+     * 业务错误,已知错误类型，且错误类型已加入StateAndMessage，不返回任何细节
+     *
+     * @param statusAndMessage
+     * @return
+     */
+    public static <T> Result<T> error(StatusAndMessage statusAndMessage) {
+        return new Result<>(statusAndMessage);
+    }
+
+    /**
+     * 业务错误,已知错误类型，且错误类型已加入StateAndMessage，返回更多的自定义错误信息
+     *
+     * @param statusAndMessage
+     * @return
+     */
+    public static <T> Result<T> error(StatusAndMessage statusAndMessage, T data) {
+        return new Result<>(statusAndMessage, data);
+    }
+
+    /**
+     * 业务错误,已知错误类型，且错误类型已加入StateAndMessage,返回具体的错误堆栈信息
+     *
+     * @param statusAndMessage
+     * @return
+     */
+    public static <T> Result<T> error(StatusAndMessage statusAndMessage, Exception e) {
+        return new Result<T>(statusAndMessage, (T) e);
+    }
+
+    /**
+     * 业务错误,已知错误类型,但错误类型未加入StateAndMessage,返回更多自定义错误信息
+     *
+     * @param data
+     * @return
+     */
+    public static <T> Result<T> error(T data) {
+        return new Result<T>(ERROR.status, ERROR.message, data);
     }
 }

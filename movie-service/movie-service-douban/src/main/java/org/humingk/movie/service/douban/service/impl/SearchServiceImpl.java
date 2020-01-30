@@ -6,6 +6,8 @@ import org.humingk.movie.dal.entity.MovieDoubanExample;
 import org.humingk.movie.dal.mapper.MovieDoubanMapper;
 import org.humingk.movie.service.douban.service.SearchService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,6 +16,7 @@ import java.util.List;
  * @author humingk
  */
 @Service
+@CacheConfig(cacheNames = "douban")
 public class SearchServiceImpl implements SearchService {
     @Autowired
     private MovieDoubanMapper movieDoubanMapper;
@@ -28,10 +31,11 @@ public class SearchServiceImpl implements SearchService {
      * @return
      */
     @Override
+    @Cacheable
     public List<MovieDouban> getMovieDoubanListByNameStart(String keyword, int offset, int limit) {
         MovieDoubanExample example = new MovieDoubanExample();
         example.or().andNameZhLike(keyword + "%");
-        PageHelper.startPage(offset, limit);
+        PageHelper.offsetPage(offset,limit);
         return movieDoubanMapper.selectByExample(example);
     }
 }

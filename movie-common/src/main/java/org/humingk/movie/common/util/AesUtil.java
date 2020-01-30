@@ -76,11 +76,14 @@ public class AesUtil {
     public static void main(String[] args) throws Exception {
         ArrayList list = new ArrayList() {
             {
-                add("{\"keyword\":\"星际\",\"offset\":0,\"limit\":5}");
                 add("test1233");
                 add("1233");
                 add("douban_id");
                 add("client");
+                add("星际");
+                add("0");
+                add("8");
+                add("10");
             }
         };
         for (Object str : list) {

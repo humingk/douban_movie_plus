@@ -18,8 +18,8 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.humingk.movie.common.util.StatusAndMessage.FORBIDDEN;
-import static org.humingk.movie.common.util.StatusAndMessage.NOUSER;
+import static org.humingk.movie.common.enumeration.StatusAndMessage.FORBIDDEN;
+import static org.humingk.movie.common.enumeration.StatusAndMessage.NOUSER;
 
 
 /**

@@ -5,9 +5,10 @@ import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
+import org.aspectj.lang.reflect.MethodSignature;
 import org.humingk.movie.common.exception.MyException;
 import org.humingk.movie.common.util.AesUtil;
-import org.humingk.movie.common.util.StatusAndMessage;
+import org.humingk.movie.common.enumeration.StatusAndMessage;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
@@ -46,11 +47,16 @@ public class AesDecryptAspect {
      */
     @Around("aesDecryptPointCut()")
     public Object doAround(ProceedingJoinPoint joinPoint) throws Throwable {
-        // 请求参数列表
+        // 请求参数key列表
+        String[] argsNameArray= ((MethodSignature) joinPoint.getSignature()).getParameterNames();
+        // 请求参数value列表
         Object[] args = joinPoint.getArgs();
         try {
             for (int i = 0; i < args.length; i++) {
-                args[i] = AesUtil.decrypt(args[i].toString());
+                // 不需要AES加密的参数： offset、limit
+                if(!"offset".equals(argsNameArray[i])&&!"limit".equals(argsNameArray[i])){
+                    args[i] = AesUtil.decrypt(args[i].toString());
+                }
             }
         } catch (Exception e) {
             ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();

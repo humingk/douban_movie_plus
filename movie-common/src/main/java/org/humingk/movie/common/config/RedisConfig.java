@@ -2,7 +2,7 @@ package org.humingk.movie.common.config;
 
 import com.alibaba.fastjson.parser.ParserConfig;
 import com.alibaba.fastjson.support.spring.FastJsonRedisSerializer;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.CachingConfigurerSupport;
@@ -10,6 +10,7 @@ import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.cache.interceptor.KeyGenerator;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.data.redis.cache.RedisCacheConfiguration;
 import org.springframework.data.redis.cache.RedisCacheManager;
 import org.springframework.data.redis.cache.RedisCacheWriter;
@@ -23,7 +24,7 @@ import java.time.Duration;
 /**
  * Redis 配置类
  * <p>
- * EnableCaching :  开启缓存
+ * EnableCaching注解 :  开启Redis缓存功能
  *
  * @author humingk
  */
@@ -34,14 +35,8 @@ public class RedisConfig extends CachingConfigurerSupport {
     /**
      * 缓存过期时间 day
      */
-    private final int EXPIRE_DAY = 5;
-
-    /**
-     * redis工厂
-     */
-    @Autowired
-    private RedisConnectionFactory redisConnectionFactory;
-
+    @Value("${custom.redis.expire}")
+    private int redisExpire;
 
     /**
      * 自定义生成key的规则
@@ -60,9 +55,6 @@ public class RedisConfig extends CachingConfigurerSupport {
             }
             // 追加方法名
             stringBuilder.append(method.getName());
-            stringBuilder.append("_");
-            // 追加类名
-            stringBuilder.append(object.getClass().getName());
             return stringBuilder.toString();
         };
     }
@@ -71,7 +63,7 @@ public class RedisConfig extends CachingConfigurerSupport {
     /**
      * 采用RedisCacheManager作为缓存管理器
      * <p>
-     * 添加注解@cacheable即可自动缓存到redis
+     * 方法上添加注解@cacheable即可自动缓存到redis
      * <p>
      * 其他注解:@cacheconfig @cachePut 更新 @cacheEvict 删除
      * <p>
@@ -80,8 +72,8 @@ public class RedisConfig extends CachingConfigurerSupport {
      * @return
      */
     @Bean
-    @Override
-    public CacheManager cacheManager() {
+    @Primary
+    public CacheManager cacheManager(RedisConnectionFactory redisConnectionFactory) {
         // 初始化redisCacheWriter
         RedisCacheWriter redisCacheWriter = RedisCacheWriter.nonLockingRedisCacheWriter(redisConnectionFactory);
         // 使用JfastJsonRedisSerializer来序列化和反序列化redis的value值（默认使用JDK的序列化方式）
@@ -89,11 +81,12 @@ public class RedisConfig extends CachingConfigurerSupport {
         RedisSerializationContext.SerializationPair<Object> pair = RedisSerializationContext.SerializationPair.fromSerializer(fastJsonRedisSerializer);
         RedisCacheConfiguration redisCacheConfiguration = RedisCacheConfiguration.defaultCacheConfig().serializeValuesWith(pair);
         // 设置过期时间
-        redisCacheConfiguration = redisCacheConfiguration.entryTtl(Duration.ofDays(5));
+        redisCacheConfiguration = redisCacheConfiguration.entryTtl(Duration.ofDays(redisExpire));
         //初始化RedisCacheManager
         RedisCacheManager redisCacheManager = new RedisCacheManager(redisCacheWriter, redisCacheConfiguration);
-        // 序列化白名单
-        ParserConfig.getGlobalInstance().addAccept("org.humingk.movie.");
+        // autoType白名单，fastjson默认开启autoType,反解析的时候需要相应Pojo在白名单中
+        ParserConfig.getGlobalInstance().addAccept("org.humingk.movie.dal.entity");
+//        ParserConfig.getGlobalInstance().addAccept("org.humingk.movie.common.entity");
         return redisCacheManager;
     }
 
@@ -104,14 +97,16 @@ public class RedisConfig extends CachingConfigurerSupport {
      * 包括 set get 等方法
      * <p>
      * 由默认的JDK序列化改为fastjson序列化
+     * <p>
+     * 使用方式： 自动导入redisTemplate
+     * redisTemplate.opsForValue().get(),redisTemplate.opsForValue().set()
      *
      * @return
      */
-    @Bean
+    @Bean(name = "redisTemplate")
     @ConditionalOnMissingBean(name = "RedisTemplate")
-    public RedisTemplate<Object, Object> redisTemplate() {
+    public RedisTemplate<Object, Object> redisTemplate(RedisConnectionFactory redisConnectionFactory) {
         RedisTemplate<Object, Object> template = new RedisTemplate<>();
-
         //使用fastjson序列化
         FastJsonRedisSerializer fastJsonRedisSerializer = new FastJsonRedisSerializer(Object.class);
         // value值的序列化采用fastJsonRedisSerializer

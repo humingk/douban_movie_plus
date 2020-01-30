@@ -7,7 +7,7 @@ import org.humingk.movie.api.user.LoginApi;
 import org.humingk.movie.common.entity.Result;
 import org.humingk.movie.common.exception.MyException;
 import org.humingk.movie.common.util.AesUtil;
-import org.humingk.movie.common.util.StatusAndMessage;
+import org.humingk.movie.common.enumeration.StatusAndMessage;
 import org.jsoup.Jsoup;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
