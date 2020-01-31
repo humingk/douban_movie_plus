@@ -48,13 +48,13 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     @Value("${custom.oauth2.validity}")
     private int validity;
 
-    @Value("${custom.client.id}")
+    @Value("${custom.oauth2.client.id}")
     private String clientId;
 
-    @Value("${custom.client.secret}")
+    @Value("${custom.oauth2.client.secret}")
     private String clientSecert;
 
-    @Value("${custom.client.scopes}")
+    @Value("${custom.oauth2.client.scopes}")
     private String clientScopes;
 
     /**

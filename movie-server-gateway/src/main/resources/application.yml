@@ -1,94 +1,10 @@
-server:
-  port: 8080
-spring:
-  application:
-    name: movie-server-gateway
-  cloud:
-    gateway:
-      discovery:
-        locator:
-          # true:开启gateway服务注册中心服务发现,并且gateway根据服务名自动为每个服务创建一个router
-          # 通过服务名路径访问,eg: http://localhost:8086/MOVIE-SERVICE-COMMON/...
-          enabled: false
-          # true:请求路径服务名配置为小写
-          lower-case-service-id: true
-      # 路由转发
-      routes:
-        # ----------------------------------------
-        # oauth2认证
-        - id: movie-server-auth
-          uri: lb://movie-server-auth
-          predicates:
-            - Path=/oauth/**
-          filters:
-            - StripPrefix=0
-        # ----------------------------------------
-        # 用户
-        - id: movie-server-user
-          uri: lb://movie-server-user
-          predicates:
-            - Path=/api/user/**
-          filters:
-            - StripPrefix=2
-        # ----------------------------------------
-        # 电影
-        - id: movie-server-movie
-          # douban服务地址
-          # lb://服务名 LoadBalancerClient过滤器，通过ribbon实现默认负载均衡算法
-          uri: lb://movie-server-movie
-          predicates:
-            - Path=/api/movie/**
-          filters:
-            # 转发前去掉匹配path最前面的n个
-            - StripPrefix=2
-            # 限流过滤器
-            # 令牌桶限流算法，当请求拿到桶中的令牌才能执行
-            # 相对于普通桶算法，可以抵挡瞬时的多个请求
-            - name: RequestRateLimiter
-              args:
-                # 限流键解析器Bean 根据IP限流
-                key-resolver: '#{@myHostAddrKeyResolver}'
-                # 令牌桶每秒填充平均速率
-                redis-rate-limiter.replenishRate: 1
-                # 令牌桶总容量
-                redis-rate-limiter.burstCapacity: 5
-        # ----------------------------------------
-        # 音乐
-        - id: movie-server-music
-          uri: lb://movie-server-music
-          predicates:
-            - Path=/api/music/**
-          filters:
-            - StripPrefix=2
-            # 限流过滤器
-            - name: RequestRateLimiter
-              args:
-                key-resolver: '#{@myHostAddrKeyResolver}'
-                redis-rate-limiter.replenishRate: 1
-                redis-rate-limiter.burstCapacity: 5
-        # ----------------------------------------
-        # ----------------------------------------
-      # 所有路由默认过滤器
-      default-filters:
-        # 熔断过滤器
-        # 调用其他服务失败时进行降级，缓解服务器压力，同时快速返回错误结果
-        - name: Hystrix
-          args:
-            name: fallback
-            # 熔断降级时重定向url
-            fallbackUri: forward:/fallback
-#        # 限流过滤器(暂时有Bug)
-#        - name: RequestRateLimiter
-#            args:
-#              key-resolver: '#{@myHostAddrKeyResolver}'
-#              redis-rate-limiter.replenishRate: 1
-#              redis-rate-limiter.burstCapacity: 5
+
 eureka:
   client:
     service-url:
       defaultZone: http://localhost:8761/eureka/
-# gateway日志等级，转发信息
-logging:
-  level:
-    org.springframework.cloud.gateway: info
+## gateway日志等级，转发信息
+#logging:
+#  level:
+#    org.springframework.cloud.gateway: info
 

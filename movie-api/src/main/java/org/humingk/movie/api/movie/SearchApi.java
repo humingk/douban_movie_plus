@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
  *
  * @author humingk
  */
+//@FeignClient(value = "movie-server-movie", fallback = SearchApiHystric.class)
 @FeignClient("movie-server-movie")
 public interface SearchApi {
     /**
@@ -49,6 +50,7 @@ public interface SearchApi {
                              @RequestParam(value = "limit",
                                      required = false,
                                      defaultValue = "10") int limit);
+
     /**
      * 豆瓣影人搜索结果
      * <p>
@@ -66,4 +68,5 @@ public interface SearchApi {
                                          defaultValue = "0") int offset,
                                  @RequestParam(value = "limit",
                                          required = false,
-                                         defaultValue = "10") int limit);}
+                                         defaultValue = "10") int limit);
+}

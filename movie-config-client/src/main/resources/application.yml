@@ -1,6 +1,0 @@
-server:
-  port: 8002
-#debug: true
-#logging:
-#  level:
-#    root: debug

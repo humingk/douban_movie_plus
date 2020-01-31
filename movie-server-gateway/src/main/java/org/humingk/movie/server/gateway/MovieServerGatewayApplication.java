@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 
 /**
- * EnableDiscoveryClient与EnableDiscoveryClient注解在此处作用一致，用于开启服务自动注册
+ * PS: EnableEurekaClient与EnableDiscoveryClient注解在此处作用一致，用于开启服务自动注册
  *
  * @author humingk
  */

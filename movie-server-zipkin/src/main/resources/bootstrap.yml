@@ -1,0 +1,20 @@
+spring:
+  application:
+    name: movie-server-zipkin
+  profiles:
+    # 当前服务启用的运行环境：dev/pro
+    active: dev
+  cloud:
+    config:
+      name: movie-server-zipkin
+      # 当前服务使用的config配置类型：dev/pro
+      profile: ${spring.profiles.active}
+      discovery:
+        # 开启服务发现
+        enabled: true
+        service-id: movie-server-config
+# eureka注册
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/

@@ -1,5 +1,8 @@
 server:
   port: 8761
+spring:
+  application:
+    name: movie-server-eureka
 eureka:
   # 实例
   instance:
@@ -13,6 +16,3 @@ eureka:
     service-url:
       # 与eureka server交互的地址
       defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
-spring:
-  application:
-    name: movie-server-eureka

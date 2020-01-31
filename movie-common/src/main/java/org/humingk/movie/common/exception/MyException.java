@@ -4,9 +4,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
-import org.humingk.movie.common.enumeration.StatusAndMessage;
+import org.humingk.movie.common.enumeration.StateAndMessage;
 
-import static org.humingk.movie.common.enumeration.StatusAndMessage.ERROR;
+import static org.humingk.movie.common.enumeration.StateAndMessage.ERROR;
 
 /**
  * 自定义异常类
@@ -38,9 +38,9 @@ public class MyException extends RuntimeException {
      * 500，服务器内部错误,不包括任何详细错误信息
      */
     public MyException() {
-        this.status = ERROR.status;
+        this.status = ERROR.state;
         this.message = ERROR.message;
-        this.data = "";
+        this.data = null;
     }
 
     /**
@@ -48,8 +48,8 @@ public class MyException extends RuntimeException {
      *
      * @param data
      */
-    public MyException(String data) {
-        this.status = ERROR.status;
+    public MyException(Object data) {
+        this.status = ERROR.state;
         this.message = ERROR.message;
         this.data = data;
     }
@@ -57,23 +57,23 @@ public class MyException extends RuntimeException {
     /**
      * 业务错误,已知错误类型，且错误类型已加入StateAndMessage，不包括任何错误细节
      *
-     * @param statusAndMessage
+     * @param stateAndMessage
      */
-    public MyException(StatusAndMessage statusAndMessage) {
-        this.status = statusAndMessage.status;
-        this.message = statusAndMessage.message;
-        this.data = "";
+    public MyException(StateAndMessage stateAndMessage) {
+        this.status = stateAndMessage.state;
+        this.message = stateAndMessage.message;
+        this.data = null;
     }
 
     /**
-     * 业务错误,已知错误类型，且错误类型已加入StateAndMessage，包括更多错误信息（自定义信息，错误堆栈信息）
+     * 业务错误,已知错误类型，且错误类型已加入StateAndMessage，包括更多错误信息（自定义信息，甚至错误堆栈信息）
      *
-     * @param statusAndMessage
+     * @param stateAndMessage
      * @return
      */
-    public MyException(StatusAndMessage statusAndMessage, Object data) {
-        this.status = statusAndMessage.status;
-        this.message = statusAndMessage.message;
+    public MyException(StateAndMessage stateAndMessage, Object data) {
+        this.status = stateAndMessage.state;
+        this.message = stateAndMessage.message;
         this.data = data;
     }
 }

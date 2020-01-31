@@ -22,6 +22,11 @@
             <groupId>org.humingk</groupId>
             <artifactId>movie-service-user</artifactId>
         </dependency>
+        <!--config client-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-config</artifactId>
+        </dependency>
         <!--web-->
         <dependency>
             <groupId>org.springframework.boot</groupId>

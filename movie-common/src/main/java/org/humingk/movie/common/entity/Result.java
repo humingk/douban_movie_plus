@@ -4,13 +4,13 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-import org.humingk.movie.common.enumeration.StatusAndMessage;
+import org.humingk.movie.common.enumeration.StateAndMessage;
 import org.humingk.movie.common.exception.MyException;
 
 import java.io.Serializable;
 
-import static org.humingk.movie.common.enumeration.StatusAndMessage.ERROR;
-import static org.humingk.movie.common.enumeration.StatusAndMessage.SUCCESS;
+import static org.humingk.movie.common.enumeration.StateAndMessage.ERROR;
+import static org.humingk.movie.common.enumeration.StateAndMessage.SUCCESS;
 
 /**
  * 返回结果封装类
@@ -21,11 +21,11 @@ import static org.humingk.movie.common.enumeration.StatusAndMessage.SUCCESS;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-public class Result<T> implements Serializable {
+public class Result implements Serializable {
     /**
      * 状态码
      */
-    private int status;
+    private int state;
     /**
      * 其他信息
      */
@@ -33,17 +33,17 @@ public class Result<T> implements Serializable {
     /**
      * Json格式数据，复杂嵌套对象,Json字符串
      */
-    private T data;
+    private Object data;
 
-    public Result(StatusAndMessage statusAndMessage) {
-        this.status = statusAndMessage.status;
-        this.message = statusAndMessage.message;
+    public Result(StateAndMessage stateAndMessage) {
+        this.state = stateAndMessage.state;
+        this.message = stateAndMessage.message;
         this.data = null;
     }
 
-    public Result(StatusAndMessage statusAndMessage, T data) {
-        this.status = statusAndMessage.status;
-        this.message = statusAndMessage.message;
+    public Result(StateAndMessage stateAndMessage, Object data) {
+        this.state = stateAndMessage.state;
+        this.message = stateAndMessage.message;
         this.data = data;
     }
 
@@ -56,8 +56,8 @@ public class Result<T> implements Serializable {
      *
      * @return
      */
-    public static <T> Result<T> success() {
-        return new Result<>(SUCCESS);
+    public static Result success() {
+        return new Result(SUCCESS);
     }
 
     /**
@@ -66,8 +66,8 @@ public class Result<T> implements Serializable {
      * @param data
      * @return
      */
-    public static <T> Result<T> success(T data) {
-        return new Result<>(SUCCESS, data);
+    public static Result success(Object data) {
+        return new Result(SUCCESS, data);
     }
 
     // 失败 -------------------------------------------------------------------------
@@ -77,8 +77,8 @@ public class Result<T> implements Serializable {
      *
      * @return
      */
-    public static <T> Result<T> error() {
-        return new Result<>(ERROR);
+    public static Result error() {
+        return new Result(ERROR);
     }
 
     // 一、Controller层拦截抛出异常专用，包括手动抛出，被动抛出 --------------
@@ -91,8 +91,8 @@ public class Result<T> implements Serializable {
      * @param e
      * @return
      */
-    public static <T> Result<T> error(MyException e) {
-        return new Result<>(e.getStatus(), e.getMessage(), (T) e.getData());
+    public static Result error(MyException e) {
+        return new Result(e.getStatus(), e.getMessage(), e.getData());
     }
 
     // 2. 抛出未知异常 -------
@@ -103,18 +103,18 @@ public class Result<T> implements Serializable {
      * @param e
      * @return
      */
-    public static <T> Result<T> error(Exception e, T data) {
-        return new Result<>(ERROR.status, e.getMessage(), data);
+    public static Result error(Exception e, Object data) {
+        return new Result(ERROR.state, e.getMessage(), data);
     }
 
     /**
-     * 业务错误，未知错误类型，未被封装抛出，返回具体错误堆栈信息
+     * 业务错误，未知错误类型，未被封装抛出，不返回具体错误堆栈信息
      *
      * @param e
      * @return
      */
-    public static <T> Result<T> error(Exception e) {
-        return new Result<T>(ERROR.status, e.getMessage(), (T) e);
+    public static Result error(Exception e) {
+        return new Result(ERROR.state, e.getMessage(), null);
     }
 
     // 二、Controller层直接判断返回错误专用，仅包括已知错误
@@ -122,31 +122,31 @@ public class Result<T> implements Serializable {
     /**
      * 业务错误,已知错误类型，且错误类型已加入StateAndMessage，不返回任何细节
      *
-     * @param statusAndMessage
+     * @param stateAndMessage
      * @return
      */
-    public static <T> Result<T> error(StatusAndMessage statusAndMessage) {
-        return new Result<>(statusAndMessage);
+    public static Result error(StateAndMessage stateAndMessage) {
+        return new Result(stateAndMessage);
     }
 
     /**
      * 业务错误,已知错误类型，且错误类型已加入StateAndMessage，返回更多的自定义错误信息
      *
-     * @param statusAndMessage
+     * @param stateAndMessage
      * @return
      */
-    public static <T> Result<T> error(StatusAndMessage statusAndMessage, T data) {
-        return new Result<>(statusAndMessage, data);
+    public static Result error(StateAndMessage stateAndMessage, Object data) {
+        return new Result(stateAndMessage, data);
     }
 
     /**
-     * 业务错误,已知错误类型，且错误类型已加入StateAndMessage,返回具体的错误堆栈信息
+     * 业务错误,已知错误类型，且错误类型已加入StateAndMessage,返回简略的错误堆栈信息
      *
-     * @param statusAndMessage
+     * @param stateAndMessage
      * @return
      */
-    public static <T> Result<T> error(StatusAndMessage statusAndMessage, Exception e) {
-        return new Result<T>(statusAndMessage, (T) e);
+    public static Result error(StateAndMessage stateAndMessage, Exception e) {
+        return new Result(stateAndMessage, e.getMessage());
     }
 
     /**
@@ -155,7 +155,7 @@ public class Result<T> implements Serializable {
      * @param data
      * @return
      */
-    public static <T> Result<T> error(T data) {
-        return new Result<T>(ERROR.status, ERROR.message, data);
+    public static Result error(Object data) {
+        return new Result(ERROR.state, ERROR.message, data);
     }
 }

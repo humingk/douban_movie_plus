@@ -1,0 +1,9 @@
+# auth对应的资源服务端配置
+security:
+  oauth2:
+    # 资源服务端
+    resource:
+      jwt:
+        key-uri: http://localhost:8006/oauth/token_key
+        # jwt密钥
+        key-value: youaretheappleofmyeyes

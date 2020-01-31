@@ -2,6 +2,7 @@ package org.humingk.movie.server.gateway.controller;
 
 //import org.humingk.movie.common.entity.Result;
 
+import org.humingk.movie.common.entity.Result;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -18,10 +19,7 @@ public class FallbackController {
      * @return
      */
     @RequestMapping("/fallback")
-//    public Result fallback() {
-//        return Result.error("fallback");
-//    }
-    public String fallback() {
-        return "fallback";
+    public Result fallback() {
+        return Result.error("gateway fallback");
     }
 }

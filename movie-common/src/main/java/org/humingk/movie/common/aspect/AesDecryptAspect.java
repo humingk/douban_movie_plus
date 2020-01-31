@@ -8,7 +8,7 @@ import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.humingk.movie.common.exception.MyException;
 import org.humingk.movie.common.util.AesUtil;
-import org.humingk.movie.common.enumeration.StatusAndMessage;
+import org.humingk.movie.common.enumeration.StateAndMessage;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
@@ -26,8 +26,8 @@ import java.util.Map;
  * @author humingk
  */
 @Aspect
-@Component
 @Slf4j
+@Component
 public class AesDecryptAspect {
 
     /**
@@ -69,7 +69,7 @@ public class AesDecryptAspect {
                 }
             };
             log.warn("decrypt failed:" + logMap.toString() + ",reason", e);
-            throw new MyException(StatusAndMessage.BADREQUEST);
+            throw new MyException(StateAndMessage.BADREQUEST);
         }
         return joinPoint.proceed(args);
     }
