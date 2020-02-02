@@ -17,6 +17,11 @@
             <groupId>org.humingk</groupId>
             <artifactId>movie-common</artifactId>
         </dependency>
+        <!--security-->
+        <dependency>
+            <groupId>org.humingk</groupId>
+            <artifactId>movie-security</artifactId>
+        </dependency>
         <!--service user-->
         <dependency>
             <groupId>org.humingk</groupId>

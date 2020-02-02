@@ -4,12 +4,12 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>org.humingk</groupId>
-        <artifactId>movie-servers</artifactId>
+        <artifactId>movie</artifactId>
         <version>2.0.0</version>
     </parent>
-    <artifactId>movie-server-user</artifactId>
-    <name>movie-server-user</name>
-    <description>user server for movie</description>
+    <artifactId>movie-security</artifactId>
+    <name>movie-security</name>
+    <description>security for movie</description>
 
     <dependencies>
         <!--service user-->
@@ -17,21 +17,11 @@
             <groupId>org.humingk</groupId>
             <artifactId>movie-service-user</artifactId>
         </dependency>
-        <!--fastjson-->
+        <!--security oauth2 (包含security)-->
         <dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>fastjson</artifactId>
-        </dependency>
-        <!--jsoup-->
-        <dependency>
-            <groupId>org.jsoup</groupId>
-            <artifactId>jsoup</artifactId>
-        </dependency>
-        <!--lombok-->
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <scope>provided</scope>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-oauth2</artifactId>
         </dependency>
     </dependencies>
+
 </project>

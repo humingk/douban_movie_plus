@@ -1,4 +1,4 @@
-package org.humingk.movie.server.auth.config;
+package org.humingk.movie.security.config;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;

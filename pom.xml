@@ -46,6 +46,7 @@
         <module>movie-api</module>
         <module>movie-common</module>
         <module>movie-dal</module>
+        <module>movie-security</module>
         <!--base server-->
         <module>movie-server-config</module>
         <module>movie-server-gateway</module>
@@ -119,6 +120,11 @@
             <dependency>
                 <groupId>org.humingk</groupId>
                 <artifactId>movie-dal</artifactId>
+                <version>2.0.0</version>
+            </dependency>
+            <dependency>
+                <groupId>org.humingk</groupId>
+                <artifactId>movie-security</artifactId>
                 <version>2.0.0</version>
             </dependency>
             <!--service list-->

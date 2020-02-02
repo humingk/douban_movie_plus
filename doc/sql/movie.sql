@@ -675,16 +675,6 @@ create table permission
 ) ENGINE = InnoDB
   default charset = utf8mb4;
 
-# 用户 token
-CREATE TABLE persistent_logins
-(
-    username  VARCHAR(64) NOT NULL,
-    series    VARCHAR(64) PRIMARY KEY,
-    token     VARCHAR(64) NOT NULL,
-    last_used TIMESTAMP   NOT NULL
-);
-
-
 # 2.公共用户关系表---------------------------------------
 
 # 用户-角色

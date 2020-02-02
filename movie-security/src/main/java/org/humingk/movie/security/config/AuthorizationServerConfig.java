@@ -1,14 +1,9 @@
-package org.humingk.movie.server.auth.config;
+package org.humingk.movie.security.config;
 
-import org.humingk.movie.server.auth.entity.OauthModes;
 import org.humingk.movie.service.user.service.MyUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
@@ -41,22 +36,6 @@ import java.util.Arrays;
 @Configuration
 @EnableAuthorizationServer
 public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {
-
-    /**
-     * 有效期 /s 90d=7776000s
-     */
-    @Value("${custom.oauth2.validity}")
-    private int validity;
-
-    @Value("${custom.oauth2.client.id}")
-    private String clientId;
-
-    @Value("${custom.oauth2.client.secret}")
-    private String clientSecert;
-
-    @Value("${custom.oauth2.client.scopes}")
-    private String clientScopes;
-
     /**
      * 认证管理器
      */
@@ -80,9 +59,8 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
      * <p>
      * -MySQL:
      */
-    @Qualifier("jwtTokenStore")
     @Autowired
-    private TokenStore tokenStore;
+    private TokenStore jwtTokenStore;
 
     /**
      * JWT-签名设置秘钥
@@ -120,28 +98,11 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
                 // 配置用户验证
                 .userDetailsService(myUserDetailsService)
                 // 配置token存储方式
-                .tokenStore(tokenStore)
+                .tokenStore(jwtTokenStore)
                 // 配置JWT签名秘钥
                 .accessTokenConverter(jwtAccessTokenConverter)
                 // 配置tokenEnhancerChain
                 .tokenEnhancer(tokenEnhancerChain);
-    }
-
-    /**
-     * 配置第三方客户端
-     *
-     * @param clients
-     * @throws Exception
-     */
-    @Override
-    public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
-        clients.inMemory()
-                // 用于password认证的客户端
-                .withClient(clientId)
-                .secret(new BCryptPasswordEncoder().encode(clientSecert))
-                .scopes(clientScopes)
-                .authorizedGrantTypes(OauthModes.PASSWORD, OauthModes.REFRESH)
-                .accessTokenValiditySeconds(validity);
     }
 
     /**

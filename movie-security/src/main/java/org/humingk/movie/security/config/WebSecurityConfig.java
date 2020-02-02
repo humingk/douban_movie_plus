@@ -1,8 +1,12 @@
-package org.humingk.movie.server.auth.config;
+package org.humingk.movie.security.config;
 
+import org.humingk.movie.service.user.service.MyUserDetailsService;
+import org.springframework.beans.factory.BeanInitializationException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
@@ -11,6 +15,8 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import javax.annotation.PostConstruct;
+
 /**
  * spring security 安全配置
  * <p>
@@ -18,18 +24,22 @@ import org.springframework.security.crypto.password.PasswordEncoder;
  * <p>
  * EnableWebSecurity:   提供基于web的security,自带order=100，优先级低于ResourcesConfig（order=3）,配置覆盖ResourceConfig
  * <p>
- * securedEnabled:  支持方法注解
+ * EnableGlobalMethodSecurity注解:
  * <p>
- * prePostEnabled:  使用hasRole()表达式
+ * prePostEnable：   开启PreAuthorize注解，基于表达式限制权限
+ * <p>
+ * securedEnabled:  开启Secured注解
+ * <p>
+ * jsr250Enabled：   开启RolesAllowed注解
  *
  * @author humingk
  */
 @Configuration
 @EnableWebSecurity
-@EnableGlobalMethodSecurity(securedEnabled = true, prePostEnabled = true)
+@EnableGlobalMethodSecurity(securedEnabled = true, prePostEnabled = true,jsr250Enabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     /**
-     * 此filter chain仅对除api之外的url生效
+     * url过滤
      *
      * @param httpSecurity
      * @throws Exception
@@ -37,12 +47,24 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity
-                .csrf().disable()
-                .authorizeRequests()
-                // 不需要保护的路径
-                .antMatchers("/user/**", "/oauth/**", "/login/**", "/test/**", "/home/**").permitAll()
-                // 需要被保护的路径
-                .anyRequest().authenticated();
+                .csrf().disable();
+    }
+
+    @Autowired
+    private MyUserDetailsService myUserDetailsService;
+
+    @Autowired
+    private AuthenticationManagerBuilder authenticationManagerBuilder;
+
+    @PostConstruct
+    public void init() {
+        try {
+            authenticationManagerBuilder
+                    .userDetailsService(myUserDetailsService)
+                    .passwordEncoder(passwordEncoder());
+        } catch (Exception e) {
+            throw new BeanInitializationException("Security配置失败", e);
+        }
     }
 
     /**

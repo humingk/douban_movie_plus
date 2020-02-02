@@ -35,6 +35,11 @@
             <groupId>org.humingk</groupId>
             <artifactId>movie-api</artifactId>
         </dependency>
+        <!--security-->
+        <dependency>
+            <groupId>org.humingk</groupId>
+            <artifactId>movie-security</artifactId>
+        </dependency>
         <!--security oauth2 (包含security)-->
         <dependency>
             <groupId>org.springframework.cloud</groupId>

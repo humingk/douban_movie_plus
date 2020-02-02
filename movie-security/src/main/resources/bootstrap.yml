@@ -1,12 +1,12 @@
 spring:
   application:
-    name: movie-server-auth
+    name: movie-security
   profiles:
     # 当前服务启用的运行环境：dev/pro
     active: dev
   cloud:
     config:
-      name: movie-server-auth,auth-resource,base,database
+      name: movie-security,base,auth-resource,database
       # 当前服务使用的config配置类型：dev/pro
       profile: ${spring.profiles.active}
       discovery:

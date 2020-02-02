@@ -1,16 +1,13 @@
-package org.humingk.movie.server.user.config;
+package org.humingk.movie.security.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configurers.ResourceServerSecurityConfigurer;
 import org.springframework.security.oauth2.provider.token.TokenStore;
-import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
-import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 
 /**
  * 资源访问权限配置
@@ -18,11 +15,20 @@ import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
  * 主要用于oauth认证，保护需要token认证的资源
  * <p>
  * EnableResourceServer:    声明为资源服务器
+ * <p>
+ * EnableGlobalMethodSecurity注解:
+ * <p>
+ * prePostEnable：   开启PreAuthorize注解，基于表达式限制权限
+ * <p>
+ * securedEnabled:  开启Secured注解
+ * <p>
+ * jsr250Enabled：   开启RolesAllowed注解
  *
  * @author humingk
  */
 @Configuration
 @EnableResourceServer
+@EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true, jsr250Enabled = true)
 public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 
     /**
@@ -33,28 +39,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
      */
     @Override
     public void configure(HttpSecurity httpSecurity) throws Exception {
-        httpSecurity
-                .csrf().disable()
-                // 不需要保护的资源路径
-                .authorizeRequests().antMatchers("/test3/**","/*login/**","/github_callback/**","/register/**").permitAll()
-                // 需要保护的资源路径
-                .anyRequest().authenticated();
-    }
-
-    @Value("${security.oauth2.resource.jwt.key-value}")
-    private String jwtKeyValue;
-
-    @Bean
-    public TokenStore jwtTokenStore() {
-        return new JwtTokenStore(jwtAccessTokenConverter());
-    }
-
-    @Bean
-    public JwtAccessTokenConverter jwtAccessTokenConverter() {
-        JwtAccessTokenConverter accessTokenConverter = new JwtAccessTokenConverter();
-        accessTokenConverter.setSigningKey(jwtKeyValue);
-        accessTokenConverter.setVerifierKey(jwtKeyValue);
-        return accessTokenConverter;
+        httpSecurity.authorizeRequests().anyRequest().authenticated();
     }
 
     @Autowired

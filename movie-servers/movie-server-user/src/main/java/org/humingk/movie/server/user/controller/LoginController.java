@@ -96,15 +96,12 @@ public class LoginController implements LoginApi {
 
     @GetMapping("test3")
     @AesDecrypt
-    public Result tt(@RequestParam("keyword") String keyword,
-                     @RequestParam(value = "offset",
-                             required = false,
-                             defaultValue = "0") int offset,
-                     @RequestParam(value = "limit",
-                             required = false,
-                             defaultValue = "10") int limit) {
+    public Result tt(){
         return searchApi.searchMovieTips("749FD964EBD6179937E2A06A5DBB3159",0,10);
-
+    }
+    @GetMapping("test4")
+    public Result t4(){
+        return Result.success("test4");
     }
 
     /**

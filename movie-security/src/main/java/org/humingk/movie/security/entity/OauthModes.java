@@ -1,4 +1,4 @@
-package org.humingk.movie.server.auth.entity;
+package org.humingk.movie.security.entity;
 
 /**
  * @author humingk

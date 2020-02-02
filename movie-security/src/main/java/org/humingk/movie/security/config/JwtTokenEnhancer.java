@@ -1,4 +1,4 @@
-package org.humingk.movie.server.auth.config;
+package org.humingk.movie.security.config;
 
 import org.springframework.security.oauth2.common.DefaultOAuth2AccessToken;
 import org.springframework.security.oauth2.common.OAuth2AccessToken;
