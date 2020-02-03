@@ -76,14 +76,20 @@ public class AesUtil {
     public static void main(String[] args) throws Exception {
         ArrayList list = new ArrayList() {
             {
-                add("test1233");
                 add("1233");
-                add("douban_id");
                 add("client");
                 add("星际");
                 add("0");
                 add("8");
                 add("10");
+                add("humingk");
+                add("id2");
+                add("id3");
+                add("id4");
+                add("email1");
+                add("email2");
+                add("email3");
+                add("email4");
             }
         };
         for (Object str : list) {

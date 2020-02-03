@@ -36,7 +36,8 @@ public class RegisterController implements RegisterApi {
                            @RequestParam("password") String password,
                            @RequestParam(value = "user_douban_id",
                                    required = false,
-                                   defaultValue = "none") String userDoubanId) {
-        return Result.success(registerService.register(new User(userDoubanId, email, password)));
+                                   defaultValue = "id is none") String userDoubanId) {
+        String userId = registerService.register(new User(userDoubanId, email, password));
+        return "register fail".equals(userId) ? Result.error(userId) : Result.success(userId);
     }
 }

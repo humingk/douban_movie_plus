@@ -1,9 +1,11 @@
-package org.humingk.movie.security.entity;
+package org.humingk.movie.common.entity;
 
 /**
+ * Oauth2的几种模式
+ *
  * @author humingk
  */
-public class OauthModes {
+public class Oauth2Modes {
     /**
      * 授权码模式： 第三方应用先申请一个授权码，然后再用该码获取令牌
      * <p>

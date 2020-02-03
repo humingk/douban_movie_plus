@@ -22,7 +22,10 @@ public enum StateAndMessage {
      * status > 1000 :自定义错误信息
      */
     PARAMTER(1001, "请求参数错误"),
-    NOUSER(1101, "无此用户");
+    NOUSER(1002, "无此用户"),
+    NOROLE(1003, "此用户无权限"),
+    EMAIL_EXIST(1004, "此邮箱已被注册"),
+    USER_ID_EXIST(1004, "此豆瓣ID已被注册");
 
     /**
      * 状态码

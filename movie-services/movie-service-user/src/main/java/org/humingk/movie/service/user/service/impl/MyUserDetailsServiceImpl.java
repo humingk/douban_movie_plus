@@ -13,12 +13,13 @@ import org.humingk.movie.service.user.service.MyUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.oauth2.common.exceptions.OAuth2Exception;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.humingk.movie.common.enumeration.StateAndMessage.FORBIDDEN;
+import static org.humingk.movie.common.enumeration.StateAndMessage.NOROLE;
 import static org.humingk.movie.common.enumeration.StateAndMessage.NOUSER;
 
 
@@ -74,13 +75,11 @@ public class MyUserDetailsServiceImpl implements MyUserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException, MyException {
         User user = getUserByEmail(username);
         if (user == null) {
-            log.warn("无此用户,email:{}", username);
-            throw new MyException(NOUSER,  "username: " + username);
+            throw OAuth2Exception.create(String.valueOf(NOUSER.state), NOUSER.message + ": " + username);
         }
         List<Role> roleList = getRoleListByUserId(user.getId());
         if (roleList.size() == 0) {
-            log.warn("此用户无权限,email:{}", username);
-            throw new MyException(FORBIDDEN, "username: " + username);
+            throw OAuth2Exception.create(String.valueOf(NOROLE.state), NOROLE.message + ": " + username);
         }
         List<SecurityRole> securityRoleList = new ArrayList<>();
         for (Role role : roleList) {

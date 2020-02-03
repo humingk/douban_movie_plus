@@ -1,13 +1,19 @@
 package org.humingk.movie.service.user.service.impl;
 
+import org.humingk.movie.common.enumeration.Roles;
+import org.humingk.movie.common.enumeration.StateAndMessage;
+import org.humingk.movie.common.exception.MyException;
 import org.humingk.movie.dal.entity.User;
 import org.humingk.movie.dal.entity.UserToRole;
 import org.humingk.movie.dal.mapper.UserMapper;
 import org.humingk.movie.dal.mapper.UserToRoleMapper;
 import org.humingk.movie.service.user.service.RegisterService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.UUID;
 
 /**
  * @author humingk
@@ -20,15 +26,28 @@ public class RegisterServiceImpl implements RegisterService {
     private UserToRoleMapper userToRoleMapper;
 
     /**
-     * 用户注册
+     * 普通用户注册
      *
-     * @param user 用户Pojo
+     * @param user
      * @return
      */
     @Override
-    public int register(User user) {
-        user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
-        userToRoleMapper.insert(new UserToRole(user.getId(), (byte) 2));
-        return userMapper.insert(user);
+    public String register(User user) {
+        int userInsert, roleInsert;
+        try {
+            // 用户ID默认为随机UUID
+            user.setId("id is none".equals(user.getId()) ? UUID.randomUUID().toString() : user.getId());
+            user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
+            userInsert = userMapper.insert(user);
+        } catch (DuplicateKeyException e) {
+            if (e.getCause().getMessage().contains("PRIMARY")) {
+                throw new MyException(StateAndMessage.USER_ID_EXIST, "豆瓣ID:" + user.getId());
+            } else {
+                throw new MyException(StateAndMessage.EMAIL_EXIST, "email:" + user.getEmail());
+            }
+        }
+        // 赋予普通用户权限
+        roleInsert = userToRoleMapper.insert(new UserToRole(user.getId(), (byte) Roles.USER.id));
+        return userInsert == 1 && roleInsert == 1 ? user.getId() : "register fail";
     }
 }

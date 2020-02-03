@@ -12,7 +12,7 @@ public interface RegisterService {
      * 用户注册
      *
      * @param user 用户Pojo
-     * @return
+     * @return 用户ID
      */
-    int register(User user);
+    String register(User user);
 }

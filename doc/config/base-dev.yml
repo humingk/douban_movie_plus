@@ -7,9 +7,6 @@ custom:
   api:
     # api的版本
     version: v2
-  jwt:
-    key:
-      value: youaretheappleofmyeyes
   oauth2:
     # 有效期 s
     validity: 7776000
@@ -18,6 +15,13 @@ custom:
       id: client
       secret: client
       scopes: all
+    key:
+      # 别名
+      alias: oauth2
+      # oauth2.jks 绝对路径
+      location: /home/humingk/gits/douban_movie_plus/doc/key/oauth2.jks
+      # 秘钥口令和秘钥库口令
+      secret: 12331233
 # feign超时设置
 ribbon:
   ReadTimeout: 100000

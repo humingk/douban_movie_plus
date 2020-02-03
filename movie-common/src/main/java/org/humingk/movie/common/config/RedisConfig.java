@@ -2,7 +2,6 @@ package org.humingk.movie.common.config;
 
 import com.alibaba.fastjson.parser.ParserConfig;
 import com.alibaba.fastjson.support.spring.FastJsonRedisSerializer;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.CachingConfigurerSupport;
@@ -35,8 +34,10 @@ public class RedisConfig extends CachingConfigurerSupport {
     /**
      * 缓存过期时间 day
      */
-    @Value("${custom.redis.expire}")
-    private int redisExpire;
+//    @Value("${custom.redis.expire}")
+//    private int redisExpire;
+
+    private int redisExpire = 30;
 
     /**
      * 自定义生成key的规则

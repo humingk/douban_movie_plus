@@ -1,2 +1,7 @@
 server:
   port: 10101
+security:
+  oauth2:
+    resource:
+      # 资源服务器ID
+      id: movie

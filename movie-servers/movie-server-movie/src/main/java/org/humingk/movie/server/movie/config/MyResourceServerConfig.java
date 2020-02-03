@@ -1,8 +1,10 @@
 package org.humingk.movie.server.movie.config;
 
 import org.humingk.movie.security.config.ResourceServerConfig;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.oauth2.config.annotation.web.configurers.ResourceServerSecurityConfigurer;
 
 /**
  * 资源访问权限配置
@@ -11,6 +13,11 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
  */
 @Configuration
 public class MyResourceServerConfig extends ResourceServerConfig {
+
+    @Value("${security.oauth2.resource.id}")
+    private String resourceId;
+
+
 
     /**
      * 路径过滤
@@ -23,9 +30,20 @@ public class MyResourceServerConfig extends ResourceServerConfig {
         httpSecurity
                 .csrf().disable()
                 // 不需要保护的资源路径
-//                .authorizeRequests().antMatchers("/test1/**").permitAll()
-                .authorizeRequests().antMatchers("/test3/**", "/search_movie_tips/**").permitAll()
+                .authorizeRequests().antMatchers("/test1/**").permitAll()
+//                .authorizeRequests().antMatchers("/test3/**", "/search_movie_tips/**").permitAll()
                 // 需要保护的资源路径
                 .anyRequest().authenticated();
+    }
+
+    /**
+     * 资源服务器的属性配置
+     *
+     * @param resources
+     */
+    @Override
+    public void configure(ResourceServerSecurityConfigurer resources) {
+        // 配置资源服务器ID
+        resources.resourceId(resourceId);
     }
 }

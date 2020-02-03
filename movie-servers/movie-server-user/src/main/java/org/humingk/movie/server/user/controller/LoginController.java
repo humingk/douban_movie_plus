@@ -3,9 +3,7 @@ package org.humingk.movie.server.user.controller;
 import com.alibaba.fastjson.JSONObject;
 import lombok.extern.slf4j.Slf4j;
 import org.humingk.movie.api.auth.OauthApi;
-import org.humingk.movie.api.movie.SearchApi;
 import org.humingk.movie.api.user.LoginApi;
-import org.humingk.movie.common.annotation.AesDecrypt;
 import org.humingk.movie.common.entity.Result;
 import org.humingk.movie.common.enumeration.StateAndMessage;
 import org.humingk.movie.common.exception.MyException;
@@ -87,21 +85,6 @@ public class LoginController implements LoginApi {
             log.error("登录出错", e);
             throw new MyException(StateAndMessage.ERROR, e.getMessage());
         }
-    }
-
-    // ----
-
-    @Autowired
-    private SearchApi searchApi;
-
-    @GetMapping("test3")
-    @AesDecrypt
-    public Result tt(){
-        return searchApi.searchMovieTips("749FD964EBD6179937E2A06A5DBB3159",0,10);
-    }
-    @GetMapping("test4")
-    public Result t4(){
-        return Result.success("test4");
     }
 
     /**

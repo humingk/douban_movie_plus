@@ -1,7 +1,9 @@
 package org.humingk.movie.server.auth.config;
 
+import org.humingk.movie.common.entity.Oauth2Modes;
+import org.humingk.movie.common.enumeration.Resources;
+import org.humingk.movie.common.enumeration.Roles;
 import org.humingk.movie.security.config.AuthorizationServerConfig;
-import org.humingk.movie.security.entity.OauthModes;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -30,7 +32,7 @@ public class MyAuthorizationServerConfig extends AuthorizationServerConfig {
     private String clientScopes;
 
     /**
-     * 配置第三方客户端
+     * 配置客户端
      *
      * @param clients
      * @throws Exception
@@ -38,12 +40,16 @@ public class MyAuthorizationServerConfig extends AuthorizationServerConfig {
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
         clients.inMemory()
-                // 用于password认证的客户端
                 .withClient(clientId)
                 .secret(new BCryptPasswordEncoder().encode(clientSecert))
-                .authorities("ROLE_USER", "ROLE_ROOT")
+                // 支持的角色
+                .authorities(Roles.ROOT.name, Roles.USER.name)
+                // 支持的资源ID
+                .resourceIds(Resources.USER.id, Resources.MOVIE.id, Resources.MUSIC.id)
                 .scopes(clientScopes)
-                .authorizedGrantTypes(OauthModes.PASSWORD, OauthModes.REFRESH)
-                .accessTokenValiditySeconds(validity);
+                // 支持的请求模式
+                .authorizedGrantTypes(Oauth2Modes.PASSWORD, Oauth2Modes.REFRESH)
+                .accessTokenValiditySeconds(validity)
+                .refreshTokenValiditySeconds(validity);
     }
 }

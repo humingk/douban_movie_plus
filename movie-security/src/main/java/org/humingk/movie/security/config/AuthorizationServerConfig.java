@@ -1,18 +1,29 @@
 package org.humingk.movie.security.config;
 
-import org.humingk.movie.service.user.service.MyUserDetailsService;
+import org.humingk.movie.common.exception.translator.MyOauth2Translator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.io.FileSystemResource;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.oauth2.common.DefaultOAuth2AccessToken;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
+import org.springframework.security.oauth2.provider.token.TokenEnhancer;
 import org.springframework.security.oauth2.provider.token.TokenEnhancerChain;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
+import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
+import org.springframework.security.oauth2.provider.token.store.KeyStoreKeyFactory;
 
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Oauth2认证授权服务配置
@@ -42,38 +53,65 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     @Autowired
     private AuthenticationManager authenticationManager;
 
+    @Autowired
+    private MyOauth2Translator myOauth2Translator;
+
     /**
      * 用户详情
      */
     @Autowired
-    private MyUserDetailsService myUserDetailsService;
+    @Qualifier("myUserDetailsServiceImpl")
+    private UserDetailsService userDetailsService;
+
+    @Value("${custom.oauth2.key.location}")
+    private String keyLocation;
+
+    @Value("${custom.oauth2.key.secret}")
+    private String keySecret;
+
+    @Value("${custom.oauth2.key.alias}")
+    private String keyAlias;
 
     /**
-     * 存储token (JWT)
-     * <p>
-     * 可选：
-     * <p>
-     * -JWT:    JwtTokenStoreConfig.java
-     * <p>
-     * -Redis:
-     * <p>
-     * -MySQL:
+     * 注册JWT-存储token
+     *
+     * @return
      */
-    @Autowired
-    private TokenStore jwtTokenStore;
+    @Bean
+    public TokenStore tokenStore() {
+        return new JwtTokenStore(jwtAccessTokenConverter());
+    }
 
     /**
-     * JWT-签名设置秘钥
+     * 注册令牌增强器,增加自定义信息
+     *
+     * @return
      */
-    @Autowired
-    private JwtAccessTokenConverter jwtAccessTokenConverter;
+    @Bean
+    public TokenEnhancer tokenEnhancer() {
+        return (accessToken, authentication) -> {
+            Map<String, Object> map = new HashMap() {{
+                put("key_1", "value_1");
+                put("organization", authentication.getName());
+            }};
+            ((DefaultOAuth2AccessToken) accessToken).setAdditionalInformation(map);
+            return accessToken;
+        };
+    }
 
     /**
-     * JWT-自定义JWT
+     * 注册令牌转换器,设置非对称加密
+     *
+     * @return
      */
-    @Autowired
-    private JwtTokenEnhancer jwtTokenEnhancer;
-
+    @Bean
+    public JwtAccessTokenConverter jwtAccessTokenConverter() {
+        JwtAccessTokenConverter accessTokenConverter = new JwtAccessTokenConverter();
+        KeyStoreKeyFactory keyStoreKeyFactory = new KeyStoreKeyFactory(
+                new FileSystemResource(keyLocation), keySecret.toCharArray());
+        accessTokenConverter.setKeyPair(keyStoreKeyFactory.getKeyPair(keyAlias));
+        return accessTokenConverter;
+    }
 
     /**
      * 配置端点安全约束，包括存储方式（JWT）、用户授权模式（密码模式）
@@ -85,28 +123,25 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
         // tokenEnhancerChain 配置
         TokenEnhancerChain tokenEnhancerChain = new TokenEnhancerChain();
         tokenEnhancerChain.setTokenEnhancers(
-                Arrays.asList(
-                        // 自定义JWT
-                        jwtTokenEnhancer,
-                        // JWT签名秘钥
-                        jwtAccessTokenConverter
-                )
+                Arrays.asList(tokenEnhancer(), jwtAccessTokenConverter())
         );
         endpoints
                 // 配置认证管理器
                 .authenticationManager(authenticationManager)
-                // 配置用户验证
-                .userDetailsService(myUserDetailsService)
+                // 配置userDetailService
+                .userDetailsService(userDetailsService)
                 // 配置token存储方式
-                .tokenStore(jwtTokenStore)
-                // 配置JWT签名秘钥
-                .accessTokenConverter(jwtAccessTokenConverter)
+                .tokenStore(tokenStore())
                 // 配置tokenEnhancerChain
-                .tokenEnhancer(tokenEnhancerChain);
+                .tokenEnhancer(tokenEnhancerChain)
+                // 处理/oauth/token的自定义异常
+                .exceptionTranslator(myOauth2Translator)
+                // 禁止重复使用刷新令牌
+                .reuseRefreshTokens(false);
     }
 
     /**
-     * 配置授权以及token的访问权限
+     * 配置授权服务器的安全信息
      *
      * @param authorizationServerSecurityConfigurer
      */
@@ -115,9 +150,11 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
         authorizationServerSecurityConfigurer
                 // 允许表单验证
                 .allowFormAuthenticationForClients()
-                // 允许非认证用户获取秘钥
+                // 获取秘钥
+//                .tokenKeyAccess("isAuthenticated()")
                 .tokenKeyAccess("permitAll()")
-                // 允许非认证用户检查秘钥
+                // 检查秘钥
+//                .checkTokenAccess("isAuthenticated()");
                 .checkTokenAccess("permitAll()");
     }
 }

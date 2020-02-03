@@ -2,7 +2,20 @@
 security:
   oauth2:
     resource:
+      # id 定义在资源服务器对应配置文件中
+      # 资源服务器检查、解析用户信息
+      token-info-uri: http://localhost:8006/oauth/check_token
       jwt:
+        # 从授权服务器获取jwt公钥
         key-uri: http://localhost:8006/oauth/token_key
-        # jwt密钥
-        key-value: youaretheappleofmyeyes
+        # 使用本地存储的公钥(优先)
+        key-value: |
+          -----BEGIN PUBLIC KEY-----
+          MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAi61EyyxeDcjH8FrH23AE
+          9PAzcyggsdPtOAbRnwModIXo2WaJjTfT+axls23lwmcnZFd5/4R7o7ICq1SsGrc3
+          zH27n+mLxbktb2b+eAaC1TkWjlvkKmGajARtIwvtu8ZGtzwNf3lrnXPmRdINbsfZ
+          Yyuxfc8kc3StoOvSWUN9KeWXKFMekNafa4csHbgcK/Ae0um8fffxu87Bl2SwiC+u
+          ZzTziq1bPg8wVhDlIhyhEs3pth5fjbW7/ypY5/Q5MQZjPogT1GOrfMwt15k4a2X5
+          859yzgepgvzQeNeySVUah1LTeoaQNs2x5bS+eypTUqghTtgo2giW46JKbyz4oqdy
+          SQIDAQAB
+          -----END PUBLIC KEY-----
