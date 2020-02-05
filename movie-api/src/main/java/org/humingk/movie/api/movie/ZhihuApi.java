@@ -20,8 +20,8 @@ public interface ZhihuApi {
      * @param limit         限制数（可选，默认10）
      * @return
      */
-    @GetMapping("zhihu_question")
-    Result zhihuQuestion(@RequestParam("movie_douban_id") long movieDoubanId,
+    @GetMapping("zhihu_questions")
+    Result zhihuQuestions(@RequestParam("movie_douban_id") long movieDoubanId,
                          @RequestParam(value = "offset",
                                  required = false,
                                  defaultValue = "0") int offset,

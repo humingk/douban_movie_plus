@@ -2,11 +2,14 @@ package org.humingk.movie.api.user;
 
 import org.humingk.movie.common.entity.Result;
 import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 import java.io.IOException;
 
 
@@ -15,6 +18,7 @@ import java.io.IOException;
  *
  * @author humingk
  */
+@Validated
 @FeignClient("movie-server-user")
 public interface LoginApi {
     /**
@@ -25,8 +29,8 @@ public interface LoginApi {
      * @return
      */
     @PostMapping("login")
-    Result login(@RequestParam("username") String email,
-                 @RequestParam("password") String password);
+    Result login(@RequestParam("username") @Email String email,
+                 @RequestParam("password") @NotBlank String password);
 
     /**
      * github 第三方登录

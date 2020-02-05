@@ -38,7 +38,7 @@ public class Result implements Serializable {
     public Result(StateAndMessage stateAndMessage) {
         this.state = stateAndMessage.state;
         this.message = stateAndMessage.message;
-        this.data = null;
+        this.data = "";
     }
 
     public Result(StateAndMessage stateAndMessage, Object data) {
@@ -114,7 +114,7 @@ public class Result implements Serializable {
      * @return
      */
     public static Result error(Exception e) {
-        return new Result(ERROR.state, e.getMessage(), null);
+        return new Result(ERROR.state, e.getMessage(), "");
     }
 
     // 二、Controller层直接判断返回错误专用，仅包括已知错误

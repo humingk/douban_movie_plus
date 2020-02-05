@@ -5,7 +5,7 @@ package org.humingk.movie.common.entity;
  *
  * @author humingk
  */
-public class Oauth2Modes {
+public class Oauth2Mode {
     /**
      * 授权码模式： 第三方应用先申请一个授权码，然后再用该码获取令牌
      * <p>

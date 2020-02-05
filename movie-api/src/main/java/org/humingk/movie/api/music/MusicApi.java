@@ -24,23 +24,23 @@ public interface MusicApi {
      * @param albumContentLimit    专辑内歌曲数目限制数（可选，默认8）
      * @return
      */
-    @GetMapping("play_music_netease")
-    Result playMusicNetease(@RequestParam("movie_douban_id") long movieDoubanId,
-                            @RequestParam(value = "song_limit",
-                                    required = false,
-                                    defaultValue = "8") int songLimit,
-                            @RequestParam(value = "playlist_limit",
-                                    required = false,
-                                    defaultValue = "1") int playlistLimit,
-                            @RequestParam(value = "playlist_content_limit",
-                                    required = false,
-                                    defaultValue = "8") int playlistContetnLimit,
-                            @RequestParam(value = "album_limit",
-                                    required = false,
-                                    defaultValue = "1") int albumLimit,
-                            @RequestParam(value = "album_content_limit",
-                                    required = false,
-                                    defaultValue = "8") int albumContentLimit);
+    @GetMapping("netease_music_resources")
+    Result neteaseMusicResources(@RequestParam("movie_douban_id") long movieDoubanId,
+                                 @RequestParam(value = "song_limit",
+                                         required = false,
+                                         defaultValue = "8") int songLimit,
+                                 @RequestParam(value = "playlist_limit",
+                                         required = false,
+                                         defaultValue = "1") int playlistLimit,
+                                 @RequestParam(value = "playlist_content_limit",
+                                         required = false,
+                                         defaultValue = "8") int playlistContetnLimit,
+                                 @RequestParam(value = "album_limit",
+                                         required = false,
+                                         defaultValue = "1") int albumLimit,
+                                 @RequestParam(value = "album_content_limit",
+                                         required = false,
+                                         defaultValue = "8") int albumContentLimit);
 
     /**
      * 获取网易云音乐热门评论
@@ -50,12 +50,12 @@ public interface MusicApi {
      * @param limit          限制数（可选，默认8）
      * @return
      */
-    @GetMapping("comment_music_netease")
-    Result commentMusicNetease(@RequestParam("music_netease_id") long musicNeteaseId,
-                               @RequestParam(value = "offset",
-                                       required = false,
-                                       defaultValue = "0") int offset,
-                               @RequestParam(value = "limit",
-                                       required = false,
-                                       defaultValue = "8") int limit);
+    @GetMapping("netease_music_hot_comments")
+    Result neteaseMusicHotComments(@RequestParam("music_netease_id") long musicNeteaseId,
+                                   @RequestParam(value = "offset",
+                                           required = false,
+                                           defaultValue = "0") int offset,
+                                   @RequestParam(value = "limit",
+                                           required = false,
+                                           defaultValue = "8") int limit);
 }

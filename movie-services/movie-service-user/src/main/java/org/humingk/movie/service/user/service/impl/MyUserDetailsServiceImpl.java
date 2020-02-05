@@ -13,14 +13,12 @@ import org.humingk.movie.service.user.service.MyUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.oauth2.common.exceptions.OAuth2Exception;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.humingk.movie.common.enumeration.StateAndMessage.NOROLE;
-import static org.humingk.movie.common.enumeration.StateAndMessage.NOUSER;
+import static com.google.common.base.Preconditions.checkState;
 
 
 /**
@@ -43,14 +41,10 @@ public class MyUserDetailsServiceImpl implements MyUserDetailsService {
      * @return
      */
     @Override
-    public User getUserByEmail(String email) {
+    public List<User> getUserByEmail(String email) {
         UserExample example = new UserExample();
         example.or().andEmailEqualTo(email);
-        List<User> userList = userMapper.selectByExample(example);
-        if (userList.size() == 1) {
-            return userList.get(0);
-        }
-        return null;
+        return userMapper.selectByExample(example);
     }
 
     /**
@@ -73,18 +67,14 @@ public class MyUserDetailsServiceImpl implements MyUserDetailsService {
      */
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException, MyException {
-        User user = getUserByEmail(username);
-        if (user == null) {
-            throw OAuth2Exception.create(String.valueOf(NOUSER.state), NOUSER.message + ": " + username);
-        }
-        List<Role> roleList = getRoleListByUserId(user.getId());
-        if (roleList.size() == 0) {
-            throw OAuth2Exception.create(String.valueOf(NOROLE.state), NOROLE.message + ": " + username);
-        }
+        List<User> userList = getUserByEmail(username);
+        checkState(userList.size() == 1, "暂无此用户,email:" + username);
+        List<Role> roleList = getRoleListByUserId(userList.get(0).getId());
+        checkState(roleList.size() == 1, "此用户暂无权限,email:" + username);
         List<SecurityRole> securityRoleList = new ArrayList<>();
         for (Role role : roleList) {
             securityRoleList.add(new SecurityRole(role));
         }
-        return new SecurityUser(user, securityRoleList);
+        return new SecurityUser(userList.get(0), securityRoleList);
     }
 }

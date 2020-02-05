@@ -13,15 +13,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 @FeignClient("movie-server-movie")
 public interface ResourceApi {
     /**
-     * 获取电影资源（包括正版资源、盗版资源、在线资源、离线资源）
+     * 电影资源（包括正版资源、盗版资源、在线资源、离线资源）
      *
      * @param movieDoubanId 豆瓣电影ID
      * @param offset        偏移量（可选，默认0）
      * @param limit         限制数（可选，默认10）
      * @return
      */
-    @GetMapping("resource_movie")
-    Result resourceMovie(@RequestParam("movie_douban_id") long movieDoubanId,
+    @GetMapping("movie_resource_details")
+    Result movieResourceDetails(@RequestParam("movie_douban_id") long movieDoubanId,
                          @RequestParam(value = "offset",
                                  required = false,
                                  defaultValue = "0") int offset,

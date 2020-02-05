@@ -11,12 +11,14 @@ import org.humingk.movie.common.util.AesUtil;
 import org.jsoup.Jsoup;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.constraints.NotBlank;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -27,6 +29,7 @@ import java.util.Map;
  * @author humingk
  */
 @Slf4j
+@Validated
 @RestController
 public class LoginController implements LoginApi {
 
@@ -69,8 +72,8 @@ public class LoginController implements LoginApi {
      */
     @Override
     @PostMapping("login")
-    public Result login(@RequestParam("username") String email,
-                        @RequestParam("password") String password) {
+    public Result login(@RequestParam("username") @NotBlank String email,
+                        @RequestParam("password") @NotBlank String password) {
         try {
             Map<String, String> params = new HashMap() {{
                 put("username", AesUtil.decrypt(email));

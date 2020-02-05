@@ -1,6 +1,6 @@
 server:
   port: 8000
 # 开启feign中的hytrix
-#feign:
-#  hystrix:
-#    enabled: true
+feign:
+  hystrix:
+    enabled: true

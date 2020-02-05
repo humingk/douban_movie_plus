@@ -12,16 +12,15 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
  * 全局未知异常处理类
  * <p>
  * 在Controller层中拦截所有抛出的未知异常,用于日志记录和前端返回
- * <p>
- * Order:   优先级最低
+ *
+ * 优先级需要比其他已知异常更低
  *
  * @author humingk
  */
 @Slf4j
 @RestControllerAdvice
-@Order(Ordered.HIGHEST_PRECEDENCE)
+@Order(Ordered.LOWEST_PRECEDENCE - 1)
 public class GlobalUnknownExceptionHandler extends ResponseEntityExceptionHandler {
-
     /**
      * 未知异常
      * <p>
@@ -31,8 +30,8 @@ public class GlobalUnknownExceptionHandler extends ResponseEntityExceptionHandle
      * @return
      */
     @ExceptionHandler(Exception.class)
-    public Result exceptionHandler(Exception e) {
-        log.error("未知异常:{}", e.getMessage(),e);
+    public Result handleUnknownException(Exception e) {
+        log.error("未知异常:{}", e.getMessage(), e);
         return Result.error(e.getMessage());
     }
 }

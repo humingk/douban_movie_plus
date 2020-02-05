@@ -1,13 +1,14 @@
 package org.humingk.movie.server.auth.config;
 
-import org.humingk.movie.common.entity.Oauth2Modes;
-import org.humingk.movie.common.enumeration.Resources;
+import org.humingk.movie.common.entity.Oauth2Mode;
 import org.humingk.movie.common.enumeration.Roles;
 import org.humingk.movie.security.config.AuthorizationServerConfig;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
+
+import static org.humingk.movie.common.entity.ResourceId.*;
 
 /**
  * Oauth2认证授权服务配置
@@ -45,10 +46,10 @@ public class MyAuthorizationServerConfig extends AuthorizationServerConfig {
                 // 支持的角色
                 .authorities(Roles.ROOT.name, Roles.USER.name)
                 // 支持的资源ID
-                .resourceIds(Resources.USER.id, Resources.MOVIE.id, Resources.MUSIC.id)
+                .resourceIds(USER_ID, MOVIE_ID, MUSIC_ID)
                 .scopes(clientScopes)
                 // 支持的请求模式
-                .authorizedGrantTypes(Oauth2Modes.PASSWORD, Oauth2Modes.REFRESH)
+                .authorizedGrantTypes(Oauth2Mode.PASSWORD, Oauth2Mode.REFRESH)
                 .accessTokenValiditySeconds(validity)
                 .refreshTokenValiditySeconds(validity);
     }

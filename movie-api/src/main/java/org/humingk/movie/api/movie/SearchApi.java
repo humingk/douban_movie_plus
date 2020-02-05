@@ -1,5 +1,6 @@
 package org.humingk.movie.api.movie;
 
+import org.humingk.movie.api.movie.hystric.SearchApiHystric;
 import org.humingk.movie.common.entity.Result;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,8 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
  *
  * @author humingk
  */
-//@FeignClient(value = "movie-server-movie", fallback = SearchApiHystric.class)
-@FeignClient("movie-server-movie")
+@FeignClient(value = "movie-server-movie", fallback = SearchApiHystric.class)
 public interface SearchApi {
     /**
      * 豆瓣电影搜索提示
@@ -42,8 +42,8 @@ public interface SearchApi {
      * @param limit   限制数（可选，默认10）
      * @return
      */
-    @GetMapping("search_movie_result")
-    Result searchMovieResult(@RequestParam("keyword") String keyword,
+    @GetMapping("search_movie_details")
+    Result searchMovieDetails(@RequestParam("keyword") String keyword,
                              @RequestParam(value = "offset",
                                      required = false,
                                      defaultValue = "0") int offset,
@@ -61,8 +61,8 @@ public interface SearchApi {
      * @param limit   限制数（可选，默认10）
      * @return
      */
-    @GetMapping("search_celebrity_result")
-    Result searchCelebrityResult(@RequestParam("keyword") String keyword,
+    @GetMapping("search_celebrity_details")
+    Result searchCelebrityDetails(@RequestParam("keyword") String keyword,
                                  @RequestParam(value = "offset",
                                          required = false,
                                          defaultValue = "0") int offset,

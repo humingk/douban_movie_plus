@@ -1,3 +1,5 @@
+server:
+  port: 10201
 spring:
   application:
     name: movie-service-douban
@@ -6,7 +8,7 @@ spring:
     active: dev
   cloud:
     config:
-      name: movie-service-douban,base,database
+      name: base,database
       # 当前服务使用的config配置类型：dev/pro
       profile: ${spring.profiles.active}
       discovery:

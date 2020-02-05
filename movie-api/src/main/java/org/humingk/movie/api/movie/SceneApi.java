@@ -20,8 +20,8 @@ public interface SceneApi {
      * @param limit         限制数（可选，默认10）
      * @return
      */
-    @GetMapping("scene_detail")
-    Result sceneDetail(@RequestParam("movie_douban_id") long movieDoubanId,
+    @GetMapping("scene_details")
+    Result sceneDetails(@RequestParam("movie_douban_id") long movieDoubanId,
                        @RequestParam(value = "offset",
                                required = false,
                                defaultValue = "0") int offset,

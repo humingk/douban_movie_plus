@@ -3,21 +3,24 @@ package org.humingk.movie.api.movie;
 import org.humingk.movie.common.entity.Result;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 /**
- * 电影模块评分API
+ * IMDB电影API
  *
  * @author humingk
  */
 @FeignClient("movie-server-movie")
-public interface RateApi {
+@RequestMapping("/movie/imdb")
+public interface ImdbApi {
+
     /**
-     * 电影所有评分信息(包括豆瓣、IMDB、MTC、猫眼、知乎、烂番茄新鲜度等)
+     * IMDB电影详情信息(包括电影海报、包括基础信息、剧情简介)
      *
-     * @param movieDoubanId 豆瓣电影ID
+     * @param id 豆瓣电影ID
      * @return
      */
-    @GetMapping("rate_details")
-    Result rateDetails(@RequestParam("movie_douban_id") long movieDoubanId);
+    @GetMapping("details")
+    Result details(@RequestParam("id") long id);
 }
