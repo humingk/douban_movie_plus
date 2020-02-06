@@ -30,6 +30,11 @@
             <groupId>org.humingk</groupId>
             <artifactId>movie-common</artifactId>
         </dependency>
+        <!--zipkin client-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-zipkin</artifactId>
+        </dependency>
         <!--config client-->
         <dependency>
             <groupId>org.springframework.cloud</groupId>

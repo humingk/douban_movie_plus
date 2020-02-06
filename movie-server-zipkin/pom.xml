@@ -16,7 +16,7 @@
         <dependency>
             <groupId>io.zipkin.java</groupId>
             <artifactId>zipkin-server</artifactId>
-            <!--排除重复log-->
+            <!--重复slf4j-->
             <exclusions>
                 <exclusion>
                     <groupId>org.apache.logging.log4j</groupId>
@@ -29,6 +29,11 @@
             <groupId>io.zipkin.java</groupId>
             <artifactId>zipkin-autoconfigure-ui</artifactId>
         </dependency>
+<!--        &lt;!&ndash;zipkin rabbitmq&ndash;&gt;-->
+<!--        <dependency>-->
+<!--            <groupId>io.zipkin.java</groupId>-->
+<!--            <artifactId>zipkin-autoconfigure-collector-rabbitmq</artifactId>-->
+<!--        </dependency>-->
         <!--config client-->
         <dependency>
             <groupId>org.springframework.cloud</groupId>

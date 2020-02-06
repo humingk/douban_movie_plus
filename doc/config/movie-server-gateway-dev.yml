@@ -21,6 +21,14 @@ spring:
           filters:
             - StripPrefix=1
         # ----------------------------------------
+        # config服务
+        - id: movie-server-config
+          uri: lb://movie-server-config
+          predicates:
+            - Path=/${custom.api.version}/actuator/**
+          filters:
+            - StripPrefix=1
+        # ----------------------------------------
         # 用户
         - id: movie-server-user
           uri: lb://movie-server-user

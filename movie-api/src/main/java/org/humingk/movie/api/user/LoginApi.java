@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletResponse;
-import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import java.io.IOException;
 
@@ -29,7 +28,7 @@ public interface LoginApi {
      * @return
      */
     @PostMapping("login")
-    Result login(@RequestParam("username") @Email String email,
+    Result login(@RequestParam("username") @NotBlank String email,
                  @RequestParam("password") @NotBlank String password);
 
     /**

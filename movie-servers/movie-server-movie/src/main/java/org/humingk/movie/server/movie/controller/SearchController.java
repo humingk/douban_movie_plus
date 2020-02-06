@@ -1,12 +1,12 @@
 package org.humingk.movie.server.movie.controller;
 
 import io.jsonwebtoken.Jwts;
-import org.humingk.movie.common.annotation.AesDecrypt;
 import org.humingk.movie.common.annotation.LogRecord;
 import org.humingk.movie.common.entity.Result;
 import org.humingk.movie.service.douban.service.SearchService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.provider.authentication.OAuth2AuthenticationDetails;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,6 +19,7 @@ import java.nio.charset.StandardCharsets;
  * @author humingk
  */
 @LogRecord
+@RefreshScope
 @RestController
 public class SearchController {
 
@@ -36,7 +37,6 @@ public class SearchController {
      * @return
      */
 //    @Override
-    @AesDecrypt
     @GetMapping("search_movie_tips")
     public Result searchMovieTips(@RequestParam("keyword") String keyword,
                                                      @RequestParam(value = "offset",
@@ -46,16 +46,6 @@ public class SearchController {
                                                              required = false,
                                                              defaultValue = "10") int limit) {
         return Result.success(searchService.getMovieDoubanListByNameStart(keyword, offset, limit));
-    }
-
-    @GetMapping("/test1")
-    public String test() {
-        return "test resource movie,nothing need";
-    }
-
-    @GetMapping("/test2")
-    public String test2() {
-        return "test resource movie,need token";
     }
 
     @GetMapping("token")

@@ -73,8 +73,7 @@
         <commons-lang3.version>3.9</commons-lang3.version>
         <commons-pool2.version>2.7.0</commons-pool2.version>
         <guava.version>28.1-jre</guava.version>
-        <zipkin-autoconfigure-ui.version>2.12.3</zipkin-autoconfigure-ui.version>
-        <zipkin-server.version>2.12.3</zipkin-server.version>
+        <zipkin.version>2.12.3</zipkin.version>
         <jsoup.version>1.12.1</jsoup.version>
 
     </properties>
@@ -84,6 +83,11 @@
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+        </dependency>
+        <!--bus+rabbit-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-bus-amqp</artifactId>
         </dependency>
         <!--测试 -->
         <dependency>
@@ -204,13 +208,19 @@
             <dependency>
                 <groupId>io.zipkin.java</groupId>
                 <artifactId>zipkin-server</artifactId>
-                <version>${zipkin-server.version}</version>
+                <version>${zipkin.version}</version>
             </dependency>
             <!--zipkin ui-->
             <dependency>
                 <groupId>io.zipkin.java</groupId>
                 <artifactId>zipkin-autoconfigure-ui</artifactId>
-                <version>${zipkin-autoconfigure-ui.version}</version>
+                <version>${zipkin.version}</version>
+            </dependency>
+            <!--zipkin rabbitmq-->
+            <dependency>
+                <groupId>io.zipkin.java</groupId>
+                <artifactId>zipkin-autoconfigure-collector-rabbitmq</artifactId>
+                <version>${zipkin.version}</version>
             </dependency>
             <!--jsoup-->
             <dependency>

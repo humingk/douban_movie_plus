@@ -38,7 +38,11 @@ public class MyResourceServerConfig extends ResourceServerConfig {
         httpSecurity
                 .csrf().disable()
                 // 不需要保护的资源路径
-                .authorizeRequests().antMatchers("/test3/**", "/*login/**", "/github_callback/**", "/register/**").permitAll()
+                .authorizeRequests().antMatchers(
+                "/test_bus_refresh/**",
+                "/*login/**",
+                "/github_callback/**",
+                "/register/**").permitAll()
                 // 需要管理员权限的资源路径
                 .antMatchers("/root/**").hasRole("ROOT")
                 // 需要保护的资源路径

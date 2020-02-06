@@ -70,7 +70,7 @@ public class MyUserDetailsServiceImpl implements MyUserDetailsService {
         List<User> userList = getUserByEmail(username);
         checkState(userList.size() == 1, "暂无此用户,email:" + username);
         List<Role> roleList = getRoleListByUserId(userList.get(0).getId());
-        checkState(roleList.size() == 1, "此用户暂无权限,email:" + username);
+        checkState(roleList.size() >= 1, "此用户暂无权限,email:" + username);
         List<SecurityRole> securityRoleList = new ArrayList<>();
         for (Role role : roleList) {
             securityRoleList.add(new SecurityRole(role));

@@ -1,5 +1,6 @@
 package org.humingk.movie.service.user.service.impl;
 
+import org.humingk.movie.common.exception.MyException;
 import org.humingk.movie.dal.entity.User;
 import org.humingk.movie.service.user.service.RegisterService;
 import org.junit.Test;
@@ -15,7 +16,7 @@ public class RegisterServiceImplTest {
     @Autowired
     private RegisterService registerService;
 
-    @Test
+    @Test(expected = MyException.class)
     public void register() {
         registerService.register(new User("id2", "email2", "1233"));
         // 重复ID

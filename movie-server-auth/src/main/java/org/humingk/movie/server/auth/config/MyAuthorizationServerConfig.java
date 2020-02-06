@@ -4,6 +4,7 @@ import org.humingk.movie.common.entity.Oauth2Mode;
 import org.humingk.movie.common.enumeration.Roles;
 import org.humingk.movie.security.config.AuthorizationServerConfig;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
@@ -15,6 +16,7 @@ import static org.humingk.movie.common.entity.ResourceId.*;
  *
  * @author humingk
  */
+@RefreshScope
 @Configuration
 public class MyAuthorizationServerConfig extends AuthorizationServerConfig {
     /**

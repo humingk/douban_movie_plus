@@ -7,10 +7,10 @@ import org.humingk.movie.api.user.LoginApi;
 import org.humingk.movie.common.entity.Result;
 import org.humingk.movie.common.enumeration.StateAndMessage;
 import org.humingk.movie.common.exception.MyException;
-import org.humingk.movie.common.util.AesUtil;
 import org.jsoup.Jsoup;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -30,6 +30,7 @@ import java.util.Map;
  */
 @Slf4j
 @Validated
+@RefreshScope
 @RestController
 public class LoginController implements LoginApi {
 
@@ -76,8 +77,8 @@ public class LoginController implements LoginApi {
                         @RequestParam("password") @NotBlank String password) {
         try {
             Map<String, String> params = new HashMap() {{
-                put("username", AesUtil.decrypt(email));
-                put("password", AesUtil.decrypt(password));
+                put("username", email);
+                put("password", password);
                 put("grant_type", "password");
                 put("scope", authClientScopes);
                 put("client_id", authClientId);

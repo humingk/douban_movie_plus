@@ -6,7 +6,6 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 
 /**
@@ -26,7 +25,7 @@ public interface RegisterApi {
      * @return
      */
     @PostMapping("/register")
-    Result register(@RequestParam("username") @Email String email,
+    Result register(@RequestParam("username") @NotBlank String email,
                     @RequestParam("password") @NotBlank String password,
                     @RequestParam(value = "douban_user_id",
                             required = false,

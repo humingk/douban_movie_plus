@@ -5,6 +5,7 @@ import org.humingk.movie.common.entity.Result;
 import org.humingk.movie.dal.entity.User;
 import org.humingk.movie.service.user.service.RegisterService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -18,6 +19,7 @@ import javax.validation.constraints.NotBlank;
  * @author humingk
  */
 @Validated
+@RefreshScope
 @RestController
 public class RegisterController {
 
@@ -32,7 +34,6 @@ public class RegisterController {
      * @param userDoubanId 豆瓣个人域名(可选)
      * @return
      */
-    @AesDecrypt
     @PostMapping("/register")
     public Result register(@RequestParam("username") @NotBlank String email,
                            @RequestParam("password") @NotBlank String password,

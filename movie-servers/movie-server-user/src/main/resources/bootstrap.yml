@@ -1,4 +1,6 @@
 spring:
+  sleuth:
+
   application:
     name: movie-server-user
   profiles:
