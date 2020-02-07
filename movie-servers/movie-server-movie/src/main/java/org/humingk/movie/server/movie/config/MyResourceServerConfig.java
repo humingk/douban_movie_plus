@@ -17,8 +17,6 @@ public class MyResourceServerConfig extends ResourceServerConfig {
     @Value("${security.oauth2.resource.id}")
     private String resourceId;
 
-
-
     /**
      * 路径过滤
      *

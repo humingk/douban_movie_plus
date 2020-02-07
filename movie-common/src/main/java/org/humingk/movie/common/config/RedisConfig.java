@@ -40,8 +40,6 @@ public class RedisConfig extends CachingConfigurerSupport {
     @Value("${custom.redis.expire}")
     private int redisExpire;
 
-//    private int redisExpire = 30;
-
     /**
      * 自定义生成key的规则
      *

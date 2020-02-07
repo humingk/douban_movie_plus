@@ -1,5 +1,9 @@
 package org.humingk.movie.common.util;
 
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Component;
+
 import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
 import java.util.ArrayList;
@@ -10,9 +14,19 @@ import java.util.ArrayList;
  *
  * @author humingk
  */
+@Component
 public class AesUtil {
-    private static final String KEY_AES = "AES";
-    private static final String KEY = "youaretheapofmye";
+    /**
+     * AesUtil所用的加密方式
+     */
+    @Value("${custom.aes.way}")
+    private String aesWay;
+
+    /**
+     * AesUtil所用的加密密钥
+     */
+    @Value("${custom.aes.key}")
+    private String AES_KEY;
 
     /**
      * AES加密
@@ -21,9 +35,9 @@ public class AesUtil {
      * @return
      * @throws Exception
      */
-    public static String encrypt(String data) throws Exception {
-        SecretKeySpec secretKeySpec = new SecretKeySpec(KEY.getBytes(), KEY_AES);
-        Cipher cipher = Cipher.getInstance(KEY_AES);
+    public String encrypt(String data) throws Exception {
+        SecretKeySpec secretKeySpec = new SecretKeySpec(AES_KEY.getBytes(), aesWay);
+        Cipher cipher = Cipher.getInstance(aesWay);
         cipher.init(Cipher.ENCRYPT_MODE, secretKeySpec);
         return byte2hex(cipher.doFinal(data.getBytes()));
     }
@@ -35,9 +49,9 @@ public class AesUtil {
      * @return
      * @throws Exception
      */
-    public static String decrypt(String data) throws Exception {
-        SecretKeySpec secretKeySpec = new SecretKeySpec(KEY.getBytes(), KEY_AES);
-        Cipher cipher = Cipher.getInstance(KEY_AES);
+    public String decrypt(String data) throws Exception {
+        SecretKeySpec secretKeySpec = new SecretKeySpec(AES_KEY.getBytes(), aesWay);
+        Cipher cipher = Cipher.getInstance(aesWay);
         cipher.init(Cipher.DECRYPT_MODE, secretKeySpec);
         return new String(cipher.doFinal(hex2byte(data)));
     }
@@ -74,6 +88,10 @@ public class AesUtil {
 
 
     public static void main(String[] args) throws Exception {
+        System.out.println("--------------");
+        System.out.println("密码1233");
+        System.out.println(new BCryptPasswordEncoder().encode("1233"));
+        System.out.println("--------------");
         ArrayList list = new ArrayList() {
             {
                 add("1233");
@@ -93,8 +111,8 @@ public class AesUtil {
             }
         };
         for (Object str : list) {
-            String se = AesUtil.encrypt((String) str);
-            String sd = AesUtil.decrypt(se);
+            String se = new AesUtil().encrypt((String) str);
+            String sd = new AesUtil().decrypt(se);
             System.out.println("=======================================");
             System.out.println("origin:  " + str);
             System.out.println("encrypt: " + se);
@@ -104,6 +122,10 @@ public class AesUtil {
 }
 /*
 
+--------------
+密码1233
+$2a$10$So3l2tsWnv2g/f3vs.OlQubgBVc30eSv69aTDaPCXgGT0V.m.auQa
+--------------
 =======================================
 origin:  1233
 encrypt: C3C677983D0D8107BBC765B313434298

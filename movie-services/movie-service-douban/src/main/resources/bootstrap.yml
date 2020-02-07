@@ -8,7 +8,7 @@ spring:
     active: dev
   cloud:
     config:
-      name: base,database
+      name: mysql,redis,rabbitmq,zipkin-client,feign-client
       # 当前服务使用的config配置类型：dev/pro
       profile: ${spring.profiles.active}
       discovery:

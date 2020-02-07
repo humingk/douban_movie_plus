@@ -52,7 +52,6 @@
         <module>movie-server-gateway</module>
         <module>movie-server-auth</module>
         <module>movie-server-eureka</module>
-        <module>movie-server-zipkin</module>
         <!--server service list-->
         <module>movie-servers</module>
         <module>movie-services</module>
@@ -73,7 +72,7 @@
         <commons-lang3.version>3.9</commons-lang3.version>
         <commons-pool2.version>2.7.0</commons-pool2.version>
         <guava.version>28.1-jre</guava.version>
-        <zipkin.version>2.12.3</zipkin.version>
+        <zipkin.version>2.11.3</zipkin.version>
         <jsoup.version>1.12.1</jsoup.version>
 
     </properties>
@@ -203,24 +202,6 @@
                 <groupId>com.google.guava</groupId>
                 <artifactId>guava</artifactId>
                 <version>${guava.version}</version>
-            </dependency>
-            <!--zipkin server-->
-            <dependency>
-                <groupId>io.zipkin.java</groupId>
-                <artifactId>zipkin-server</artifactId>
-                <version>${zipkin.version}</version>
-            </dependency>
-            <!--zipkin ui-->
-            <dependency>
-                <groupId>io.zipkin.java</groupId>
-                <artifactId>zipkin-autoconfigure-ui</artifactId>
-                <version>${zipkin.version}</version>
-            </dependency>
-            <!--zipkin rabbitmq-->
-            <dependency>
-                <groupId>io.zipkin.java</groupId>
-                <artifactId>zipkin-autoconfigure-collector-rabbitmq</artifactId>
-                <version>${zipkin.version}</version>
             </dependency>
             <!--jsoup-->
             <dependency>

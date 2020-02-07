@@ -1,5 +1,3 @@
-server:
-  port: 10102
 security:
   oauth2:
     resource:

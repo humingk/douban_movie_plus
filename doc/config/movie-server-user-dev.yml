@@ -1,5 +1,3 @@
-server:
-  port: 10103
 security:
   oauth2:
     resource:
@@ -10,10 +8,12 @@ spring:
     oauth2:
       client:
         registration:
+          # 通过本地注册服务器认证
           auth:
             client-id: client
             client-secret: client
             client-scopes: all
+          # 通过Github认证
           github:
             client-id: e97fedfabcf648c19043
             client-secret: 4f6091870ca0e51b432587b557f6375732d3ac44

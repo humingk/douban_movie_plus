@@ -1,3 +1,5 @@
+server:
+  port: 8080
 spring:
   application:
     name: movie-server-gateway
@@ -6,7 +8,7 @@ spring:
     active: dev
   cloud:
     config:
-      name: movie-server-gateway,base
+      name: gateway,rabbitmq,zipkin-client
       # 当前服务使用的config配置类型：dev/pro
       profile: ${spring.profiles.active}
       discovery:

@@ -1,6 +1,0 @@
-management:
-  metrics:
-    web:
-      server:
-        # 忽略zipkin服务端部分异常
-        auto-time-requests: false

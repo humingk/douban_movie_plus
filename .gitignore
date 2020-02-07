@@ -1,8 +1,9 @@
 .idea/
 *.iml
 **/target/
-**/log/
 **/*.iml
 **/.mvn/
 **/mvnw
 **/mvnw.cmd
+zipkin.jar
+doc/log/

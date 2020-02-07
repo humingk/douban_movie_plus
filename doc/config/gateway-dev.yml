@@ -1,5 +1,7 @@
-server:
-  port: 8080
+custom:
+  api:
+    # api的版本
+    version: v2
 spring:
   cloud:
     gateway:

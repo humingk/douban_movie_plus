@@ -23,11 +23,4 @@ public class UserController {
         return Result.success(ResponseEntity.ok(principal));
     }
 
-    @Value("${custom.test}")
-    private String test;
-
-    @GetMapping("/test_bus_refresh")
-    public Result testBusRefresh() {
-        return Result.success(test);
-    }
 }

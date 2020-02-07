@@ -35,6 +35,11 @@
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-zipkin</artifactId>
         </dependency>
+        <!--common-->
+        <dependency>
+            <groupId>org.humingk</groupId>
+            <artifactId>movie-common</artifactId>
+        </dependency>
         <!--movie api-->
         <dependency>
             <groupId>org.humingk</groupId>

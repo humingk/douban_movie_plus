@@ -1,0 +1,7 @@
+spring:
+  # 消息中间件rabbit
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest

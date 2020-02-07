@@ -1,3 +1,5 @@
+server:
+  port: 8000
 spring:
   application:
     name: movie-api
@@ -6,7 +8,7 @@ spring:
     active: dev
   cloud:
     config:
-      name: movie-api,base,database
+      name: mysql,rabbitmq,zipkin-client,feign-server
       # 当前服务使用的config配置类型：dev/pro
       profile: ${spring.profiles.active}
       discovery:

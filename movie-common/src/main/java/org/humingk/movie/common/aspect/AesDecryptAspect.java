@@ -9,6 +9,7 @@ import org.aspectj.lang.reflect.MethodSignature;
 import org.humingk.movie.common.exception.MyException;
 import org.humingk.movie.common.util.AesUtil;
 import org.humingk.movie.common.enumeration.StateAndMessage;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
@@ -29,6 +30,9 @@ import java.util.Map;
 @Slf4j
 @Component
 public class AesDecryptAspect {
+
+    @Autowired
+    private AesUtil aesUtil;
 
     /**
      * 切点定义:
@@ -55,7 +59,7 @@ public class AesDecryptAspect {
             for (int i = 0; i < args.length; i++) {
                 // 不需要AES加密的参数： offset、limit
                 if(!"offset".equals(argsNameArray[i])&&!"limit".equals(argsNameArray[i])){
-                    args[i] = AesUtil.decrypt(args[i].toString());
+                    args[i] = aesUtil.decrypt(args[i].toString());
                 }
             }
         } catch (Exception e) {

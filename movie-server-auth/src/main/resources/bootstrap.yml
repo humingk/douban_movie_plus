@@ -1,3 +1,5 @@
+server:
+  port: 8006
 spring:
   application:
     name: movie-server-auth
@@ -6,7 +8,7 @@ spring:
     active: dev
   cloud:
     config:
-      name: movie-server-auth,auth-resource,base,database
+      name: oauth2-server,rabbitmq,mysql,redis,aes,zipkin-client,feign-client
       # 当前服务使用的config配置类型：dev/pro
       profile: ${spring.profiles.active}
       discovery:
