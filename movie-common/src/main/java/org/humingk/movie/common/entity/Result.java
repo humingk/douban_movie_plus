@@ -25,25 +25,25 @@ public class Result implements Serializable {
     /**
      * 状态码
      */
-    private int state;
+    private int code;
     /**
      * 其他信息
      */
-    private String message;
+    private String msg;
     /**
      * Json格式数据，复杂嵌套对象,Json字符串
      */
     private Object data;
 
     public Result(StateAndMessage stateAndMessage) {
-        this.state = stateAndMessage.state;
-        this.message = stateAndMessage.message;
+        this.code = stateAndMessage.code;
+        this.msg = stateAndMessage.msg;
         this.data = "";
     }
 
     public Result(StateAndMessage stateAndMessage, Object data) {
-        this.state = stateAndMessage.state;
-        this.message = stateAndMessage.message;
+        this.code = stateAndMessage.code;
+        this.msg = stateAndMessage.msg;
         this.data = data;
     }
 
@@ -104,7 +104,7 @@ public class Result implements Serializable {
      * @return
      */
     public static Result error(Exception e, Object data) {
-        return new Result(ERROR.state, e.getMessage(), data);
+        return new Result(ERROR.code, e.getMessage(), data);
     }
 
     /**
@@ -114,7 +114,7 @@ public class Result implements Serializable {
      * @return
      */
     public static Result error(Exception e) {
-        return new Result(ERROR.state, e.getMessage(), "");
+        return new Result(ERROR.code, e.getMessage(), "");
     }
 
     // 二、Controller层直接判断返回错误专用，仅包括已知错误
@@ -156,6 +156,6 @@ public class Result implements Serializable {
      * @return
      */
     public static Result error(Object data) {
-        return new Result(ERROR.state, ERROR.message, data);
+        return new Result(ERROR.code, ERROR.msg, data);
     }
 }

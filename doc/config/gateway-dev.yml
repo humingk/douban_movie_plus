@@ -37,7 +37,7 @@ spring:
           predicates:
             - Path=/${custom.api.version}/user/**
           filters:
-            - StripPrefix=2
+            - StripPrefix=1
         # ----------------------------------------
         # 电影
         - id: movie-server-movie
@@ -48,7 +48,7 @@ spring:
             - Path=/${custom.api.version}/movie/**
           filters:
             # 转发前去掉匹配path最前面的n个
-            - StripPrefix=2
+            - StripPrefix=1
             # 限流过滤器
             # 令牌桶限流算法，当请求拿到桶中的令牌才能执行
             # 相对于普通桶算法，可以抵挡瞬时的多个请求
@@ -61,13 +61,27 @@ spring:
                 # 令牌桶总容量
                 redis-rate-limiter.burstCapacity: 5
         # ----------------------------------------
+        # 影人
+        - id: movie-server-celebrity
+          uri: lb://movie-server-celebrity
+          predicates:
+            - Path=/${custom.api.version}/celebrity/**
+          filters:
+            - StripPrefix=1
+            # 限流过滤器
+            - name: RequestRateLimiter
+              args:
+                key-resolver: '#{@myHostAddrKeyResolver}'
+                redis-rate-limiter.replenishRate: 1
+                redis-rate-limiter.burstCapacity: 5
+        # ----------------------------------------
         # 音乐
         - id: movie-server-music
           uri: lb://movie-server-music
           predicates:
             - Path=/${custom.api.version}/music/**
           filters:
-            - StripPrefix=2
+            - StripPrefix=1
             # 限流过滤器
             - name: RequestRateLimiter
               args:

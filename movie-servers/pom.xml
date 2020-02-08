@@ -15,6 +15,7 @@
     <!--servers子模块-->
     <modules>
         <module>movie-server-movie</module>
+        <module>movie-server-celebrity</module>
         <module>movie-server-music</module>
         <module>movie-server-user</module>
     </modules>

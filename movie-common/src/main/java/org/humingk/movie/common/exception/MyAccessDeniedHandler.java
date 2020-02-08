@@ -26,8 +26,8 @@ public class MyAccessDeniedHandler implements AccessDeniedHandler {
     @Override
     public void handle(HttpServletRequest request, HttpServletResponse response, AccessDeniedException accessDeniedException) throws IOException, ServletException {
         Map map = new HashMap() {{
-            put("state", FORBIDDEN.state);
-            put("message", FORBIDDEN.message);
+            put("state", FORBIDDEN.code);
+            put("message", FORBIDDEN.msg);
             put("data", "权限不足");
         }};
         response.setContentType("application/json");

@@ -28,7 +28,7 @@ public class MyResourceServerConfig extends ResourceServerConfig {
         httpSecurity
                 .csrf().disable()
                 // 不需要保护的资源路径
-                .authorizeRequests().antMatchers("/testx/**").permitAll()
+                .authorizeRequests().antMatchers("/movie/**").permitAll()
 //                .authorizeRequests().antMatchers("/test3/**", "/search_movie_tips/**").permitAll()
                 // 需要保护的资源路径
                 .anyRequest().authenticated();

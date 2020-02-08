@@ -14,7 +14,10 @@ public class ResourceId {
      * 电影资源ID
      */
     public static final String MOVIE_ID = "movie";
-
+    /**
+     * 影人资源ID
+     */
+    public static final String CELEBRITY_ID = " celebrity";
     /**
      * 音乐资源ID
      */

@@ -29,11 +29,11 @@ public class MyOauth2Translator implements WebResponseExceptionTranslator {
         } else if (e instanceof AuthenticationException) {
             AuthenticationException authenticationException = (AuthenticationException) e;
             return ResponseEntity
-                    .status(UNAUTHORIZED.state)
+                    .status(UNAUTHORIZED.code)
                     .body(new MyOauth2Exception(authenticationException.getMessage()));
         }
         return ResponseEntity
-                .status(SUCCESS.state)
+                .status(SUCCESS.code)
                 .body(new MyOauth2Exception(e.getMessage()));
     }
 }

@@ -39,6 +39,7 @@ public class MyResourceServerConfig extends ResourceServerConfig {
                 .csrf().disable()
                 // 不需要保护的资源路径
                 .authorizeRequests().antMatchers(
+                "/user/**",
                 "/*login/**",
                 "/github_callback/**",
                 "/register/**").permitAll()

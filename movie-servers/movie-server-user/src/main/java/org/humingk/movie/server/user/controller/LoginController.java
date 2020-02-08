@@ -2,23 +2,16 @@ package org.humingk.movie.server.user.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import lombok.extern.slf4j.Slf4j;
-import org.humingk.movie.api.auth.OauthApi;
-import org.humingk.movie.api.user.LoginApi;
 import org.humingk.movie.common.entity.Result;
-import org.humingk.movie.common.enumeration.StateAndMessage;
-import org.humingk.movie.common.exception.MyException;
 import org.jsoup.Jsoup;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletResponse;
-import javax.validation.constraints.NotBlank;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -32,7 +25,7 @@ import java.util.Map;
 @Validated
 @RefreshScope
 @RestController
-public class LoginController implements LoginApi {
+public class LoginController {
 
     @Value("${spring.security.oauth2.client.registration.auth.client-id}")
     private String authClientId;
@@ -61,35 +54,35 @@ public class LoginController implements LoginApi {
     @Value("${spring.security.oauth2.client.registration.github.user-uri}")
     private String githubUserUri;
 
-    @Autowired
-    private OauthApi oauthApi;
-
-    /**
-     * auth 登录
-     *
-     * @param email    用户邮箱
-     * @param password 密码
-     * @return
-     */
-    @Override
-    @PostMapping("login")
-    public Result login(@RequestParam("username") @NotBlank String email,
-                        @RequestParam("password") @NotBlank String password) {
-        try {
-            Map<String, String> params = new HashMap() {{
-                put("username", email);
-                put("password", password);
-                put("grant_type", "password");
-                put("scope", authClientScopes);
-                put("client_id", authClientId);
-                put("client_secret", authClientSecret);
-            }};
-            return Result.success(oauthApi.postAccessToken(params));
-        } catch (Exception e) {
-            log.error("登录出错", e);
-            throw new MyException(StateAndMessage.ERROR, e.getMessage());
-        }
-    }
+//    @Qualifier("movie-server-auth")
+//    @Autowired
+//    private Oauth2Api oauth2Api;
+//
+//    /**
+//     * auth 登录
+//     *
+//     * @param email    用户邮箱
+//     * @param password 密码
+//     * @return
+//     */
+//    @PostMapping("login")
+//    public Result login(@RequestParam("username") @NotBlank String email,
+//                        @RequestParam("password") @NotBlank String password) {
+//        try {
+//            Map<String, String> params = new HashMap() {{
+//                put("username", email);
+//                put("password", password);
+//                put("grant_type", "password");
+//                put("scope", authClientScopes);
+//                put("client_id", authClientId);
+//                put("client_secret", authClientSecret);
+//            }};
+//            return Result.success(oauth2Api.postAccessToken(params));
+//        } catch (Exception e) {
+//            log.error("登录出错", e);
+//            throw new MyException(StateAndMessage.ERROR, e.getMessage());
+//        }
+//    }
 
     /**
      * github 第三方登录
@@ -97,7 +90,6 @@ public class LoginController implements LoginApi {
      * @param response
      * @throws IOException
      */
-    @Override
     @GetMapping("/github_login")
     public void githubLogin(HttpServletResponse response) throws IOException {
         response.sendRedirect(githubAuthorizeUri
@@ -115,7 +107,6 @@ public class LoginController implements LoginApi {
      * @return
      * @throws IOException
      */
-    @Override
     @GetMapping("/github_callback")
     public Result githubCallback(@RequestParam("code") String code,
                                  @RequestParam("state") String state) {

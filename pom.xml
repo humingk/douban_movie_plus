@@ -71,6 +71,8 @@
         <jwt.version>0.9.1</jwt.version>
         <commons-lang3.version>3.9</commons-lang3.version>
         <commons-pool2.version>2.7.0</commons-pool2.version>
+        <apache-httpclient.version>4.5.6</apache-httpclient.version>
+        <feign-httpclient.version>8.18.0</feign-httpclient.version>
         <guava.version>28.1-jre</guava.version>
         <zipkin.version>2.11.3</zipkin.version>
         <jsoup.version>1.12.1</jsoup.version>
@@ -196,6 +198,18 @@
                 <groupId>org.apache.commons</groupId>
                 <artifactId>commons-pool2</artifactId>
                 <version>${commons-pool2.version}</version>
+            </dependency>
+            <!--apache httpclient-->
+            <dependency>
+                <groupId>org.apache.httpcomponents</groupId>
+                <artifactId>httpclient</artifactId>
+                <version>${apache-httpclient.version}</version>
+            </dependency>
+            <!--feign httpclient-->
+            <dependency>
+                <groupId>com.netflix.feign</groupId>
+                <artifactId>feign-httpclient</artifactId>
+                <version>${feign-httpclient.version}</version>
             </dependency>
             <!--google  guava-->
             <dependency>

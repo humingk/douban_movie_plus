@@ -30,10 +30,10 @@ public enum StateAndMessage {
     /**
      * 状态码
      */
-    public final int state;
+    public final int code;
     /**
      * 状态信息
      */
-    public final String message;
+    public final String msg;
 
 }

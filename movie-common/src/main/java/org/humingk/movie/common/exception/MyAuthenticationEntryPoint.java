@@ -26,8 +26,8 @@ public class MyAuthenticationEntryPoint implements AuthenticationEntryPoint {
     @Override
     public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException) throws IOException, ServletException {
         Map map = new HashMap() {{
-            put("state", UNAUTHORIZED.state);
-            put("message", UNAUTHORIZED.message);
+            put("state", UNAUTHORIZED.code);
+            put("message", UNAUTHORIZED.msg);
             put("data", "未认证");
         }};
         response.setContentType("application/json");

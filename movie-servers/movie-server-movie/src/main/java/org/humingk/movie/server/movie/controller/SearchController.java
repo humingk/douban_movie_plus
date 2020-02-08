@@ -9,19 +9,25 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.provider.authentication.OAuth2AuthenticationDetails;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.PositiveOrZero;
 import java.nio.charset.StandardCharsets;
+import java.util.List;
 
 /**
  * @author humingk
  */
+@Validated
 @LogRecord
 @RefreshScope
 @RestController
-public class SearchController {
+public class SearchController{
 
     @Autowired
     private SearchService searchService;
@@ -38,14 +44,14 @@ public class SearchController {
      */
 //    @Override
     @GetMapping("search_movie_tips")
-    public Result searchMovieTips(@RequestParam("keyword") String keyword,
+    public Result searchMovieTips(@RequestParam("keyword") @NotBlank String keyword,
                                                      @RequestParam(value = "offset",
                                                              required = false,
-                                                             defaultValue = "0") int offset,
+                                                             defaultValue = "0") @PositiveOrZero int offset,
                                                      @RequestParam(value = "limit",
                                                              required = false,
-                                                             defaultValue = "10") int limit) {
-        return Result.success(searchService.getMovieDoubanListByNameStart(keyword, offset, limit));
+                                                             defaultValue = "10") @PositiveOrZero int limit) {
+        return Result.success(searchService.getMovieDoubanListByNameStart(keyword.trim(), offset, limit));
     }
 
     @GetMapping("token")
@@ -58,6 +64,13 @@ public class SearchController {
 
     @Value("${security.oauth2.resource.jwt.key-value}")
     private String jwtKeyValue;
+
+    @GetMapping("testx")
+    public Result basesList(@RequestBody List<Long> idList){
+        System.out.println();
+        return Result.success("testx");
+    }
+
 
     @GetMapping(value = "jwt")
     public Object jwtParser(Authentication authentication) {

@@ -37,5 +37,15 @@
             <groupId>org.humingk</groupId>
             <artifactId>movie-dal</artifactId>
         </dependency>
+        <!--apache httpclient-->
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+        </dependency>
+        <!--feign httpclient-->
+        <dependency>
+            <groupId>com.netflix.feign</groupId>
+            <artifactId>feign-httpclient</artifactId>
+        </dependency>
     </dependencies>
 </project>

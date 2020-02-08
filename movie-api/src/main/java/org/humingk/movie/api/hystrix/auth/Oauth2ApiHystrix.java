@@ -1,19 +1,17 @@
-package org.humingk.movie.api.auth;
+package org.humingk.movie.api.hystrix.auth;
 
-import org.springframework.cloud.openfeign.FeignClient;
+import org.humingk.movie.api.auth.Oauth2Api;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.stereotype.Component;
 
 import java.util.Map;
 
 /**
- * auth认证服务器API
- *
  * @author humingk
  */
-@FeignClient("movie-server-auth")
-public interface OauthApi {
+@Component
+public class Oauth2ApiHystrix implements Oauth2Api {
     /**
      * post请求申请token
      *
@@ -26,6 +24,8 @@ public interface OauthApi {
      *                   client_secret： 客户端密钥
      * @return
      */
-    @PostMapping("/oauth/token")
-    ResponseEntity<Object> postAccessToken(@RequestParam Map<String, String> parameters);
+    @Override
+    public ResponseEntity<Object> postAccessToken(Map<String, String> parameters) {
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("hystrix");
+    }
 }

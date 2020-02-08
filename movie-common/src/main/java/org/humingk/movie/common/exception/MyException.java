@@ -38,8 +38,8 @@ public class MyException extends RuntimeException {
      * 500，服务器内部错误,不包括任何详细错误信息
      */
     public MyException() {
-        this.status = ERROR.state;
-        this.message = ERROR.message;
+        this.status = ERROR.code;
+        this.message = ERROR.msg;
         this.data = null;
     }
 
@@ -49,8 +49,8 @@ public class MyException extends RuntimeException {
      * @param data
      */
     public MyException(Object data) {
-        this.status = ERROR.state;
-        this.message = ERROR.message;
+        this.status = ERROR.code;
+        this.message = ERROR.msg;
         this.data = data;
     }
 
@@ -60,8 +60,8 @@ public class MyException extends RuntimeException {
      * @param stateAndMessage
      */
     public MyException(StateAndMessage stateAndMessage) {
-        this.status = stateAndMessage.state;
-        this.message = stateAndMessage.message;
+        this.status = stateAndMessage.code;
+        this.message = stateAndMessage.msg;
         this.data = null;
     }
 
@@ -72,8 +72,8 @@ public class MyException extends RuntimeException {
      * @return
      */
     public MyException(StateAndMessage stateAndMessage, Object data) {
-        this.status = stateAndMessage.state;
-        this.message = stateAndMessage.message;
+        this.status = stateAndMessage.code;
+        this.message = stateAndMessage.msg;
         this.data = data;
     }
 }

@@ -7,3 +7,4 @@
 **/mvnw.cmd
 zipkin.jar
 doc/log/
+**/rebel.xml
