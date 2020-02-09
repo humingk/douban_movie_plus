@@ -47,5 +47,11 @@
             <groupId>com.netflix.feign</groupId>
             <artifactId>feign-httpclient</artifactId>
         </dependency>
+        <!--smart doc-->
+        <dependency>
+            <groupId>com.github.shalousun</groupId>
+            <artifactId>smart-doc</artifactId>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 </project>

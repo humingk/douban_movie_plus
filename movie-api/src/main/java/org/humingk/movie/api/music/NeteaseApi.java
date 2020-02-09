@@ -3,12 +3,16 @@ package org.humingk.movie.api.music;
 import org.humingk.movie.common.entity.Result;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 import javax.validation.constraints.PositiveOrZero;
+
+//import org.springframework.web.bind.annotation.RestController;
+//@RestController
 
 /**
  * 音乐API
@@ -17,7 +21,6 @@ import javax.validation.constraints.PositiveOrZero;
  */
 @Validated
 @FeignClient("movie-server-music")
-@RequestMapping("/music/netease")
 public interface NeteaseApi {
 
     /**
@@ -31,23 +34,23 @@ public interface NeteaseApi {
      * @param albumSongLimit    专辑内歌曲数目限制数（可选，默认8）
      * @return
      */
-    @GetMapping("plays")
-    Result plays(@RequestParam("id") long id,
-                 @RequestParam(value = "song_limit",
+    @RequestMapping(value = "/music/netease/plays", method = RequestMethod.GET)
+    Result plays(@RequestParam("id") @NotNull Long id,
+                 @RequestParam(value = "songLimit",
                          required = false,
-                         defaultValue = "8") @Positive int songLimit,
-                 @RequestParam(value = "playlist_limit",
+                         defaultValue = "8") @Positive Integer songLimit,
+                 @RequestParam(value = "playlistLimit",
                          required = false,
-                         defaultValue = "1") @Positive int playlistLimit,
-                 @RequestParam(value = "playlist_song_limit",
+                         defaultValue = "1") @Positive Integer playlistLimit,
+                 @RequestParam(value = "playlistSongLimit",
                          required = false,
-                         defaultValue = "8") @Positive int playlistSongLimit,
-                 @RequestParam(value = "album_limit",
+                         defaultValue = "8") @Positive Integer playlistSongLimit,
+                 @RequestParam(value = "albumLimit",
                          required = false,
-                         defaultValue = "1") @Positive int albumLimit,
-                 @RequestParam(value = "album_song_limit",
+                         defaultValue = "1") @Positive Integer albumLimit,
+                 @RequestParam(value = "albumSongLimit",
                          required = false,
-                         defaultValue = "8") @Positive int albumSongLimit);
+                         defaultValue = "8") @Positive Integer albumSongLimit);
 
     /**
      * 获取网易云音乐热门评论
@@ -57,12 +60,12 @@ public interface NeteaseApi {
      * @param limit  限制数（可选，默认8）
      * @return
      */
-    @GetMapping("hot_comments")
-    Result hotComments(@RequestParam("id") long id,
+    @RequestMapping(value = "/music/netease/hot_comments", method = RequestMethod.GET)
+    Result hotComments(@RequestParam("id") @NotNull Long id,
                        @RequestParam(value = "offset",
                                required = false,
-                               defaultValue = "0") @PositiveOrZero int offset,
+                               defaultValue = "0") @PositiveOrZero Integer offset,
                        @RequestParam(value = "limit",
                                required = false,
-                               defaultValue = "8") @PositiveOrZero int limit);
+                               defaultValue = "8") @PositiveOrZero Integer limit);
 }

@@ -1,6 +1,9 @@
-package org.humingk.movie.server.movie.config;
+package org.humingk.movie.server.music.config;
 
+import org.humingk.movie.common.exception.MyAccessDeniedHandler;
+import org.humingk.movie.common.exception.MyAuthenticationEntryPoint;
 import org.humingk.movie.security.config.ResourceServerConfig;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.context.annotation.Configuration;
@@ -19,6 +22,13 @@ public class MyResourceServerConfig extends ResourceServerConfig {
     @Value("${security.oauth2.resource.id}")
     private String resourceId;
 
+    @Autowired
+    private MyAccessDeniedHandler myAccessDeniedHandler;
+
+    @Autowired
+    private MyAuthenticationEntryPoint myAuthenticationEntryPoint;
+
+
     /**
      * 路径过滤
      *
@@ -31,12 +41,10 @@ public class MyResourceServerConfig extends ResourceServerConfig {
                 .csrf().disable()
                 // 不需要保护的资源路径
                 .authorizeRequests().antMatchers(
-                "/movie/**",
-                "/*swagger*/**"
+                "/netease/**"
         ).permitAll()
                 // 剩下都是需要保护的资源路径
-//                .anyRequest().authenticated();
-        .anyRequest().permitAll();
+                .anyRequest().authenticated();
     }
 
     /**
@@ -46,7 +54,11 @@ public class MyResourceServerConfig extends ResourceServerConfig {
      */
     @Override
     public void configure(ResourceServerSecurityConfigurer resources) {
-        // 配置资源服务器ID
-        resources.resourceId(resourceId);
+        resources
+                // 配置资源服务器ID
+                .resourceId(resourceId)
+                // 自定义异常
+                .accessDeniedHandler(myAccessDeniedHandler)
+                .authenticationEntryPoint(myAuthenticationEntryPoint);
     }
 }

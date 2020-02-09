@@ -2,7 +2,9 @@ package org.humingk.movie.api.celebrity;
 
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.RequestMapping;
+
+//import org.springframework.web.bind.annotation.RestController;
+//@RestController
 
 /**
  * IMDB影人API
@@ -11,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
  */
 @Validated
 @FeignClient("movie-server-celebrity")
-@RequestMapping("/celebrity/imdb")
 public interface ImdbApi {
 
 }

@@ -5,6 +5,7 @@ import org.humingk.movie.common.exception.MyAuthenticationEntryPoint;
 import org.humingk.movie.security.config.ResourceServerConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.oauth2.config.annotation.web.configurers.ResourceServerSecurityConfigurer;
@@ -14,6 +15,7 @@ import org.springframework.security.oauth2.config.annotation.web.configurers.Res
  *
  * @author humingk
  */
+@RefreshScope
 @Configuration
 public class MyResourceServerConfig extends ResourceServerConfig {
 
@@ -40,12 +42,13 @@ public class MyResourceServerConfig extends ResourceServerConfig {
                 // 不需要保护的资源路径
                 .authorizeRequests().antMatchers(
                 "/user/**",
-                "/*login/**",
-                "/github_callback/**",
-                "/register/**").permitAll()
+                "/root/**"
+        ).permitAll()
                 // 需要管理员权限的资源路径
-                .antMatchers("/root/**").hasRole("ROOT")
-                // 需要保护的资源路径
+                .antMatchers(
+                        "/rootx/**"
+                ).hasRole("ROOT")
+                // 剩下都是需要保护的资源路径
                 .anyRequest().authenticated();
     }
 

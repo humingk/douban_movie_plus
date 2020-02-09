@@ -2,6 +2,7 @@ package org.humingk.movie.server.celebrity.config;
 
 import org.humingk.movie.security.config.ResourceServerConfig;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.oauth2.config.annotation.web.configurers.ResourceServerSecurityConfigurer;
@@ -11,6 +12,7 @@ import org.springframework.security.oauth2.config.annotation.web.configurers.Res
  *
  * @author humingk
  */
+@RefreshScope
 @Configuration
 public class MyResourceServerConfig extends ResourceServerConfig {
 
@@ -28,9 +30,10 @@ public class MyResourceServerConfig extends ResourceServerConfig {
         httpSecurity
                 .csrf().disable()
                 // 不需要保护的资源路径
-                .authorizeRequests().antMatchers("/testx/**").permitAll()
-//                .authorizeRequests().antMatchers("/test3/**", "/search_movie_tips/**").permitAll()
-                // 需要保护的资源路径
+                .authorizeRequests().antMatchers(
+                "/celebrity/**"
+        ).permitAll()
+                // 剩下都是需要保护的资源路径
                 .anyRequest().authenticated();
     }
 

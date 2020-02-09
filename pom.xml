@@ -76,6 +76,7 @@
         <guava.version>28.1-jre</guava.version>
         <zipkin.version>2.11.3</zipkin.version>
         <jsoup.version>1.12.1</jsoup.version>
+        <smart-doc.version>1.8.1</smart-doc.version>
 
     </properties>
     <!--依赖(子模块需要的公共依赖，子模块默认会继承)-->
@@ -222,6 +223,18 @@
                 <groupId>org.jsoup</groupId>
                 <artifactId>jsoup</artifactId>
                 <version>${jsoup.version}</version>
+            </dependency>
+            <!-- swagger-->
+            <dependency>
+                <groupId>com.spring4all</groupId>
+                <artifactId>swagger-spring-boot-starter</artifactId>
+                <version>${swagger.version}</version>
+            </dependency>
+            <!--smart doc-->
+            <dependency>
+                <groupId>com.github.shalousun</groupId>
+                <artifactId>smart-doc</artifactId>
+                <version>${smart-doc.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

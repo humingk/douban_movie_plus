@@ -3,20 +3,29 @@ package org.humingk.movie.api.user;
 import org.humingk.movie.common.entity.Result;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.io.IOException;
+import java.security.Principal;
+
+import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
+
+//import org.springframework.web.bind.annotation.RestController;
+//@RestController
 
 /**
- * 用户相关API
+ * 普通用户相关API
  *
  * @author humingk
  */
 @Validated
 @FeignClient("movie-server-user")
-@RequestMapping("/user")
 public interface UserApi {
 
     /**
@@ -26,7 +35,7 @@ public interface UserApi {
      * @param password 密码
      * @return
      */
-    @PostMapping("login")
+    @RequestMapping(value = "/user/login", method = RequestMethod.POST)
     Result login(@RequestParam("email") @NotBlank String email,
                  @RequestParam("password") @NotBlank String password);
 
@@ -36,7 +45,7 @@ public interface UserApi {
      * @param response
      * @throws IOException
      */
-    @GetMapping("/github_login")
+    @RequestMapping(value = "/user/github_login", method = RequestMethod.GET)
     void githubLogin(HttpServletResponse response) throws IOException;
 
     /**
@@ -46,9 +55,9 @@ public interface UserApi {
      * @param state github_login传入的state
      * @return
      */
-    @GetMapping("/github_callback")
-    Result githubCallback(@RequestParam("code") String code,
-                          @RequestParam("state") String state);
+    @RequestMapping(value = "/user/github_callback", method = RequestMethod.GET)
+    Result githubCallback(@RequestParam("code") @NotBlank String code,
+                          @RequestParam("state") @NotBlank String state);
 
     /**
      * 用户注册
@@ -58,13 +67,22 @@ public interface UserApi {
      * @param password 密码
      * @return
      */
-    @PostMapping("/register")
+    @RequestMapping(value = "/user/register", method = RequestMethod.POST)
     Result register(
-            @RequestParam(value = "douban_user_id",
+            @RequestParam(value = "id",
                     required = false,
-                    defaultValue = "") String id,
+                    defaultValue = "") @NotBlank String id,
             @RequestParam("email") @NotBlank String email,
             @RequestParam("password") @NotBlank String password);
+
+    /**
+     * 当前用户信息
+     *
+     * @param principal Authorization
+     * @return
+     */
+    @RequestMapping(value = "/user/user_info", method = RequestMethod.GET, consumes = APPLICATION_JSON_VALUE)
+    Result userInfo(@RequestBody @NotNull Principal principal);
 
     /**
      * 更新豆瓣用户ID
@@ -72,6 +90,6 @@ public interface UserApi {
      * @param id 豆瓣用户ID
      * @return
      */
-    @PutMapping("update_id")
+    @RequestMapping(value = "/user/update_id", method = RequestMethod.PUT)
     Result updateId(@RequestParam("id") @NotBlank String id);
 }
