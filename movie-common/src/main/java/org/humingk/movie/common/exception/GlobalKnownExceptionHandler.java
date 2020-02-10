@@ -16,7 +16,8 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 import javax.validation.ConstraintViolationException;
 import javax.xml.bind.ValidationException;
 
-import static org.humingk.movie.common.enumeration.StateAndMessage.PARAMTER;
+import static org.humingk.movie.common.enumeration.CodeAndMsg.PARAMTER;
+
 
 /**
  * 全局已知异常处理类

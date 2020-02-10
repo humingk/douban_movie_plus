@@ -24,9 +24,9 @@ public interface ZhihuApi {
     /**
      * 与豆瓣电影相关的知乎问题
      *
-     * @param id     豆瓣电影ID
-     * @param offset 偏移量（可选，默认0）
-     * @param limit  限制数（可选，默认10）
+     * @param id     电影豆瓣ID
+     * @param offset 偏移量（默认0）
+     * @param limit  限制数（默认10）
      * @return
      */
     @RequestMapping(value = "/movie/zhihu/questions", method = RequestMethod.GET)

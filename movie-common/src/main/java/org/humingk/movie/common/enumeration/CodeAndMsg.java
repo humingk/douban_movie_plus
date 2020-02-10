@@ -8,7 +8,7 @@ import lombok.AllArgsConstructor;
  * @author humingk
  */
 @AllArgsConstructor
-public enum StateAndMessage {
+public enum CodeAndMsg {
     /**
      * status < 1000 :常见已知错误信息
      */

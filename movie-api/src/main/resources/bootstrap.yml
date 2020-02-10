@@ -20,3 +20,16 @@ eureka:
   client:
     service-url:
       defaultZone: http://localhost:8761/eureka/
+swagger:
+  enabled: true
+  title: 豆瓣电影Plus
+  description: 豆瓣电影Plus项目后端Restful-API文档
+  version: 2.0.0
+  license: GNU General Public License v2.0
+  license-url: https://github.com/humingk/douban_movie_plus/blob/master/LICENSE
+  terms-of-service-url: https://github.com/humingk/douban_movie_plus
+  contact:
+    name: humingk
+    email: humingk@gmail.com
+    url: https://github.com/humingk
+  base-package: org.humingk.movie.api

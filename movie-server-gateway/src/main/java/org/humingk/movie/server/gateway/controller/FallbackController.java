@@ -7,14 +7,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * Hytrix熔断处理
+ * 网关转发异常
  *
  * @author humingk
  */
 @RestController
 public class FallbackController {
     /**
-     * 重定向
+     * Hytrix熔断处理
      *
      * @return
      */

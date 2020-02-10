@@ -12,7 +12,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-import static org.humingk.movie.common.enumeration.StateAndMessage.FORBIDDEN;
+import static org.humingk.movie.common.enumeration.CodeAndMsg.FORBIDDEN;
 
 /**
  * 自定义认证端点异常，认证失败,AccessDenied

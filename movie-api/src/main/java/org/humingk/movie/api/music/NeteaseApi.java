@@ -26,12 +26,12 @@ public interface NeteaseApi {
     /**
      * 获取与豆瓣电影相关的网易云音乐播放信息
      *
-     * @param id                豆瓣电影ID
-     * @param songLimit         歌曲数目限制数（可选，默认8）
-     * @param playlistLimit     歌单数目限制数（可选，默认1）
-     * @param playlistSongLimit 歌单内歌曲数目限制数（可选，默认8）
-     * @param albumLimit        专辑数目限制数（可选，默认1）
-     * @param albumSongLimit    专辑内歌曲数目限制数（可选，默认8）
+     * @param id                电影豆瓣ID
+     * @param songLimit         歌曲数目限制数（默认8）
+     * @param playlistLimit     歌单数目限制数（默认1）
+     * @param playlistSongLimit 歌单内歌曲数目限制数（默认8）
+     * @param albumLimit        专辑数目限制数（默认1）
+     * @param albumSongLimit    专辑内歌曲数目限制数（默认8）
      * @return
      */
     @RequestMapping(value = "/music/netease/plays", method = RequestMethod.GET)
@@ -56,8 +56,8 @@ public interface NeteaseApi {
      * 获取网易云音乐热门评论
      *
      * @param id     网易云音乐歌曲ID
-     * @param offset 偏移量（可选，默认0）
-     * @param limit  限制数（可选，默认8）
+     * @param offset 偏移量（默认0）
+     * @param limit  限制数（默认8）
      * @return
      */
     @RequestMapping(value = "/music/netease/hot_comments", method = RequestMethod.GET)

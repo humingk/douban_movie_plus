@@ -76,7 +76,8 @@
         <guava.version>28.1-jre</guava.version>
         <zipkin.version>2.11.3</zipkin.version>
         <jsoup.version>1.12.1</jsoup.version>
-        <smart-doc.version>1.8.1</smart-doc.version>
+        <smart-doc-plugin.version>1.0.2</smart-doc-plugin.version>
+        <swagger.version>1.9.1.RELEASE</swagger.version>
 
     </properties>
     <!--依赖(子模块需要的公共依赖，子模块默认会继承)-->
@@ -230,12 +231,6 @@
                 <artifactId>swagger-spring-boot-starter</artifactId>
                 <version>${swagger.version}</version>
             </dependency>
-            <!--smart doc-->
-            <dependency>
-                <groupId>com.github.shalousun</groupId>
-                <artifactId>smart-doc</artifactId>
-                <version>${smart-doc.version}</version>
-            </dependency>
         </dependencies>
     </dependencyManagement>
 
@@ -252,6 +247,25 @@
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>versions-maven-plugin</artifactId>
                 <version>${versions-maven-plugin.version}</version>
+            </plugin>
+            <!-- smart-doc -->
+            <plugin>
+                <groupId>com.github.shalousun</groupId>
+                <artifactId>smart-doc-maven-plugin</artifactId>
+                <version>${smart-doc-plugin.version}</version>
+                <configuration>
+                    <!--配置文件-->
+                    <configFile>/home/humingk/gits/douban_movie_plus/doc/config/smart-doc.json</configFile>
+                    <!--指定项目名称-->
+                    <projectName>豆瓣电影Plus</projectName>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>html</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>

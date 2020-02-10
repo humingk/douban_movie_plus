@@ -1,7 +1,7 @@
 package org.humingk.movie.service.user.service.impl;
 
 import org.humingk.movie.common.enumeration.Roles;
-import org.humingk.movie.common.enumeration.StateAndMessage;
+import org.humingk.movie.common.enumeration.CodeAndMsg;
 import org.humingk.movie.common.exception.MyException;
 import org.humingk.movie.dal.entity.User;
 import org.humingk.movie.dal.entity.UserToRole;
@@ -43,9 +43,9 @@ public class RegisterServiceImpl implements RegisterService {
             userInsert = userMapper.insert(user);
         } catch (DuplicateKeyException e) {
             if (e.getCause().getMessage().contains("PRIMARY")) {
-                throw new MyException(StateAndMessage.USER_ID_EXIST, "豆瓣ID:" + user.getId());
+                throw new MyException(CodeAndMsg.USER_ID_EXIST, "豆瓣ID:" + user.getId());
             } else {
-                throw new MyException(StateAndMessage.EMAIL_EXIST, "email:" + user.getEmail());
+                throw new MyException(CodeAndMsg.EMAIL_EXIST, "email:" + user.getEmail());
             }
         }
         // 赋予普通用户权限

@@ -24,7 +24,7 @@ public interface ImdbApi {
     /**
      * IMDB电影详情信息(包括电影海报、包括基础信息、剧情简介)
      *
-     * @param id 豆瓣电影ID
+     * @param id 电影豆瓣ID
      * @return
      */
     @RequestMapping(value = "/movie/imdb/details", method = RequestMethod.GET)

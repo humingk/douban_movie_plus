@@ -1,7 +1,7 @@
 package org.humingk.movie.common.controller;
 
+import org.humingk.movie.common.enumeration.CodeAndMsg;
 import org.humingk.movie.common.entity.Result;
-import org.humingk.movie.common.enumeration.StateAndMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.servlet.error.ErrorController;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * 自定义部分统一错误界面
+ * 部分错误返回控制器
  *
  * @author humingk
  */
@@ -30,7 +30,7 @@ public class MyErrorController implements ErrorController {
     }
 
     /**
-     * 响应/error路径，统一处理将要返回的错误
+     * 部分不能被Controller层拦截的异常
      *
      * @return
      */
@@ -40,15 +40,15 @@ public class MyErrorController implements ErrorController {
         switch (status) {
             case 400:
             case 405:
-                return Result.error(StateAndMessage.BADREQUEST);
+                return Result.error(CodeAndMsg.BADREQUEST);
             case 401:
-                return Result.error(StateAndMessage.UNAUTHORIZED);
+                return Result.error(CodeAndMsg.UNAUTHORIZED);
             case 403:
-                return Result.error(StateAndMessage.FORBIDDEN);
+                return Result.error(CodeAndMsg.FORBIDDEN);
             case 404:
-                return Result.error(StateAndMessage.NOTFOUND);
+                return Result.error(CodeAndMsg.NOTFOUND);
             case 500:
-                return Result.error(StateAndMessage.ERROR);
+                return Result.error(CodeAndMsg.ERROR);
             default:
                 return Result.error();
         }

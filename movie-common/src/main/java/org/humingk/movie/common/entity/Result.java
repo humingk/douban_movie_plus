@@ -4,13 +4,13 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-import org.humingk.movie.common.enumeration.StateAndMessage;
+import org.humingk.movie.common.enumeration.CodeAndMsg;
 import org.humingk.movie.common.exception.MyException;
 
 import java.io.Serializable;
 
-import static org.humingk.movie.common.enumeration.StateAndMessage.ERROR;
-import static org.humingk.movie.common.enumeration.StateAndMessage.SUCCESS;
+import static org.humingk.movie.common.enumeration.CodeAndMsg.ERROR;
+import static org.humingk.movie.common.enumeration.CodeAndMsg.SUCCESS;
 
 /**
  * 返回结果封装类
@@ -27,23 +27,23 @@ public class Result implements Serializable {
      */
     private int code;
     /**
-     * 其他信息
+     * 状态信息
      */
     private String msg;
     /**
-     * Json格式数据，复杂嵌套对象,Json字符串
+     * 具体结果
      */
     private Object data;
 
-    public Result(StateAndMessage stateAndMessage) {
-        this.code = stateAndMessage.code;
-        this.msg = stateAndMessage.msg;
+    public Result(CodeAndMsg codeAndMsg) {
+        this.code = codeAndMsg.code;
+        this.msg = codeAndMsg.msg;
         this.data = "";
     }
 
-    public Result(StateAndMessage stateAndMessage, Object data) {
-        this.code = stateAndMessage.code;
-        this.msg = stateAndMessage.msg;
+    public Result(CodeAndMsg codeAndMsg, Object data) {
+        this.code = codeAndMsg.code;
+        this.msg = codeAndMsg.msg;
         this.data = data;
     }
 
@@ -122,31 +122,31 @@ public class Result implements Serializable {
     /**
      * 业务错误,已知错误类型，且错误类型已加入StateAndMessage，不返回任何细节
      *
-     * @param stateAndMessage
+     * @param codeAndMsg
      * @return
      */
-    public static Result error(StateAndMessage stateAndMessage) {
-        return new Result(stateAndMessage);
+    public static Result error(CodeAndMsg codeAndMsg) {
+        return new Result(codeAndMsg);
     }
 
     /**
      * 业务错误,已知错误类型，且错误类型已加入StateAndMessage，返回更多的自定义错误信息
      *
-     * @param stateAndMessage
+     * @param codeAndMsg
      * @return
      */
-    public static Result error(StateAndMessage stateAndMessage, Object data) {
-        return new Result(stateAndMessage, data);
+    public static Result error(CodeAndMsg codeAndMsg, Object data) {
+        return new Result(codeAndMsg, data);
     }
 
     /**
      * 业务错误,已知错误类型，且错误类型已加入StateAndMessage,返回简略的错误堆栈信息
      *
-     * @param stateAndMessage
+     * @param codeAndMsg
      * @return
      */
-    public static Result error(StateAndMessage stateAndMessage, Exception e) {
-        return new Result(stateAndMessage, e.getMessage());
+    public static Result error(CodeAndMsg codeAndMsg, Exception e) {
+        return new Result(codeAndMsg, e.getMessage());
     }
 
     /**

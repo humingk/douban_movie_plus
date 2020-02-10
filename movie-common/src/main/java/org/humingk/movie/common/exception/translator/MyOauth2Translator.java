@@ -7,8 +7,8 @@ import org.springframework.security.oauth2.common.exceptions.OAuth2Exception;
 import org.springframework.security.oauth2.provider.error.WebResponseExceptionTranslator;
 import org.springframework.stereotype.Component;
 
-import static org.humingk.movie.common.enumeration.StateAndMessage.SUCCESS;
-import static org.humingk.movie.common.enumeration.StateAndMessage.UNAUTHORIZED;
+import static org.humingk.movie.common.enumeration.CodeAndMsg.SUCCESS;
+import static org.humingk.movie.common.enumeration.CodeAndMsg.UNAUTHORIZED;
 
 /**
  * 将oauth2Exception等异常转化为自定义异常MyOauth2Exception

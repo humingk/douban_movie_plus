@@ -8,7 +8,7 @@ import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.humingk.movie.common.exception.MyException;
 import org.humingk.movie.common.util.AesUtil;
-import org.humingk.movie.common.enumeration.StateAndMessage;
+import org.humingk.movie.common.enumeration.CodeAndMsg;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
@@ -73,7 +73,7 @@ public class AesDecryptAspect {
                 }
             };
             log.warn("decrypt failed:" + logMap.toString() + ",reason", e);
-            throw new MyException(StateAndMessage.BADREQUEST);
+            throw new MyException(CodeAndMsg.BADREQUEST);
         }
         return joinPoint.proceed(args);
     }

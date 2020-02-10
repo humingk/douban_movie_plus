@@ -5,7 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.humingk.movie.api.auth.Oauth2Api;
 import org.humingk.movie.api.user.UserApi;
 import org.humingk.movie.common.entity.Result;
-import org.humingk.movie.common.enumeration.StateAndMessage;
+import org.humingk.movie.common.enumeration.CodeAndMsg;
 import org.humingk.movie.common.exception.MyException;
 import org.humingk.movie.dal.entity.User;
 import org.humingk.movie.service.user.service.RegisterService;
@@ -81,7 +81,7 @@ public class UserController implements UserApi {
             return Result.success(oauth2Api.postAccessToken(params));
         } catch (Exception e) {
             log.error("登录出错", e);
-            throw new MyException(StateAndMessage.ERROR, e.getMessage());
+            throw new MyException(CodeAndMsg.ERROR, e.getMessage());
         }
     }
 

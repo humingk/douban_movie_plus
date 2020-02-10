@@ -4,9 +4,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
-import org.humingk.movie.common.enumeration.StateAndMessage;
+import org.humingk.movie.common.enumeration.CodeAndMsg;
 
-import static org.humingk.movie.common.enumeration.StateAndMessage.ERROR;
+import static org.humingk.movie.common.enumeration.CodeAndMsg.ERROR;
 
 /**
  * 自定义异常类
@@ -57,23 +57,23 @@ public class MyException extends RuntimeException {
     /**
      * 业务错误,已知错误类型，且错误类型已加入StateAndMessage，不包括任何错误细节
      *
-     * @param stateAndMessage
+     * @param codeAndMsg
      */
-    public MyException(StateAndMessage stateAndMessage) {
-        this.status = stateAndMessage.code;
-        this.message = stateAndMessage.msg;
+    public MyException(CodeAndMsg codeAndMsg) {
+        this.status = codeAndMsg.code;
+        this.message = codeAndMsg.msg;
         this.data = null;
     }
 
     /**
      * 业务错误,已知错误类型，且错误类型已加入StateAndMessage，包括更多错误信息（自定义信息，甚至错误堆栈信息）
      *
-     * @param stateAndMessage
+     * @param codeAndMsg
      * @return
      */
-    public MyException(StateAndMessage stateAndMessage, Object data) {
-        this.status = stateAndMessage.code;
-        this.message = stateAndMessage.msg;
+    public MyException(CodeAndMsg codeAndMsg, Object data) {
+        this.status = codeAndMsg.code;
+        this.message = codeAndMsg.msg;
         this.data = data;
     }
 }

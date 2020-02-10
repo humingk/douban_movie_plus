@@ -24,9 +24,9 @@ public interface ResourceApi {
     /**
      * 电影资源详情（包括正版资源、盗版资源、在线资源、离线资源）
      *
-     * @param id     豆瓣电影ID
-     * @param offset 偏移量（可选，默认0）
-     * @param limit  限制数（可选，默认10）
+     * @param id     电影豆瓣ID
+     * @param offset 偏移量（默认0）
+     * @param limit  限制数（默认10）
      * @return
      */
     @RequestMapping(value = "/movie/resource/details", method = RequestMethod.GET)
