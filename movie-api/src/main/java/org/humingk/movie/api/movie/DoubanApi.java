@@ -1,12 +1,10 @@
 package org.humingk.movie.api.movie;
 
 import org.humingk.movie.common.entity.Result;
+import org.humingk.movie.dal.entity.MovieDouban;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
@@ -16,6 +14,7 @@ import java.util.List;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
+// 用于生成API文档
 //import org.springframework.web.bind.annotation.RestController;
 //@RestController
 
@@ -29,13 +28,14 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 public interface DoubanApi {
 
     /**
-     * 豆瓣电影基础信息（包括电影海报、基础信息）
+     * 豆瓣电影基础信息
      *
      * @param id 电影豆瓣ID
      * @return
+     * @apiNote 包括电影海报, 电影年份，电影简介等基础信息
      */
     @RequestMapping(value = "/movie/douban/bases", method = RequestMethod.GET)
-    Result bases(@RequestParam("id") @NotNull Long id);
+    Result<MovieDouban> bases(@RequestParam("id") @NotNull Long id);
 
 
     /**

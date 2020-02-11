@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.humingk.movie.dal.mapper.auto.ArtistNeteaseMapper">
+  <resultMap id="BaseResultMap" type="org.humingk.movie.dal.entity.ArtistNetease">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="name_zh" jdbcType="VARCHAR" property="nameZh" />
+    <result column="url_portrait" jdbcType="VARCHAR" property="urlPortrait" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, name_zh, url_portrait
+  </sql>
+  <select id="selectByExample" parameterType="org.humingk.movie.dal.entity.ArtistNeteaseExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from artist_netease
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from artist_netease
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from artist_netease
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="org.humingk.movie.dal.entity.ArtistNeteaseExample">
+    delete from artist_netease
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="org.humingk.movie.dal.entity.ArtistNetease">
+    insert into artist_netease (id, name_zh, url_portrait
+      )
+    values (#{id,jdbcType=BIGINT}, #{nameZh,jdbcType=VARCHAR}, #{urlPortrait,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="org.humingk.movie.dal.entity.ArtistNetease">
+    insert into artist_netease
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="nameZh != null">
+        name_zh,
+      </if>
+      <if test="urlPortrait != null">
+        url_portrait,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="nameZh != null">
+        #{nameZh,jdbcType=VARCHAR},
+      </if>
+      <if test="urlPortrait != null">
+        #{urlPortrait,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="org.humingk.movie.dal.entity.ArtistNeteaseExample" resultType="java.lang.Long">
+    select count(*) from artist_netease
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update artist_netease
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.nameZh != null">
+        name_zh = #{record.nameZh,jdbcType=VARCHAR},
+      </if>
+      <if test="record.urlPortrait != null">
+        url_portrait = #{record.urlPortrait,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update artist_netease
+    set id = #{record.id,jdbcType=BIGINT},
+      name_zh = #{record.nameZh,jdbcType=VARCHAR},
+      url_portrait = #{record.urlPortrait,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="org.humingk.movie.dal.entity.ArtistNetease">
+    update artist_netease
+    <set>
+      <if test="nameZh != null">
+        name_zh = #{nameZh,jdbcType=VARCHAR},
+      </if>
+      <if test="urlPortrait != null">
+        url_portrait = #{urlPortrait,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.humingk.movie.dal.entity.ArtistNetease">
+    update artist_netease
+    set name_zh = #{nameZh,jdbcType=VARCHAR},
+      url_portrait = #{urlPortrait,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.humingk.movie.dal.mapper.auto.MovieImdbToCelebrityImdbMapper">
+  <resultMap id="BaseResultMap" type="org.humingk.movie.dal.entity.MovieImdbToCelebrityImdb">
+    <id column="id_movie_imdb" jdbcType="BIGINT" property="idMovieImdb" />
+    <id column="id_celebrity_imdb" jdbcType="BIGINT" property="idCelebrityImdb" />
+    <id column="id_profession" jdbcType="TINYINT" property="idProfession" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id_movie_imdb, id_celebrity_imdb, id_profession
+  </sql>
+  <select id="selectByExample" parameterType="org.humingk.movie.dal.entity.MovieImdbToCelebrityImdbExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from movie_imdb_to_celebrity_imdb
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="map">
+    delete from movie_imdb_to_celebrity_imdb
+    where id_movie_imdb = #{idMovieImdb,jdbcType=BIGINT}
+      and id_celebrity_imdb = #{idCelebrityImdb,jdbcType=BIGINT}
+      and id_profession = #{idProfession,jdbcType=TINYINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="org.humingk.movie.dal.entity.MovieImdbToCelebrityImdbExample">
+    delete from movie_imdb_to_celebrity_imdb
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="org.humingk.movie.dal.entity.MovieImdbToCelebrityImdb">
+    insert into movie_imdb_to_celebrity_imdb (id_movie_imdb, id_celebrity_imdb, id_profession
+      )
+    values (#{idMovieImdb,jdbcType=BIGINT}, #{idCelebrityImdb,jdbcType=BIGINT}, #{idProfession,jdbcType=TINYINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="org.humingk.movie.dal.entity.MovieImdbToCelebrityImdb">
+    insert into movie_imdb_to_celebrity_imdb
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="idMovieImdb != null">
+        id_movie_imdb,
+      </if>
+      <if test="idCelebrityImdb != null">
+        id_celebrity_imdb,
+      </if>
+      <if test="idProfession != null">
+        id_profession,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="idMovieImdb != null">
+        #{idMovieImdb,jdbcType=BIGINT},
+      </if>
+      <if test="idCelebrityImdb != null">
+        #{idCelebrityImdb,jdbcType=BIGINT},
+      </if>
+      <if test="idProfession != null">
+        #{idProfession,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="org.humingk.movie.dal.entity.MovieImdbToCelebrityImdbExample" resultType="java.lang.Long">
+    select count(*) from movie_imdb_to_celebrity_imdb
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update movie_imdb_to_celebrity_imdb
+    <set>
+      <if test="record.idMovieImdb != null">
+        id_movie_imdb = #{record.idMovieImdb,jdbcType=BIGINT},
+      </if>
+      <if test="record.idCelebrityImdb != null">
+        id_celebrity_imdb = #{record.idCelebrityImdb,jdbcType=BIGINT},
+      </if>
+      <if test="record.idProfession != null">
+        id_profession = #{record.idProfession,jdbcType=TINYINT},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update movie_imdb_to_celebrity_imdb
+    set id_movie_imdb = #{record.idMovieImdb,jdbcType=BIGINT},
+      id_celebrity_imdb = #{record.idCelebrityImdb,jdbcType=BIGINT},
+      id_profession = #{record.idProfession,jdbcType=TINYINT}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.humingk.movie.dal.mapper.auto.MovieImdbMapper">
+  <resultMap id="BaseResultMap" type="org.humingk.movie.dal.entity.MovieImdb">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="id_type_video" jdbcType="TINYINT" property="idTypeVideo" />
+    <result column="name_en" jdbcType="VARCHAR" property="nameEn" />
+    <result column="start_year" jdbcType="SMALLINT" property="startYear" />
+    <result column="is_adult" jdbcType="BIT" property="isAdult" />
+    <result column="name_origin" jdbcType="VARCHAR" property="nameOrigin" />
+    <result column="runtime" jdbcType="SMALLINT" property="runtime" />
+    <result column="url_poster" jdbcType="VARCHAR" property="urlPoster" />
+    <result column="id_movie_douban" jdbcType="BIGINT" property="idMovieDouban" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="org.humingk.movie.dal.entity.MovieImdb">
+    <result column="summary" jdbcType="LONGVARCHAR" property="summary" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, id_type_video, name_en, start_year, is_adult, name_origin, runtime, url_poster, 
+    id_movie_douban
+  </sql>
+  <sql id="Blob_Column_List">
+    summary
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="org.humingk.movie.dal.entity.MovieImdbExample" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from movie_imdb
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" parameterType="org.humingk.movie.dal.entity.MovieImdbExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from movie_imdb
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from movie_imdb
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from movie_imdb
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="org.humingk.movie.dal.entity.MovieImdbExample">
+    delete from movie_imdb
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="org.humingk.movie.dal.entity.MovieImdb">
+    insert into movie_imdb (id, id_type_video, name_en, 
+      start_year, is_adult, name_origin, 
+      runtime, url_poster, id_movie_douban, 
+      summary)
+    values (#{id,jdbcType=BIGINT}, #{idTypeVideo,jdbcType=TINYINT}, #{nameEn,jdbcType=VARCHAR}, 
+      #{startYear,jdbcType=SMALLINT}, #{isAdult,jdbcType=BIT}, #{nameOrigin,jdbcType=VARCHAR}, 
+      #{runtime,jdbcType=SMALLINT}, #{urlPoster,jdbcType=VARCHAR}, #{idMovieDouban,jdbcType=BIGINT}, 
+      #{summary,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="org.humingk.movie.dal.entity.MovieImdb">
+    insert into movie_imdb
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="idTypeVideo != null">
+        id_type_video,
+      </if>
+      <if test="nameEn != null">
+        name_en,
+      </if>
+      <if test="startYear != null">
+        start_year,
+      </if>
+      <if test="isAdult != null">
+        is_adult,
+      </if>
+      <if test="nameOrigin != null">
+        name_origin,
+      </if>
+      <if test="runtime != null">
+        runtime,
+      </if>
+      <if test="urlPoster != null">
+        url_poster,
+      </if>
+      <if test="idMovieDouban != null">
+        id_movie_douban,
+      </if>
+      <if test="summary != null">
+        summary,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="idTypeVideo != null">
+        #{idTypeVideo,jdbcType=TINYINT},
+      </if>
+      <if test="nameEn != null">
+        #{nameEn,jdbcType=VARCHAR},
+      </if>
+      <if test="startYear != null">
+        #{startYear,jdbcType=SMALLINT},
+      </if>
+      <if test="isAdult != null">
+        #{isAdult,jdbcType=BIT},
+      </if>
+      <if test="nameOrigin != null">
+        #{nameOrigin,jdbcType=VARCHAR},
+      </if>
+      <if test="runtime != null">
+        #{runtime,jdbcType=SMALLINT},
+      </if>
+      <if test="urlPoster != null">
+        #{urlPoster,jdbcType=VARCHAR},
+      </if>
+      <if test="idMovieDouban != null">
+        #{idMovieDouban,jdbcType=BIGINT},
+      </if>
+      <if test="summary != null">
+        #{summary,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="org.humingk.movie.dal.entity.MovieImdbExample" resultType="java.lang.Long">
+    select count(*) from movie_imdb
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update movie_imdb
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.idTypeVideo != null">
+        id_type_video = #{record.idTypeVideo,jdbcType=TINYINT},
+      </if>
+      <if test="record.nameEn != null">
+        name_en = #{record.nameEn,jdbcType=VARCHAR},
+      </if>
+      <if test="record.startYear != null">
+        start_year = #{record.startYear,jdbcType=SMALLINT},
+      </if>
+      <if test="record.isAdult != null">
+        is_adult = #{record.isAdult,jdbcType=BIT},
+      </if>
+      <if test="record.nameOrigin != null">
+        name_origin = #{record.nameOrigin,jdbcType=VARCHAR},
+      </if>
+      <if test="record.runtime != null">
+        runtime = #{record.runtime,jdbcType=SMALLINT},
+      </if>
+      <if test="record.urlPoster != null">
+        url_poster = #{record.urlPoster,jdbcType=VARCHAR},
+      </if>
+      <if test="record.idMovieDouban != null">
+        id_movie_douban = #{record.idMovieDouban,jdbcType=BIGINT},
+      </if>
+      <if test="record.summary != null">
+        summary = #{record.summary,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update movie_imdb
+    set id = #{record.id,jdbcType=BIGINT},
+      id_type_video = #{record.idTypeVideo,jdbcType=TINYINT},
+      name_en = #{record.nameEn,jdbcType=VARCHAR},
+      start_year = #{record.startYear,jdbcType=SMALLINT},
+      is_adult = #{record.isAdult,jdbcType=BIT},
+      name_origin = #{record.nameOrigin,jdbcType=VARCHAR},
+      runtime = #{record.runtime,jdbcType=SMALLINT},
+      url_poster = #{record.urlPoster,jdbcType=VARCHAR},
+      id_movie_douban = #{record.idMovieDouban,jdbcType=BIGINT},
+      summary = #{record.summary,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update movie_imdb
+    set id = #{record.id,jdbcType=BIGINT},
+      id_type_video = #{record.idTypeVideo,jdbcType=TINYINT},
+      name_en = #{record.nameEn,jdbcType=VARCHAR},
+      start_year = #{record.startYear,jdbcType=SMALLINT},
+      is_adult = #{record.isAdult,jdbcType=BIT},
+      name_origin = #{record.nameOrigin,jdbcType=VARCHAR},
+      runtime = #{record.runtime,jdbcType=SMALLINT},
+      url_poster = #{record.urlPoster,jdbcType=VARCHAR},
+      id_movie_douban = #{record.idMovieDouban,jdbcType=BIGINT}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="org.humingk.movie.dal.entity.MovieImdb">
+    update movie_imdb
+    <set>
+      <if test="idTypeVideo != null">
+        id_type_video = #{idTypeVideo,jdbcType=TINYINT},
+      </if>
+      <if test="nameEn != null">
+        name_en = #{nameEn,jdbcType=VARCHAR},
+      </if>
+      <if test="startYear != null">
+        start_year = #{startYear,jdbcType=SMALLINT},
+      </if>
+      <if test="isAdult != null">
+        is_adult = #{isAdult,jdbcType=BIT},
+      </if>
+      <if test="nameOrigin != null">
+        name_origin = #{nameOrigin,jdbcType=VARCHAR},
+      </if>
+      <if test="runtime != null">
+        runtime = #{runtime,jdbcType=SMALLINT},
+      </if>
+      <if test="urlPoster != null">
+        url_poster = #{urlPoster,jdbcType=VARCHAR},
+      </if>
+      <if test="idMovieDouban != null">
+        id_movie_douban = #{idMovieDouban,jdbcType=BIGINT},
+      </if>
+      <if test="summary != null">
+        summary = #{summary,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="org.humingk.movie.dal.entity.MovieImdb">
+    update movie_imdb
+    set id_type_video = #{idTypeVideo,jdbcType=TINYINT},
+      name_en = #{nameEn,jdbcType=VARCHAR},
+      start_year = #{startYear,jdbcType=SMALLINT},
+      is_adult = #{isAdult,jdbcType=BIT},
+      name_origin = #{nameOrigin,jdbcType=VARCHAR},
+      runtime = #{runtime,jdbcType=SMALLINT},
+      url_poster = #{urlPoster,jdbcType=VARCHAR},
+      id_movie_douban = #{idMovieDouban,jdbcType=BIGINT},
+      summary = #{summary,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.humingk.movie.dal.entity.MovieImdb">
+    update movie_imdb
+    set id_type_video = #{idTypeVideo,jdbcType=TINYINT},
+      name_en = #{nameEn,jdbcType=VARCHAR},
+      start_year = #{startYear,jdbcType=SMALLINT},
+      is_adult = #{isAdult,jdbcType=BIT},
+      name_origin = #{nameOrigin,jdbcType=VARCHAR},
+      runtime = #{runtime,jdbcType=SMALLINT},
+      url_poster = #{urlPoster,jdbcType=VARCHAR},
+      id_movie_douban = #{idMovieDouban,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

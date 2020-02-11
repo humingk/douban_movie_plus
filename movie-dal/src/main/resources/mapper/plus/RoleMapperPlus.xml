@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.humingk.movie.dal.mapper.plus.RoleMapperPlus">
+    <resultMap id="BaseResultMapPlus"
+               extends="org.humingk.movie.dal.mapper.auto.RoleMapper.BaseResultMap"
+               type="org.humingk.movie.dal.entity.Role"/>
+    <!--角色列表-->
+    <select id="selectRoleListByUserId" parameterType="java.lang.String" resultMap="BaseResultMapPlus">
+        select role.id,
+               role.name_zh,
+               role.description
+        from role
+                 inner join user_to_role
+                            on role.id = user_to_role.id_role
+        where user_to_role.id_user = #{id,jdbcType=VARCHAR}
+    </select>
+</mapper>

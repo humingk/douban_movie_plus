@@ -1,88 +1,33 @@
 package org.humingk.movie.dal.entity;
 
 import java.io.Serializable;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+/**
+ * 影人别名
+ *
+ *@author humingk
+ */
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class AliasCelebrityDouban implements Serializable {
+    /**
+     * 豆瓣影人ID
+     */
     private Long idCelebrityDouban;
 
+    /**
+     * 豆瓣影人别称
+     */
     private String nameAlias;
 
+    /**
+     * 是否为昵称 0-本名 1-昵称
+     */
     private Boolean isNikename;
 
     private static final long serialVersionUID = 1L;
-
-    public AliasCelebrityDouban(Long idCelebrityDouban, String nameAlias, Boolean isNikename) {
-        this.idCelebrityDouban = idCelebrityDouban;
-        this.nameAlias = nameAlias;
-        this.isNikename = isNikename;
-    }
-
-    public AliasCelebrityDouban() {
-        super();
-    }
-
-    public Long getIdCelebrityDouban() {
-        return idCelebrityDouban;
-    }
-
-    public void setIdCelebrityDouban(Long idCelebrityDouban) {
-        this.idCelebrityDouban = idCelebrityDouban;
-    }
-
-    public String getNameAlias() {
-        return nameAlias;
-    }
-
-    public void setNameAlias(String nameAlias) {
-        this.nameAlias = nameAlias == null ? null : nameAlias.trim();
-    }
-
-    public Boolean getIsNikename() {
-        return isNikename;
-    }
-
-    public void setIsNikename(Boolean isNikename) {
-        this.isNikename = isNikename;
-    }
-
-    @Override
-    public boolean equals(Object that) {
-        if (this == that) {
-            return true;
-        }
-        if (that == null) {
-            return false;
-        }
-        if (getClass() != that.getClass()) {
-            return false;
-        }
-        AliasCelebrityDouban other = (AliasCelebrityDouban) that;
-        return (this.getIdCelebrityDouban() == null ? other.getIdCelebrityDouban() == null : this.getIdCelebrityDouban().equals(other.getIdCelebrityDouban()))
-            && (this.getNameAlias() == null ? other.getNameAlias() == null : this.getNameAlias().equals(other.getNameAlias()))
-            && (this.getIsNikename() == null ? other.getIsNikename() == null : this.getIsNikename().equals(other.getIsNikename()));
-    }
-
-    @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + ((getIdCelebrityDouban() == null) ? 0 : getIdCelebrityDouban().hashCode());
-        result = prime * result + ((getNameAlias() == null) ? 0 : getNameAlias().hashCode());
-        result = prime * result + ((getIsNikename() == null) ? 0 : getIsNikename().hashCode());
-        return result;
-    }
-
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(getClass().getSimpleName());
-        sb.append(" [");
-        sb.append("Hash = ").append(hashCode());
-        sb.append(", idCelebrityDouban=").append(idCelebrityDouban);
-        sb.append(", nameAlias=").append(nameAlias);
-        sb.append(", isNikename=").append(isNikename);
-        sb.append(", serialVersionUID=").append(serialVersionUID);
-        sb.append("]");
-        return sb.toString();
-    }
 }

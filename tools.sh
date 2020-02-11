@@ -4,10 +4,16 @@ echo "[0]  更改项目版本"
 echo "[1]  生成RSA密钥对"
 echo "[2]  启动zipkin服务"
 echo "[3]  更新API文档"
+echo "[4]  强制部署[3]需要的环境"
+echo "[5]  强制撤销[3]部署的环境"
 echo "========================================="
 read -p "请选择脚本:" choose
-# -------------------------------------------------------------------
-if [ $choose -eq 0 ]; then
+
+# 功能函数
+# ------------------------------
+
+# 更改项目版本
+function version_change() {
   read -p "请输入新版本号:" new_version
   mvn -f "pom.xml" versions:set -DoldVersion=* -DnewVersion="$new_version" -DprocessAllModules=true -DallowSnapshots=true -DgenerateBackupPoms=false
   if [ $? -eq 0 ]; then
@@ -15,9 +21,11 @@ if [ $choose -eq 0 ]; then
   else
     echo "更改版本失败"
   fi
-# -------------------------------------------------------------------
-elif [ $choose -eq 1 ]; then
-  read -p "你确定要生成RSA密钥对？[y/n]:" choose_sure_rsa
+}
+
+# 生成RSA密钥对
+function rsa_create() {
+  read -p "你确定要覆盖生成RSA密钥对？[y/n]:" choose_sure_rsa
   if [ "$choose_sure_rsa" = "y" ]; then
     # 生成jks (另需要秘钥口令和秘钥库口令)
     keytool -genkey -alias oauth2 -keyalg RSA -keystore ./doc/key/oauth2.jks -keysize 2048 -dname "CN=humingk,OU=org,O=doubans,L=Beijing,S=Beijing,C=China"
@@ -27,9 +35,10 @@ elif [ $choose -eq 1 ]; then
     keytool -list -rfc --keystore ./doc/key/oauth2.jks | openssl x509 -inform pem -pubkey >./doc/key/public.txt
     echo "密钥生成路径: ./doc/key/"
   fi
-# -------------------------------------------------------------------
-elif [ $choose -eq 2 ]; then
-  # 官网下载zipkin的jar包（建议代理下载）
+}
+
+# 启动zipkin服务
+function zipkin_start() {
   if [ ! -f "./zipkin.jar" ]; then
     curl -sSL https://zipkin.io/quickstart.sh | bash -s
   fi
@@ -56,39 +65,86 @@ elif [ $choose -eq 2 ]; then
       echo "zipkin运行失败"
     fi
   fi
-# -------------------------------------------------------------------
-elif [ $choose -eq 3 ]; then
-  read -p "你确定要更新API文档？[y/n]:" choose_sure_api
-  if [ "$choose_sure_api" = "y" ]; then
-    echo "添加RestController注解..."
-    sed -i "s/\/\/import/import/g" $(grep annotation -rl ./movie-api/src/main/java/org/humingk/movie/api/*/*Api.java)
-    sed -i "s/\/\/@RestController/@RestController/g" $(grep annotation -rl ./movie-api/src/main/java/org/humingk/movie/api/*/*Api.java)
-    sed -i "s/@RestController/\/\/@RestController/g" $(grep annotation -rl ./movie-common/src/main/java/org/humingk/movie/common/controller/MyErrorController.java)
-    sed -i "s/@RestController/\/\/@RestController/g" $(grep annotation -rl ./movie-server-gateway/src/main/java/org/humingk/movie/server/gateway/controller/FallbackController.java)
-    # API生成
-    echo "进行到movie-api即可中止[Ctrl+C]"
-    echo "-------------------"
-    echo "[0] adoc"
-    echo "[1] html"
-    echo "[2] markdown"
-    echo "[3] postman"
-    echo "-------------------"
-    read -p "请选择类型：" choose_api
-    exec_api="mvn -Dfile.encoding=UTF-8 smart-doc:"
-    if [ $choose_api -eq 0 ]; then
-      exec $exec_api"adoc"
-    elif [ $choose_api -eq 1 ]; then
-      exec $exec_api"html"
-    elif [ $choose_api -eq 2 ]; then
-      exec $exec_api"markdown"
-    elif [ $choose_api -eq 3 ]; then
-      exec $exec_api"postman"
-    fi
-    echo "撤销RestController注解..."
-    sed -i "s/import\ org.springframework.web.bind.annotation.RestController;/\/\/import\ org.springframework.web.bind.annotation.RestController;/g" $(grep annotation -rl ./movie-api/src/main/java/org/humingk/movie/api/*/*Api.java)
-    sed -i "s/@RestController/\/\/@RestController/g" $(grep annotation -rl ./movie-api/src/main/java/org/humingk/movie/api/*/*Api.java)
-    sed -i "s/\/\/@RestController/@RestController/g" $(grep annotation -rl ./movie-common/src/main/java/org/humingk/movie/common/controller/MyErrorController.java)
-    sed -i "s/\/\/@RestController/@RestController/g" $(grep annotation -rl ./movie-server-gateway/src/main/java/org/humingk/movie/server/gateway/controller/FallbackController.java)
-  fi
-fi
-exit 0
+}
+
+# 更新API文档
+function api_update() {
+  echo "请选择生成文档类型"
+  echo "-------------------"
+  echo "[0] adoc"
+  echo "[1] html"
+  echo "[2] markdown"
+  echo "[3] postman"
+  echo "-------------------"
+  read -p "请选择类型：" choose_api
+  env_create
+  # 执行mvn
+  exec_api="mvn -Dfile.encoding=UTF-8 smart-doc:"
+  case $choose_api in
+  0)
+    exec $exec_api"adoc"
+    ;;
+  1)
+    exec $exec_api"html"
+    ;;
+  2)
+    exec $exec_api"markdown"
+    ;;
+  3)
+    exec $exec_api"postman"
+    ;;
+  esac
+  env_release
+}
+
+# 部署环境配置
+function env_create() {
+  echo "配置环境..."
+  # pom
+  sed -i "s/<module>/<\!--<module>/g" ./pom.xml
+  sed -i "s/<\/module>/<\/module>-->/g" ./pom.xml
+  sed -i "s/<\!--<module>movie-api<\/module>-->/<module>movie-api<\/module>/g" ./pom.xml
+  sed -i "s/<\!--<module>movie-dal<\/module>-->/<module>movie-dal<\/module>/g" ./pom.xml
+  sed -i "s/<\!--<module>movie-common<\/module>-->/<module>movie-common<\/module>/g" ./pom.xml
+  # controller
+  sed -i "s/@RestController/\/\/@RestController/g" $(grep annotation -rl ./movie-common/src/main/java/org/humingk/movie/common/controller/MyErrorController.java)
+  sed -i "s/@RestController/\/\/@RestController/g" $(grep annotation -rl ./movie-server-gateway/src/main/java/org/humingk/movie/server/gateway/controller/FallbackController.java)
+  sed -i "s/\/\/import/import/g" $(grep annotation -rl ./movie-api/src/main/java/org/humingk/movie/api/*/*Api.java)
+  sed -i "s/\/\/@RestController/@RestController/g" $(grep annotation -rl ./movie-api/src/main/java/org/humingk/movie/api/*/*Api.java)
+}
+
+# 撤销环境配置
+function env_release() {
+  echo "撤销配置环境..."
+  # pom
+  sed -i "s/<\!--<module>/<module>/g" ./pom.xml
+  sed -i "s/<\/module>-->/<\/module>/g" ./pom.xml
+  # controller
+  sed -i "s/\/\/@RestController/@RestController/g" $(grep annotation -rl ./movie-common/src/main/java/org/humingk/movie/common/controller/MyErrorController.java)
+  sed -i "s/\/\/@RestController/@RestController/g" $(grep annotation -rl ./movie-server-gateway/src/main/java/org/humingk/movie/server/gateway/controller/FallbackController.java)
+  sed -i "s/import\ org.springframework.web.bind.annotation.RestController;/\/\/import\ org.springframework.web.bind.annotation.RestController;/g" $(grep annotation -rl ./movie-api/src/main/java/org/humingk/movie/api/*/*Api.java)
+  sed -i "s/@RestController/\/\/@RestController/g" $(grep annotation -rl ./movie-api/src/main/java/org/humingk/movie/api/*/*Api.java)
+}
+
+# main
+# ------------------------------
+case $choose in
+0)
+  version_change
+  ;;
+1)
+  rsa_create
+  ;;
+2)
+  zipkin_start
+  ;;
+3)
+  api_update
+  ;;
+4)
+  env_create
+  ;;
+5)
+  env_release
+  ;;
+esac

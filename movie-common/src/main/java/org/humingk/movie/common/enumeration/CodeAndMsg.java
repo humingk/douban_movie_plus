@@ -12,7 +12,7 @@ public enum CodeAndMsg {
     /**
      * status < 1000 :常见已知错误信息
      */
-    SUCCESS(200, "success"),
+    SUCCESS(200, "成功"),
     BADREQUEST(400, "客户端错误"),
     UNAUTHORIZED(401, "认证失败"),
     FORBIDDEN(403, "服务器拒绝提供服务"),
@@ -36,4 +36,11 @@ public enum CodeAndMsg {
      */
     public final String msg;
 
+    public int getCode() {
+        return code;
+    }
+
+    public String getMsg() {
+        return msg;
+    }
 }

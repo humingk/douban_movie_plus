@@ -1,172 +1,63 @@
 package org.humingk.movie.dal.entity;
 
 import java.io.Serializable;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+/**
+ * 电影资源
+ *
+ *@author humingk
+ */
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class ResourceMovie implements Serializable {
+    /**
+     * 电影资源ID
+     */
     private Long id;
 
+    /**
+     * 豆瓣电影ID 0-未匹配 1-已匹配
+     */
     private Long idMovieDouban;
 
+    /**
+     * IMDB电影ID 0-未匹配 1-已匹配
+     */
     private Long idMovieImdb;
 
+    /**
+     * 电影资源网站ID ID<100-正版 ID>100-盗版
+     */
     private Short idWebsiteResource;
 
+    /**
+     * 电影资源类型ID ID<100-在线  ID>100-离线
+     */
     private Short idTypeResource;
 
+    /**
+     * 资源中文名
+     */
     private String nameZh;
 
+    /**
+     * 电影年代 /year
+     */
     private Short createYear;
 
+    /**
+     * 资源原始名
+     */
     private String nameOrigin;
 
+    /**
+     * 资源链接
+     */
     private String urlResource;
 
     private static final long serialVersionUID = 1L;
-
-    public ResourceMovie(Long id, Long idMovieDouban, Long idMovieImdb, Short idWebsiteResource, Short idTypeResource, String nameZh, Short createYear, String nameOrigin, String urlResource) {
-        this.id = id;
-        this.idMovieDouban = idMovieDouban;
-        this.idMovieImdb = idMovieImdb;
-        this.idWebsiteResource = idWebsiteResource;
-        this.idTypeResource = idTypeResource;
-        this.nameZh = nameZh;
-        this.createYear = createYear;
-        this.nameOrigin = nameOrigin;
-        this.urlResource = urlResource;
-    }
-
-    public ResourceMovie() {
-        super();
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Long getIdMovieDouban() {
-        return idMovieDouban;
-    }
-
-    public void setIdMovieDouban(Long idMovieDouban) {
-        this.idMovieDouban = idMovieDouban;
-    }
-
-    public Long getIdMovieImdb() {
-        return idMovieImdb;
-    }
-
-    public void setIdMovieImdb(Long idMovieImdb) {
-        this.idMovieImdb = idMovieImdb;
-    }
-
-    public Short getIdWebsiteResource() {
-        return idWebsiteResource;
-    }
-
-    public void setIdWebsiteResource(Short idWebsiteResource) {
-        this.idWebsiteResource = idWebsiteResource;
-    }
-
-    public Short getIdTypeResource() {
-        return idTypeResource;
-    }
-
-    public void setIdTypeResource(Short idTypeResource) {
-        this.idTypeResource = idTypeResource;
-    }
-
-    public String getNameZh() {
-        return nameZh;
-    }
-
-    public void setNameZh(String nameZh) {
-        this.nameZh = nameZh == null ? null : nameZh.trim();
-    }
-
-    public Short getCreateYear() {
-        return createYear;
-    }
-
-    public void setCreateYear(Short createYear) {
-        this.createYear = createYear;
-    }
-
-    public String getNameOrigin() {
-        return nameOrigin;
-    }
-
-    public void setNameOrigin(String nameOrigin) {
-        this.nameOrigin = nameOrigin == null ? null : nameOrigin.trim();
-    }
-
-    public String getUrlResource() {
-        return urlResource;
-    }
-
-    public void setUrlResource(String urlResource) {
-        this.urlResource = urlResource == null ? null : urlResource.trim();
-    }
-
-    @Override
-    public boolean equals(Object that) {
-        if (this == that) {
-            return true;
-        }
-        if (that == null) {
-            return false;
-        }
-        if (getClass() != that.getClass()) {
-            return false;
-        }
-        ResourceMovie other = (ResourceMovie) that;
-        return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
-            && (this.getIdMovieDouban() == null ? other.getIdMovieDouban() == null : this.getIdMovieDouban().equals(other.getIdMovieDouban()))
-            && (this.getIdMovieImdb() == null ? other.getIdMovieImdb() == null : this.getIdMovieImdb().equals(other.getIdMovieImdb()))
-            && (this.getIdWebsiteResource() == null ? other.getIdWebsiteResource() == null : this.getIdWebsiteResource().equals(other.getIdWebsiteResource()))
-            && (this.getIdTypeResource() == null ? other.getIdTypeResource() == null : this.getIdTypeResource().equals(other.getIdTypeResource()))
-            && (this.getNameZh() == null ? other.getNameZh() == null : this.getNameZh().equals(other.getNameZh()))
-            && (this.getCreateYear() == null ? other.getCreateYear() == null : this.getCreateYear().equals(other.getCreateYear()))
-            && (this.getNameOrigin() == null ? other.getNameOrigin() == null : this.getNameOrigin().equals(other.getNameOrigin()))
-            && (this.getUrlResource() == null ? other.getUrlResource() == null : this.getUrlResource().equals(other.getUrlResource()));
-    }
-
-    @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
-        result = prime * result + ((getIdMovieDouban() == null) ? 0 : getIdMovieDouban().hashCode());
-        result = prime * result + ((getIdMovieImdb() == null) ? 0 : getIdMovieImdb().hashCode());
-        result = prime * result + ((getIdWebsiteResource() == null) ? 0 : getIdWebsiteResource().hashCode());
-        result = prime * result + ((getIdTypeResource() == null) ? 0 : getIdTypeResource().hashCode());
-        result = prime * result + ((getNameZh() == null) ? 0 : getNameZh().hashCode());
-        result = prime * result + ((getCreateYear() == null) ? 0 : getCreateYear().hashCode());
-        result = prime * result + ((getNameOrigin() == null) ? 0 : getNameOrigin().hashCode());
-        result = prime * result + ((getUrlResource() == null) ? 0 : getUrlResource().hashCode());
-        return result;
-    }
-
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(getClass().getSimpleName());
-        sb.append(" [");
-        sb.append("Hash = ").append(hashCode());
-        sb.append(", id=").append(id);
-        sb.append(", idMovieDouban=").append(idMovieDouban);
-        sb.append(", idMovieImdb=").append(idMovieImdb);
-        sb.append(", idWebsiteResource=").append(idWebsiteResource);
-        sb.append(", idTypeResource=").append(idTypeResource);
-        sb.append(", nameZh=").append(nameZh);
-        sb.append(", createYear=").append(createYear);
-        sb.append(", nameOrigin=").append(nameOrigin);
-        sb.append(", urlResource=").append(urlResource);
-        sb.append(", serialVersionUID=").append(serialVersionUID);
-        sb.append("]");
-        return sb.toString();
-    }
 }

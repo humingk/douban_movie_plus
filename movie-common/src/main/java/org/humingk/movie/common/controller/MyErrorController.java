@@ -1,7 +1,7 @@
 package org.humingk.movie.common.controller;
 
-import org.humingk.movie.common.enumeration.CodeAndMsg;
 import org.humingk.movie.common.entity.Result;
+import org.humingk.movie.common.enumeration.CodeAndMsg;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.servlet.error.ErrorController;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -9,12 +9,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 
+@RestController
 /**
  * 部分错误返回控制器
  *
  * @author humingk
  */
-@RestController
 public class MyErrorController implements ErrorController {
     @Autowired
     private HttpServletRequest request;

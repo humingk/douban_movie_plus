@@ -30,10 +30,11 @@
             <groupId>org.humingk</groupId>
             <artifactId>movie-common</artifactId>
         </dependency>
-        <!--zipkin client-->
+        <!--security oauth2 (包含security)-->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-zipkin</artifactId>
+            <artifactId>spring-cloud-starter-oauth2</artifactId>
+            <scope>provided</scope>
         </dependency>
         <!--config client-->
         <dependency>

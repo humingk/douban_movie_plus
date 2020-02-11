@@ -1,6 +1,6 @@
 # mysql和redis数据库配置
 mybatis:
-  mapper-locations: classpath:mapper/*Mapper.xml
+  mapper-locations: classpath:mapper/**/*.xml
 spring:
   datasource:
     driverClassName: com.mysql.cj.jdbc.Driver

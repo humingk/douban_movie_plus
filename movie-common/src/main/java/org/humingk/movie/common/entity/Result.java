@@ -21,7 +21,7 @@ import static org.humingk.movie.common.enumeration.CodeAndMsg.SUCCESS;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-public class Result implements Serializable {
+public class Result<T> implements Serializable {
     /**
      * 状态码
      */
@@ -33,15 +33,15 @@ public class Result implements Serializable {
     /**
      * 具体结果
      */
-    private Object data;
+    private T data;
 
     public Result(CodeAndMsg codeAndMsg) {
         this.code = codeAndMsg.code;
         this.msg = codeAndMsg.msg;
-        this.data = "";
+        this.data = null;
     }
 
-    public Result(CodeAndMsg codeAndMsg, Object data) {
+    public Result(CodeAndMsg codeAndMsg, T data) {
         this.code = codeAndMsg.code;
         this.msg = codeAndMsg.msg;
         this.data = data;
@@ -66,8 +66,8 @@ public class Result implements Serializable {
      * @param data
      * @return
      */
-    public static Result success(Object data) {
-        return new Result(SUCCESS, data);
+    public static <T> Result<T> success(T data) {
+        return new Result<>(SUCCESS, data);
     }
 
     // 失败 -------------------------------------------------------------------------

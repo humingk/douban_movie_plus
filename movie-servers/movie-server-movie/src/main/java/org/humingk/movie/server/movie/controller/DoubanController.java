@@ -2,6 +2,8 @@ package org.humingk.movie.server.movie.controller;
 
 import org.humingk.movie.api.movie.DoubanApi;
 import org.humingk.movie.common.entity.Result;
+import org.humingk.movie.dal.entity.MovieDouban;
+import org.humingk.movie.service.douban.service.MovieService;
 import org.humingk.movie.service.douban.service.SearchService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,10 +20,14 @@ import java.util.List;
 @RestController
 public class DoubanController implements DoubanApi {
     @Autowired
+    private MovieService movieService;
+    @Autowired
     private SearchService searchService;
 
+
     @Override
-    public Result bases(@NotNull Long id) {
+    public Result<MovieDouban> bases(@NotNull Long id) {
+        MovieDouban movieDouban = movieService.getMovieDoubanByMovieDoubanId(id);
         return null;
     }
 

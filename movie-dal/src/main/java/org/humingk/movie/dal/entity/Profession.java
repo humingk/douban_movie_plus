@@ -1,88 +1,33 @@
 package org.humingk.movie.dal.entity;
 
 import java.io.Serializable;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+/**
+ * 影人职业
+ *
+ *@author humingk
+ */
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Profession implements Serializable {
+    /**
+     * 影人职业ID
+     */
     private Byte id;
 
+    /**
+     * 职业中文名
+     */
     private String nameZh;
 
+    /**
+     * 职业英文名
+     */
     private String nameEn;
 
     private static final long serialVersionUID = 1L;
-
-    public Profession(Byte id, String nameZh, String nameEn) {
-        this.id = id;
-        this.nameZh = nameZh;
-        this.nameEn = nameEn;
-    }
-
-    public Profession() {
-        super();
-    }
-
-    public Byte getId() {
-        return id;
-    }
-
-    public void setId(Byte id) {
-        this.id = id;
-    }
-
-    public String getNameZh() {
-        return nameZh;
-    }
-
-    public void setNameZh(String nameZh) {
-        this.nameZh = nameZh == null ? null : nameZh.trim();
-    }
-
-    public String getNameEn() {
-        return nameEn;
-    }
-
-    public void setNameEn(String nameEn) {
-        this.nameEn = nameEn == null ? null : nameEn.trim();
-    }
-
-    @Override
-    public boolean equals(Object that) {
-        if (this == that) {
-            return true;
-        }
-        if (that == null) {
-            return false;
-        }
-        if (getClass() != that.getClass()) {
-            return false;
-        }
-        Profession other = (Profession) that;
-        return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
-            && (this.getNameZh() == null ? other.getNameZh() == null : this.getNameZh().equals(other.getNameZh()))
-            && (this.getNameEn() == null ? other.getNameEn() == null : this.getNameEn().equals(other.getNameEn()));
-    }
-
-    @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
-        result = prime * result + ((getNameZh() == null) ? 0 : getNameZh().hashCode());
-        result = prime * result + ((getNameEn() == null) ? 0 : getNameEn().hashCode());
-        return result;
-    }
-
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(getClass().getSimpleName());
-        sb.append(" [");
-        sb.append("Hash = ").append(hashCode());
-        sb.append(", id=").append(id);
-        sb.append(", nameZh=").append(nameZh);
-        sb.append(", nameEn=").append(nameEn);
-        sb.append(", serialVersionUID=").append(serialVersionUID);
-        sb.append("]");
-        return sb.toString();
-    }
 }

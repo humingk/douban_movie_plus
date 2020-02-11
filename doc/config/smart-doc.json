@@ -19,19 +19,6 @@
   "skipTransientField": true,
   "//": "是否显示接口作者名称",
   "showAuthor": true,
-  "//": "数据字典 ?",
-  "dataDictionaries": [
-    {
-      "//": "数据字典的名称",
-      "title": "Code and Msg",
-      "//": "数据字典枚举类名称",
-      "enumClassName": "org.humingk.movie.common.enumeration.CodeAndMsg",
-      "//": "数据字典字典码对应的字段名称",
-      "codeField": "code",
-      "//": "数据字典对象的描述信息字典",
-      "descField": "msg"
-    }
-  ],
   "//": "设置文档变更记录",
   "revisionLogs": [
     {

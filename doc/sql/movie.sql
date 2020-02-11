@@ -1334,12 +1334,12 @@ values (1, '未知', 'unknown'),
        (3, '电视剧', 'tv series'),
        (4, '短片', 'short'),
        # 来自IMDB
-       (5, '', 'tv mini series'),
-       (6, '', 'tv short'),
-       (7, '', 'tv special'),
-       (8, '', 'tvMovie'),
-       (9, '', 'video'),
-       (10, '', 'video game');
+       (5, '迷你电视剧', 'tv mini series'),
+       (6, '电视短片', 'tv short'),
+       (7, '电视特辑', 'tv special'),
+       (8, '电视电影', 'tvMovie'),
+       (9, '视频', 'video'),
+       (10, '视频游戏', 'video game');
 
 insert into website_resource
 values (2, '爱奇艺视频', 'https://www.iqiyi.com'),

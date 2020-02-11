@@ -1,12 +1,12 @@
 package org.humingk.movie.service.user.service.impl;
 
-import org.humingk.movie.common.enumeration.Roles;
 import org.humingk.movie.common.enumeration.CodeAndMsg;
+import org.humingk.movie.common.enumeration.Roles;
 import org.humingk.movie.common.exception.MyException;
 import org.humingk.movie.dal.entity.User;
 import org.humingk.movie.dal.entity.UserToRole;
-import org.humingk.movie.dal.mapper.UserMapper;
-import org.humingk.movie.dal.mapper.UserToRoleMapper;
+import org.humingk.movie.dal.mapper.auto.UserMapper;
+import org.humingk.movie.dal.mapper.auto.UserToRoleMapper;
 import org.humingk.movie.service.user.service.RegisterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;

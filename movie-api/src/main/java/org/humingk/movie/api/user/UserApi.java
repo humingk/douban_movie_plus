@@ -16,6 +16,7 @@ import java.security.Principal;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
+// 用于生成API文档
 //import org.springframework.web.bind.annotation.RestController;
 //@RestController
 

@@ -5,7 +5,7 @@
 
 <generatorConfiguration>
 
-    <properties resource="mybatis/mybatis-generator.properties"/>
+<!--    <properties resource="mybatis/mybatis-generator.properties"/>-->
 
     <!--一个数据库一个context,context的子元素必须按照它给出的顺序
     property*,plugin*,commentGenerator?,jdbcConnection,javaTypeResolver?,
@@ -38,7 +38,7 @@
         <property name="endingDelimiter" value="`"/>
 
         <!--这个插件给生成的Java模型对象增加了equals和hashCode方法 -->
-        <plugin type="org.mybatis.generator.plugins.EqualsHashCodePlugin"/>
+<!--        <plugin type="org.mybatis.generator.plugins.EqualsHashCodePlugin"/>-->
 
         <!--实体类实现序列化接口-->
         <plugin type="org.mybatis.generator.plugins.SerializablePlugin"/>
@@ -50,28 +50,33 @@
         <plugin type="org.mybatis.generator.plugins.UnmergeableXmlMappersPlugin"/>
 
         <!--toString -->
-        <plugin type="org.mybatis.generator.plugins.ToStringPlugin"/>
+<!--        <plugin type="org.mybatis.generator.plugins.ToStringPlugin"/>-->
 
         <!--分页插件 -->
         <!--该插件在内存中分页,影响性能,采用 PageHelper 分页插件-->
         <!--https://github.com/pagehelper/Mybatis-PageHelper -->
         <!--<plugin type="org.mybatis.generator.plugins.RowBoundsPlugin" />-->
 
+
+        <!--自定义注释+lombak-->
+        <plugin type="org.humingk.movie.dal.generator.MyBatisPlugin">
+            <property name="hasLombok" value="true"/>
+        </plugin>
+
+        <!--关闭自带注释 -->
         <commentGenerator>
-            <!--是否去除自动生成的注释 true：是 ： false:否 -->
             <property name="suppressAllComments" value="true"/>
-            <!--注释中是否去除时间戳 -->
-            <property name="suppressDate" value="true"/>
-            <!--添加表中字段的注释，只有suppressAllComments为false时才生效-->
-            <property name="addRemarkComments" value="true"/>
-            <property name="javaFileEncoding" value="utf-8"/>
         </commentGenerator>
 
         <!--数据库连接的信息：驱动类、连接地址、用户名、密码-->
-        <jdbcConnection driverClass="${spring.datasource.driverClassName}"
-                        connectionURL="${spring.datasource.url}"
-                        userId="${spring.datasource.username}"
-                        password="${spring.datasource.password}">
+<!--        <jdbcConnection driverClass="${spring.datasource.driverClassName}"-->
+<!--                        connectionURL="${spring.datasource.url}"-->
+<!--                        userId="${spring.datasource.username}"-->
+<!--                        password="${spring.datasource.password}">-->
+        <jdbcConnection driverClass="com.mysql.cj.jdbc.Driver"
+                        connectionURL="jdbc:mysql://localhost:3306/movie?useUnicode=true&amp;characterEncoding=utf-8&amp;useSSL=false&amp;serverTimezone=Asia/Shanghai"
+                        userId="root"
+                        password="1233">
 
             <!--高版本的 mysql-connector-java 需要设置
             nullCatalogMeansCurrent=true
@@ -79,6 +84,8 @@
             https://www.jianshu.com/p/dbeeac29ff27
             -->
             <property name="nullCatalogMeansCurrent" value="true"/>
+            <!--自定义类的注释-->
+            <property name="useInformationSchema" value="true"/>
         </jdbcConnection>
 
         <!--java类型处理器
@@ -112,14 +119,15 @@
             targetPackage：生成的类要放的包，真实的包受enableSubPackages属性控制；
             targetProject：目标项目，指定一个存在的目录下，生成的内容会放到指定目录中，如果目录不存在，MBG不会自动建目录
          -->
-        <javaModelGenerator targetPackage="${config.path.entity}" targetProject="${config.path.java}">
+<!--        <javaModelGenerator targetPackage="${config.path.entity}" targetProject="${config.path.java}">-->
+        <javaModelGenerator targetPackage="org.humingk.movie.dal.entity" targetProject="/home/humingk/gits/douban_movie_plus/movie-dal/src/main/java">
 
             <!--在targetPackage的基础上，根据数据库的schema再生成一层package，最终生成的类放在这个package下，默认为false -->
             <property name="enableSubPackages" value="false"/>
 
             <!--for MyBatis3/MyBatis3Simple
                 自动为每一个生成的类创建一个构造方法，构造方法包含了所有的field；而不是使用setter；-->
-            <property name="constructorBased" value="true"/>
+            <property name="constructorBased" value="false"/>
 
             <!--设置是否在getter方法中，对String类型字段调用trim()方法 -->
             <property name="trimStrings" value="true"/>
@@ -136,7 +144,8 @@
         </javaModelGenerator>
 
         <!--Mapper映射文件生成所在的目录 为每一个数据库的表生成对应的SqlMap文件 -->
-        <sqlMapGenerator targetPackage="${config.path.mapper.resources}" targetProject="${config.path.resources}">
+<!--        <sqlMapGenerator targetPackage="${config.path.mapper.resources}" targetProject="${config.path.resources}">-->
+        <sqlMapGenerator targetPackage="mapper.auto" targetProject="/home/humingk/gits/douban_movie_plus/movie-dal/src/main/resources">
             <!--是否允许子包，即targetPackage.schemaName.tableName -->
             <property name="enableSubPackages" value="false"/>
         </sqlMapGenerator>
@@ -149,8 +158,8 @@
                 3，XMLMAPPER：会生成Mapper接口，接口完全依赖XML；
             注意，如果context是MyBatis3Simple：只支持ANNOTATEDMAPPER和XMLMAPPER
         -->
-        <javaClientGenerator targetPackage="${config.path.mapper.base}" targetProject="${config.path.java}"
-                             type="XMLMAPPER">
+<!--        <javaClientGenerator targetPackage="${config.path.mapper.base}" targetProject="${config.path.java}" type="XMLMAPPER">-->
+        <javaClientGenerator targetPackage="org.humingk.movie.dal.mapper.auto" targetProject="/home/humingk/gits/douban_movie_plus/movie-dal/src/main/java" type="XMLMAPPER">
 
             <!--在targetPackage的基础上，根据数据库的schema再生成一层package，最终生成的类放在这个package下，默认为false -->
             <property name="enableSubPackages" value="false"/>
@@ -389,7 +398,6 @@
         <table tableName="user_to_role"/>
         <table tableName="user_netease"/>
         <table tableName="website_resource"/>
-        <table tableName="persistent_logins"/>
 
 
     </context>

@@ -1,6 +1,6 @@
 package org.humingk.movie.api.auth;
 
-import org.humingk.movie.api.hystrix.auth.Oauth2ApiHystrix;
+import org.humingk.movie.api.common.hystrix.auth.Oauth2ApiHystrix;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;

@@ -13,6 +13,7 @@ import java.util.List;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
+// 用于生成API文档
 //import org.springframework.web.bind.annotation.RestController;
 //@RestController
 
@@ -26,10 +27,11 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 public interface DoubanApi {
 
     /**
-     * 豆瓣影人基础信息，包括影人图片
+     * 豆瓣影人基础信息
      *
      * @param id 影人豆瓣ID
      * @return
+     * @apiNote 包括影人图片
      */
     @RequestMapping(value = "/celebrity/douban/bases", method = RequestMethod.GET)
     Result bases(@RequestParam("id") @NotNull Long id);

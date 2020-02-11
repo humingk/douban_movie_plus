@@ -3,11 +3,21 @@ Version |  Update Time  | Status | Author |  Description
 ------|--------|-----|------|-------
 2.0.0||create|humingk|创建RESTful-API文档
 
-[TOC]
 
+
+## 
+## 
+## 
+## 
+## 
+## 
+## 
+## 
+## 
+## 
+## 
 ## 豆瓣影人API
-### 基础信息
-豆瓣影人基础信息，包括影人图片
+### 豆瓣影人基础信息
 **URL:** https://localhost/celebrity/douban/bases
 
 **Type:** GET
@@ -15,8 +25,7 @@ Version |  Update Time  | Status | Author |  Description
 
 **Content-Type:** application/x-www-form-urlencoded;charset=utf-8
 
-**Description:** 基础信息
-豆瓣影人基础信息，包括影人图片
+**Description:** 包括影人图片
 
 **Request-headers:**
 
@@ -32,9 +41,8 @@ Parameter | Type|Description|Required|Since
 id|int64|影人豆瓣ID|true|-
 
 **Request-example:**
-
 ```
-curl -X GET -i https://localhost/celebrity/douban/bases?id=699
+curl -X GET -i https://localhost/celebrity/douban/bases?id=432
 ```
 **Response-fields:**
 
@@ -47,16 +55,15 @@ data|object|具体结果|-
 **Response-example:**
 ```
 {
-	"code":176,
-	"msg":"zmax8p",
+	"code":131,
+	"msg":"dhfji4",
 	"data":{
 		"waring":"You may have used non-display generics."
 	}
 }
 ```
 
-### 基础信息列表
-豆瓣影人基础信息列表,包括影人图片
+### 豆瓣影人基础信息列表,包括影人图片
 **URL:** https://localhost/celebrity/douban/bases_list
 
 **Type:** GET
@@ -64,8 +71,7 @@ data|object|具体结果|-
 
 **Content-Type:** application/json; charset=utf-8
 
-**Description:** 基础信息列表
-豆瓣影人基础信息列表,包括影人图片
+**Description:** 豆瓣影人基础信息列表,包括影人图片
 
 **Request-headers:**
 
@@ -95,16 +101,15 @@ data|object|具体结果|-
 **Response-example:**
 ```
 {
-	"code":701,
-	"msg":"h3zyj3",
+	"code":437,
+	"msg":"srh0u3",
 	"data":{
 		"waring":"You may have used non-display generics."
 	}
 }
 ```
 
-### 详细信息
-豆瓣影人详细信息,包括影人图片、基础信息、参演电影基础信息（电影海报、基础信息）、影人简介
+### 豆瓣影人详细信息,包括影人图片、基础信息、参演电影基础信息（电影海报、基础信息）、影人简介
 **URL:** https://localhost/celebrity/douban/details
 
 **Type:** GET
@@ -112,8 +117,7 @@ data|object|具体结果|-
 
 **Content-Type:** application/x-www-form-urlencoded;charset=utf-8
 
-**Description:** 详细信息
-豆瓣影人详细信息,包括影人图片、基础信息、参演电影基础信息（电影海报、基础信息）、影人简介
+**Description:** 豆瓣影人详细信息,包括影人图片、基础信息、参演电影基础信息（电影海报、基础信息）、影人简介
 
 **Request-headers:**
 
@@ -130,7 +134,7 @@ id|int64|影人豆瓣ID|true|-
 
 **Request-example:**
 ```
-curl -X GET -i https://localhost/celebrity/douban/details?id=703
+curl -X GET -i https://localhost/celebrity/douban/details?id=720
 ```
 **Response-fields:**
 
@@ -143,16 +147,15 @@ data|object|具体结果|-
 **Response-example:**
 ```
 {
-	"code":908,
-	"msg":"8bf6wb",
+	"code":454,
+	"msg":"37cq9f",
 	"data":{
 		"waring":"You may have used non-display generics."
 	}
 }
 ```
 
-### 奖项
-豆瓣影人奖项，包括电影基础信息、奖项信息
+### 豆瓣影人奖项，包括电影基础信息、奖项信息
 **URL:** https://localhost/celebrity/douban/awards
 
 **Type:** GET
@@ -160,8 +163,7 @@ data|object|具体结果|-
 
 **Content-Type:** application/x-www-form-urlencoded;charset=utf-8
 
-**Description:** 奖项
-豆瓣影人奖项，包括电影基础信息、奖项信息
+**Description:** 豆瓣影人奖项，包括电影基础信息、奖项信息
 
 **Request-headers:**
 
@@ -180,7 +182,7 @@ limit|int32| 限制数（默认10）|false|-
 
 **Request-example:**
 ```
-curl -X GET -i https://localhost/celebrity/douban/awards?id=989&offset=0&limit=10
+curl -X GET -i https://localhost/celebrity/douban/awards?id=791&offset=0&limit=10
 ```
 **Response-fields:**
 
@@ -193,17 +195,15 @@ data|object|具体结果|-
 **Response-example:**
 ```
 {
-	"code":673,
-	"msg":"s0u8xy",
+	"code":579,
+	"msg":"8kdjqf",
 	"data":{
 		"waring":"You may have used non-display generics."
 	}
 }
 ```
 
-### 合作影人基础信息
-<p>
-豆瓣影人合作过的影人基础信息，包括影人照片、基础信息、相关电影基础信息（电影海报、基础信息）
+### 豆瓣影人合作过的影人基础信息，包括影人照片、基础信息、相关电影基础信息（电影海报、基础信息）
 **URL:** https://localhost/celebrity/douban/cooperators_bases
 
 **Type:** GET
@@ -211,9 +211,7 @@ data|object|具体结果|-
 
 **Content-Type:** application/x-www-form-urlencoded;charset=utf-8
 
-**Description:** 合作影人基础信息
-<p>
-豆瓣影人合作过的影人基础信息，包括影人照片、基础信息、相关电影基础信息（电影海报、基础信息）
+**Description:** 豆瓣影人合作过的影人基础信息，包括影人照片、基础信息、相关电影基础信息（电影海报、基础信息）
 
 **Request-headers:**
 
@@ -232,7 +230,7 @@ limit|int32| 合作次数限制数（默认10）|false|-
 
 **Request-example:**
 ```
-curl -X GET -i https://localhost/celebrity/douban/cooperators_bases?id=163&offset=0&limit=10
+curl -X GET -i https://localhost/celebrity/douban/cooperators_bases?id=325&offset=0&limit=10
 ```
 **Response-fields:**
 
@@ -245,16 +243,15 @@ data|object|具体结果|-
 **Response-example:**
 ```
 {
-	"code":58,
-	"msg":"h92h3c",
+	"code":139,
+	"msg":"k29hh3",
 	"data":{
 		"waring":"You may have used non-display generics."
 	}
 }
 ```
 
-### 搜索结果
-豆瓣影人搜索结果,根据影人名称字符串找出豆瓣影人的基本信息列表
+### 豆瓣影人搜索结果,根据影人名称字符串找出豆瓣影人的基本信息列表
 **URL:** https://localhost/celebrity/douban/search_details
 
 **Type:** GET
@@ -262,8 +259,7 @@ data|object|具体结果|-
 
 **Content-Type:** application/x-www-form-urlencoded;charset=utf-8
 
-**Description:** 搜索结果
-豆瓣影人搜索结果,根据影人名称字符串找出豆瓣影人的基本信息列表
+**Description:** 豆瓣影人搜索结果,根据影人名称字符串找出豆瓣影人的基本信息列表
 
 **Request-headers:**
 
@@ -282,7 +278,7 @@ limit|int32|  限制数（默认10）|false|-
 
 **Request-example:**
 ```
-curl -X GET -i https://localhost/celebrity/douban/search_details?keyword=cs252b&offset=0&limit=10
+curl -X GET -i https://localhost/celebrity/douban/search_details?keyword=nxmmio&offset=0&limit=10
 ```
 **Response-fields:**
 
@@ -295,8 +291,8 @@ data|object|具体结果|-
 **Response-example:**
 ```
 {
-	"code":678,
-	"msg":"gq553j",
+	"code":554,
+	"msg":"a5zlzt",
 	"data":{
 		"waring":"You may have used non-display generics."
 	}
@@ -335,7 +331,7 @@ albumSongLimit|int32|   专辑内歌曲数目限制数（默认8）|false|-
 
 **Request-example:**
 ```
-curl -X GET -i https://localhost/music/netease/plays?id=586&songLimit=8&playlistLimit=1&playlistSongLimit=8&albumLimit=1&albumSongLimit=8
+curl -X GET -i https://localhost/music/netease/plays?id=480&songLimit=8&playlistLimit=1&playlistSongLimit=8&albumLimit=1&albumSongLimit=8
 ```
 **Response-fields:**
 
@@ -348,8 +344,8 @@ data|object|具体结果|-
 **Response-example:**
 ```
 {
-	"code":889,
-	"msg":"z9941p",
+	"code":104,
+	"msg":"fftnq3",
 	"data":{
 		"waring":"You may have used non-display generics."
 	}
@@ -383,7 +379,7 @@ limit|int32| 限制数（默认8）|false|-
 
 **Request-example:**
 ```
-curl -X GET -i https://localhost/music/netease/hot_comments?id=333&offset=0&limit=8
+curl -X GET -i https://localhost/music/netease/hot_comments?id=359&offset=0&limit=8
 ```
 **Response-fields:**
 
@@ -396,8 +392,8 @@ data|object|具体结果|-
 **Response-example:**
 ```
 {
-	"code":285,
-	"msg":"gaq522",
+	"code":751,
+	"msg":"hpg407",
 	"data":{
 		"waring":"You may have used non-display generics."
 	}
@@ -405,7 +401,6 @@ data|object|具体结果|-
 ```
 
 ## 知乎API
-
 ### 与豆瓣电影相关的知乎问题
 **URL:** https://localhost/movie/zhihu/questions
 
@@ -433,7 +428,7 @@ limit|int32| 限制数（默认10）|false|-
 
 **Request-example:**
 ```
-curl -X GET -i https://localhost/movie/zhihu/questions?id=342&offset=0&limit=10
+curl -X GET -i https://localhost/movie/zhihu/questions?id=216&offset=0&limit=10
 ```
 **Response-fields:**
 
@@ -446,8 +441,8 @@ data|object|具体结果|-
 **Response-example:**
 ```
 {
-	"code":214,
-	"msg":"u7f26x",
+	"code":510,
+	"msg":"gp7qdd",
 	"data":{
 		"waring":"You may have used non-display generics."
 	}
@@ -480,7 +475,7 @@ id|int64|电影豆瓣ID|true|-
 
 **Request-example:**
 ```
-curl -X GET -i https://localhost/movie/rate/details?id=985
+curl -X GET -i https://localhost/movie/rate/details?id=88
 ```
 **Response-fields:**
 
@@ -493,8 +488,8 @@ data|object|具体结果|-
 **Response-example:**
 ```
 {
-	"code":393,
-	"msg":"nk5h7k",
+	"code":167,
+	"msg":"zffogp",
 	"data":{
 		"waring":"You may have used non-display generics."
 	}
@@ -529,7 +524,7 @@ limit|int32| 限制数（默认10）|false|-
 
 **Request-example:**
 ```
-curl -X GET -i https://localhost/mvoie/scene/details?id=596&offset=0&limit=10
+curl -X GET -i https://localhost/mvoie/scene/details?id=239&offset=0&limit=10
 ```
 **Response-fields:**
 
@@ -542,8 +537,8 @@ data|object|具体结果|-
 **Response-example:**
 ```
 {
-	"code":368,
-	"msg":"dphpna",
+	"code":773,
+	"msg":"6thpjk",
 	"data":{
 		"waring":"You may have used non-display generics."
 	}
@@ -551,7 +546,7 @@ data|object|具体结果|-
 ```
 
 ## 豆瓣电影API
-### 豆瓣电影基础信息（包括电影海报、基础信息）
+### 豆瓣电影基础信息
 **URL:** https://localhost/movie/douban/bases
 
 **Type:** GET
@@ -559,7 +554,7 @@ data|object|具体结果|-
 
 **Content-Type:** application/x-www-form-urlencoded;charset=utf-8
 
-**Description:** 豆瓣电影基础信息（包括电影海报、基础信息）
+**Description:** 包括电影海报等基础信息
 
 **Request-headers:**
 
@@ -576,7 +571,7 @@ id|int64|电影豆瓣ID|true|-
 
 **Request-example:**
 ```
-curl -X GET -i https://localhost/movie/douban/bases?id=399
+curl -X GET -i https://localhost/movie/douban/bases?id=726
 ```
 **Response-fields:**
 
@@ -589,8 +584,8 @@ data|object|具体结果|-
 **Response-example:**
 ```
 {
-	"code":532,
-	"msg":"her6el",
+	"code":7,
+	"msg":"noy25e",
 	"data":{
 		"waring":"You may have used non-display generics."
 	}
@@ -635,8 +630,8 @@ data|object|具体结果|-
 **Response-example:**
 ```
 {
-	"code":499,
-	"msg":"hel7c3",
+	"code":193,
+	"msg":"805g5u",
 	"data":{
 		"waring":"You may have used non-display generics."
 	}
@@ -668,7 +663,7 @@ id|int64|电影豆瓣ID|true|-
 
 **Request-example:**
 ```
-curl -X GET -i https://localhost/movie/douban/details?id=580
+curl -X GET -i https://localhost/movie/douban/details?id=587
 ```
 **Response-fields:**
 
@@ -681,8 +676,8 @@ data|object|具体结果|-
 **Response-example:**
 ```
 {
-	"code":861,
-	"msg":"fctves",
+	"code":541,
+	"msg":"zvuecj",
 	"data":{
 		"waring":"You may have used non-display generics."
 	}
@@ -714,7 +709,7 @@ id|int64|电影豆瓣ID|true|-
 
 **Request-example:**
 ```
-curl -X GET -i https://localhost/movie/douban/images?id=615
+curl -X GET -i https://localhost/movie/douban/images?id=3
 ```
 **Response-fields:**
 
@@ -727,8 +722,8 @@ data|object|具体结果|-
 **Response-example:**
 ```
 {
-	"code":468,
-	"msg":"j9bzdv",
+	"code":867,
+	"msg":"vs955z",
 	"data":{
 		"waring":"You may have used non-display generics."
 	}
@@ -762,7 +757,7 @@ limit|int32| 限制数（默认10）|false|-
 
 **Request-example:**
 ```
-curl -X GET -i https://localhost/movie/douban/hot_comments?id=580&offset=0&limit=10
+curl -X GET -i https://localhost/movie/douban/hot_comments?id=864&offset=0&limit=10
 ```
 **Response-fields:**
 
@@ -775,8 +770,8 @@ data|object|具体结果|-
 **Response-example:**
 ```
 {
-	"code":463,
-	"msg":"woi0ju",
+	"code":584,
+	"msg":"b2lxpr",
 	"data":{
 		"waring":"You may have used non-display generics."
 	}
@@ -810,7 +805,7 @@ limit|int32| 限制数（默认10）|false|-
 
 **Request-example:**
 ```
-curl -X GET -i https://localhost/movie/douban/hot_reviews?id=373&offset=0&limit=10
+curl -X GET -i https://localhost/movie/douban/hot_reviews?id=754&offset=0&limit=10
 ```
 **Response-fields:**
 
@@ -823,8 +818,8 @@ data|object|具体结果|-
 **Response-example:**
 ```
 {
-	"code":427,
-	"msg":"7rjaz5",
+	"code":860,
+	"msg":"d1u64d",
 	"data":{
 		"waring":"You may have used non-display generics."
 	}
@@ -862,7 +857,7 @@ limit|int32|  限制数（默认10）|false|-
 
 **Request-example:**
 ```
-curl -X GET -i https://localhost/movie/douban/search_tips?keyword=w5ydhr&offset=0&limit=10
+curl -X GET -i https://localhost/movie/douban/search_tips?keyword=w5mwbx&offset=0&limit=10
 ```
 **Response-fields:**
 
@@ -875,8 +870,8 @@ data|object|具体结果|-
 **Response-example:**
 ```
 {
-	"code":598,
-	"msg":"z19mvm",
+	"code":372,
+	"msg":"ke3v41",
 	"data":{
 		"waring":"You may have used non-display generics."
 	}
@@ -914,7 +909,7 @@ limit|int32|  限制数（默认10）|false|-
 
 **Request-example:**
 ```
-curl -X GET -i https://localhost/movie/douban/search_details?keyword=j1v7yq&offset=0&limit=10
+curl -X GET -i https://localhost/movie/douban/search_details?keyword=xee4o6&offset=0&limit=10
 ```
 **Response-fields:**
 
@@ -927,8 +922,8 @@ data|object|具体结果|-
 **Response-example:**
 ```
 {
-	"code":95,
-	"msg":"f8vhjd",
+	"code":54,
+	"msg":"p0ukxb",
 	"data":{
 		"waring":"You may have used non-display generics."
 	}
@@ -961,7 +956,7 @@ id|int64|电影豆瓣ID|true|-
 
 **Request-example:**
 ```
-curl -X GET -i https://localhost/movie/imdb/details?id=370
+curl -X GET -i https://localhost/movie/imdb/details?id=197
 ```
 **Response-fields:**
 
@@ -974,8 +969,8 @@ data|object|具体结果|-
 **Response-example:**
 ```
 {
-	"code":238,
-	"msg":"vlbg25",
+	"code":763,
+	"msg":"6xci62",
 	"data":{
 		"waring":"You may have used non-display generics."
 	}
@@ -1010,7 +1005,7 @@ limit|int32| 限制数（默认10）|false|-
 
 **Request-example:**
 ```
-curl -X GET -i https://localhost/movie/resource/details?id=540&offset=0&limit=10
+curl -X GET -i https://localhost/movie/resource/details?id=609&offset=0&limit=10
 ```
 **Response-fields:**
 
@@ -1023,8 +1018,8 @@ data|object|具体结果|-
 **Response-example:**
 ```
 {
-	"code":278,
-	"msg":"t88q9n",
+	"code":956,
+	"msg":"cpm0wo",
 	"data":{
 		"waring":"You may have used non-display generics."
 	}
@@ -1058,7 +1053,7 @@ password|string|密码|true|-
 
 **Request-example:**
 ```
-curl -X POST -i https://localhost/user/login  --data 'email=昊然.刘@hotmail.com&password=qs9t05'
+curl -X POST -i https://localhost/user/login  --data 'email=思淼.叶@hotmail.com&password=3mxomm'
 ```
 **Response-fields:**
 
@@ -1071,8 +1066,8 @@ data|object|具体结果|-
 **Response-example:**
 ```
 {
-	"code":944,
-	"msg":"296y63",
+	"code":141,
+	"msg":"s9ac6b",
 	"data":{
 		"waring":"You may have used non-display generics."
 	}
@@ -1132,7 +1127,7 @@ state|string|github_login传入的state|true|-
 
 **Request-example:**
 ```
-curl -X GET -i https://localhost/user/github_callback?code=88872&state=6oqli2
+curl -X GET -i https://localhost/user/github_callback?code=84394&state=hwu69o
 ```
 **Response-fields:**
 
@@ -1145,8 +1140,8 @@ data|object|具体结果|-
 **Response-example:**
 ```
 {
-	"code":424,
-	"msg":"y9bmv8",
+	"code":534,
+	"msg":"ugf1eg",
 	"data":{
 		"waring":"You may have used non-display generics."
 	}
@@ -1180,7 +1175,7 @@ password|string|密码|true|-
 
 **Request-example:**
 ```
-curl -X POST -i https://localhost/user/register  --data 'id=&email=昊然.刘@hotmail.com&password=gw5mdo'
+curl -X POST -i https://localhost/user/register  --data 'id=&email=思淼.叶@hotmail.com&password=slt0tx'
 ```
 **Response-fields:**
 
@@ -1193,8 +1188,8 @@ data|object|具体结果|-
 **Response-example:**
 ```
 {
-	"code":986,
-	"msg":"gdoxwa",
+	"code":573,
+	"msg":"mug3xv",
 	"data":{
 		"waring":"You may have used non-display generics."
 	}
@@ -1239,8 +1234,8 @@ data|object|具体结果|-
 **Response-example:**
 ```
 {
-	"code":199,
-	"msg":"jrfaeh",
+	"code":197,
+	"msg":"tuzq5g",
 	"data":{
 		"waring":"You may have used non-display generics."
 	}
@@ -1272,7 +1267,7 @@ id|string|豆瓣用户ID|true|-
 
 **Request-example:**
 ```
-curl -X PUT -i https://localhost/user/update_id  --data 'id=59'
+curl -X PUT -i https://localhost/user/update_id  --data 'id=73'
 ```
 **Response-fields:**
 
@@ -1285,8 +1280,8 @@ data|object|具体结果|-
 **Response-example:**
 ```
 {
-	"code":626,
-	"msg":"w1dwbx",
+	"code":627,
+	"msg":"qad9eu",
 	"data":{
 		"waring":"You may have used non-display generics."
 	}
@@ -1333,8 +1328,8 @@ data|object|具体结果|-
 **Response-example:**
 ```
 {
-	"code":185,
-	"msg":"flbfwt",
+	"code":159,
+	"msg":"refr8n",
 	"data":{
 		"waring":"You may have used non-display generics."
 	}

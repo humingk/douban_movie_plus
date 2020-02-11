@@ -5,8 +5,8 @@ import org.humingk.movie.common.exception.MyException;
 import org.humingk.movie.dal.entity.Role;
 import org.humingk.movie.dal.entity.User;
 import org.humingk.movie.dal.entity.UserExample;
-import org.humingk.movie.dal.mapper.RoleMapper;
-import org.humingk.movie.dal.mapper.UserMapper;
+import org.humingk.movie.dal.mapper.auto.UserMapper;
+import org.humingk.movie.dal.mapper.plus.RoleMapperPlus;
 import org.humingk.movie.service.user.entity.SecurityRole;
 import org.humingk.movie.service.user.entity.SecurityUser;
 import org.humingk.movie.service.user.service.MyUserDetailsService;
@@ -32,7 +32,7 @@ public class MyUserDetailsServiceImpl implements MyUserDetailsService {
     @Autowired
     private UserMapper userMapper;
     @Autowired
-    private RoleMapper roleMapper;
+    private RoleMapperPlus roleMapperPlus;
 
     /**
      * 根据邮箱获取用户信息
@@ -55,7 +55,7 @@ public class MyUserDetailsServiceImpl implements MyUserDetailsService {
      */
     @Override
     public List<Role> getRoleListByUserId(String id) {
-        return roleMapper.selectRoleListByUserId(id);
+        return roleMapperPlus.selectRoleListByUserId(id);
     }
 
     /**
