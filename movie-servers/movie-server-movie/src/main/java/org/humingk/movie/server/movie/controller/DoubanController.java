@@ -1,18 +1,19 @@
 package org.humingk.movie.server.movie.controller;
 
+import org.humingk.movie.api.common.converter.MovieDoubanDetailsVoConverter;
+import org.humingk.movie.api.common.converter.MovieDoubanVoConverter;
+import org.humingk.movie.api.common.vo.MovieDoubanDetailsVo;
+import org.humingk.movie.api.common.vo.MovieDoubanVo;
 import org.humingk.movie.api.movie.DoubanApi;
 import org.humingk.movie.common.entity.Result;
-import org.humingk.movie.dal.entity.MovieDouban;
 import org.humingk.movie.service.douban.service.MovieService;
 import org.humingk.movie.service.douban.service.SearchService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PositiveOrZero;
-import java.util.List;
 
 /**
  * @author humingk
@@ -23,22 +24,28 @@ public class DoubanController implements DoubanApi {
     private MovieService movieService;
     @Autowired
     private SearchService searchService;
-
+    @Autowired
+    private MovieDoubanVoConverter movieDoubanVoConverter;
+    @Autowired
+    private MovieDoubanDetailsVoConverter movieDoubanDetailsVoConverter;
 
     @Override
-    public Result<MovieDouban> bases(@NotNull Long id) {
-        MovieDouban movieDouban = movieService.getMovieDoubanByMovieDoubanId(id);
-        return null;
+    public Result<MovieDoubanVo> bases(@NotNull Long id) {
+        return Result.success(
+                movieDoubanVoConverter.to(
+                        movieService.getMovieDoubanByMovieDoubanId(id)
+                )
+        );
     }
 
     @Override
-    public Result basesList(@NotEmpty List<Long> idList) {
-        return null;
-    }
-
-    @Override
-    public Result details(@NotNull Long id) {
-        return null;
+    public Result<MovieDoubanDetailsVo> details(@NotNull Long id) {
+        return Result.success(
+                movieDoubanDetailsVoConverter.to(
+                        movieService.getMovieDoubanByMovieDoubanId(id),
+                        movieService.getAliasMovieDoubanListByMovieDoubanId(id)
+                )
+        );
     }
 
     @Override

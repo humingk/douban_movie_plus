@@ -5,20 +5,9 @@ Version |  Update Time  | Status | Author |  Description
 
 
 
-## 
-## 
-## 
-## 
-## 
-## 
-## 
-## 
-## 
-## 
-## 
 ## 豆瓣影人API
 ### 豆瓣影人基础信息
-**URL:** https://localhost/celebrity/douban/bases
+**URL:** http://localhost:8080/celebrity/douban/bases
 
 **Type:** GET
 
@@ -31,7 +20,7 @@ Version |  Update Time  | Status | Author |  Description
 
 Header | Type|Description|Required|Since
 ---|---|---|---|----
-Authorization|string|部分API需要认证访问|false|-
+Authorization|string|access_token|false|-
 
 
 **Request-parameters:**
@@ -42,7 +31,7 @@ id|int64|影人豆瓣ID|true|-
 
 **Request-example:**
 ```
-curl -X GET -i https://localhost/celebrity/douban/bases?id=432
+curl -X GET -i http://localhost:8080/celebrity/douban/bases?id=329
 ```
 **Response-fields:**
 
@@ -55,29 +44,29 @@ data|object|具体结果|-
 **Response-example:**
 ```
 {
-	"code":131,
-	"msg":"dhfji4",
+	"code":584,
+	"msg":"acskvp",
 	"data":{
 		"waring":"You may have used non-display generics."
 	}
 }
 ```
 
-### 豆瓣影人基础信息列表,包括影人图片
-**URL:** https://localhost/celebrity/douban/bases_list
+### 豆瓣影人基础信息列表
+**URL:** http://localhost:8080/celebrity/douban/bases_list
 
 **Type:** GET
 
 
 **Content-Type:** application/json; charset=utf-8
 
-**Description:** 豆瓣影人基础信息列表,包括影人图片
+**Description:** 包括影人图片
 
 **Request-headers:**
 
 Header | Type|Description|Required|Since
 ---|---|---|---|----
-Authorization|string|部分API需要认证访问|false|-
+Authorization|string|access_token|false|-
 
 
 **Request-parameters:**
@@ -88,7 +77,7 @@ idList|array||false|
 
 **Request-example:**
 ```
-curl -X GET -i https://localhost/celebrity/douban/bases_list
+curl -X GET -i http://localhost:8080/celebrity/douban/bases_list
 ```
 **Response-fields:**
 
@@ -101,29 +90,29 @@ data|object|具体结果|-
 **Response-example:**
 ```
 {
-	"code":437,
-	"msg":"srh0u3",
+	"code":138,
+	"msg":"a5czj3",
 	"data":{
 		"waring":"You may have used non-display generics."
 	}
 }
 ```
 
-### 豆瓣影人详细信息,包括影人图片、基础信息、参演电影基础信息（电影海报、基础信息）、影人简介
-**URL:** https://localhost/celebrity/douban/details
+### 豆瓣影人详细信息
+**URL:** http://localhost:8080/celebrity/douban/details
 
 **Type:** GET
 
 
 **Content-Type:** application/x-www-form-urlencoded;charset=utf-8
 
-**Description:** 豆瓣影人详细信息,包括影人图片、基础信息、参演电影基础信息（电影海报、基础信息）、影人简介
+**Description:** 包括影人图片、基础信息、参演电影基础信息（电影海报、基础信息）、影人简介
 
 **Request-headers:**
 
 Header | Type|Description|Required|Since
 ---|---|---|---|----
-Authorization|string|部分API需要认证访问|false|-
+Authorization|string|access_token|false|-
 
 
 **Request-parameters:**
@@ -134,7 +123,7 @@ id|int64|影人豆瓣ID|true|-
 
 **Request-example:**
 ```
-curl -X GET -i https://localhost/celebrity/douban/details?id=720
+curl -X GET -i http://localhost:8080/celebrity/douban/details?id=213
 ```
 **Response-fields:**
 
@@ -147,42 +136,42 @@ data|object|具体结果|-
 **Response-example:**
 ```
 {
-	"code":454,
-	"msg":"37cq9f",
+	"code":970,
+	"msg":"k8bshm",
 	"data":{
 		"waring":"You may have used non-display generics."
 	}
 }
 ```
 
-### 豆瓣影人奖项，包括电影基础信息、奖项信息
-**URL:** https://localhost/celebrity/douban/awards
+### 豆瓣影人奖项
+**URL:** http://localhost:8080/celebrity/douban/awards
 
 **Type:** GET
 
 
 **Content-Type:** application/x-www-form-urlencoded;charset=utf-8
 
-**Description:** 豆瓣影人奖项，包括电影基础信息、奖项信息
+**Description:** 包括电影基础信息、奖项信息
 
 **Request-headers:**
 
 Header | Type|Description|Required|Since
 ---|---|---|---|----
-Authorization|string|部分API需要认证访问|false|-
+Authorization|string|access_token|false|-
 
 
 **Request-parameters:**
 
 Parameter | Type|Description|Required|Since
 ---|---|---|---|---
-id|int64|No comments found.|true|-
+id|int64|    豆瓣影人ID|true|-
 offset|int32|偏移量（默认0）|false|-
 limit|int32| 限制数（默认10）|false|-
 
 **Request-example:**
 ```
-curl -X GET -i https://localhost/celebrity/douban/awards?id=791&offset=0&limit=10
+curl -X GET -i http://localhost:8080/celebrity/douban/awards?id=488&offset=0&limit=10
 ```
 **Response-fields:**
 
@@ -195,29 +184,29 @@ data|object|具体结果|-
 **Response-example:**
 ```
 {
-	"code":579,
-	"msg":"8kdjqf",
+	"code":736,
+	"msg":"bedeem",
 	"data":{
 		"waring":"You may have used non-display generics."
 	}
 }
 ```
 
-### 豆瓣影人合作过的影人基础信息，包括影人照片、基础信息、相关电影基础信息（电影海报、基础信息）
-**URL:** https://localhost/celebrity/douban/cooperators_bases
+### 豆瓣影人合作过的影人基础信息
+**URL:** http://localhost:8080/celebrity/douban/cooperators_bases
 
 **Type:** GET
 
 
 **Content-Type:** application/x-www-form-urlencoded;charset=utf-8
 
-**Description:** 豆瓣影人合作过的影人基础信息，包括影人照片、基础信息、相关电影基础信息（电影海报、基础信息）
+**Description:** 包括影人照片、基础信息、相关电影基础信息（电影海报、基础信息）
 
 **Request-headers:**
 
 Header | Type|Description|Required|Since
 ---|---|---|---|----
-Authorization|string|部分API需要认证访问|false|-
+Authorization|string|access_token|false|-
 
 
 **Request-parameters:**
@@ -230,7 +219,7 @@ limit|int32| 合作次数限制数（默认10）|false|-
 
 **Request-example:**
 ```
-curl -X GET -i https://localhost/celebrity/douban/cooperators_bases?id=325&offset=0&limit=10
+curl -X GET -i http://localhost:8080/celebrity/douban/cooperators_bases?id=704&offset=0&limit=10
 ```
 **Response-fields:**
 
@@ -243,29 +232,29 @@ data|object|具体结果|-
 **Response-example:**
 ```
 {
-	"code":139,
-	"msg":"k29hh3",
+	"code":75,
+	"msg":"jqp2z6",
 	"data":{
 		"waring":"You may have used non-display generics."
 	}
 }
 ```
 
-### 豆瓣影人搜索结果,根据影人名称字符串找出豆瓣影人的基本信息列表
-**URL:** https://localhost/celebrity/douban/search_details
+### 豆瓣影人搜索结果
+**URL:** http://localhost:8080/celebrity/douban/search_details
 
 **Type:** GET
 
 
 **Content-Type:** application/x-www-form-urlencoded;charset=utf-8
 
-**Description:** 豆瓣影人搜索结果,根据影人名称字符串找出豆瓣影人的基本信息列表
+**Description:** 根据影人名称字符串找出豆瓣影人的基本信息列表
 
 **Request-headers:**
 
 Header | Type|Description|Required|Since
 ---|---|---|---|----
-Authorization|string|部分API需要认证访问|false|-
+Authorization|string|access_token|false|-
 
 
 **Request-parameters:**
@@ -278,7 +267,7 @@ limit|int32|  限制数（默认10）|false|-
 
 **Request-example:**
 ```
-curl -X GET -i https://localhost/celebrity/douban/search_details?keyword=nxmmio&offset=0&limit=10
+curl -X GET -i http://localhost:8080/celebrity/douban/search_details?keyword=oong3d&offset=0&limit=10
 ```
 **Response-fields:**
 
@@ -291,8 +280,8 @@ data|object|具体结果|-
 **Response-example:**
 ```
 {
-	"code":554,
-	"msg":"a5zlzt",
+	"code":82,
+	"msg":"52r2ja",
 	"data":{
 		"waring":"You may have used non-display generics."
 	}
@@ -301,21 +290,21 @@ data|object|具体结果|-
 
 ## IMDB影人API
 ## 音乐API
-### 获取与豆瓣电影相关的网易云音乐播放信息
-**URL:** https://localhost/music/netease/plays
+### 豆瓣电影网易云音乐相关播放信息
+**URL:** http://localhost:8080/music/netease/plays
 
 **Type:** GET
 
 
 **Content-Type:** application/x-www-form-urlencoded;charset=utf-8
 
-**Description:** 获取与豆瓣电影相关的网易云音乐播放信息
+**Description:** 豆瓣电影网易云音乐相关播放信息
 
 **Request-headers:**
 
 Header | Type|Description|Required|Since
 ---|---|---|---|----
-Authorization|string|部分API需要认证访问|false|-
+Authorization|string|access_token|false|-
 
 
 **Request-parameters:**
@@ -331,7 +320,7 @@ albumSongLimit|int32|   专辑内歌曲数目限制数（默认8）|false|-
 
 **Request-example:**
 ```
-curl -X GET -i https://localhost/music/netease/plays?id=480&songLimit=8&playlistLimit=1&playlistSongLimit=8&albumLimit=1&albumSongLimit=8
+curl -X GET -i http://localhost:8080/music/netease/plays?id=611&songLimit=8&playlistLimit=1&playlistSongLimit=8&albumLimit=1&albumSongLimit=8
 ```
 **Response-fields:**
 
@@ -344,29 +333,29 @@ data|object|具体结果|-
 **Response-example:**
 ```
 {
-	"code":104,
-	"msg":"fftnq3",
+	"code":66,
+	"msg":"rm57wy",
 	"data":{
 		"waring":"You may have used non-display generics."
 	}
 }
 ```
 
-### 获取网易云音乐热门评论
-**URL:** https://localhost/music/netease/hot_comments
+### 网易云音乐热门评论
+**URL:** http://localhost:8080/music/netease/hot_comments
 
 **Type:** GET
 
 
 **Content-Type:** application/x-www-form-urlencoded;charset=utf-8
 
-**Description:** 获取网易云音乐热门评论
+**Description:** 网易云音乐热门评论
 
 **Request-headers:**
 
 Header | Type|Description|Required|Since
 ---|---|---|---|----
-Authorization|string|部分API需要认证访问|false|-
+Authorization|string|access_token|false|-
 
 
 **Request-parameters:**
@@ -379,7 +368,7 @@ limit|int32| 限制数（默认8）|false|-
 
 **Request-example:**
 ```
-curl -X GET -i https://localhost/music/netease/hot_comments?id=359&offset=0&limit=8
+curl -X GET -i http://localhost:8080/music/netease/hot_comments?id=615&offset=0&limit=8
 ```
 **Response-fields:**
 
@@ -392,8 +381,8 @@ data|object|具体结果|-
 **Response-example:**
 ```
 {
-	"code":751,
-	"msg":"hpg407",
+	"code":171,
+	"msg":"8f8ey6",
 	"data":{
 		"waring":"You may have used non-display generics."
 	}
@@ -401,21 +390,21 @@ data|object|具体结果|-
 ```
 
 ## 知乎API
-### 与豆瓣电影相关的知乎问题
-**URL:** https://localhost/movie/zhihu/questions
+### 豆瓣电影知乎相关问题
+**URL:** http://localhost:8080/movie/zhihu/questions
 
 **Type:** GET
 
 
 **Content-Type:** application/x-www-form-urlencoded;charset=utf-8
 
-**Description:** 与豆瓣电影相关的知乎问题
+**Description:** 豆瓣电影知乎相关问题
 
 **Request-headers:**
 
 Header | Type|Description|Required|Since
 ---|---|---|---|----
-Authorization|string|部分API需要认证访问|false|-
+Authorization|string|access_token|false|-
 
 
 **Request-parameters:**
@@ -428,7 +417,7 @@ limit|int32| 限制数（默认10）|false|-
 
 **Request-example:**
 ```
-curl -X GET -i https://localhost/movie/zhihu/questions?id=216&offset=0&limit=10
+curl -X GET -i http://localhost:8080/movie/zhihu/questions?id=801&offset=0&limit=10
 ```
 **Response-fields:**
 
@@ -441,8 +430,8 @@ data|object|具体结果|-
 **Response-example:**
 ```
 {
-	"code":510,
-	"msg":"gp7qdd",
+	"code":260,
+	"msg":"282pio",
 	"data":{
 		"waring":"You may have used non-display generics."
 	}
@@ -450,21 +439,21 @@ data|object|具体结果|-
 ```
 
 ## 电影模块评分API
-### 电影所有评分信息(包括豆瓣、IMDB、MTC、猫眼、知乎、烂番茄新鲜度等)
-**URL:** https://localhost/movie/rate/details
+### 电影评分信息
+**URL:** http://localhost:8080/movie/rate/details
 
 **Type:** GET
 
 
 **Content-Type:** application/x-www-form-urlencoded;charset=utf-8
 
-**Description:** 电影所有评分信息(包括豆瓣、IMDB、MTC、猫眼、知乎、烂番茄新鲜度等)
+**Description:** 包括豆瓣、IMDB、MTC、猫眼、知乎、烂番茄新鲜度等
 
 **Request-headers:**
 
 Header | Type|Description|Required|Since
 ---|---|---|---|----
-Authorization|string|部分API需要认证访问|false|-
+Authorization|string|access_token|false|-
 
 
 **Request-parameters:**
@@ -475,7 +464,7 @@ id|int64|电影豆瓣ID|true|-
 
 **Request-example:**
 ```
-curl -X GET -i https://localhost/movie/rate/details?id=88
+curl -X GET -i http://localhost:8080/movie/rate/details?id=408
 ```
 **Response-fields:**
 
@@ -488,8 +477,8 @@ data|object|具体结果|-
 **Response-example:**
 ```
 {
-	"code":167,
-	"msg":"zffogp",
+	"code":704,
+	"msg":"9v4baw",
 	"data":{
 		"waring":"You may have used non-display generics."
 	}
@@ -497,21 +486,21 @@ data|object|具体结果|-
 ```
 
 ## 电影场景API
-### 获取电影场景详情
-**URL:** https://localhost/mvoie/scene/details
+### 电影场景详情
+**URL:** http://localhost:8080/mvoie/scene/details
 
 **Type:** GET
 
 
 **Content-Type:** application/x-www-form-urlencoded;charset=utf-8
 
-**Description:** 获取电影场景详情
+**Description:** 电影场景详情
 
 **Request-headers:**
 
 Header | Type|Description|Required|Since
 ---|---|---|---|----
-Authorization|string|部分API需要认证访问|false|-
+Authorization|string|access_token|false|-
 
 
 **Request-parameters:**
@@ -524,7 +513,7 @@ limit|int32| 限制数（默认10）|false|-
 
 **Request-example:**
 ```
-curl -X GET -i https://localhost/mvoie/scene/details?id=239&offset=0&limit=10
+curl -X GET -i http://localhost:8080/mvoie/scene/details?id=162&offset=0&limit=10
 ```
 **Response-fields:**
 
@@ -537,8 +526,8 @@ data|object|具体结果|-
 **Response-example:**
 ```
 {
-	"code":773,
-	"msg":"6thpjk",
+	"code":357,
+	"msg":"z7vj3g",
 	"data":{
 		"waring":"You may have used non-display generics."
 	}
@@ -547,20 +536,20 @@ data|object|具体结果|-
 
 ## 豆瓣电影API
 ### 豆瓣电影基础信息
-**URL:** https://localhost/movie/douban/bases
+**URL:** http://localhost:8080/movie/douban/bases
 
 **Type:** GET
 
 
 **Content-Type:** application/x-www-form-urlencoded;charset=utf-8
 
-**Description:** 包括电影海报等基础信息
+**Description:** 包括电影海报,电影年份，电影简介等基础信息
 
 **Request-headers:**
 
 Header | Type|Description|Required|Since
 ---|---|---|---|----
-Authorization|string|部分API需要认证访问|false|-
+Authorization|string|access_token|false|-
 
 
 **Request-parameters:**
@@ -571,7 +560,7 @@ id|int64|电影豆瓣ID|true|-
 
 **Request-example:**
 ```
-curl -X GET -i https://localhost/movie/douban/bases?id=726
+curl -X GET -i http://localhost:8080/movie/douban/bases?id=248
 ```
 **Response-fields:**
 
@@ -580,33 +569,54 @@ Field | Type|Description|Since
 code|int32|状态码|-
 msg|string|状态信息|-
 data|object|具体结果|-
+└─id|int64|豆瓣电影ID|-
+└─typeVideo|string|影片类型|-
+└─idMovieImdb|string|IMDB电影ID 0-未匹配 1-已匹配|-
+└─startYear|int16|上映时间 /year|-
+└─nameZh|string|豆瓣电影中文名|-
+└─nameOrigin|string|豆瓣电影原始名|-
+└─runtime|int16|豆瓣电影运行片长 /m|-
+└─urlPoster|string|豆瓣电影海报ID|-
+└─haveSeen|int32|已看人数|-
+└─wannaSee|int32|想看人数|-
+└─summary|string|简介|-
 
 **Response-example:**
 ```
 {
-	"code":7,
-	"msg":"noy25e",
+	"code":274,
+	"msg":"31wu9i",
 	"data":{
-		"waring":"You may have used non-display generics."
+		"id":894,
+		"typeVideo":"ln2x48",
+		"idMovieImdb":"rracvg",
+		"startYear":7748,
+		"nameZh":"il3omv",
+		"nameOrigin":"kz1uo2",
+		"runtime":9151,
+		"urlPoster":"kpxzfn",
+		"haveSeen":471,
+		"wannaSee":227,
+		"summary":"2q4xdw"
 	}
 }
 ```
 
-### 豆瓣电影基础信息列表（包括电影海报、基础信息）
-**URL:** https://localhost/movie/douban/bases_list
+### 豆瓣电影基础信息列表
+**URL:** http://localhost:8080/movie/douban/bases_list
 
 **Type:** GET
 
 
 **Content-Type:** application/json; charset=utf-8
 
-**Description:** 豆瓣电影基础信息列表（包括电影海报、基础信息）
+**Description:** 包括电影海报,电影年份，电影简介等基础信息
 
 **Request-headers:**
 
 Header | Type|Description|Required|Since
 ---|---|---|---|----
-Authorization|string|部分API需要认证访问|false|-
+Authorization|string|access_token|false|-
 
 
 **Request-parameters:**
@@ -617,7 +627,7 @@ idList|array||false|
 
 **Request-example:**
 ```
-curl -X GET -i https://localhost/movie/douban/bases_list
+curl -X GET -i http://localhost:8080/movie/douban/bases_list
 ```
 **Response-fields:**
 
@@ -626,33 +636,56 @@ Field | Type|Description|Since
 code|int32|状态码|-
 msg|string|状态信息|-
 data|object|具体结果|-
+└─id|int64|豆瓣电影ID|-
+└─typeVideo|string|影片类型|-
+└─idMovieImdb|string|IMDB电影ID 0-未匹配 1-已匹配|-
+└─startYear|int16|上映时间 /year|-
+└─nameZh|string|豆瓣电影中文名|-
+└─nameOrigin|string|豆瓣电影原始名|-
+└─runtime|int16|豆瓣电影运行片长 /m|-
+└─urlPoster|string|豆瓣电影海报ID|-
+└─haveSeen|int32|已看人数|-
+└─wannaSee|int32|想看人数|-
+└─summary|string|简介|-
 
 **Response-example:**
 ```
 {
-	"code":193,
-	"msg":"805g5u",
-	"data":{
-		"waring":"You may have used non-display generics."
-	}
+	"code":96,
+	"msg":"ykyqrw",
+	"data":[
+		{
+			"id":998,
+			"typeVideo":"k5h7w9",
+			"idMovieImdb":"kpddtr",
+			"startYear":27905,
+			"nameZh":"delgom",
+			"nameOrigin":"att03c",
+			"runtime":31502,
+			"urlPoster":"r8vgb5",
+			"haveSeen":902,
+			"wannaSee":335,
+			"summary":"zc0si5"
+		}
+	]
 }
 ```
 
-### 豆瓣电影详情信息(包括电影海报、基础信息、剧情简介)
-**URL:** https://localhost/movie/douban/details
+### 豆瓣电影详情信息
+**URL:** http://localhost:8080/movie/douban/details
 
 **Type:** GET
 
 
 **Content-Type:** application/x-www-form-urlencoded;charset=utf-8
 
-**Description:** 豆瓣电影详情信息(包括电影海报、基础信息、剧情简介)
+**Description:** 包括电影海报、基础信息、剧情简介
 
 **Request-headers:**
 
 Header | Type|Description|Required|Since
 ---|---|---|---|----
-Authorization|string|部分API需要认证访问|false|-
+Authorization|string|access_token|false|-
 
 
 **Request-parameters:**
@@ -663,7 +696,7 @@ id|int64|电影豆瓣ID|true|-
 
 **Request-example:**
 ```
-curl -X GET -i https://localhost/movie/douban/details?id=587
+curl -X GET -i http://localhost:8080/movie/douban/details?id=436
 ```
 **Response-fields:**
 
@@ -676,8 +709,8 @@ data|object|具体结果|-
 **Response-example:**
 ```
 {
-	"code":541,
-	"msg":"zvuecj",
+	"code":161,
+	"msg":"madukl",
 	"data":{
 		"waring":"You may have used non-display generics."
 	}
@@ -685,7 +718,7 @@ data|object|具体结果|-
 ```
 
 ### 豆瓣电影图片
-**URL:** https://localhost/movie/douban/images
+**URL:** http://localhost:8080/movie/douban/images
 
 **Type:** GET
 
@@ -698,7 +731,7 @@ data|object|具体结果|-
 
 Header | Type|Description|Required|Since
 ---|---|---|---|----
-Authorization|string|部分API需要认证访问|false|-
+Authorization|string|access_token|false|-
 
 
 **Request-parameters:**
@@ -709,7 +742,7 @@ id|int64|电影豆瓣ID|true|-
 
 **Request-example:**
 ```
-curl -X GET -i https://localhost/movie/douban/images?id=3
+curl -X GET -i http://localhost:8080/movie/douban/images?id=690
 ```
 **Response-fields:**
 
@@ -722,8 +755,8 @@ data|object|具体结果|-
 **Response-example:**
 ```
 {
-	"code":867,
-	"msg":"vs955z",
+	"code":833,
+	"msg":"5bwmpc",
 	"data":{
 		"waring":"You may have used non-display generics."
 	}
@@ -731,7 +764,7 @@ data|object|具体结果|-
 ```
 
 ### 豆瓣电影热门短评
-**URL:** https://localhost/movie/douban/hot_comments
+**URL:** http://localhost:8080/movie/douban/hot_comments
 
 **Type:** GET
 
@@ -744,7 +777,7 @@ data|object|具体结果|-
 
 Header | Type|Description|Required|Since
 ---|---|---|---|----
-Authorization|string|部分API需要认证访问|false|-
+Authorization|string|access_token|false|-
 
 
 **Request-parameters:**
@@ -757,7 +790,7 @@ limit|int32| 限制数（默认10）|false|-
 
 **Request-example:**
 ```
-curl -X GET -i https://localhost/movie/douban/hot_comments?id=864&offset=0&limit=10
+curl -X GET -i http://localhost:8080/movie/douban/hot_comments?id=460&offset=0&limit=10
 ```
 **Response-fields:**
 
@@ -770,8 +803,8 @@ data|object|具体结果|-
 **Response-example:**
 ```
 {
-	"code":584,
-	"msg":"b2lxpr",
+	"code":139,
+	"msg":"tpzm0m",
 	"data":{
 		"waring":"You may have used non-display generics."
 	}
@@ -779,7 +812,7 @@ data|object|具体结果|-
 ```
 
 ### 豆瓣电影热门影评
-**URL:** https://localhost/movie/douban/hot_reviews
+**URL:** http://localhost:8080/movie/douban/hot_reviews
 
 **Type:** GET
 
@@ -792,7 +825,7 @@ data|object|具体结果|-
 
 Header | Type|Description|Required|Since
 ---|---|---|---|----
-Authorization|string|部分API需要认证访问|false|-
+Authorization|string|access_token|false|-
 
 
 **Request-parameters:**
@@ -805,7 +838,7 @@ limit|int32| 限制数（默认10）|false|-
 
 **Request-example:**
 ```
-curl -X GET -i https://localhost/movie/douban/hot_reviews?id=754&offset=0&limit=10
+curl -X GET -i http://localhost:8080/movie/douban/hot_reviews?id=483&offset=0&limit=10
 ```
 **Response-fields:**
 
@@ -818,8 +851,8 @@ data|object|具体结果|-
 **Response-example:**
 ```
 {
-	"code":860,
-	"msg":"d1u64d",
+	"code":387,
+	"msg":"0yz8o8",
 	"data":{
 		"waring":"You may have used non-display generics."
 	}
@@ -827,24 +860,20 @@ data|object|具体结果|-
 ```
 
 ### 豆瓣电影搜索提示
-<p>
-根据电影名称开头的字符串找出豆瓣电影的基本信息列表
-**URL:** https://localhost/movie/douban/search_tips
+**URL:** http://localhost:8080/movie/douban/search_tips
 
 **Type:** GET
 
 
 **Content-Type:** application/x-www-form-urlencoded;charset=utf-8
 
-**Description:** 豆瓣电影搜索提示
-<p>
-根据电影名称开头的字符串找出豆瓣电影的基本信息列表
+**Description:** 根据电影名称开头的字符串找出豆瓣电影的基本信息列表
 
 **Request-headers:**
 
 Header | Type|Description|Required|Since
 ---|---|---|---|----
-Authorization|string|部分API需要认证访问|false|-
+Authorization|string|access_token|false|-
 
 
 **Request-parameters:**
@@ -857,7 +886,7 @@ limit|int32|  限制数（默认10）|false|-
 
 **Request-example:**
 ```
-curl -X GET -i https://localhost/movie/douban/search_tips?keyword=w5mwbx&offset=0&limit=10
+curl -X GET -i http://localhost:8080/movie/douban/search_tips?keyword=ksy0ei&offset=0&limit=10
 ```
 **Response-fields:**
 
@@ -870,8 +899,8 @@ data|object|具体结果|-
 **Response-example:**
 ```
 {
-	"code":372,
-	"msg":"ke3v41",
+	"code":268,
+	"msg":"vjs5su",
 	"data":{
 		"waring":"You may have used non-display generics."
 	}
@@ -879,24 +908,20 @@ data|object|具体结果|-
 ```
 
 ### 豆瓣电影搜索结果
-<p>
-根据电影名称字符串找出豆瓣电影的基本信息列表
-**URL:** https://localhost/movie/douban/search_details
+**URL:** http://localhost:8080/movie/douban/search_details
 
 **Type:** GET
 
 
 **Content-Type:** application/x-www-form-urlencoded;charset=utf-8
 
-**Description:** 豆瓣电影搜索结果
-<p>
-根据电影名称字符串找出豆瓣电影的基本信息列表
+**Description:** 根据电影名称字符串找出豆瓣电影的基本信息列表
 
 **Request-headers:**
 
 Header | Type|Description|Required|Since
 ---|---|---|---|----
-Authorization|string|部分API需要认证访问|false|-
+Authorization|string|access_token|false|-
 
 
 **Request-parameters:**
@@ -909,7 +934,7 @@ limit|int32|  限制数（默认10）|false|-
 
 **Request-example:**
 ```
-curl -X GET -i https://localhost/movie/douban/search_details?keyword=xee4o6&offset=0&limit=10
+curl -X GET -i http://localhost:8080/movie/douban/search_details?keyword=nk7umy&offset=0&limit=10
 ```
 **Response-fields:**
 
@@ -922,8 +947,8 @@ data|object|具体结果|-
 **Response-example:**
 ```
 {
-	"code":54,
-	"msg":"p0ukxb",
+	"code":614,
+	"msg":"np1yuo",
 	"data":{
 		"waring":"You may have used non-display generics."
 	}
@@ -931,21 +956,21 @@ data|object|具体结果|-
 ```
 
 ## IMDB电影API
-### IMDB电影详情信息(包括电影海报、包括基础信息、剧情简介)
-**URL:** https://localhost/movie/imdb/details
+### IMDB电影详情信息
+**URL:** http://localhost:8080/movie/imdb/details
 
 **Type:** GET
 
 
 **Content-Type:** application/x-www-form-urlencoded;charset=utf-8
 
-**Description:** IMDB电影详情信息(包括电影海报、包括基础信息、剧情简介)
+**Description:** 包括电影海报、包括基础信息、剧情简介
 
 **Request-headers:**
 
 Header | Type|Description|Required|Since
 ---|---|---|---|----
-Authorization|string|部分API需要认证访问|false|-
+Authorization|string|access_token|false|-
 
 
 **Request-parameters:**
@@ -956,7 +981,7 @@ id|int64|电影豆瓣ID|true|-
 
 **Request-example:**
 ```
-curl -X GET -i https://localhost/movie/imdb/details?id=197
+curl -X GET -i http://localhost:8080/movie/imdb/details?id=415
 ```
 **Response-fields:**
 
@@ -969,8 +994,8 @@ data|object|具体结果|-
 **Response-example:**
 ```
 {
-	"code":763,
-	"msg":"6xci62",
+	"code":768,
+	"msg":"vu68wm",
 	"data":{
 		"waring":"You may have used non-display generics."
 	}
@@ -978,21 +1003,21 @@ data|object|具体结果|-
 ```
 
 ## 电影资源API
-### 电影资源详情（包括正版资源、盗版资源、在线资源、离线资源）
-**URL:** https://localhost/movie/resource/details
+### 电影资源详情
+**URL:** http://localhost:8080/movie/resource/details
 
 **Type:** GET
 
 
 **Content-Type:** application/x-www-form-urlencoded;charset=utf-8
 
-**Description:** 电影资源详情（包括正版资源、盗版资源、在线资源、离线资源）
+**Description:** 包括正版资源、盗版资源、在线资源、离线资源
 
 **Request-headers:**
 
 Header | Type|Description|Required|Since
 ---|---|---|---|----
-Authorization|string|部分API需要认证访问|false|-
+Authorization|string|access_token|false|-
 
 
 **Request-parameters:**
@@ -1005,7 +1030,7 @@ limit|int32| 限制数（默认10）|false|-
 
 **Request-example:**
 ```
-curl -X GET -i https://localhost/movie/resource/details?id=609&offset=0&limit=10
+curl -X GET -i http://localhost:8080/movie/resource/details?id=337&offset=0&limit=10
 ```
 **Response-fields:**
 
@@ -1018,8 +1043,8 @@ data|object|具体结果|-
 **Response-example:**
 ```
 {
-	"code":956,
-	"msg":"cpm0wo",
+	"code":282,
+	"msg":"ptpe3y",
 	"data":{
 		"waring":"You may have used non-display generics."
 	}
@@ -1027,21 +1052,21 @@ data|object|具体结果|-
 ```
 
 ## 普通用户相关API
-### auth 登录
-**URL:** https://localhost/user/login
+### 普通登录
+**URL:** http://localhost:8080/user/login
 
 **Type:** POST
 
 
 **Content-Type:** application/x-www-form-urlencoded;charset=utf-8
 
-**Description:** auth 登录
+**Description:** 普通登录
 
 **Request-headers:**
 
 Header | Type|Description|Required|Since
 ---|---|---|---|----
-Authorization|string|部分API需要认证访问|false|-
+Authorization|string|access_token|false|-
 
 
 **Request-parameters:**
@@ -1053,7 +1078,7 @@ password|string|密码|true|-
 
 **Request-example:**
 ```
-curl -X POST -i https://localhost/user/login  --data 'email=思淼.叶@hotmail.com&password=3mxomm'
+curl -X POST -i http://localhost:8080/user/login  --data 'email=胤祥.苏@gmail.com&password=rciwph'
 ```
 **Response-fields:**
 
@@ -1066,8 +1091,8 @@ data|object|具体结果|-
 **Response-example:**
 ```
 {
-	"code":141,
-	"msg":"s9ac6b",
+	"code":59,
+	"msg":"yob65s",
 	"data":{
 		"waring":"You may have used non-display generics."
 	}
@@ -1075,7 +1100,7 @@ data|object|具体结果|-
 ```
 
 ### github 第三方登录
-**URL:** https://localhost/user/github_login
+**URL:** http://localhost:8080/user/github_login
 
 **Type:** GET
 
@@ -1088,12 +1113,12 @@ data|object|具体结果|-
 
 Header | Type|Description|Required|Since
 ---|---|---|---|----
-Authorization|string|部分API需要认证访问|false|-
+Authorization|string|access_token|false|-
 
 
 **Request-example:**
 ```
-curl -X GET -i https://localhost/user/github_login
+curl -X GET -i http://localhost:8080/user/github_login
 ```
 
 **Response-example:**
@@ -1102,7 +1127,7 @@ This api return nothing.
 ```
 
 ### github 第三方登录 回调方法
-**URL:** https://localhost/user/github_callback
+**URL:** http://localhost:8080/user/github_callback
 
 **Type:** GET
 
@@ -1115,7 +1140,7 @@ This api return nothing.
 
 Header | Type|Description|Required|Since
 ---|---|---|---|----
-Authorization|string|部分API需要认证访问|false|-
+Authorization|string|access_token|false|-
 
 
 **Request-parameters:**
@@ -1127,7 +1152,7 @@ state|string|github_login传入的state|true|-
 
 **Request-example:**
 ```
-curl -X GET -i https://localhost/user/github_callback?code=84394&state=hwu69o
+curl -X GET -i http://localhost:8080/user/github_callback?code=90870&state=d6m1j0
 ```
 **Response-fields:**
 
@@ -1140,8 +1165,8 @@ data|object|具体结果|-
 **Response-example:**
 ```
 {
-	"code":534,
-	"msg":"ugf1eg",
+	"code":412,
+	"msg":"7w8wcn",
 	"data":{
 		"waring":"You may have used non-display generics."
 	}
@@ -1149,7 +1174,7 @@ data|object|具体结果|-
 ```
 
 ### 用户注册
-**URL:** https://localhost/user/register
+**URL:** http://localhost:8080/user/register
 
 **Type:** POST
 
@@ -1162,7 +1187,7 @@ data|object|具体结果|-
 
 Header | Type|Description|Required|Since
 ---|---|---|---|----
-Authorization|string|部分API需要认证访问|false|-
+Authorization|string|access_token|false|-
 
 
 **Request-parameters:**
@@ -1175,7 +1200,7 @@ password|string|密码|true|-
 
 **Request-example:**
 ```
-curl -X POST -i https://localhost/user/register  --data 'id=&email=思淼.叶@hotmail.com&password=slt0tx'
+curl -X POST -i http://localhost:8080/user/register  --data 'id=&email=胤祥.苏@gmail.com&password=2ftqla'
 ```
 **Response-fields:**
 
@@ -1188,29 +1213,29 @@ data|object|具体结果|-
 **Response-example:**
 ```
 {
-	"code":573,
-	"msg":"mug3xv",
+	"code":460,
+	"msg":"7s94o0",
 	"data":{
 		"waring":"You may have used non-display generics."
 	}
 }
 ```
 
-### 当前用户信息
-**URL:** https://localhost/user/user_info
+### 用户信息
+**URL:** http://localhost:8080/user/user_info
 
 **Type:** GET
 
 
 **Content-Type:** application/json; charset=utf-8
 
-**Description:** 当前用户信息
+**Description:** 用户信息
 
 **Request-headers:**
 
 Header | Type|Description|Required|Since
 ---|---|---|---|----
-Authorization|string|部分API需要认证访问|false|-
+Authorization|string|access_token|false|-
 
 
 **Request-parameters:**
@@ -1221,7 +1246,7 @@ name|string|No comments found.|false|-
 
 **Request-example:**
 ```
-curl -X GET -i https://localhost/user/user_info
+curl -X GET -i http://localhost:8080/user/user_info
 ```
 **Response-fields:**
 
@@ -1234,8 +1259,8 @@ data|object|具体结果|-
 **Response-example:**
 ```
 {
-	"code":197,
-	"msg":"tuzq5g",
+	"code":518,
+	"msg":"drhyab",
 	"data":{
 		"waring":"You may have used non-display generics."
 	}
@@ -1243,7 +1268,7 @@ data|object|具体结果|-
 ```
 
 ### 更新豆瓣用户ID
-**URL:** https://localhost/user/update_id
+**URL:** http://localhost:8080/user/update_id
 
 **Type:** PUT
 
@@ -1256,7 +1281,7 @@ data|object|具体结果|-
 
 Header | Type|Description|Required|Since
 ---|---|---|---|----
-Authorization|string|部分API需要认证访问|false|-
+Authorization|string|access_token|false|-
 
 
 **Request-parameters:**
@@ -1267,7 +1292,7 @@ id|string|豆瓣用户ID|true|-
 
 **Request-example:**
 ```
-curl -X PUT -i https://localhost/user/update_id  --data 'id=73'
+curl -X PUT -i http://localhost:8080/user/update_id  --data 'id=47'
 ```
 **Response-fields:**
 
@@ -1280,8 +1305,8 @@ data|object|具体结果|-
 **Response-example:**
 ```
 {
-	"code":627,
-	"msg":"qad9eu",
+	"code":257,
+	"msg":"8ou655",
 	"data":{
 		"waring":"You may have used non-display generics."
 	}
@@ -1290,7 +1315,7 @@ data|object|具体结果|-
 
 ## ROOT用户相关API
 ### 普通用户列表
-**URL:** https://localhost/root/users_list
+**URL:** http://localhost:8080/root/users_list
 
 **Type:** GET
 
@@ -1303,7 +1328,7 @@ data|object|具体结果|-
 
 Header | Type|Description|Required|Since
 ---|---|---|---|----
-Authorization|string|部分API需要认证访问|false|-
+Authorization|string|access_token|false|-
 
 
 **Request-parameters:**
@@ -1315,7 +1340,7 @@ limit|int32| 限制数（默认10）|false|-
 
 **Request-example:**
 ```
-curl -X GET -i https://localhost/root/users_list?offset=0&limit=10
+curl -X GET -i http://localhost:8080/root/users_list?offset=0&limit=10
 ```
 **Response-fields:**
 
@@ -1328,8 +1353,8 @@ data|object|具体结果|-
 **Response-example:**
 ```
 {
-	"code":159,
-	"msg":"refr8n",
+	"code":982,
+	"msg":"t7q9w0",
 	"data":{
 		"waring":"You may have used non-display generics."
 	}

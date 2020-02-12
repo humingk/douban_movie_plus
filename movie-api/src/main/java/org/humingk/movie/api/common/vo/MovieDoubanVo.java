@@ -28,7 +28,7 @@ public class MovieDoubanVo implements Serializable {
     /**
      * IMDB电影ID 0-未匹配 1-已匹配
      */
-    private Long idMovieImdb;
+    private String imdbId;
 
     /**
      * 上映时间 /year
@@ -51,9 +51,9 @@ public class MovieDoubanVo implements Serializable {
     private Short runtime;
 
     /**
-     * 豆瓣电影海报ID
+     * 豆瓣电影海报
      */
-    private Long urlPoster;
+    private String urlPoster;
 
     /**
      * 已看人数
@@ -64,16 +64,6 @@ public class MovieDoubanVo implements Serializable {
      * 想看人数
      */
     private Integer wannaSee;
-
-    /**
-     * 是否匹配到网易云音乐 0-未匹配 1-匹配无 2-匹配有
-     */
-    private Boolean isNetease;
-
-    /**
-     * 是否匹配到知乎话题或问题 0-未匹配 1-匹配无 2-匹配有
-     */
-    private Boolean isZhihu;
 
     /**
      * 简介

@@ -1,9 +1,11 @@
 #!/bin/bash
+base_path=/home/humingk/gits/douban_movie_plus/
+
 echo "========== 豆瓣电影Plus 脚本工具 =========="
 echo "[0]  更改项目版本"
 echo "[1]  生成RSA密钥对"
 echo "[2]  启动zipkin服务"
-echo "[3]  更新API文档"
+echo "[3]  更新API文档(暂时bug,记得结束后运行[5])"
 echo "[4]  强制部署[3]需要的环境"
 echo "[5]  强制撤销[3]部署的环境"
 echo "========================================="
@@ -99,31 +101,37 @@ function api_update() {
 
 # 部署环境配置
 function env_create() {
-  echo "配置环境..."
-  # pom
-  sed -i "s/<module>/<\!--<module>/g" ./pom.xml
-  sed -i "s/<\/module>/<\/module>-->/g" ./pom.xml
-  sed -i "s/<\!--<module>movie-api<\/module>-->/<module>movie-api<\/module>/g" ./pom.xml
-  sed -i "s/<\!--<module>movie-dal<\/module>-->/<module>movie-dal<\/module>/g" ./pom.xml
-  sed -i "s/<\!--<module>movie-common<\/module>-->/<module>movie-common<\/module>/g" ./pom.xml
-  # controller
-  sed -i "s/@RestController/\/\/@RestController/g" $(grep annotation -rl ./movie-common/src/main/java/org/humingk/movie/common/controller/MyErrorController.java)
-  sed -i "s/@RestController/\/\/@RestController/g" $(grep annotation -rl ./movie-server-gateway/src/main/java/org/humingk/movie/server/gateway/controller/FallbackController.java)
-  sed -i "s/\/\/import/import/g" $(grep annotation -rl ./movie-api/src/main/java/org/humingk/movie/api/*/*Api.java)
-  sed -i "s/\/\/@RestController/@RestController/g" $(grep annotation -rl ./movie-api/src/main/java/org/humingk/movie/api/*/*Api.java)
+  read -p "你确定要部署API环境配置吗？[y/n]:" choose_sure_api_env_create
+  if [ "$choose_sure_api_env_create" = "y" ]; then
+    echo "配置环境..."
+    # pom
+    sed -i "s/<module>/<\!--<module>/g" ./pom.xml
+    sed -i "s/<\/module>/<\/module>-->/g" ./pom.xml
+    sed -i "s/<\!--<module>movie-api<\/module>-->/<module>movie-api<\/module>/g" ./pom.xml
+    sed -i "s/<\!--<module>movie-dal<\/module>-->/<module>movie-dal<\/module>/g" ./pom.xml
+    sed -i "s/<\!--<module>movie-common<\/module>-->/<module>movie-common<\/module>/g" ./pom.xml
+    # controller
+    sed -i "s/@RestController/\/\/@RestController/g" $(grep annotation -rl ./movie-common/src/main/java/org/humingk/movie/common/controller/MyErrorController.java)
+    sed -i "s/@RestController/\/\/@RestController/g" $(grep annotation -rl ./movie-server-gateway/src/main/java/org/humingk/movie/server/gateway/controller/FallbackController.java)
+    sed -i "s/\/\/import/import/g" $(grep annotation -rl ./movie-api/src/main/java/org/humingk/movie/api/*/*Api.java)
+    sed -i "s/\/\/@RestController/@RestController/g" $(grep annotation -rl ./movie-api/src/main/java/org/humingk/movie/api/*/*Api.java)
+  fi
 }
 
 # 撤销环境配置
 function env_release() {
-  echo "撤销配置环境..."
-  # pom
-  sed -i "s/<\!--<module>/<module>/g" ./pom.xml
-  sed -i "s/<\/module>-->/<\/module>/g" ./pom.xml
-  # controller
-  sed -i "s/\/\/@RestController/@RestController/g" $(grep annotation -rl ./movie-common/src/main/java/org/humingk/movie/common/controller/MyErrorController.java)
-  sed -i "s/\/\/@RestController/@RestController/g" $(grep annotation -rl ./movie-server-gateway/src/main/java/org/humingk/movie/server/gateway/controller/FallbackController.java)
-  sed -i "s/import\ org.springframework.web.bind.annotation.RestController;/\/\/import\ org.springframework.web.bind.annotation.RestController;/g" $(grep annotation -rl ./movie-api/src/main/java/org/humingk/movie/api/*/*Api.java)
-  sed -i "s/@RestController/\/\/@RestController/g" $(grep annotation -rl ./movie-api/src/main/java/org/humingk/movie/api/*/*Api.java)
+  read -p "你确定要撤销部署API环境配置吗？[y/n]:" choose_sure_api_env_release
+  if [ "$choose_sure_api_env_release" = "y" ]; then
+    echo "撤销配置环境..."
+    # pom
+    sed -i "s/<\!--<module>/<module>/g" ./pom.xml
+    sed -i "s/<\/module>-->/<\/module>/g" ./pom.xml
+    # controller
+    sed -i "s/\/\/@RestController/@RestController/g" $(grep annotation -rl ./movie-common/src/main/java/org/humingk/movie/common/controller/MyErrorController.java)
+    sed -i "s/\/\/@RestController/@RestController/g" $(grep annotation -rl ./movie-server-gateway/src/main/java/org/humingk/movie/server/gateway/controller/FallbackController.java)
+    sed -i "s/import\ org.springframework.web.bind.annotation.RestController;/\/\/import\ org.springframework.web.bind.annotation.RestController;/g" $(grep annotation -rl ./movie-api/src/main/java/org/humingk/movie/api/*/*Api.java)
+    sed -i "s/@RestController/\/\/@RestController/g" $(grep annotation -rl ./movie-api/src/main/java/org/humingk/movie/api/*/*Api.java)
+  fi
 }
 
 # main

@@ -1,18 +1,17 @@
 package org.humingk.movie.api.movie;
 
+import org.humingk.movie.api.common.vo.MovieDoubanDetailsVo;
+import org.humingk.movie.api.common.vo.MovieDoubanVo;
 import org.humingk.movie.common.entity.Result;
-import org.humingk.movie.dal.entity.MovieDouban;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PositiveOrZero;
-import java.util.List;
-
-import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 // 用于生成API文档
 //import org.springframework.web.bind.annotation.RestController;
@@ -35,26 +34,17 @@ public interface DoubanApi {
      * @apiNote 包括电影海报, 电影年份，电影简介等基础信息
      */
     @RequestMapping(value = "/movie/douban/bases", method = RequestMethod.GET)
-    Result<MovieDouban> bases(@RequestParam("id") @NotNull Long id);
-
-
-    /**
-     * 豆瓣电影基础信息列表（包括电影海报、基础信息）
-     *
-     * @param idList 电影豆瓣ID列表(Json字符串)
-     * @return
-     */
-    @RequestMapping(value = "/movie/douban/bases_list", method = RequestMethod.GET, consumes = APPLICATION_JSON_VALUE)
-    Result basesList(@RequestBody @NotEmpty List<Long> idList);
+    Result<MovieDoubanVo> bases(@RequestParam("id") @NotNull Long id);
 
     /**
-     * 豆瓣电影详情信息(包括电影海报、基础信息、剧情简介)
+     * 豆瓣电影详情信息
      *
      * @param id 电影豆瓣ID
      * @return
+     * @apiNote 包括电影海报、基础信息、剧情简介
      */
     @RequestMapping(value = "/movie/douban/details", method = RequestMethod.GET)
-    Result details(@RequestParam("id") @NotNull Long id);
+    Result<MovieDoubanDetailsVo> details(@RequestParam("id") @NotNull Long id);
 
     /**
      * 豆瓣电影图片
@@ -101,13 +91,12 @@ public interface DoubanApi {
 
     /**
      * 豆瓣电影搜索提示
-     * <p>
-     * 根据电影名称开头的字符串找出豆瓣电影的基本信息列表
      *
      * @param keyword 搜索关键字
      * @param offset  偏移量（默认0）
      * @param limit   限制数（默认10）
      * @return
+     * @apiNote 根据电影名称开头的字符串找出豆瓣电影的基本信息列表
      */
     @RequestMapping(value = "/movie/douban/search_tips", method = RequestMethod.GET)
     Result searchTips(@RequestParam("keyword") @NotBlank String keyword,
@@ -120,13 +109,12 @@ public interface DoubanApi {
 
     /**
      * 豆瓣电影搜索结果
-     * <p>
-     * 根据电影名称字符串找出豆瓣电影的基本信息列表
      *
      * @param keyword 搜索关键字
      * @param offset  偏移量（默认0）
      * @param limit   限制数（默认10）
      * @return
+     * @apiNote 根据电影名称字符串找出豆瓣电影的基本信息列表
      */
     @RequestMapping(value = "/movie/douban/search_details", method = RequestMethod.GET)
     Result searchDetails(@RequestParam("keyword") @NotBlank String keyword,

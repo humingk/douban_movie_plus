@@ -1,6 +1,6 @@
 {
   "//": "服务器地址",
-  "serverUrl": "https://localhost",
+  "serverUrl": "http://localhost:8080",
   "//": "是否开启严格模式,需要标准文档注释",
   "isStrict": false,
   "//": "是否将文档合并到一个文件",
@@ -36,11 +36,11 @@
   "customResponseFields": [
     {
       "//": "覆盖响应码字段",
-      "name": "code233",
+      "name": "offset233",
       "//": "覆盖响应码的字段注释",
-      "desc": "状态码233",
+      "desc": "偏移量(默认0)233",
       "//": "设置响应码的值",
-      "value": "0"
+      "value": "0233"
     }
   ],
   "//": "设置请求头",
@@ -48,7 +48,7 @@
     {
       "name": "Authorization",
       "type": "string",
-      "desc": "部分API需要认证访问",
+      "desc": "access_token",
       "required": false,
       "since": "-"
     }

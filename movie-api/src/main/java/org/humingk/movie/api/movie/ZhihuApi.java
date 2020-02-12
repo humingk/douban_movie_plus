@@ -23,7 +23,7 @@ import javax.validation.constraints.PositiveOrZero;
 @FeignClient("movie-server-movie")
 public interface ZhihuApi {
     /**
-     * 与豆瓣电影相关的知乎问题
+     * 豆瓣电影知乎相关问题
      *
      * @param id     电影豆瓣ID
      * @param offset 偏移量（默认0）

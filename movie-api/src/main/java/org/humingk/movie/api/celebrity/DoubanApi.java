@@ -37,30 +37,33 @@ public interface DoubanApi {
     Result bases(@RequestParam("id") @NotNull Long id);
 
     /**
-     * 豆瓣影人基础信息列表,包括影人图片
+     * 豆瓣影人基础信息列表
      *
      * @param idList 影人豆瓣ID列表
      * @return
+     * @apiNote 包括影人图片
      */
     @RequestMapping(value = "/celebrity/douban/bases_list", method = RequestMethod.GET, consumes = APPLICATION_JSON_VALUE)
     Result basesList(@RequestBody @NotEmpty List<Long> idList);
 
     /**
-     * 豆瓣影人详细信息,包括影人图片、基础信息、参演电影基础信息（电影海报、基础信息）、影人简介
+     * 豆瓣影人详细信息
      *
      * @param id 影人豆瓣ID
      * @return
+     * @apiNote 包括影人图片、基础信息、参演电影基础信息（电影海报、基础信息）、影人简介
      */
     @RequestMapping(value = "/celebrity/douban/details", method = RequestMethod.GET)
     Result details(@RequestParam("id") @NotNull Long id);
 
     /**
-     * 豆瓣影人奖项，包括电影基础信息、奖项信息
+     * 豆瓣影人奖项
      *
-     * @param id
+     * @param id     豆瓣影人ID
      * @param offset 偏移量（默认0）
      * @param limit  限制数（默认10）
      * @return
+     * @apiNote 包括电影基础信息、奖项信息
      */
     @RequestMapping(value = "/celebrity/douban/awards", method = RequestMethod.GET)
     Result awards(@RequestParam("id") Long id,
@@ -72,12 +75,13 @@ public interface DoubanApi {
                           defaultValue = "10") @PositiveOrZero Integer limit);
 
     /**
-     * 豆瓣影人合作过的影人基础信息，包括影人照片、基础信息、相关电影基础信息（电影海报、基础信息）
+     * 豆瓣影人合作过的影人基础信息
      *
      * @param id     影人豆瓣ID
      * @param offset 合作次数偏移量（默认0）
      * @param limit  合作次数限制数（默认10）
      * @return
+     * @apiNote 包括影人照片、基础信息、相关电影基础信息（电影海报、基础信息）
      */
     @RequestMapping(value = "/celebrity/douban/cooperators_bases", method = RequestMethod.GET)
     Result cooperatorsBases(@RequestParam("id") Long id,
@@ -89,12 +93,13 @@ public interface DoubanApi {
                                     defaultValue = "10") @PositiveOrZero Integer limit);
 
     /**
-     * 豆瓣影人搜索结果,根据影人名称字符串找出豆瓣影人的基本信息列表
+     * 豆瓣影人搜索结果
      *
      * @param keyword 搜索关键字
      * @param offset  偏移量（默认0）
      * @param limit   限制数（默认10）
      * @return
+     * @apiNote 根据影人名称字符串找出豆瓣影人的基本信息列表
      */
     @RequestMapping(value = "/celebrity/douban/search_details", method = RequestMethod.GET)
     Result searchDetails(@RequestParam("keyword") @NotBlank String keyword,

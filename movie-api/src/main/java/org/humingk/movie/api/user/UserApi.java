@@ -30,7 +30,7 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 public interface UserApi {
 
     /**
-     * auth 登录
+     * 普通登录
      *
      * @param email    用户邮箱
      * @param password 密码
@@ -77,7 +77,7 @@ public interface UserApi {
             @RequestParam("password") @NotBlank String password);
 
     /**
-     * 当前用户信息
+     * 用户信息
      *
      * @param principal Authorization
      * @return

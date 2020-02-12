@@ -23,10 +23,11 @@ import javax.validation.constraints.NotNull;
 public interface ImdbApi {
 
     /**
-     * IMDB电影详情信息(包括电影海报、包括基础信息、剧情简介)
+     * IMDB电影详情信息
      *
      * @param id 电影豆瓣ID
      * @return
+     * @apiNote 包括电影海报、包括基础信息、剧情简介
      */
     @RequestMapping(value = "/movie/imdb/details", method = RequestMethod.GET)
     Result details(@RequestParam("id") @NotNull Long id);

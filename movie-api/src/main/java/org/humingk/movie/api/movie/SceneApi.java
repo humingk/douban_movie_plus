@@ -23,7 +23,7 @@ import javax.validation.constraints.PositiveOrZero;
 @FeignClient("movie-server-movie")
 public interface SceneApi {
     /**
-     * 获取电影场景详情
+     * 电影场景详情
      *
      * @param id     电影豆瓣ID
      * @param offset 偏移量（默认0）
