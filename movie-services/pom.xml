@@ -17,6 +17,7 @@
         <module>movie-service-netease</module>
         <module>movie-service-douban</module>
         <module>movie-service-user</module>
+        <module>movie-service-imdb</module>
     </modules>
 
     <dependencies>

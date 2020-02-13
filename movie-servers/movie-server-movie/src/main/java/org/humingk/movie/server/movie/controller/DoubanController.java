@@ -25,19 +25,21 @@ public class DoubanController implements DoubanApi {
 
   @Override
   public Result<MovieDoubanVo> bases(@NotNull Long id) {
-    return Result.success(
-        movieDoubanVoConverter.to(movieService.getMovieDoubanByMovieDoubanId(id)));
+    return null;
+    //    return Result.success(
+    //        movieDoubanVoConverter.to(movieService.getMovieDoubanByMovieDoubanId(id)));
   }
 
   @Override
   public Result<MovieDoubanDetailsVo> details(@NotNull Long id) {
-    return Result.success(
-        movieDoubanDetailsVoConverter.to(
-            movieService.getMovieDoubanByMovieDoubanId(id),
-            movieService.getAliasMovieDoubanListByMovieDoubanId(id),
-            movieService.getTagMovieDoubanListByMovieDoubanId(id),
-            movieService.getMovieDoubanToTypeMovieListByMovieDoubanId(id),
-            movieService.getTrailerMovieDoubanListByMovieDoubanId(id)));
+    return null;
+    //    return Result.success(
+    //        movieDoubanDetailsVoConverter.to(
+    //            movieService.getMovieDoubanByMovieDoubanId(id),
+    //            movieService.getAliasMovieDoubanListByMovieDoubanId(id),
+    //            movieService.getTagMovieDoubanListByMovieDoubanId(id),
+    //            movieService.getMovieDoubanToTypeMovieListByMovieDoubanId(id),
+    //            movieService.getTrailerMovieDoubanListByMovieDoubanId(id)));
   }
 
   @Override

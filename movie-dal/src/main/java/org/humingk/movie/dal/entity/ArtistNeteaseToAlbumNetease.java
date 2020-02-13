@@ -1,23 +1,28 @@
 package org.humingk.movie.dal.entity;
 
+import java.io.Serializable;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.io.Serializable;
-
 /**
  * 网易云音乐歌手-专辑
  *
- * @author humingk
+ *@author humingk
  */
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 public class ArtistNeteaseToAlbumNetease implements Serializable {
-  private static final long serialVersionUID = 1L;
-  /** 网易云音乐歌手ID */
-  private Long idArtistNetease;
-  /** 网易云音乐专辑ID */
-  private Long idAlbumNetease;
+    /**
+     * 网易云音乐歌手ID
+     */
+    private Long idArtistNetease;
+
+    /**
+     * 网易云音乐专辑ID
+     */
+    private Long idAlbumNetease;
+
+    private static final long serialVersionUID = 1L;
 }

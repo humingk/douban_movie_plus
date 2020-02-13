@@ -9,7 +9,12 @@ import org.springframework.context.annotation.ComponentScan;
 /** @author humingk */
 @SpringBootApplication
 @EnableEurekaClient
-@ComponentScan(basePackages = {"org.humingk.movie.service.user", "org.humingk.movie.common"})
+@ComponentScan(
+    basePackages = {
+      "org.humingk.movie.service.user",
+      "org.humingk.movie.common",
+      "org.humingk.movie.dal"
+    })
 @MapperScan(basePackages = {"org.humingk.movie.dal.mapper"})
 public class MovieServiceUserApplication {
 

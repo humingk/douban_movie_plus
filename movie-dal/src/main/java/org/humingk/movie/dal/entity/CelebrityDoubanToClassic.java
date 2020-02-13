@@ -1,23 +1,28 @@
 package org.humingk.movie.dal.entity;
 
+import java.io.Serializable;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.io.Serializable;
-
 /**
  * 豆瓣电影经典台词-影人
  *
- * @author humingk
+ *@author humingk
  */
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 public class CelebrityDoubanToClassic implements Serializable {
-  private static final long serialVersionUID = 1L;
-  /** 豆瓣影人ID */
-  private Long idCelebrityDouban;
-  /** 豆瓣电影经典台词ID */
-  private Long idClassicDouban;
+    /**
+     * 豆瓣影人ID
+     */
+    private Long idCelebrityDouban;
+
+    /**
+     * 豆瓣电影经典台词ID
+     */
+    private Long idClassicDouban;
+
+    private static final long serialVersionUID = 1L;
 }

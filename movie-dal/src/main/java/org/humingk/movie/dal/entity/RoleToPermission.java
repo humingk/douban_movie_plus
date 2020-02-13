@@ -1,23 +1,28 @@
 package org.humingk.movie.dal.entity;
 
+import java.io.Serializable;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.io.Serializable;
-
 /**
  * 角色-权限
  *
- * @author humingk
+ *@author humingk
  */
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 public class RoleToPermission implements Serializable {
-  private static final long serialVersionUID = 1L;
-  /** 角色ID */
-  private Byte idRole;
-  /** 权限ID */
-  private Integer idPermission;
+    /**
+     * 角色ID
+     */
+    private Byte idRole;
+
+    /**
+     * 权限ID
+     */
+    private Integer idPermission;
+
+    private static final long serialVersionUID = 1L;
 }

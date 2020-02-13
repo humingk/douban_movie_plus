@@ -3,11 +3,9 @@ package org.humingk.movie.dal.generator;
 import org.mybatis.generator.api.IntrospectedColumn;
 import org.mybatis.generator.api.IntrospectedTable;
 import org.mybatis.generator.api.PluginAdapter;
-import org.mybatis.generator.api.dom.java.Field;
-import org.mybatis.generator.api.dom.java.Method;
-import org.mybatis.generator.api.dom.java.TopLevelClass;
+import org.mybatis.generator.api.dom.java.*;
 
-import java.util.List;
+import java.util.List;;
 
 /**
  * Mybatis 插件，自定义注释+lombak
@@ -36,15 +34,9 @@ public class MyBatisPlugin extends PluginAdapter {
     topLevelClass.addJavaDocLine(" *");
     topLevelClass.addJavaDocLine(" *@author humingk");
     topLevelClass.addJavaDocLine(" */");
-
-    // import lombok.data
-    topLevelClass.addImportedType("lombok.Data");
+    addLombok(topLevelClass);
     topLevelClass.addImportedType("lombok.NoArgsConstructor");
-    topLevelClass.addImportedType("lombok.AllArgsConstructor");
-    // @Data
-    topLevelClass.addAnnotation("@Data");
     topLevelClass.addAnnotation("@NoArgsConstructor");
-    topLevelClass.addAnnotation("@AllArgsConstructor");
     return true;
   }
 
@@ -110,5 +102,44 @@ public class MyBatisPlugin extends PluginAdapter {
       IntrospectedTable introspectedTable,
       ModelClassType modelClassType) {
     return false;
+  }
+
+  /**
+   * 将Example注册为bean,另外再增加一个start()方法，调用之前clear一下
+   *
+   * <p>Example使用方式：先用@Autowired引入，再用example.start().xxx
+   *
+   * @param topLevelClass
+   * @param introspectedTable
+   * @return
+   */
+  @Override
+  public boolean modelExampleClassGenerated(
+      TopLevelClass topLevelClass, IntrospectedTable introspectedTable) {
+    Method method = new Method();
+    method.setVisibility(JavaVisibility.PUBLIC);
+    method.setReturnType(new FullyQualifiedJavaType("Criteria"));
+    method.setName("start");
+    method.addBodyLine("clear();");
+    method.addBodyLine("return createCriteriaInternal();");
+    topLevelClass.addMethod(method);
+    // 注册为bean
+    topLevelClass.addImportedType("org.springframework.stereotype.Repository");
+    topLevelClass.addAnnotation("@Repository");
+    addLombok(topLevelClass);
+    topLevelClass.addJavaDocLine("/** @author humingk */");
+    return true;
+  }
+
+  /**
+   * 增加lombok插件
+   *
+   * @param topLevelClass
+   */
+  public void addLombok(TopLevelClass topLevelClass) {
+    topLevelClass.addImportedType("lombok.Data");
+    topLevelClass.addImportedType("lombok.AllArgsConstructor");
+    topLevelClass.addAnnotation("@Data");
+    topLevelClass.addAnnotation("@AllArgsConstructor");
   }
 }

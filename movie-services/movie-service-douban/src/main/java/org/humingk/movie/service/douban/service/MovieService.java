@@ -1,6 +1,8 @@
 package org.humingk.movie.service.douban.service;
 
 import org.humingk.movie.dal.entity.*;
+import org.humingk.movie.service.douban.common.dto.MovieDoubanDetailsDto;
+import org.humingk.movie.service.douban.common.dto.MovieDoubanDto;
 import org.springframework.validation.annotation.Validated;
 
 import javax.validation.constraints.NotNull;
@@ -17,7 +19,16 @@ public interface MovieService {
    * @return
    */
   @NotNull(message = "该ID暂无对应电影")
-  MovieDouban getMovieDoubanByMovieDoubanId(long id);
+  MovieDoubanDto getMovieDoubanByMovieDoubanId(long id);
+
+  /**
+   * 豆瓣电影详细信息
+   *
+   * @param id 豆瓣电影ID
+   * @return
+   */
+  @NotNull(message = "该ID暂无对应电影")
+  MovieDoubanDetailsDto getMovieDoubanDetailsByMovieDoubanId(long id);
 
   /**
    * 豆瓣电影别名列表

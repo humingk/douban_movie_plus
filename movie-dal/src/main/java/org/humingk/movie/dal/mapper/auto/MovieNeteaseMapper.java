@@ -1,41 +1,32 @@
 package org.humingk.movie.dal.mapper.auto;
 
+import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.humingk.movie.dal.entity.MovieNetease;
 import org.humingk.movie.dal.entity.MovieNeteaseExample;
 
-import java.util.List;
-
 @Mapper
 public interface MovieNeteaseMapper {
-  long countByExample(MovieNeteaseExample example);
+    long countByExample(MovieNeteaseExample example);
 
-  int deleteByExample(MovieNeteaseExample example);
+    int deleteByExample(MovieNeteaseExample example);
 
-  int deleteByPrimaryKey(
-      @Param("idMovieDouban") Long idMovieDouban,
-      @Param("idNetease") Long idNetease,
-      @Param("neteaseType") Byte neteaseType);
+    int deleteByPrimaryKey(@Param("idMovieDouban") Long idMovieDouban, @Param("idNetease") Long idNetease, @Param("neteaseType") Byte neteaseType);
 
-  int insert(MovieNetease record);
+    int insert(MovieNetease record);
 
-  int insertSelective(MovieNetease record);
+    int insertSelective(MovieNetease record);
 
-  List<MovieNetease> selectByExample(MovieNeteaseExample example);
+    List<MovieNetease> selectByExample(MovieNeteaseExample example);
 
-  MovieNetease selectByPrimaryKey(
-      @Param("idMovieDouban") Long idMovieDouban,
-      @Param("idNetease") Long idNetease,
-      @Param("neteaseType") Byte neteaseType);
+    MovieNetease selectByPrimaryKey(@Param("idMovieDouban") Long idMovieDouban, @Param("idNetease") Long idNetease, @Param("neteaseType") Byte neteaseType);
 
-  int updateByExampleSelective(
-      @Param("record") MovieNetease record, @Param("example") MovieNeteaseExample example);
+    int updateByExampleSelective(@Param("record") MovieNetease record, @Param("example") MovieNeteaseExample example);
 
-  int updateByExample(
-      @Param("record") MovieNetease record, @Param("example") MovieNeteaseExample example);
+    int updateByExample(@Param("record") MovieNetease record, @Param("example") MovieNeteaseExample example);
 
-  int updateByPrimaryKeySelective(MovieNetease record);
+    int updateByPrimaryKeySelective(MovieNetease record);
 
-  int updateByPrimaryKey(MovieNetease record);
+    int updateByPrimaryKey(MovieNetease record);
 }
