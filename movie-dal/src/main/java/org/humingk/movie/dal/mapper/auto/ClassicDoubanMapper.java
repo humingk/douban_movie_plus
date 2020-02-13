@@ -1,32 +1,35 @@
 package org.humingk.movie.dal.mapper.auto;
 
-import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.humingk.movie.dal.entity.ClassicDouban;
 import org.humingk.movie.dal.entity.ClassicDoubanExample;
 
+import java.util.List;
+
 @Mapper
 public interface ClassicDoubanMapper {
-    long countByExample(ClassicDoubanExample example);
+  long countByExample(ClassicDoubanExample example);
 
-    int deleteByExample(ClassicDoubanExample example);
+  int deleteByExample(ClassicDoubanExample example);
 
-    int deleteByPrimaryKey(Long id);
+  int deleteByPrimaryKey(Long id);
 
-    int insert(ClassicDouban record);
+  int insert(ClassicDouban record);
 
-    int insertSelective(ClassicDouban record);
+  int insertSelective(ClassicDouban record);
 
-    List<ClassicDouban> selectByExample(ClassicDoubanExample example);
+  List<ClassicDouban> selectByExample(ClassicDoubanExample example);
 
-    ClassicDouban selectByPrimaryKey(Long id);
+  ClassicDouban selectByPrimaryKey(Long id);
 
-    int updateByExampleSelective(@Param("record") ClassicDouban record, @Param("example") ClassicDoubanExample example);
+  int updateByExampleSelective(
+      @Param("record") ClassicDouban record, @Param("example") ClassicDoubanExample example);
 
-    int updateByExample(@Param("record") ClassicDouban record, @Param("example") ClassicDoubanExample example);
+  int updateByExample(
+      @Param("record") ClassicDouban record, @Param("example") ClassicDoubanExample example);
 
-    int updateByPrimaryKeySelective(ClassicDouban record);
+  int updateByPrimaryKeySelective(ClassicDouban record);
 
-    int updateByPrimaryKey(ClassicDouban record);
+  int updateByPrimaryKey(ClassicDouban record);
 }

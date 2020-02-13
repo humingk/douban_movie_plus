@@ -1,38 +1,42 @@
 package org.humingk.movie.dal.mapper.auto;
 
-import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.humingk.movie.dal.entity.CelebrityDouban;
 import org.humingk.movie.dal.entity.CelebrityDoubanExample;
 
+import java.util.List;
+
 @Mapper
 public interface CelebrityDoubanMapper {
-    long countByExample(CelebrityDoubanExample example);
+  long countByExample(CelebrityDoubanExample example);
 
-    int deleteByExample(CelebrityDoubanExample example);
+  int deleteByExample(CelebrityDoubanExample example);
 
-    int deleteByPrimaryKey(Long id);
+  int deleteByPrimaryKey(Long id);
 
-    int insert(CelebrityDouban record);
+  int insert(CelebrityDouban record);
 
-    int insertSelective(CelebrityDouban record);
+  int insertSelective(CelebrityDouban record);
 
-    List<CelebrityDouban> selectByExampleWithBLOBs(CelebrityDoubanExample example);
+  List<CelebrityDouban> selectByExampleWithBLOBs(CelebrityDoubanExample example);
 
-    List<CelebrityDouban> selectByExample(CelebrityDoubanExample example);
+  List<CelebrityDouban> selectByExample(CelebrityDoubanExample example);
 
-    CelebrityDouban selectByPrimaryKey(Long id);
+  CelebrityDouban selectByPrimaryKey(Long id);
 
-    int updateByExampleSelective(@Param("record") CelebrityDouban record, @Param("example") CelebrityDoubanExample example);
+  int updateByExampleSelective(
+      @Param("record") CelebrityDouban record, @Param("example") CelebrityDoubanExample example);
 
-    int updateByExampleWithBLOBs(@Param("record") CelebrityDouban record, @Param("example") CelebrityDoubanExample example);
+  int updateByExampleWithBLOBs(
+      @Param("record") CelebrityDouban record, @Param("example") CelebrityDoubanExample example);
 
-    int updateByExample(@Param("record") CelebrityDouban record, @Param("example") CelebrityDoubanExample example);
+  int updateByExample(
+      @Param("record") CelebrityDouban record, @Param("example") CelebrityDoubanExample example);
 
-    int updateByPrimaryKeySelective(CelebrityDouban record);
+  int updateByPrimaryKeySelective(CelebrityDouban record);
 
-    int updateByPrimaryKeyWithBLOBs(CelebrityDouban record);
+  int updateByPrimaryKeyWithBLOBs(CelebrityDouban record);
 
-    int updateByPrimaryKey(CelebrityDouban record);
+  int updateByPrimaryKey(CelebrityDouban record);
 }

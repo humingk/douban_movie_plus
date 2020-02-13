@@ -16,27 +16,34 @@ import static org.humingk.movie.common.enumeration.CodeAndMsg.FORBIDDEN;
 
 /**
  * 自定义认证端点异常，认证失败,AccessDenied
- * <p>
- * 用于资源服务器
+ *
+ * <p>用于资源服务器
  *
  * @author humingk
  */
 @Component
 public class MyAccessDeniedHandler implements AccessDeniedHandler {
-    @Override
-    public void handle(HttpServletRequest request, HttpServletResponse response, AccessDeniedException accessDeniedException) throws IOException, ServletException {
-        Map map = new HashMap() {{
+  @Override
+  public void handle(
+      HttpServletRequest request,
+      HttpServletResponse response,
+      AccessDeniedException accessDeniedException)
+      throws IOException, ServletException {
+    Map map =
+        new HashMap() {
+          {
             put("state", FORBIDDEN.code);
             put("message", FORBIDDEN.msg);
             put("data", "权限不足");
-        }};
-        response.setContentType("application/json");
-        response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-        try {
-            ObjectMapper mapper = new ObjectMapper();
-            mapper.writeValue(response.getOutputStream(), map);
-        } catch (Exception e) {
-            throw new ServletException();
-        }
+          }
+        };
+    response.setContentType("application/json");
+    response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+    try {
+      ObjectMapper mapper = new ObjectMapper();
+      mapper.writeValue(response.getOutputStream(), map);
+    } catch (Exception e) {
+      throw new ServletException();
     }
+  }
 }

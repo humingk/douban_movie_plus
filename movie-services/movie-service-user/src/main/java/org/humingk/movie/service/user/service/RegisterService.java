@@ -10,11 +10,11 @@ import org.springframework.validation.annotation.Validated;
  */
 @Validated
 public interface RegisterService {
-    /**
-     * 用户注册
-     *
-     * @param user 用户Pojo
-     * @return 用户ID
-     */
-    String register(User user);
+  /**
+   * 用户注册
+   *
+   * @param user 用户Pojo
+   * @return 用户ID
+   */
+  String register(User user);
 }

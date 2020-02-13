@@ -16,35 +16,37 @@ import org.springframework.security.oauth2.config.annotation.web.configurers.Res
 @Configuration
 public class MyResourceServerConfig extends ResourceServerConfig {
 
-    @Value("${security.oauth2.resource.id}")
-    private String resourceId;
+  @Value("${security.oauth2.resource.id}")
+  private String resourceId;
 
-    /**
-     * 路径过滤
-     *
-     * @param httpSecurity
-     * @throws Exception
-     */
-    @Override
-    public void configure(HttpSecurity httpSecurity) throws Exception {
-        httpSecurity
-                .csrf().disable()
-                // 不需要保护的资源路径
-                .authorizeRequests().antMatchers(
-                "/celebrity/**"
-        ).permitAll()
-                // 剩下都是需要保护的资源路径
-                .anyRequest().authenticated();
-    }
+  /**
+   * 路径过滤
+   *
+   * @param httpSecurity
+   * @throws Exception
+   */
+  @Override
+  public void configure(HttpSecurity httpSecurity) throws Exception {
+    httpSecurity
+        .csrf()
+        .disable()
+        // 不需要保护的资源路径
+        .authorizeRequests()
+        .antMatchers("/celebrity/**")
+        .permitAll()
+        // 剩下都是需要保护的资源路径
+        .anyRequest()
+        .authenticated();
+  }
 
-    /**
-     * 资源服务器的属性配置
-     *
-     * @param resources
-     */
-    @Override
-    public void configure(ResourceServerSecurityConfigurer resources) {
-        // 配置资源服务器ID
-        resources.resourceId(resourceId);
-    }
+  /**
+   * 资源服务器的属性配置
+   *
+   * @param resources
+   */
+  @Override
+  public void configure(ResourceServerSecurityConfigurer resources) {
+    // 配置资源服务器ID
+    resources.resourceId(resourceId);
+  }
 }

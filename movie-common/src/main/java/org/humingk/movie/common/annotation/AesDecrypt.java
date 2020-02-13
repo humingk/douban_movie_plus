@@ -6,10 +6,10 @@ import java.lang.annotation.*;
 
 /**
  * 自定义AES解密注解
- * <p>
- * 作用位置:    类 方法
- * <p>
- * 作用时间:    运行时
+ *
+ * <p>作用位置: 类 方法
+ *
+ * <p>作用时间: 运行时
  *
  * @author humingk
  */
@@ -17,5 +17,4 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 @Mapping
-public @interface AesDecrypt {
-}
+public @interface AesDecrypt {}

@@ -14,13 +14,12 @@ import java.util.List;
 @RunWith(SpringJUnit4ClassRunner.class)
 public class SearchServiceTest {
 
-    @Autowired
-    private SearchServiceImpl searchService;
+  @Autowired private SearchServiceImpl searchService;
 
-    @Test
-    public void getMovieDoubanListByNameStart() {
-        System.out.println();
-        List<MovieDouban> result = searchService.getMovieDoubanListByNameStart("星际", 0, 10);
-        System.out.println(result.toString());
-    }
+  @Test
+  public void getMovieDoubanListByNameStart() {
+    System.out.println();
+    List<MovieDouban> result = searchService.getMovieDoubanListByNameStart("星际", 0, 10);
+    System.out.println(result.toString());
+  }
 }

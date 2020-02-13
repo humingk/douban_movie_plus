@@ -7,13 +7,12 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PositiveOrZero;
 
-/**
- * @author humingk
- */
+/** @author humingk */
 @RestController
 public class ZhihuController implements ZhihuApi {
-    @Override
-    public Result questions(@NotNull Long id, @PositiveOrZero Integer offset, @PositiveOrZero Integer limit) {
-        return null;
-    }
+  @Override
+  public Result questions(
+      @NotNull Long id, @PositiveOrZero Integer offset, @PositiveOrZero Integer limit) {
+    return null;
+  }
 }

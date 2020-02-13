@@ -111,10 +111,10 @@ function env_create() {
     sed -i "s/<\!--<module>movie-dal<\/module>-->/<module>movie-dal<\/module>/g" ./pom.xml
     sed -i "s/<\!--<module>movie-common<\/module>-->/<module>movie-common<\/module>/g" ./pom.xml
     # controller
-    sed -i "s/@RestController/\/\/@RestController/g" $(grep annotation -rl ./movie-common/src/main/java/org/humingk/movie/common/controller/MyErrorController.java)
-    sed -i "s/@RestController/\/\/@RestController/g" $(grep annotation -rl ./movie-server-gateway/src/main/java/org/humingk/movie/server/gateway/controller/FallbackController.java)
-    sed -i "s/\/\/import/import/g" $(grep annotation -rl ./movie-api/src/main/java/org/humingk/movie/api/*/*Api.java)
-    sed -i "s/\/\/@RestController/@RestController/g" $(grep annotation -rl ./movie-api/src/main/java/org/humingk/movie/api/*/*Api.java)
+    sed -i "s/@RestController/\/\/\ @RestController/g" $(grep annotation -rl ./movie-common/src/main/java/org/humingk/movie/common/controller/MyErrorController.java)
+    sed -i "s/@RestController/\/\/\ @RestController/g" $(grep annotation -rl ./movie-server-gateway/src/main/java/org/humingk/movie/server/gateway/controller/FallbackController.java)
+    sed -i "s/\/\/\ import/import/g" $(grep annotation -rl ./movie-api/src/main/java/org/humingk/movie/api/*/*Api.java)
+    sed -i "s/\/\/\ @RestController/@RestController/g" $(grep annotation -rl ./movie-api/src/main/java/org/humingk/movie/api/*/*Api.java)
   fi
 }
 
@@ -127,10 +127,10 @@ function env_release() {
     sed -i "s/<\!--<module>/<module>/g" ./pom.xml
     sed -i "s/<\/module>-->/<\/module>/g" ./pom.xml
     # controller
-    sed -i "s/\/\/@RestController/@RestController/g" $(grep annotation -rl ./movie-common/src/main/java/org/humingk/movie/common/controller/MyErrorController.java)
-    sed -i "s/\/\/@RestController/@RestController/g" $(grep annotation -rl ./movie-server-gateway/src/main/java/org/humingk/movie/server/gateway/controller/FallbackController.java)
-    sed -i "s/import\ org.springframework.web.bind.annotation.RestController;/\/\/import\ org.springframework.web.bind.annotation.RestController;/g" $(grep annotation -rl ./movie-api/src/main/java/org/humingk/movie/api/*/*Api.java)
-    sed -i "s/@RestController/\/\/@RestController/g" $(grep annotation -rl ./movie-api/src/main/java/org/humingk/movie/api/*/*Api.java)
+    sed -i "s/\/\/\ @RestController/@RestController/g" $(grep annotation -rl ./movie-common/src/main/java/org/humingk/movie/common/controller/MyErrorController.java)
+    sed -i "s/\/\/\ @RestController/@RestController/g" $(grep annotation -rl ./movie-server-gateway/src/main/java/org/humingk/movie/server/gateway/controller/FallbackController.java)
+    sed -i "s/import\ org.springframework.web.bind.annotation.RestController;/\/\/\ import\ org.springframework.web.bind.annotation.RestController;/g" $(grep annotation -rl ./movie-api/src/main/java/org/humingk/movie/api/*/*Api.java)
+    sed -i "s/@RestController/\/\/\ @RestController/g" $(grep annotation -rl ./movie-api/src/main/java/org/humingk/movie/api/*/*Api.java)
   fi
 }
 

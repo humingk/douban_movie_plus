@@ -1,32 +1,35 @@
 package org.humingk.movie.dal.mapper.auto;
 
-import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.humingk.movie.dal.entity.CityScene;
 import org.humingk.movie.dal.entity.CitySceneExample;
 
+import java.util.List;
+
 @Mapper
 public interface CitySceneMapper {
-    long countByExample(CitySceneExample example);
+  long countByExample(CitySceneExample example);
 
-    int deleteByExample(CitySceneExample example);
+  int deleteByExample(CitySceneExample example);
 
-    int deleteByPrimaryKey(Integer id);
+  int deleteByPrimaryKey(Integer id);
 
-    int insert(CityScene record);
+  int insert(CityScene record);
 
-    int insertSelective(CityScene record);
+  int insertSelective(CityScene record);
 
-    List<CityScene> selectByExample(CitySceneExample example);
+  List<CityScene> selectByExample(CitySceneExample example);
 
-    CityScene selectByPrimaryKey(Integer id);
+  CityScene selectByPrimaryKey(Integer id);
 
-    int updateByExampleSelective(@Param("record") CityScene record, @Param("example") CitySceneExample example);
+  int updateByExampleSelective(
+      @Param("record") CityScene record, @Param("example") CitySceneExample example);
 
-    int updateByExample(@Param("record") CityScene record, @Param("example") CitySceneExample example);
+  int updateByExample(
+      @Param("record") CityScene record, @Param("example") CitySceneExample example);
 
-    int updateByPrimaryKeySelective(CityScene record);
+  int updateByPrimaryKeySelective(CityScene record);
 
-    int updateByPrimaryKey(CityScene record);
+  int updateByPrimaryKey(CityScene record);
 }

@@ -5,15 +5,13 @@ import org.humingk.movie.dal.entity.RoleExample;
 
 import java.util.List;
 
-/**
- * @author humingk
- */
+/** @author humingk */
 public interface RoleMapperPlus extends BaseMapperPlus<Role, RoleExample> {
-    /**
-     * 获取用户对应的角色列表
-     *
-     * @param id 用户ID
-     * @return
-     */
-    List<Role> selectRoleListByUserId(String id);
+  /**
+   * 获取用户对应的角色列表
+   *
+   * @param id 用户ID
+   * @return
+   */
+  List<Role> selectRoleListByUserId(String id);
 }

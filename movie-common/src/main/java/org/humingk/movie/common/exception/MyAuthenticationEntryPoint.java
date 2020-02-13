@@ -16,27 +16,34 @@ import static org.humingk.movie.common.enumeration.CodeAndMsg.UNAUTHORIZED;
 
 /**
  * 自定义认证端点异常，未认证,unauthorized
- * <p>
- * 用于资源服务器
+ *
+ * <p>用于资源服务器
  *
  * @author humingk
  */
 @Component
 public class MyAuthenticationEntryPoint implements AuthenticationEntryPoint {
-    @Override
-    public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException) throws IOException, ServletException {
-        Map map = new HashMap() {{
+  @Override
+  public void commence(
+      HttpServletRequest request,
+      HttpServletResponse response,
+      AuthenticationException authException)
+      throws IOException, ServletException {
+    Map map =
+        new HashMap() {
+          {
             put("state", UNAUTHORIZED.code);
             put("message", UNAUTHORIZED.msg);
             put("data", "未认证");
-        }};
-        response.setContentType("application/json");
-        response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-        try {
-            ObjectMapper mapper = new ObjectMapper();
-            mapper.writeValue(response.getOutputStream(), map);
-        } catch (Exception e) {
-            throw new ServletException();
-        }
+          }
+        };
+    response.setContentType("application/json");
+    response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+    try {
+      ObjectMapper mapper = new ObjectMapper();
+      mapper.writeValue(response.getOutputStream(), map);
+    } catch (Exception e) {
+      throw new ServletException();
     }
+  }
 }

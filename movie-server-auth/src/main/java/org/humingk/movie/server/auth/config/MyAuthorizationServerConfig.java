@@ -21,40 +21,39 @@ import static org.humingk.movie.common.enumeration.Roles.USER;
 @RefreshScope
 @Configuration
 public class MyAuthorizationServerConfig extends AuthorizationServerConfig {
-    /**
-     * 有效期 /s 90d=7776000s
-     */
-    @Value("${custom.oauth2.validity}")
-    private int validity;
+  /** 有效期 /s 90d=7776000s */
+  @Value("${custom.oauth2.validity}")
+  private int validity;
 
-    @Value("${custom.oauth2.client.id}")
-    private String clientId;
+  @Value("${custom.oauth2.client.id}")
+  private String clientId;
 
-    @Value("${custom.oauth2.client.secret}")
-    private String clientSecert;
+  @Value("${custom.oauth2.client.secret}")
+  private String clientSecert;
 
-    @Value("${custom.oauth2.client.scopes}")
-    private String clientScopes;
+  @Value("${custom.oauth2.client.scopes}")
+  private String clientScopes;
 
-    /**
-     * 配置客户端
-     *
-     * @param clients
-     * @throws Exception
-     */
-    @Override
-    public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
-        clients.inMemory()
-                .withClient(clientId)
-                .secret(new BCryptPasswordEncoder().encode(clientSecert))
-                // 支持的角色
-                .authorities(ROOT.name, USER.name)
-                // 支持的资源ID
-                .resourceIds(USER_ID, MOVIE_ID, MUSIC_ID,CELEBRITY_ID)
-                .scopes(clientScopes)
-                // 支持的请求模式
-                .authorizedGrantTypes(PASSWORD, REFRESH)
-                .accessTokenValiditySeconds(validity)
-                .refreshTokenValiditySeconds(validity);
-    }
+  /**
+   * 配置客户端
+   *
+   * @param clients
+   * @throws Exception
+   */
+  @Override
+  public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
+    clients
+        .inMemory()
+        .withClient(clientId)
+        .secret(new BCryptPasswordEncoder().encode(clientSecert))
+        // 支持的角色
+        .authorities(ROOT.name, USER.name)
+        // 支持的资源ID
+        .resourceIds(USER_ID, MOVIE_ID, MUSIC_ID, CELEBRITY_ID)
+        .scopes(clientScopes)
+        // 支持的请求模式
+        .authorizedGrantTypes(PASSWORD, REFRESH)
+        .accessTokenValiditySeconds(validity)
+        .refreshTokenValiditySeconds(validity);
+  }
 }

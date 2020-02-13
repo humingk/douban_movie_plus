@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 import java.io.Serializable;
 
 /**
- * 豆瓣电影VO
+ * 豆瓣电影
  *
  * @author humingk
  */
@@ -15,58 +15,42 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 public class MovieDoubanVo implements Serializable {
-    /**
-     * 豆瓣电影ID
-     */
-    private Long id;
+  /** 豆瓣电影ID */
+  protected Long id;
 
-    /**
-     * 影片类型
-     */
-    private String typeVideo;
+  /** 豆瓣电影链接 */
+  protected String urlMovieDouban;
 
-    /**
-     * IMDB电影ID 0-未匹配 1-已匹配
-     */
-    private String imdbId;
+  /** 影片类型 */
+  private String typeVideo;
 
-    /**
-     * 上映时间 /year
-     */
-    private Short startYear;
+  /** IMDB电影ID 0-未匹配 1-已匹配 */
+  private String idMovieImdb;
 
-    /**
-     * 豆瓣电影中文名
-     */
-    private String nameZh;
+  /** IMDB电影链接 */
+  private String urlMovieImdb;
 
-    /**
-     * 豆瓣电影原始名
-     */
-    private String nameOrigin;
+  /** 上映时间 /year */
+  private Short startYear;
 
-    /**
-     * 豆瓣电影运行片长 /m
-     */
-    private Short runtime;
+  /** 豆瓣电影中文名 */
+  private String nameZh;
 
-    /**
-     * 豆瓣电影海报
-     */
-    private String urlPoster;
+  /** 豆瓣电影原始名 */
+  private String nameOrigin;
 
-    /**
-     * 已看人数
-     */
-    private Integer haveSeen;
+  /** 豆瓣电影运行片长 /m */
+  private Short runtime;
 
-    /**
-     * 想看人数
-     */
-    private Integer wannaSee;
+  /** 豆瓣电影海报 */
+  private String urlPoster;
 
-    /**
-     * 简介
-     */
-    private String summary;
+  /** 已看人数 */
+  private Integer haveSeen;
+
+  /** 想看人数 */
+  private Integer wannaSee;
+
+  /** 简介 */
+  private String summary;
 }

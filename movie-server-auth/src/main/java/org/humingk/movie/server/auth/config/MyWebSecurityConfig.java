@@ -13,20 +13,23 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 @Configuration
 @Order(101)
 public class MyWebSecurityConfig extends WebSecurityConfig {
-    /**
-     * url过滤
-     *
-     * @param httpSecurity
-     * @throws Exception
-     */
-    @Override
-    protected void configure(HttpSecurity httpSecurity) throws Exception {
-        httpSecurity
-                .csrf().disable()
-                .authorizeRequests()
-                // 不需要保护的路径
-                .antMatchers("/oauth/**").permitAll()
-                // 需要被保护的路径
-                .anyRequest().authenticated();
-    }
+  /**
+   * url过滤
+   *
+   * @param httpSecurity
+   * @throws Exception
+   */
+  @Override
+  protected void configure(HttpSecurity httpSecurity) throws Exception {
+    httpSecurity
+        .csrf()
+        .disable()
+        .authorizeRequests()
+        // 不需要保护的路径
+        .antMatchers("/oauth/**")
+        .permitAll()
+        // 需要被保护的路径
+        .anyRequest()
+        .authenticated();
+  }
 }

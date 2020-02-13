@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import javax.validation.constraints.NotNull;
 
 // 用于生成API文档
-//import org.springframework.web.bind.annotation.RestController;
-//@RestController
+// import org.springframework.web.bind.annotation.RestController;
+// @RestController
 
 /**
  * IMDB电影API
@@ -22,13 +22,13 @@ import javax.validation.constraints.NotNull;
 @FeignClient("movie-server-movie")
 public interface ImdbApi {
 
-    /**
-     * IMDB电影详情信息
-     *
-     * @param id 电影豆瓣ID
-     * @return
-     * @apiNote 包括电影海报、包括基础信息、剧情简介
-     */
-    @RequestMapping(value = "/movie/imdb/details", method = RequestMethod.GET)
-    Result details(@RequestParam("id") @NotNull Long id);
+  /**
+   * IMDB电影详情信息
+   *
+   * @param id 电影豆瓣ID
+   * @return
+   * @apiNote 包括电影海报、包括基础信息、剧情简介
+   */
+  @RequestMapping(value = "/movie/imdb/details", method = RequestMethod.GET)
+  Result details(@RequestParam("id") @NotNull Long id);
 }

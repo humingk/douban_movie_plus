@@ -8,7 +8,6 @@ import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
 import java.util.ArrayList;
 
-
 /**
  * AES 加密解密工具类
  *
@@ -16,109 +15,104 @@ import java.util.ArrayList;
  */
 @Component
 public class AesUtil {
-    /**
-     * AesUtil所用的加密方式
-     */
-    @Value("${custom.aes.way}")
-    private String aesWay;
+  /** AesUtil所用的加密方式 */
+  @Value("${custom.aes.way}")
+  private String aesWay;
 
-    /**
-     * AesUtil所用的加密密钥
-     */
-    @Value("${custom.aes.key}")
-    private String AES_KEY;
+  /** AesUtil所用的加密密钥 */
+  @Value("${custom.aes.key}")
+  private String AES_KEY;
 
-    /**
-     * AES加密
-     *
-     * @param data
-     * @return
-     * @throws Exception
-     */
-    public String encrypt(String data) throws Exception {
-        SecretKeySpec secretKeySpec = new SecretKeySpec(AES_KEY.getBytes(), aesWay);
-        Cipher cipher = Cipher.getInstance(aesWay);
-        cipher.init(Cipher.ENCRYPT_MODE, secretKeySpec);
-        return byte2hex(cipher.doFinal(data.getBytes()));
+  private static byte[] hex2byte(String stringhex) {
+    if (stringhex == null) {
+      return null;
     }
-
-    /**
-     * AES解密
-     *
-     * @param data
-     * @return
-     * @throws Exception
-     */
-    public String decrypt(String data) throws Exception {
-        SecretKeySpec secretKeySpec = new SecretKeySpec(AES_KEY.getBytes(), aesWay);
-        Cipher cipher = Cipher.getInstance(aesWay);
-        cipher.init(Cipher.DECRYPT_MODE, secretKeySpec);
-        return new String(cipher.doFinal(hex2byte(data)));
+    int length = stringhex.length();
+    if (length % 2 == 1) {
+      return null;
     }
-
-    private static byte[] hex2byte(String stringhex) {
-        if (stringhex == null) {
-            return null;
-        }
-        int length = stringhex.length();
-        if (length % 2 == 1) {
-            return null;
-        }
-        byte[] bytes = new byte[length / 2];
-        for (int i = 0; i != length / 2; i++) {
-            bytes[i] = (byte) Integer.parseInt(stringhex.substring(i * 2, i * 2 + 2),
-                    16);
-        }
-        return bytes;
+    byte[] bytes = new byte[length / 2];
+    for (int i = 0; i != length / 2; i++) {
+      bytes[i] = (byte) Integer.parseInt(stringhex.substring(i * 2, i * 2 + 2), 16);
     }
+    return bytes;
+  }
 
-    private static String byte2hex(byte[] bytes) {
-        StringBuilder stringBuilder = new StringBuilder();
-        String temp;
-        for (int n = 0; n < bytes.length; n++) {
-            temp = (Integer.toHexString(bytes[n] & 0XFF));
-            if (temp.length() == 1) {
-                stringBuilder.append("0").append(temp);
-            } else {
-                stringBuilder.append(temp);
-            }
-        }
-        return stringBuilder.toString().toUpperCase();
+  private static String byte2hex(byte[] bytes) {
+    StringBuilder stringBuilder = new StringBuilder();
+    String temp;
+    for (int n = 0; n < bytes.length; n++) {
+      temp = (Integer.toHexString(bytes[n] & 0XFF));
+      if (temp.length() == 1) {
+        stringBuilder.append("0").append(temp);
+      } else {
+        stringBuilder.append(temp);
+      }
     }
+    return stringBuilder.toString().toUpperCase();
+  }
 
-
-    public static void main(String[] args) throws Exception {
-        System.out.println("--------------");
-        System.out.println("密码1233");
-        System.out.println(new BCryptPasswordEncoder().encode("1233"));
-        System.out.println("--------------");
-        ArrayList list = new ArrayList() {
-            {
-                add("1233");
-                add("client");
-                add("星际");
-                add("0");
-                add("8");
-                add("10");
-                add("humingk");
-                add("id2");
-                add("id3");
-                add("id4");
-                add("1111@email.com");
-                add("2222@email.com");
-                add("3333@email.com");
-                add("4444@email.com");
-            }
+  public static void main(String[] args) throws Exception {
+    System.out.println("--------------");
+    System.out.println("密码1233");
+    System.out.println(new BCryptPasswordEncoder().encode("1233"));
+    System.out.println("--------------");
+    ArrayList list =
+        new ArrayList() {
+          {
+            add("1233");
+            add("client");
+            add("星际");
+            add("0");
+            add("8");
+            add("10");
+            add("humingk");
+            add("id2");
+            add("id3");
+            add("id4");
+            add("1111@email.com");
+            add("2222@email.com");
+            add("3333@email.com");
+            add("4444@email.com");
+          }
         };
-        for (Object str : list) {
-            String se = new AesUtil().encrypt((String) str);
-            String sd = new AesUtil().decrypt(se);
-            System.out.println("=======================================");
-            System.out.println("origin:  " + str);
-            System.out.println("encrypt: " + se);
-            System.out.println("decrypt: " + sd);
-        }
+    for (Object str : list) {
+      String se = new AesUtil().encrypt((String) str);
+      String sd = new AesUtil().decrypt(se);
+      System.out.println("=======================================");
+      System.out.println("origin:  " + str);
+      System.out.println("encrypt: " + se);
+      System.out.println("decrypt: " + sd);
     }
+  }
+
+  /**
+   * AES加密
+   *
+   * @param data
+   * @return
+   * @throws Exception
+   */
+  public String encrypt(String data) throws Exception {
+    SecretKeySpec secretKeySpec = new SecretKeySpec(AES_KEY.getBytes(), aesWay);
+    Cipher cipher = Cipher.getInstance(aesWay);
+    cipher.init(Cipher.ENCRYPT_MODE, secretKeySpec);
+    return byte2hex(cipher.doFinal(data.getBytes()));
+  }
+
+  /**
+   * AES解密
+   *
+   * @param data
+   * @return
+   * @throws Exception
+   */
+  public String decrypt(String data) throws Exception {
+    SecretKeySpec secretKeySpec = new SecretKeySpec(AES_KEY.getBytes(), aesWay);
+    Cipher cipher = Cipher.getInstance(aesWay);
+    cipher.init(Cipher.DECRYPT_MODE, secretKeySpec);
+    return new String(cipher.doFinal(hex2byte(data)));
+  }
 }
 /*
 

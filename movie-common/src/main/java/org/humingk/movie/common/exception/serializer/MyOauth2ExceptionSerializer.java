@@ -13,16 +13,18 @@ import java.io.IOException;
  * @author humingk
  */
 public class MyOauth2ExceptionSerializer extends StdSerializer<MyOauth2Exception> {
-    public MyOauth2ExceptionSerializer() {
-        super(MyOauth2Exception.class);
-    }
+  public MyOauth2ExceptionSerializer() {
+    super(MyOauth2Exception.class);
+  }
 
-    @Override
-    public void serialize(MyOauth2Exception e, JsonGenerator jsonGenerator, SerializerProvider serializerProvider) throws IOException {
-        jsonGenerator.writeStartObject();
-        jsonGenerator.writeNumberField("state", e.getHttpErrorCode());
-        jsonGenerator.writeStringField("message", e.getOAuth2ErrorCode());
-        jsonGenerator.writeObjectField("date", e.getMessage());
-        jsonGenerator.writeEndObject();
-    }
+  @Override
+  public void serialize(
+      MyOauth2Exception e, JsonGenerator jsonGenerator, SerializerProvider serializerProvider)
+      throws IOException {
+    jsonGenerator.writeStartObject();
+    jsonGenerator.writeNumberField("state", e.getHttpErrorCode());
+    jsonGenerator.writeStringField("message", e.getOAuth2ErrorCode());
+    jsonGenerator.writeObjectField("date", e.getMessage());
+    jsonGenerator.writeEndObject();
+  }
 }

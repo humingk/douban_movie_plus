@@ -16,41 +16,40 @@ import javax.servlet.http.HttpServletRequest;
  * @author humingk
  */
 public class MyErrorController implements ErrorController {
-    @Autowired
-    private HttpServletRequest request;
+  @Autowired private HttpServletRequest request;
 
-    /**
-     * Returns the path of the error page.
-     *
-     * @return the error path
-     */
-    @Override
-    public String getErrorPath() {
-        return "/error";
-    }
+  /**
+   * Returns the path of the error page.
+   *
+   * @return the error path
+   */
+  @Override
+  public String getErrorPath() {
+    return "/error";
+  }
 
-    /**
-     * 部分不能被Controller层拦截的异常
-     *
-     * @return
-     */
-    @RequestMapping("/error")
-    public Result error() {
-        int status = (int) request.getAttribute("javax.servlet.error.status_code");
-        switch (status) {
-            case 400:
-            case 405:
-                return Result.error(CodeAndMsg.BADREQUEST);
-            case 401:
-                return Result.error(CodeAndMsg.UNAUTHORIZED);
-            case 403:
-                return Result.error(CodeAndMsg.FORBIDDEN);
-            case 404:
-                return Result.error(CodeAndMsg.NOTFOUND);
-            case 500:
-                return Result.error(CodeAndMsg.ERROR);
-            default:
-                return Result.error();
-        }
+  /**
+   * 部分不能被Controller层拦截的异常
+   *
+   * @return
+   */
+  @RequestMapping("/error")
+  public Result error() {
+    int status = (int) request.getAttribute("javax.servlet.error.status_code");
+    switch (status) {
+      case 400:
+      case 405:
+        return Result.error(CodeAndMsg.BADREQUEST);
+      case 401:
+        return Result.error(CodeAndMsg.UNAUTHORIZED);
+      case 403:
+        return Result.error(CodeAndMsg.FORBIDDEN);
+      case 404:
+        return Result.error(CodeAndMsg.NOTFOUND);
+      case 500:
+        return Result.error(CodeAndMsg.ERROR);
+      default:
+        return Result.error();
     }
+  }
 }

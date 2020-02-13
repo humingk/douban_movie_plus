@@ -20,7 +20,6 @@ import java.util.List;
 
 import static com.google.common.base.Preconditions.checkState;
 
-
 /**
  * 用户验证服务
  *
@@ -29,52 +28,51 @@ import static com.google.common.base.Preconditions.checkState;
 @Slf4j
 @Service
 public class MyUserDetailsServiceImpl implements MyUserDetailsService {
-    @Autowired
-    private UserMapper userMapper;
-    @Autowired
-    private RoleMapperPlus roleMapperPlus;
+  @Autowired private UserMapper userMapper;
+  @Autowired private RoleMapperPlus roleMapperPlus;
 
-    /**
-     * 根据邮箱获取用户信息
-     *
-     * @param email
-     * @return
-     */
-    @Override
-    public List<User> getUserByEmail(String email) {
-        UserExample example = new UserExample();
-        example.or().andEmailEqualTo(email);
-        return userMapper.selectByExample(example);
-    }
+  /**
+   * 根据邮箱获取用户信息
+   *
+   * @param email
+   * @return
+   */
+  @Override
+  public List<User> getUserByEmail(String email) {
+    UserExample example = new UserExample();
+    example.or().andEmailEqualTo(email);
+    return userMapper.selectByExample(example);
+  }
 
-    /**
-     * 根据用户ID获取该用户的角色列表
-     *
-     * @param id
-     * @return
-     */
-    @Override
-    public List<Role> getRoleListByUserId(String id) {
-        return roleMapperPlus.selectRoleListByUserId(id);
-    }
+  /**
+   * 根据用户ID获取该用户的角色列表
+   *
+   * @param id
+   * @return
+   */
+  @Override
+  public List<Role> getRoleListByUserId(String id) {
+    return roleMapperPlus.selectRoleListByUserId(id);
+  }
 
-    /**
-     * 通过用户登录名(email)获取该用户的用户信息及对应的所有角色名(权限点)
-     *
-     * @param username
-     * @return
-     * @throws UsernameNotFoundException
-     */
-    @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException, MyException {
-        List<User> userList = getUserByEmail(username);
-        checkState(userList.size() == 1, "暂无此用户,email:" + username);
-        List<Role> roleList = getRoleListByUserId(userList.get(0).getId());
-        checkState(roleList.size() >= 1, "此用户暂无权限,email:" + username);
-        List<SecurityRole> securityRoleList = new ArrayList<>();
-        for (Role role : roleList) {
-            securityRoleList.add(new SecurityRole(role));
-        }
-        return new SecurityUser(userList.get(0), securityRoleList);
+  /**
+   * 通过用户登录名(email)获取该用户的用户信息及对应的所有角色名(权限点)
+   *
+   * @param username
+   * @return
+   * @throws UsernameNotFoundException
+   */
+  @Override
+  public UserDetails loadUserByUsername(String username)
+      throws UsernameNotFoundException, MyException {
+    List<User> userList = getUserByEmail(username);
+    checkState(userList.size() == 1, "暂无此用户,email:" + username);
+    List<Role> roleList = getRoleListByUserId(userList.get(0).getId());
+    checkState(roleList.size() >= 1, "此用户暂无权限,email:" + username);
+    List<SecurityRole> securityRoleList = new ArrayList<>();
+    for (Role role : roleList) {
+      securityRoleList.add(new SecurityRole(role));
     }
+    return new SecurityUser(userList.get(0), securityRoleList);
+  }
 }

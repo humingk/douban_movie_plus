@@ -14,14 +14,17 @@ import java.util.Objects;
  */
 @Component
 public class MyHostAddrKeyResolver implements KeyResolver {
-    /**
-     * Hostname进行限流，用hostAddress判断
-     *
-     * @param exchange
-     * @return
-     */
-    @Override
-    public Mono<String> resolve(ServerWebExchange exchange) {
-        return Mono.just(Objects.requireNonNull(exchange.getRequest().getRemoteAddress()).getAddress().getHostAddress());
-    }
+  /**
+   * Hostname进行限流，用hostAddress判断
+   *
+   * @param exchange
+   * @return
+   */
+  @Override
+  public Mono<String> resolve(ServerWebExchange exchange) {
+    return Mono.just(
+        Objects.requireNonNull(exchange.getRequest().getRemoteAddress())
+            .getAddress()
+            .getHostAddress());
+  }
 }

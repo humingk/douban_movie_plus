@@ -11,8 +11,8 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PositiveOrZero;
 
 // 用于生成API文档
-//import org.springframework.web.bind.annotation.RestController;
-//@RestController
+// import org.springframework.web.bind.annotation.RestController;
+// @RestController
 
 /**
  * 知乎API
@@ -22,20 +22,19 @@ import javax.validation.constraints.PositiveOrZero;
 @Validated
 @FeignClient("movie-server-movie")
 public interface ZhihuApi {
-    /**
-     * 豆瓣电影知乎相关问题
-     *
-     * @param id     电影豆瓣ID
-     * @param offset 偏移量（默认0）
-     * @param limit  限制数（默认10）
-     * @return
-     */
-    @RequestMapping(value = "/movie/zhihu/questions", method = RequestMethod.GET)
-    Result questions(@RequestParam("id") @NotNull Long id,
-                     @RequestParam(value = "offset",
-                             required = false,
-                             defaultValue = "0") @PositiveOrZero Integer offset,
-                     @RequestParam(value = "limit",
-                             required = false,
-                             defaultValue = "10") @PositiveOrZero Integer limit);
+  /**
+   * 豆瓣电影知乎相关问题
+   *
+   * @param id 电影豆瓣ID
+   * @param offset 偏移量（默认0）
+   * @param limit 限制数（默认10）
+   * @return
+   */
+  @RequestMapping(value = "/movie/zhihu/questions", method = RequestMethod.GET)
+  Result questions(
+      @RequestParam("id") @NotNull Long id,
+      @RequestParam(value = "offset", required = false, defaultValue = "0") @PositiveOrZero
+          Integer offset,
+      @RequestParam(value = "limit", required = false, defaultValue = "10") @PositiveOrZero
+          Integer limit);
 }

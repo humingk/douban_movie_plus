@@ -11,13 +11,13 @@ import org.springframework.web.bind.annotation.RestController;
  * @author humingk
  */
 public class FallbackController {
-    /**
-     * Hytrix熔断处理
-     *
-     * @return
-     */
-    @RequestMapping("/fallback")
-    public Result fallback() {
-        return Result.error("gateway fallback");
-    }
+  /**
+   * Hytrix熔断处理
+   *
+   * @return
+   */
+  @RequestMapping("/fallback")
+  public Result fallback() {
+    return Result.error("gateway fallback");
+  }
 }

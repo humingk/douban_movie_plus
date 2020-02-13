@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import javax.validation.constraints.PositiveOrZero;
 
 // 用于生成API文档
-//import org.springframework.web.bind.annotation.RestController;
-//@RestController
+// import org.springframework.web.bind.annotation.RestController;
+// @RestController
 
 /**
  * ROOT用户相关API
@@ -22,19 +22,17 @@ import javax.validation.constraints.PositiveOrZero;
 @FeignClient("movie-server-user")
 public interface RootApi {
 
-    /**
-     * 普通用户列表
-     *
-     * @param offset 偏移量（默认0）
-     * @param limit  限制数（默认10）
-     * @return
-     */
-    @RequestMapping(value = "/root/users_list", method = RequestMethod.GET)
-    Result usersList(
-            @RequestParam(value = "offset",
-                    required = false,
-                    defaultValue = "0") @PositiveOrZero Integer offset,
-            @RequestParam(value = "limit",
-                    required = false,
-                    defaultValue = "10") @PositiveOrZero Integer limit);
+  /**
+   * 普通用户列表
+   *
+   * @param offset 偏移量（默认0）
+   * @param limit 限制数（默认10）
+   * @return
+   */
+  @RequestMapping(value = "/root/users_list", method = RequestMethod.GET)
+  Result usersList(
+      @RequestParam(value = "offset", required = false, defaultValue = "0") @PositiveOrZero
+          Integer offset,
+      @RequestParam(value = "limit", required = false, defaultValue = "10") @PositiveOrZero
+          Integer limit);
 }

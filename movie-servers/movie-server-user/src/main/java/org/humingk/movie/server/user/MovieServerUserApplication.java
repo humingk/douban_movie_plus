@@ -6,23 +6,20 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.context.annotation.ComponentScan;
 
-/**
- * @author humingk
- */
+/** @author humingk */
 @SpringBootApplication
 @EnableEurekaClient
-@ComponentScan(basePackages = {
-        "org.humingk.movie.server.user",
-        "org.humingk.movie.service.user",
-        "org.humingk.movie.common",
-        "org.humingk.movie.api"
-})
-@MapperScan(basePackages = {
-        "org.humingk.movie.dal.mapper"
-})
+@ComponentScan(
+    basePackages = {
+      "org.humingk.movie.server.user",
+      "org.humingk.movie.service.user",
+      "org.humingk.movie.common",
+      "org.humingk.movie.api"
+    })
+@MapperScan(basePackages = {"org.humingk.movie.dal.mapper"})
 public class MovieServerUserApplication {
 
-    public static void main(String[] args) {
-        SpringApplication.run(MovieServerUserApplication.class, args);
-    }
+  public static void main(String[] args) {
+    SpringApplication.run(MovieServerUserApplication.class, args);
+  }
 }

@@ -13,27 +13,25 @@ import javax.validation.ConstraintViolationException;
 @RunWith(SpringJUnit4ClassRunner.class)
 public class MyUserDetailsServiceImplTest {
 
-    @Autowired
-    private MyUserDetailsService myUserDetailsService;
+  @Autowired private MyUserDetailsService myUserDetailsService;
 
-    @Test
-    public void getUserByEmail() {
-        System.out.println(myUserDetailsService.getUserByEmail("email1").toString());
-    }
+  @Test
+  public void getUserByEmail() {
+    System.out.println(myUserDetailsService.getUserByEmail("email1").toString());
+  }
 
-    @Test(expected = ConstraintViolationException.class)
-    public void getUserByEmail2() {
-        System.out.println(myUserDetailsService.getUserByEmail("11").toString());
-    }
+  @Test(expected = ConstraintViolationException.class)
+  public void getUserByEmail2() {
+    System.out.println(myUserDetailsService.getUserByEmail("11").toString());
+  }
 
+  @Test
+  public void getRoleListByUserId() {
+    System.out.println(myUserDetailsService.getRoleListByUserId("humingk").toString());
+  }
 
-    @Test
-    public void getRoleListByUserId() {
-        System.out.println(myUserDetailsService.getRoleListByUserId("humingk").toString());
-    }
-
-    @Test
-    public void loadUserByUsername() {
-        System.out.println(myUserDetailsService.loadUserByUsername("email1").toString());
-    }
+  @Test
+  public void loadUserByUsername() {
+    System.out.println(myUserDetailsService.loadUserByUsername("email1").toString());
+  }
 }

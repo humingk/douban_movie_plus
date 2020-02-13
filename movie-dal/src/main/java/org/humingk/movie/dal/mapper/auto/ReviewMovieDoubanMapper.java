@@ -1,38 +1,45 @@
 package org.humingk.movie.dal.mapper.auto;
 
-import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.humingk.movie.dal.entity.ReviewMovieDouban;
 import org.humingk.movie.dal.entity.ReviewMovieDoubanExample;
 
+import java.util.List;
+
 @Mapper
 public interface ReviewMovieDoubanMapper {
-    long countByExample(ReviewMovieDoubanExample example);
+  long countByExample(ReviewMovieDoubanExample example);
 
-    int deleteByExample(ReviewMovieDoubanExample example);
+  int deleteByExample(ReviewMovieDoubanExample example);
 
-    int deleteByPrimaryKey(Long id);
+  int deleteByPrimaryKey(Long id);
 
-    int insert(ReviewMovieDouban record);
+  int insert(ReviewMovieDouban record);
 
-    int insertSelective(ReviewMovieDouban record);
+  int insertSelective(ReviewMovieDouban record);
 
-    List<ReviewMovieDouban> selectByExampleWithBLOBs(ReviewMovieDoubanExample example);
+  List<ReviewMovieDouban> selectByExampleWithBLOBs(ReviewMovieDoubanExample example);
 
-    List<ReviewMovieDouban> selectByExample(ReviewMovieDoubanExample example);
+  List<ReviewMovieDouban> selectByExample(ReviewMovieDoubanExample example);
 
-    ReviewMovieDouban selectByPrimaryKey(Long id);
+  ReviewMovieDouban selectByPrimaryKey(Long id);
 
-    int updateByExampleSelective(@Param("record") ReviewMovieDouban record, @Param("example") ReviewMovieDoubanExample example);
+  int updateByExampleSelective(
+      @Param("record") ReviewMovieDouban record,
+      @Param("example") ReviewMovieDoubanExample example);
 
-    int updateByExampleWithBLOBs(@Param("record") ReviewMovieDouban record, @Param("example") ReviewMovieDoubanExample example);
+  int updateByExampleWithBLOBs(
+      @Param("record") ReviewMovieDouban record,
+      @Param("example") ReviewMovieDoubanExample example);
 
-    int updateByExample(@Param("record") ReviewMovieDouban record, @Param("example") ReviewMovieDoubanExample example);
+  int updateByExample(
+      @Param("record") ReviewMovieDouban record,
+      @Param("example") ReviewMovieDoubanExample example);
 
-    int updateByPrimaryKeySelective(ReviewMovieDouban record);
+  int updateByPrimaryKeySelective(ReviewMovieDouban record);
 
-    int updateByPrimaryKeyWithBLOBs(ReviewMovieDouban record);
+  int updateByPrimaryKeyWithBLOBs(ReviewMovieDouban record);
 
-    int updateByPrimaryKey(ReviewMovieDouban record);
+  int updateByPrimaryKey(ReviewMovieDouban record);
 }

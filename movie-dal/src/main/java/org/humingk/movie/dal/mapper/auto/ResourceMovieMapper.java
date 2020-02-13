@@ -1,32 +1,35 @@
 package org.humingk.movie.dal.mapper.auto;
 
-import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.humingk.movie.dal.entity.ResourceMovie;
 import org.humingk.movie.dal.entity.ResourceMovieExample;
 
+import java.util.List;
+
 @Mapper
 public interface ResourceMovieMapper {
-    long countByExample(ResourceMovieExample example);
+  long countByExample(ResourceMovieExample example);
 
-    int deleteByExample(ResourceMovieExample example);
+  int deleteByExample(ResourceMovieExample example);
 
-    int deleteByPrimaryKey(Long id);
+  int deleteByPrimaryKey(Long id);
 
-    int insert(ResourceMovie record);
+  int insert(ResourceMovie record);
 
-    int insertSelective(ResourceMovie record);
+  int insertSelective(ResourceMovie record);
 
-    List<ResourceMovie> selectByExample(ResourceMovieExample example);
+  List<ResourceMovie> selectByExample(ResourceMovieExample example);
 
-    ResourceMovie selectByPrimaryKey(Long id);
+  ResourceMovie selectByPrimaryKey(Long id);
 
-    int updateByExampleSelective(@Param("record") ResourceMovie record, @Param("example") ResourceMovieExample example);
+  int updateByExampleSelective(
+      @Param("record") ResourceMovie record, @Param("example") ResourceMovieExample example);
 
-    int updateByExample(@Param("record") ResourceMovie record, @Param("example") ResourceMovieExample example);
+  int updateByExample(
+      @Param("record") ResourceMovie record, @Param("example") ResourceMovieExample example);
 
-    int updateByPrimaryKeySelective(ResourceMovie record);
+  int updateByPrimaryKeySelective(ResourceMovie record);
 
-    int updateByPrimaryKey(ResourceMovie record);
+  int updateByPrimaryKey(ResourceMovie record);
 }

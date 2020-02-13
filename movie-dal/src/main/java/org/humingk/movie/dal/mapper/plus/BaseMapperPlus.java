@@ -7,6 +7,4 @@ package org.humingk.movie.dal.mapper.plus;
  * @param <E> 实体类对应的Example类
  * @author humingk
  */
-public interface BaseMapperPlus<M, E> {
-
-}
+public interface BaseMapperPlus<M, E> {}

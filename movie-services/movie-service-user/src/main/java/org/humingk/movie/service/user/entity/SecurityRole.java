@@ -7,8 +7,8 @@ import org.springframework.security.core.GrantedAuthority;
 
 /**
  * Spring Security 专用Role类
- * <p>
- * 实现GrantedAuthority:  用户获取权限认证
+ *
+ * <p>实现GrantedAuthority: 用户获取权限认证
  *
  * @author humingk
  */
@@ -16,18 +16,17 @@ import org.springframework.security.core.GrantedAuthority;
 @AllArgsConstructor
 public class SecurityRole extends Role implements GrantedAuthority {
 
-    /**
-     * 获取角色名(权限点)
-     *
-     * @return
-     */
-    @Override
-    public String getAuthority() {
-        return getNameZh();
-    }
+  public SecurityRole(Role role) {
+    super(role.getId(), role.getNameZh(), role.getDescription());
+  }
 
-    public SecurityRole(Role role) {
-        super(role.getId(), role.getNameZh(), role.getDescription());
-    }
-
+  /**
+   * 获取角色名(权限点)
+   *
+   * @return
+   */
+  @Override
+  public String getAuthority() {
+    return getNameZh();
+  }
 }

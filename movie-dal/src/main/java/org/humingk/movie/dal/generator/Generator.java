@@ -15,19 +15,19 @@ import java.util.List;
  * @author humingk
  */
 public class Generator {
-    public static void main(String[] args) {
-        try {
-            List<String> warnings = new ArrayList<>();
-            boolean overwrite = true;
-            ClassLoader classloader = Thread.currentThread().getContextClassLoader();
-            InputStream is = classloader.getResourceAsStream("mybatis/generatorConfig.xml");
-            ConfigurationParser cp = new ConfigurationParser(warnings);
-            Configuration config = cp.parseConfiguration(is);
-            DefaultShellCallback callback = new DefaultShellCallback(overwrite);
-            MyBatisGenerator myBatisGenerator = new MyBatisGenerator(config, callback, warnings);
-            myBatisGenerator.generate(null);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+  public static void main(String[] args) {
+    try {
+      List<String> warnings = new ArrayList<>();
+      boolean overwrite = true;
+      ClassLoader classloader = Thread.currentThread().getContextClassLoader();
+      InputStream is = classloader.getResourceAsStream("mybatis/generatorConfig.xml");
+      ConfigurationParser cp = new ConfigurationParser(warnings);
+      Configuration config = cp.parseConfiguration(is);
+      DefaultShellCallback callback = new DefaultShellCallback(overwrite);
+      MyBatisGenerator myBatisGenerator = new MyBatisGenerator(config, callback, warnings);
+      myBatisGenerator.generate(null);
+    } catch (Exception e) {
+      e.printStackTrace();
     }
+  }
 }

@@ -19,46 +19,45 @@ import org.springframework.security.oauth2.config.annotation.web.configurers.Res
 @Configuration
 public class MyResourceServerConfig extends ResourceServerConfig {
 
-    @Value("${security.oauth2.resource.id}")
-    private String resourceId;
+  @Value("${security.oauth2.resource.id}")
+  private String resourceId;
 
-    @Autowired
-    private MyAccessDeniedHandler myAccessDeniedHandler;
+  @Autowired private MyAccessDeniedHandler myAccessDeniedHandler;
 
-    @Autowired
-    private MyAuthenticationEntryPoint myAuthenticationEntryPoint;
+  @Autowired private MyAuthenticationEntryPoint myAuthenticationEntryPoint;
 
+  /**
+   * 路径过滤
+   *
+   * @param httpSecurity
+   * @throws Exception
+   */
+  @Override
+  public void configure(HttpSecurity httpSecurity) throws Exception {
+    httpSecurity
+        .csrf()
+        .disable()
+        // 不需要保护的资源路径
+        .authorizeRequests()
+        .antMatchers("/netease/**")
+        .permitAll()
+        // 剩下都是需要保护的资源路径
+        .anyRequest()
+        .authenticated();
+  }
 
-    /**
-     * 路径过滤
-     *
-     * @param httpSecurity
-     * @throws Exception
-     */
-    @Override
-    public void configure(HttpSecurity httpSecurity) throws Exception {
-        httpSecurity
-                .csrf().disable()
-                // 不需要保护的资源路径
-                .authorizeRequests().antMatchers(
-                "/netease/**"
-        ).permitAll()
-                // 剩下都是需要保护的资源路径
-                .anyRequest().authenticated();
-    }
-
-    /**
-     * 资源服务器的属性配置
-     *
-     * @param resources
-     */
-    @Override
-    public void configure(ResourceServerSecurityConfigurer resources) {
-        resources
-                // 配置资源服务器ID
-                .resourceId(resourceId)
-                // 自定义异常
-                .accessDeniedHandler(myAccessDeniedHandler)
-                .authenticationEntryPoint(myAuthenticationEntryPoint);
-    }
+  /**
+   * 资源服务器的属性配置
+   *
+   * @param resources
+   */
+  @Override
+  public void configure(ResourceServerSecurityConfigurer resources) {
+    resources
+        // 配置资源服务器ID
+        .resourceId(resourceId)
+        // 自定义异常
+        .accessDeniedHandler(myAccessDeniedHandler)
+        .authenticationEntryPoint(myAuthenticationEntryPoint);
+  }
 }

@@ -6,13 +6,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.constraints.NotNull;
 
-/**
- * @author humingk
- */
+/** @author humingk */
 @RestController
 public class ImdbController implements ImdbApi {
-    @Override
-    public Result details(@NotNull Long id) {
-        return null;
-    }
+  @Override
+  public Result details(@NotNull Long id) {
+    return null;
+  }
 }

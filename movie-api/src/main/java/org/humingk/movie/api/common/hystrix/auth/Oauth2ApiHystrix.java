@@ -7,25 +7,18 @@ import org.springframework.stereotype.Component;
 
 import java.util.Map;
 
-/**
- * @author humingk
- */
+/** @author humingk */
 @Component
 public class Oauth2ApiHystrix implements Oauth2Api {
-    /**
-     * post请求申请token
-     *
-     * @param parameters 请求参数:
-     *                   username：      用户名
-     *                   password：      密码
-     *                   grant_type：    模式
-     *                   scope：         权限范围
-     *                   client_id：     客户端ID
-     *                   client_secret： 客户端密钥
-     * @return
-     */
-    @Override
-    public ResponseEntity<Object> postAccessToken(Map<String, String> parameters) {
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("hystrix");
-    }
+  /**
+   * post请求申请token
+   *
+   * @param parameters 请求参数: username： 用户名 password： 密码 grant_type： 模式 scope： 权限范围 client_id： 客户端ID
+   *     client_secret： 客户端密钥
+   * @return
+   */
+  @Override
+  public ResponseEntity<Object> postAccessToken(Map<String, String> parameters) {
+    return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("hystrix");
+  }
 }
