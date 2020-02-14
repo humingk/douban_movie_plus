@@ -6,7 +6,7 @@
     <result column="id_celebrity_imdb" jdbcType="BIGINT" property="idCelebrityImdb" />
     <result column="name_zh" jdbcType="VARCHAR" property="nameZh" />
     <result column="name_origin" jdbcType="VARCHAR" property="nameOrigin" />
-    <result column="sex" jdbcType="BIT" property="sex" />
+    <result column="sex" jdbcType="TINYINT" property="sex" />
     <result column="birth_date" jdbcType="BIGINT" property="birthDate" />
     <result column="url_portrait" jdbcType="BIGINT" property="urlPortrait" />
   </resultMap>
@@ -130,7 +130,7 @@
       name_origin, sex, birth_date, 
       url_portrait, summary)
     values (#{id,jdbcType=BIGINT}, #{idCelebrityImdb,jdbcType=BIGINT}, #{nameZh,jdbcType=VARCHAR}, 
-      #{nameOrigin,jdbcType=VARCHAR}, #{sex,jdbcType=BIT}, #{birthDate,jdbcType=BIGINT}, 
+      #{nameOrigin,jdbcType=VARCHAR}, #{sex,jdbcType=TINYINT}, #{birthDate,jdbcType=BIGINT}, 
       #{urlPortrait,jdbcType=BIGINT}, #{summary,jdbcType=LONGVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="org.humingk.movie.dal.entity.CelebrityDouban">
@@ -175,7 +175,7 @@
         #{nameOrigin,jdbcType=VARCHAR},
       </if>
       <if test="sex != null">
-        #{sex,jdbcType=BIT},
+        #{sex,jdbcType=TINYINT},
       </if>
       <if test="birthDate != null">
         #{birthDate,jdbcType=BIGINT},
@@ -210,7 +210,7 @@
         name_origin = #{record.nameOrigin,jdbcType=VARCHAR},
       </if>
       <if test="record.sex != null">
-        sex = #{record.sex,jdbcType=BIT},
+        sex = #{record.sex,jdbcType=TINYINT},
       </if>
       <if test="record.birthDate != null">
         birth_date = #{record.birthDate,jdbcType=BIGINT},
@@ -232,7 +232,7 @@
       id_celebrity_imdb = #{record.idCelebrityImdb,jdbcType=BIGINT},
       name_zh = #{record.nameZh,jdbcType=VARCHAR},
       name_origin = #{record.nameOrigin,jdbcType=VARCHAR},
-      sex = #{record.sex,jdbcType=BIT},
+      sex = #{record.sex,jdbcType=TINYINT},
       birth_date = #{record.birthDate,jdbcType=BIGINT},
       url_portrait = #{record.urlPortrait,jdbcType=BIGINT},
       summary = #{record.summary,jdbcType=LONGVARCHAR}
@@ -246,7 +246,7 @@
       id_celebrity_imdb = #{record.idCelebrityImdb,jdbcType=BIGINT},
       name_zh = #{record.nameZh,jdbcType=VARCHAR},
       name_origin = #{record.nameOrigin,jdbcType=VARCHAR},
-      sex = #{record.sex,jdbcType=BIT},
+      sex = #{record.sex,jdbcType=TINYINT},
       birth_date = #{record.birthDate,jdbcType=BIGINT},
       url_portrait = #{record.urlPortrait,jdbcType=BIGINT}
     <if test="_parameter != null">
@@ -266,7 +266,7 @@
         name_origin = #{nameOrigin,jdbcType=VARCHAR},
       </if>
       <if test="sex != null">
-        sex = #{sex,jdbcType=BIT},
+        sex = #{sex,jdbcType=TINYINT},
       </if>
       <if test="birthDate != null">
         birth_date = #{birthDate,jdbcType=BIGINT},
@@ -285,7 +285,7 @@
     set id_celebrity_imdb = #{idCelebrityImdb,jdbcType=BIGINT},
       name_zh = #{nameZh,jdbcType=VARCHAR},
       name_origin = #{nameOrigin,jdbcType=VARCHAR},
-      sex = #{sex,jdbcType=BIT},
+      sex = #{sex,jdbcType=TINYINT},
       birth_date = #{birthDate,jdbcType=BIGINT},
       url_portrait = #{urlPortrait,jdbcType=BIGINT},
       summary = #{summary,jdbcType=LONGVARCHAR}
@@ -296,7 +296,7 @@
     set id_celebrity_imdb = #{idCelebrityImdb,jdbcType=BIGINT},
       name_zh = #{nameZh,jdbcType=VARCHAR},
       name_origin = #{nameOrigin,jdbcType=VARCHAR},
-      sex = #{sex,jdbcType=BIT},
+      sex = #{sex,jdbcType=TINYINT},
       birth_date = #{birthDate,jdbcType=BIGINT},
       url_portrait = #{urlPortrait,jdbcType=BIGINT}
     where id = #{id,jdbcType=BIGINT}

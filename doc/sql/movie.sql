@@ -107,7 +107,7 @@ create table movie_imdb
     # IMDB电影发行年份 、 电视剧首集播放年份
     start_year      smallint(4) unsigned not null default 0,
     # 是否是成人电影 0-不是 1-是
-    is_adult        tinyint(1)           not null default 0,
+    is_adult        tinyint(2)           not null default 0,
     # IMDB电影原始名
     name_origin     varchar(255)         not null default '',
     # IMDB电影片长 分钟
@@ -190,9 +190,9 @@ create table movie_douban
     # 想看人数
     wanna_see     int unsigned         not null default 0,
     # 是否有对应的网易云音乐 0:未匹配 1:没有 2：有
-    is_netease    tinyint(1)           not null default 0,
+    is_netease    tinyint(2)           not null default 0,
     # 是否有对应的知乎电影话题或问题 0:未匹配 1:没有 2：有
-    is_zhihu      tinyint(1)           not null default 0,
+    is_zhihu      tinyint(2)           not null default 0,
 
 
     index (id_type_video),
@@ -356,7 +356,7 @@ create table movie_douban_to_award_movie
     # 获奖奖项届数 
     award_th            smallint unsigned not null default 1,
     # 是否提名 0-仅提名，未获奖 1-获奖者，非提名
-    is_nominated        tinyint(1)        not null default 0,
+    is_nominated        tinyint(2)        not null default 0,
 
     primary key (id_movie_douban, id_award_movie, id_celebrity_douban, type_award, award_th)
 ) ENGINE = InnoDB
@@ -448,7 +448,7 @@ create table celebrity_douban
     # 英文名
     name_origin       varchar(255)    not null default '',
     # 性别 0-女 1-男 2-其他
-    sex               tinyint(1)      not null default 2,
+    sex               tinyint(2)      not null default 2,
     # 生日日期
     birth_date        bigint          not null default 0,
     # 豆瓣影人海报ID
@@ -471,7 +471,7 @@ create table alias_celebrity_douban
     # 豆瓣影人别称
     name_alias          varchar(255)    not null default '',
     # 是否为昵称 0-本名 1-昵称
-    is_nikename         tinyint(1)      not null default 0,
+    is_nikename         tinyint(2)      not null default 0,
 
     primary key (id_celebrity_douban, name_alias)
 ) ENGINE = InnoDB
@@ -722,9 +722,9 @@ create table user_douban_to_movie_douban
     # 用户对电影的评分 0.0 ～ 10.0
     score           decimal(3, 1)   not null default 0.0,
     # 标记用户是否想看 0-未标记 1-已想看
-    is_wish         tinyint(1)      not null default 0,
+    is_wish         tinyint(2)      not null default 0,
     # 标记用户是否看过 0-未标记 1-已看过
-    is_seen         tinyint(1)      not null default 0,
+    is_seen         tinyint(2)      not null default 0,
 
     primary key (id_user_douban, id_movie_douban, score desc)
 ) ENGINE = InnoDB
@@ -1382,22 +1382,21 @@ values (2, '免费观看'),
        (117, '1024高清');
 
 insert into profession
-values (1, '未知',
-        'unknown'),
+values (1, '未知', 'unknown'),
        (2, '导演', 'director'),
        (3, '编剧', 'writer'),
-       (4, '主演', 'starring'),
+       (4, '演员', 'starring'),
        # 来自IMDB
        (5, '男演员', 'actor'),
        (6, '女演员', 'actress'),
-       (7, '', 'archive_footage'),
-       (8, '', 'archive_sound'),
-       (9, '', 'cinematographer'),
-       (10, '', 'composer'),
-       (11, '', 'editor'),
-       (12, '', 'producer'),
-       (13, '', 'production_designer'),
-       (14, '', 'self');
+       (7, '存档胶片', 'archive_footage'),
+       (8, '存档声音', 'archive_sound'),
+       (9, '摄影师', 'cinematographer'),
+       (10, '作曲家', 'composer'),
+       (11, '编辑', 'editor'),
+       (12, '制片人', 'producer'),
+       (13, '美工', 'production_designer'),
+       (14, '自己？', 'self');
 
 insert into type_movie
 values (1, '未知'),

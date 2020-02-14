@@ -4,7 +4,7 @@
   <resultMap id="BaseResultMap" type="org.humingk.movie.dal.entity.AliasCelebrityDouban">
     <id column="id_celebrity_douban" jdbcType="BIGINT" property="idCelebrityDouban" />
     <id column="name_alias" jdbcType="VARCHAR" property="nameAlias" />
-    <result column="is_nikename" jdbcType="BIT" property="isNikename" />
+    <result column="is_nikename" jdbcType="TINYINT" property="isNikename" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -102,7 +102,7 @@
   <insert id="insert" parameterType="org.humingk.movie.dal.entity.AliasCelebrityDouban">
     insert into alias_celebrity_douban (id_celebrity_douban, name_alias, is_nikename
       )
-    values (#{idCelebrityDouban,jdbcType=BIGINT}, #{nameAlias,jdbcType=VARCHAR}, #{isNikename,jdbcType=BIT}
+    values (#{idCelebrityDouban,jdbcType=BIGINT}, #{nameAlias,jdbcType=VARCHAR}, #{isNikename,jdbcType=TINYINT}
       )
   </insert>
   <insert id="insertSelective" parameterType="org.humingk.movie.dal.entity.AliasCelebrityDouban">
@@ -126,7 +126,7 @@
         #{nameAlias,jdbcType=VARCHAR},
       </if>
       <if test="isNikename != null">
-        #{isNikename,jdbcType=BIT},
+        #{isNikename,jdbcType=TINYINT},
       </if>
     </trim>
   </insert>
@@ -146,7 +146,7 @@
         name_alias = #{record.nameAlias,jdbcType=VARCHAR},
       </if>
       <if test="record.isNikename != null">
-        is_nikename = #{record.isNikename,jdbcType=BIT},
+        is_nikename = #{record.isNikename,jdbcType=TINYINT},
       </if>
     </set>
     <if test="_parameter != null">
@@ -157,7 +157,7 @@
     update alias_celebrity_douban
     set id_celebrity_douban = #{record.idCelebrityDouban,jdbcType=BIGINT},
       name_alias = #{record.nameAlias,jdbcType=VARCHAR},
-      is_nikename = #{record.isNikename,jdbcType=BIT}
+      is_nikename = #{record.isNikename,jdbcType=TINYINT}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -166,7 +166,7 @@
     update alias_celebrity_douban
     <set>
       <if test="isNikename != null">
-        is_nikename = #{isNikename,jdbcType=BIT},
+        is_nikename = #{isNikename,jdbcType=TINYINT},
       </if>
     </set>
     where id_celebrity_douban = #{idCelebrityDouban,jdbcType=BIGINT}
@@ -174,7 +174,7 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="org.humingk.movie.dal.entity.AliasCelebrityDouban">
     update alias_celebrity_douban
-    set is_nikename = #{isNikename,jdbcType=BIT}
+    set is_nikename = #{isNikename,jdbcType=TINYINT}
     where id_celebrity_douban = #{idCelebrityDouban,jdbcType=BIGINT}
       and name_alias = #{nameAlias,jdbcType=VARCHAR}
   </update>

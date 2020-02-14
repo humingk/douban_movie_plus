@@ -71,8 +71,9 @@ public class MovieImdbExample {
     }
 
     public Criteria start() {
+        oredCriteria = new ArrayList<>();
         clear();
-        return createCriteriaInternal();
+        return createCriteria();
     }
 
     protected abstract static class GeneratedCriteria {
@@ -376,52 +377,52 @@ public class MovieImdbExample {
             return (Criteria) this;
         }
 
-        public Criteria andIsAdultEqualTo(Boolean value) {
+        public Criteria andIsAdultEqualTo(Byte value) {
             addCriterion("is_adult =", value, "isAdult");
             return (Criteria) this;
         }
 
-        public Criteria andIsAdultNotEqualTo(Boolean value) {
+        public Criteria andIsAdultNotEqualTo(Byte value) {
             addCriterion("is_adult <>", value, "isAdult");
             return (Criteria) this;
         }
 
-        public Criteria andIsAdultGreaterThan(Boolean value) {
+        public Criteria andIsAdultGreaterThan(Byte value) {
             addCriterion("is_adult >", value, "isAdult");
             return (Criteria) this;
         }
 
-        public Criteria andIsAdultGreaterThanOrEqualTo(Boolean value) {
+        public Criteria andIsAdultGreaterThanOrEqualTo(Byte value) {
             addCriterion("is_adult >=", value, "isAdult");
             return (Criteria) this;
         }
 
-        public Criteria andIsAdultLessThan(Boolean value) {
+        public Criteria andIsAdultLessThan(Byte value) {
             addCriterion("is_adult <", value, "isAdult");
             return (Criteria) this;
         }
 
-        public Criteria andIsAdultLessThanOrEqualTo(Boolean value) {
+        public Criteria andIsAdultLessThanOrEqualTo(Byte value) {
             addCriterion("is_adult <=", value, "isAdult");
             return (Criteria) this;
         }
 
-        public Criteria andIsAdultIn(List<Boolean> values) {
+        public Criteria andIsAdultIn(List<Byte> values) {
             addCriterion("is_adult in", values, "isAdult");
             return (Criteria) this;
         }
 
-        public Criteria andIsAdultNotIn(List<Boolean> values) {
+        public Criteria andIsAdultNotIn(List<Byte> values) {
             addCriterion("is_adult not in", values, "isAdult");
             return (Criteria) this;
         }
 
-        public Criteria andIsAdultBetween(Boolean value1, Boolean value2) {
+        public Criteria andIsAdultBetween(Byte value1, Byte value2) {
             addCriterion("is_adult between", value1, value2, "isAdult");
             return (Criteria) this;
         }
 
-        public Criteria andIsAdultNotBetween(Boolean value1, Boolean value2) {
+        public Criteria andIsAdultNotBetween(Byte value1, Byte value2) {
             addCriterion("is_adult not between", value1, value2, "isAdult");
             return (Criteria) this;
         }

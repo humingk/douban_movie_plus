@@ -33,12 +33,12 @@ public class UserDoubanToMovieDouban implements Serializable {
     /**
      * 是否想看 0-未标记 1-已想看
      */
-    private Boolean isWish;
+    private Byte isWish;
 
     /**
      * 是否看过 0-未标记 1-已看过
      */
-    private Boolean isSeen;
+    private Byte isSeen;
 
     private static final long serialVersionUID = 1L;
 }

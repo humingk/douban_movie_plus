@@ -5,8 +5,8 @@
     <id column="id_user_douban" jdbcType="VARCHAR" property="idUserDouban" />
     <id column="id_movie_douban" jdbcType="BIGINT" property="idMovieDouban" />
     <id column="score" jdbcType="DECIMAL" property="score" />
-    <result column="is_wish" jdbcType="BIT" property="isWish" />
-    <result column="is_seen" jdbcType="BIT" property="isSeen" />
+    <result column="is_wish" jdbcType="TINYINT" property="isWish" />
+    <result column="is_seen" jdbcType="TINYINT" property="isSeen" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -107,7 +107,7 @@
     insert into user_douban_to_movie_douban (id_user_douban, id_movie_douban, score, 
       is_wish, is_seen)
     values (#{idUserDouban,jdbcType=VARCHAR}, #{idMovieDouban,jdbcType=BIGINT}, #{score,jdbcType=DECIMAL}, 
-      #{isWish,jdbcType=BIT}, #{isSeen,jdbcType=BIT})
+      #{isWish,jdbcType=TINYINT}, #{isSeen,jdbcType=TINYINT})
   </insert>
   <insert id="insertSelective" parameterType="org.humingk.movie.dal.entity.UserDoubanToMovieDouban">
     insert into user_douban_to_movie_douban
@@ -139,10 +139,10 @@
         #{score,jdbcType=DECIMAL},
       </if>
       <if test="isWish != null">
-        #{isWish,jdbcType=BIT},
+        #{isWish,jdbcType=TINYINT},
       </if>
       <if test="isSeen != null">
-        #{isSeen,jdbcType=BIT},
+        #{isSeen,jdbcType=TINYINT},
       </if>
     </trim>
   </insert>
@@ -165,10 +165,10 @@
         score = #{record.score,jdbcType=DECIMAL},
       </if>
       <if test="record.isWish != null">
-        is_wish = #{record.isWish,jdbcType=BIT},
+        is_wish = #{record.isWish,jdbcType=TINYINT},
       </if>
       <if test="record.isSeen != null">
-        is_seen = #{record.isSeen,jdbcType=BIT},
+        is_seen = #{record.isSeen,jdbcType=TINYINT},
       </if>
     </set>
     <if test="_parameter != null">
@@ -180,8 +180,8 @@
     set id_user_douban = #{record.idUserDouban,jdbcType=VARCHAR},
       id_movie_douban = #{record.idMovieDouban,jdbcType=BIGINT},
       score = #{record.score,jdbcType=DECIMAL},
-      is_wish = #{record.isWish,jdbcType=BIT},
-      is_seen = #{record.isSeen,jdbcType=BIT}
+      is_wish = #{record.isWish,jdbcType=TINYINT},
+      is_seen = #{record.isSeen,jdbcType=TINYINT}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -190,10 +190,10 @@
     update user_douban_to_movie_douban
     <set>
       <if test="isWish != null">
-        is_wish = #{isWish,jdbcType=BIT},
+        is_wish = #{isWish,jdbcType=TINYINT},
       </if>
       <if test="isSeen != null">
-        is_seen = #{isSeen,jdbcType=BIT},
+        is_seen = #{isSeen,jdbcType=TINYINT},
       </if>
     </set>
     where id_user_douban = #{idUserDouban,jdbcType=VARCHAR}
@@ -202,8 +202,8 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="org.humingk.movie.dal.entity.UserDoubanToMovieDouban">
     update user_douban_to_movie_douban
-    set is_wish = #{isWish,jdbcType=BIT},
-      is_seen = #{isSeen,jdbcType=BIT}
+    set is_wish = #{isWish,jdbcType=TINYINT},
+      is_seen = #{isSeen,jdbcType=TINYINT}
     where id_user_douban = #{idUserDouban,jdbcType=VARCHAR}
       and id_movie_douban = #{idMovieDouban,jdbcType=BIGINT}
       and score = #{score,jdbcType=DECIMAL}

@@ -46,10 +46,10 @@ public class MovieDouban implements Serializable {
   private Integer wannaSee;
 
   /** 是否匹配到网易云音乐 0-未匹配 1-匹配无 2-匹配有 */
-  private Boolean isNetease;
+  private Byte isNetease;
 
   /** 是否匹配到知乎话题或问题 0-未匹配 1-匹配无 2-匹配有 */
-  private Boolean isZhihu;
+  private Byte isZhihu;
 
   /** 简介 */
   private String summary;

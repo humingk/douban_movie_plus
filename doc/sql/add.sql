@@ -67,7 +67,7 @@ alter table movie_imdb
     modify column start_year smallint(4) unsigned not null default 0 comment 'IMDB电影发行年份';
 # 是否是成人电影 0-不是 1-是
 alter table movie_imdb
-    modify column is_adult tinyint(1) not null default 0 comment '是否是成人电影 0-不是 1-是';
+    modify column is_adult tinyint(2) not null default 0 comment '是否是成人电影 0-不是 1-是';
 # IMDB电影原始名
 alter table movie_imdb
     modify column name_origin varchar(255) not null default '' comment 'IMDB电影原始名';
@@ -159,10 +159,10 @@ alter table movie_douban
     modify column wanna_see int unsigned not null default 0 comment '想看人数';
 # 是否有对应的网易云音乐 0:未匹配 1:没有 2：有
 alter table movie_douban
-    modify column is_netease tinyint(1) not null default 0 comment '是否匹配到网易云音乐 0-未匹配 1-匹配无 2-匹配有';
+    modify column is_netease tinyint(2) not null default 0 comment '是否匹配到网易云音乐 0-未匹配 1-匹配无 2-匹配有';
 # 是否有对应的知乎电影话题或问题 0:未匹配 1:没有 2：有
 alter table movie_douban
-    modify column is_zhihu tinyint(1) not null default 0 comment '是否匹配到知乎话题或问题 0-未匹配 1-匹配无 2-匹配有';
+    modify column is_zhihu tinyint(2) not null default 0 comment '是否匹配到知乎话题或问题 0-未匹配 1-匹配无 2-匹配有';
 
 
 # 豆瓣电影评分
@@ -325,7 +325,7 @@ alter table movie_douban_to_award_movie
     modify column award_th smallint unsigned not null default 1 comment '获奖奖项届数';
 # 是否提名 0-仅提名，未获奖 1-获奖者，非提名
 alter table movie_douban_to_award_movie
-    modify column is_nominated tinyint(1) not null default 0 comment '是否被提名 0-仅提名未获奖 1-已提名且获奖';
+    modify column is_nominated tinyint(2) not null default 0 comment '是否被提名 0-仅提名未获奖 1-已提名且获奖';
 
 
 # 豆瓣电影-影评
@@ -422,7 +422,7 @@ alter table celebrity_douban
     modify column name_origin varchar(255) not null default '' comment '豆瓣影人英文名';
 # 性别 0-女 1-男 2-其他
 alter table celebrity_douban
-    modify column sex tinyint(1) not null default 2 comment '性别 0-女 1-男 2-未知';
+    modify column sex tinyint(2) not null default 2 comment '性别 0-女 1-男 2-未知';
 # 生日日期
 alter table celebrity_douban
     modify column birth_date bigint not null default 0 comment '生日日期 /unix';
@@ -445,7 +445,7 @@ alter table alias_celebrity_douban
     modify column name_alias varchar(255) not null default '' comment '豆瓣影人别称';
 # 是否为昵称 0-本名 1-昵称
 alter table alias_celebrity_douban
-    modify column is_nikename tinyint(1) not null default 0 comment '是否为昵称 0-本名 1-昵称';
+    modify column is_nikename tinyint(2) not null default 0 comment '是否为昵称 0-本名 1-昵称';
 
 
 
@@ -701,10 +701,10 @@ alter table user_douban_to_movie_douban
     modify column score decimal(3, 1) not null default 0.0 comment '用户对电影的评分';
 # 标记用户是否想看 0-未标记 1-已想看
 alter table user_douban_to_movie_douban
-    modify column is_wish tinyint(1) not null default 0 comment '是否想看 0-未标记 1-已想看';
+    modify column is_wish tinyint(2) not null default 0 comment '是否想看 0-未标记 1-已想看';
 # 标记用户是否看过 0-未标记 1-已看过
 alter table user_douban_to_movie_douban
-    modify column is_seen tinyint(1) not null default 0 comment '是否看过 0-未标记 1-已看过';
+    modify column is_seen tinyint(2) not null default 0 comment '是否看过 0-未标记 1-已看过';
 
 
 # 用户-影评

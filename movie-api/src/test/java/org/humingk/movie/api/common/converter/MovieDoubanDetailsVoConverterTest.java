@@ -1,5 +1,6 @@
 package org.humingk.movie.api.common.converter;
 
+import org.humingk.movie.api.common.converter.movie.MovieDoubanDetailsVoConverter;
 import org.humingk.movie.dal.entity.*;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -24,8 +25,8 @@ public class MovieDoubanDetailsVoConverterTest {
     movieDouban.setSummary("dfaga");
     movieDouban.setIdMovieImdb(123345L);
     movieDouban.setHaveSeen(123);
-    movieDouban.setIsNetease(true);
-    movieDouban.setIsZhihu(true);
+    movieDouban.setIsNetease((byte) 1);
+    movieDouban.setIsZhihu((byte) 1);
     movieDouban.setRuntime((short) 111);
     movieDouban.setNameZh("dagaeg");
     movieDouban.setUrlPoster(123L);
@@ -70,12 +71,12 @@ public class MovieDoubanDetailsVoConverterTest {
     System.out.println("--------------");
     System.out.println(tagMovieList);
     System.out.println("--------------");
-    System.out.println(
-        converter.to(
-            movieDouban,
-            aliasMovieDoubanList,
-            tagMovieList,
-            movieDoubanToTypeMovieList,
-            trailerMovieDoubanList));
+    //    System.out.println(
+    //        converter.to(
+    //            movieDouban,
+    //            aliasMovieDoubanList,
+    //            tagMovieList,
+    //            movieDoubanToTypeMovieList,
+    //            trailerMovieDoubanList));
   }
 }

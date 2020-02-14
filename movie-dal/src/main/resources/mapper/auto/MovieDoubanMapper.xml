@@ -12,8 +12,8 @@
     <result column="url_poster" jdbcType="BIGINT" property="urlPoster" />
     <result column="have_seen" jdbcType="INTEGER" property="haveSeen" />
     <result column="wanna_see" jdbcType="INTEGER" property="wannaSee" />
-    <result column="is_netease" jdbcType="BIT" property="isNetease" />
-    <result column="is_zhihu" jdbcType="BIT" property="isZhihu" />
+    <result column="is_netease" jdbcType="TINYINT" property="isNetease" />
+    <result column="is_zhihu" jdbcType="TINYINT" property="isZhihu" />
   </resultMap>
   <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="org.humingk.movie.dal.entity.MovieDouban">
     <result column="summary" jdbcType="LONGVARCHAR" property="summary" />
@@ -140,7 +140,7 @@
     values (#{id,jdbcType=BIGINT}, #{idTypeVideo,jdbcType=TINYINT}, #{idMovieImdb,jdbcType=BIGINT}, 
       #{startYear,jdbcType=SMALLINT}, #{nameZh,jdbcType=VARCHAR}, #{nameOrigin,jdbcType=VARCHAR}, 
       #{runtime,jdbcType=SMALLINT}, #{urlPoster,jdbcType=BIGINT}, #{haveSeen,jdbcType=INTEGER}, 
-      #{wannaSee,jdbcType=INTEGER}, #{isNetease,jdbcType=BIT}, #{isZhihu,jdbcType=BIT}, 
+      #{wannaSee,jdbcType=INTEGER}, #{isNetease,jdbcType=TINYINT}, #{isZhihu,jdbcType=TINYINT}, 
       #{summary,jdbcType=LONGVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="org.humingk.movie.dal.entity.MovieDouban">
@@ -218,10 +218,10 @@
         #{wannaSee,jdbcType=INTEGER},
       </if>
       <if test="isNetease != null">
-        #{isNetease,jdbcType=BIT},
+        #{isNetease,jdbcType=TINYINT},
       </if>
       <if test="isZhihu != null">
-        #{isZhihu,jdbcType=BIT},
+        #{isZhihu,jdbcType=TINYINT},
       </if>
       <if test="summary != null">
         #{summary,jdbcType=LONGVARCHAR},
@@ -268,10 +268,10 @@
         wanna_see = #{record.wannaSee,jdbcType=INTEGER},
       </if>
       <if test="record.isNetease != null">
-        is_netease = #{record.isNetease,jdbcType=BIT},
+        is_netease = #{record.isNetease,jdbcType=TINYINT},
       </if>
       <if test="record.isZhihu != null">
-        is_zhihu = #{record.isZhihu,jdbcType=BIT},
+        is_zhihu = #{record.isZhihu,jdbcType=TINYINT},
       </if>
       <if test="record.summary != null">
         summary = #{record.summary,jdbcType=LONGVARCHAR},
@@ -293,8 +293,8 @@
       url_poster = #{record.urlPoster,jdbcType=BIGINT},
       have_seen = #{record.haveSeen,jdbcType=INTEGER},
       wanna_see = #{record.wannaSee,jdbcType=INTEGER},
-      is_netease = #{record.isNetease,jdbcType=BIT},
-      is_zhihu = #{record.isZhihu,jdbcType=BIT},
+      is_netease = #{record.isNetease,jdbcType=TINYINT},
+      is_zhihu = #{record.isZhihu,jdbcType=TINYINT},
       summary = #{record.summary,jdbcType=LONGVARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -312,8 +312,8 @@
       url_poster = #{record.urlPoster,jdbcType=BIGINT},
       have_seen = #{record.haveSeen,jdbcType=INTEGER},
       wanna_see = #{record.wannaSee,jdbcType=INTEGER},
-      is_netease = #{record.isNetease,jdbcType=BIT},
-      is_zhihu = #{record.isZhihu,jdbcType=BIT}
+      is_netease = #{record.isNetease,jdbcType=TINYINT},
+      is_zhihu = #{record.isZhihu,jdbcType=TINYINT}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -349,10 +349,10 @@
         wanna_see = #{wannaSee,jdbcType=INTEGER},
       </if>
       <if test="isNetease != null">
-        is_netease = #{isNetease,jdbcType=BIT},
+        is_netease = #{isNetease,jdbcType=TINYINT},
       </if>
       <if test="isZhihu != null">
-        is_zhihu = #{isZhihu,jdbcType=BIT},
+        is_zhihu = #{isZhihu,jdbcType=TINYINT},
       </if>
       <if test="summary != null">
         summary = #{summary,jdbcType=LONGVARCHAR},
@@ -371,8 +371,8 @@
       url_poster = #{urlPoster,jdbcType=BIGINT},
       have_seen = #{haveSeen,jdbcType=INTEGER},
       wanna_see = #{wannaSee,jdbcType=INTEGER},
-      is_netease = #{isNetease,jdbcType=BIT},
-      is_zhihu = #{isZhihu,jdbcType=BIT},
+      is_netease = #{isNetease,jdbcType=TINYINT},
+      is_zhihu = #{isZhihu,jdbcType=TINYINT},
       summary = #{summary,jdbcType=LONGVARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
@@ -387,8 +387,8 @@
       url_poster = #{urlPoster,jdbcType=BIGINT},
       have_seen = #{haveSeen,jdbcType=INTEGER},
       wanna_see = #{wannaSee,jdbcType=INTEGER},
-      is_netease = #{isNetease,jdbcType=BIT},
-      is_zhihu = #{isZhihu,jdbcType=BIT}
+      is_netease = #{isNetease,jdbcType=TINYINT},
+      is_zhihu = #{isZhihu,jdbcType=TINYINT}
     where id = #{id,jdbcType=BIGINT}
   </update>
 </mapper>

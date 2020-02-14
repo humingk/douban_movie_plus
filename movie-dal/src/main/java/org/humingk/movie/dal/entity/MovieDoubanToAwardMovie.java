@@ -42,7 +42,7 @@ public class MovieDoubanToAwardMovie implements Serializable {
     /**
      * 是否被提名 0-仅提名未获奖 1-已提名且获奖
      */
-    private Boolean isNominated;
+    private Byte isNominated;
 
     private static final long serialVersionUID = 1L;
 }

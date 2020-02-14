@@ -72,8 +72,9 @@ public class UserDoubanToMovieDoubanExample {
     }
 
     public Criteria start() {
+        oredCriteria = new ArrayList<>();
         clear();
-        return createCriteriaInternal();
+        return createCriteria();
     }
 
     protected abstract static class GeneratedCriteria {
@@ -317,52 +318,52 @@ public class UserDoubanToMovieDoubanExample {
             return (Criteria) this;
         }
 
-        public Criteria andIsWishEqualTo(Boolean value) {
+        public Criteria andIsWishEqualTo(Byte value) {
             addCriterion("is_wish =", value, "isWish");
             return (Criteria) this;
         }
 
-        public Criteria andIsWishNotEqualTo(Boolean value) {
+        public Criteria andIsWishNotEqualTo(Byte value) {
             addCriterion("is_wish <>", value, "isWish");
             return (Criteria) this;
         }
 
-        public Criteria andIsWishGreaterThan(Boolean value) {
+        public Criteria andIsWishGreaterThan(Byte value) {
             addCriterion("is_wish >", value, "isWish");
             return (Criteria) this;
         }
 
-        public Criteria andIsWishGreaterThanOrEqualTo(Boolean value) {
+        public Criteria andIsWishGreaterThanOrEqualTo(Byte value) {
             addCriterion("is_wish >=", value, "isWish");
             return (Criteria) this;
         }
 
-        public Criteria andIsWishLessThan(Boolean value) {
+        public Criteria andIsWishLessThan(Byte value) {
             addCriterion("is_wish <", value, "isWish");
             return (Criteria) this;
         }
 
-        public Criteria andIsWishLessThanOrEqualTo(Boolean value) {
+        public Criteria andIsWishLessThanOrEqualTo(Byte value) {
             addCriterion("is_wish <=", value, "isWish");
             return (Criteria) this;
         }
 
-        public Criteria andIsWishIn(List<Boolean> values) {
+        public Criteria andIsWishIn(List<Byte> values) {
             addCriterion("is_wish in", values, "isWish");
             return (Criteria) this;
         }
 
-        public Criteria andIsWishNotIn(List<Boolean> values) {
+        public Criteria andIsWishNotIn(List<Byte> values) {
             addCriterion("is_wish not in", values, "isWish");
             return (Criteria) this;
         }
 
-        public Criteria andIsWishBetween(Boolean value1, Boolean value2) {
+        public Criteria andIsWishBetween(Byte value1, Byte value2) {
             addCriterion("is_wish between", value1, value2, "isWish");
             return (Criteria) this;
         }
 
-        public Criteria andIsWishNotBetween(Boolean value1, Boolean value2) {
+        public Criteria andIsWishNotBetween(Byte value1, Byte value2) {
             addCriterion("is_wish not between", value1, value2, "isWish");
             return (Criteria) this;
         }
@@ -377,52 +378,52 @@ public class UserDoubanToMovieDoubanExample {
             return (Criteria) this;
         }
 
-        public Criteria andIsSeenEqualTo(Boolean value) {
+        public Criteria andIsSeenEqualTo(Byte value) {
             addCriterion("is_seen =", value, "isSeen");
             return (Criteria) this;
         }
 
-        public Criteria andIsSeenNotEqualTo(Boolean value) {
+        public Criteria andIsSeenNotEqualTo(Byte value) {
             addCriterion("is_seen <>", value, "isSeen");
             return (Criteria) this;
         }
 
-        public Criteria andIsSeenGreaterThan(Boolean value) {
+        public Criteria andIsSeenGreaterThan(Byte value) {
             addCriterion("is_seen >", value, "isSeen");
             return (Criteria) this;
         }
 
-        public Criteria andIsSeenGreaterThanOrEqualTo(Boolean value) {
+        public Criteria andIsSeenGreaterThanOrEqualTo(Byte value) {
             addCriterion("is_seen >=", value, "isSeen");
             return (Criteria) this;
         }
 
-        public Criteria andIsSeenLessThan(Boolean value) {
+        public Criteria andIsSeenLessThan(Byte value) {
             addCriterion("is_seen <", value, "isSeen");
             return (Criteria) this;
         }
 
-        public Criteria andIsSeenLessThanOrEqualTo(Boolean value) {
+        public Criteria andIsSeenLessThanOrEqualTo(Byte value) {
             addCriterion("is_seen <=", value, "isSeen");
             return (Criteria) this;
         }
 
-        public Criteria andIsSeenIn(List<Boolean> values) {
+        public Criteria andIsSeenIn(List<Byte> values) {
             addCriterion("is_seen in", values, "isSeen");
             return (Criteria) this;
         }
 
-        public Criteria andIsSeenNotIn(List<Boolean> values) {
+        public Criteria andIsSeenNotIn(List<Byte> values) {
             addCriterion("is_seen not in", values, "isSeen");
             return (Criteria) this;
         }
 
-        public Criteria andIsSeenBetween(Boolean value1, Boolean value2) {
+        public Criteria andIsSeenBetween(Byte value1, Byte value2) {
             addCriterion("is_seen between", value1, value2, "isSeen");
             return (Criteria) this;
         }
 
-        public Criteria andIsSeenNotBetween(Boolean value1, Boolean value2) {
+        public Criteria andIsSeenNotBetween(Byte value1, Byte value2) {
             addCriterion("is_seen not between", value1, value2, "isSeen");
             return (Criteria) this;
         }

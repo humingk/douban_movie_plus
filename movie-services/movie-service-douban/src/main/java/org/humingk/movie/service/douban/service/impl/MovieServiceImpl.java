@@ -1,12 +1,14 @@
 package org.humingk.movie.service.douban.service.impl;
 
-import org.humingk.movie.common.annotation.RedisCache;
+import org.humingk.movie.dal.domain.CelebrityDoubanOfMovieDoubanDo;
 import org.humingk.movie.dal.entity.*;
 import org.humingk.movie.dal.mapper.auto.*;
-import org.humingk.movie.service.douban.common.converter.MovieDoubanDetailsDtoConverter;
-import org.humingk.movie.service.douban.common.converter.MovieDoubanDtoConverter;
-import org.humingk.movie.service.douban.common.dto.MovieDoubanDetailsDto;
-import org.humingk.movie.service.douban.common.dto.MovieDoubanDto;
+import org.humingk.movie.dal.mapper.plus.CelebrityDoubanMapperPlus;
+import org.humingk.movie.dal.mapper.plus.ReviewMovieDoubanMapperPlus;
+import org.humingk.movie.service.douban.common.converter.movie.MovieDoubanDetailsDtoConverter;
+import org.humingk.movie.service.douban.common.converter.movie.MovieDoubanDtoConverter;
+import org.humingk.movie.service.douban.common.dto.movie.MovieDoubanDetailsDto;
+import org.humingk.movie.service.douban.common.dto.movie.MovieDoubanDto;
 import org.humingk.movie.service.douban.service.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,7 +17,7 @@ import java.util.List;
 
 /** @author humingk */
 @Service
-@RedisCache
+// @RedisCache
 public class MovieServiceImpl implements MovieService {
 
   /** converter */
@@ -40,11 +42,12 @@ public class MovieServiceImpl implements MovieService {
 
   @Autowired private MovieDoubanToTypeMovieMapper movieDoubanToTypeMovieMapper;
   @Autowired private TagMovieMapper tagMovieMapper;
-  @Autowired private MovieDoubanToCelebrityDoubanMapper movieDoubanToCelebrityDoubanMapper;
+  @Autowired private CelebrityDoubanMapperPlus celebrityDoubanMapperPlus;
   @Autowired private TrailerMovieDoubanMapper trailerMovieDoubanMapper;
   @Autowired private ImageMovieDoubanMapper imageMovieDoubanMapper;
   @Autowired private ClassicDoubanMapper classicDoubanMapper;
   @Autowired private CommentMovieDoubanMapper commentMovieDoubanMapper;
+  @Autowired private ReviewMovieDoubanMapperPlus reviewMovieDoubanMapperPlus;
   @Autowired private MovieDoubanToReviewMovieDoubanMapper movieDoubanToReviewMovieDoubanMapper;
   @Autowired private MovieDoubanToAwardMovieMapper movieDoubanToAwardMovieMapper;
   @Autowired private MovieDoubanMapper movieDoubanMapper;
@@ -72,10 +75,10 @@ public class MovieServiceImpl implements MovieService {
     /** 豆瓣电影标签列表 */
     tagMovieExample.start().andIdMovieDoubanEqualTo(id);
     List<TagMovie> tagMovieList = tagMovieMapper.selectByExample(tagMovieExample);
-    /** 豆瓣电影-影人列表 */
+    /** 豆瓣电影影人列表 */
     movieDoubanToCelebrityDoubanExample.start().andIdMovieDoubanEqualTo(id);
-    List<MovieDoubanToCelebrityDouban> movieDoubanToCelebrityDoubanList =
-        movieDoubanToCelebrityDoubanMapper.selectByExample(movieDoubanToCelebrityDoubanExample);
+    List<CelebrityDoubanOfMovieDoubanDo> celebrityDoubanOfMovieDoubanDoList =
+        celebrityDoubanMapperPlus.selectCelebrityDoubanOfMovieDoubanListByMovieDoubanId(id);
     /** 豆瓣电影预告片列表 */
     trailerMovieDoubanExample.start().andIdMovieDoubanEqualTo(id);
     List<TrailerMovieDouban> trailerMovieDoubanList =
@@ -93,9 +96,8 @@ public class MovieServiceImpl implements MovieService {
     List<CommentMovieDouban> commentMovieDoubanList =
         commentMovieDoubanMapper.selectByExample(commentMovieDoubanExample);
     /** 豆瓣电影-热门影评列表 */
-    movieDoubanToReviewMovieDoubanExample.start().andIdMovieDoubanEqualTo(id);
-    List<MovieDoubanToReviewMovieDouban> movieDoubanToReviewMovieDoubanList =
-        movieDoubanToReviewMovieDoubanMapper.selectByExample(movieDoubanToReviewMovieDoubanExample);
+    List<ReviewMovieDouban> reviewMovieDoubanList =
+        reviewMovieDoubanMapperPlus.selectReviewMovieDoubanListByMovieDoubanId(id);
     /** 豆瓣电影-奖项列表 */
     movieDoubanToAwardMovieExample.start().andIdMovieDoubanEqualTo(id);
     List<MovieDoubanToAwardMovie> movieDoubanToAwardMovieList =
@@ -107,40 +109,12 @@ public class MovieServiceImpl implements MovieService {
         aliasMovieDoubanList,
         movieDoubanToTypeMovieList,
         tagMovieList,
-        movieDoubanToCelebrityDoubanList,
+        celebrityDoubanOfMovieDoubanDoList,
         trailerMovieDoubanList,
         imageMovieDoubanList,
         classicDoubanList,
         commentMovieDoubanList,
-        movieDoubanToReviewMovieDoubanList,
+        reviewMovieDoubanList,
         movieDoubanToAwardMovieList);
-  }
-
-  @Override
-  public List<AliasMovieDouban> getAliasMovieDoubanListByMovieDoubanId(long id) {
-    AliasMovieDoubanExample example = new AliasMovieDoubanExample();
-    example.or().andIdMovieDoubanEqualTo(id);
-    return aliasMovieDoubanMapper.selectByExample(example);
-  }
-
-  @Override
-  public List<TagMovie> getTagMovieDoubanListByMovieDoubanId(long id) {
-    TagMovieExample example = new TagMovieExample();
-    example.or().andIdMovieDoubanEqualTo(id);
-    return tagMovieMapper.selectByExample(example);
-  }
-
-  @Override
-  public List<MovieDoubanToTypeMovie> getMovieDoubanToTypeMovieListByMovieDoubanId(long id) {
-    MovieDoubanToTypeMovieExample example = new MovieDoubanToTypeMovieExample();
-    example.or().andIdMovieDoubanEqualTo(id);
-    return movieDoubanToTypeMovieMapper.selectByExample(example);
-  }
-
-  @Override
-  public List<TrailerMovieDouban> getTrailerMovieDoubanListByMovieDoubanId(long id) {
-    TrailerMovieDoubanExample example = new TrailerMovieDoubanExample();
-    //    example.or().andIdEqualTo(id);
-    return trailerMovieDoubanMapper.selectByExample(example);
   }
 }

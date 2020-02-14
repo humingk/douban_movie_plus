@@ -120,8 +120,9 @@ public class MyBatisPlugin extends PluginAdapter {
     method.setVisibility(JavaVisibility.PUBLIC);
     method.setReturnType(new FullyQualifiedJavaType("Criteria"));
     method.setName("start");
+    method.addBodyLine("oredCriteria = new ArrayList<>();");
     method.addBodyLine("clear();");
-    method.addBodyLine("return createCriteriaInternal();");
+    method.addBodyLine("return createCriteria();");
     topLevelClass.addMethod(method);
     // 注册为bean
     topLevelClass.addImportedType("org.springframework.stereotype.Repository");

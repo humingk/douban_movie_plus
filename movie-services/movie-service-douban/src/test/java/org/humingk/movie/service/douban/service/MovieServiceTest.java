@@ -19,6 +19,6 @@ public class MovieServiceTest {
 
   @Test
   public void getMovieDoubanDetailsByMovieDoubanId() {
-    System.out.println(movieService.getAliasMovieDoubanListByMovieDoubanId(1291561));
+    System.out.println(movieService.getMovieDoubanDetailsByMovieDoubanId(1291561));
   }
 }

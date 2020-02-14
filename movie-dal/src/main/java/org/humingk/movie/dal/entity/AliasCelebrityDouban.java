@@ -27,7 +27,7 @@ public class AliasCelebrityDouban implements Serializable {
     /**
      * 是否为昵称 0-本名 1-昵称
      */
-    private Boolean isNikename;
+    private Byte isNikename;
 
     private static final long serialVersionUID = 1L;
 }

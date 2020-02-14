@@ -7,7 +7,7 @@
     <id column="id_celebrity_douban" jdbcType="BIGINT" property="idCelebrityDouban" />
     <id column="type_award" jdbcType="VARCHAR" property="typeAward" />
     <id column="award_th" jdbcType="SMALLINT" property="awardTh" />
-    <result column="is_nominated" jdbcType="BIT" property="isNominated" />
+    <result column="is_nominated" jdbcType="TINYINT" property="isNominated" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -113,7 +113,7 @@
       type_award, award_th, is_nominated
       )
     values (#{idMovieDouban,jdbcType=BIGINT}, #{idAwardMovie,jdbcType=VARCHAR}, #{idCelebrityDouban,jdbcType=BIGINT}, 
-      #{typeAward,jdbcType=VARCHAR}, #{awardTh,jdbcType=SMALLINT}, #{isNominated,jdbcType=BIT}
+      #{typeAward,jdbcType=VARCHAR}, #{awardTh,jdbcType=SMALLINT}, #{isNominated,jdbcType=TINYINT}
       )
   </insert>
   <insert id="insertSelective" parameterType="org.humingk.movie.dal.entity.MovieDoubanToAwardMovie">
@@ -155,7 +155,7 @@
         #{awardTh,jdbcType=SMALLINT},
       </if>
       <if test="isNominated != null">
-        #{isNominated,jdbcType=BIT},
+        #{isNominated,jdbcType=TINYINT},
       </if>
     </trim>
   </insert>
@@ -184,7 +184,7 @@
         award_th = #{record.awardTh,jdbcType=SMALLINT},
       </if>
       <if test="record.isNominated != null">
-        is_nominated = #{record.isNominated,jdbcType=BIT},
+        is_nominated = #{record.isNominated,jdbcType=TINYINT},
       </if>
     </set>
     <if test="_parameter != null">
@@ -198,7 +198,7 @@
       id_celebrity_douban = #{record.idCelebrityDouban,jdbcType=BIGINT},
       type_award = #{record.typeAward,jdbcType=VARCHAR},
       award_th = #{record.awardTh,jdbcType=SMALLINT},
-      is_nominated = #{record.isNominated,jdbcType=BIT}
+      is_nominated = #{record.isNominated,jdbcType=TINYINT}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -207,7 +207,7 @@
     update movie_douban_to_award_movie
     <set>
       <if test="isNominated != null">
-        is_nominated = #{isNominated,jdbcType=BIT},
+        is_nominated = #{isNominated,jdbcType=TINYINT},
       </if>
     </set>
     where id_movie_douban = #{idMovieDouban,jdbcType=BIGINT}
@@ -218,7 +218,7 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="org.humingk.movie.dal.entity.MovieDoubanToAwardMovie">
     update movie_douban_to_award_movie
-    set is_nominated = #{isNominated,jdbcType=BIT}
+    set is_nominated = #{isNominated,jdbcType=TINYINT}
     where id_movie_douban = #{idMovieDouban,jdbcType=BIGINT}
       and id_award_movie = #{idAwardMovie,jdbcType=VARCHAR}
       and id_celebrity_douban = #{idCelebrityDouban,jdbcType=BIGINT}

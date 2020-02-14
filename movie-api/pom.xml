@@ -37,6 +37,23 @@
             <groupId>org.humingk</groupId>
             <artifactId>movie-dal</artifactId>
         </dependency>
+        <!--service list-->
+        <dependency>
+            <groupId>org.humingk</groupId>
+            <artifactId>movie-service-douban</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.humingk</groupId>
+            <artifactId>movie-service-netease</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.humingk</groupId>
+            <artifactId>movie-service-user</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.humingk</groupId>
+            <artifactId>movie-service-imdb</artifactId>
+        </dependency>
         <!--apache httpclient-->
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>

@@ -71,8 +71,9 @@ public class MovieDoubanExample {
     }
 
     public Criteria start() {
+        oredCriteria = new ArrayList<>();
         clear();
-        return createCriteriaInternal();
+        return createCriteria();
     }
 
     protected abstract static class GeneratedCriteria {
@@ -746,52 +747,52 @@ public class MovieDoubanExample {
             return (Criteria) this;
         }
 
-        public Criteria andIsNeteaseEqualTo(Boolean value) {
+        public Criteria andIsNeteaseEqualTo(Byte value) {
             addCriterion("is_netease =", value, "isNetease");
             return (Criteria) this;
         }
 
-        public Criteria andIsNeteaseNotEqualTo(Boolean value) {
+        public Criteria andIsNeteaseNotEqualTo(Byte value) {
             addCriterion("is_netease <>", value, "isNetease");
             return (Criteria) this;
         }
 
-        public Criteria andIsNeteaseGreaterThan(Boolean value) {
+        public Criteria andIsNeteaseGreaterThan(Byte value) {
             addCriterion("is_netease >", value, "isNetease");
             return (Criteria) this;
         }
 
-        public Criteria andIsNeteaseGreaterThanOrEqualTo(Boolean value) {
+        public Criteria andIsNeteaseGreaterThanOrEqualTo(Byte value) {
             addCriterion("is_netease >=", value, "isNetease");
             return (Criteria) this;
         }
 
-        public Criteria andIsNeteaseLessThan(Boolean value) {
+        public Criteria andIsNeteaseLessThan(Byte value) {
             addCriterion("is_netease <", value, "isNetease");
             return (Criteria) this;
         }
 
-        public Criteria andIsNeteaseLessThanOrEqualTo(Boolean value) {
+        public Criteria andIsNeteaseLessThanOrEqualTo(Byte value) {
             addCriterion("is_netease <=", value, "isNetease");
             return (Criteria) this;
         }
 
-        public Criteria andIsNeteaseIn(List<Boolean> values) {
+        public Criteria andIsNeteaseIn(List<Byte> values) {
             addCriterion("is_netease in", values, "isNetease");
             return (Criteria) this;
         }
 
-        public Criteria andIsNeteaseNotIn(List<Boolean> values) {
+        public Criteria andIsNeteaseNotIn(List<Byte> values) {
             addCriterion("is_netease not in", values, "isNetease");
             return (Criteria) this;
         }
 
-        public Criteria andIsNeteaseBetween(Boolean value1, Boolean value2) {
+        public Criteria andIsNeteaseBetween(Byte value1, Byte value2) {
             addCriterion("is_netease between", value1, value2, "isNetease");
             return (Criteria) this;
         }
 
-        public Criteria andIsNeteaseNotBetween(Boolean value1, Boolean value2) {
+        public Criteria andIsNeteaseNotBetween(Byte value1, Byte value2) {
             addCriterion("is_netease not between", value1, value2, "isNetease");
             return (Criteria) this;
         }
@@ -806,52 +807,52 @@ public class MovieDoubanExample {
             return (Criteria) this;
         }
 
-        public Criteria andIsZhihuEqualTo(Boolean value) {
+        public Criteria andIsZhihuEqualTo(Byte value) {
             addCriterion("is_zhihu =", value, "isZhihu");
             return (Criteria) this;
         }
 
-        public Criteria andIsZhihuNotEqualTo(Boolean value) {
+        public Criteria andIsZhihuNotEqualTo(Byte value) {
             addCriterion("is_zhihu <>", value, "isZhihu");
             return (Criteria) this;
         }
 
-        public Criteria andIsZhihuGreaterThan(Boolean value) {
+        public Criteria andIsZhihuGreaterThan(Byte value) {
             addCriterion("is_zhihu >", value, "isZhihu");
             return (Criteria) this;
         }
 
-        public Criteria andIsZhihuGreaterThanOrEqualTo(Boolean value) {
+        public Criteria andIsZhihuGreaterThanOrEqualTo(Byte value) {
             addCriterion("is_zhihu >=", value, "isZhihu");
             return (Criteria) this;
         }
 
-        public Criteria andIsZhihuLessThan(Boolean value) {
+        public Criteria andIsZhihuLessThan(Byte value) {
             addCriterion("is_zhihu <", value, "isZhihu");
             return (Criteria) this;
         }
 
-        public Criteria andIsZhihuLessThanOrEqualTo(Boolean value) {
+        public Criteria andIsZhihuLessThanOrEqualTo(Byte value) {
             addCriterion("is_zhihu <=", value, "isZhihu");
             return (Criteria) this;
         }
 
-        public Criteria andIsZhihuIn(List<Boolean> values) {
+        public Criteria andIsZhihuIn(List<Byte> values) {
             addCriterion("is_zhihu in", values, "isZhihu");
             return (Criteria) this;
         }
 
-        public Criteria andIsZhihuNotIn(List<Boolean> values) {
+        public Criteria andIsZhihuNotIn(List<Byte> values) {
             addCriterion("is_zhihu not in", values, "isZhihu");
             return (Criteria) this;
         }
 
-        public Criteria andIsZhihuBetween(Boolean value1, Boolean value2) {
+        public Criteria andIsZhihuBetween(Byte value1, Byte value2) {
             addCriterion("is_zhihu between", value1, value2, "isZhihu");
             return (Criteria) this;
         }
 
-        public Criteria andIsZhihuNotBetween(Boolean value1, Boolean value2) {
+        public Criteria andIsZhihuNotBetween(Byte value1, Byte value2) {
             addCriterion("is_zhihu not between", value1, value2, "isZhihu");
             return (Criteria) this;
         }

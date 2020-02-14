@@ -1,7 +1,5 @@
 package org.humingk.movie.api.movie;
 
-import org.humingk.movie.api.common.vo.MovieDoubanDetailsVo;
-import org.humingk.movie.api.common.vo.MovieDoubanVo;
 import org.humingk.movie.common.entity.Result;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.validation.annotation.Validated;
@@ -26,25 +24,25 @@ import javax.validation.constraints.PositiveOrZero;
 @FeignClient(value = "movie-server-movie")
 public interface DoubanApi {
 
-  /**
-   * 豆瓣电影基础信息
-   *
-   * @param id 电影豆瓣ID
-   * @return
-   * @apiNote 包括电影海报, 电影年份，电影简介等基础信息
-   */
-  @RequestMapping(value = "/movie/douban/bases", method = RequestMethod.GET)
-  Result<MovieDoubanVo> bases(@RequestParam("id") @NotNull Long id);
-
-  /**
-   * 豆瓣电影详情信息
-   *
-   * @param id 电影豆瓣ID
-   * @return
-   * @apiNote 包括电影海报、基础信息、剧情简介
-   */
-  @RequestMapping(value = "/movie/douban/details", method = RequestMethod.GET)
-  Result<MovieDoubanDetailsVo> details(@RequestParam("id") @NotNull Long id);
+  //  /**
+  //   * 豆瓣电影基础信息
+  //   *
+  //   * @param id 电影豆瓣ID
+  //   * @return
+  //   * @apiNote 包括电影海报, 电影年份，电影简介等基础信息
+  //   */
+  //  @RequestMapping(value = "/movie/douban/bases", method = RequestMethod.GET)
+  //  Result<MovieDoubanVo> bases(@RequestParam("id") @NotNull Long id);
+  //
+  //  /**
+  //   * 豆瓣电影详情信息
+  //   *
+  //   * @param id 电影豆瓣ID
+  //   * @return
+  //   * @apiNote 包括电影海报、基础信息、剧情简介
+  //   */
+  //  @RequestMapping(value = "/movie/douban/details", method = RequestMethod.GET)
+  //  Result<MovieDoubanDetailsVo> details(@RequestParam("id") @NotNull Long id);
 
   /**
    * 豆瓣电影图片

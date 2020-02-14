@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.humingk.movie.dal.mapper.plus.ReviewMovieDoubanMapperPlus">
+    <resultMap id="BaseResultMapPlus"
+               extends="org.humingk.movie.dal.mapper.auto.ReviewMovieDoubanMapper.BaseResultMap"
+               type="org.humingk.movie.dal.entity.ReviewMovieDouban"/>
+    <!--根据豆瓣电影ID获取热门影评列表-->
+    <select id="selectReviewMovieDoubanListByMovieDoubanId" parameterType="java.lang.Long"
+            resultMap="BaseResultMapPlus">
+        select review_movie_douban.id, agree_vote, against_vote, create_datetime, title, content
+        from review_movie_douban
+                 inner join movie_douban_to_review_movie_douban
+                            on review_movie_douban.id = movie_douban_to_review_movie_douban.id_review_movie_douban
+        where movie_douban_to_review_movie_douban.id_movie_douban = #{idMovieDouban,jdbcType=BIGINT}
+    </select>
+</mapper>

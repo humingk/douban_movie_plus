@@ -6,7 +6,7 @@
     <result column="id_type_video" jdbcType="TINYINT" property="idTypeVideo" />
     <result column="name_en" jdbcType="VARCHAR" property="nameEn" />
     <result column="start_year" jdbcType="SMALLINT" property="startYear" />
-    <result column="is_adult" jdbcType="BIT" property="isAdult" />
+    <result column="is_adult" jdbcType="TINYINT" property="isAdult" />
     <result column="name_origin" jdbcType="VARCHAR" property="nameOrigin" />
     <result column="runtime" jdbcType="SMALLINT" property="runtime" />
     <result column="url_poster" jdbcType="VARCHAR" property="urlPoster" />
@@ -134,7 +134,7 @@
       runtime, url_poster, id_movie_douban, 
       summary)
     values (#{id,jdbcType=BIGINT}, #{idTypeVideo,jdbcType=TINYINT}, #{nameEn,jdbcType=VARCHAR}, 
-      #{startYear,jdbcType=SMALLINT}, #{isAdult,jdbcType=BIT}, #{nameOrigin,jdbcType=VARCHAR}, 
+      #{startYear,jdbcType=SMALLINT}, #{isAdult,jdbcType=TINYINT}, #{nameOrigin,jdbcType=VARCHAR}, 
       #{runtime,jdbcType=SMALLINT}, #{urlPoster,jdbcType=VARCHAR}, #{idMovieDouban,jdbcType=BIGINT}, 
       #{summary,jdbcType=LONGVARCHAR})
   </insert>
@@ -186,7 +186,7 @@
         #{startYear,jdbcType=SMALLINT},
       </if>
       <if test="isAdult != null">
-        #{isAdult,jdbcType=BIT},
+        #{isAdult,jdbcType=TINYINT},
       </if>
       <if test="nameOrigin != null">
         #{nameOrigin,jdbcType=VARCHAR},
@@ -227,7 +227,7 @@
         start_year = #{record.startYear,jdbcType=SMALLINT},
       </if>
       <if test="record.isAdult != null">
-        is_adult = #{record.isAdult,jdbcType=BIT},
+        is_adult = #{record.isAdult,jdbcType=TINYINT},
       </if>
       <if test="record.nameOrigin != null">
         name_origin = #{record.nameOrigin,jdbcType=VARCHAR},
@@ -255,7 +255,7 @@
       id_type_video = #{record.idTypeVideo,jdbcType=TINYINT},
       name_en = #{record.nameEn,jdbcType=VARCHAR},
       start_year = #{record.startYear,jdbcType=SMALLINT},
-      is_adult = #{record.isAdult,jdbcType=BIT},
+      is_adult = #{record.isAdult,jdbcType=TINYINT},
       name_origin = #{record.nameOrigin,jdbcType=VARCHAR},
       runtime = #{record.runtime,jdbcType=SMALLINT},
       url_poster = #{record.urlPoster,jdbcType=VARCHAR},
@@ -271,7 +271,7 @@
       id_type_video = #{record.idTypeVideo,jdbcType=TINYINT},
       name_en = #{record.nameEn,jdbcType=VARCHAR},
       start_year = #{record.startYear,jdbcType=SMALLINT},
-      is_adult = #{record.isAdult,jdbcType=BIT},
+      is_adult = #{record.isAdult,jdbcType=TINYINT},
       name_origin = #{record.nameOrigin,jdbcType=VARCHAR},
       runtime = #{record.runtime,jdbcType=SMALLINT},
       url_poster = #{record.urlPoster,jdbcType=VARCHAR},
@@ -293,7 +293,7 @@
         start_year = #{startYear,jdbcType=SMALLINT},
       </if>
       <if test="isAdult != null">
-        is_adult = #{isAdult,jdbcType=BIT},
+        is_adult = #{isAdult,jdbcType=TINYINT},
       </if>
       <if test="nameOrigin != null">
         name_origin = #{nameOrigin,jdbcType=VARCHAR},
@@ -318,7 +318,7 @@
     set id_type_video = #{idTypeVideo,jdbcType=TINYINT},
       name_en = #{nameEn,jdbcType=VARCHAR},
       start_year = #{startYear,jdbcType=SMALLINT},
-      is_adult = #{isAdult,jdbcType=BIT},
+      is_adult = #{isAdult,jdbcType=TINYINT},
       name_origin = #{nameOrigin,jdbcType=VARCHAR},
       runtime = #{runtime,jdbcType=SMALLINT},
       url_poster = #{urlPoster,jdbcType=VARCHAR},
@@ -331,7 +331,7 @@
     set id_type_video = #{idTypeVideo,jdbcType=TINYINT},
       name_en = #{nameEn,jdbcType=VARCHAR},
       start_year = #{startYear,jdbcType=SMALLINT},
-      is_adult = #{isAdult,jdbcType=BIT},
+      is_adult = #{isAdult,jdbcType=TINYINT},
       name_origin = #{nameOrigin,jdbcType=VARCHAR},
       runtime = #{runtime,jdbcType=SMALLINT},
       url_poster = #{urlPoster,jdbcType=VARCHAR},

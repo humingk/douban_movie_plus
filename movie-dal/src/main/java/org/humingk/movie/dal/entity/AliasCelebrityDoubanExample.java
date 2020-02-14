@@ -71,8 +71,9 @@ public class AliasCelebrityDoubanExample {
     }
 
     public Criteria start() {
+        oredCriteria = new ArrayList<>();
         clear();
-        return createCriteriaInternal();
+        return createCriteria();
     }
 
     protected abstract static class GeneratedCriteria {
@@ -256,52 +257,52 @@ public class AliasCelebrityDoubanExample {
             return (Criteria) this;
         }
 
-        public Criteria andIsNikenameEqualTo(Boolean value) {
+        public Criteria andIsNikenameEqualTo(Byte value) {
             addCriterion("is_nikename =", value, "isNikename");
             return (Criteria) this;
         }
 
-        public Criteria andIsNikenameNotEqualTo(Boolean value) {
+        public Criteria andIsNikenameNotEqualTo(Byte value) {
             addCriterion("is_nikename <>", value, "isNikename");
             return (Criteria) this;
         }
 
-        public Criteria andIsNikenameGreaterThan(Boolean value) {
+        public Criteria andIsNikenameGreaterThan(Byte value) {
             addCriterion("is_nikename >", value, "isNikename");
             return (Criteria) this;
         }
 
-        public Criteria andIsNikenameGreaterThanOrEqualTo(Boolean value) {
+        public Criteria andIsNikenameGreaterThanOrEqualTo(Byte value) {
             addCriterion("is_nikename >=", value, "isNikename");
             return (Criteria) this;
         }
 
-        public Criteria andIsNikenameLessThan(Boolean value) {
+        public Criteria andIsNikenameLessThan(Byte value) {
             addCriterion("is_nikename <", value, "isNikename");
             return (Criteria) this;
         }
 
-        public Criteria andIsNikenameLessThanOrEqualTo(Boolean value) {
+        public Criteria andIsNikenameLessThanOrEqualTo(Byte value) {
             addCriterion("is_nikename <=", value, "isNikename");
             return (Criteria) this;
         }
 
-        public Criteria andIsNikenameIn(List<Boolean> values) {
+        public Criteria andIsNikenameIn(List<Byte> values) {
             addCriterion("is_nikename in", values, "isNikename");
             return (Criteria) this;
         }
 
-        public Criteria andIsNikenameNotIn(List<Boolean> values) {
+        public Criteria andIsNikenameNotIn(List<Byte> values) {
             addCriterion("is_nikename not in", values, "isNikename");
             return (Criteria) this;
         }
 
-        public Criteria andIsNikenameBetween(Boolean value1, Boolean value2) {
+        public Criteria andIsNikenameBetween(Byte value1, Byte value2) {
             addCriterion("is_nikename between", value1, value2, "isNikename");
             return (Criteria) this;
         }
 
-        public Criteria andIsNikenameNotBetween(Boolean value1, Boolean value2) {
+        public Criteria andIsNikenameNotBetween(Byte value1, Byte value2) {
             addCriterion("is_nikename not between", value1, value2, "isNikename");
             return (Criteria) this;
         }

@@ -71,8 +71,9 @@ public class MovieDoubanToAwardMovieExample {
     }
 
     public Criteria start() {
+        oredCriteria = new ArrayList<>();
         clear();
-        return createCriteriaInternal();
+        return createCriteria();
     }
 
     protected abstract static class GeneratedCriteria {
@@ -446,52 +447,52 @@ public class MovieDoubanToAwardMovieExample {
             return (Criteria) this;
         }
 
-        public Criteria andIsNominatedEqualTo(Boolean value) {
+        public Criteria andIsNominatedEqualTo(Byte value) {
             addCriterion("is_nominated =", value, "isNominated");
             return (Criteria) this;
         }
 
-        public Criteria andIsNominatedNotEqualTo(Boolean value) {
+        public Criteria andIsNominatedNotEqualTo(Byte value) {
             addCriterion("is_nominated <>", value, "isNominated");
             return (Criteria) this;
         }
 
-        public Criteria andIsNominatedGreaterThan(Boolean value) {
+        public Criteria andIsNominatedGreaterThan(Byte value) {
             addCriterion("is_nominated >", value, "isNominated");
             return (Criteria) this;
         }
 
-        public Criteria andIsNominatedGreaterThanOrEqualTo(Boolean value) {
+        public Criteria andIsNominatedGreaterThanOrEqualTo(Byte value) {
             addCriterion("is_nominated >=", value, "isNominated");
             return (Criteria) this;
         }
 
-        public Criteria andIsNominatedLessThan(Boolean value) {
+        public Criteria andIsNominatedLessThan(Byte value) {
             addCriterion("is_nominated <", value, "isNominated");
             return (Criteria) this;
         }
 
-        public Criteria andIsNominatedLessThanOrEqualTo(Boolean value) {
+        public Criteria andIsNominatedLessThanOrEqualTo(Byte value) {
             addCriterion("is_nominated <=", value, "isNominated");
             return (Criteria) this;
         }
 
-        public Criteria andIsNominatedIn(List<Boolean> values) {
+        public Criteria andIsNominatedIn(List<Byte> values) {
             addCriterion("is_nominated in", values, "isNominated");
             return (Criteria) this;
         }
 
-        public Criteria andIsNominatedNotIn(List<Boolean> values) {
+        public Criteria andIsNominatedNotIn(List<Byte> values) {
             addCriterion("is_nominated not in", values, "isNominated");
             return (Criteria) this;
         }
 
-        public Criteria andIsNominatedBetween(Boolean value1, Boolean value2) {
+        public Criteria andIsNominatedBetween(Byte value1, Byte value2) {
             addCriterion("is_nominated between", value1, value2, "isNominated");
             return (Criteria) this;
         }
 
-        public Criteria andIsNominatedNotBetween(Boolean value1, Boolean value2) {
+        public Criteria andIsNominatedNotBetween(Byte value1, Byte value2) {
             addCriterion("is_nominated not between", value1, value2, "isNominated");
             return (Criteria) this;
         }
