@@ -5,6 +5,7 @@ import org.humingk.movie.common.util.BaseConverter;
 import org.humingk.movie.dal.entity.RateMovieDouban;
 import org.mapstruct.Mapper;
 
+/** @author humingk */
 @Mapper(componentModel = "spring")
 public interface RateMovieDoubanVoConverter
     extends BaseConverter<RateMovieDoubanVo, RateMovieDouban> {}

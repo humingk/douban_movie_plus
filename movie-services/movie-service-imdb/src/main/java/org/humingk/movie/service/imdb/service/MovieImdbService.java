@@ -1,8 +1,10 @@
 package org.humingk.movie.service.imdb.service;
 
-import org.humingk.movie.service.imdb.common.dto.MovieImdbDetailsDto;
-import org.humingk.movie.service.imdb.common.dto.MovieImdbDto;
+import org.humingk.movie.service.imdb.common.dto.movie.MovieImdbDetailsDto;
+import org.humingk.movie.service.imdb.common.dto.movie.MovieImdbDto;
 import org.springframework.validation.annotation.Validated;
+
+import javax.validation.constraints.NotNull;
 
 /**
  * IMDB电影服务
@@ -10,13 +12,14 @@ import org.springframework.validation.annotation.Validated;
  * @author humingk
  */
 @Validated
-public interface MovieService {
+public interface MovieImdbService {
   /**
    * 获取IMDB电影基础信息
    *
    * @param id IMDB电影ID
    * @return
    */
+  @NotNull(message = "该ID暂无对应IMDB电影")
   MovieImdbDto getMovieImdbByMovieImdbId(long id);
 
   /**
@@ -25,5 +28,6 @@ public interface MovieService {
    * @param id IMDB电影ID
    * @return
    */
+  @NotNull(message = "该ID暂无对应IMDB电影")
   MovieImdbDetailsDto getMovieImdbDetailsByMovieImdbId(long id);
 }

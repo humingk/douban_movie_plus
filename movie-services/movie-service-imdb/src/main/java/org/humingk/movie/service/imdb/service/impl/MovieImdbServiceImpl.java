@@ -1,15 +1,14 @@
 package org.humingk.movie.service.imdb.service.impl;
 
+import org.humingk.movie.dal.domain.CelebrityImdbOfMovieImdbDo;
 import org.humingk.movie.dal.entity.*;
-import org.humingk.movie.dal.mapper.auto.MovieImdbMapper;
-import org.humingk.movie.dal.mapper.auto.MovieImdbToCelebrityImdbMapper;
-import org.humingk.movie.dal.mapper.auto.MovieImdbToTypeMovieMapper;
-import org.humingk.movie.dal.mapper.auto.RateImdbMapper;
-import org.humingk.movie.service.imdb.common.converter.MovieImdbDetailsDtoConverter;
-import org.humingk.movie.service.imdb.common.converter.MovieImdbDtoConverter;
-import org.humingk.movie.service.imdb.common.dto.MovieImdbDetailsDto;
-import org.humingk.movie.service.imdb.common.dto.MovieImdbDto;
-import org.humingk.movie.service.imdb.service.MovieService;
+import org.humingk.movie.dal.mapper.auto.*;
+import org.humingk.movie.dal.mapper.plus.CelebrityImdbMapperPlus;
+import org.humingk.movie.service.imdb.common.converter.movie.MovieImdbDetailsDtoConverter;
+import org.humingk.movie.service.imdb.common.converter.movie.MovieImdbDtoConverter;
+import org.humingk.movie.service.imdb.common.dto.movie.MovieImdbDetailsDto;
+import org.humingk.movie.service.imdb.common.dto.movie.MovieImdbDto;
+import org.humingk.movie.service.imdb.service.MovieImdbService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,7 +17,7 @@ import java.util.List;
 /** @author humingk */
 @Service
 // @RedisCache
-public class MovieServiceImpl implements MovieService {
+public class MovieImdbServiceImpl implements MovieImdbService {
 
   /** converter */
   @Autowired private MovieImdbDtoConverter movieImdbDtoConverter;
@@ -27,13 +26,12 @@ public class MovieServiceImpl implements MovieService {
   /** example */
   @Autowired private MovieImdbToTypeMovieExample movieImdbToTypeMovieExample;
 
-  @Autowired private MovieImdbToCelebrityImdbExample movieImdbToCelebrityImdbExample;
   /** mapper */
   @Autowired private MovieImdbMapper movieImdbMapper;
 
   @Autowired private RateImdbMapper rateImdbMapper;
   @Autowired private MovieImdbToTypeMovieMapper movieImdbToTypeMovieMapper;
-  @Autowired private MovieImdbToCelebrityImdbMapper movieImdbToCelebrityImdbMapper;
+  @Autowired private CelebrityImdbMapperPlus celebrityImdbMapperPlus;
 
   @Override
   public MovieImdbDto getMovieImdbByMovieImdbId(long id) {
@@ -50,11 +48,10 @@ public class MovieServiceImpl implements MovieService {
     movieImdbToTypeMovieExample.start().andIdMovieImdbEqualTo(id);
     List<MovieImdbToTypeMovie> movieImdbToTypeMovieList =
         movieImdbToTypeMovieMapper.selectByExample(movieImdbToTypeMovieExample);
-    /** IMDB电影-影人列表 */
-    movieImdbToCelebrityImdbExample.start().andIdMovieImdbEqualTo(id);
-    List<MovieImdbToCelebrityImdb> movieImdbToCelebrityImdbList =
-        movieImdbToCelebrityImdbMapper.selectByExample(movieImdbToCelebrityImdbExample);
+    /** 与IMDB电影相关的IMDB影人列表 */
+    List<CelebrityImdbOfMovieImdbDo> celebrityImdbOfMovieImdbDoList =
+        celebrityImdbMapperPlus.selectCelebrityImdbOfMovieImdbListByMovieImdbId(id);
     return movieImdbDetailsDtoConverter.to(
-        movieImdb, rateImdb, movieImdbToTypeMovieList, movieImdbToCelebrityImdbList);
+        movieImdb, rateImdb, movieImdbToTypeMovieList, celebrityImdbOfMovieImdbDoList);
   }
 }

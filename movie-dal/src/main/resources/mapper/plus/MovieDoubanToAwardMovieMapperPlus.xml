@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.humingk.movie.dal.mapper.plus.MoviedouanToAwardMovieMapperPlus">
+    <resultMap id="BaseResultMapPlus"
+               extends="org.humingk.movie.dal.mapper.auto.MovieDoubanToAwardMovieMapper.BaseResultMap"
+               type="org.humingk.movie.dal.entity.MovieDoubanToAwardMovie"/>
+    <!--对应的奖项信息-->
+    <resultMap id="AwardMovie"
+               type="org.humingk.movie.dal.entity.AwardMovie"
+               extends="org.humingk.movie.dal.mapper.auto.AwardMovieMapper.BaseResultMap"/>
+    <!--与豆瓣电影相关的奖项信息-->
+    <resultMap id="AwardOfMovieDoubanResultMapPlus"
+               type="org.humingk.movie.dal.domain.AwardOfMovieDoubanDo"
+               extends="BaseResultMapPlus">
+        <association property="awardMovie"
+                     javaType="org.humingk.movie.dal.entity.AwardMovie"
+                     resultMap="AwardMovie"/>
+    </resultMap>
+    <!--通过豆瓣电影ID获取与豆瓣电影相关的获奖信息列表-->
+    <select id="selectAwardOfMovieListByMovieDoubanId" parameterType="java.lang.Long"
+            resultMap="AwardOfMovieDoubanResultMapPlus">
+        select movie_douban_to_award_movie.id_movie_douban,
+               id_award_movie,
+               id_celebrity_douban,
+               type_award,
+               award_th,
+               is_nominated,
+               award_movie.id,
+               name_zh
+        from movie_douban_to_award_movie
+                 inner join award_movie
+                            on movie_douban_to_award_movie.id_award_movie = award_movie.id
+        where movie_douban_to_award_movie.id_movie_douban = #{idMovieDouban,jdbcType=BIGINT}
+    </select>
+</mapper>

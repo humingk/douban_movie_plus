@@ -1,15 +1,21 @@
 package org.humingk.movie.service.douban.common.converter.movie;
 
+import org.humingk.movie.dal.domain.AwardOfMovieDoubanDo;
 import org.humingk.movie.dal.domain.CelebrityDoubanOfMovieDoubanDo;
 import org.humingk.movie.dal.entity.*;
 import org.humingk.movie.service.douban.common.dto.movie.MovieDoubanDetailsDto;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+import org.mapstruct.Mappings;
 
 import java.util.List;
 
 /** @author humingk */
-@Mapper(componentModel = "spring")
+@Mapper(
+    componentModel = "spring",
+    uses = {MovieDoubanDtoConverter.class})
 public interface MovieDoubanDetailsDtoConverter {
+  @Mappings({@Mapping(target = "movieDoubanDto", source = "movieDouban")})
   MovieDoubanDetailsDto to(
       /** 豆瓣电影基础信息 */
       MovieDouban movieDouban,
@@ -33,6 +39,6 @@ public interface MovieDoubanDetailsDtoConverter {
       List<CommentMovieDouban> commentMovieDoubanList,
       /** 豆瓣电影热门影评列表 */
       List<ReviewMovieDouban> reviewMovieDoubanList,
-      /** 豆瓣电影-奖项列表 */
-      List<MovieDoubanToAwardMovie> movieDoubanToAwardMovieList);
+      /** 豆瓣电影奖项列表 */
+      List<AwardOfMovieDoubanDo> awardOfMovieDoubanDoList);
 }

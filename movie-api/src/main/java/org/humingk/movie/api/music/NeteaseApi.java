@@ -27,7 +27,7 @@ public interface NeteaseApi {
   /**
    * 豆瓣电影网易云音乐相关播放信息
    *
-   * @param id 电影豆瓣ID
+   * @param id 豆瓣电影ID
    * @param songLimit 歌曲数目限制数（默认8）
    * @param playlistLimit 歌单数目限制数（默认1）
    * @param playlistSongLimit 歌单内歌曲数目限制数（默认8）

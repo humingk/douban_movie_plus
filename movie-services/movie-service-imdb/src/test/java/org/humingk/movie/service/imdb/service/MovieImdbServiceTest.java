@@ -6,21 +6,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import static org.junit.Assert.*;
-
 @SpringBootTest
 @RunWith(SpringJUnit4ClassRunner.class)
-public class MovieServiceTest {
+public class MovieImdbServiceTest {
 
-  @Autowired private MovieService movieService;
+  @Autowired private MovieImdbService movieImdbService;
 
   @Test
   public void getMovieImdbByMovieImdbId() {
-    System.out.println(movieService.getMovieImdbByMovieImdbId(245429));
+    System.out.println(movieImdbService.getMovieImdbByMovieImdbId(245429));
   }
 
   @Test
   public void getMovieImdbDetailsByMovieImdbId() {
-    System.out.println(movieService.getMovieImdbDetailsByMovieImdbId(245429));
+    System.out.println(movieImdbService.getMovieImdbDetailsByMovieImdbId(245429));
   }
 }

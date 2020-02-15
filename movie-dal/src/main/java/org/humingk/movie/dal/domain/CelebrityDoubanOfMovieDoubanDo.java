@@ -34,7 +34,7 @@ public class CelebrityDoubanOfMovieDoubanDo implements Serializable {
   private String nameOrigin;
 
   /** 性别 0-女 1-男 2-未知 */
-  private Boolean sex;
+  private Byte sex;
 
   /** 生日日期 /unix */
   private Long birthDate;

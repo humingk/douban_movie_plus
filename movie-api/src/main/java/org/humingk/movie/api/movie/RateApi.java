@@ -24,7 +24,7 @@ public interface RateApi {
   /**
    * 电影评分信息
    *
-   * @param id 电影豆瓣ID
+   * @param id 豆瓣电影ID
    * @return
    * @apiNote 包括豆瓣、IMDB、MTC、猫眼、知乎、烂番茄新鲜度等
    */

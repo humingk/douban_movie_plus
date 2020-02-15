@@ -3,6 +3,7 @@ package org.humingk.movie.service.douban.common.dto.movie;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.humingk.movie.dal.domain.AwardOfMovieDoubanDo;
 import org.humingk.movie.dal.domain.CelebrityDoubanOfMovieDoubanDo;
 import org.humingk.movie.dal.entity.*;
 
@@ -19,7 +20,7 @@ import java.util.List;
 @AllArgsConstructor
 public class MovieDoubanDetailsDto implements Serializable {
   /** 豆瓣电影基础信息 */
-  private MovieDouban movieDouban;
+  private MovieDoubanDto movieDoubanDto;
   /** 豆瓣电影评分信息 */
   private RateMovieDouban rateMovieDouban;
   /** 豆瓣电影别名列表 */
@@ -39,7 +40,7 @@ public class MovieDoubanDetailsDto implements Serializable {
   /** 豆瓣电影热门影评列表 */
   private List<ReviewMovieDouban> reviewMovieDoubanList;
   /** 豆瓣电影-奖项列表 */
-  private List<MovieDoubanToAwardMovie> movieDoubanToAwardMovieList;
+  private List<AwardOfMovieDoubanDo> awardOfMovieDoubanDoList;
   /** 豆瓣电影热门评论列表 */
   private List<CommentMovieDouban> commentMovieDoubanList;
 }

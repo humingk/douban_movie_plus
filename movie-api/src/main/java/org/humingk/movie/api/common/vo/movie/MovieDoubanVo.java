@@ -20,7 +20,8 @@ public class MovieDoubanVo implements Serializable {
 
   /** 豆瓣电影链接 */
   protected String urlMovieDouban;
-
+  /** 影片类型ID */
+  private Byte idTypeVideo;
   /** 影片类型 */
   private String typeVideo;
 

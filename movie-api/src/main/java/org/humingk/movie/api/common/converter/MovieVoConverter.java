@@ -4,7 +4,7 @@ import org.humingk.movie.api.common.converter.movie.MovieDoubanVoConverter;
 import org.humingk.movie.api.common.converter.movie.MovieImdbVoConverter;
 import org.humingk.movie.api.common.vo.MovieVo;
 import org.humingk.movie.service.douban.common.dto.movie.MovieDoubanDto;
-import org.humingk.movie.service.imdb.common.dto.MovieImdbDto;
+import org.humingk.movie.service.imdb.common.dto.movie.MovieImdbDto;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;

@@ -27,7 +27,7 @@ Authorization|string|access_token|false|-
 
 Parameter | Type|Description|Required|Since
 ---|---|---|---|---
-id|int64|影人豆瓣ID|true|-
+id|int64|豆瓣影人ID|true|-
 
 **Request-example:**
 ```
@@ -119,7 +119,7 @@ Authorization|string|access_token|false|-
 
 Parameter | Type|Description|Required|Since
 ---|---|---|---|---
-id|int64|影人豆瓣ID|true|-
+id|int64|豆瓣影人ID|true|-
 
 **Request-example:**
 ```
@@ -213,7 +213,7 @@ Authorization|string|access_token|false|-
 
 Parameter | Type|Description|Required|Since
 ---|---|---|---|---
-id|int64|    影人豆瓣ID|true|-
+id|int64|    豆瓣影人ID|true|-
 offset|int32|合作次数偏移量（默认0）|false|-
 limit|int32| 合作次数限制数（默认10）|false|-
 
@@ -311,7 +311,7 @@ Authorization|string|access_token|false|-
 
 Parameter | Type|Description|Required|Since
 ---|---|---|---|---
-id|int64|               电影豆瓣ID|true|-
+id|int64|               豆瓣电影ID|true|-
 songLimit|int32|        歌曲数目限制数（默认8）|false|-
 playlistLimit|int32|    歌单数目限制数（默认1）|false|-
 playlistSongLimit|int32|歌单内歌曲数目限制数（默认8）|false|-
@@ -411,7 +411,7 @@ Authorization|string|access_token|false|-
 
 Parameter | Type|Description|Required|Since
 ---|---|---|---|---
-id|int64|    电影豆瓣ID|true|-
+id|int64|    豆瓣电影ID|true|-
 offset|int32|偏移量（默认0）|false|-
 limit|int32| 限制数（默认10）|false|-
 
@@ -460,7 +460,7 @@ Authorization|string|access_token|false|-
 
 Parameter | Type|Description|Required|Since
 ---|---|---|---|---
-id|int64|电影豆瓣ID|true|-
+id|int64|豆瓣电影ID|true|-
 
 **Request-example:**
 ```
@@ -507,7 +507,7 @@ Authorization|string|access_token|false|-
 
 Parameter | Type|Description|Required|Since
 ---|---|---|---|---
-id|int64|    电影豆瓣ID|true|-
+id|int64|    豆瓣电影ID|true|-
 offset|int32|偏移量（默认0）|false|-
 limit|int32| 限制数（默认10）|false|-
 
@@ -556,7 +556,7 @@ Authorization|string|access_token|false|-
 
 Parameter | Type|Description|Required|Since
 ---|---|---|---|---
-id|int64|电影豆瓣ID|true|-
+id|int64|豆瓣电影ID|true|-
 
 **Request-example:**
 ```
@@ -692,7 +692,7 @@ Authorization|string|access_token|false|-
 
 Parameter | Type|Description|Required|Since
 ---|---|---|---|---
-id|int64|电影豆瓣ID|true|-
+id|int64|豆瓣电影ID|true|-
 
 **Request-example:**
 ```
@@ -738,7 +738,7 @@ Authorization|string|access_token|false|-
 
 Parameter | Type|Description|Required|Since
 ---|---|---|---|---
-id|int64|电影豆瓣ID|true|-
+id|int64|豆瓣电影ID|true|-
 
 **Request-example:**
 ```
@@ -784,7 +784,7 @@ Authorization|string|access_token|false|-
 
 Parameter | Type|Description|Required|Since
 ---|---|---|---|---
-id|int64|    电影豆瓣ID|true|-
+id|int64|    豆瓣电影ID|true|-
 offset|int32|偏移量（默认0）|false|-
 limit|int32| 限制数（默认10）|false|-
 
@@ -832,7 +832,7 @@ Authorization|string|access_token|false|-
 
 Parameter | Type|Description|Required|Since
 ---|---|---|---|---
-id|int64|    电影豆瓣ID|true|-
+id|int64|    豆瓣电影ID|true|-
 offset|int32|偏移量（默认0）|false|-
 limit|int32| 限制数（默认10）|false|-
 
@@ -977,7 +977,7 @@ Authorization|string|access_token|false|-
 
 Parameter | Type|Description|Required|Since
 ---|---|---|---|---
-id|int64|电影豆瓣ID|true|-
+id|int64|豆瓣电影ID|true|-
 
 **Request-example:**
 ```
@@ -1024,7 +1024,7 @@ Authorization|string|access_token|false|-
 
 Parameter | Type|Description|Required|Since
 ---|---|---|---|---
-id|int64|    电影豆瓣ID|true|-
+id|int64|    豆瓣电影ID|true|-
 offset|int32|偏移量（默认0）|false|-
 limit|int32| 限制数（默认10）|false|-
 

@@ -3,10 +3,8 @@ package org.humingk.movie.api.common.vo.movie;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.humingk.movie.dal.entity.MovieImdb;
-import org.humingk.movie.dal.entity.MovieImdbToCelebrityImdb;
-import org.humingk.movie.dal.entity.MovieImdbToTypeMovie;
-import org.humingk.movie.dal.entity.RateImdb;
+import org.humingk.movie.api.common.vo.movie.details.CelebrityImdbOfMovieImdbVo;
+import org.humingk.movie.api.common.vo.movie.rate.RateMovieImdbVo;
 
 import java.io.Serializable;
 import java.util.List;
@@ -21,11 +19,11 @@ import java.util.List;
 @AllArgsConstructor
 public class MovieImdbDetailsVo implements Serializable {
   /** IMDB电影基础信息 */
-  private MovieImdb movieImdb;
-  /** IMDB电影评分信息（包括烂番茄、MTC） */
-  private RateImdb rateImdb;
-  /** IMDB电影-类型列表 */
-  private List<MovieImdbToTypeMovie> movieImdbToTypeMovieList;
-  /** IMDB电影-影人列表 */
-  private List<MovieImdbToCelebrityImdb> movieImdbToCelebrityImdbList;
+  private MovieImdbVo base;
+  /** IMDB电影评分 */
+  private RateMovieImdbVo rate;
+  /** IMDB电影类型列表 */
+  private List<String> typeList;
+  /** IMDB电影影人列表 */
+  private List<CelebrityImdbOfMovieImdbVo> celebrityList;
 }

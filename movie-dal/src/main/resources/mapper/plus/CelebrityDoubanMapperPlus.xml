@@ -13,6 +13,7 @@
                type="org.humingk.movie.dal.domain.CelebrityDoubanOfMovieDoubanDo"
                extends="BaseResultMapPlus">
         <association property="movieDoubanToCelebrityDouban"
+                     javaType="org.humingk.movie.dal.entity.MovieDoubanToCelebrityDouban"
                      resultMap="MovieDoubanToCelebrityDouban"/>
     </resultMap>
     <!--通过豆瓣电影ID获取与豆瓣电影相关的豆瓣影人信息列表-->

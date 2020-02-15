@@ -32,7 +32,7 @@ public interface DoubanApi {
   /**
    * 豆瓣影人基础信息
    *
-   * @param id 影人豆瓣ID
+   * @param id 豆瓣影人ID
    * @return
    * @apiNote 包括影人图片
    */
@@ -42,7 +42,7 @@ public interface DoubanApi {
   /**
    * 豆瓣影人基础信息列表
    *
-   * @param idList 影人豆瓣ID列表
+   * @param idList 豆瓣影人ID列表
    * @return
    * @apiNote 包括影人图片
    */
@@ -55,7 +55,7 @@ public interface DoubanApi {
   /**
    * 豆瓣影人详细信息
    *
-   * @param id 影人豆瓣ID
+   * @param id 豆瓣影人ID
    * @return
    * @apiNote 包括影人图片、基础信息、参演电影基础信息（电影海报、基础信息）、影人简介
    */
@@ -82,7 +82,7 @@ public interface DoubanApi {
   /**
    * 豆瓣影人合作过的影人基础信息
    *
-   * @param id 影人豆瓣ID
+   * @param id 豆瓣影人ID
    * @param offset 合作次数偏移量（默认0）
    * @param limit 合作次数限制数（默认10）
    * @return

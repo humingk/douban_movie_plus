@@ -25,7 +25,7 @@ public interface ZhihuApi {
   /**
    * 豆瓣电影知乎相关问题
    *
-   * @param id 电影豆瓣ID
+   * @param id 豆瓣电影ID
    * @param offset 偏移量（默认0）
    * @param limit 限制数（默认10）
    * @return

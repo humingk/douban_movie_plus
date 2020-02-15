@@ -10,15 +10,16 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @RunWith(SpringJUnit4ClassRunner.class)
 public class MovieServiceTest {
 
-  @Autowired private MovieService movieService;
+  @Autowired private MovieDoubanService movieDoubanService;
 
   @Test
   public void getMovieDoubanByMovieDoubanId() {
-    System.out.println(movieService.getMovieDoubanByMovieDoubanId(1291561));
+    System.out.println(movieDoubanService.getMovieDoubanByMovieDoubanId(1291561));
   }
 
   @Test
   public void getMovieDoubanDetailsByMovieDoubanId() {
-    System.out.println(movieService.getMovieDoubanDetailsByMovieDoubanId(1291561));
+    //    System.out.println(movieService.getMovieDoubanDetailsByMovieDoubanId(1291561));
+    System.out.println(movieDoubanService.getMovieDoubanDetailsByMovieDoubanId(26920842));
   }
 }

@@ -18,7 +18,7 @@
                 {
                   "key": "id",
                   "type": "text",
-                  "desc": "影人豆瓣ID",
+                  "desc": "豆瓣影人ID",
                   "value": "975"
                 }
               ]
@@ -74,7 +74,7 @@
                 {
                   "key": "id",
                   "type": "text",
-                  "desc": "影人豆瓣ID",
+                  "desc": "豆瓣影人ID",
                   "value": "24"
                 }
               ]
@@ -144,7 +144,7 @@
                 {
                   "key": "id",
                   "type": "text",
-                  "desc": "    影人豆瓣ID",
+                  "desc": "    豆瓣影人ID",
                   "value": "733"
                 },
                 {
@@ -235,7 +235,7 @@
                 {
                   "key": "id",
                   "type": "text",
-                  "desc": "               电影豆瓣ID",
+                  "desc": "               豆瓣电影ID",
                   "value": "543"
                 },
                 {
@@ -340,7 +340,7 @@
                 {
                   "key": "id",
                   "type": "text",
-                  "desc": "    电影豆瓣ID",
+                  "desc": "    豆瓣电影ID",
                   "value": "3"
                 },
                 {
@@ -386,7 +386,7 @@
                 {
                   "key": "id",
                   "type": "text",
-                  "desc": "电影豆瓣ID",
+                  "desc": "豆瓣电影ID",
                   "value": "216"
                 }
               ]
@@ -420,7 +420,7 @@
                 {
                   "key": "id",
                   "type": "text",
-                  "desc": "    电影豆瓣ID",
+                  "desc": "    豆瓣电影ID",
                   "value": "322"
                 },
                 {
@@ -466,7 +466,7 @@
                 {
                   "key": "id",
                   "type": "text",
-                  "desc": "电影豆瓣ID",
+                  "desc": "豆瓣电影ID",
                   "value": "117"
                 }
               ]
@@ -522,7 +522,7 @@
                 {
                   "key": "id",
                   "type": "text",
-                  "desc": "电影豆瓣ID",
+                  "desc": "豆瓣电影ID",
                   "value": "164"
                 }
               ]
@@ -551,7 +551,7 @@
                 {
                   "key": "id",
                   "type": "text",
-                  "desc": "电影豆瓣ID",
+                  "desc": "豆瓣电影ID",
                   "value": "730"
                 }
               ]
@@ -580,7 +580,7 @@
                 {
                   "key": "id",
                   "type": "text",
-                  "desc": "    电影豆瓣ID",
+                  "desc": "    豆瓣电影ID",
                   "value": "580"
                 },
                 {
@@ -621,7 +621,7 @@
                 {
                   "key": "id",
                   "type": "text",
-                  "desc": "    电影豆瓣ID",
+                  "desc": "    豆瓣电影ID",
                   "value": "205"
                 },
                 {
@@ -749,7 +749,7 @@
                 {
                   "key": "id",
                   "type": "text",
-                  "desc": "电影豆瓣ID",
+                  "desc": "豆瓣电影ID",
                   "value": "645"
                 }
               ]
@@ -783,7 +783,7 @@
                 {
                   "key": "id",
                   "type": "text",
-                  "desc": "    电影豆瓣ID",
+                  "desc": "    豆瓣电影ID",
                   "value": "647"
                 },
                 {

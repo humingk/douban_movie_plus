@@ -1,4 +1,4 @@
-package org.humingk.movie.service.imdb.common.dto;
+package org.humingk.movie.service.imdb.common.dto.movie;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

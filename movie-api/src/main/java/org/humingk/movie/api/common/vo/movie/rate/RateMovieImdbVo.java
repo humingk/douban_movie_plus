@@ -8,7 +8,7 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 
 /**
- * IMDB电影评分
+ * IMDB电影评分，包括MTC、烂番茄新鲜度
  *
  * @author humingk
  */
@@ -17,9 +17,17 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 public class RateMovieImdbVo implements Serializable {
   /** IMDB电影ID */
-  private Long id;
-  /** IMDB电影评分 */
-  private BigDecimal score;
-  /** IMDB电影评分人数 */
-  private Integer vote;
+  private String idMovieImdb;
+
+  /** IMDB评分 */
+  private BigDecimal imdbScore;
+
+  /** IMDB评分人数 */
+  private Integer imdbVote;
+
+  /** 烂番茄新鲜度 */
+  private BigDecimal tomatoScore;
+
+  /** MTC评分 */
+  private BigDecimal mtcScore;
 }

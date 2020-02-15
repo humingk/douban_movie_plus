@@ -12,7 +12,7 @@ import javax.validation.constraints.NotNull;
  * @author humingk
  */
 @Validated
-public interface MovieService {
+public interface MovieDoubanService {
 
   /**
    * 豆瓣电影基础信息
@@ -20,7 +20,7 @@ public interface MovieService {
    * @param id 豆瓣电影ID
    * @return
    */
-  @NotNull(message = "该ID暂无对应电影")
+  @NotNull(message = "该ID暂无对应豆瓣电影")
   MovieDoubanDto getMovieDoubanByMovieDoubanId(long id);
 
   /**
@@ -29,6 +29,6 @@ public interface MovieService {
    * @param id 豆瓣电影ID
    * @return
    */
-  @NotNull(message = "该ID暂无对应电影")
+  @NotNull(message = "该ID暂无对应豆瓣电影")
   MovieDoubanDetailsDto getMovieDoubanDetailsByMovieDoubanId(long id);
 }

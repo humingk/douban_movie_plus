@@ -1,17 +1,22 @@
-package org.humingk.movie.service.imdb.common.converter;
+package org.humingk.movie.service.imdb.common.converter.movie;
 
+import org.humingk.movie.dal.domain.CelebrityImdbOfMovieImdbDo;
 import org.humingk.movie.dal.entity.MovieImdb;
-import org.humingk.movie.dal.entity.MovieImdbToCelebrityImdb;
 import org.humingk.movie.dal.entity.MovieImdbToTypeMovie;
 import org.humingk.movie.dal.entity.RateImdb;
-import org.humingk.movie.service.imdb.common.dto.MovieImdbDetailsDto;
+import org.humingk.movie.service.imdb.common.dto.movie.MovieImdbDetailsDto;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+import org.mapstruct.Mappings;
 
 import java.util.List;
 
 /** @author humingk */
-@Mapper(componentModel = "spring")
+@Mapper(
+    componentModel = "spring",
+    uses = {MovieImdbDtoConverter.class})
 public interface MovieImdbDetailsDtoConverter {
+  @Mappings({@Mapping(target = "movieImdbDto", source = "movieImdb")})
   MovieImdbDetailsDto to(
       /** IMDB电影基础信息 */
       MovieImdb movieImdb,
@@ -19,6 +24,6 @@ public interface MovieImdbDetailsDtoConverter {
       RateImdb rateImdb,
       /** IMDB电影-类型列表 */
       List<MovieImdbToTypeMovie> movieImdbToTypeMovieList,
-      /** IMDB电影-影人列表 */
-      List<MovieImdbToCelebrityImdb> movieImdbToCelebrityImdbList);
+      /** 与IMDB电影相关的IMDB影人列表 */
+      List<CelebrityImdbOfMovieImdbDo> celebrityImdbOfMovieImdbDoList);
 }

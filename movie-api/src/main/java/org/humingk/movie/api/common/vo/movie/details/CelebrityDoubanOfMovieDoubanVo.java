@@ -1,4 +1,4 @@
-package org.humingk.movie.api.common.vo.celebrity;
+package org.humingk.movie.api.common.vo.movie.details;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -45,6 +45,9 @@ public class CelebrityDoubanOfMovieDoubanVo implements Serializable {
 
   /** 影人简介 */
   private String summary;
+
+  /** 该影人在该电影中的职位ID */
+  private Byte idProfession;
 
   /** 该影人在该电影中的职位 */
   private String profession;

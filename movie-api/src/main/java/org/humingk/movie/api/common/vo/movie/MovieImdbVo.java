@@ -17,6 +17,10 @@ import java.io.Serializable;
 public class MovieImdbVo implements Serializable {
   /** IMDB电影ID */
   private String id;
+  /** IMDB电影链接 */
+  private String urlMovieImdb;
+  /** 影片种类ID */
+  private Byte idTypeVideo;
   /** 影片种类 */
   private String typeVideo;
   /** IMDB电影英文名 */

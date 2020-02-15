@@ -7,8 +7,6 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
 
-import java.util.List;
-
 /** @author humingk */
 @Mapper(componentModel = "spring")
 public interface ImageMovieDoubanVoConverter

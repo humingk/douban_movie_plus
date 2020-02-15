@@ -1,15 +1,17 @@
 package org.humingk.movie.service.douban.service.impl;
 
+import org.humingk.movie.dal.domain.AwardOfMovieDoubanDo;
 import org.humingk.movie.dal.domain.CelebrityDoubanOfMovieDoubanDo;
 import org.humingk.movie.dal.entity.*;
 import org.humingk.movie.dal.mapper.auto.*;
 import org.humingk.movie.dal.mapper.plus.CelebrityDoubanMapperPlus;
+import org.humingk.movie.dal.mapper.plus.MoviedouanToAwardMovieMapperPlus;
 import org.humingk.movie.dal.mapper.plus.ReviewMovieDoubanMapperPlus;
 import org.humingk.movie.service.douban.common.converter.movie.MovieDoubanDetailsDtoConverter;
 import org.humingk.movie.service.douban.common.converter.movie.MovieDoubanDtoConverter;
 import org.humingk.movie.service.douban.common.dto.movie.MovieDoubanDetailsDto;
 import org.humingk.movie.service.douban.common.dto.movie.MovieDoubanDto;
-import org.humingk.movie.service.douban.service.MovieService;
+import org.humingk.movie.service.douban.service.MovieDoubanService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,7 +20,7 @@ import java.util.List;
 /** @author humingk */
 @Service
 // @RedisCache
-public class MovieServiceImpl implements MovieService {
+public class MovieDoubanServiceImpl implements MovieDoubanService {
 
   /** converter */
   @Autowired private MovieDoubanDtoConverter movieDoubanDtoConverter;
@@ -35,8 +37,6 @@ public class MovieServiceImpl implements MovieService {
   @Autowired private ImageMovieDoubanExample imageMovieDoubanExample;
   @Autowired private ClassicDoubanExample classicDoubanExample;
   @Autowired private CommentMovieDoubanExample commentMovieDoubanExample;
-  @Autowired private MovieDoubanToReviewMovieDoubanExample movieDoubanToReviewMovieDoubanExample;
-  @Autowired private MovieDoubanToAwardMovieExample movieDoubanToAwardMovieExample;
   /** mapper */
   @Autowired private AliasMovieDoubanMapper aliasMovieDoubanMapper;
 
@@ -48,10 +48,9 @@ public class MovieServiceImpl implements MovieService {
   @Autowired private ClassicDoubanMapper classicDoubanMapper;
   @Autowired private CommentMovieDoubanMapper commentMovieDoubanMapper;
   @Autowired private ReviewMovieDoubanMapperPlus reviewMovieDoubanMapperPlus;
-  @Autowired private MovieDoubanToReviewMovieDoubanMapper movieDoubanToReviewMovieDoubanMapper;
-  @Autowired private MovieDoubanToAwardMovieMapper movieDoubanToAwardMovieMapper;
   @Autowired private MovieDoubanMapper movieDoubanMapper;
   @Autowired private RateMovieDoubanMapper rateMovieDoubanMapper;
+  @Autowired private MoviedouanToAwardMovieMapperPlus moviedouanToAwardMovieMapperPlus;
 
   @Override
   public MovieDoubanDto getMovieDoubanByMovieDoubanId(long id) {
@@ -99,9 +98,8 @@ public class MovieServiceImpl implements MovieService {
     List<ReviewMovieDouban> reviewMovieDoubanList =
         reviewMovieDoubanMapperPlus.selectReviewMovieDoubanListByMovieDoubanId(id);
     /** 豆瓣电影-奖项列表 */
-    movieDoubanToAwardMovieExample.start().andIdMovieDoubanEqualTo(id);
-    List<MovieDoubanToAwardMovie> movieDoubanToAwardMovieList =
-        movieDoubanToAwardMovieMapper.selectByExample(movieDoubanToAwardMovieExample);
+    List<AwardOfMovieDoubanDo> awardOfMovieDoubanDoList =
+        moviedouanToAwardMovieMapperPlus.selectAwardOfMovieListByMovieDoubanId(id);
     // 转换为dto
     return movieDoubanDetailsDtoConverter.to(
         movieDouban,
@@ -115,6 +113,6 @@ public class MovieServiceImpl implements MovieService {
         classicDoubanList,
         commentMovieDoubanList,
         reviewMovieDoubanList,
-        movieDoubanToAwardMovieList);
+        awardOfMovieDoubanDoList);
   }
 }
