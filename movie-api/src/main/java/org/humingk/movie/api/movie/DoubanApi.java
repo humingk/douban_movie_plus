@@ -46,6 +46,8 @@ public interface DoubanApi {
   @RequestMapping(value = "/movie/douban/details", method = RequestMethod.GET)
   Result<MovieDoubanDetailsVo> details(@RequestParam("id") @NotNull Long id);
 
+  // -------------------
+
   /**
    * 豆瓣电影图片
    *

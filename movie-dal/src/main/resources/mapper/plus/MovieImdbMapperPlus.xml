@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.humingk.movie.dal.mapper.plus.MovieImdbMapperPlus">
+    <resultMap id="BaseResultMapPlus"
+               extends="org.humingk.movie.dal.mapper.auto.MovieImdbMapper.BaseResultMap"
+               type="org.humingk.movie.dal.entity.MovieImdb"/>
+    <!--IMDB电影-IMDB影人-->
+    <resultMap id="MovieImdbToCelebrityImdb"
+               type="org.humingk.movie.dal.entity.MovieImdbToCelebrityImdb"
+               extends="org.humingk.movie.dal.mapper.auto.MovieImdbToCelebrityImdbMapper.BaseResultMap"/>
+    <!--与IMDB影人相关的IMDB电影-->
+    <resultMap id="MovieImdbOfCelebrityImdbDoResultMapPlus"
+               type="org.humingk.movie.dal.domain.MovieImdbOfCelebrityImdbDo"
+               extends="BaseResultMapPlus">
+        <association property="movieImdbToCelebrityImdb"
+                     javaType="org.humingk.movie.dal.entity.MovieImdbToCelebrityImdb"
+                     resultMap="MovieImdbToCelebrityImdb"/>
+    </resultMap>
+    <!--通过IMDB影人ID获取与IMDB影人相关的IMDB电影信息列表-->
+    <select id="selectMovieImdbOfCelebrityImdbListByCelebrityImdbId" parameterType="java.lang.Long"
+            resultMap="MovieImdbOfCelebrityImdbDoResultMapPlus">
+        select movie_imdb.id,
+               id_type_video,
+               name_en,
+               start_year,
+               is_adult,
+               name_origin,
+               runtime,
+               url_poster,
+               summary,
+               id_movie_douban,
+               movie_imdb_to_celebrity_imdb.id_movie_imdb,
+               id_celebrity_imdb,
+               id_profession
+        from movie_imdb
+                 inner join movie_imdb_to_celebrity_imdb
+                            on movie_imdb.id = movie_imdb_to_celebrity_imdb.id_movie_imdb
+        where movie_imdb_to_celebrity_imdb.id_celebrity_imdb = #{idCelebrityImdb,jdbcType=BIGINT}
+    </select>
+</mapper>

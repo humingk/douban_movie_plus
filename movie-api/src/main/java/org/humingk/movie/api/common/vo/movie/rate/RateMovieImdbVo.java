@@ -16,6 +16,7 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @AllArgsConstructor
 public class RateMovieImdbVo implements Serializable {
+  private static final long serialVersionUID = 1L;
   /** IMDB电影ID */
   private String idMovieImdb;
 

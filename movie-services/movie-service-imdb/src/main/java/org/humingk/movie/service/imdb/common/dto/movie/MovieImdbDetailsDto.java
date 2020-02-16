@@ -19,6 +19,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class MovieImdbDetailsDto implements Serializable {
+  private static final long serialVersionUID = 1L;
   /** IMDB电影基础信息 */
   private MovieImdbDto movieImdbDto;
   /** IMDB电影评分信息（包括烂番茄、MTC） */

@@ -1,4 +1,4 @@
-package org.humingk.movie.api.common.vo.movie.details;
+package org.humingk.movie.api.common.vo.share;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -14,7 +14,8 @@ import java.io.Serializable;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class AwardOfMovieDoubanVo implements Serializable {
+public class AwardOfMovieAndCelebrityDoubanVo implements Serializable {
+  private static final long serialVersionUID = 1L;
 
   /** 豆瓣电影ID */
   private Long idMovieDouban;

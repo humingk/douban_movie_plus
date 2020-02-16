@@ -18,6 +18,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class MovieImdbDetailsVo implements Serializable {
+  private static final long serialVersionUID = 1L;
   /** IMDB电影基础信息 */
   private MovieImdbVo base;
   /** IMDB电影评分 */

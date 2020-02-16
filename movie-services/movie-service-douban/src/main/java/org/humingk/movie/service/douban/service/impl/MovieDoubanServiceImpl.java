@@ -1,11 +1,11 @@
 package org.humingk.movie.service.douban.service.impl;
 
-import org.humingk.movie.dal.domain.AwardOfMovieDoubanDo;
+import org.humingk.movie.dal.domain.AwardOfMovieAndCelebrityDoubanDo;
 import org.humingk.movie.dal.domain.CelebrityDoubanOfMovieDoubanDo;
 import org.humingk.movie.dal.entity.*;
 import org.humingk.movie.dal.mapper.auto.*;
 import org.humingk.movie.dal.mapper.plus.CelebrityDoubanMapperPlus;
-import org.humingk.movie.dal.mapper.plus.MoviedouanToAwardMovieMapperPlus;
+import org.humingk.movie.dal.mapper.plus.MovieDouanToAwardMovieMapperPlus;
 import org.humingk.movie.dal.mapper.plus.ReviewMovieDoubanMapperPlus;
 import org.humingk.movie.service.douban.common.converter.movie.MovieDoubanDetailsDtoConverter;
 import org.humingk.movie.service.douban.common.converter.movie.MovieDoubanDtoConverter;
@@ -50,7 +50,7 @@ public class MovieDoubanServiceImpl implements MovieDoubanService {
   @Autowired private ReviewMovieDoubanMapperPlus reviewMovieDoubanMapperPlus;
   @Autowired private MovieDoubanMapper movieDoubanMapper;
   @Autowired private RateMovieDoubanMapper rateMovieDoubanMapper;
-  @Autowired private MoviedouanToAwardMovieMapperPlus moviedouanToAwardMovieMapperPlus;
+  @Autowired private MovieDouanToAwardMovieMapperPlus moviedouanToAwardMovieMapperPlus;
 
   @Override
   public MovieDoubanDto getMovieDoubanByMovieDoubanId(long id) {
@@ -98,8 +98,8 @@ public class MovieDoubanServiceImpl implements MovieDoubanService {
     List<ReviewMovieDouban> reviewMovieDoubanList =
         reviewMovieDoubanMapperPlus.selectReviewMovieDoubanListByMovieDoubanId(id);
     /** 豆瓣电影-奖项列表 */
-    List<AwardOfMovieDoubanDo> awardOfMovieDoubanDoList =
-        moviedouanToAwardMovieMapperPlus.selectAwardOfMovieListByMovieDoubanId(id);
+    List<AwardOfMovieAndCelebrityDoubanDo> awardOfMovieAndCelebrityDoubanDoList =
+        moviedouanToAwardMovieMapperPlus.selectAwardOfMovieAndCelebrityListByMovieDoubanId(id);
     // 转换为dto
     return movieDoubanDetailsDtoConverter.to(
         movieDouban,
@@ -113,6 +113,6 @@ public class MovieDoubanServiceImpl implements MovieDoubanService {
         classicDoubanList,
         commentMovieDoubanList,
         reviewMovieDoubanList,
-        awardOfMovieDoubanDoList);
+        awardOfMovieAndCelebrityDoubanDoList);
   }
 }

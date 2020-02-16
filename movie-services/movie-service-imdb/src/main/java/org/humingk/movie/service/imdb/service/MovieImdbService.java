@@ -19,8 +19,17 @@ public interface MovieImdbService {
    * @param id IMDB电影ID
    * @return
    */
-  @NotNull(message = "该ID暂无对应IMDB电影")
+  @NotNull(message = "该IMDB电影ID暂无对应IMDB电影")
   MovieImdbDto getMovieImdbByMovieImdbId(long id);
+
+  /**
+   * 获取IMDB电影基础信息
+   *
+   * @param id 豆瓣电影ID
+   * @return
+   */
+  @NotNull(message = "该IMDB电影ID暂无对应IMDB电影")
+  MovieImdbDto getMovieImdbByMovieDoubanId(long id);
 
   /**
    * 获取IMDB电影详细信息
@@ -28,6 +37,15 @@ public interface MovieImdbService {
    * @param id IMDB电影ID
    * @return
    */
-  @NotNull(message = "该ID暂无对应IMDB电影")
+  @NotNull(message = "该豆瓣电影ID暂无对应IMDB电影")
   MovieImdbDetailsDto getMovieImdbDetailsByMovieImdbId(long id);
+
+  /**
+   * 获取IMDB电影详细信息
+   *
+   * @param id 豆瓣电影ID
+   * @return
+   */
+  @NotNull(message = "该豆瓣电影ID暂无对应IMDB电影")
+  MovieImdbDetailsDto getMovieImdbDetailsByMovieDoubanId(long id);
 }

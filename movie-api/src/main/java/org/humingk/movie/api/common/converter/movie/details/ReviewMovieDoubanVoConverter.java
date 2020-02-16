@@ -22,7 +22,7 @@ public interface ReviewMovieDoubanVoConverter
     @Mapping(
         target = "createDatetime",
         source = "createDatetime",
-        qualifiedByName = {"ConverterUtil", "unixTimestampToDate"}),
+        qualifiedByName = {"util", "unixTimestamp"}),
   })
   ReviewMovieDoubanVo to(ReviewMovieDouban reviewMovieDouban);
 }

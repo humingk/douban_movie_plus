@@ -18,26 +18,24 @@ public interface CelebrityImdbOfMovieImdbVoConverter
     @Mapping(
         target = "idCelebrityImdb",
         source = "id",
-        qualifiedByName = {"ConverterUtil", "getIdCelebrityImdb"}),
+        qualifiedByName = {"util", "idCelebrityImdb"}),
     @Mapping(
         target = "urlCelebrityImdb",
         source = "id",
-        qualifiedByName = {"ConverterUtil", "getUrlCelebrityImdb"}),
+        qualifiedByName = {"util", "urlCelebrityImdb"}),
     @Mapping(
         target = "idMovieImdb",
-        source = "celebrityImdbOfMovieImdbDo.movieImdbToCelebrityImdb.idMovieImdb",
-        qualifiedByName = {"ConverterUtil", "getUrlMovieImdb"}),
+        source = "movieImdbToCelebrityImdb.idMovieImdb",
+        qualifiedByName = {"util", "urlMovieImdb"}),
     @Mapping(
         target = "urlCelebrityDouban",
         source = "idCelebrityDouban",
-        qualifiedByName = {"ConverterUtil", "getUrlCelebrityDouban"}),
-    @Mapping(
-        target = "idProfession",
-        source = "celebrityImdbOfMovieImdbDo.movieImdbToCelebrityImdb.idProfession"),
+        qualifiedByName = {"util", "urlCelebrityDouban"}),
+    @Mapping(target = "idProfession", source = "movieImdbToCelebrityImdb.idProfession"),
     @Mapping(
         target = "profession",
-        source = "celebrityImdbOfMovieImdbDo.movieImdbToCelebrityImdb.idProfession",
-        qualifiedByName = {"ConverterUtil", "getProfessionZh"})
+        source = "movieImdbToCelebrityImdb.idProfession",
+        qualifiedByName = {"util", "profession"})
   })
   CelebrityImdbOfMovieImdbVo to(CelebrityImdbOfMovieImdbDo celebrityImdbOfMovieImdbDo);
 }

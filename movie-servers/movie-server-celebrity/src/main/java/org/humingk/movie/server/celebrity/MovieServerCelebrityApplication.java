@@ -13,6 +13,7 @@ import org.springframework.context.annotation.ComponentScan;
     basePackages = {
       "org.humingk.movie.server.celebrity",
       "org.humingk.movie.service.douban",
+      "org.humingk.movie.service.imdb",
       "org.humingk.movie.api",
       "org.humingk.movie.common"
     })

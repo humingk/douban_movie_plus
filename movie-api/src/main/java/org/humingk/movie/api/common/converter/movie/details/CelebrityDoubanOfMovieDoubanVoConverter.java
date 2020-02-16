@@ -7,7 +7,6 @@ import org.humingk.movie.dal.domain.CelebrityDoubanOfMovieDoubanDo;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
-import org.mapstruct.Named;
 
 /** @author humingk */
 @Mapper(
@@ -20,39 +19,33 @@ public interface CelebrityDoubanOfMovieDoubanVoConverter
     @Mapping(
         target = "urlCelebrityDouban",
         source = "id",
-        qualifiedByName = {"ConverterUtil", "getUrlCelebrityDouban"}),
+        qualifiedByName = {"util", "urlCelebrityDouban"}),
     @Mapping(
         target = "idCelebrityImdb",
         source = "idCelebrityImdb",
-        qualifiedByName = {"ConverterUtil", "getIdCelebrityImdb"}),
+        qualifiedByName = {"util", "idCelebrityImdb"}),
     @Mapping(
         target = "urlCelebrityImdb",
         source = "idCelebrityImdb",
-        qualifiedByName = {"ConverterUtil", "getUrlCelebrityImdb"}),
-    @Mapping(target = "sex", source = "sex", qualifiedByName = "toSex"),
+        qualifiedByName = {"util", "urlCelebrityImdb"}),
+    @Mapping(
+        target = "sex",
+        source = "sex",
+        qualifiedByName = {"util", "sex"}),
     @Mapping(
         target = "birthDate",
         source = "birthDate",
-        qualifiedByName = {"ConverterUtil", "unixTimestampToDate"}),
+        qualifiedByName = {"util", "unixTimestamp"}),
     @Mapping(
         target = "urlPortrait",
-        expression =
-            "java(\"https://img1.doubanio.com/view/celebrity/s_ratio_celebrity/public/p\"+celebrityDoubanOfMovieDoubanDo.getUrlPortrait()+\".webp\")"),
-    @Mapping(
-        target = "idProfession",
-        source = "celebrityDoubanOfMovieDoubanDo.movieDoubanToCelebrityDouban.idProfession"),
+        source = "urlPortrait",
+        qualifiedByName = {"util", "urlPortrait"}),
+    @Mapping(target = "idProfession", source = "movieDoubanToCelebrityDouban.idProfession"),
     @Mapping(
         target = "profession",
-        source = "celebrityDoubanOfMovieDoubanDo.movieDoubanToCelebrityDouban.idProfession",
-        qualifiedByName = {"ConverterUtil", "getProfessionZh"}),
-    @Mapping(
-        target = "sort",
-        source = "celebrityDoubanOfMovieDoubanDo.movieDoubanToCelebrityDouban.sort")
+        source = "movieDoubanToCelebrityDouban.idProfession",
+        qualifiedByName = {"util", "profession"}),
+    @Mapping(target = "sort", source = "movieDoubanToCelebrityDouban.sort")
   })
   CelebrityDoubanOfMovieDoubanVo to(CelebrityDoubanOfMovieDoubanDo celebrityDoubanOfMovieDoubanDo);
-
-  @Named("toSex")
-  default String toSex(Byte sex) {
-    return sex == 0 ? "女" : (sex == 1 ? "男" : "");
-  }
 }

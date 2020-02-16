@@ -2,7 +2,9 @@ package org.humingk.movie.service.imdb.service.impl;
 
 import org.humingk.movie.dal.domain.CelebrityImdbOfMovieImdbDo;
 import org.humingk.movie.dal.entity.*;
-import org.humingk.movie.dal.mapper.auto.*;
+import org.humingk.movie.dal.mapper.auto.MovieImdbMapper;
+import org.humingk.movie.dal.mapper.auto.MovieImdbToTypeMovieMapper;
+import org.humingk.movie.dal.mapper.auto.RateImdbMapper;
 import org.humingk.movie.dal.mapper.plus.CelebrityImdbMapperPlus;
 import org.humingk.movie.service.imdb.common.converter.movie.MovieImdbDetailsDtoConverter;
 import org.humingk.movie.service.imdb.common.converter.movie.MovieImdbDtoConverter;
@@ -26,6 +28,8 @@ public class MovieImdbServiceImpl implements MovieImdbService {
   /** example */
   @Autowired private MovieImdbToTypeMovieExample movieImdbToTypeMovieExample;
 
+  @Autowired private MovieImdbExample movieImdbExample;
+
   /** mapper */
   @Autowired private MovieImdbMapper movieImdbMapper;
 
@@ -39,18 +43,42 @@ public class MovieImdbServiceImpl implements MovieImdbService {
   }
 
   @Override
+  public MovieImdbDto getMovieImdbByMovieDoubanId(long id) {
+    movieImdbExample.start().andIdMovieDoubanEqualTo(id);
+    List<MovieImdb> movieImdbList = movieImdbMapper.selectByExample(movieImdbExample);
+    return movieImdbList.size() != 1
+        ? null
+        : movieImdbDtoConverter.to(movieImdbMapper.selectByExample(movieImdbExample).get(0));
+  }
+
+  @Override
   public MovieImdbDetailsDto getMovieImdbDetailsByMovieImdbId(long id) {
-    /** IMDB电影基础信息 */
     MovieImdb movieImdb = movieImdbMapper.selectByPrimaryKey(id);
+    return getMovieImdbDetailsByMovieImdb(movieImdb);
+  }
+
+  @Override
+  public MovieImdbDetailsDto getMovieImdbDetailsByMovieDoubanId(long id) {
+    movieImdbExample.start().andIdMovieDoubanEqualTo(id);
+    List<MovieImdb> movieImdbList = movieImdbMapper.selectByExample(movieImdbExample);
+    return movieImdbList.size() != 1 ? null : getMovieImdbDetailsByMovieImdb(movieImdbList.get(0));
+  }
+  /**
+   * 根据IMDB电影基础信息获取IMDB电影详细信息
+   *
+   * @param movieImdb IMDB电影基础信息
+   * @return
+   */
+  public MovieImdbDetailsDto getMovieImdbDetailsByMovieImdb(MovieImdb movieImdb) {
     /** IMDB电影评分信息（包括烂番茄、MTC） */
-    RateImdb rateImdb = rateImdbMapper.selectByPrimaryKey(id);
+    RateImdb rateImdb = rateImdbMapper.selectByPrimaryKey(movieImdb.getId());
     /** IMDB电影-类型列表 */
-    movieImdbToTypeMovieExample.start().andIdMovieImdbEqualTo(id);
+    movieImdbToTypeMovieExample.start().andIdMovieImdbEqualTo(movieImdb.getId());
     List<MovieImdbToTypeMovie> movieImdbToTypeMovieList =
         movieImdbToTypeMovieMapper.selectByExample(movieImdbToTypeMovieExample);
     /** 与IMDB电影相关的IMDB影人列表 */
     List<CelebrityImdbOfMovieImdbDo> celebrityImdbOfMovieImdbDoList =
-        celebrityImdbMapperPlus.selectCelebrityImdbOfMovieImdbListByMovieImdbId(id);
+        celebrityImdbMapperPlus.selectCelebrityImdbOfMovieImdbListByMovieImdbId(movieImdb.getId());
     return movieImdbDetailsDtoConverter.to(
         movieImdb, rateImdb, movieImdbToTypeMovieList, celebrityImdbOfMovieImdbDoList);
   }

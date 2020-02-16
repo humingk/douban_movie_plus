@@ -12,11 +12,6 @@
     <description>celebrity server for movie</description>
 
     <dependencies>
-        <!--service douban-->
-        <dependency>
-            <groupId>org.humingk</groupId>
-            <artifactId>movie-service-douban</artifactId>
-        </dependency>
         <!--jwt 解析-->
         <dependency>
             <groupId>io.jsonwebtoken</groupId>

@@ -21,4 +21,14 @@ public class MovieImdbServiceTest {
   public void getMovieImdbDetailsByMovieImdbId() {
     System.out.println(movieImdbService.getMovieImdbDetailsByMovieImdbId(245429));
   }
+
+  @Test
+  public void getMovieImdbByMovieDoubanId() {
+    System.out.println(movieImdbService.getMovieImdbByMovieDoubanId(1291561));
+  }
+
+  @Test
+  public void getMovieImdbDetailsByMovieDoubanId() {
+    System.out.println(movieImdbService.getMovieImdbDetailsByMovieDoubanId(1291561));
+  }
 }

@@ -17,7 +17,8 @@ import java.io.Serializable;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class AwardOfMovieDoubanDo implements Serializable {
+public class AwardOfMovieAndCelebrityDoubanDo implements Serializable {
+  private static final long serialVersionUID = 1L;
   // MovieDoubanToAwardMovie -----------------------
 
   /** 豆瓣电影ID */

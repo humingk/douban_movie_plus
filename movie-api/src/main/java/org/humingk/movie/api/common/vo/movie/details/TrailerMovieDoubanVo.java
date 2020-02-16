@@ -15,6 +15,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 public class TrailerMovieDoubanVo implements Serializable {
+  private static final long serialVersionUID = 1L;
   /** 豆瓣电影预告片ID */
   private Long id;
 

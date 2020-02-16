@@ -23,7 +23,7 @@ public interface CommentMovieDoubanVoConverter
     @Mapping(
         target = "createDate",
         source = "createDate",
-        qualifiedByName = {"ConverterUtil", "unixTimestampToDate"})
+        qualifiedByName = {"util", "unixTimestamp"})
   })
   CommentMovieDoubanVo to(CommentMovieDouban commentMovieDouban);
 }

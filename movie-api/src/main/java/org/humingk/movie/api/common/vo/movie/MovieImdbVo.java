@@ -15,6 +15,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 public class MovieImdbVo implements Serializable {
+  private static final long serialVersionUID = 1L;
   /** IMDB电影ID */
   private String id;
   /** IMDB电影链接 */

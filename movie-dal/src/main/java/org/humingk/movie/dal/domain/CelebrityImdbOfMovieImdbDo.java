@@ -7,11 +7,16 @@ import org.humingk.movie.dal.entity.MovieImdbToCelebrityImdb;
 
 import java.io.Serializable;
 
-/** @author humingk */
+/**
+ * 与IMDB电影相关的IMDB影人
+ *
+ * @author humingk
+ */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class CelebrityImdbOfMovieImdbDo implements Serializable {
+  private static final long serialVersionUID = 1L;
   // CelebrityImdb ---------------------------
   /** IMDB影人ID nm++00xxx(7) */
   private Long id;

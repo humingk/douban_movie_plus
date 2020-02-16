@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.humingk.movie.dal.mapper.plus.MovieDoubanMapperPlus">
+    <resultMap id="BaseResultMapPlus"
+               extends="org.humingk.movie.dal.mapper.auto.MovieDoubanMapper.BaseResultMap"
+               type="org.humingk.movie.dal.entity.MovieDouban"/>
+    <!--豆瓣电影-豆瓣影人-->
+    <resultMap id="MovieDoubanToCelebrityDouban"
+               type="org.humingk.movie.dal.entity.MovieDoubanToCelebrityDouban"
+               extends="org.humingk.movie.dal.mapper.auto.MovieDoubanToCelebrityDoubanMapper.BaseResultMap"/>
+    <!--与豆瓣电影相关的豆瓣影人-->
+    <resultMap id="MovieDoubanOfCelebrityDoubanDoResultMapPlus"
+               type="org.humingk.movie.dal.domain.MovieDoubanOfCelebrityDoubanDo"
+               extends="BaseResultMapPlus">
+        <association property="movieDoubanToCelebrityDouban"
+                     javaType="org.humingk.movie.dal.entity.MovieDoubanToCelebrityDouban"
+                     resultMap="MovieDoubanToCelebrityDouban"/>
+    </resultMap>
+    <!--通过豆瓣影人ID获取与豆瓣影人相关的豆瓣电影信息列表-->
+    <select id="selectMovieDoubanOfCelebrityDoubanListByCelebrityDoubanId" parameterType="java.lang.Long"
+            resultMap="MovieDoubanOfCelebrityDoubanDoResultMapPlus">
+        select movie_douban.id,
+               id_type_video,
+               id_movie_imdb,
+               start_year,
+               name_zh,
+               name_origin,
+               runtime,
+               url_poster,
+               summary,
+               have_seen,
+               wanna_see,
+               is_netease,
+               is_zhihu,
+               movie_douban_to_celebrity_douban.id_movie_douban,
+               id_celebrity_douban,
+               id_profession,
+               sort
+        from movie_douban
+                 inner join movie_douban_to_celebrity_douban
+                            on movie_douban.id = movie_douban_to_celebrity_douban.id_movie_douban
+        where movie_douban_to_celebrity_douban.id_celebrity_douban = #{idCelebrityDouban,jdbcType=BIGINT}
+    </select>
+</mapper>

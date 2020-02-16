@@ -17,6 +17,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 public class MovieVo implements Serializable {
+  private static final long serialVersionUID = 1L;
 
   /** 豆瓣电影基础信息 */
   private MovieDoubanVo douban;

@@ -1,20 +1,17 @@
 package org.humingk.movie.api.celebrity;
 
+import org.humingk.movie.api.common.vo.celebrity.CelebrityDoubanDetailsVo;
+import org.humingk.movie.api.common.vo.celebrity.CelebrityDoubanVo;
 import org.humingk.movie.common.entity.Result;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PositiveOrZero;
-import java.util.List;
-
-import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 // 用于生成API文档
 // import org.springframework.web.bind.annotation.RestController;
@@ -34,33 +31,22 @@ public interface DoubanApi {
    *
    * @param id 豆瓣影人ID
    * @return
-   * @apiNote 包括影人图片
+   * @apiNote 包括影人头像,影人简介等
    */
   @RequestMapping(value = "/celebrity/douban/bases", method = RequestMethod.GET)
-  Result bases(@RequestParam("id") @NotNull Long id);
-
-  /**
-   * 豆瓣影人基础信息列表
-   *
-   * @param idList 豆瓣影人ID列表
-   * @return
-   * @apiNote 包括影人图片
-   */
-  @RequestMapping(
-      value = "/celebrity/douban/bases_list",
-      method = RequestMethod.GET,
-      consumes = APPLICATION_JSON_VALUE)
-  Result basesList(@RequestBody @NotEmpty List<Long> idList);
+  Result<CelebrityDoubanVo> bases(@RequestParam("id") @NotNull Long id);
 
   /**
    * 豆瓣影人详细信息
    *
    * @param id 豆瓣影人ID
    * @return
-   * @apiNote 包括影人图片、基础信息、参演电影基础信息（电影海报、基础信息）、影人简介
+   * @apiNote 包括影人基础信息，别称，图片，相关的豆瓣电影，获得的奖项
    */
   @RequestMapping(value = "/celebrity/douban/details", method = RequestMethod.GET)
-  Result details(@RequestParam("id") @NotNull Long id);
+  Result<CelebrityDoubanDetailsVo> details(@RequestParam("id") @NotNull Long id);
+
+  // -----------------------
 
   /**
    * 豆瓣影人奖项

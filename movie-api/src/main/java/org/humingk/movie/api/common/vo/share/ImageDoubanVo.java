@@ -1,4 +1,4 @@
-package org.humingk.movie.api.common.vo.movie.details;
+package org.humingk.movie.api.common.vo.share;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -7,27 +7,25 @@ import lombok.NoArgsConstructor;
 import java.io.Serializable;
 
 /**
- * 豆瓣电影图片
+ * 豆瓣图片
  *
  * @author humingk
  */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class ImageMovieDoubanVo implements Serializable {
-  /** 豆瓣电影图片ID */
+public class ImageDoubanVo implements Serializable {
+  private static final long serialVersionUID = 1L;
+  /** 豆瓣图片ID */
   private Long id;
 
-  /** 豆瓣电影ID */
-  private Long idMovieDouban;
-
-  /** 豆瓣电影图片链接 sqxs */
+  /** 豆瓣图片链接 sqxs */
   private String urlImageSqxs;
-  /** 豆瓣电影图片链接 s */
+  /** 豆瓣图片链接 s */
   private String urlImageS;
-  /** 豆瓣电影图片链接 m */
+  /** 豆瓣图片链接 m */
   private String urlImageM;
-  /** 豆瓣电影图片链接 L */
+  /** 豆瓣图片链接 L */
   private String urlImageL;
 
   /** 序号 */

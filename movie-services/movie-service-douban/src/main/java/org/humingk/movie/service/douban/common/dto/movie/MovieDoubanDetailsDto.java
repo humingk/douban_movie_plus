@@ -3,9 +3,10 @@ package org.humingk.movie.service.douban.common.dto.movie;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.humingk.movie.dal.domain.AwardOfMovieDoubanDo;
+import org.humingk.movie.dal.domain.AwardOfMovieAndCelebrityDoubanDo;
 import org.humingk.movie.dal.domain.CelebrityDoubanOfMovieDoubanDo;
 import org.humingk.movie.dal.entity.*;
+import org.humingk.movie.dal.domain.ImageDoubanDo;
 
 import java.io.Serializable;
 import java.util.List;
@@ -19,6 +20,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class MovieDoubanDetailsDto implements Serializable {
+  private static final long serialVersionUID = 1L;
   /** 豆瓣电影基础信息 */
   private MovieDoubanDto movieDoubanDto;
   /** 豆瓣电影评分信息 */
@@ -33,14 +35,14 @@ public class MovieDoubanDetailsDto implements Serializable {
   private List<CelebrityDoubanOfMovieDoubanDo> celebrityDoubanOfMovieDoubanDoList;
   /** 豆瓣电影预告片列表 */
   private List<TrailerMovieDouban> trailerMovieDoubanList;
-  /** 豆瓣电影图片列表 */
-  private List<ImageMovieDouban> imageMovieDoubanList;
+  /** 豆瓣图片列表 */
+  private List<ImageDoubanDo> imageDoubanDoList;
   /** 豆瓣电影经典台词列表 */
   private List<ClassicDouban> classicDoubanList;
   /** 豆瓣电影热门影评列表 */
   private List<ReviewMovieDouban> reviewMovieDoubanList;
   /** 豆瓣电影-奖项列表 */
-  private List<AwardOfMovieDoubanDo> awardOfMovieDoubanDoList;
+  private List<AwardOfMovieAndCelebrityDoubanDo> awardOfMovieAndCelebrityDoubanDoList;
   /** 豆瓣电影热门评论列表 */
   private List<CommentMovieDouban> commentMovieDoubanList;
 }

@@ -11,6 +11,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ReviewMovieDoubanVo implements Serializable {
+  private static final long serialVersionUID = 1L;
   /** 豆瓣电影影评ID */
   private Long id;
 

@@ -15,6 +15,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 public class MovieDoubanVo implements Serializable {
+  private static final long serialVersionUID = 1L;
   /** 豆瓣电影ID */
   protected Long id;
 
@@ -25,7 +26,7 @@ public class MovieDoubanVo implements Serializable {
   /** 影片类型 */
   private String typeVideo;
 
-  /** IMDB电影ID 0-未匹配 1-已匹配 */
+  /** IMDB电影ID */
   private String idMovieImdb;
 
   /** IMDB电影链接 */
@@ -43,7 +44,7 @@ public class MovieDoubanVo implements Serializable {
   /** 豆瓣电影运行片长 /m */
   private Short runtime;
 
-  /** 豆瓣电影海报 */
+  /** 豆瓣电影海报链接 */
   private String urlPoster;
 
   /** 已看人数 */

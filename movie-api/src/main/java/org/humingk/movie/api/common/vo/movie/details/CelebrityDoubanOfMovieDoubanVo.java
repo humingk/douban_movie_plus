@@ -15,6 +15,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CelebrityDoubanOfMovieDoubanVo implements Serializable {
+  private static final long serialVersionUID = 1L;
 
   /** 豆瓣影人ID */
   private Long id;

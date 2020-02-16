@@ -15,6 +15,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CelebrityImdbDto implements Serializable {
+  private static final long serialVersionUID = 1L;
   /** IMDB影人ID nm++00xxx(7) */
   private Long id;
 

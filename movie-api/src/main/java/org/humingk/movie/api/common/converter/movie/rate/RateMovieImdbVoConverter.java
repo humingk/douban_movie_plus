@@ -18,7 +18,7 @@ public interface RateMovieImdbVoConverter extends BaseConverter<RateMovieImdbVo,
     @Mapping(
         target = "idMovieImdb",
         source = "id",
-        qualifiedByName = {"ConverterUtil", "getIdMovieImdb"})
+        qualifiedByName = {"util", "idMovieImdb"})
   })
   RateMovieImdbVo to(RateImdb rateImdb);
 }

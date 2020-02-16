@@ -2,6 +2,8 @@ package org.humingk.movie.api.common.converter.movie;
 
 import org.humingk.movie.api.common.converter.movie.details.*;
 import org.humingk.movie.api.common.converter.movie.rate.RateMovieDoubanVoConverter;
+import org.humingk.movie.api.common.converter.share.AwardOfMovieAndCelebrityDoubanVoConverter;
+import org.humingk.movie.api.common.converter.share.ImageDoubanVoConverter;
 import org.humingk.movie.api.common.vo.movie.MovieDoubanDetailsVo;
 import org.humingk.movie.common.entity.MovieConstant;
 import org.humingk.movie.dal.entity.AliasMovieDouban;
@@ -24,10 +26,10 @@ import java.util.stream.Collectors;
       RateMovieDoubanVoConverter.class,
       CelebrityDoubanOfMovieDoubanVoConverter.class,
       TrailerMovieDoubanVoConverter.class,
-      ImageMovieDoubanVoConverter.class,
+      ImageDoubanVoConverter.class,
       ClassicDoubanVoConverter.class,
       ReviewMovieDoubanVoConverter.class,
-      AwardOfMovieDoubanVoConverter.class,
+      AwardOfMovieAndCelebrityDoubanVoConverter.class,
       CommentMovieDoubanVoConverter.class
     })
 public interface MovieDoubanDetailsVoConverter {
@@ -46,10 +48,10 @@ public interface MovieDoubanDetailsVoConverter {
     @Mapping(target = "tagList", source = "tagMovieList", qualifiedByName = "toTagList"),
     @Mapping(target = "celebrityList", source = "celebrityDoubanOfMovieDoubanDoList"),
     @Mapping(target = "trailerList", source = "trailerMovieDoubanList"),
-    @Mapping(target = "imageList", source = "imageMovieDoubanList"),
+    @Mapping(target = "imageList", source = "imageDoubanDoList"),
     @Mapping(target = "classicList", source = "classicDoubanList"),
     @Mapping(target = "reviewList", source = "reviewMovieDoubanList"),
-    @Mapping(target = "awardList", source = "awardOfMovieDoubanDoList"),
+    @Mapping(target = "awardList", source = "awardOfMovieAndCelebrityDoubanDoList"),
     @Mapping(target = "commentList", source = "commentMovieDoubanList")
   })
   MovieDoubanDetailsVo to(MovieDoubanDetailsDto movieDoubanDetailsDto);

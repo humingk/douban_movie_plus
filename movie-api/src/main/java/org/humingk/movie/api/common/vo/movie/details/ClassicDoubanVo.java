@@ -15,6 +15,7 @@ import java.io.Serializable;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ClassicDoubanVo implements Serializable {
+  private static final long serialVersionUID = 1L;
   /** 豆瓣电影经典台词ID */
   private Long id;
 
