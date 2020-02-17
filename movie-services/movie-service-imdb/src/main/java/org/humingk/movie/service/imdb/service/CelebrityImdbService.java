@@ -1,7 +1,7 @@
 package org.humingk.movie.service.imdb.service;
 
-import org.humingk.movie.service.imdb.common.dto.celebrity.CelebrityImdbDetailsDto;
-import org.humingk.movie.service.imdb.common.dto.celebrity.CelebrityImdbDto;
+import org.humingk.movie.service.imdb.dto.celebrity.CelebrityImdbDetailsDto;
+import org.humingk.movie.service.imdb.dto.celebrity.CelebrityImdbDto;
 import org.springframework.validation.annotation.Validated;
 
 import javax.validation.constraints.NotNull;

@@ -2,8 +2,12 @@ package org.humingk.movie.api.common.util;
 
 import org.apache.commons.lang.time.DateFormatUtils;
 import org.humingk.movie.common.entity.MovieConstant;
+import org.humingk.movie.dal.entity.AliasMovieDouban;
 import org.mapstruct.Named;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Pojo转换工具类
@@ -158,5 +162,18 @@ public class ConverterUtil {
   @Named("typeVideo")
   public String typeVideo(Byte idTypeVideo) {
     return MovieConstant.VIDEO_TYPE.get(idTypeVideo).get(0);
+  }
+
+  /**
+   * 获取豆瓣电影别名列表
+   *
+   * @param aliasMovieDoubanList
+   * @return
+   */
+  @Named("aliasList")
+  public List<String> aliasList(List<AliasMovieDouban> aliasMovieDoubanList) {
+    return aliasMovieDoubanList.stream()
+        .map(AliasMovieDouban::getNameAlias)
+        .collect(Collectors.toList());
   }
 }

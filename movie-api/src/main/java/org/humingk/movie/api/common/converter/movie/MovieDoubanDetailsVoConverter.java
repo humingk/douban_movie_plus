@@ -4,12 +4,12 @@ import org.humingk.movie.api.common.converter.movie.details.*;
 import org.humingk.movie.api.common.converter.movie.rate.RateMovieDoubanVoConverter;
 import org.humingk.movie.api.common.converter.share.AwardOfMovieAndCelebrityDoubanVoConverter;
 import org.humingk.movie.api.common.converter.share.ImageDoubanVoConverter;
+import org.humingk.movie.api.common.util.ConverterUtil;
 import org.humingk.movie.api.common.vo.movie.MovieDoubanDetailsVo;
 import org.humingk.movie.common.entity.MovieConstant;
-import org.humingk.movie.dal.entity.AliasMovieDouban;
 import org.humingk.movie.dal.entity.MovieDoubanToTypeMovie;
 import org.humingk.movie.dal.entity.TagMovie;
-import org.humingk.movie.service.douban.common.dto.movie.MovieDoubanDetailsDto;
+import org.humingk.movie.service.douban.dto.movie.MovieDoubanDetailsDto;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
@@ -22,6 +22,7 @@ import java.util.stream.Collectors;
 @Mapper(
     componentModel = "spring",
     uses = {
+      ConverterUtil.class,
       MovieDoubanVoConverter.class,
       RateMovieDoubanVoConverter.class,
       CelebrityDoubanOfMovieDoubanVoConverter.class,
@@ -35,12 +36,12 @@ import java.util.stream.Collectors;
 public interface MovieDoubanDetailsVoConverter {
 
   @Mappings({
-    @Mapping(target = "base", source = "movieDoubanDetailsDto.movieDoubanDto"),
+    @Mapping(target = "base", source = "movieDoubanDto"),
     @Mapping(target = "rate", source = "rateMovieDouban"),
     @Mapping(
         target = "aliasList",
         source = "aliasMovieDoubanList",
-        qualifiedByName = "toAliasList"),
+        qualifiedByName = {"util", "aliasList"}),
     @Mapping(
         target = "typeList",
         source = "movieDoubanToTypeMovieList",
@@ -55,13 +56,6 @@ public interface MovieDoubanDetailsVoConverter {
     @Mapping(target = "commentList", source = "commentMovieDoubanList")
   })
   MovieDoubanDetailsVo to(MovieDoubanDetailsDto movieDoubanDetailsDto);
-
-  @Named("toAliasList")
-  default List<String> toAliasList(List<AliasMovieDouban> aliasMovieDoubanList) {
-    return aliasMovieDoubanList.stream()
-        .map(AliasMovieDouban::getNameAlias)
-        .collect(Collectors.toList());
-  }
 
   @Named("toTagList")
   default List<String> toTagList(List<TagMovie> tagMovieList) {

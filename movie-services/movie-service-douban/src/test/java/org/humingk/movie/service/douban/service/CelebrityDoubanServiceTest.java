@@ -24,4 +24,11 @@ public class CelebrityDoubanServiceTest {
     System.out.println(
         celebrityDoubanService.getCelebrityDoubanDetailsByCelebrityDoubanId(1054439));
   }
+
+  @Test
+  public void getSearchTipsCelebrityDoubanListByCelebrityDoubanKeywordStart() {
+    System.out.println(
+        celebrityDoubanService.getSearchTipsCelebrityDoubanListByCelebrityDoubanKeywordStart(
+            "宫", 0, 10));
+  }
 }

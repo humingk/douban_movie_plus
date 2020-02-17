@@ -61,6 +61,20 @@ spring:
                 # 令牌桶总容量
                 redis-rate-limiter.burstCapacity: 5
         # ----------------------------------------
+        # 搜索
+        - id: movie-server-search
+          uri: lb://movie-server-search
+          predicates:
+            - Path=/${custom.api.version}/search/**
+          filters:
+            - StripPrefix=1
+            # 限流过滤器
+            - name: RequestRateLimiter
+              args:
+                key-resolver: '#{@myHostAddrKeyResolver}'
+                redis-rate-limiter.replenishRate: 1
+                redis-rate-limiter.burstCapacity: 5
+        # ----------------------------------------
         # 影人
         - id: movie-server-celebrity
           uri: lb://movie-server-celebrity

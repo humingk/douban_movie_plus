@@ -1,20 +1,25 @@
 package org.humingk.movie.service.douban.service.impl;
 
+import com.github.pagehelper.PageHelper;
 import org.humingk.movie.dal.domain.AwardOfMovieAndCelebrityDoubanDo;
 import org.humingk.movie.dal.domain.CelebrityDoubanOfMovieDoubanDo;
+import org.humingk.movie.dal.domain.SearchTipsMovieDoubanDo;
 import org.humingk.movie.dal.entity.*;
 import org.humingk.movie.dal.mapper.auto.*;
 import org.humingk.movie.dal.mapper.plus.CelebrityDoubanMapperPlus;
 import org.humingk.movie.dal.mapper.plus.MovieDouanToAwardMovieMapperPlus;
 import org.humingk.movie.dal.mapper.plus.ReviewMovieDoubanMapperPlus;
-import org.humingk.movie.service.douban.common.converter.movie.MovieDoubanDetailsDtoConverter;
-import org.humingk.movie.service.douban.common.converter.movie.MovieDoubanDtoConverter;
-import org.humingk.movie.service.douban.common.dto.movie.MovieDoubanDetailsDto;
-import org.humingk.movie.service.douban.common.dto.movie.MovieDoubanDto;
+import org.humingk.movie.service.douban.converter.movie.MovieDoubanDetailsDtoConverter;
+import org.humingk.movie.service.douban.converter.movie.MovieDoubanDtoConverter;
+import org.humingk.movie.service.douban.converter.movie.SearchTipsMovieDoubanDtoConverter;
+import org.humingk.movie.service.douban.dto.movie.MovieDoubanDetailsDto;
+import org.humingk.movie.service.douban.dto.movie.MovieDoubanDto;
+import org.humingk.movie.service.douban.dto.movie.SearchTipsMovieDoubanDto;
 import org.humingk.movie.service.douban.service.MovieDoubanService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /** @author humingk */
@@ -26,10 +31,11 @@ public class MovieDoubanServiceImpl implements MovieDoubanService {
   @Autowired private MovieDoubanDtoConverter movieDoubanDtoConverter;
 
   @Autowired private MovieDoubanDetailsDtoConverter movieDoubanDetailsDtoConverter;
-
+  @Autowired private SearchTipsMovieDoubanDtoConverter searchTipsMovieDoubanDtoConverter;
   /** example */
   @Autowired private AliasMovieDoubanExample aliasMovieDoubanExample;
 
+  @Autowired private MovieDoubanExample movieDoubanExample;
   @Autowired private MovieDoubanToTypeMovieExample movieDoubanToTypeMovieExample;
   @Autowired private TagMovieExample tagMovieExample;
   @Autowired private MovieDoubanToCelebrityDoubanExample movieDoubanToCelebrityDoubanExample;
@@ -114,5 +120,25 @@ public class MovieDoubanServiceImpl implements MovieDoubanService {
         commentMovieDoubanList,
         reviewMovieDoubanList,
         awardOfMovieAndCelebrityDoubanDoList);
+  }
+
+  @Override
+  public List<SearchTipsMovieDoubanDto> getSearchTipsMovieDoubanListByMovieDoubanKeywordStart(
+      String keyword, int offset, int limit) {
+    List<SearchTipsMovieDoubanDo> resultList = new ArrayList<>();
+    movieDoubanExample.start().andNameZhLike(keyword.trim() + "%");
+    movieDoubanExample.or().andNameOriginLike(keyword.trim() + "%");
+    PageHelper.offsetPage(offset, limit);
+    List<MovieDouban> movieDoubanList = movieDoubanMapper.selectByExample(movieDoubanExample);
+    for (MovieDouban movieDouban : movieDoubanList) {
+      RateMovieDouban rateMovieDouban =
+          rateMovieDoubanMapper.selectByPrimaryKey(movieDouban.getId());
+      aliasMovieDoubanExample.start().andIdMovieDoubanEqualTo(movieDouban.getId());
+      List<AliasMovieDouban> aliasMovieDoubanList =
+          aliasMovieDoubanMapper.selectByExample(aliasMovieDoubanExample);
+      resultList.add(
+          new SearchTipsMovieDoubanDo(movieDouban, rateMovieDouban, aliasMovieDoubanList));
+    }
+    return searchTipsMovieDoubanDtoConverter.toList(resultList);
   }
 }

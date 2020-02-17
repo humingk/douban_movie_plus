@@ -7,11 +7,9 @@ import org.humingk.movie.api.common.vo.movie.MovieDoubanVo;
 import org.humingk.movie.api.movie.DoubanApi;
 import org.humingk.movie.common.entity.Result;
 import org.humingk.movie.service.douban.service.MovieDoubanService;
-import org.humingk.movie.service.douban.service.SearchService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PositiveOrZero;
 
@@ -19,7 +17,6 @@ import javax.validation.constraints.PositiveOrZero;
 @RestController
 public class DoubanController implements DoubanApi {
   @Autowired private MovieDoubanService movieDoubanService;
-  @Autowired private SearchService searchService;
   @Autowired private MovieDoubanVoConverter movieDoubanVoConverter;
   @Autowired private MovieDoubanDetailsVoConverter movieDoubanDetailsVoConverter;
 
@@ -36,6 +33,8 @@ public class DoubanController implements DoubanApi {
             movieDoubanService.getMovieDoubanDetailsByMovieDoubanId(id)));
   }
 
+  // --------
+
   @Override
   public Result images(@NotNull Long id) {
     return null;
@@ -49,19 +48,6 @@ public class DoubanController implements DoubanApi {
 
   @Override
   public Result hotReviews(Long id, @PositiveOrZero Integer offset, @PositiveOrZero Integer limit) {
-    return null;
-  }
-
-  @Override
-  public Result searchTips(
-      @NotBlank String keyword, @PositiveOrZero Integer offset, @PositiveOrZero Integer limit) {
-    return Result.success(
-        searchService.getMovieDoubanListByNameStart(keyword.trim(), offset, limit));
-  }
-
-  @Override
-  public Result searchDetails(
-      @NotBlank String keyword, @PositiveOrZero Integer offset, @PositiveOrZero Integer limit) {
     return null;
   }
 }

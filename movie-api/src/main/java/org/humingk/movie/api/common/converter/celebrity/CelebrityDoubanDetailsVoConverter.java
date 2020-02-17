@@ -6,7 +6,7 @@ import org.humingk.movie.api.common.converter.share.AwardOfMovieAndCelebrityDoub
 import org.humingk.movie.api.common.converter.share.ImageDoubanVoConverter;
 import org.humingk.movie.api.common.vo.celebrity.CelebrityDoubanDetailsVo;
 import org.humingk.movie.common.util.BaseConverter;
-import org.humingk.movie.service.douban.common.dto.celebrity.CelebrityDoubanDetailsDto;
+import org.humingk.movie.service.douban.dto.celebrity.CelebrityDoubanDetailsDto;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;

@@ -10,7 +10,6 @@ import org.humingk.movie.service.douban.service.CelebrityDoubanService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PositiveOrZero;
 
@@ -37,7 +36,6 @@ public class DoubanController implements DoubanApi {
         celebrityDoubanDetailsVoConverter.to(
             celebrityDoubanService.getCelebrityDoubanDetailsByCelebrityDoubanId(id)));
   }
-
   // ----------
 
   @Override
@@ -48,12 +46,6 @@ public class DoubanController implements DoubanApi {
   @Override
   public Result cooperatorsBases(
       Long id, @PositiveOrZero Integer offset, @PositiveOrZero Integer limit) {
-    return null;
-  }
-
-  @Override
-  public Result searchDetails(
-      @NotBlank String keyword, @PositiveOrZero Integer offset, @PositiveOrZero Integer limit) {
     return null;
   }
 }

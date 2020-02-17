@@ -6,7 +6,7 @@ import org.humingk.movie.api.common.vo.movie.MovieImdbDetailsVo;
 import org.humingk.movie.common.entity.MovieConstant;
 import org.humingk.movie.common.util.BaseConverter;
 import org.humingk.movie.dal.entity.MovieImdbToTypeMovie;
-import org.humingk.movie.service.imdb.common.dto.movie.MovieImdbDetailsDto;
+import org.humingk.movie.service.imdb.dto.movie.MovieImdbDetailsDto;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;

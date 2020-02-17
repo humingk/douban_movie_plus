@@ -10,6 +10,8 @@ public class ResourceId {
   public static final String USER_ID = "user";
   /** 电影资源ID */
   public static final String MOVIE_ID = "movie";
+  /** 搜索资源ID */
+  public static final String SEARCH_ID = "search";
   /** 影人资源ID */
   public static final String CELEBRITY_ID = " celebrity";
   /** 音乐资源ID */

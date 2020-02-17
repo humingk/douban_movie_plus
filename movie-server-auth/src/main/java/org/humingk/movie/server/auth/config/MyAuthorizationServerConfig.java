@@ -49,7 +49,7 @@ public class MyAuthorizationServerConfig extends AuthorizationServerConfig {
         // 支持的角色
         .authorities(ROOT.name, USER.name)
         // 支持的资源ID
-        .resourceIds(USER_ID, MOVIE_ID, MUSIC_ID, CELEBRITY_ID)
+        .resourceIds(USER_ID, MOVIE_ID, MUSIC_ID, CELEBRITY_ID, SEARCH_ID)
         .scopes(clientScopes)
         // 支持的请求模式
         .authorizedGrantTypes(PASSWORD, REFRESH)

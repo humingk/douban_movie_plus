@@ -1,5 +1,6 @@
 package org.humingk.movie.service.douban.service.impl;
 
+import com.github.pagehelper.PageHelper;
 import org.humingk.movie.dal.domain.AwardOfMovieAndCelebrityDoubanDo;
 import org.humingk.movie.dal.domain.MovieDoubanOfCelebrityDoubanDo;
 import org.humingk.movie.dal.entity.*;
@@ -8,10 +9,10 @@ import org.humingk.movie.dal.mapper.auto.CelebrityDoubanMapper;
 import org.humingk.movie.dal.mapper.auto.ImageCelebrityDoubanMapper;
 import org.humingk.movie.dal.mapper.plus.MovieDouanToAwardMovieMapperPlus;
 import org.humingk.movie.dal.mapper.plus.MovieDoubanMapperPlus;
-import org.humingk.movie.service.douban.common.converter.celebrity.CelebrityDoubanDetailsDtoConverter;
-import org.humingk.movie.service.douban.common.converter.celebrity.CelebrityDoubanDtoConverter;
-import org.humingk.movie.service.douban.common.dto.celebrity.CelebrityDoubanDetailsDto;
-import org.humingk.movie.service.douban.common.dto.celebrity.CelebrityDoubanDto;
+import org.humingk.movie.service.douban.converter.celebrity.CelebrityDoubanDetailsDtoConverter;
+import org.humingk.movie.service.douban.converter.celebrity.CelebrityDoubanDtoConverter;
+import org.humingk.movie.service.douban.dto.celebrity.CelebrityDoubanDetailsDto;
+import org.humingk.movie.service.douban.dto.celebrity.CelebrityDoubanDto;
 import org.humingk.movie.service.douban.service.CelebrityDoubanService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -36,11 +37,22 @@ public class CelebrityDoubanServiceImpl implements CelebrityDoubanService {
   /** example */
   @Autowired private AliasCelebrityDoubanExample aliasCelebrityDoubanExample;
 
+  @Autowired private CelebrityDoubanExample celebrityDoubanExample;
   @Autowired private ImageCelebrityDoubanExample imageCelebrityDoubanExample;
 
   @Override
   public CelebrityDoubanDto getCelebrityDoubanByCelebrityDoubanId(long id) {
     return celebrityDoubanDtoConverter.to(celebrityDoubanMapper.selectByPrimaryKey(id));
+  }
+
+  @Override
+  public List<CelebrityDoubanDto> getSearchTipsCelebrityDoubanListByCelebrityDoubanKeywordStart(
+      String keyword, int offset, int limit) {
+    celebrityDoubanExample.start().andNameZhLike(keyword.trim() + "%");
+    celebrityDoubanExample.or().andNameOriginLike(keyword.trim() + "%");
+    PageHelper.offsetPage(offset, limit);
+    return celebrityDoubanDtoConverter.toList(
+        celebrityDoubanMapper.selectByExample(celebrityDoubanExample));
   }
 
   @Override

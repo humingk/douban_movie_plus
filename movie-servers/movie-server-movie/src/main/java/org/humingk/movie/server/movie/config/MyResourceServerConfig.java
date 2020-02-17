@@ -32,7 +32,7 @@ public class MyResourceServerConfig extends ResourceServerConfig {
         .disable()
         // 不需要保护的资源路径
         .authorizeRequests()
-        .antMatchers("/movie/**", "/*swagger*/**")
+        .antMatchers("/movie/**")
         .permitAll()
         // 剩下都是需要保护的资源路径
         //                .anyRequest().authenticated();
