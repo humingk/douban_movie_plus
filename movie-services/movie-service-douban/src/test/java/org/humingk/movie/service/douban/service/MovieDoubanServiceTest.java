@@ -27,4 +27,10 @@ public class MovieDoubanServiceTest {
     System.out.println(
         movieDoubanService.getSearchTipsMovieDoubanListByMovieDoubanKeywordStart("- 歌剧", 0, 10));
   }
+
+  @Test
+  public void getSearchResultMovieDoubanListByMovieDoubanKeyword() {
+    System.out.println(
+        movieDoubanService.getSearchResultMovieDoubanListByMovieDoubanKeyword("爱", 0, 10));
+  }
 }

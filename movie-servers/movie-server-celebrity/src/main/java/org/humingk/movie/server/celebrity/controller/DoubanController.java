@@ -39,11 +39,6 @@ public class DoubanController implements DoubanApi {
   // ----------
 
   @Override
-  public Result awards(Long id, @PositiveOrZero Integer offset, @PositiveOrZero Integer limit) {
-    return null;
-  }
-
-  @Override
   public Result cooperatorsBases(
       Long id, @PositiveOrZero Integer offset, @PositiveOrZero Integer limit) {
     return null;

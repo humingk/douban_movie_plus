@@ -2,6 +2,8 @@ package org.humingk.movie.service.douban.service;
 
 import org.humingk.movie.service.douban.dto.celebrity.CelebrityDoubanDetailsDto;
 import org.humingk.movie.service.douban.dto.celebrity.CelebrityDoubanDto;
+import org.humingk.movie.service.douban.dto.celebrity.SearchResultCelebrityDoubanDto;
+import org.humingk.movie.service.douban.dto.celebrity.SearchTipsCelebrityDoubanDto;
 import org.springframework.validation.annotation.Validated;
 
 import javax.validation.constraints.NotNull;
@@ -36,6 +38,17 @@ public interface CelebrityDoubanService {
    * @param limit 限制数
    * @return
    */
-  List<CelebrityDoubanDto> getSearchTipsCelebrityDoubanListByCelebrityDoubanKeywordStart(
+  List<SearchTipsCelebrityDoubanDto> getSearchTipsCelebrityDoubanListByCelebrityDoubanKeywordStart(
+      String keyword, int offset, int limit);
+
+  /**
+   * 获取豆瓣影人搜索结果列表
+   *
+   * @param keyword 影人关键字
+   * @param offset 偏移量
+   * @param limit 限制数
+   * @return
+   */
+  List<SearchResultCelebrityDoubanDto> getSearchResultCelebrityDoubanListByCelebrityDoubanKeyword(
       String keyword, int offset, int limit);
 }

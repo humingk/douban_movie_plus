@@ -6,17 +6,10 @@ import org.humingk.movie.api.common.converter.share.AwardOfMovieAndCelebrityDoub
 import org.humingk.movie.api.common.converter.share.ImageDoubanVoConverter;
 import org.humingk.movie.api.common.util.ConverterUtil;
 import org.humingk.movie.api.common.vo.movie.MovieDoubanDetailsVo;
-import org.humingk.movie.common.entity.MovieConstant;
-import org.humingk.movie.dal.entity.MovieDoubanToTypeMovie;
-import org.humingk.movie.dal.entity.TagMovie;
 import org.humingk.movie.service.douban.dto.movie.MovieDoubanDetailsDto;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
-import org.mapstruct.Named;
-
-import java.util.List;
-import java.util.stream.Collectors;
 
 /** @author humingk */
 @Mapper(
@@ -45,8 +38,11 @@ public interface MovieDoubanDetailsVoConverter {
     @Mapping(
         target = "typeList",
         source = "movieDoubanToTypeMovieList",
-        qualifiedByName = "toTypeList"),
-    @Mapping(target = "tagList", source = "tagMovieList", qualifiedByName = "toTagList"),
+        qualifiedByName = {"util", "typeList"}),
+    @Mapping(
+        target = "tagList",
+        source = "tagMovieList",
+        qualifiedByName = {"util", "tagList"}),
     @Mapping(target = "celebrityList", source = "celebrityDoubanOfMovieDoubanDoList"),
     @Mapping(target = "trailerList", source = "trailerMovieDoubanList"),
     @Mapping(target = "imageList", source = "imageDoubanDoList"),
@@ -56,18 +52,4 @@ public interface MovieDoubanDetailsVoConverter {
     @Mapping(target = "commentList", source = "commentMovieDoubanList")
   })
   MovieDoubanDetailsVo to(MovieDoubanDetailsDto movieDoubanDetailsDto);
-
-  @Named("toTagList")
-  default List<String> toTagList(List<TagMovie> tagMovieList) {
-    return tagMovieList.stream().map(TagMovie::getNameZh).collect(Collectors.toList());
-  }
-
-  @Named("toTypeList")
-  default List<String> toTypeList(List<MovieDoubanToTypeMovie> movieDoubanToTypeMovieList) {
-    return movieDoubanToTypeMovieList.stream()
-        .map(
-            movieDoubanToTypeMovie ->
-                MovieConstant.MOVIE_TYPE.get(movieDoubanToTypeMovie.getIdTypeMovie()))
-        .collect(Collectors.toList());
-  }
 }

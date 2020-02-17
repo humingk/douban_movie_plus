@@ -48,23 +48,6 @@ public interface DoubanApi {
   // -----------------------
 
   /**
-   * 豆瓣影人奖项
-   *
-   * @param id 豆瓣影人ID
-   * @param offset 偏移量（默认0）
-   * @param limit 限制数（默认10）
-   * @return
-   * @apiNote 包括电影基础信息、奖项信息
-   */
-  @RequestMapping(value = "/celebrity/douban/awards", method = RequestMethod.GET)
-  Result awards(
-      @RequestParam("id") Long id,
-      @RequestParam(value = "offset", required = false, defaultValue = "0") @PositiveOrZero
-          Integer offset,
-      @RequestParam(value = "limit", required = false, defaultValue = "10") @PositiveOrZero
-          Integer limit);
-
-  /**
    * 豆瓣影人合作过的影人基础信息
    *
    * @param id 豆瓣影人ID

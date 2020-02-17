@@ -1,7 +1,9 @@
 package org.humingk.movie.server.search.controller;
 
-import org.humingk.movie.api.common.converter.celebrity.CelebrityDoubanVoConverter;
-import org.humingk.movie.api.common.vo.celebrity.CelebrityDoubanVo;
+import org.humingk.movie.api.common.converter.celebrity.SearchResultCelebrityDoubanVoConverter;
+import org.humingk.movie.api.common.converter.celebrity.SearchTipsCelebrityDoubanVoConverter;
+import org.humingk.movie.api.common.vo.celebrity.SearchResultCelebrityDoubanVo;
+import org.humingk.movie.api.common.vo.celebrity.SearchTipsCelebrityDoubanVo;
 import org.humingk.movie.api.search.SearchCelebrityDoubanApi;
 import org.humingk.movie.common.entity.Result;
 import org.humingk.movie.service.douban.service.CelebrityDoubanService;
@@ -15,22 +17,27 @@ import java.util.List;
 /** @author humingk */
 @RestController
 public class SearchCelebrityDoubanController implements SearchCelebrityDoubanApi {
-  @Autowired private CelebrityDoubanVoConverter celebrityDoubanVoConverter;
+  @Autowired private SearchTipsCelebrityDoubanVoConverter searchTipsCelebrityDoubanVoConverter;
+
+  @Autowired private SearchResultCelebrityDoubanVoConverter searchResultCelebrityDoubanVoConverter;
 
   @Autowired private CelebrityDoubanService celebrityDoubanService;
 
   @Override
-  public Result<List<CelebrityDoubanVo>> searchTips(
+  public Result<List<SearchTipsCelebrityDoubanVo>> searchTips(
       @NotBlank String keyword, @PositiveOrZero Integer offset, @PositiveOrZero Integer limit) {
     return Result.success(
-        celebrityDoubanVoConverter.toList(
+        searchTipsCelebrityDoubanVoConverter.toList(
             celebrityDoubanService.getSearchTipsCelebrityDoubanListByCelebrityDoubanKeywordStart(
                 keyword.trim(), offset, limit)));
   }
 
   @Override
-  public Result searchDetails(
+  public Result<List<SearchResultCelebrityDoubanVo>> searchDetails(
       @NotBlank String keyword, @PositiveOrZero Integer offset, @PositiveOrZero Integer limit) {
-    return null;
+    return Result.success(
+        searchResultCelebrityDoubanVoConverter.toList(
+            celebrityDoubanService.getSearchResultCelebrityDoubanListByCelebrityDoubanKeyword(
+                keyword.trim(), offset, limit)));
   }
 }

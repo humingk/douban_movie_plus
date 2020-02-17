@@ -3,6 +3,8 @@ package org.humingk.movie.api.common.util;
 import org.apache.commons.lang.time.DateFormatUtils;
 import org.humingk.movie.common.entity.MovieConstant;
 import org.humingk.movie.dal.entity.AliasMovieDouban;
+import org.humingk.movie.dal.entity.MovieDoubanToTypeMovie;
+import org.humingk.movie.dal.entity.TagMovie;
 import org.mapstruct.Named;
 import org.springframework.stereotype.Component;
 
@@ -175,5 +177,31 @@ public class ConverterUtil {
     return aliasMovieDoubanList.stream()
         .map(AliasMovieDouban::getNameAlias)
         .collect(Collectors.toList());
+  }
+
+  /**
+   * 获取豆瓣电影类型列表
+   *
+   * @param movieDoubanToTypeMovieList
+   * @return
+   */
+  @Named("typeList")
+  public List<String> toTypeList(List<MovieDoubanToTypeMovie> movieDoubanToTypeMovieList) {
+    return movieDoubanToTypeMovieList.stream()
+        .map(
+            movieDoubanToTypeMovie ->
+                MovieConstant.MOVIE_TYPE.get(movieDoubanToTypeMovie.getIdTypeMovie()))
+        .collect(Collectors.toList());
+  }
+
+  /**
+   * 获取豆瓣电影标签列表
+   *
+   * @param tagMovieList
+   * @return
+   */
+  @Named("tagList")
+  public List<String> toTagList(List<TagMovie> tagMovieList) {
+    return tagMovieList.stream().map(TagMovie::getNameZh).collect(Collectors.toList());
   }
 }

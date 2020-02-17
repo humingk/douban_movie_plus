@@ -2,6 +2,7 @@ package org.humingk.movie.service.douban.service;
 
 import org.humingk.movie.service.douban.dto.movie.MovieDoubanDetailsDto;
 import org.humingk.movie.service.douban.dto.movie.MovieDoubanDto;
+import org.humingk.movie.service.douban.dto.movie.SearchResultMovieDoubanDto;
 import org.humingk.movie.service.douban.dto.movie.SearchTipsMovieDoubanDto;
 import org.springframework.validation.annotation.Validated;
 
@@ -42,7 +43,17 @@ public interface MovieDoubanService {
    * @param limit 限制数
    * @return
    */
-  @NotNull(message = "该关键字开头暂匹配不到豆瓣电影")
   List<SearchTipsMovieDoubanDto> getSearchTipsMovieDoubanListByMovieDoubanKeywordStart(
+      String keyword, int offset, int limit);
+
+  /**
+   * 根据电影名称字符串匹配电影的基础信息列表
+   *
+   * @param keyword 电影名称关键字
+   * @param offset 偏移量
+   * @param limit 限制数
+   * @return
+   */
+  List<SearchResultMovieDoubanDto> getSearchResultMovieDoubanListByMovieDoubanKeyword(
       String keyword, int offset, int limit);
 }

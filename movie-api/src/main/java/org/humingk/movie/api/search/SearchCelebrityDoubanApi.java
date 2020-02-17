@@ -4,7 +4,8 @@ package org.humingk.movie.api.search;
 // import org.springframework.web.bind.annotation.RestController;
 // @RestController
 
-import org.humingk.movie.api.common.vo.celebrity.CelebrityDoubanVo;
+import org.humingk.movie.api.common.vo.celebrity.SearchResultCelebrityDoubanVo;
+import org.humingk.movie.api.common.vo.celebrity.SearchTipsCelebrityDoubanVo;
 import org.humingk.movie.common.entity.Result;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.validation.annotation.Validated;
@@ -34,7 +35,7 @@ public interface SearchCelebrityDoubanApi {
    * @apiNote 根据影人名称开头的字符串找出豆瓣影人的基本信息列表
    */
   @RequestMapping(value = "/search/celebrity/douban/search_tips", method = RequestMethod.GET)
-  Result<List<CelebrityDoubanVo>> searchTips(
+  Result<List<SearchTipsCelebrityDoubanVo>> searchTips(
       @RequestParam("keyword") @NotBlank String keyword,
       @RequestParam(value = "offset", required = false, defaultValue = "0") @PositiveOrZero
           Integer offset,
@@ -51,7 +52,7 @@ public interface SearchCelebrityDoubanApi {
    * @apiNote 根据影人名称字符串找出豆瓣影人的基本信息列表
    */
   @RequestMapping(value = "/search/celebrity/douban/search_details", method = RequestMethod.GET)
-  Result searchDetails(
+  Result<List<SearchResultCelebrityDoubanVo>> searchDetails(
       @RequestParam("keyword") @NotBlank String keyword,
       @RequestParam(value = "offset", required = false, defaultValue = "0") @PositiveOrZero
           Integer offset,

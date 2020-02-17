@@ -3,6 +3,8 @@ package org.humingk.movie.service.douban.service.impl;
 import com.github.pagehelper.PageHelper;
 import org.humingk.movie.dal.domain.AwardOfMovieAndCelebrityDoubanDo;
 import org.humingk.movie.dal.domain.MovieDoubanOfCelebrityDoubanDo;
+import org.humingk.movie.dal.domain.SearchResultCelebrityDoubanDo;
+import org.humingk.movie.dal.domain.SearchTipsCelebrityDoubanDo;
 import org.humingk.movie.dal.entity.*;
 import org.humingk.movie.dal.mapper.auto.AliasCelebrityDoubanMapper;
 import org.humingk.movie.dal.mapper.auto.CelebrityDoubanMapper;
@@ -11,12 +13,17 @@ import org.humingk.movie.dal.mapper.plus.MovieDouanToAwardMovieMapperPlus;
 import org.humingk.movie.dal.mapper.plus.MovieDoubanMapperPlus;
 import org.humingk.movie.service.douban.converter.celebrity.CelebrityDoubanDetailsDtoConverter;
 import org.humingk.movie.service.douban.converter.celebrity.CelebrityDoubanDtoConverter;
+import org.humingk.movie.service.douban.converter.celebrity.SearchResultCelebrityDoubanDtoConverter;
+import org.humingk.movie.service.douban.converter.celebrity.SearchTipsCelebrityDoubanDtoConverter;
 import org.humingk.movie.service.douban.dto.celebrity.CelebrityDoubanDetailsDto;
 import org.humingk.movie.service.douban.dto.celebrity.CelebrityDoubanDto;
+import org.humingk.movie.service.douban.dto.celebrity.SearchResultCelebrityDoubanDto;
+import org.humingk.movie.service.douban.dto.celebrity.SearchTipsCelebrityDoubanDto;
 import org.humingk.movie.service.douban.service.CelebrityDoubanService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /** @author humingk */
@@ -34,6 +41,11 @@ public class CelebrityDoubanServiceImpl implements CelebrityDoubanService {
   @Autowired private CelebrityDoubanDtoConverter celebrityDoubanDtoConverter;
 
   @Autowired private CelebrityDoubanDetailsDtoConverter celebrityDoubanDetailsDtoConverter;
+
+  @Autowired private SearchTipsCelebrityDoubanDtoConverter searchTipsCelebrityDoubanDtoConverter;
+
+  @Autowired
+  private SearchResultCelebrityDoubanDtoConverter searchResultCelebrityDoubanDtoConverter;
   /** example */
   @Autowired private AliasCelebrityDoubanExample aliasCelebrityDoubanExample;
 
@@ -43,16 +55,6 @@ public class CelebrityDoubanServiceImpl implements CelebrityDoubanService {
   @Override
   public CelebrityDoubanDto getCelebrityDoubanByCelebrityDoubanId(long id) {
     return celebrityDoubanDtoConverter.to(celebrityDoubanMapper.selectByPrimaryKey(id));
-  }
-
-  @Override
-  public List<CelebrityDoubanDto> getSearchTipsCelebrityDoubanListByCelebrityDoubanKeywordStart(
-      String keyword, int offset, int limit) {
-    celebrityDoubanExample.start().andNameZhLike(keyword.trim() + "%");
-    celebrityDoubanExample.or().andNameOriginLike(keyword.trim() + "%");
-    PageHelper.offsetPage(offset, limit);
-    return celebrityDoubanDtoConverter.toList(
-        celebrityDoubanMapper.selectByExample(celebrityDoubanExample));
   }
 
   @Override
@@ -79,5 +81,52 @@ public class CelebrityDoubanServiceImpl implements CelebrityDoubanService {
         imageCelebrityDoubanList,
         movieDoubanOfCelebrityDoubanDoList,
         awardOfMovieAndCelebrityDoubanDoList);
+  }
+
+  @Override
+  public List<SearchTipsCelebrityDoubanDto>
+      getSearchTipsCelebrityDoubanListByCelebrityDoubanKeywordStart(
+          String keyword, int offset, int limit) {
+    List<SearchTipsCelebrityDoubanDo> searchTipsCelebrityDoubanDoList = new ArrayList<>();
+    celebrityDoubanExample.start().andNameZhLike(keyword.trim() + "%");
+    celebrityDoubanExample.or().andNameOriginLike(keyword.trim() + "%");
+    PageHelper.offsetPage(offset, limit);
+    List<CelebrityDouban> celebrityDoubanList =
+        celebrityDoubanMapper.selectByExample(celebrityDoubanExample);
+    for (CelebrityDouban celebrityDouban : celebrityDoubanList) {
+      /** 豆瓣影人别称列表 */
+      aliasCelebrityDoubanExample.start().andIdCelebrityDoubanEqualTo(celebrityDouban.getId());
+      List<AliasCelebrityDouban> aliasCelebrityDoubanList =
+          aliasCelebrityDoubanMapper.selectByExample(aliasCelebrityDoubanExample);
+      searchTipsCelebrityDoubanDoList.add(
+          new SearchTipsCelebrityDoubanDo(celebrityDouban, aliasCelebrityDoubanList));
+    }
+    return searchTipsCelebrityDoubanDtoConverter.toList(searchTipsCelebrityDoubanDoList);
+  }
+
+  @Override
+  public List<SearchResultCelebrityDoubanDto>
+      getSearchResultCelebrityDoubanListByCelebrityDoubanKeyword(
+          String keyword, int offset, int limit) {
+    List<SearchResultCelebrityDoubanDo> searchResultCelebrityDoubanDoList = new ArrayList<>();
+    celebrityDoubanExample.start().andNameZhLike("%" + keyword.trim() + "%");
+    celebrityDoubanExample.or().andNameOriginLike("%" + keyword.trim() + "%");
+    PageHelper.offsetPage(offset, limit);
+    List<CelebrityDouban> celebrityDoubanList =
+        celebrityDoubanMapper.selectByExample(celebrityDoubanExample);
+    for (CelebrityDouban celebrityDouban : celebrityDoubanList) {
+      /** 豆瓣影人别称列表 */
+      aliasCelebrityDoubanExample.start().andIdCelebrityDoubanEqualTo(celebrityDouban.getId());
+      List<AliasCelebrityDouban> aliasCelebrityDoubanList =
+          aliasCelebrityDoubanMapper.selectByExample(aliasCelebrityDoubanExample);
+      /** 与豆瓣影人相关的豆瓣电影列表 */
+      List<MovieDoubanOfCelebrityDoubanDo> movieDoubanOfCelebrityDoubanDoList =
+          movieDoubanMapperPlus.selectMovieDoubanOfCelebrityDoubanListByCelebrityDoubanId(
+              celebrityDouban.getId());
+      searchResultCelebrityDoubanDoList.add(
+          new SearchResultCelebrityDoubanDo(
+              celebrityDouban, aliasCelebrityDoubanList, movieDoubanOfCelebrityDoubanDoList));
+    }
+    return searchResultCelebrityDoubanDtoConverter.toList(searchResultCelebrityDoubanDoList);
   }
 }

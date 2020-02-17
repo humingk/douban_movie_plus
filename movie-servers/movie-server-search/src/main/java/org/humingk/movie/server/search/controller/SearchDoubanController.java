@@ -1,6 +1,8 @@
 package org.humingk.movie.server.search.controller;
 
+import org.humingk.movie.api.common.converter.SearchResultDoubanVoConverter;
 import org.humingk.movie.api.common.converter.SearchTipsDoubanVoConverter;
+import org.humingk.movie.api.common.vo.SearchResultDoubanVo;
 import org.humingk.movie.api.common.vo.SearchTipsDoubanVo;
 import org.humingk.movie.api.search.SearchDoubanApi;
 import org.humingk.movie.common.entity.Result;
@@ -18,6 +20,7 @@ public class SearchDoubanController implements SearchDoubanApi {
   @Autowired private MovieDoubanService movieDoubanService;
   @Autowired private CelebrityDoubanService celebrityDoubanService;
   @Autowired private SearchTipsDoubanVoConverter searchTipsDoubanVoConverter;
+  @Autowired private SearchResultDoubanVoConverter searchResultDoubanVoConverter;
 
   @Override
   public Result<SearchTipsDoubanVo> searchTips(
@@ -31,8 +34,13 @@ public class SearchDoubanController implements SearchDoubanApi {
   }
 
   @Override
-  public Result searchDetails(
+  public Result<SearchResultDoubanVo> searchDetails(
       @NotBlank String keyword, @PositiveOrZero Integer offset, @PositiveOrZero Integer limit) {
-    return null;
+    return Result.success(
+        searchResultDoubanVoConverter.to(
+            movieDoubanService.getSearchResultMovieDoubanListByMovieDoubanKeyword(
+                keyword.trim(), offset, limit),
+            celebrityDoubanService.getSearchResultCelebrityDoubanListByCelebrityDoubanKeyword(
+                keyword.trim(), offset, limit)));
   }
 }

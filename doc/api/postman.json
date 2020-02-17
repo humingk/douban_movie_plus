@@ -1,7 +1,7 @@
 {
   "info": {
     "schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
-    "_postman_id": "c072c137-5f1e-401a-a918-96fd08877f3b",
+    "_postman_id": "1643b4b7-bd8a-4812-b5bd-140c78dd708c",
     "name": "豆瓣电影Plus RESTful-API文档"
   },
   "item": [
@@ -19,11 +19,11 @@
                   "key": "id",
                   "type": "text",
                   "desc": "豆瓣影人ID",
-                  "value": "975"
+                  "value": "81"
                 }
               ]
             },
-            "url": "http://localhost:8080/celebrity/douban/bases?id\u003d975",
+            "url": "http://localhost:8080/celebrity/douban/bases?id\u003d81",
             "description": "豆瓣影人基础信息",
             "header": [
               {
@@ -35,34 +35,7 @@
               }
             ]
           },
-          "description": "包括影人图片"
-        },
-        {
-          "name": "豆瓣影人基础信息列表",
-          "request": {
-            "method": "GET",
-            "body": {
-              "mode": "raw",
-              "raw": "",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            },
-            "url": "http://localhost:8080/celebrity/douban/bases_list",
-            "description": "豆瓣影人基础信息列表",
-            "header": [
-              {
-                "key": "Authorization",
-                "type": "text",
-                "disabled": true,
-                "name": "Authorization",
-                "description": "access_token"
-              }
-            ]
-          },
-          "description": "包括影人图片"
+          "description": "包括影人头像,影人简介等"
         },
         {
           "name": "豆瓣影人详细信息",
@@ -75,11 +48,11 @@
                   "key": "id",
                   "type": "text",
                   "desc": "豆瓣影人ID",
-                  "value": "24"
+                  "value": "698"
                 }
               ]
             },
-            "url": "http://localhost:8080/celebrity/douban/details?id\u003d24",
+            "url": "http://localhost:8080/celebrity/douban/details?id\u003d698",
             "description": "豆瓣影人详细信息",
             "header": [
               {
@@ -91,7 +64,7 @@
               }
             ]
           },
-          "description": "包括影人图片、基础信息、参演电影基础信息（电影海报、基础信息）、影人简介"
+          "description": "包括影人基础信息，别称，图片，相关的豆瓣电影，获得的奖项"
         },
         {
           "name": "豆瓣影人奖项",
@@ -103,8 +76,8 @@
                 {
                   "key": "id",
                   "type": "text",
-                  "desc": "    豆瓣影人ID",
-                  "value": "676"
+                  "desc": "豆瓣影人ID",
+                  "value": "999"
                 },
                 {
                   "key": "offset",
@@ -115,12 +88,12 @@
                 {
                   "key": "limit",
                   "type": "text",
-                  "desc": " 限制数（默认10）",
+                  "desc": "限制数（默认10）",
                   "value": "10"
                 }
               ]
             },
-            "url": "http://localhost:8080/celebrity/douban/awards?id\u003d676\u0026offset\u003d0\u0026limit\u003d10",
+            "url": "http://localhost:8080/celebrity/douban/awards?id\u003d999\u0026offset\u003d0\u0026limit\u003d10",
             "description": "豆瓣影人奖项",
             "header": [
               {
@@ -144,8 +117,8 @@
                 {
                   "key": "id",
                   "type": "text",
-                  "desc": "    豆瓣影人ID",
-                  "value": "733"
+                  "desc": "豆瓣影人ID",
+                  "value": "807"
                 },
                 {
                   "key": "offset",
@@ -156,12 +129,12 @@
                 {
                   "key": "limit",
                   "type": "text",
-                  "desc": " 合作次数限制数（默认10）",
+                  "desc": "合作次数限制数（默认10）",
                   "value": "10"
                 }
               ]
             },
-            "url": "http://localhost:8080/celebrity/douban/cooperators_bases?id\u003d733\u0026offset\u003d0\u0026limit\u003d10",
+            "url": "http://localhost:8080/celebrity/douban/cooperators_bases?id\u003d807\u0026offset\u003d0\u0026limit\u003d10",
             "description": "豆瓣影人合作过的影人基础信息",
             "header": [
               {
@@ -174,6 +147,265 @@
             ]
           },
           "description": "包括影人照片、基础信息、相关电影基础信息（电影海报、基础信息）"
+        }
+      ]
+    },
+    {
+      "name": "IMDB影人API",
+      "item": [
+        {
+          "name": "IMDB影人基础信息",
+          "request": {
+            "method": "GET",
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "id",
+                  "type": "text",
+                  "desc": "IMDB影人ID",
+                  "value": "131"
+                }
+              ]
+            },
+            "url": "http://localhost:8080/celebrity/imdb/bases?id\u003d131",
+            "description": "IMDB影人基础信息",
+            "header": [
+              {
+                "key": "Authorization",
+                "type": "text",
+                "disabled": true,
+                "name": "Authorization",
+                "description": "access_token"
+              }
+            ]
+          },
+          "description": "简略"
+        },
+        {
+          "name": "IMDB影人详细信息",
+          "request": {
+            "method": "GET",
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "id",
+                  "type": "text",
+                  "desc": "IMDB影人ID",
+                  "value": "129"
+                }
+              ]
+            },
+            "url": "http://localhost:8080/celebrity/imdb/details?id\u003d129",
+            "description": "IMDB影人详细信息",
+            "header": [
+              {
+                "key": "Authorization",
+                "type": "text",
+                "disabled": true,
+                "name": "Authorization",
+                "description": "access_token"
+              }
+            ]
+          },
+          "description": "包括影人基础信息，相关的IMDB电影"
+        }
+      ]
+    },
+    {
+      "name": "影人API",
+      "item": [
+        {
+          "name": "影人基础信息",
+          "request": {
+            "method": "GET",
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "id",
+                  "type": "text",
+                  "desc": "豆瓣影人ID",
+                  "value": "459"
+                }
+              ]
+            },
+            "url": "http://localhost:8080/celebrity/bases?id\u003d459",
+            "description": "影人基础信息",
+            "header": [
+              {
+                "key": "Authorization",
+                "type": "text",
+                "disabled": true,
+                "name": "Authorization",
+                "description": "access_token"
+              }
+            ]
+          },
+          "description": "包括影人头像,影人简介等"
+        },
+        {
+          "name": "影人详细信息",
+          "request": {
+            "method": "GET",
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "id",
+                  "type": "text",
+                  "desc": "豆瓣影人ID",
+                  "value": "218"
+                }
+              ]
+            },
+            "url": "http://localhost:8080/celebrity/details?id\u003d218",
+            "description": "影人详细信息",
+            "header": [
+              {
+                "key": "Authorization",
+                "type": "text",
+                "disabled": true,
+                "name": "Authorization",
+                "description": "access_token"
+              }
+            ]
+          },
+          "description": "包括影人基础信息，别称，图片，相关的电影，获得的奖项"
+        }
+      ]
+    },
+    {
+      "name": "豆瓣搜索API",
+      "item": [
+        {
+          "name": "豆瓣搜索提示",
+          "request": {
+            "method": "GET",
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "keyword",
+                  "type": "text",
+                  "desc": "搜索关键字",
+                  "value": "vld7ty"
+                },
+                {
+                  "key": "offset",
+                  "type": "text",
+                  "desc": "偏移量（默认0）",
+                  "value": "0"
+                },
+                {
+                  "key": "limit",
+                  "type": "text",
+                  "desc": "限制数（默认10）",
+                  "value": "10"
+                }
+              ]
+            },
+            "url": "http://localhost:8080/search/douban/search_tips?keyword\u003dvld7ty\u0026offset\u003d0\u0026limit\u003d10",
+            "description": "豆瓣搜索提示",
+            "header": [
+              {
+                "key": "Authorization",
+                "type": "text",
+                "disabled": true,
+                "name": "Authorization",
+                "description": "access_token"
+              }
+            ]
+          },
+          "description": "根据名称开头的字符串找出豆瓣电影、豆瓣影人等基本信息列表"
+        },
+        {
+          "name": "豆瓣搜索结果",
+          "request": {
+            "method": "GET",
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "keyword",
+                  "type": "text",
+                  "desc": "搜索关键字",
+                  "value": "cbdztx"
+                },
+                {
+                  "key": "offset",
+                  "type": "text",
+                  "desc": "偏移量（默认0）",
+                  "value": "0"
+                },
+                {
+                  "key": "limit",
+                  "type": "text",
+                  "desc": "限制数（默认10）",
+                  "value": "10"
+                }
+              ]
+            },
+            "url": "http://localhost:8080/search/douban/search_details?keyword\u003dcbdztx\u0026offset\u003d0\u0026limit\u003d10",
+            "description": "豆瓣搜索结果",
+            "header": [
+              {
+                "key": "Authorization",
+                "type": "text",
+                "disabled": true,
+                "name": "Authorization",
+                "description": "access_token"
+              }
+            ]
+          },
+          "description": "根据名称字符串找出豆瓣电影、豆瓣影人等基本信息列表"
+        }
+      ]
+    },
+    {
+      "name": "豆瓣影人搜索API",
+      "item": [
+        {
+          "name": "豆瓣影人搜索提示",
+          "request": {
+            "method": "GET",
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "keyword",
+                  "type": "text",
+                  "desc": "搜索关键字",
+                  "value": "azk4jp"
+                },
+                {
+                  "key": "offset",
+                  "type": "text",
+                  "desc": "偏移量（默认0）",
+                  "value": "0"
+                },
+                {
+                  "key": "limit",
+                  "type": "text",
+                  "desc": "限制数（默认10）",
+                  "value": "10"
+                }
+              ]
+            },
+            "url": "http://localhost:8080/search/celebrity/douban/search_tips?keyword\u003dazk4jp\u0026offset\u003d0\u0026limit\u003d10",
+            "description": "豆瓣影人搜索提示",
+            "header": [
+              {
+                "key": "Authorization",
+                "type": "text",
+                "disabled": true,
+                "name": "Authorization",
+                "description": "access_token"
+              }
+            ]
+          },
+          "description": "根据影人名称开头的字符串找出豆瓣影人的基本信息列表"
         },
         {
           "name": "豆瓣影人搜索结果",
@@ -186,23 +418,23 @@
                   "key": "keyword",
                   "type": "text",
                   "desc": "搜索关键字",
-                  "value": "2e247h"
+                  "value": "w4c1au"
                 },
                 {
                   "key": "offset",
                   "type": "text",
-                  "desc": " 偏移量（默认0）",
+                  "desc": "偏移量（默认0）",
                   "value": "0"
                 },
                 {
                   "key": "limit",
                   "type": "text",
-                  "desc": "  限制数（默认10）",
+                  "desc": "限制数（默认10）",
                   "value": "10"
                 }
               ]
             },
-            "url": "http://localhost:8080/celebrity/douban/search_details?keyword\u003d2e247h\u0026offset\u003d0\u0026limit\u003d10",
+            "url": "http://localhost:8080/search/celebrity/douban/search_details?keyword\u003dw4c1au\u0026offset\u003d0\u0026limit\u003d10",
             "description": "豆瓣影人搜索结果",
             "header": [
               {
@@ -219,8 +451,178 @@
       ]
     },
     {
-      "name": "IMDB影人API",
-      "item": []
+      "name": "豆瓣电影搜索API",
+      "item": [
+        {
+          "name": "豆瓣电影搜索提示",
+          "request": {
+            "method": "GET",
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "keyword",
+                  "type": "text",
+                  "desc": "搜索关键字",
+                  "value": "3mcies"
+                },
+                {
+                  "key": "offset",
+                  "type": "text",
+                  "desc": "偏移量（默认0）",
+                  "value": "0"
+                },
+                {
+                  "key": "limit",
+                  "type": "text",
+                  "desc": "限制数（默认10）",
+                  "value": "10"
+                }
+              ]
+            },
+            "url": "http://localhost:8080/search/movie/douban/search_tips?keyword\u003d3mcies\u0026offset\u003d0\u0026limit\u003d10",
+            "description": "豆瓣电影搜索提示",
+            "header": [
+              {
+                "key": "Authorization",
+                "type": "text",
+                "disabled": true,
+                "name": "Authorization",
+                "description": "access_token"
+              }
+            ]
+          },
+          "description": "根据电影名称开头的字符串找出豆瓣电影的基本信息列表"
+        },
+        {
+          "name": "豆瓣电影搜索结果",
+          "request": {
+            "method": "GET",
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "keyword",
+                  "type": "text",
+                  "desc": "搜索关键字",
+                  "value": "d40tfi"
+                },
+                {
+                  "key": "offset",
+                  "type": "text",
+                  "desc": "偏移量（默认0）",
+                  "value": "0"
+                },
+                {
+                  "key": "limit",
+                  "type": "text",
+                  "desc": "限制数（默认10）",
+                  "value": "10"
+                }
+              ]
+            },
+            "url": "http://localhost:8080/search/movie/douban/search_details?keyword\u003dd40tfi\u0026offset\u003d0\u0026limit\u003d10",
+            "description": "豆瓣电影搜索结果",
+            "header": [
+              {
+                "key": "Authorization",
+                "type": "text",
+                "disabled": true,
+                "name": "Authorization",
+                "description": "access_token"
+              }
+            ]
+          },
+          "description": "根据电影名称字符串找出豆瓣电影的基本信息列表"
+        }
+      ]
+    },
+    {
+      "name": "Plus搜索API",
+      "item": [
+        {
+          "name": "Plus搜索提示",
+          "request": {
+            "method": "GET",
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "keyword",
+                  "type": "text",
+                  "desc": "搜索关键字",
+                  "value": "uqk7wq"
+                },
+                {
+                  "key": "offset",
+                  "type": "text",
+                  "desc": "偏移量（默认0）",
+                  "value": "0"
+                },
+                {
+                  "key": "limit",
+                  "type": "text",
+                  "desc": "限制数（默认10）",
+                  "value": "10"
+                }
+              ]
+            },
+            "url": "http://localhost:8080/search/search_tips?keyword\u003duqk7wq\u0026offset\u003d0\u0026limit\u003d10",
+            "description": "Plus搜索提示",
+            "header": [
+              {
+                "key": "Authorization",
+                "type": "text",
+                "disabled": true,
+                "name": "Authorization",
+                "description": "access_token"
+              }
+            ]
+          },
+          "description": "根据名称开头的字符串找出豆瓣电影、豆瓣影人、网易云音乐等基本信息列表"
+        },
+        {
+          "name": "Plus搜索结果",
+          "request": {
+            "method": "GET",
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "keyword",
+                  "type": "text",
+                  "desc": "搜索关键字",
+                  "value": "queuhv"
+                },
+                {
+                  "key": "offset",
+                  "type": "text",
+                  "desc": "偏移量（默认0）",
+                  "value": "0"
+                },
+                {
+                  "key": "limit",
+                  "type": "text",
+                  "desc": "限制数（默认10）",
+                  "value": "10"
+                }
+              ]
+            },
+            "url": "http://localhost:8080/search/search_details?keyword\u003dqueuhv\u0026offset\u003d0\u0026limit\u003d10",
+            "description": "Plus搜索结果",
+            "header": [
+              {
+                "key": "Authorization",
+                "type": "text",
+                "disabled": true,
+                "name": "Authorization",
+                "description": "access_token"
+              }
+            ]
+          },
+          "description": "根据名称字符串找出豆瓣电影、豆瓣影人、网易云音乐等基本信息列表"
+        }
+      ]
     },
     {
       "name": "音乐API",
@@ -235,19 +637,19 @@
                 {
                   "key": "id",
                   "type": "text",
-                  "desc": "               豆瓣电影ID",
-                  "value": "543"
+                  "desc": "豆瓣电影ID",
+                  "value": "379"
                 },
                 {
                   "key": "songLimit",
                   "type": "text",
-                  "desc": "        歌曲数目限制数（默认8）",
+                  "desc": "歌曲数目限制数（默认8）",
                   "value": "8"
                 },
                 {
                   "key": "playlistLimit",
                   "type": "text",
-                  "desc": "    歌单数目限制数（默认1）",
+                  "desc": "歌单数目限制数（默认1）",
                   "value": "1"
                 },
                 {
@@ -259,18 +661,18 @@
                 {
                   "key": "albumLimit",
                   "type": "text",
-                  "desc": "       专辑数目限制数（默认1）",
+                  "desc": "专辑数目限制数（默认1）",
                   "value": "1"
                 },
                 {
                   "key": "albumSongLimit",
                   "type": "text",
-                  "desc": "   专辑内歌曲数目限制数（默认8）",
+                  "desc": "专辑内歌曲数目限制数（默认8）",
                   "value": "8"
                 }
               ]
             },
-            "url": "http://localhost:8080/music/netease/plays?id\u003d543\u0026songLimit\u003d8\u0026playlistLimit\u003d1\u0026playlistSongLimit\u003d8\u0026albumLimit\u003d1\u0026albumSongLimit\u003d8",
+            "url": "http://localhost:8080/music/netease/plays?id\u003d379\u0026songLimit\u003d8\u0026playlistLimit\u003d1\u0026playlistSongLimit\u003d8\u0026albumLimit\u003d1\u0026albumSongLimit\u003d8",
             "description": "豆瓣电影网易云音乐相关播放信息",
             "header": [
               {
@@ -294,8 +696,8 @@
                 {
                   "key": "id",
                   "type": "text",
-                  "desc": "    网易云音乐歌曲ID",
-                  "value": "808"
+                  "desc": "网易云音乐歌曲ID",
+                  "value": "774"
                 },
                 {
                   "key": "offset",
@@ -306,12 +708,12 @@
                 {
                   "key": "limit",
                   "type": "text",
-                  "desc": " 限制数（默认8）",
+                  "desc": "限制数（默认8）",
                   "value": "8"
                 }
               ]
             },
-            "url": "http://localhost:8080/music/netease/hot_comments?id\u003d808\u0026offset\u003d0\u0026limit\u003d8",
+            "url": "http://localhost:8080/music/netease/hot_comments?id\u003d774\u0026offset\u003d0\u0026limit\u003d8",
             "description": "网易云音乐热门评论",
             "header": [
               {
@@ -340,8 +742,8 @@
                 {
                   "key": "id",
                   "type": "text",
-                  "desc": "    豆瓣电影ID",
-                  "value": "3"
+                  "desc": "豆瓣电影ID",
+                  "value": "200"
                 },
                 {
                   "key": "offset",
@@ -352,12 +754,12 @@
                 {
                   "key": "limit",
                   "type": "text",
-                  "desc": " 限制数（默认10）",
+                  "desc": "限制数（默认10）",
                   "value": "10"
                 }
               ]
             },
-            "url": "http://localhost:8080/movie/zhihu/questions?id\u003d3\u0026offset\u003d0\u0026limit\u003d10",
+            "url": "http://localhost:8080/movie/zhihu/questions?id\u003d200\u0026offset\u003d0\u0026limit\u003d10",
             "description": "豆瓣电影知乎相关问题",
             "header": [
               {
@@ -387,11 +789,11 @@
                   "key": "id",
                   "type": "text",
                   "desc": "豆瓣电影ID",
-                  "value": "216"
+                  "value": "149"
                 }
               ]
             },
-            "url": "http://localhost:8080/movie/rate/details?id\u003d216",
+            "url": "http://localhost:8080/movie/rate/details?id\u003d149",
             "description": "电影评分信息",
             "header": [
               {
@@ -420,8 +822,8 @@
                 {
                   "key": "id",
                   "type": "text",
-                  "desc": "    豆瓣电影ID",
-                  "value": "322"
+                  "desc": "豆瓣电影ID",
+                  "value": "946"
                 },
                 {
                   "key": "offset",
@@ -432,12 +834,12 @@
                 {
                   "key": "limit",
                   "type": "text",
-                  "desc": " 限制数（默认10）",
+                  "desc": "限制数（默认10）",
                   "value": "10"
                 }
               ]
             },
-            "url": "http://localhost:8080/mvoie/scene/details?id\u003d322\u0026offset\u003d0\u0026limit\u003d10",
+            "url": "http://localhost:8080/mvoie/scene/details?id\u003d946\u0026offset\u003d0\u0026limit\u003d10",
             "description": "电影场景详情",
             "header": [
               {
@@ -467,11 +869,11 @@
                   "key": "id",
                   "type": "text",
                   "desc": "豆瓣电影ID",
-                  "value": "117"
+                  "value": "935"
                 }
               ]
             },
-            "url": "http://localhost:8080/movie/douban/bases?id\u003d117",
+            "url": "http://localhost:8080/movie/douban/bases?id\u003d935",
             "description": "豆瓣电影基础信息",
             "header": [
               {
@@ -483,34 +885,7 @@
               }
             ]
           },
-          "description": "包括电影海报,电影年份，电影简介等基础信息"
-        },
-        {
-          "name": "豆瓣电影基础信息列表",
-          "request": {
-            "method": "GET",
-            "body": {
-              "mode": "raw",
-              "raw": "",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            },
-            "url": "http://localhost:8080/movie/douban/bases_list",
-            "description": "豆瓣电影基础信息列表",
-            "header": [
-              {
-                "key": "Authorization",
-                "type": "text",
-                "disabled": true,
-                "name": "Authorization",
-                "description": "access_token"
-              }
-            ]
-          },
-          "description": "包括电影海报,电影年份，电影简介等基础信息"
+          "description": "包括电影海报,电影简介等基础信息"
         },
         {
           "name": "豆瓣电影详情信息",
@@ -523,11 +898,11 @@
                   "key": "id",
                   "type": "text",
                   "desc": "豆瓣电影ID",
-                  "value": "164"
+                  "value": "20"
                 }
               ]
             },
-            "url": "http://localhost:8080/movie/douban/details?id\u003d164",
+            "url": "http://localhost:8080/movie/douban/details?id\u003d20",
             "description": "豆瓣电影详情信息",
             "header": [
               {
@@ -539,7 +914,7 @@
               }
             ]
           },
-          "description": "包括电影海报、基础信息、剧情简介"
+          "description": "包括电影基础信息、评分信息、标签类型、相关影人基础信息、图片、预告片、热门影评短评、j奖项等"
         },
         {
           "name": "豆瓣电影图片",
@@ -552,11 +927,11 @@
                   "key": "id",
                   "type": "text",
                   "desc": "豆瓣电影ID",
-                  "value": "730"
+                  "value": "736"
                 }
               ]
             },
-            "url": "http://localhost:8080/movie/douban/images?id\u003d730",
+            "url": "http://localhost:8080/movie/douban/images?id\u003d736",
             "description": "豆瓣电影图片",
             "header": [
               {
@@ -580,8 +955,8 @@
                 {
                   "key": "id",
                   "type": "text",
-                  "desc": "    豆瓣电影ID",
-                  "value": "580"
+                  "desc": "豆瓣电影ID",
+                  "value": "741"
                 },
                 {
                   "key": "offset",
@@ -592,12 +967,12 @@
                 {
                   "key": "limit",
                   "type": "text",
-                  "desc": " 限制数（默认10）",
+                  "desc": "限制数（默认10）",
                   "value": "10"
                 }
               ]
             },
-            "url": "http://localhost:8080/movie/douban/hot_comments?id\u003d580\u0026offset\u003d0\u0026limit\u003d10",
+            "url": "http://localhost:8080/movie/douban/hot_comments?id\u003d741\u0026offset\u003d0\u0026limit\u003d10",
             "description": "豆瓣电影热门短评",
             "header": [
               {
@@ -621,8 +996,8 @@
                 {
                   "key": "id",
                   "type": "text",
-                  "desc": "    豆瓣电影ID",
-                  "value": "205"
+                  "desc": "豆瓣电影ID",
+                  "value": "585"
                 },
                 {
                   "key": "offset",
@@ -633,12 +1008,12 @@
                 {
                   "key": "limit",
                   "type": "text",
-                  "desc": " 限制数（默认10）",
+                  "desc": "限制数（默认10）",
                   "value": "10"
                 }
               ]
             },
-            "url": "http://localhost:8080/movie/douban/hot_reviews?id\u003d205\u0026offset\u003d0\u0026limit\u003d10",
+            "url": "http://localhost:8080/movie/douban/hot_reviews?id\u003d585\u0026offset\u003d0\u0026limit\u003d10",
             "description": "豆瓣电影热门影评",
             "header": [
               {
@@ -651,94 +1026,41 @@
             ]
           },
           "description": "豆瓣电影热门影评"
-        },
-        {
-          "name": "豆瓣电影搜索提示",
-          "request": {
-            "method": "GET",
-            "body": {
-              "mode": "formdata",
-              "formdata": [
-                {
-                  "key": "keyword",
-                  "type": "text",
-                  "desc": "搜索关键字",
-                  "value": "j4igck"
-                },
-                {
-                  "key": "offset",
-                  "type": "text",
-                  "desc": " 偏移量（默认0）",
-                  "value": "0"
-                },
-                {
-                  "key": "limit",
-                  "type": "text",
-                  "desc": "  限制数（默认10）",
-                  "value": "10"
-                }
-              ]
-            },
-            "url": "http://localhost:8080/movie/douban/search_tips?keyword\u003dj4igck\u0026offset\u003d0\u0026limit\u003d10",
-            "description": "豆瓣电影搜索提示",
-            "header": [
-              {
-                "key": "Authorization",
-                "type": "text",
-                "disabled": true,
-                "name": "Authorization",
-                "description": "access_token"
-              }
-            ]
-          },
-          "description": "根据电影名称开头的字符串找出豆瓣电影的基本信息列表"
-        },
-        {
-          "name": "豆瓣电影搜索结果",
-          "request": {
-            "method": "GET",
-            "body": {
-              "mode": "formdata",
-              "formdata": [
-                {
-                  "key": "keyword",
-                  "type": "text",
-                  "desc": "搜索关键字",
-                  "value": "m6h0nk"
-                },
-                {
-                  "key": "offset",
-                  "type": "text",
-                  "desc": " 偏移量（默认0）",
-                  "value": "0"
-                },
-                {
-                  "key": "limit",
-                  "type": "text",
-                  "desc": "  限制数（默认10）",
-                  "value": "10"
-                }
-              ]
-            },
-            "url": "http://localhost:8080/movie/douban/search_details?keyword\u003dm6h0nk\u0026offset\u003d0\u0026limit\u003d10",
-            "description": "豆瓣电影搜索结果",
-            "header": [
-              {
-                "key": "Authorization",
-                "type": "text",
-                "disabled": true,
-                "name": "Authorization",
-                "description": "access_token"
-              }
-            ]
-          },
-          "description": "根据电影名称字符串找出豆瓣电影的基本信息列表"
         }
       ]
     },
     {
       "name": "IMDB电影API",
       "item": [
+        {
+          "name": "IMDB电影基础信息",
+          "request": {
+            "method": "GET",
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "id",
+                  "type": "text",
+                  "desc": "IMDB电影ID",
+                  "value": "935"
+                }
+              ]
+            },
+            "url": "http://localhost:8080/movie/imdb/bases?id\u003d935",
+            "description": "IMDB电影基础信息",
+            "header": [
+              {
+                "key": "Authorization",
+                "type": "text",
+                "disabled": true,
+                "name": "Authorization",
+                "description": "access_token"
+              }
+            ]
+          },
+          "description": "包括电影海报、电影简介等"
+        },
         {
           "name": "IMDB电影详情信息",
           "request": {
@@ -749,12 +1071,12 @@
                 {
                   "key": "id",
                   "type": "text",
-                  "desc": "豆瓣电影ID",
-                  "value": "645"
+                  "desc": "IMDB电影ID",
+                  "value": "472"
                 }
               ]
             },
-            "url": "http://localhost:8080/movie/imdb/details?id\u003d645",
+            "url": "http://localhost:8080/movie/imdb/details?id\u003d472",
             "description": "IMDB电影详情信息",
             "header": [
               {
@@ -766,7 +1088,7 @@
               }
             ]
           },
-          "description": "包括电影海报、包括基础信息、剧情简介"
+          "description": "包括电影基础信息、评分、相关影人信息等"
         }
       ]
     },
@@ -783,8 +1105,8 @@
                 {
                   "key": "id",
                   "type": "text",
-                  "desc": "    豆瓣电影ID",
-                  "value": "647"
+                  "desc": "豆瓣电影ID",
+                  "value": "951"
                 },
                 {
                   "key": "offset",
@@ -795,12 +1117,12 @@
                 {
                   "key": "limit",
                   "type": "text",
-                  "desc": " 限制数（默认10）",
+                  "desc": "限制数（默认10）",
                   "value": "10"
                 }
               ]
             },
-            "url": "http://localhost:8080/movie/resource/details?id\u003d647\u0026offset\u003d0\u0026limit\u003d10",
+            "url": "http://localhost:8080/movie/resource/details?id\u003d951\u0026offset\u003d0\u0026limit\u003d10",
             "description": "电影资源详情",
             "header": [
               {
@@ -817,6 +1139,69 @@
       ]
     },
     {
+      "name": "电影API",
+      "item": [
+        {
+          "name": "电影基础信息",
+          "request": {
+            "method": "GET",
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "id",
+                  "type": "text",
+                  "desc": "豆瓣电影ID",
+                  "value": "109"
+                }
+              ]
+            },
+            "url": "http://localhost:8080/movie/bases?id\u003d109",
+            "description": "电影基础信息",
+            "header": [
+              {
+                "key": "Authorization",
+                "type": "text",
+                "disabled": true,
+                "name": "Authorization",
+                "description": "access_token"
+              }
+            ]
+          },
+          "description": "豆瓣电影和IMDB电影,包括电影海报,电影简介等基础信息"
+        },
+        {
+          "name": "电影详情信息",
+          "request": {
+            "method": "GET",
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "id",
+                  "type": "text",
+                  "desc": "豆瓣电影ID",
+                  "value": "412"
+                }
+              ]
+            },
+            "url": "http://localhost:8080/movie/details?id\u003d412",
+            "description": "电影详情信息",
+            "header": [
+              {
+                "key": "Authorization",
+                "type": "text",
+                "disabled": true,
+                "name": "Authorization",
+                "description": "access_token"
+              }
+            ]
+          },
+          "description": "豆瓣电影和IMDB电影,包括电影基础信息、评分信息、标签类型、相关影人基础信息、图片、预告片、热门影评短评、j奖项等"
+        }
+      ]
+    },
+    {
       "name": "普通用户相关API",
       "item": [
         {
@@ -829,14 +1214,14 @@
                 {
                   "key": "email",
                   "type": "text",
-                  "desc": "   用户邮箱",
-                  "value": "楷瑞.韩@gmail.com"
+                  "desc": "用户邮箱",
+                  "value": "子默.袁@gmail.com"
                 },
                 {
                   "key": "password",
                   "type": "text",
                   "desc": "密码",
-                  "value": "8n1zcg"
+                  "value": "r6rymv"
                 }
               ]
             },
@@ -886,18 +1271,18 @@
                 {
                   "key": "code",
                   "type": "text",
-                  "desc": " 授权码（授权码模式）",
-                  "value": "81822"
+                  "desc": "授权码（授权码模式）",
+                  "value": "83653"
                 },
                 {
                   "key": "state",
                   "type": "text",
                   "desc": "github_login传入的state",
-                  "value": "m349nz"
+                  "value": "p1711x"
                 }
               ]
             },
-            "url": "http://localhost:8080/user/github_callback?code\u003d81822\u0026state\u003dm349nz",
+            "url": "http://localhost:8080/user/github_callback?code\u003d83653\u0026state\u003dp1711x",
             "description": "github 第三方登录 回调方法",
             "header": [
               {
@@ -921,20 +1306,20 @@
                 {
                   "key": "id",
                   "type": "text",
-                  "desc": "      豆瓣个人域名(可选,默认随机UUID)",
+                  "desc": "豆瓣个人域名(可选,默认随机UUID)",
                   "value": ""
                 },
                 {
                   "key": "email",
                   "type": "text",
-                  "desc": "   邮箱",
-                  "value": "楷瑞.韩@gmail.com"
+                  "desc": "邮箱",
+                  "value": "子默.袁@gmail.com"
                 },
                 {
                   "key": "password",
                   "type": "text",
                   "desc": "密码",
-                  "value": "4kfpxo"
+                  "value": "s3uuw9"
                 }
               ]
             },
@@ -990,7 +1375,7 @@
                   "key": "id",
                   "type": "text",
                   "desc": "豆瓣用户ID",
-                  "value": "162"
+                  "value": "84"
                 }
               ]
             },
@@ -1029,7 +1414,7 @@
                 {
                   "key": "limit",
                   "type": "text",
-                  "desc": " 限制数（默认10）",
+                  "desc": "限制数（默认10）",
                   "value": "10"
                 }
               ]

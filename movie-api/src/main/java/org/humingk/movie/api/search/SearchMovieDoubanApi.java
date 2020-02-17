@@ -4,6 +4,7 @@ package org.humingk.movie.api.search;
 // import org.springframework.web.bind.annotation.RestController;
 // @RestController
 
+import org.humingk.movie.api.common.vo.movie.SearchResultMovieDoubanVo;
 import org.humingk.movie.api.common.vo.movie.SearchTipsMovieDoubanVo;
 import org.humingk.movie.common.entity.Result;
 import org.springframework.cloud.openfeign.FeignClient;
@@ -51,7 +52,7 @@ public interface SearchMovieDoubanApi {
    * @apiNote 根据电影名称字符串找出豆瓣电影的基本信息列表
    */
   @RequestMapping(value = "/search/movie/douban/search_details", method = RequestMethod.GET)
-  Result searchDetails(
+  Result<List<SearchResultMovieDoubanVo>> searchDetails(
       @RequestParam("keyword") @NotBlank String keyword,
       @RequestParam(value = "offset", required = false, defaultValue = "0") @PositiveOrZero
           Integer offset,

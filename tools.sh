@@ -8,6 +8,7 @@ echo "[2]  启动zipkin服务"
 echo "[3]  更新API文档(暂时bug,记得结束后运行[5])"
 echo "[4]  强制部署[3]需要的环境"
 echo "[5]  强制撤销[3]部署的环境"
+echo "[6]  删除target目录"
 echo "========================================="
 read -p "请选择脚本:" choose
 
@@ -134,6 +135,16 @@ function env_release() {
   fi
 }
 
+function delete_target() {
+  read -p "你确定要删除target目录吗？[y/n]:" choose_delete_target
+  if [ "choose_delete_target" = "y" ]; then
+    rm -r ./*/target
+    rm -r ./movie-servers/*/target
+    rm -r ./movie-services/*/target
+    echo "删除成功..."
+  fi
+}
+
 # main
 # ------------------------------
 case $choose in
@@ -154,5 +165,8 @@ case $choose in
   ;;
 5)
   env_release
+  ;;
+6)
+  delete_target
   ;;
 esac

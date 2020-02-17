@@ -31,4 +31,11 @@ public class CelebrityDoubanServiceTest {
         celebrityDoubanService.getSearchTipsCelebrityDoubanListByCelebrityDoubanKeywordStart(
             "宫", 0, 10));
   }
+
+  @Test
+  public void getSearchResultCelebrityDoubanListByCelebrityDoubanKeyword() {
+    System.out.println(
+        celebrityDoubanService.getSearchResultCelebrityDoubanListByCelebrityDoubanKeyword(
+            "爱", 0, 10));
+  }
 }
