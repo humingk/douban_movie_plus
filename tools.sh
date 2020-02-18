@@ -138,9 +138,9 @@ function env_release() {
 function delete_target() {
   read -p "你确定要删除target目录吗？[y/n]:" choose_delete_target
   if [ "choose_delete_target" = "y" ]; then
-    rm -r ./*/target
-    rm -r ./movie-servers/*/target
-    rm -r ./movie-services/*/target
+    rm -rf ./*/target
+    rm -rf ./movie-servers/*/target
+    rm -rf ./movie-services/*/target
     echo "删除成功..."
   fi
 }

@@ -1,4 +1,4 @@
-package org.humingk.movie.common.entity;
+package org.humingk.movie.server.auth.entity;
 
 /**
  * Oauth2的几种模式

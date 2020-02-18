@@ -91,9 +91,8 @@ public class CelebrityDoubanServiceImpl implements CelebrityDoubanService {
     celebrityDoubanExample.start().andNameZhLike(keyword.trim() + "%");
     celebrityDoubanExample.or().andNameOriginLike(keyword.trim() + "%");
     PageHelper.offsetPage(offset, limit);
-    List<CelebrityDouban> celebrityDoubanList =
-        celebrityDoubanMapper.selectByExample(celebrityDoubanExample);
-    for (CelebrityDouban celebrityDouban : celebrityDoubanList) {
+    for (CelebrityDouban celebrityDouban :
+        celebrityDoubanMapper.selectByExample(celebrityDoubanExample)) {
       /** 豆瓣影人别称列表 */
       aliasCelebrityDoubanExample.start().andIdCelebrityDoubanEqualTo(celebrityDouban.getId());
       List<AliasCelebrityDouban> aliasCelebrityDoubanList =
@@ -112,9 +111,8 @@ public class CelebrityDoubanServiceImpl implements CelebrityDoubanService {
     celebrityDoubanExample.start().andNameZhLike("%" + keyword.trim() + "%");
     celebrityDoubanExample.or().andNameOriginLike("%" + keyword.trim() + "%");
     PageHelper.offsetPage(offset, limit);
-    List<CelebrityDouban> celebrityDoubanList =
-        celebrityDoubanMapper.selectByExample(celebrityDoubanExample);
-    for (CelebrityDouban celebrityDouban : celebrityDoubanList) {
+    for (CelebrityDouban celebrityDouban :
+        celebrityDoubanMapper.selectByExample(celebrityDoubanExample)) {
       /** 豆瓣影人别称列表 */
       aliasCelebrityDoubanExample.start().andIdCelebrityDoubanEqualTo(celebrityDouban.getId());
       List<AliasCelebrityDouban> aliasCelebrityDoubanList =

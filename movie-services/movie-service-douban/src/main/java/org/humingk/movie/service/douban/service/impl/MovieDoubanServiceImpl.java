@@ -132,8 +132,7 @@ public class MovieDoubanServiceImpl implements MovieDoubanService {
     movieDoubanExample.start().andNameZhLike(keyword.trim() + "%");
     movieDoubanExample.or().andNameOriginLike(keyword.trim() + "%");
     PageHelper.offsetPage(offset, limit);
-    List<MovieDouban> movieDoubanList = movieDoubanMapper.selectByExample(movieDoubanExample);
-    for (MovieDouban movieDouban : movieDoubanList) {
+    for (MovieDouban movieDouban : movieDoubanMapper.selectByExample(movieDoubanExample)) {
       RateMovieDouban rateMovieDouban =
           rateMovieDoubanMapper.selectByPrimaryKey(movieDouban.getId());
       aliasMovieDoubanExample.start().andIdMovieDoubanEqualTo(movieDouban.getId());
@@ -152,8 +151,7 @@ public class MovieDoubanServiceImpl implements MovieDoubanService {
     movieDoubanExample.start().andNameZhLike("%" + keyword.trim() + "%");
     movieDoubanExample.or().andNameOriginLike("%" + keyword.trim() + "%");
     PageHelper.offsetPage(offset, limit);
-    List<MovieDouban> movieDoubanList = movieDoubanMapper.selectByExample(movieDoubanExample);
-    for (MovieDouban movieDouban : movieDoubanList) {
+    for (MovieDouban movieDouban : movieDoubanMapper.selectByExample(movieDoubanExample)) {
       RateMovieDouban rateMovieDouban =
           rateMovieDoubanMapper.selectByPrimaryKey(movieDouban.getId());
       aliasMovieDoubanExample.start().andIdMovieDoubanEqualTo(movieDouban.getId());

@@ -70,11 +70,6 @@ public class MovieConstant {
     PROFESSION_TYPE.put((byte) 14, "self");
   }
 
-  //  public static final ImmutableMap<Byte, String> PROFESSION_TYPE =
-  //          ImmutableMap.<Byte,String>builder()
-  //          .put((byte)1, "未知"),
-
-  //
   /** 电影类型 */
   public static final ImmutableMap<Short, String> MOVIE_TYPE =
       ImmutableMap.<Short, String>builder()
@@ -113,5 +108,38 @@ public class MovieConstant {
           .put((short) 33, "舞台艺术")
           .put((short) 34, "戏曲")
           .put((short) 35, "鬼怪")
+          .build();
+
+  /** 场景地点类型 */
+  public static final ImmutableMap<Byte, String> PLACE_TYPE =
+      ImmutableMap.<Byte, String>builder()
+          .put((byte) 100, "未知")
+          .put((byte) 0, "旅游景点")
+          .put((byte) 1, "历史建筑")
+          .put((byte) 2, "餐饮")
+          .put((byte) 3, "商铺")
+          .put((byte) 4, "自然风光")
+          .put((byte) 5, "民居")
+          .put((byte) 6, "酒店")
+          .put((byte) 7, "地标")
+          .put((byte) 8, "宗教场所")
+          .put((byte) 9, "街道")
+          .put((byte) 10, "影视基地")
+          .put((byte) 11, "公园")
+          .put((byte) 12, "演艺场所")
+          .put((byte) 13, "展馆")
+          .put((byte) 14, "交通站")
+          .put((byte) 15, "商用建筑")
+          .put((byte) 16, "广场")
+          .put((byte) 17, "政府机关")
+          .put((byte) 18, "医疗机构")
+          .put((byte) 19, "")
+          .put((byte) 20, "工厂")
+          .put((byte) 21, "体育场馆")
+          .put((byte) 22, "金融机构")
+          .put((byte) 23, "港口")
+          .put((byte) 24, "社会福利机构")
+          .put((byte) 25, "墓地")
+          .put((byte) 26, "学校")
           .build();
 }

@@ -2,9 +2,7 @@ package org.humingk.movie.api.common.util;
 
 import org.apache.commons.lang.time.DateFormatUtils;
 import org.humingk.movie.common.entity.MovieConstant;
-import org.humingk.movie.dal.entity.AliasMovieDouban;
-import org.humingk.movie.dal.entity.MovieDoubanToTypeMovie;
-import org.humingk.movie.dal.entity.TagMovie;
+import org.humingk.movie.dal.entity.*;
 import org.mapstruct.Named;
 import org.springframework.stereotype.Component;
 
@@ -186,7 +184,7 @@ public class ConverterUtil {
    * @return
    */
   @Named("typeList")
-  public List<String> toTypeList(List<MovieDoubanToTypeMovie> movieDoubanToTypeMovieList) {
+  public List<String> typeList(List<MovieDoubanToTypeMovie> movieDoubanToTypeMovieList) {
     return movieDoubanToTypeMovieList.stream()
         .map(
             movieDoubanToTypeMovie ->
@@ -201,7 +199,99 @@ public class ConverterUtil {
    * @return
    */
   @Named("tagList")
-  public List<String> toTagList(List<TagMovie> tagMovieList) {
+  public List<String> tagList(List<TagMovie> tagMovieList) {
     return tagMovieList.stream().map(TagMovie::getNameZh).collect(Collectors.toList());
+  }
+
+  // 场景 ---
+
+  /**
+   * 获取场景电影链接
+   *
+   * @param id
+   * @return
+   */
+  @Named("urlMovieScene")
+  public String urlMovieScene(Long id) {
+    return "https://-----------------" + id;
+  }
+
+  /**
+   * 获取场景电影地点分布图、地点地点分布图链接
+   *
+   * <p>scene中字段名为url_map的链接
+   *
+   * @param id
+   * @return
+   */
+  @Named("urlMap")
+  public String urlMap(String id) {
+    return "http://cache.fotoplace.cc/mocation/staticmap/" + id + ".png";
+  }
+
+  /**
+   * 获取场景详情、等等图片链接
+   *
+   * <p>scene中字段名不为url_map的链接
+   *
+   * @param id
+   * @return
+   */
+  @Named("urlImage")
+  public String urlImage(String id) {
+    return "http://cache.fotoplace.cc/mocation/" + id;
+  }
+
+  /**
+   * 获取场景电影的地点类型列表
+   *
+   * @param placeSceneToTypePlaceSceneList
+   * @return
+   */
+  @Named("typeListScene")
+  public List<String> typeListScene(
+      List<PlaceSceneToTypePlaceScene> placeSceneToTypePlaceSceneList) {
+    return placeSceneToTypePlaceSceneList.stream()
+        .map(
+            placeSceneToTypePlaceScene ->
+                MovieConstant.PLACE_TYPE.get(placeSceneToTypePlaceScene.getIdTypePlaceScene()))
+        .collect(Collectors.toList());
+  }
+
+  /**
+   * 获取场景地点 洲
+   *
+   * @param continentScene
+   * @return
+   */
+  public String continentScene(ContinentScene continentScene) {
+    return continentScene.getNameZh();
+  }
+  /**
+   * 获取场景地点 国家
+   *
+   * @param countryScene
+   * @return
+   */
+  public String countryScene(CountryScene countryScene) {
+    return countryScene.getNameZh();
+  }
+  /**
+   * 获取场景地点 州、省
+   *
+   * @param stateScene
+   * @return
+   */
+  public String stateScene(StateScene stateScene) {
+    return stateScene.getNameZh();
+  }
+  /**
+   * 获取场景地点 城市
+   *
+   * @param cityScene
+   * @return
+   */
+  public String cityScene(CityScene cityScene) {
+    return cityScene.getNameZh();
   }
 }

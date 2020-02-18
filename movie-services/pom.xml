@@ -18,6 +18,7 @@
         <module>movie-service-douban</module>
         <module>movie-service-user</module>
         <module>movie-service-imdb</module>
+        <module>movie-service-scene</module>
     </modules>
 
     <dependencies>

@@ -1,4 +1,4 @@
-package org.humingk.movie.common.entity;
+package org.humingk.movie.server.auth.entity;
 
 /**
  * oauth2默认客户端对应的资源ID
@@ -15,5 +15,7 @@ public class ResourceId {
   /** 影人资源ID */
   public static final String CELEBRITY_ID = " celebrity";
   /** 音乐资源ID */
-  public static final String MUSIC_ID = "movie";
+  public static final String MUSIC_ID = "music";
+  /** 场景资源ID */
+  public static final String SCENE_ID = "scene";
 }

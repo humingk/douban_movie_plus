@@ -1,0 +1,5 @@
+security:
+  oauth2:
+    resource:
+      # 资源服务器ID
+      id: scene

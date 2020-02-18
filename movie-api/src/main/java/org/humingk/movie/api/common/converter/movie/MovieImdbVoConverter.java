@@ -30,7 +30,7 @@ public interface MovieImdbVoConverter extends BaseConverter<MovieImdbVo, MovieIm
     @Mapping(
         target = "urlPoster",
         source = "urlPoster",
-        qualifiedByName = {"util", "urlMovieImdb"}),
+        qualifiedByName = {"util", "urlPosterImdb"}),
   })
   MovieImdbVo to(MovieImdbDto movieImdbDto);
 }

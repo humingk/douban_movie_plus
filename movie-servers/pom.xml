@@ -19,6 +19,7 @@
         <module>movie-server-celebrity</module>
         <module>movie-server-music</module>
         <module>movie-server-user</module>
+        <module>movie-server-scene</module>
     </modules>
 
     <dependencies>
