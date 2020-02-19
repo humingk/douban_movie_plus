@@ -42,9 +42,25 @@
  id含有 auto_increment 属性的表，id=1均为默认值-未知
  id不含有 auto_increment 属性的表，id=0均为默认值-未知
 
+---2020-02-15---
 
  PS:大大大大大BUG
- celebrity_scene 与 movie_scene_to_celebrity_scene 不匹配！
+ 1. celebrity_scene 与 movie_scene_to_celebrity_scene 不匹配！
+ 2. netease 歌单、专辑评论
+ 3. movie_zhihu id重复:
+ select * from movie_zhihu where id in(
+ select id from movie_zhihu group by id HAVING count(id)>2);
+=>
+ | 19551395 |           1453238 | 海贼王       |           8   |           44 |            9.4 |
+| 19551395 |           2026970 | 海贼王       |           8   |           44 |            9.4 |
+| 19551395 |           2058851 | 海贼王       |           8   |           44 |            9.4 |
+只有第一个是匹配的，仅保留第一个
+改变表结构：
+
+ 原因：用豆瓣电影名搜索知乎电影的时候，在匹配到相应话题的时候，应该再判断一下相似度（两个名字重复字符所占比例），再决定是否录入
+
+这个表要重新爬一下。
+
 
  Tips(数据库更改):
  1. movie_scene url_map 去除重复部分 http://cache.fotoplace.cc/mocation/staticmap/e684c03600b64032a6654e2e5ee1551f.png
@@ -1274,29 +1290,24 @@ CREATE TABLE artist_netease_to_song_netease
 
 # 1.知乎基础表---------------------------------------
 
-# 知乎电影
-CREATE TABLE movie_zhihu
+CREATE TABLE `movie_zhihu`
 (
     # 知乎话题ID https://www.zhihu.com/topic/ + id + /hot
-    id              bigint unsigned not null default 0,
-    # 豆瓣电影ID
-    id_movie_douban bigint unsigned not null default 0,
-    # 知乎电影中文名
-    name_zh         varchar(255)    not null default '',
-    # 知乎评分
-    zhihu_score     decimal(3, 1)   not null default 0.0,
-    # 知乎评分票数
-    zhihu_vote      int unsigned    not null default 0,
-    # 猫眼评分
-    maoyan_score    decimal(3, 1)   not null default 0.0,
-
-    primary key (id, id_movie_douban),
-    index (name_zh),
-    index (zhihu_score desc),
-    index (zhihu_vote desc),
-    index (maoyan_score desc)
+    `id`              bigint unsigned NOT NULL DEFAULT '0' COMMENT '知乎电影ID',
+    `id_movie_douban` bigint unsigned NOT NULL DEFAULT '0' COMMENT '豆瓣电影ID',
+    `name_zh`         varchar(255)    NOT NULL DEFAULT '' COMMENT '知乎电影中文名',
+    `zhihu_score`     decimal(3, 1)   NOT NULL DEFAULT '0.0' COMMENT '知乎评分',
+    `zhihu_vote`      int unsigned    NOT NULL DEFAULT '0' COMMENT '知乎评分票数',
+    `maoyan_score`    decimal(3, 1)   NOT NULL DEFAULT '0.0' COMMENT '猫眼评分',
+    PRIMARY KEY (`id`),
+    UNIQUE KEY `id_movie_douban` (`id_movie_douban`),
+    KEY `name_zh` (`name_zh`),
+    KEY `zhihu_score` (`zhihu_score` DESC),
+    KEY `zhihu_vote` (`zhihu_vote` DESC),
+    KEY `maoyan_score` (`maoyan_score` DESC)
 ) ENGINE = InnoDB
-  DEFAULT CHARSET = utf8mb4;
+  DEFAULT CHARSET = utf8mb4
+  COLLATE = utf8mb4_0900_ai_ci COMMENT ='知乎电影';
 
 # 知乎问题
 CREATE TABLE question_zhihu

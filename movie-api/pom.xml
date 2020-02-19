@@ -58,6 +58,14 @@
             <groupId>org.humingk</groupId>
             <artifactId>movie-service-scene</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.humingk</groupId>
+            <artifactId>movie-service-zhihu</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.humingk</groupId>
+            <artifactId>movie-service-resource</artifactId>
+        </dependency>
         <!--apache httpclient-->
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>

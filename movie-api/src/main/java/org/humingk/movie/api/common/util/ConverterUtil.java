@@ -294,4 +294,62 @@ public class ConverterUtil {
   public String cityScene(CityScene cityScene) {
     return cityScene.getNameZh();
   }
+
+  // zhihu
+
+  /**
+   * 知乎话题链接
+   *
+   * @param id 知乎话题ID
+   * @return
+   */
+  @Named("urlZhihuTopic")
+  public String urlZhihuTopic(Long id) {
+    return "https://www.zhihu.com/topic/" + id;
+  }
+
+  /**
+   * 知乎问题链接
+   *
+   * @param id 知乎问题ID
+   * @return
+   */
+  @Named("urlZhihuQuestion")
+  public String urlZhihuQuestion(Long id) {
+    return "https://www.zhihu.com/question/" + id;
+  }
+
+  // resource
+
+  /**
+   * 获取电影资源网站名
+   *
+   * @param id 资源网站ID
+   * @return
+   */
+  @Named("websiteResource")
+  public String websiteResource(Short id) {
+    return MovieConstant.WEBSITE_RESOURCE.get(id).get(0);
+  }
+
+  /**
+   * 获取电影资源网站链接
+   *
+   * @param id 资源网站ID
+   * @return
+   */
+  @Named("urlWebsiteResource")
+  public String urlWebsiteResource(Short id) {
+    return MovieConstant.WEBSITE_RESOURCE.get(id).get(1);
+  }
+  /**
+   * 获取电影资源类型
+   *
+   * @param id 资源类型ID
+   * @return
+   */
+  @Named("typeResource")
+  public String typeResource(Short id) {
+    return MovieConstant.RESOURCE_TYPE.get(id);
+  }
 }

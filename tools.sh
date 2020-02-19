@@ -9,6 +9,7 @@ echo "[3]  更新API文档(暂时bug,记得结束后运行[5])"
 echo "[4]  强制部署[3]需要的环境"
 echo "[5]  强制撤销[3]部署的环境"
 echo "[6]  删除target目录"
+echo "[7]  导出数据库建表SQL语句"
 echo "========================================="
 read -p "请选择脚本:" choose
 
@@ -145,6 +146,18 @@ function delete_target() {
   fi
 }
 
+function export_database_sql_create() {
+  read -p "你确定要导出数据库建表SQL语句吗？[y/n]:" choose_export
+  if [ "choose_export" = "y" ]; then
+    mysqldump -h localhost -P 3306 -uroot -p -d --databases movie >./doc/sql/export_movie.sql
+    if [ $? -eq 0 ]; then
+      echo "导出成功 => ./doc/export_movie.sql"
+    else
+      echo "导出失败..."
+    fi
+  fi
+}
+
 # main
 # ------------------------------
 case $choose in
@@ -168,5 +181,8 @@ case $choose in
   ;;
 6)
   delete_target
+  ;;
+7)
+  export_database_sql_create
   ;;
 esac

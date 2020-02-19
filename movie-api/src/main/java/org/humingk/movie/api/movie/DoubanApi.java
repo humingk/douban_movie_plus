@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.PositiveOrZero;
 
 // 用于生成API文档
 // import org.springframework.web.bind.annotation.RestController;
@@ -44,47 +43,4 @@ public interface DoubanApi {
    */
   @RequestMapping(value = "/movie/douban/details", method = RequestMethod.GET)
   Result<MovieDoubanDetailsVo> details(@RequestParam("id") @NotNull Long id);
-
-  // -------------------
-
-  /**
-   * 豆瓣电影图片
-   *
-   * @param id 豆瓣电影ID
-   * @return
-   */
-  @RequestMapping(value = "/movie/douban/images", method = RequestMethod.GET)
-  Result images(@RequestParam("id") @NotNull Long id);
-
-  /**
-   * 豆瓣电影热门短评
-   *
-   * @param id 豆瓣电影ID
-   * @param offset 偏移量（默认0）
-   * @param limit 限制数（默认10）
-   * @return
-   */
-  @RequestMapping(value = "/movie/douban/hot_comments", method = RequestMethod.GET)
-  Result hotComments(
-      @RequestParam("id") @NotNull Long id,
-      @RequestParam(value = "offset", required = false, defaultValue = "0") @PositiveOrZero
-          Integer offset,
-      @RequestParam(value = "limit", required = false, defaultValue = "10") @PositiveOrZero
-          Integer limit);
-
-  /**
-   * 豆瓣电影热门影评
-   *
-   * @param id 豆瓣电影ID
-   * @param offset 偏移量（默认0）
-   * @param limit 限制数（默认10）
-   * @return
-   */
-  @RequestMapping(value = "/movie/douban/hot_reviews", method = RequestMethod.GET)
-  Result hotReviews(
-      @RequestParam("id") Long id,
-      @RequestParam(value = "offset", required = false, defaultValue = "0") @PositiveOrZero
-          Integer offset,
-      @RequestParam(value = "limit", required = false, defaultValue = "10") @PositiveOrZero
-          Integer limit);
 }

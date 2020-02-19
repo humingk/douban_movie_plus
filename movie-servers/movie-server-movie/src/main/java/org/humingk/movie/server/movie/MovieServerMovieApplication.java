@@ -14,6 +14,8 @@ import org.springframework.context.annotation.ComponentScan;
       "org.humingk.movie.server.movie",
       "org.humingk.movie.service.douban",
       "org.humingk.movie.service.imdb",
+      "org.humingk.movie.service.zhihu",
+      "org.humingk.movie.service.resource",
       "org.humingk.movie.api",
       "org.humingk.movie.common"
     })

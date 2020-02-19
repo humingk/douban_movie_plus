@@ -19,6 +19,8 @@
         <module>movie-service-user</module>
         <module>movie-service-imdb</module>
         <module>movie-service-scene</module>
+        <module>movie-service-zhihu</module>
+        <module>movie-service-resource</module>
     </modules>
 
     <dependencies>
