@@ -5,7 +5,7 @@ Version |  Update Time  | Status | Author |  Description
 
 ## 豆瓣影人API
 ### 豆瓣影人基础信息
-**URL:** http://localhost:8080/celebrity/douban/bases
+**URL:** http://localhost:8081/v2/celebrity/douban/bases
 
 **Type:** GET
 
@@ -29,7 +29,7 @@ id|int64|豆瓣影人ID|true|-
 
 **Request-example:**
 ```
-curl -X GET -i http://localhost:8080/celebrity/douban/bases?id=645
+curl -X GET -i http://localhost:8081/v2/celebrity/douban/bases?id=967
 ```
 **Response-fields:**
 
@@ -52,25 +52,25 @@ data|object|具体结果|-
 **Response-example:**
 ```
 {
-	"code":925,
-	"msg":"6k0n9s",
+	"code":912,
+	"msg":"u8b1j8",
 	"data":{
-		"id":422,
-		"urlCelebrityDouban":"l9rv2r",
-		"idCelebrityImdb":"xmrm5v",
-		"urlCelebrityImdb":"5cks9t",
-		"nameZh":"2lil2b",
-		"nameOrigin":"pz8drh",
-		"sex":"uvj4t2",
-		"birthDate":"2020-02-16",
-		"urlPortrait":"3sar5y",
-		"summary":"d8hegg"
+		"id":457,
+		"urlCelebrityDouban":"tn8dxs",
+		"idCelebrityImdb":"vsdkc6",
+		"urlCelebrityImdb":"k9vdlf",
+		"nameZh":"ggmu37",
+		"nameOrigin":"b8b446",
+		"sex":"hkdzwl",
+		"birthDate":"2020-02-28",
+		"urlPortrait":"eyhezq",
+		"summary":"50kwoc"
 	}
 }
 ```
 
 ### 豆瓣影人详细信息
-**URL:** http://localhost:8080/celebrity/douban/details
+**URL:** http://localhost:8081/v2/celebrity/douban/details
 
 **Type:** GET
 
@@ -91,10 +91,11 @@ Authorization|string|access_token|false|-
 Parameter | Type|Description|Required|Since
 ---|---|---|---|---
 id|int64|豆瓣影人ID|true|-
+limit|int32|相关电影限制数(默认10)|false|-
 
 **Request-example:**
 ```
-curl -X GET -i http://localhost:8080/celebrity/douban/details?id=772
+curl -X GET -i http://localhost:8081/v2/celebrity/douban/details?id=304&limit=10
 ```
 **Response-fields:**
 
@@ -126,7 +127,25 @@ data|object|具体结果|-
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─sort|string|序号|-
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─length|int32|Large版本的长 /px|-
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─width|int32|Large版本的宽 /px|-
-└─movieList|array|与豆瓣影人相关的豆瓣电影列表|-
+└─movieListOrderByScore|array|与豆瓣影人相关的豆瓣电影列表 order by score|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─id|int64|豆瓣电影ID|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─urlMovieDouban|string|豆瓣电影链接|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─idTypeVideo|string|影片类型ID|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─typeVideo|string|影片类型|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─idMovieImdb|string|IMDB电影ID|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─urlMovieImdb|string|IMDB电影链接|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─startYear|int16|上映时间 /year|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─nameZh|string|豆瓣电影中文名|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─nameOrigin|string|豆瓣电影原始名|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─runtime|int16|豆瓣电影运行片长 /m|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─urlPoster|string|豆瓣电影海报链接|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─haveSeen|int32|已看人数|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─wannaSee|int32|想看人数|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─summary|string|简介|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─idProfession|string|该影人在该电影中的职位ID|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─profession|string|该影人在该电影中的职位|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─sort|int16|该影人在该电影中的演员排列顺序|-
+└─movieListOrderByStartYear|array|与豆瓣影人相关的豆瓣电影列表 order by start year|-
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─id|int64|豆瓣电影ID|-
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─urlMovieDouban|string|豆瓣电影链接|-
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─idTypeVideo|string|影片类型ID|-
@@ -158,127 +177,100 @@ data|object|具体结果|-
 **Response-example:**
 ```
 {
-	"code":113,
-	"msg":"asq24i",
+	"code":827,
+	"msg":"3o52qy",
 	"data":{
 		"base":{
-			"id":718,
-			"urlCelebrityDouban":"qdvaem",
-			"idCelebrityImdb":"izic7f",
-			"urlCelebrityImdb":"5a2phz",
-			"nameZh":"8v7qnu",
-			"nameOrigin":"1hngn8",
-			"sex":"6biatv",
-			"birthDate":"2020-02-16",
-			"urlPortrait":"5y6li8",
-			"summary":"prgiyc"
+			"id":492,
+			"urlCelebrityDouban":"gbhhpj",
+			"idCelebrityImdb":"6cl2yw",
+			"urlCelebrityImdb":"x730wi",
+			"nameZh":"wbw5rs",
+			"nameOrigin":"cuuacv",
+			"sex":"filxpc",
+			"birthDate":"2020-02-28",
+			"urlPortrait":"wfvyhz",
+			"summary":"oxtjr5"
 		},
 		"aliasList":[
 			{
-				"nameAlias":"ucllxw",
-				"isNikename":"h1gvdr"
+				"nameAlias":"5ai8i2",
+				"isNikename":"7b3xc4"
 			}
 		],
 		"imageList":[
 			{
-				"id":519,
-				"urlImageSqxs":"1xejco",
-				"urlImageS":"fqomjv",
-				"urlImageM":"d4n1zl",
-				"urlImageL":"xv7tnt",
-				"sort":"4y8u5u",
-				"length":94,
-				"width":125
+				"id":580,
+				"urlImageSqxs":"k49kca",
+				"urlImageS":"jyhanw",
+				"urlImageM":"e616i3",
+				"urlImageL":"n6d6pm",
+				"sort":"e6jfxs",
+				"length":550,
+				"width":761
 			}
 		],
-		"movieList":[
+		"movieListOrderByScore":[
 			{
-				"id":891,
-				"urlMovieDouban":"wmx9at",
-				"idTypeVideo":"ou4q71",
-				"typeVideo":"sm53x8",
-				"idMovieImdb":"ztwrec",
-				"urlMovieImdb":"59wqfn",
-				"startYear":20358,
-				"nameZh":"3utssp",
-				"nameOrigin":"67ue35",
-				"runtime":30925,
-				"urlPoster":"ylsfrp",
-				"haveSeen":816,
-				"wannaSee":487,
-				"summary":"wn6xfy",
-				"idProfession":"ujafle",
-				"profession":"dh3qxe",
-				"sort":11723
+				"id":820,
+				"urlMovieDouban":"r6swtj",
+				"idTypeVideo":"l1znmv",
+				"typeVideo":"d1nc6o",
+				"idMovieImdb":"mnv2w2",
+				"urlMovieImdb":"asztrl",
+				"startYear":28240,
+				"nameZh":"l2h5mp",
+				"nameOrigin":"vfz6yi",
+				"runtime":22047,
+				"urlPoster":"ghulre",
+				"haveSeen":860,
+				"wannaSee":483,
+				"summary":"e04u92",
+				"idProfession":"k94wps",
+				"profession":"vuk1gw",
+				"sort":19924
+			}
+		],
+		"movieListOrderByStartYear":[
+			{
+				"id":784,
+				"urlMovieDouban":"n0gth4",
+				"idTypeVideo":"lcozxi",
+				"typeVideo":"ibii5d",
+				"idMovieImdb":"dek0yh",
+				"urlMovieImdb":"1pkl7p",
+				"startYear":1321,
+				"nameZh":"r2xo1d",
+				"nameOrigin":"iye01n",
+				"runtime":6789,
+				"urlPoster":"w6uqhh",
+				"haveSeen":580,
+				"wannaSee":348,
+				"summary":"vibqou",
+				"idProfession":"p3l0e2",
+				"profession":"su3zb5",
+				"sort":290
 			}
 		],
 		"awardList":[
 			{
-				"idMovieDouban":883,
-				"idAwardMovie":"hp5bls",
-				"nameZh":"tvjccn",
-				"urlAward":"rb97k6",
-				"idCelebrityDouban":115,
-				"urlCelebrityDouban":"rqd94v",
-				"typeAward":"pw1wkv",
-				"awardTh":26871,
-				"isNominated":"14buxy"
+				"idMovieDouban":565,
+				"idAwardMovie":"wz56gu",
+				"nameZh":"rp5j0c",
+				"urlAward":"8yi0le",
+				"idCelebrityDouban":442,
+				"urlCelebrityDouban":"1ohgjs",
+				"typeAward":"xh452x",
+				"awardTh":8367,
+				"isNominated":"6cqh22"
 			}
 		]
 	}
 }
 ```
 
-### 豆瓣影人奖项
-**URL:** http://localhost:8080/celebrity/douban/awards
-
-**Type:** GET
-
-
-**Content-Type:** application/x-www-form-urlencoded;charset=utf-8
-
-**Description:** 包括电影基础信息、奖项信息
-
-**Request-headers:**
-
-Header | Type|Description|Required|Since
----|---|---|---|----
-Authorization|string|access_token|false|-
-
-
-**Request-parameters:**
-
-Parameter | Type|Description|Required|Since
----|---|---|---|---
-id|int64|豆瓣影人ID|true|-
-offset|int32|偏移量（默认0）|false|-
-limit|int32|限制数（默认10）|false|-
-
-**Request-example:**
-```
-curl -X GET -i http://localhost:8080/celebrity/douban/awards?id=667&offset=0&limit=10
-```
-**Response-fields:**
-
-Field | Type|Description|Since
----|---|---|---
-code|int32|状态码|-
-msg|string|状态信息|-
-data|object|具体结果|-
-
-**Response-example:**
-```
-{
-	"code":905,
-	"msg":"lx18cw",
-	"data":{
-		"waring":"You may have used non-display generics."
-	}
-}
-```
-
 ### 豆瓣影人合作过的影人基础信息
-**URL:** http://localhost:8080/celebrity/douban/cooperators_bases
+**URL:** http://localhost:8081/v2/celebrity/douban/cooperators_bases
 
 **Type:** GET
 
@@ -304,7 +296,7 @@ limit|int32|合作次数限制数（默认10）|false|-
 
 **Request-example:**
 ```
-curl -X GET -i http://localhost:8080/celebrity/douban/cooperators_bases?id=742&offset=0&limit=10
+curl -X GET -i http://localhost:8081/v2/celebrity/douban/cooperators_bases?id=849&offset=0&limit=10
 ```
 **Response-fields:**
 
@@ -317,56 +309,8 @@ data|object|具体结果|-
 **Response-example:**
 ```
 {
-	"code":940,
-	"msg":"g1f30x",
-	"data":{
-		"waring":"You may have used non-display generics."
-	}
-}
-```
-
-### 豆瓣影人搜索结果
-**URL:** http://localhost:8080/celebrity/douban/search_details
-
-**Type:** GET
-
-
-**Content-Type:** application/x-www-form-urlencoded;charset=utf-8
-
-**Description:** 根据影人名称字符串找出豆瓣影人的基本信息列表
-
-**Request-headers:**
-
-Header | Type|Description|Required|Since
----|---|---|---|----
-Authorization|string|access_token|false|-
-
-
-**Request-parameters:**
-
-Parameter | Type|Description|Required|Since
----|---|---|---|---
-keyword|string|搜索关键字|true|-
-offset|int32|偏移量（默认0）|false|-
-limit|int32|限制数（默认10）|false|-
-
-**Request-example:**
-```
-curl -X GET -i http://localhost:8080/celebrity/douban/search_details?keyword=pv18qx&offset=0&limit=10
-```
-**Response-fields:**
-
-Field | Type|Description|Since
----|---|---|---
-code|int32|状态码|-
-msg|string|状态信息|-
-data|object|具体结果|-
-
-**Response-example:**
-```
-{
-	"code":826,
-	"msg":"y7868f",
+	"code":910,
+	"msg":"epmxw7",
 	"data":{
 		"waring":"You may have used non-display generics."
 	}
@@ -375,7 +319,7 @@ data|object|具体结果|-
 
 ## IMDB影人API
 ### IMDB影人基础信息
-**URL:** http://localhost:8080/celebrity/imdb/bases
+**URL:** http://localhost:8081/v2/celebrity/imdb/bases
 
 **Type:** GET
 
@@ -399,7 +343,7 @@ id|int64|IMDB影人ID|true|-
 
 **Request-example:**
 ```
-curl -X GET -i http://localhost:8080/celebrity/imdb/bases?id=37
+curl -X GET -i http://localhost:8081/v2/celebrity/imdb/bases?id=890
 ```
 **Response-fields:**
 
@@ -416,19 +360,19 @@ data|object|具体结果|-
 **Response-example:**
 ```
 {
-	"code":465,
-	"msg":"w7vspl",
+	"code":836,
+	"msg":"2bx5pl",
 	"data":{
-		"id":"87",
-		"nameEn":"zo2eyq",
-		"birthYear":30126,
-		"idCelebrityDouban":571
+		"id":"38",
+		"nameEn":"ilyvxz",
+		"birthYear":9620,
+		"idCelebrityDouban":641
 	}
 }
 ```
 
 ### IMDB影人详细信息
-**URL:** http://localhost:8080/celebrity/imdb/details
+**URL:** http://localhost:8081/v2/celebrity/imdb/details
 
 **Type:** GET
 
@@ -452,7 +396,7 @@ id|int64|IMDB影人ID|true|-
 
 **Request-example:**
 ```
-curl -X GET -i http://localhost:8080/celebrity/imdb/details?id=44
+curl -X GET -i http://localhost:8081/v2/celebrity/imdb/details?id=174
 ```
 **Response-fields:**
 
@@ -484,30 +428,30 @@ data|object|具体结果|-
 **Response-example:**
 ```
 {
-	"code":604,
-	"msg":"ma0v5p",
+	"code":956,
+	"msg":"su731r",
 	"data":{
 		"base":{
-			"id":"87",
-			"nameEn":"18hto3",
-			"birthYear":21712,
-			"idCelebrityDouban":42
+			"id":"38",
+			"nameEn":"4j6o4i",
+			"birthYear":17033,
+			"idCelebrityDouban":943
 		},
 		"movieList":[
 			{
-				"id":"87",
-				"idTypeVideo":"5d5r2y",
-				"typeVideo":"asxlps",
-				"nameEn":"fgkwoi",
-				"startYear":28071,
-				"isAdult":"0b91dp",
-				"nameOrigin":"g8s31f",
-				"runtime":6883,
-				"urlPoster":"t9bryp",
-				"idMovieDouban":284,
-				"summary":"6d1km1",
-				"idProfession":"sxeybt",
-				"profession":"lo2dru"
+				"id":"38",
+				"idTypeVideo":"5ixmqz",
+				"typeVideo":"r7cheh",
+				"nameEn":"jo0wsr",
+				"startYear":32371,
+				"isAdult":"srhec7",
+				"nameOrigin":"9v5j44",
+				"runtime":16291,
+				"urlPoster":"9uhva5",
+				"idMovieDouban":378,
+				"summary":"4xj4lk",
+				"idProfession":"44kpb4",
+				"profession":"pu9k2l"
 			}
 		]
 	}
@@ -516,7 +460,7 @@ data|object|具体结果|-
 
 ## 影人API
 ### 影人基础信息
-**URL:** http://localhost:8080/celebrity/bases
+**URL:** http://localhost:8081/v2/celebrity/bases
 
 **Type:** GET
 
@@ -540,7 +484,7 @@ id|int64|豆瓣影人ID|true|-
 
 **Request-example:**
 ```
-curl -X GET -i http://localhost:8080/celebrity/bases?id=359
+curl -X GET -i http://localhost:8081/v2/celebrity/bases?id=422
 ```
 **Response-fields:**
 
@@ -569,33 +513,33 @@ data|object|具体结果|-
 **Response-example:**
 ```
 {
-	"code":967,
-	"msg":"xgkn6a",
+	"code":314,
+	"msg":"ejv8v8",
 	"data":{
 		"douban":{
-			"id":109,
-			"urlCelebrityDouban":"vo1xwv",
-			"idCelebrityImdb":"jgwnbz",
-			"urlCelebrityImdb":"ptv28c",
-			"nameZh":"vvepry",
-			"nameOrigin":"1fd4o6",
-			"sex":"4hgddo",
-			"birthDate":"2020-02-16",
-			"urlPortrait":"kb08tr",
-			"summary":"rof3rh"
+			"id":849,
+			"urlCelebrityDouban":"qe6ll8",
+			"idCelebrityImdb":"7r88fu",
+			"urlCelebrityImdb":"oor2jj",
+			"nameZh":"ptkswm",
+			"nameOrigin":"9cuh36",
+			"sex":"xh4wk6",
+			"birthDate":"2020-02-28",
+			"urlPortrait":"9mtpf3",
+			"summary":"wyiwpg"
 		},
 		"imdb":{
-			"id":"87",
-			"nameEn":"vfsknk",
-			"birthYear":5311,
-			"idCelebrityDouban":337
+			"id":"38",
+			"nameEn":"q5zt6z",
+			"birthYear":27291,
+			"idCelebrityDouban":226
 		}
 	}
 }
 ```
 
 ### 影人详细信息
-**URL:** http://localhost:8080/celebrity/details
+**URL:** http://localhost:8081/v2/celebrity/details
 
 **Type:** GET
 
@@ -619,7 +563,7 @@ id|int64|豆瓣影人ID|true|-
 
 **Request-example:**
 ```
-curl -X GET -i http://localhost:8080/celebrity/details?id=861
+curl -X GET -i http://localhost:8081/v2/celebrity/details?id=156
 ```
 **Response-fields:**
 
@@ -652,7 +596,25 @@ data|object|具体结果|-
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─sort|string|序号|-
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─length|int32|Large版本的长 /px|-
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─width|int32|Large版本的宽 /px|-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─movieList|array|与豆瓣影人相关的豆瓣电影列表|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─movieListOrderByScore|array|与豆瓣影人相关的豆瓣电影列表 order by score|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─id|int64|豆瓣电影ID|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─urlMovieDouban|string|豆瓣电影链接|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─idTypeVideo|string|影片类型ID|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─typeVideo|string|影片类型|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─idMovieImdb|string|IMDB电影ID|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─urlMovieImdb|string|IMDB电影链接|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─startYear|int16|上映时间 /year|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─nameZh|string|豆瓣电影中文名|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─nameOrigin|string|豆瓣电影原始名|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─runtime|int16|豆瓣电影运行片长 /m|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─urlPoster|string|豆瓣电影海报链接|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─haveSeen|int32|已看人数|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─wannaSee|int32|想看人数|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─summary|string|简介|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─idProfession|string|该影人在该电影中的职位ID|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─profession|string|该影人在该电影中的职位|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─sort|int16|该影人在该电影中的演员排列顺序|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─movieListOrderByStartYear|array|与豆瓣影人相关的豆瓣电影列表 order by start year|-
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─id|int64|豆瓣电影ID|-
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─urlMovieDouban|string|豆瓣电影链接|-
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─idTypeVideo|string|影片类型ID|-
@@ -704,97 +666,118 @@ data|object|具体结果|-
 **Response-example:**
 ```
 {
-	"code":65,
-	"msg":"wsm48t",
+	"code":82,
+	"msg":"r4saan",
 	"data":{
 		"douban":{
 			"base":{
-				"id":254,
-				"urlCelebrityDouban":"8sg7mf",
-				"idCelebrityImdb":"7un791",
-				"urlCelebrityImdb":"y7bdnf",
-				"nameZh":"hnc250",
-				"nameOrigin":"g7yhcx",
-				"sex":"e05ja7",
-				"birthDate":"2020-02-16",
-				"urlPortrait":"9l0orl",
-				"summary":"s2sr0w"
+				"id":129,
+				"urlCelebrityDouban":"3k5hzu",
+				"idCelebrityImdb":"kc4osg",
+				"urlCelebrityImdb":"y5gjr5",
+				"nameZh":"bx6827",
+				"nameOrigin":"kjfcwx",
+				"sex":"rg0015",
+				"birthDate":"2020-02-28",
+				"urlPortrait":"ag96pa",
+				"summary":"1j9af4"
 			},
 			"aliasList":[
 				{
-					"nameAlias":"roxc1x",
-					"isNikename":"64rk4x"
+					"nameAlias":"8exj2p",
+					"isNikename":"zka4yj"
 				}
 			],
 			"imageList":[
 				{
-					"id":756,
-					"urlImageSqxs":"3xchfu",
-					"urlImageS":"6q1sa6",
-					"urlImageM":"vi3v55",
-					"urlImageL":"hrqqqz",
-					"sort":"n9ek4r",
-					"length":600,
-					"width":29
+					"id":222,
+					"urlImageSqxs":"4vdobm",
+					"urlImageS":"0j1o00",
+					"urlImageM":"b86rzp",
+					"urlImageL":"j2myla",
+					"sort":"rhq8ie",
+					"length":674,
+					"width":935
 				}
 			],
-			"movieList":[
+			"movieListOrderByScore":[
 				{
-					"id":341,
-					"urlMovieDouban":"5vf64y",
-					"idTypeVideo":"e3hex6",
-					"typeVideo":"7qectf",
-					"idMovieImdb":"trebvj",
-					"urlMovieImdb":"7zprel",
-					"startYear":1320,
-					"nameZh":"9q5ohk",
-					"nameOrigin":"ttcd9r",
-					"runtime":17243,
-					"urlPoster":"e5w1g8",
-					"haveSeen":276,
-					"wannaSee":823,
-					"summary":"6wve9f",
-					"idProfession":"dprgpj",
-					"profession":"o8of1a",
-					"sort":10675
+					"id":955,
+					"urlMovieDouban":"8khqgr",
+					"idTypeVideo":"4m1zfu",
+					"typeVideo":"5uopma",
+					"idMovieImdb":"sufaz0",
+					"urlMovieImdb":"2gofes",
+					"startYear":6904,
+					"nameZh":"d9gczb",
+					"nameOrigin":"iefokg",
+					"runtime":24576,
+					"urlPoster":"gv94i8",
+					"haveSeen":356,
+					"wannaSee":919,
+					"summary":"2sti3a",
+					"idProfession":"si6zg9",
+					"profession":"w1iiot",
+					"sort":9060
+				}
+			],
+			"movieListOrderByStartYear":[
+				{
+					"id":186,
+					"urlMovieDouban":"87xcm9",
+					"idTypeVideo":"qpwh8w",
+					"typeVideo":"hjf77g",
+					"idMovieImdb":"ysiw2v",
+					"urlMovieImdb":"7nhtij",
+					"startYear":19522,
+					"nameZh":"dyd8ym",
+					"nameOrigin":"7ea59i",
+					"runtime":5595,
+					"urlPoster":"8h9lke",
+					"haveSeen":607,
+					"wannaSee":773,
+					"summary":"3w1cjn",
+					"idProfession":"f720iu",
+					"profession":"y1v35x",
+					"sort":17317
 				}
 			],
 			"awardList":[
 				{
-					"idMovieDouban":457,
-					"idAwardMovie":"0a0j16",
-					"nameZh":"f6epgu",
-					"urlAward":"9yw6sd",
-					"idCelebrityDouban":252,
-					"urlCelebrityDouban":"6w1nsc",
-					"typeAward":"euegep",
-					"awardTh":17700,
-					"isNominated":"o3exmj"
+					"idMovieDouban":842,
+					"idAwardMovie":"9h87l8",
+					"nameZh":"giog87",
+					"urlAward":"06iwg3",
+					"idCelebrityDouban":317,
+					"urlCelebrityDouban":"tqmevj",
+					"typeAward":"r5a9h0",
+					"awardTh":1278,
+					"isNominated":"48e828"
 				}
 			]
 		},
 		"imdb":{
 			"base":{
-				"id":"87",
-				"nameEn":"mughr4",
-				"birthYear":8421,
-				"idCelebrityDouban":990
+				"id":"38",
+				"nameEn":"gccn9e",
+				"birthYear":7369,
+				"idCelebrityDouban":37
 			},
 			"movieList":[
 				{
-					"id":"87",
-					"idTypeVideo":"zywmwa",
-					"typeVideo":"6bf9l4",
-					"nameEn":"e1d3h9",
-					"startYear":9408,
-					"isAdult":"l3s2fs",
-					"nameOrigin":"yp2qsk",
-					"runtime":2281,
-					"urlPoster":"m7jasx",
-					"idMovieDouban":235,
-					"summary":"a24jt9",
-					"idProfession":"773l00",
-					"profession":"nbb83b"
+					"id":"38",
+					"idTypeVideo":"sqx14t",
+					"typeVideo":"cfyfvb",
+					"nameEn":"df0pne",
+					"startYear":19297,
+					"isAdult":"h8gijk",
+					"nameOrigin":"4winjv",
+					"runtime":8219,
+					"urlPoster":"g44ssf",
+					"idMovieDouban":646,
+					"summary":"zw0w55",
+					"idProfession":"vpldje",
+					"profession":"q78arl"
 				}
 			]
 		}
@@ -802,165 +785,919 @@ data|object|具体结果|-
 }
 ```
 
+## 豆瓣搜索API
+### 豆瓣搜索提示
+**URL:** http://localhost:8081/v2/search/douban/search_tips
+
+**Type:** GET
+
+
+**Content-Type:** application/x-www-form-urlencoded;charset=utf-8
+
+**Description:** 根据名称开头的字符串找出豆瓣电影、豆瓣影人等基本信息列表
+
+**Request-headers:**
+
+Header | Type|Description|Required|Since
+---|---|---|---|----
+Authorization|string|access_token|false|-
+
+
+**Request-parameters:**
+
+Parameter | Type|Description|Required|Since
+---|---|---|---|---
+keyword|string|搜索关键字|true|-
+offset|int32|偏移量（默认0）|false|-
+limit|int32|限制数（默认10）|false|-
+
+**Request-example:**
+```
+curl -X GET -i http://localhost:8081/v2/search/douban/search_tips?keyword=23k17g&offset=0&limit=10
+```
+**Response-fields:**
+
+Field | Type|Description|Since
+---|---|---|---
+code|int32|状态码|-
+msg|string|状态信息|-
+data|object|具体结果|-
+└─movieList|array|豆瓣电影搜索提示列表|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─base|object|豆瓣电影基础信息|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─id|int64|豆瓣电影ID|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─urlMovieDouban|string|豆瓣电影链接|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─idTypeVideo|string|影片类型ID|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─typeVideo|string|影片类型|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─idMovieImdb|string|IMDB电影ID|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─urlMovieImdb|string|IMDB电影链接|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─startYear|int16|上映时间 /year|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─nameZh|string|豆瓣电影中文名|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─nameOrigin|string|豆瓣电影原始名|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─runtime|int16|豆瓣电影运行片长 /m|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─urlPoster|string|豆瓣电影海报链接|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─haveSeen|int32|已看人数|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─wannaSee|int32|想看人数|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─summary|string|简介|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─rate|object|豆瓣电影评分信息|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─id|int64|豆瓣电影ID|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─score|number|豆瓣电影评分|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─vote|int32|豆瓣电影评分人数|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─score5|number|豆瓣5星比例|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─score4|number|豆瓣4星比例|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─score3|number|豆瓣3星比例|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─score2|number|豆瓣2星比例|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─score1|number|豆瓣1星比例|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─aliasList|array|豆瓣电影别名列表|-
+└─celebrityList|array|豆瓣影人搜索提示列表|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─base|object|豆瓣影人基础信息|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─id|int64|豆瓣影人ID|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─urlCelebrityDouban|string|豆瓣影人链接|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─idCelebrityImdb|string|IMDB影人ID|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─urlCelebrityImdb|string|IMDB影人链接|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─nameZh|string|豆瓣影人中文名|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─nameOrigin|string|豆瓣影人英文名|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─sex|string|性别|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─birthDate|string|生日日期|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─urlPortrait|string|豆瓣影人海报链接|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─summary|string|影人简介|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─aliasList|array|豆瓣影人别称列表|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─nameAlias|string|豆瓣影人别称|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─isNikename|string|是否为昵称 0-本名 1-昵称|-
+
+**Response-example:**
+```
+{
+	"code":52,
+	"msg":"i5bkpu",
+	"data":{
+		"movieList":[
+			{
+				"base":{
+					"id":894,
+					"urlMovieDouban":"k48j24",
+					"idTypeVideo":"itj7op",
+					"typeVideo":"29bg0q",
+					"idMovieImdb":"2vbd4n",
+					"urlMovieImdb":"z50nlh",
+					"startYear":8629,
+					"nameZh":"eknl48",
+					"nameOrigin":"yq7dgf",
+					"runtime":32493,
+					"urlPoster":"yj5mg4",
+					"haveSeen":130,
+					"wannaSee":436,
+					"summary":"ra21bd"
+				},
+				"rate":{
+					"id":161,
+					"score":718,
+					"vote":437,
+					"score5":285,
+					"score4":658,
+					"score3":907,
+					"score2":125,
+					"score1":651
+				},
+				"aliasList":[
+					"1ytvlz"
+				]
+			}
+		],
+		"celebrityList":[
+			{
+				"base":{
+					"id":637,
+					"urlCelebrityDouban":"huj4lr",
+					"idCelebrityImdb":"rdy7du",
+					"urlCelebrityImdb":"8441jo",
+					"nameZh":"9fajee",
+					"nameOrigin":"dhrkqb",
+					"sex":"1ftumu",
+					"birthDate":"2020-02-28",
+					"urlPortrait":"3xkz5h",
+					"summary":"whra3m"
+				},
+				"aliasList":[
+					{
+						"nameAlias":"vkzzgz",
+						"isNikename":"jxzxd9"
+					}
+				]
+			}
+		]
+	}
+}
+```
+
+### 豆瓣搜索结果
+**URL:** http://localhost:8081/v2/search/douban/search_details
+
+**Type:** GET
+
+
+**Content-Type:** application/x-www-form-urlencoded;charset=utf-8
+
+**Description:** 根据名称字符串找出豆瓣电影、豆瓣影人等基本信息列表
+
+**Request-headers:**
+
+Header | Type|Description|Required|Since
+---|---|---|---|----
+Authorization|string|access_token|false|-
+
+
+**Request-parameters:**
+
+Parameter | Type|Description|Required|Since
+---|---|---|---|---
+keyword|string|搜索关键字|true|-
+offset|int32|偏移量（默认0）|false|-
+limit|int32|限制数（默认10）|false|-
+
+**Request-example:**
+```
+curl -X GET -i http://localhost:8081/v2/search/douban/search_details?keyword=hjp3ds&offset=0&limit=10
+```
+**Response-fields:**
+
+Field | Type|Description|Since
+---|---|---|---
+code|int32|状态码|-
+msg|string|状态信息|-
+data|object|具体结果|-
+└─movieList|array|豆瓣电影搜索结果列表|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─base|object|豆瓣电影基础信息|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─id|int64|豆瓣电影ID|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─urlMovieDouban|string|豆瓣电影链接|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─idTypeVideo|string|影片类型ID|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─typeVideo|string|影片类型|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─idMovieImdb|string|IMDB电影ID|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─urlMovieImdb|string|IMDB电影链接|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─startYear|int16|上映时间 /year|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─nameZh|string|豆瓣电影中文名|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─nameOrigin|string|豆瓣电影原始名|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─runtime|int16|豆瓣电影运行片长 /m|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─urlPoster|string|豆瓣电影海报链接|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─haveSeen|int32|已看人数|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─wannaSee|int32|想看人数|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─summary|string|简介|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─rate|object|豆瓣电影评分信息|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─id|int64|豆瓣电影ID|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─score|number|豆瓣电影评分|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─vote|int32|豆瓣电影评分人数|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─score5|number|豆瓣5星比例|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─score4|number|豆瓣4星比例|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─score3|number|豆瓣3星比例|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─score2|number|豆瓣2星比例|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─score1|number|豆瓣1星比例|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─aliasList|array|豆瓣电影别名列表|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─typeList|array|豆瓣电影-类型列表|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─celebrityList|array|豆瓣电影影人列表|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─id|int64|豆瓣影人ID|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─urlCelebrityDouban|string|豆瓣影人链接|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─idCelebrityImdb|string|IMDB影人ID|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─urlCelebrityImdb|string|IMDB影人链接|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─nameZh|string|豆瓣影人中文名|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─nameOrigin|string|豆瓣影人英文名|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─sex|string|性别|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─birthDate|string|生日日期|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─urlPortrait|string|豆瓣影人海报链接|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─summary|string|影人简介|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─idProfession|string|该影人在该电影中的职位ID|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─profession|string|该影人在该电影中的职位|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─sort|int16|该影人在该电影中的演员排列顺序|-
+└─celebrityList|array|豆瓣影人搜索结果列表|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─base|object|豆瓣影人基础信息|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─id|int64|豆瓣影人ID|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─urlCelebrityDouban|string|豆瓣影人链接|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─idCelebrityImdb|string|IMDB影人ID|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─urlCelebrityImdb|string|IMDB影人链接|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─nameZh|string|豆瓣影人中文名|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─nameOrigin|string|豆瓣影人英文名|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─sex|string|性别|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─birthDate|string|生日日期|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─urlPortrait|string|豆瓣影人海报链接|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─summary|string|影人简介|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─aliasList|array|豆瓣影人别称列表|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─nameAlias|string|豆瓣影人别称|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─isNikename|string|是否为昵称 0-本名 1-昵称|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─movieList|array|与豆瓣影人相关的豆瓣电影列表|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─id|int64|豆瓣电影ID|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─urlMovieDouban|string|豆瓣电影链接|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─idTypeVideo|string|影片类型ID|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─typeVideo|string|影片类型|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─idMovieImdb|string|IMDB电影ID|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─urlMovieImdb|string|IMDB电影链接|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─startYear|int16|上映时间 /year|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─nameZh|string|豆瓣电影中文名|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─nameOrigin|string|豆瓣电影原始名|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─runtime|int16|豆瓣电影运行片长 /m|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─urlPoster|string|豆瓣电影海报链接|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─haveSeen|int32|已看人数|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─wannaSee|int32|想看人数|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─summary|string|简介|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─idProfession|string|该影人在该电影中的职位ID|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─profession|string|该影人在该电影中的职位|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─sort|int16|该影人在该电影中的演员排列顺序|-
+
+**Response-example:**
+```
+{
+	"code":927,
+	"msg":"mqpkj8",
+	"data":{
+		"movieList":[
+			{
+				"base":{
+					"id":70,
+					"urlMovieDouban":"2p3tmi",
+					"idTypeVideo":"gj2x8x",
+					"typeVideo":"ek895s",
+					"idMovieImdb":"b5gv4i",
+					"urlMovieImdb":"5mclzx",
+					"startYear":7889,
+					"nameZh":"qsxkw1",
+					"nameOrigin":"hyx6ci",
+					"runtime":8886,
+					"urlPoster":"uq0p6d",
+					"haveSeen":46,
+					"wannaSee":740,
+					"summary":"a5bxx5"
+				},
+				"rate":{
+					"id":644,
+					"score":131,
+					"vote":895,
+					"score5":391,
+					"score4":426,
+					"score3":699,
+					"score2":472,
+					"score1":3
+				},
+				"aliasList":[
+					"m3xi76"
+				],
+				"typeList":[
+					"7829kk"
+				],
+				"celebrityList":[
+					{
+						"id":456,
+						"urlCelebrityDouban":"dmhkxx",
+						"idCelebrityImdb":"f154v9",
+						"urlCelebrityImdb":"k7i1yk",
+						"nameZh":"l5bpqo",
+						"nameOrigin":"qsh07b",
+						"sex":"ejp7vz",
+						"birthDate":"2020-02-28",
+						"urlPortrait":"7jtvdd",
+						"summary":"d7u45f",
+						"idProfession":"yalhn6",
+						"profession":"cj5ag8",
+						"sort":14677
+					}
+				]
+			}
+		],
+		"celebrityList":[
+			{
+				"base":{
+					"id":649,
+					"urlCelebrityDouban":"rqcmb9",
+					"idCelebrityImdb":"jv0lbp",
+					"urlCelebrityImdb":"tq0oah",
+					"nameZh":"3jt6ci",
+					"nameOrigin":"xwapr6",
+					"sex":"04c8kj",
+					"birthDate":"2020-02-28",
+					"urlPortrait":"s6h54e",
+					"summary":"u8lclj"
+				},
+				"aliasList":[
+					{
+						"nameAlias":"8zic2c",
+						"isNikename":"tflqr1"
+					}
+				],
+				"movieList":[
+					{
+						"id":82,
+						"urlMovieDouban":"im3cgf",
+						"idTypeVideo":"9136q1",
+						"typeVideo":"2xu4v2",
+						"idMovieImdb":"6serpf",
+						"urlMovieImdb":"zf4jar",
+						"startYear":6932,
+						"nameZh":"ukabs7",
+						"nameOrigin":"u63apw",
+						"runtime":11907,
+						"urlPoster":"ieeal6",
+						"haveSeen":402,
+						"wannaSee":979,
+						"summary":"yhy4fx",
+						"idProfession":"64wlfp",
+						"profession":"kv00c6",
+						"sort":28946
+					}
+				]
+			}
+		]
+	}
+}
+```
+
+## 豆瓣影人搜索API
+### 豆瓣影人搜索提示
+**URL:** http://localhost:8081/v2/search/celebrity/douban/search_tips
+
+**Type:** GET
+
+
+**Content-Type:** application/x-www-form-urlencoded;charset=utf-8
+
+**Description:** 根据影人名称开头的字符串找出豆瓣影人的基本信息列表
+
+**Request-headers:**
+
+Header | Type|Description|Required|Since
+---|---|---|---|----
+Authorization|string|access_token|false|-
+
+
+**Request-parameters:**
+
+Parameter | Type|Description|Required|Since
+---|---|---|---|---
+keyword|string|搜索关键字|true|-
+offset|int32|偏移量（默认0）|false|-
+limit|int32|限制数（默认10）|false|-
+
+**Request-example:**
+```
+curl -X GET -i http://localhost:8081/v2/search/celebrity/douban/search_tips?keyword=rcvqoy&offset=0&limit=10
+```
+**Response-fields:**
+
+Field | Type|Description|Since
+---|---|---|---
+code|int32|状态码|-
+msg|string|状态信息|-
+data|object|具体结果|-
+└─base|object|豆瓣影人基础信息|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─id|int64|豆瓣影人ID|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─urlCelebrityDouban|string|豆瓣影人链接|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─idCelebrityImdb|string|IMDB影人ID|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─urlCelebrityImdb|string|IMDB影人链接|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─nameZh|string|豆瓣影人中文名|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─nameOrigin|string|豆瓣影人英文名|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─sex|string|性别|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─birthDate|string|生日日期|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─urlPortrait|string|豆瓣影人海报链接|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─summary|string|影人简介|-
+└─aliasList|array|豆瓣影人别称列表|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─nameAlias|string|豆瓣影人别称|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─isNikename|string|是否为昵称 0-本名 1-昵称|-
+
+**Response-example:**
+```
+{
+	"code":137,
+	"msg":"t78560",
+	"data":[
+		{
+			"base":{
+				"id":788,
+				"urlCelebrityDouban":"qrxkvk",
+				"idCelebrityImdb":"8u6916",
+				"urlCelebrityImdb":"eigs5s",
+				"nameZh":"ep3hr1",
+				"nameOrigin":"tz7ism",
+				"sex":"p3lfqb",
+				"birthDate":"2020-02-28",
+				"urlPortrait":"i2q3ys",
+				"summary":"r2eufm"
+			},
+			"aliasList":[
+				{
+					"nameAlias":"ohztl3",
+					"isNikename":"mgs46p"
+				}
+			]
+		}
+	]
+}
+```
+
+### 豆瓣影人搜索结果
+**URL:** http://localhost:8081/v2/search/celebrity/douban/search_details
+
+**Type:** GET
+
+
+**Content-Type:** application/x-www-form-urlencoded;charset=utf-8
+
+**Description:** 根据影人名称字符串找出豆瓣影人的基本信息列表
+
+**Request-headers:**
+
+Header | Type|Description|Required|Since
+---|---|---|---|----
+Authorization|string|access_token|false|-
+
+
+**Request-parameters:**
+
+Parameter | Type|Description|Required|Since
+---|---|---|---|---
+keyword|string|搜索关键字|true|-
+offset|int32|偏移量（默认0）|false|-
+limit|int32|限制数（默认10）|false|-
+
+**Request-example:**
+```
+curl -X GET -i http://localhost:8081/v2/search/celebrity/douban/search_details?keyword=macg1v&offset=0&limit=10
+```
+**Response-fields:**
+
+Field | Type|Description|Since
+---|---|---|---
+code|int32|状态码|-
+msg|string|状态信息|-
+data|object|具体结果|-
+└─base|object|豆瓣影人基础信息|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─id|int64|豆瓣影人ID|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─urlCelebrityDouban|string|豆瓣影人链接|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─idCelebrityImdb|string|IMDB影人ID|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─urlCelebrityImdb|string|IMDB影人链接|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─nameZh|string|豆瓣影人中文名|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─nameOrigin|string|豆瓣影人英文名|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─sex|string|性别|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─birthDate|string|生日日期|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─urlPortrait|string|豆瓣影人海报链接|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─summary|string|影人简介|-
+└─aliasList|array|豆瓣影人别称列表|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─nameAlias|string|豆瓣影人别称|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─isNikename|string|是否为昵称 0-本名 1-昵称|-
+└─movieList|array|与豆瓣影人相关的豆瓣电影列表|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─id|int64|豆瓣电影ID|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─urlMovieDouban|string|豆瓣电影链接|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─idTypeVideo|string|影片类型ID|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─typeVideo|string|影片类型|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─idMovieImdb|string|IMDB电影ID|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─urlMovieImdb|string|IMDB电影链接|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─startYear|int16|上映时间 /year|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─nameZh|string|豆瓣电影中文名|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─nameOrigin|string|豆瓣电影原始名|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─runtime|int16|豆瓣电影运行片长 /m|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─urlPoster|string|豆瓣电影海报链接|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─haveSeen|int32|已看人数|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─wannaSee|int32|想看人数|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─summary|string|简介|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─idProfession|string|该影人在该电影中的职位ID|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─profession|string|该影人在该电影中的职位|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─sort|int16|该影人在该电影中的演员排列顺序|-
+
+**Response-example:**
+```
+{
+	"code":233,
+	"msg":"qd8blt",
+	"data":[
+		{
+			"base":{
+				"id":622,
+				"urlCelebrityDouban":"h0nvaj",
+				"idCelebrityImdb":"vdmlyn",
+				"urlCelebrityImdb":"yegf9s",
+				"nameZh":"jhkdn3",
+				"nameOrigin":"1ew7zs",
+				"sex":"ropgud",
+				"birthDate":"2020-02-28",
+				"urlPortrait":"w7yqr3",
+				"summary":"mlekxy"
+			},
+			"aliasList":[
+				{
+					"nameAlias":"bikkyc",
+					"isNikename":"036ko2"
+				}
+			],
+			"movieList":[
+				{
+					"id":851,
+					"urlMovieDouban":"dw5liq",
+					"idTypeVideo":"1ypgp2",
+					"typeVideo":"cjp3xr",
+					"idMovieImdb":"f4xp5l",
+					"urlMovieImdb":"qeqw6t",
+					"startYear":15279,
+					"nameZh":"y8ozr7",
+					"nameOrigin":"rqohve",
+					"runtime":26734,
+					"urlPoster":"lzoxmm",
+					"haveSeen":317,
+					"wannaSee":350,
+					"summary":"4hiueu",
+					"idProfession":"9ulhwe",
+					"profession":"sfi3pm",
+					"sort":3778
+				}
+			]
+		}
+	]
+}
+```
+
+## 豆瓣电影搜索API
+### 豆瓣电影搜索提示
+**URL:** http://localhost:8081/v2/search/movie/douban/search_tips
+
+**Type:** GET
+
+
+**Content-Type:** application/x-www-form-urlencoded;charset=utf-8
+
+**Description:** 根据电影名称开头的字符串找出豆瓣电影的基本信息列表
+
+**Request-headers:**
+
+Header | Type|Description|Required|Since
+---|---|---|---|----
+Authorization|string|access_token|false|-
+
+
+**Request-parameters:**
+
+Parameter | Type|Description|Required|Since
+---|---|---|---|---
+keyword|string|搜索关键字|true|-
+offset|int32|偏移量（默认0）|false|-
+limit|int32|限制数（默认10）|false|-
+
+**Request-example:**
+```
+curl -X GET -i http://localhost:8081/v2/search/movie/douban/search_tips?keyword=eka4zs&offset=0&limit=10
+```
+**Response-fields:**
+
+Field | Type|Description|Since
+---|---|---|---
+code|int32|状态码|-
+msg|string|状态信息|-
+data|object|具体结果|-
+└─base|object|豆瓣电影基础信息|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─id|int64|豆瓣电影ID|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─urlMovieDouban|string|豆瓣电影链接|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─idTypeVideo|string|影片类型ID|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─typeVideo|string|影片类型|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─idMovieImdb|string|IMDB电影ID|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─urlMovieImdb|string|IMDB电影链接|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─startYear|int16|上映时间 /year|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─nameZh|string|豆瓣电影中文名|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─nameOrigin|string|豆瓣电影原始名|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─runtime|int16|豆瓣电影运行片长 /m|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─urlPoster|string|豆瓣电影海报链接|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─haveSeen|int32|已看人数|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─wannaSee|int32|想看人数|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─summary|string|简介|-
+└─rate|object|豆瓣电影评分信息|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─id|int64|豆瓣电影ID|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─score|number|豆瓣电影评分|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─vote|int32|豆瓣电影评分人数|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─score5|number|豆瓣5星比例|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─score4|number|豆瓣4星比例|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─score3|number|豆瓣3星比例|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─score2|number|豆瓣2星比例|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─score1|number|豆瓣1星比例|-
+└─aliasList|array|豆瓣电影别名列表|-
+
+**Response-example:**
+```
+{
+	"code":336,
+	"msg":"9oaql7",
+	"data":[
+		{
+			"base":{
+				"id":57,
+				"urlMovieDouban":"gvl280",
+				"idTypeVideo":"423cop",
+				"typeVideo":"5i7p7z",
+				"idMovieImdb":"ryktdv",
+				"urlMovieImdb":"n93a2n",
+				"startYear":26199,
+				"nameZh":"1y61i0",
+				"nameOrigin":"bvn4cd",
+				"runtime":32348,
+				"urlPoster":"tmkr5g",
+				"haveSeen":429,
+				"wannaSee":412,
+				"summary":"ff4cie"
+			},
+			"rate":{
+				"id":68,
+				"score":203,
+				"vote":318,
+				"score5":957,
+				"score4":165,
+				"score3":862,
+				"score2":82,
+				"score1":555
+			},
+			"aliasList":[
+				"vve19e"
+			]
+		}
+	]
+}
+```
+
+### 豆瓣电影搜索结果
+**URL:** http://localhost:8081/v2/search/movie/douban/search_details
+
+**Type:** GET
+
+
+**Content-Type:** application/x-www-form-urlencoded;charset=utf-8
+
+**Description:** 根据电影名称字符串找出豆瓣电影的基本信息列表
+
+**Request-headers:**
+
+Header | Type|Description|Required|Since
+---|---|---|---|----
+Authorization|string|access_token|false|-
+
+
+**Request-parameters:**
+
+Parameter | Type|Description|Required|Since
+---|---|---|---|---
+keyword|string|搜索关键字|true|-
+offset|int32|偏移量（默认0）|false|-
+limit|int32|限制数（默认10）|false|-
+
+**Request-example:**
+```
+curl -X GET -i http://localhost:8081/v2/search/movie/douban/search_details?keyword=agl5lb&offset=0&limit=10
+```
+**Response-fields:**
+
+Field | Type|Description|Since
+---|---|---|---
+code|int32|状态码|-
+msg|string|状态信息|-
+data|object|具体结果|-
+└─base|object|豆瓣电影基础信息|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─id|int64|豆瓣电影ID|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─urlMovieDouban|string|豆瓣电影链接|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─idTypeVideo|string|影片类型ID|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─typeVideo|string|影片类型|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─idMovieImdb|string|IMDB电影ID|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─urlMovieImdb|string|IMDB电影链接|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─startYear|int16|上映时间 /year|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─nameZh|string|豆瓣电影中文名|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─nameOrigin|string|豆瓣电影原始名|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─runtime|int16|豆瓣电影运行片长 /m|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─urlPoster|string|豆瓣电影海报链接|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─haveSeen|int32|已看人数|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─wannaSee|int32|想看人数|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─summary|string|简介|-
+└─rate|object|豆瓣电影评分信息|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─id|int64|豆瓣电影ID|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─score|number|豆瓣电影评分|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─vote|int32|豆瓣电影评分人数|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─score5|number|豆瓣5星比例|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─score4|number|豆瓣4星比例|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─score3|number|豆瓣3星比例|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─score2|number|豆瓣2星比例|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─score1|number|豆瓣1星比例|-
+└─aliasList|array|豆瓣电影别名列表|-
+└─typeList|array|豆瓣电影-类型列表|-
+└─celebrityList|array|豆瓣电影影人列表|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─id|int64|豆瓣影人ID|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─urlCelebrityDouban|string|豆瓣影人链接|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─idCelebrityImdb|string|IMDB影人ID|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─urlCelebrityImdb|string|IMDB影人链接|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─nameZh|string|豆瓣影人中文名|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─nameOrigin|string|豆瓣影人英文名|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─sex|string|性别|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─birthDate|string|生日日期|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─urlPortrait|string|豆瓣影人海报链接|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─summary|string|影人简介|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─idProfession|string|该影人在该电影中的职位ID|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─profession|string|该影人在该电影中的职位|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─sort|int16|该影人在该电影中的演员排列顺序|-
+
+**Response-example:**
+```
+{
+	"code":981,
+	"msg":"sgmk95",
+	"data":[
+		{
+			"base":{
+				"id":557,
+				"urlMovieDouban":"6owa3g",
+				"idTypeVideo":"aibjqz",
+				"typeVideo":"f06wst",
+				"idMovieImdb":"xxvn7t",
+				"urlMovieImdb":"bq8d4q",
+				"startYear":25221,
+				"nameZh":"dbw4t0",
+				"nameOrigin":"zxc3ef",
+				"runtime":16990,
+				"urlPoster":"o2nqqm",
+				"haveSeen":717,
+				"wannaSee":352,
+				"summary":"ozco8v"
+			},
+			"rate":{
+				"id":913,
+				"score":816,
+				"vote":914,
+				"score5":304,
+				"score4":347,
+				"score3":858,
+				"score2":847,
+				"score1":549
+			},
+			"aliasList":[
+				"y1adu9"
+			],
+			"typeList":[
+				"2xr1o9"
+			],
+			"celebrityList":[
+				{
+					"id":881,
+					"urlCelebrityDouban":"8lbfnc",
+					"idCelebrityImdb":"c0jq5a",
+					"urlCelebrityImdb":"0z83h5",
+					"nameZh":"gns8i7",
+					"nameOrigin":"448u9w",
+					"sex":"8sqc2i",
+					"birthDate":"2020-02-28",
+					"urlPortrait":"garnn5",
+					"summary":"qzzilt",
+					"idProfession":"hwtqhn",
+					"profession":"nlmazd",
+					"sort":10236
+				}
+			]
+		}
+	]
+}
+```
+
+## Plus搜索API
+### Plus搜索提示
+**URL:** http://localhost:8081/v2/search/search_tips
+
+**Type:** GET
+
+
+**Content-Type:** application/x-www-form-urlencoded;charset=utf-8
+
+**Description:** 根据名称开头的字符串找出豆瓣电影、豆瓣影人、网易云音乐等基本信息列表
+
+**Request-headers:**
+
+Header | Type|Description|Required|Since
+---|---|---|---|----
+Authorization|string|access_token|false|-
+
+
+**Request-parameters:**
+
+Parameter | Type|Description|Required|Since
+---|---|---|---|---
+keyword|string|搜索关键字|true|-
+offset|int32|偏移量（默认0）|false|-
+limit|int32|限制数（默认10）|false|-
+
+**Request-example:**
+```
+curl -X GET -i http://localhost:8081/v2/search/search_tips?keyword=37sfrx&offset=0&limit=10
+```
+**Response-fields:**
+
+Field | Type|Description|Since
+---|---|---|---
+code|int32|状态码|-
+msg|string|状态信息|-
+data|object|具体结果|-
+
+**Response-example:**
+```
+{
+	"code":884,
+	"msg":"2zjlk9",
+	"data":{
+		"waring":"You may have used non-display generics."
+	}
+}
+```
+
+### Plus搜索结果
+**URL:** http://localhost:8081/v2/search/search_details
+
+**Type:** GET
+
+
+**Content-Type:** application/x-www-form-urlencoded;charset=utf-8
+
+**Description:** 根据名称字符串找出豆瓣电影、豆瓣影人、网易云音乐等基本信息列表
+
+**Request-headers:**
+
+Header | Type|Description|Required|Since
+---|---|---|---|----
+Authorization|string|access_token|false|-
+
+
+**Request-parameters:**
+
+Parameter | Type|Description|Required|Since
+---|---|---|---|---
+keyword|string|搜索关键字|true|-
+offset|int32|偏移量（默认0）|false|-
+limit|int32|限制数（默认10）|false|-
+
+**Request-example:**
+```
+curl -X GET -i http://localhost:8081/v2/search/search_details?keyword=w1bdwb&offset=0&limit=10
+```
+**Response-fields:**
+
+Field | Type|Description|Since
+---|---|---|---
+code|int32|状态码|-
+msg|string|状态信息|-
+data|object|具体结果|-
+
+**Response-example:**
+```
+{
+	"code":23,
+	"msg":"5cos7s",
+	"data":{
+		"waring":"You may have used non-display generics."
+	}
+}
+```
+
 ## 音乐API
-### 豆瓣电影网易云音乐相关播放信息
-**URL:** http://localhost:8080/music/netease/plays
-
-**Type:** GET
-
-
-**Content-Type:** application/x-www-form-urlencoded;charset=utf-8
-
-**Description:** 豆瓣电影网易云音乐相关播放信息
-
-**Request-headers:**
-
-Header | Type|Description|Required|Since
----|---|---|---|----
-Authorization|string|access_token|false|-
-
-
-**Request-parameters:**
-
-Parameter | Type|Description|Required|Since
----|---|---|---|---
-id|int64|豆瓣电影ID|true|-
-songLimit|int32|歌曲数目限制数（默认8）|false|-
-playlistLimit|int32|歌单数目限制数（默认1）|false|-
-playlistSongLimit|int32|歌单内歌曲数目限制数（默认8）|false|-
-albumLimit|int32|专辑数目限制数（默认1）|false|-
-albumSongLimit|int32|专辑内歌曲数目限制数（默认8）|false|-
-
-**Request-example:**
-```
-curl -X GET -i http://localhost:8080/music/netease/plays?id=87&songLimit=8&playlistLimit=1&playlistSongLimit=8&albumLimit=1&albumSongLimit=8
-```
-**Response-fields:**
-
-Field | Type|Description|Since
----|---|---|---
-code|int32|状态码|-
-msg|string|状态信息|-
-data|object|具体结果|-
-
-**Response-example:**
-```
-{
-	"code":795,
-	"msg":"hy2v0m",
-	"data":{
-		"waring":"You may have used non-display generics."
-	}
-}
-```
-
-### 网易云音乐热门评论
-**URL:** http://localhost:8080/music/netease/hot_comments
-
-**Type:** GET
-
-
-**Content-Type:** application/x-www-form-urlencoded;charset=utf-8
-
-**Description:** 网易云音乐热门评论
-
-**Request-headers:**
-
-Header | Type|Description|Required|Since
----|---|---|---|----
-Authorization|string|access_token|false|-
-
-
-**Request-parameters:**
-
-Parameter | Type|Description|Required|Since
----|---|---|---|---
-id|int64|网易云音乐歌曲ID|true|-
-offset|int32|偏移量（默认0）|false|-
-limit|int32|限制数（默认8）|false|-
-
-**Request-example:**
-```
-curl -X GET -i http://localhost:8080/music/netease/hot_comments?id=562&offset=0&limit=8
-```
-**Response-fields:**
-
-Field | Type|Description|Since
----|---|---|---
-code|int32|状态码|-
-msg|string|状态信息|-
-data|object|具体结果|-
-
-**Response-example:**
-```
-{
-	"code":465,
-	"msg":"oiecb6",
-	"data":{
-		"waring":"You may have used non-display generics."
-	}
-}
-```
-
 ## 知乎API
-### 豆瓣电影知乎相关问题
-**URL:** http://localhost:8080/movie/zhihu/questions
+### 豆瓣电影知乎相关
+**URL:** http://localhost:8081/v2/movie/zhihu/bases
 
 **Type:** GET
 
 
 **Content-Type:** application/x-www-form-urlencoded;charset=utf-8
 
-**Description:** 豆瓣电影知乎相关问题
-
-**Request-headers:**
-
-Header | Type|Description|Required|Since
----|---|---|---|----
-Authorization|string|access_token|false|-
-
-
-**Request-parameters:**
-
-Parameter | Type|Description|Required|Since
----|---|---|---|---
-id|int64|豆瓣电影ID|true|-
-offset|int32|偏移量（默认0）|false|-
-limit|int32|限制数（默认10）|false|-
-
-**Request-example:**
-```
-curl -X GET -i http://localhost:8080/movie/zhihu/questions?id=287&offset=0&limit=10
-```
-**Response-fields:**
-
-Field | Type|Description|Since
----|---|---|---
-code|int32|状态码|-
-msg|string|状态信息|-
-data|object|具体结果|-
-
-**Response-example:**
-```
-{
-	"code":688,
-	"msg":"i3qggf",
-	"data":{
-		"waring":"You may have used non-display generics."
-	}
-}
-```
-
-## 电影模块评分API
-### 电影评分信息
-**URL:** http://localhost:8080/movie/rate/details
-
-**Type:** GET
-
-
-**Content-Type:** application/x-www-form-urlencoded;charset=utf-8
-
-**Description:** 包括豆瓣、IMDB、MTC、猫眼、知乎、烂番茄新鲜度等
+**Description:** 包括知乎话题、知乎评分、猫眼评分、知乎问题列表等
 
 **Request-headers:**
 
@@ -977,7 +1714,7 @@ id|int64|豆瓣电影ID|true|-
 
 **Request-example:**
 ```
-curl -X GET -i http://localhost:8080/movie/rate/details?id=350
+curl -X GET -i http://localhost:8081/v2/movie/zhihu/bases?id=158
 ```
 **Response-fields:**
 
@@ -986,70 +1723,56 @@ Field | Type|Description|Since
 code|int32|状态码|-
 msg|string|状态信息|-
 data|object|具体结果|-
+└─topic|object|知乎话题|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─id|int64|知乎电影ID|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─urlZhihuTopic|string|知乎话题链接|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─idMovieDouban|int64|豆瓣电影ID|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─urlMovieDouban|string|豆瓣电影链接|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─nameZh|string|知乎电影中文名|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─zhihuScore|number|知乎评分|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─zhihuVote|int32|知乎评分票数|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─maoyanScore|number|猫眼评分|-
+└─questionList|array|知乎问题列表|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─id|int64|知乎问题ID|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─urlZhihuQuestion|string|知乎问题链接|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─idMovieDouban|int64|豆瓣电影ID|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─urlMovieDouban|string|豆瓣电影链接|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─nameZh|string|知乎问题中文名|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─answerNum|int32|回答数 0-默认 1-文章|-
 
 **Response-example:**
 ```
 {
-	"code":318,
-	"msg":"m3ceti",
+	"code":69,
+	"msg":"iu0nnr",
 	"data":{
-		"waring":"You may have used non-display generics."
-	}
-}
-```
-
-## 电影场景API
-### 电影场景详情
-**URL:** http://localhost:8080/mvoie/scene/details
-
-**Type:** GET
-
-
-**Content-Type:** application/x-www-form-urlencoded;charset=utf-8
-
-**Description:** 电影场景详情
-
-**Request-headers:**
-
-Header | Type|Description|Required|Since
----|---|---|---|----
-Authorization|string|access_token|false|-
-
-
-**Request-parameters:**
-
-Parameter | Type|Description|Required|Since
----|---|---|---|---
-id|int64|豆瓣电影ID|true|-
-offset|int32|偏移量（默认0）|false|-
-limit|int32|限制数（默认10）|false|-
-
-**Request-example:**
-```
-curl -X GET -i http://localhost:8080/mvoie/scene/details?id=478&offset=0&limit=10
-```
-**Response-fields:**
-
-Field | Type|Description|Since
----|---|---|---
-code|int32|状态码|-
-msg|string|状态信息|-
-data|object|具体结果|-
-
-**Response-example:**
-```
-{
-	"code":975,
-	"msg":"xnyye4",
-	"data":{
-		"waring":"You may have used non-display generics."
+		"topic":{
+			"id":487,
+			"urlZhihuTopic":"sjyf4e",
+			"idMovieDouban":279,
+			"urlMovieDouban":"auvtp5",
+			"nameZh":"n2d04v",
+			"zhihuScore":6,
+			"zhihuVote":888,
+			"maoyanScore":77
+		},
+		"questionList":[
+			{
+				"id":750,
+				"urlZhihuQuestion":"vf2dml",
+				"idMovieDouban":254,
+				"urlMovieDouban":"sg52ob",
+				"nameZh":"utgm9a",
+				"answerNum":893
+			}
+		]
 	}
 }
 ```
 
 ## 豆瓣电影API
 ### 豆瓣电影基础信息
-**URL:** http://localhost:8080/movie/douban/bases
+**URL:** http://localhost:8081/v2/movie/douban/bases
 
 **Type:** GET
 
@@ -1073,7 +1796,7 @@ id|int64|豆瓣电影ID|true|-
 
 **Request-example:**
 ```
-curl -X GET -i http://localhost:8080/movie/douban/bases?id=972
+curl -X GET -i http://localhost:8081/v2/movie/douban/bases?id=764
 ```
 **Response-fields:**
 
@@ -1100,29 +1823,29 @@ data|object|具体结果|-
 **Response-example:**
 ```
 {
-	"code":853,
-	"msg":"l1f54o",
+	"code":338,
+	"msg":"1u201t",
 	"data":{
-		"id":848,
-		"urlMovieDouban":"bff0ys",
-		"idTypeVideo":"podq2d",
-		"typeVideo":"ue9qgn",
-		"idMovieImdb":"c0k9aw",
-		"urlMovieImdb":"r1uqaf",
-		"startYear":23065,
-		"nameZh":"ip4hrm",
-		"nameOrigin":"21913l",
-		"runtime":26109,
-		"urlPoster":"lnco63",
-		"haveSeen":351,
-		"wannaSee":713,
-		"summary":"r7uekj"
+		"id":641,
+		"urlMovieDouban":"qovg5t",
+		"idTypeVideo":"crystt",
+		"typeVideo":"6u3ll5",
+		"idMovieImdb":"59gtck",
+		"urlMovieImdb":"43pc74",
+		"startYear":6028,
+		"nameZh":"8g6bei",
+		"nameOrigin":"qf8f17",
+		"runtime":17200,
+		"urlPoster":"7i6i8t",
+		"haveSeen":142,
+		"wannaSee":896,
+		"summary":"gyrcyc"
 	}
 }
 ```
 
 ### 豆瓣电影详情信息
-**URL:** http://localhost:8080/movie/douban/details
+**URL:** http://localhost:8081/v2/movie/douban/details
 
 **Type:** GET
 
@@ -1146,7 +1869,7 @@ id|int64|豆瓣电影ID|true|-
 
 **Request-example:**
 ```
-curl -X GET -i http://localhost:8080/movie/douban/details?id=110
+curl -X GET -i http://localhost:8081/v2/movie/douban/details?id=484
 ```
 **Response-fields:**
 
@@ -1245,369 +1968,131 @@ data|object|具体结果|-
 **Response-example:**
 ```
 {
-	"code":335,
-	"msg":"02fqsw",
+	"code":371,
+	"msg":"fedrpk",
 	"data":{
 		"base":{
-			"id":953,
-			"urlMovieDouban":"5jm1dv",
-			"idTypeVideo":"wbb7bb",
-			"typeVideo":"kjkrh9",
-			"idMovieImdb":"2qltsg",
-			"urlMovieImdb":"aenbcx",
-			"startYear":18148,
-			"nameZh":"m3vxbo",
-			"nameOrigin":"gyl77m",
-			"runtime":1995,
-			"urlPoster":"587p1j",
-			"haveSeen":427,
-			"wannaSee":646,
-			"summary":"oyv16y"
+			"id":875,
+			"urlMovieDouban":"wmo24q",
+			"idTypeVideo":"jtlby3",
+			"typeVideo":"wffknd",
+			"idMovieImdb":"dnt59e",
+			"urlMovieImdb":"78h09z",
+			"startYear":24840,
+			"nameZh":"8kd4yj",
+			"nameOrigin":"hnkcfm",
+			"runtime":2955,
+			"urlPoster":"nywl23",
+			"haveSeen":530,
+			"wannaSee":436,
+			"summary":"kll1k0"
 		},
 		"rate":{
-			"id":375,
-			"score":868,
-			"vote":486,
-			"score5":761,
-			"score4":769,
-			"score3":223,
-			"score2":531,
-			"score1":354
+			"id":649,
+			"score":544,
+			"vote":123,
+			"score5":882,
+			"score4":445,
+			"score3":447,
+			"score2":294,
+			"score1":601
 		},
 		"aliasList":[
-			"tthfgb"
+			"3tuzlf"
 		],
 		"typeList":[
-			"4nctc0"
+			"9jqge6"
 		],
 		"tagList":[
-			"gwqkgb"
+			"r8pxgv"
 		],
 		"celebrityList":[
 			{
-				"id":602,
-				"urlCelebrityDouban":"nu4dm1",
-				"idCelebrityImdb":"q1my5r",
-				"urlCelebrityImdb":"jgeo8r",
-				"nameZh":"wydhwj",
-				"nameOrigin":"7uk1ur",
-				"sex":"q49zkb",
-				"birthDate":"2020-02-16",
-				"urlPortrait":"fplnyk",
-				"summary":"1tktdi",
-				"idProfession":"n7gty6",
-				"profession":"7ea6kf",
-				"sort":13673
+				"id":614,
+				"urlCelebrityDouban":"mumh13",
+				"idCelebrityImdb":"jk0fv6",
+				"urlCelebrityImdb":"jiwcd9",
+				"nameZh":"vvzvcx",
+				"nameOrigin":"6296t6",
+				"sex":"pixemm",
+				"birthDate":"2020-02-28",
+				"urlPortrait":"cpjddo",
+				"summary":"30ezza",
+				"idProfession":"uyj4yn",
+				"profession":"x9ey3u",
+				"sort":26005
 			}
 		],
 		"trailerList":[
 			{
-				"id":209,
-				"idMovieDouban":597,
-				"urlTrailer":"k76mk1",
-				"urlVideo":"bhuwvf"
+				"id":215,
+				"idMovieDouban":684,
+				"urlTrailer":"wxxsr1",
+				"urlVideo":"lec9yc"
 			}
 		],
 		"imageList":[
 			{
-				"id":812,
-				"urlImageSqxs":"z8ke17",
-				"urlImageS":"xplyi4",
-				"urlImageM":"o0lic2",
-				"urlImageL":"xd505g",
-				"sort":"chwf79",
-				"length":529,
-				"width":914
+				"id":833,
+				"urlImageSqxs":"skjv6l",
+				"urlImageS":"smq0rh",
+				"urlImageM":"vmm16p",
+				"urlImageL":"9hm1kw",
+				"sort":"gr4ubs",
+				"length":354,
+				"width":969
 			}
 		],
 		"classicList":[
 			{
-				"id":657,
-				"idMovieDouban":927,
-				"content":"qx18wq",
-				"happenTime":762,
-				"agreeVote":858
+				"id":219,
+				"idMovieDouban":498,
+				"content":"a8hmhr",
+				"happenTime":903,
+				"agreeVote":643
 			}
 		],
 		"reviewList":[
 			{
-				"id":363,
-				"urlReview":"phv2jp",
-				"agreeVote":224,
-				"againstVote":937,
-				"createDatetime":"2020-02-16 23:04:34",
-				"title":"io16ub",
-				"content":"h5ejui"
+				"id":768,
+				"urlReview":"1ngwnz",
+				"agreeVote":252,
+				"againstVote":204,
+				"createDatetime":"2020-02-28 18:00:46",
+				"title":"nkjvlo",
+				"content":"kdag7n"
 			}
 		],
 		"awardList":[
 			{
-				"idMovieDouban":628,
-				"idAwardMovie":"dgexzu",
-				"nameZh":"jc12gl",
-				"urlAward":"ls7mde",
-				"idCelebrityDouban":81,
-				"urlCelebrityDouban":"sz9d0j",
-				"typeAward":"qjiscn",
-				"awardTh":17619,
-				"isNominated":"ldi5rg"
+				"idMovieDouban":994,
+				"idAwardMovie":"hcx88g",
+				"nameZh":"ftbeam",
+				"urlAward":"x1uka0",
+				"idCelebrityDouban":419,
+				"urlCelebrityDouban":"yo2pti",
+				"typeAward":"zh0ezi",
+				"awardTh":10182,
+				"isNominated":"zupfm4"
 			}
 		],
 		"commentList":[
 			{
-				"idMovieDouban":76,
-				"idUserDouban":"apjvqt",
-				"urlUserDouban":"jm7uqs",
-				"agreeVote":31766,
-				"createDate":"2020-02-16",
-				"content":"uf450g"
+				"idMovieDouban":916,
+				"idUserDouban":"da43ze",
+				"urlUserDouban":"wirxre",
+				"agreeVote":13861,
+				"createDate":"2020-02-28",
+				"content":"1wdmaf"
 			}
 		]
 	}
 }
 ```
 
-### 豆瓣电影图片
-**URL:** http://localhost:8080/movie/douban/images
-
-**Type:** GET
-
-
-**Content-Type:** application/x-www-form-urlencoded;charset=utf-8
-
-**Description:** 豆瓣电影图片
-
-**Request-headers:**
-
-Header | Type|Description|Required|Since
----|---|---|---|----
-Authorization|string|access_token|false|-
-
-
-**Request-parameters:**
-
-Parameter | Type|Description|Required|Since
----|---|---|---|---
-id|int64|豆瓣电影ID|true|-
-
-**Request-example:**
-```
-curl -X GET -i http://localhost:8080/movie/douban/images?id=226
-```
-**Response-fields:**
-
-Field | Type|Description|Since
----|---|---|---
-code|int32|状态码|-
-msg|string|状态信息|-
-data|object|具体结果|-
-
-**Response-example:**
-```
-{
-	"code":169,
-	"msg":"rdjs3d",
-	"data":{
-		"waring":"You may have used non-display generics."
-	}
-}
-```
-
-### 豆瓣电影热门短评
-**URL:** http://localhost:8080/movie/douban/hot_comments
-
-**Type:** GET
-
-
-**Content-Type:** application/x-www-form-urlencoded;charset=utf-8
-
-**Description:** 豆瓣电影热门短评
-
-**Request-headers:**
-
-Header | Type|Description|Required|Since
----|---|---|---|----
-Authorization|string|access_token|false|-
-
-
-**Request-parameters:**
-
-Parameter | Type|Description|Required|Since
----|---|---|---|---
-id|int64|豆瓣电影ID|true|-
-offset|int32|偏移量（默认0）|false|-
-limit|int32|限制数（默认10）|false|-
-
-**Request-example:**
-```
-curl -X GET -i http://localhost:8080/movie/douban/hot_comments?id=779&offset=0&limit=10
-```
-**Response-fields:**
-
-Field | Type|Description|Since
----|---|---|---
-code|int32|状态码|-
-msg|string|状态信息|-
-data|object|具体结果|-
-
-**Response-example:**
-```
-{
-	"code":125,
-	"msg":"ifci4o",
-	"data":{
-		"waring":"You may have used non-display generics."
-	}
-}
-```
-
-### 豆瓣电影热门影评
-**URL:** http://localhost:8080/movie/douban/hot_reviews
-
-**Type:** GET
-
-
-**Content-Type:** application/x-www-form-urlencoded;charset=utf-8
-
-**Description:** 豆瓣电影热门影评
-
-**Request-headers:**
-
-Header | Type|Description|Required|Since
----|---|---|---|----
-Authorization|string|access_token|false|-
-
-
-**Request-parameters:**
-
-Parameter | Type|Description|Required|Since
----|---|---|---|---
-id|int64|豆瓣电影ID|true|-
-offset|int32|偏移量（默认0）|false|-
-limit|int32|限制数（默认10）|false|-
-
-**Request-example:**
-```
-curl -X GET -i http://localhost:8080/movie/douban/hot_reviews?id=728&offset=0&limit=10
-```
-**Response-fields:**
-
-Field | Type|Description|Since
----|---|---|---
-code|int32|状态码|-
-msg|string|状态信息|-
-data|object|具体结果|-
-
-**Response-example:**
-```
-{
-	"code":399,
-	"msg":"gj4i26",
-	"data":{
-		"waring":"You may have used non-display generics."
-	}
-}
-```
-
-### 豆瓣电影搜索提示
-**URL:** http://localhost:8080/movie/douban/search_tips
-
-**Type:** GET
-
-
-**Content-Type:** application/x-www-form-urlencoded;charset=utf-8
-
-**Description:** 根据电影名称开头的字符串找出豆瓣电影的基本信息列表
-
-**Request-headers:**
-
-Header | Type|Description|Required|Since
----|---|---|---|----
-Authorization|string|access_token|false|-
-
-
-**Request-parameters:**
-
-Parameter | Type|Description|Required|Since
----|---|---|---|---
-keyword|string|搜索关键字|true|-
-offset|int32|偏移量（默认0）|false|-
-limit|int32|限制数（默认10）|false|-
-
-**Request-example:**
-```
-curl -X GET -i http://localhost:8080/movie/douban/search_tips?keyword=mld4ek&offset=0&limit=10
-```
-**Response-fields:**
-
-Field | Type|Description|Since
----|---|---|---
-code|int32|状态码|-
-msg|string|状态信息|-
-data|object|具体结果|-
-
-**Response-example:**
-```
-{
-	"code":256,
-	"msg":"4f2npe",
-	"data":{
-		"waring":"You may have used non-display generics."
-	}
-}
-```
-
-### 豆瓣电影搜索结果
-**URL:** http://localhost:8080/movie/douban/search_details
-
-**Type:** GET
-
-
-**Content-Type:** application/x-www-form-urlencoded;charset=utf-8
-
-**Description:** 根据电影名称字符串找出豆瓣电影的基本信息列表
-
-**Request-headers:**
-
-Header | Type|Description|Required|Since
----|---|---|---|----
-Authorization|string|access_token|false|-
-
-
-**Request-parameters:**
-
-Parameter | Type|Description|Required|Since
----|---|---|---|---
-keyword|string|搜索关键字|true|-
-offset|int32|偏移量（默认0）|false|-
-limit|int32|限制数（默认10）|false|-
-
-**Request-example:**
-```
-curl -X GET -i http://localhost:8080/movie/douban/search_details?keyword=qjnj3j&offset=0&limit=10
-```
-**Response-fields:**
-
-Field | Type|Description|Since
----|---|---|---
-code|int32|状态码|-
-msg|string|状态信息|-
-data|object|具体结果|-
-
-**Response-example:**
-```
-{
-	"code":905,
-	"msg":"eueny8",
-	"data":{
-		"waring":"You may have used non-display generics."
-	}
-}
-```
-
 ## IMDB电影API
 ### IMDB电影基础信息
-**URL:** http://localhost:8080/movie/imdb/bases
+**URL:** http://localhost:8081/v2/movie/imdb/bases
 
 **Type:** GET
 
@@ -1631,7 +2116,7 @@ id|int64|IMDB电影ID|true|-
 
 **Request-example:**
 ```
-curl -X GET -i http://localhost:8080/movie/imdb/bases?id=336
+curl -X GET -i http://localhost:8081/v2/movie/imdb/bases?id=82
 ```
 **Response-fields:**
 
@@ -1656,27 +2141,27 @@ data|object|具体结果|-
 **Response-example:**
 ```
 {
-	"code":327,
-	"msg":"4aualf",
+	"code":931,
+	"msg":"bz84sj",
 	"data":{
-		"id":"87",
-		"urlMovieImdb":"xv9qow",
-		"idTypeVideo":"jalabr",
-		"typeVideo":"ob8xy3",
-		"nameEn":"7ryu1m",
-		"startYear":16574,
-		"isAdult":"93dqvg",
-		"nameOrigin":"3pd687",
-		"runtime":17580,
-		"urlPoster":"6rn9uw",
-		"idMovieDouban":301,
-		"summary":"xcys8o"
+		"id":"38",
+		"urlMovieImdb":"gejl9f",
+		"idTypeVideo":"opltwe",
+		"typeVideo":"gi1od0",
+		"nameEn":"sycvky",
+		"startYear":5412,
+		"isAdult":"9j4iso",
+		"nameOrigin":"84crxo",
+		"runtime":30280,
+		"urlPoster":"7bcvqj",
+		"idMovieDouban":473,
+		"summary":"gayijj"
 	}
 }
 ```
 
 ### IMDB电影详情信息
-**URL:** http://localhost:8080/movie/imdb/details
+**URL:** http://localhost:8081/v2/movie/imdb/details
 
 **Type:** GET
 
@@ -1700,7 +2185,7 @@ id|int64|IMDB电影ID|true|-
 
 **Request-example:**
 ```
-curl -X GET -i http://localhost:8080/movie/imdb/details?id=591
+curl -X GET -i http://localhost:8081/v2/movie/imdb/details?id=770
 ```
 **Response-fields:**
 
@@ -1743,44 +2228,44 @@ data|object|具体结果|-
 **Response-example:**
 ```
 {
-	"code":983,
-	"msg":"bs0s2s",
+	"code":315,
+	"msg":"f4kf78",
 	"data":{
 		"base":{
-			"id":"87",
-			"urlMovieImdb":"a9blal",
-			"idTypeVideo":"awgkhb",
-			"typeVideo":"mz505k",
-			"nameEn":"526ca4",
-			"startYear":10226,
-			"isAdult":"vsrtl9",
-			"nameOrigin":"twg0r6",
-			"runtime":24608,
-			"urlPoster":"6jv08i",
-			"idMovieDouban":469,
-			"summary":"dgpebf"
+			"id":"38",
+			"urlMovieImdb":"ao4a4z",
+			"idTypeVideo":"djd49x",
+			"typeVideo":"44m42o",
+			"nameEn":"gjph4s",
+			"startYear":30289,
+			"isAdult":"pfpnz7",
+			"nameOrigin":"sgdusv",
+			"runtime":32233,
+			"urlPoster":"2a055m",
+			"idMovieDouban":788,
+			"summary":"p5ukr8"
 		},
 		"rate":{
-			"idMovieImdb":"4v2o09",
-			"imdbScore":330,
-			"imdbVote":346,
-			"tomatoScore":541,
-			"mtcScore":863
+			"idMovieImdb":"p5i226",
+			"imdbScore":573,
+			"imdbVote":930,
+			"tomatoScore":398,
+			"mtcScore":714
 		},
 		"typeList":[
-			"8y683h"
+			"qmqjy4"
 		],
 		"celebrityList":[
 			{
-				"idCelebrityImdb":"632k45",
-				"urlCelebrityImdb":"eqbkz7",
-				"idMovieImdb":"4jnk9g",
-				"idCelebrityDouban":588,
-				"urlCelebrityDouban":"rolrr6",
-				"nameEn":"d3kkf2",
-				"birthYear":3148,
-				"idProfession":"y8nwjx",
-				"profession":"woy7v6"
+				"idCelebrityImdb":"wpevhk",
+				"urlCelebrityImdb":"mio8js",
+				"idMovieImdb":"tp6ecq",
+				"idCelebrityDouban":523,
+				"urlCelebrityDouban":"iy6c81",
+				"nameEn":"8dvzma",
+				"birthYear":30787,
+				"idProfession":"ryue6m",
+				"profession":"fuxafg"
 			}
 		]
 	}
@@ -1788,8 +2273,8 @@ data|object|具体结果|-
 ```
 
 ## 电影资源API
-### 电影资源详情
-**URL:** http://localhost:8080/movie/resource/details
+### 电影资源
+**URL:** http://localhost:8081/v2/movie/resource/bases
 
 **Type:** GET
 
@@ -1810,12 +2295,10 @@ Authorization|string|access_token|false|-
 Parameter | Type|Description|Required|Since
 ---|---|---|---|---
 id|int64|豆瓣电影ID|true|-
-offset|int32|偏移量（默认0）|false|-
-limit|int32|限制数（默认10）|false|-
 
 **Request-example:**
 ```
-curl -X GET -i http://localhost:8080/movie/resource/details?id=84&offset=0&limit=10
+curl -X GET -i http://localhost:8081/v2/movie/resource/bases?id=486
 ```
 **Response-fields:**
 
@@ -1824,21 +2307,50 @@ Field | Type|Description|Since
 code|int32|状态码|-
 msg|string|状态信息|-
 data|object|具体结果|-
+└─id|int64|电影资源ID|-
+└─idMovieDouban|int64|豆瓣电影ID 0-未匹配 1-已匹配|-
+└─urlMovieDouban|string|豆瓣电影链接|-
+└─idMovieImdb|int64|IMDB电影ID 0-未匹配 1-已匹配|-
+└─urlMovieImdb|string|IMDB电影链接|-
+└─idWebsiteResource|int16|电影资源网站ID ID<100-正版 ID>100-盗版|-
+└─websiteResource|string|电影资源网站名称|-
+└─urlWebsiteResource|string|电影资源网站官网链接|-
+└─idTypeResource|int16|电影资源类型ID ID<100-在线 ID>100-离线|-
+└─typeResource|string|电影资源类型|-
+└─nameZh|string|资源中文名|-
+└─createYear|int16|电影年代 /year|-
+└─nameOrigin|string|资源原始名|-
+└─urlResource|string|资源链接|-
 
 **Response-example:**
 ```
 {
-	"code":213,
-	"msg":"dq5613",
-	"data":{
-		"waring":"You may have used non-display generics."
-	}
+	"code":134,
+	"msg":"gvok6j",
+	"data":[
+		{
+			"id":868,
+			"idMovieDouban":796,
+			"urlMovieDouban":"ck0uaa",
+			"idMovieImdb":351,
+			"urlMovieImdb":"axjlnm",
+			"idWebsiteResource":9792,
+			"websiteResource":"3p63ix",
+			"urlWebsiteResource":"z8ryz3",
+			"idTypeResource":1687,
+			"typeResource":"wh14qm",
+			"nameZh":"wgam06",
+			"createYear":30673,
+			"nameOrigin":"lh9a9s",
+			"urlResource":"f3sfbb"
+		}
+	]
 }
 ```
 
 ## 电影API
 ### 电影基础信息
-**URL:** http://localhost:8080/movie/bases
+**URL:** http://localhost:8081/v2/movie/bases
 
 **Type:** GET
 
@@ -1862,7 +2374,7 @@ id|int64|豆瓣电影ID|true|-
 
 **Request-example:**
 ```
-curl -X GET -i http://localhost:8080/movie/bases?id=713
+curl -X GET -i http://localhost:8081/v2/movie/bases?id=86
 ```
 **Response-fields:**
 
@@ -1903,45 +2415,45 @@ data|object|具体结果|-
 **Response-example:**
 ```
 {
-	"code":673,
-	"msg":"imy5wo",
+	"code":394,
+	"msg":"7nba6k",
 	"data":{
 		"douban":{
-			"id":812,
-			"urlMovieDouban":"7t3351",
-			"idTypeVideo":"kvhwj3",
-			"typeVideo":"sooa0l",
-			"idMovieImdb":"3l3qj5",
-			"urlMovieImdb":"mb3lji",
-			"startYear":18359,
-			"nameZh":"xdbxpv",
-			"nameOrigin":"uidsg0",
-			"runtime":31764,
-			"urlPoster":"umyh0n",
-			"haveSeen":276,
-			"wannaSee":641,
-			"summary":"7io7yn"
+			"id":908,
+			"urlMovieDouban":"d06qwr",
+			"idTypeVideo":"w9wyh3",
+			"typeVideo":"id9tef",
+			"idMovieImdb":"544smy",
+			"urlMovieImdb":"t7q5w5",
+			"startYear":5858,
+			"nameZh":"uu0xpb",
+			"nameOrigin":"jg0fz3",
+			"runtime":20483,
+			"urlPoster":"hjv18x",
+			"haveSeen":548,
+			"wannaSee":441,
+			"summary":"zo1ejb"
 		},
 		"imdb":{
-			"id":"87",
-			"urlMovieImdb":"8o6mw1",
-			"idTypeVideo":"t5m1t4",
-			"typeVideo":"jk5oq6",
-			"nameEn":"9uzi5z",
-			"startYear":6931,
-			"isAdult":"cwbl9y",
-			"nameOrigin":"twsvm9",
-			"runtime":32266,
-			"urlPoster":"3vcl8u",
-			"idMovieDouban":36,
-			"summary":"5ya42q"
+			"id":"38",
+			"urlMovieImdb":"ktxklj",
+			"idTypeVideo":"lqbfj0",
+			"typeVideo":"axkjqz",
+			"nameEn":"hgkowb",
+			"startYear":19751,
+			"isAdult":"o18s2h",
+			"nameOrigin":"w96dzh",
+			"runtime":31484,
+			"urlPoster":"h5a7rw",
+			"idMovieDouban":477,
+			"summary":"qntl92"
 		}
 	}
 }
 ```
 
 ### 电影详情信息
-**URL:** http://localhost:8080/movie/details
+**URL:** http://localhost:8081/v2/movie/details
 
 **Type:** GET
 
@@ -1965,7 +2477,7 @@ id|int64|豆瓣电影ID|true|-
 
 **Request-example:**
 ```
-curl -X GET -i http://localhost:8080/movie/details?id=365
+curl -X GET -i http://localhost:8081/v2/movie/details?id=693
 ```
 **Response-fields:**
 
@@ -2096,162 +2608,162 @@ data|object|具体结果|-
 **Response-example:**
 ```
 {
-	"code":79,
-	"msg":"el430l",
+	"code":446,
+	"msg":"clp044",
 	"data":{
 		"douban":{
 			"base":{
-				"id":141,
-				"urlMovieDouban":"cqrz7c",
-				"idTypeVideo":"4hopu5",
-				"typeVideo":"y22xof",
-				"idMovieImdb":"h04rgh",
-				"urlMovieImdb":"lohngz",
-				"startYear":27457,
-				"nameZh":"16q6jt",
-				"nameOrigin":"3o34v8",
-				"runtime":13485,
-				"urlPoster":"s8ec97",
-				"haveSeen":626,
-				"wannaSee":465,
-				"summary":"auwcax"
+				"id":650,
+				"urlMovieDouban":"fkn88g",
+				"idTypeVideo":"bg7jme",
+				"typeVideo":"cxm5u9",
+				"idMovieImdb":"hq5afe",
+				"urlMovieImdb":"7kw51a",
+				"startYear":8759,
+				"nameZh":"siel9e",
+				"nameOrigin":"lth1bp",
+				"runtime":28089,
+				"urlPoster":"eal127",
+				"haveSeen":607,
+				"wannaSee":366,
+				"summary":"m22v6k"
 			},
 			"rate":{
-				"id":327,
-				"score":842,
-				"vote":814,
-				"score5":151,
-				"score4":862,
-				"score3":731,
-				"score2":40,
-				"score1":192
+				"id":401,
+				"score":291,
+				"vote":542,
+				"score5":718,
+				"score4":325,
+				"score3":738,
+				"score2":975,
+				"score1":36
 			},
 			"aliasList":[
-				"x2uzol"
+				"w7nalr"
 			],
 			"typeList":[
-				"64w4yz"
+				"pc5jfm"
 			],
 			"tagList":[
-				"h705dn"
+				"5q1185"
 			],
 			"celebrityList":[
 				{
-					"id":638,
-					"urlCelebrityDouban":"b1xe8a",
-					"idCelebrityImdb":"jp70gu",
-					"urlCelebrityImdb":"apoieb",
-					"nameZh":"2d6txk",
-					"nameOrigin":"kq6m4p",
-					"sex":"svebby",
-					"birthDate":"2020-02-16",
-					"urlPortrait":"ytjd7u",
-					"summary":"dfx2oe",
-					"idProfession":"mey6dd",
-					"profession":"mndqyb",
-					"sort":5815
+					"id":626,
+					"urlCelebrityDouban":"yl7soq",
+					"idCelebrityImdb":"whmgv9",
+					"urlCelebrityImdb":"6sg2ll",
+					"nameZh":"e1brrw",
+					"nameOrigin":"8co3t1",
+					"sex":"kqlae0",
+					"birthDate":"2020-02-28",
+					"urlPortrait":"k7fjhf",
+					"summary":"e1kre8",
+					"idProfession":"2jy352",
+					"profession":"45hjli",
+					"sort":32207
 				}
 			],
 			"trailerList":[
 				{
-					"id":850,
-					"idMovieDouban":227,
-					"urlTrailer":"kzrvpv",
-					"urlVideo":"15feq0"
+					"id":523,
+					"idMovieDouban":188,
+					"urlTrailer":"c8rr88",
+					"urlVideo":"p8j0zp"
 				}
 			],
 			"imageList":[
 				{
-					"id":386,
-					"urlImageSqxs":"0kntas",
-					"urlImageS":"xtsaa2",
-					"urlImageM":"3fimyy",
-					"urlImageL":"ziicvw",
-					"sort":"611ot9",
-					"length":188,
-					"width":429
+					"id":611,
+					"urlImageSqxs":"6skdww",
+					"urlImageS":"na8ez9",
+					"urlImageM":"8q3j4j",
+					"urlImageL":"ekzpkg",
+					"sort":"81ppwi",
+					"length":214,
+					"width":295
 				}
 			],
 			"classicList":[
 				{
-					"id":956,
-					"idMovieDouban":425,
-					"content":"uft502",
-					"happenTime":498,
-					"agreeVote":423
+					"id":708,
+					"idMovieDouban":654,
+					"content":"rscss7",
+					"happenTime":200,
+					"agreeVote":830
 				}
 			],
 			"reviewList":[
 				{
-					"id":745,
-					"urlReview":"k30i8i",
-					"agreeVote":541,
-					"againstVote":304,
-					"createDatetime":"2020-02-16 23:04:34",
-					"title":"lsy1zn",
-					"content":"xn22y2"
+					"id":753,
+					"urlReview":"ludvj9",
+					"agreeVote":433,
+					"againstVote":250,
+					"createDatetime":"2020-02-28 18:00:46",
+					"title":"oxsfus",
+					"content":"9ekh6e"
 				}
 			],
 			"awardList":[
 				{
-					"idMovieDouban":307,
-					"idAwardMovie":"8ra0d6",
-					"nameZh":"uo8a33",
-					"urlAward":"jeqpny",
-					"idCelebrityDouban":0,
-					"urlCelebrityDouban":"x32ce3",
-					"typeAward":"43j6xs",
-					"awardTh":7395,
-					"isNominated":"pci8dy"
+					"idMovieDouban":679,
+					"idAwardMovie":"6dpa5j",
+					"nameZh":"e893dp",
+					"urlAward":"m899i6",
+					"idCelebrityDouban":254,
+					"urlCelebrityDouban":"9ys534",
+					"typeAward":"pdtaww",
+					"awardTh":28744,
+					"isNominated":"4ncmkd"
 				}
 			],
 			"commentList":[
 				{
-					"idMovieDouban":121,
-					"idUserDouban":"35lzig",
-					"urlUserDouban":"0r0dt3",
-					"agreeVote":15611,
-					"createDate":"2020-02-16",
-					"content":"8shse8"
+					"idMovieDouban":435,
+					"idUserDouban":"fb4rwh",
+					"urlUserDouban":"bll67z",
+					"agreeVote":372,
+					"createDate":"2020-02-28",
+					"content":"fh2w8s"
 				}
 			]
 		},
 		"imdb":{
 			"base":{
-				"id":"87",
-				"urlMovieImdb":"sd234x",
-				"idTypeVideo":"apprdm",
-				"typeVideo":"8pym36",
-				"nameEn":"zvsehf",
-				"startYear":10281,
-				"isAdult":"drr257",
-				"nameOrigin":"fjuw7r",
-				"runtime":26423,
-				"urlPoster":"fcee5h",
-				"idMovieDouban":38,
-				"summary":"409ipy"
+				"id":"38",
+				"urlMovieImdb":"4ws9y2",
+				"idTypeVideo":"btsudu",
+				"typeVideo":"oqe2fb",
+				"nameEn":"61y74m",
+				"startYear":11352,
+				"isAdult":"ocmtc0",
+				"nameOrigin":"qygib0",
+				"runtime":564,
+				"urlPoster":"jv7vuh",
+				"idMovieDouban":939,
+				"summary":"3cl1mm"
 			},
 			"rate":{
-				"idMovieImdb":"y57z7m",
-				"imdbScore":706,
-				"imdbVote":707,
-				"tomatoScore":909,
-				"mtcScore":763
+				"idMovieImdb":"4xbmkf",
+				"imdbScore":61,
+				"imdbVote":70,
+				"tomatoScore":679,
+				"mtcScore":393
 			},
 			"typeList":[
-				"jb205e"
+				"jsrgq0"
 			],
 			"celebrityList":[
 				{
-					"idCelebrityImdb":"qsjz7y",
-					"urlCelebrityImdb":"bkvrdf",
-					"idMovieImdb":"mutvdz",
-					"idCelebrityDouban":980,
-					"urlCelebrityDouban":"ia5xsh",
-					"nameEn":"qshiva",
-					"birthYear":4285,
-					"idProfession":"fztab1",
-					"profession":"w41hne"
+					"idCelebrityImdb":"fqrv5n",
+					"urlCelebrityImdb":"sqcqpo",
+					"idMovieImdb":"yzc9i6",
+					"idCelebrityDouban":420,
+					"urlCelebrityDouban":"vd46ct",
+					"nameEn":"0xgxgq",
+					"birthYear":16110,
+					"idProfession":"p7ohsz",
+					"profession":"339wo1"
 				}
 			]
 		}
@@ -2259,9 +2771,344 @@ data|object|具体结果|-
 }
 ```
 
+## 电影场景API
+### 电影场景简略信息
+**URL:** http://localhost:8081/v2/scene/fotoplace/bases
+
+**Type:** GET
+
+
+**Content-Type:** application/x-www-form-urlencoded;charset=utf-8
+
+**Description:** 包括场景电影基础信息，分布图，场景地点简略信息，场景地点图等
+
+**Request-headers:**
+
+Header | Type|Description|Required|Since
+---|---|---|---|----
+Authorization|string|access_token|false|-
+
+
+**Request-parameters:**
+
+Parameter | Type|Description|Required|Since
+---|---|---|---|---
+id|int64|豆瓣电影ID|true|-
+
+**Request-example:**
+```
+curl -X GET -i http://localhost:8081/v2/scene/fotoplace/bases?id=235
+```
+**Response-fields:**
+
+Field | Type|Description|Since
+---|---|---|---
+code|int32|状态码|-
+msg|string|状态信息|-
+data|object|具体结果|-
+└─base|object|场景电影基础信息|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─id|int64|场景电影ID|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─urlMovieScene|string|场景电影链接|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─idMovieDouban|int64|豆瓣电影ID 0-未匹配 1-已匹配|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─urlMovieDouban|string|豆瓣电影链接|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─nameZh|string|场景电影中文名|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─nameEn|string|场景电影英文名|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─startYear|int16|上映时间 /year|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─description|string|场景电影拍摄地点大致描述|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─urlMap|string|场景电影地点分布图链接|-
+└─sceneList|array|场景地点简略信息|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─base|object|场景基础信息|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─id|int64|场景ID|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─idMovieScene|int64|场景电影ID|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─idPlaceScene|int64|地点ID|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─nameZh|string|场景中文名|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─happenTime|int32|场景发生在电影中的时间 /s|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─place|object|场景地点简略信息|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─base|object|场景地点基础信息|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─id|int64|场景地点ID|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─longitude|number|经度|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─latitude|number|纬度|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─nameZh|string|中文名|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─nameEn|string|英文名|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─nameOther|string|其他语言名|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─alias|string|别名|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─addressZh|string|中文地址|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─addressEn|string|英文地址|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─description|string|地点描述|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─areaZh|string|区域中文|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─areaEn|string|区域英文|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─phone|string|电话号码|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─urlPoster|string|地点海报图链接|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─urlEarth|string|地点地球位置图链接|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─urlSatellite|string|地点卫星图链接|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─urlMap|string|地点地图|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─imageList|array|场景地点图片列表|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─id|int64|场景地点图片ID|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─idPlaceScene|int64|场景地点ID|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─urlImage|string|图片链接|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─description|string|图片描述|-
+
+**Response-example:**
+```
+{
+	"code":81,
+	"msg":"2a99yb",
+	"data":{
+		"base":{
+			"id":661,
+			"urlMovieScene":"sirl4a",
+			"idMovieDouban":234,
+			"urlMovieDouban":"x0r74k",
+			"nameZh":"ys8wd9",
+			"nameEn":"2i5t44",
+			"startYear":7762,
+			"description":"xjh5dp",
+			"urlMap":"ezmub2"
+		},
+		"sceneList":[
+			{
+				"base":{
+					"id":795,
+					"idMovieScene":167,
+					"idPlaceScene":945,
+					"nameZh":"e02xbk",
+					"happenTime":154
+				},
+				"place":{
+					"base":{
+						"id":54,
+						"longitude":127,
+						"latitude":379,
+						"nameZh":"1aqv9r",
+						"nameEn":"5fho6v",
+						"nameOther":"8m0gpo",
+						"alias":"ips63c",
+						"addressZh":"mmgpoh",
+						"addressEn":"t3na17",
+						"description":"4qq8f8",
+						"areaZh":"5sal2q",
+						"areaEn":"gslpfw",
+						"phone":"15660107066",
+						"urlPoster":"96za2j",
+						"urlEarth":"l6ae53",
+						"urlSatellite":"so0bjn",
+						"urlMap":"1iukeu"
+					},
+					"imageList":[
+						{
+							"id":423,
+							"idPlaceScene":57,
+							"urlImage":"wrvphh",
+							"description":"l0rjku"
+						}
+					]
+				}
+			}
+		]
+	}
+}
+```
+
+### 电影场景详细信息
+**URL:** http://localhost:8081/v2/scene/fotoplace/details
+
+**Type:** GET
+
+
+**Content-Type:** application/x-www-form-urlencoded;charset=utf-8
+
+**Description:** 包括场景电影基础信息，分布图，场景详细信息,场景地点详细信息，场景图片等
+
+**Request-headers:**
+
+Header | Type|Description|Required|Since
+---|---|---|---|----
+Authorization|string|access_token|false|-
+
+
+**Request-parameters:**
+
+Parameter | Type|Description|Required|Since
+---|---|---|---|---
+id|int64|豆瓣电影ID|true|-
+
+**Request-example:**
+```
+curl -X GET -i http://localhost:8081/v2/scene/fotoplace/details?id=904
+```
+**Response-fields:**
+
+Field | Type|Description|Since
+---|---|---|---
+code|int32|状态码|-
+msg|string|状态信息|-
+data|object|具体结果|-
+└─base|object|场景电影基础信息|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─id|int64|场景电影ID|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─urlMovieScene|string|场景电影链接|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─idMovieDouban|int64|豆瓣电影ID 0-未匹配 1-已匹配|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─urlMovieDouban|string|豆瓣电影链接|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─nameZh|string|场景电影中文名|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─nameEn|string|场景电影英文名|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─startYear|int16|上映时间 /year|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─description|string|场景电影拍摄地点大致描述|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─urlMap|string|场景电影地点分布图链接|-
+└─sceneList|array|场景详细信息列表|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─base|object|场景基础信息|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─id|int64|场景ID|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─idMovieScene|int64|场景电影ID|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─urlMovieScene|string|场景电影链接|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─idPlaceScene|int64|地点ID|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─nameZh|string|场景中文名|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─happenTime|int32|场景发生在电影中的时间 /s|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─sceneDetailList|array|场景详情详细信息列表|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─base|object|场景详情基础信息|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─id|int64|场景详情ID|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─idScene|int64|场景ID|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─idMovieScene|int64|场景电影ID|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─happenTime|int32|场景发生在电影中的时间 /s|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─description|string|场景描述|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─imageList|array|场景详情图片列表|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─id|int64|场景详情剧照ID|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─idSceneDetail|int64|场景详情ID|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─urlImage|string|图片链接|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─celebrityList|array|场景详情的相关场景影人列表|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─id|int64|场景影人ID|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─idCelebrityDouban|int64|豆瓣影人ID 0-未匹配 1-已匹配|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─urlCelebrityDouban|string|豆瓣影人链接|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─nameZh|string|场景影人中文名|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─nameEn|string|场景影人英文名|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─idSceneDetail|int64|对应的场景详情ID|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─place|object|场景地点详细信息|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─base|object|场景地点基础信息|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─id|int64|场景地点ID|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─longitude|number|经度|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─latitude|number|纬度|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─nameZh|string|中文名|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─nameEn|string|英文名|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─nameOther|string|其他语言名|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─alias|string|别名|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─addressZh|string|中文地址|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─addressEn|string|英文地址|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─description|string|地点描述|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─areaZh|string|区域中文|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─areaEn|string|区域英文|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─phone|string|电话号码|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─urlPoster|string|地点海报图链接|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─urlEarth|string|地点地球位置图链接|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─urlSatellite|string|地点卫星图链接|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─urlMap|string|地点地图|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─imageList|array|场景地点图片列表|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─id|int64|场景地点图片ID|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─idPlaceScene|int64|场景地点ID|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─urlImage|string|图片链接|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─description|string|图片描述|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─typeList|array|场景地点-类型列表|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─continent|string|场景地点 洲|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─country|string|场景地点 国家|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─city|string|场景地点 城市|-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─state|string|场景地点 州/省|-
+
+**Response-example:**
+```
+{
+	"code":654,
+	"msg":"bvl5ho",
+	"data":{
+		"base":{
+			"id":415,
+			"urlMovieScene":"93lrx5",
+			"idMovieDouban":989,
+			"urlMovieDouban":"pp8s1l",
+			"nameZh":"4iv5b2",
+			"nameEn":"w36ifi",
+			"startYear":1163,
+			"description":"tow4ik",
+			"urlMap":"lvlhb7"
+		},
+		"sceneList":[
+			{
+				"base":{
+					"id":751,
+					"idMovieScene":816,
+					"urlMovieScene":"ropj10",
+					"idPlaceScene":56,
+					"nameZh":"z521zv",
+					"happenTime":270
+				},
+				"sceneDetailList":[
+					{
+						"base":{
+							"id":25,
+							"idScene":767,
+							"idMovieScene":682,
+							"happenTime":262,
+							"description":"4p7r2c"
+						},
+						"imageList":[
+							{
+								"id":740,
+								"idSceneDetail":152,
+								"urlImage":"vyez6e"
+							}
+						],
+						"celebrityList":[
+							{
+								"id":180,
+								"idCelebrityDouban":510,
+								"urlCelebrityDouban":"dqxbr0",
+								"nameZh":"sbo8m2",
+								"nameEn":"djawmq",
+								"idSceneDetail":425
+							}
+						]
+					}
+				],
+				"place":{
+					"base":{
+						"id":861,
+						"longitude":994,
+						"latitude":447,
+						"nameZh":"ki50ng",
+						"nameEn":"i4sm41",
+						"nameOther":"jebrq5",
+						"alias":"gsagci",
+						"addressZh":"9zgq4l",
+						"addressEn":"w4vsku",
+						"description":"mwhk94",
+						"areaZh":"zyw3z3",
+						"areaEn":"fl1cdj",
+						"phone":"15660107066",
+						"urlPoster":"o50lpg",
+						"urlEarth":"ivulkn",
+						"urlSatellite":"zzq73f",
+						"urlMap":"j2ibno"
+					},
+					"imageList":[
+						{
+							"id":106,
+							"idPlaceScene":563,
+							"urlImage":"03yj06",
+							"description":"lpb1iu"
+						}
+					],
+					"typeList":[
+						"cfmq2t"
+					],
+					"continent":"zw5b90",
+					"country":"s1c6ys",
+					"city":"gzoz4s",
+					"state":"mlv5as"
+				}
+			}
+		]
+	}
+}
+```
+
 ## 普通用户相关API
 ### 普通登录
-**URL:** http://localhost:8080/user/login
+**URL:** http://localhost:8081/v2/user/login
 
 **Type:** POST
 
@@ -2286,7 +3133,7 @@ password|string|密码|true|-
 
 **Request-example:**
 ```
-curl -X POST -i http://localhost:8080/user/login  --data 'email=鹭洋.姚@hotmail.com&password=shhot1'
+curl -X POST -i http://localhost:8081/v2/user/login  --data 'email=金鑫.韦@yahoo.com&password=qecksa'
 ```
 **Response-fields:**
 
@@ -2299,8 +3146,8 @@ data|object|具体结果|-
 **Response-example:**
 ```
 {
-	"code":318,
-	"msg":"3thz68",
+	"code":531,
+	"msg":"zfxx1x",
 	"data":{
 		"waring":"You may have used non-display generics."
 	}
@@ -2308,7 +3155,7 @@ data|object|具体结果|-
 ```
 
 ### github 第三方登录
-**URL:** http://localhost:8080/user/github_login
+**URL:** http://localhost:8081/v2/user/github_login
 
 **Type:** GET
 
@@ -2326,7 +3173,7 @@ Authorization|string|access_token|false|-
 
 **Request-example:**
 ```
-curl -X GET -i http://localhost:8080/user/github_login
+curl -X GET -i http://localhost:8081/v2/user/github_login
 ```
 
 **Response-example:**
@@ -2335,7 +3182,7 @@ This api return nothing.
 ```
 
 ### github 第三方登录 回调方法
-**URL:** http://localhost:8080/user/github_callback
+**URL:** http://localhost:8081/v2/user/github_callback
 
 **Type:** GET
 
@@ -2360,7 +3207,7 @@ state|string|github_login传入的state|true|-
 
 **Request-example:**
 ```
-curl -X GET -i http://localhost:8080/user/github_callback?code=33927&state=ndm5oe
+curl -X GET -i http://localhost:8081/v2/user/github_callback?code=42124&state=srdp5f
 ```
 **Response-fields:**
 
@@ -2373,8 +3220,8 @@ data|object|具体结果|-
 **Response-example:**
 ```
 {
-	"code":516,
-	"msg":"i5kpty",
+	"code":245,
+	"msg":"1skoen",
 	"data":{
 		"waring":"You may have used non-display generics."
 	}
@@ -2382,7 +3229,7 @@ data|object|具体结果|-
 ```
 
 ### 用户注册
-**URL:** http://localhost:8080/user/register
+**URL:** http://localhost:8081/v2/user/register
 
 **Type:** POST
 
@@ -2408,7 +3255,7 @@ password|string|密码|true|-
 
 **Request-example:**
 ```
-curl -X POST -i http://localhost:8080/user/register  --data 'id=&email=鹭洋.姚@hotmail.com&password=c02nrd'
+curl -X POST -i http://localhost:8081/v2/user/register  --data 'id=&email=金鑫.韦@yahoo.com&password=9wq1qm'
 ```
 **Response-fields:**
 
@@ -2421,8 +3268,8 @@ data|object|具体结果|-
 **Response-example:**
 ```
 {
-	"code":819,
-	"msg":"cgfh7c",
+	"code":233,
+	"msg":"ao34ih",
 	"data":{
 		"waring":"You may have used non-display generics."
 	}
@@ -2430,7 +3277,7 @@ data|object|具体结果|-
 ```
 
 ### 用户信息
-**URL:** http://localhost:8080/user/user_info
+**URL:** http://localhost:8081/v2/user/user_info
 
 **Type:** GET
 
@@ -2454,7 +3301,7 @@ name|string|No comments found.|false|-
 
 **Request-example:**
 ```
-curl -X GET -i http://localhost:8080/user/user_info
+curl -X GET -i http://localhost:8081/v2/user/user_info
 ```
 **Response-fields:**
 
@@ -2467,8 +3314,8 @@ data|object|具体结果|-
 **Response-example:**
 ```
 {
-	"code":667,
-	"msg":"uhexwe",
+	"code":42,
+	"msg":"5zbuo6",
 	"data":{
 		"waring":"You may have used non-display generics."
 	}
@@ -2476,7 +3323,7 @@ data|object|具体结果|-
 ```
 
 ### 更新豆瓣用户ID
-**URL:** http://localhost:8080/user/update_id
+**URL:** http://localhost:8081/v2/user/update_id
 
 **Type:** PUT
 
@@ -2500,7 +3347,7 @@ id|string|豆瓣用户ID|true|-
 
 **Request-example:**
 ```
-curl -X PUT -i http://localhost:8080/user/update_id  --data 'id=87'
+curl -X PUT -i http://localhost:8081/v2/user/update_id  --data 'id=38'
 ```
 **Response-fields:**
 
@@ -2513,8 +3360,8 @@ data|object|具体结果|-
 **Response-example:**
 ```
 {
-	"code":655,
-	"msg":"d8ancw",
+	"code":290,
+	"msg":"mexrxa",
 	"data":{
 		"waring":"You may have used non-display generics."
 	}
@@ -2523,7 +3370,7 @@ data|object|具体结果|-
 
 ## ROOT用户相关API
 ### 普通用户列表
-**URL:** http://localhost:8080/root/users_list
+**URL:** http://localhost:8081/v2/root/users_list
 
 **Type:** GET
 
@@ -2548,7 +3395,7 @@ limit|int32|限制数（默认10）|false|-
 
 **Request-example:**
 ```
-curl -X GET -i http://localhost:8080/root/users_list?offset=0&limit=10
+curl -X GET -i http://localhost:8081/v2/root/users_list?offset=0&limit=10
 ```
 **Response-fields:**
 
@@ -2561,8 +3408,8 @@ data|object|具体结果|-
 **Response-example:**
 ```
 {
-	"code":658,
-	"msg":"8bbbbo",
+	"code":367,
+	"msg":"6bcjrn",
 	"data":{
 		"waring":"You may have used non-display generics."
 	}

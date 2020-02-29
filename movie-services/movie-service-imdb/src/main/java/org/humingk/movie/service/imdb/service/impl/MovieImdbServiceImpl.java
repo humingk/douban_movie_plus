@@ -63,12 +63,8 @@ public class MovieImdbServiceImpl implements MovieImdbService {
     List<MovieImdb> movieImdbList = movieImdbMapper.selectByExample(movieImdbExample);
     return movieImdbList.size() != 1 ? null : getMovieImdbDetailsByMovieImdb(movieImdbList.get(0));
   }
-  /**
-   * 根据IMDB电影基础信息获取IMDB电影详细信息
-   *
-   * @param movieImdb IMDB电影基础信息
-   * @return
-   */
+
+  @Override
   public MovieImdbDetailsDto getMovieImdbDetailsByMovieImdb(MovieImdb movieImdb) {
     /** IMDB电影评分信息（包括烂番茄、MTC） */
     RateImdb rateImdb = rateImdbMapper.selectByPrimaryKey(movieImdb.getId());

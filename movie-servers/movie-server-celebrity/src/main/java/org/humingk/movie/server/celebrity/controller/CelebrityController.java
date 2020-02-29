@@ -9,9 +9,11 @@ import org.humingk.movie.common.entity.Result;
 import org.humingk.movie.service.douban.service.CelebrityDoubanService;
 import org.humingk.movie.service.imdb.service.CelebrityImdbService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.PositiveOrZero;
 
 /** @author humingk */
 @RestController
@@ -26,7 +28,7 @@ public class CelebrityController implements CelebrityApi {
   @Autowired private CelebrityDetailsVoConverter celebrityDetailsVoConverter;
 
   @Override
-  public Result<CelebrityVo> bases(@NotNull Long id) {
+  public Result<CelebrityVo> bases(@RequestParam("id") @NotNull Long id) {
     return Result.success(
         celebrityVoConverter.to(
             celebrityDoubanService.getCelebrityDoubanByCelebrityDoubanId(id),
@@ -34,10 +36,15 @@ public class CelebrityController implements CelebrityApi {
   }
 
   @Override
-  public Result<CelebrityDetailsVo> details(@NotNull Long id) {
+  public Result<CelebrityDetailsVo> details(
+      @RequestParam("id") @NotNull Long id,
+      @RequestParam(value = "doubanLimit", required = false, defaultValue = "10") @PositiveOrZero
+          Integer doubanLimit,
+      @RequestParam(value = "imdbLimit", required = false, defaultValue = "10") @PositiveOrZero
+          Integer imdbLimit) {
     return Result.success(
         celebrityDetailsVoConverter.to(
-            celebrityDoubanService.getCelebrityDoubanDetailsByCelebrityDoubanId(id),
-            celebrityImdbService.getCelebrityImdbDetailsByCelebrityDoubanId(id)));
+            celebrityDoubanService.getCelebrityDoubanDetailsByCelebrityDoubanId(id, doubanLimit),
+            celebrityImdbService.getCelebrityImdbDetailsByCelebrityDoubanId(id, imdbLimit)));
   }
 }

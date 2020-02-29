@@ -8,9 +8,11 @@ import org.humingk.movie.api.common.vo.celebrity.CelebrityImdbVo;
 import org.humingk.movie.common.entity.Result;
 import org.humingk.movie.service.imdb.service.CelebrityImdbService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.PositiveOrZero;
 
 /** @author humingk */
 @RestController
@@ -23,15 +25,18 @@ public class ImdbController implements ImdbApi {
   @Autowired private CelebrityImdbDetailsVoConverter celebrityImdbDetailsVoConverter;
 
   @Override
-  public Result<CelebrityImdbVo> bases(@NotNull Long id) {
+  public Result<CelebrityImdbVo> bases(@RequestParam("id") @NotNull Long id) {
     return Result.success(
         celebrityImdbVoConverter.to(celebrityImdbService.getCelebrityImdbByCelebrityImdbId(id)));
   }
 
   @Override
-  public Result<CelebrityImdbDetailsVo> details(@NotNull Long id) {
+  public Result<CelebrityImdbDetailsVo> details(
+      @RequestParam("id") @NotNull Long id,
+      @RequestParam(value = "limit", required = false, defaultValue = "10") @PositiveOrZero
+          Integer limit) {
     return Result.success(
         celebrityImdbDetailsVoConverter.to(
-            celebrityImdbService.getCelebrityImdbDetailsByCelebrityImdbId(id)));
+            celebrityImdbService.getCelebrityImdbDetailsByCelebrityImdbId(id, limit)));
   }
 }

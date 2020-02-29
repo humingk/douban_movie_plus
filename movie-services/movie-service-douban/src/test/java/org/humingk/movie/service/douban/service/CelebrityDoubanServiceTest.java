@@ -6,8 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import static org.junit.Assert.*;
-
 @SpringBootTest
 @RunWith(SpringJUnit4ClassRunner.class)
 public class CelebrityDoubanServiceTest {
@@ -22,7 +20,7 @@ public class CelebrityDoubanServiceTest {
   @Test
   public void getCelebrityDoubanDetailsByCelebrityDoubanId() {
     System.out.println(
-        celebrityDoubanService.getCelebrityDoubanDetailsByCelebrityDoubanId(1054439));
+        celebrityDoubanService.getCelebrityDoubanDetailsByCelebrityDoubanId(1054439, 10));
   }
 
   @Test

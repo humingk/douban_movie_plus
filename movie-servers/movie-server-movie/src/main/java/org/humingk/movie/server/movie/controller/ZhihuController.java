@@ -6,6 +6,7 @@ import org.humingk.movie.api.movie.ZhihuApi;
 import org.humingk.movie.common.entity.Result;
 import org.humingk.movie.service.zhihu.service.ZhihuService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.constraints.NotNull;
@@ -17,7 +18,7 @@ public class ZhihuController implements ZhihuApi {
   @Autowired private ZhihuVoConverter zhihuVoConverter;
 
   @Override
-  public Result<ZhihuVo> bases(@NotNull Long id) {
+  public Result<ZhihuVo> bases(@RequestParam("id") @NotNull Long id) {
     return Result.success(zhihuVoConverter.to(zhihuService.getMovieZhihuByMovieDoubanId(id)));
   }
 }

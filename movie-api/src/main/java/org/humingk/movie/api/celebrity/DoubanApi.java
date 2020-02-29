@@ -39,11 +39,15 @@ public interface DoubanApi {
    * 豆瓣影人详细信息
    *
    * @param id 豆瓣影人ID
+   * @param limit 相关电影限制数(默认10)
    * @return
    * @apiNote 包括影人基础信息，别称，图片，相关的豆瓣电影，获得的奖项
    */
   @RequestMapping(value = "/celebrity/douban/details", method = RequestMethod.GET)
-  Result<CelebrityDoubanDetailsVo> details(@RequestParam("id") @NotNull Long id);
+  Result<CelebrityDoubanDetailsVo> details(
+      @RequestParam("id") @NotNull Long id,
+      @RequestParam(value = "limit", required = false, defaultValue = "10") @PositiveOrZero
+          Integer limit);
 
   // -----------------------
 

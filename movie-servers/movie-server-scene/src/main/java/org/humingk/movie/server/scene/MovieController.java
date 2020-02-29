@@ -8,6 +8,7 @@ import org.humingk.movie.api.scene.MovieApi;
 import org.humingk.movie.common.entity.Result;
 import org.humingk.movie.service.scene.service.SceneMovieService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.constraints.NotNull;
@@ -21,13 +22,13 @@ public class MovieController implements MovieApi {
   @Autowired private MovieSceneAllVoConverter movieSceneAllVoConverter;
 
   @Override
-  public Result<MovieSceneBriefVo> bases(@NotNull Long id) {
+  public Result<MovieSceneBriefVo> bases(@RequestParam("id") @NotNull Long id) {
     return Result.success(
         movieSceneBriefVoConverter.to(sceneMovieService.getMovieSceneBriefByMovieDoubanId(id)));
   }
 
   @Override
-  public Result<MovieSceneAllVo> details(@NotNull Long id) {
+  public Result<MovieSceneAllVo> details(@RequestParam("id") @NotNull Long id) {
     return Result.success(
         movieSceneAllVoConverter.to(sceneMovieService.getMovieSceneAllByMovieDoubanId(id)));
   }

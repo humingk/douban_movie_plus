@@ -13,8 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -52,26 +50,14 @@ public class SceneMovieServiceImpl implements SceneMovieService {
 
   @Autowired private MovieSceneBriefDtoConverter movieSceneBriefDtoConverter;
 
-  /**
-   * 获取场景电影信息
-   *
-   * @param id 豆瓣电影ID
-   * @return
-   */
-  @NotNull(message = "此豆瓣电影ID暂无对应场景电影")
+  @Override
   public MovieScene getMovieSceneByMovieDoubanId(Long id) {
     movieSceneExample.start().andIdMovieDoubanEqualTo(id);
     List<MovieScene> movieSceneList = movieSceneMapper.selectByExample(movieSceneExample);
     return movieSceneList.size() != 1 ? null : movieSceneList.get(0);
   }
 
-  /**
-   * 获取场景列表
-   *
-   * @param id 场景电影ID
-   * @return
-   */
-  @NotEmpty(message = "此场景电影ID暂无对应场景列表")
+  @Override
   public List<Scene> getSceneListByMovieSceneId(Long id) {
     sceneExample.start().andIdMovieSceneEqualTo(id);
     return sceneMapper.selectByExample(sceneExample);
@@ -102,18 +88,28 @@ public class SceneMovieServiceImpl implements SceneMovieService {
       List<SceneDetailAllDo> sceneDetailAllDoList = new ArrayList<>();
       sceneDetailExample.start().andIdSceneEqualTo(scene.getId());
       for (SceneDetail sceneDetail : sceneDetailMapper.selectByExample(sceneDetailExample)) {
+        // 场景详情图片列表
         imageSceneDetailExample.start().andIdSceneDetailEqualTo(sceneDetail.getId());
+        List<ImageSceneDetail> imageSceneDetailList =
+            imageSceneDetailMapper.selectByExample(imageSceneDetailExample);
+        // 场景影人列表
+        List<CelebritySceneOfSceneDetailDo> celebritySceneOfSceneDetailDoList =
+            celebritySceneMapperPlus.selectCelebritySceneOfSceneDetailListBySceneDetailId(
+                sceneDetail.getId());
         // scene detail all
         sceneDetailAllDoList.add(
             new SceneDetailAllDo(
-                sceneDetail,
-                imageSceneDetailMapper.selectByExample(imageSceneDetailExample),
-                celebritySceneMapperPlus.selectCelebritySceneOfSceneDetailListBySceneDetailId(
-                    sceneDetail.getId())));
+                sceneDetail, imageSceneDetailList, celebritySceneOfSceneDetailDoList));
       }
       PlaceScene placeScene = placeSceneMapper.selectByPrimaryKey(scene.getIdPlaceScene());
+      // 地点图片列表
       imagePlaceSceneExample.start().andIdPlaceSceneEqualTo(placeScene.getId());
+      List<ImagePlaceScene> imagePlaceSceneList =
+          imagePlaceSceneMapper.selectByExample(imagePlaceSceneExample);
+      // 地点类型
       placeSceneToTypePlaceSceneExample.start().andIdPlaceSceneEqualTo(placeScene.getId());
+      List<PlaceSceneToTypePlaceScene> placeSceneToTypePlaceSceneList =
+          placeSceneToTypePlaceSceneMapper.selectByExample(placeSceneToTypePlaceSceneExample);
       sceneAllDoList.add(
           new SceneAllDo(
               scene,
@@ -121,9 +117,8 @@ public class SceneMovieServiceImpl implements SceneMovieService {
               // place all
               new PlaceSceneAllDo(
                   placeScene,
-                  imagePlaceSceneMapper.selectByExample(imagePlaceSceneExample),
-                  placeSceneToTypePlaceSceneMapper.selectByExample(
-                      placeSceneToTypePlaceSceneExample),
+                  imagePlaceSceneList,
+                  placeSceneToTypePlaceSceneList,
                   continentSceneMapper.selectByPrimaryKey(placeScene.getIdContinentScene()),
                   countrySceneMapper.selectByPrimaryKey(placeScene.getIdCountryScene()),
                   citySceneMapper.selectByPrimaryKey(placeScene.getIdCityScene()),

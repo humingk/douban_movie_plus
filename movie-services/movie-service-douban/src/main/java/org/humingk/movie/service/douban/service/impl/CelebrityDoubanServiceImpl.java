@@ -58,7 +58,8 @@ public class CelebrityDoubanServiceImpl implements CelebrityDoubanService {
   }
 
   @Override
-  public CelebrityDoubanDetailsDto getCelebrityDoubanDetailsByCelebrityDoubanId(long id) {
+  public CelebrityDoubanDetailsDto getCelebrityDoubanDetailsByCelebrityDoubanId(
+      long id, int limit) {
     /** 豆瓣影人基础信息 */
     CelebrityDouban celebrityDouban = celebrityDoubanMapper.selectByPrimaryKey(id);
     /** 豆瓣影人别称列表 */
@@ -69,9 +70,14 @@ public class CelebrityDoubanServiceImpl implements CelebrityDoubanService {
     imageCelebrityDoubanExample.start().andIdCelebrityDoubanEqualTo(id);
     List<ImageCelebrityDouban> imageCelebrityDoubanList =
         imageCelebrityDoubanMapper.selectByExample(imageCelebrityDoubanExample);
-    /** 与豆瓣影人相关的豆瓣电影列表 */
-    List<MovieDoubanOfCelebrityDoubanDo> movieDoubanOfCelebrityDoubanDoList =
-        movieDoubanMapperPlus.selectMovieDoubanOfCelebrityDoubanListByCelebrityDoubanId(id);
+    /** 与豆瓣影人相关的豆瓣电影列表 order by score */
+    List<MovieDoubanOfCelebrityDoubanDo> movieDoubanOfCelebrityDoubanDoListOrderByScore =
+        movieDoubanMapperPlus.selectMovieDoubanOfCelebrityDoubanListByCelebrityDoubanId(
+            id, limit, "score");
+    /** 与豆瓣影人相关的豆瓣电影列表 order by start_year */
+    List<MovieDoubanOfCelebrityDoubanDo> movieDoubanOfCelebrityDoubanDoListOrderByStartYear =
+        movieDoubanMapperPlus.selectMovieDoubanOfCelebrityDoubanListByCelebrityDoubanId(
+            id, limit, "start_year");
     /** 豆瓣影人-电影奖项 */
     List<AwardOfMovieAndCelebrityDoubanDo> awardOfMovieAndCelebrityDoubanDoList =
         movieDouanToAwardMovieMapperPlus.selectAwardOfMovieAndCelebrityListByCelebrityDoubanId(id);
@@ -79,7 +85,8 @@ public class CelebrityDoubanServiceImpl implements CelebrityDoubanService {
         celebrityDouban,
         aliasCelebrityDoubanList,
         imageCelebrityDoubanList,
-        movieDoubanOfCelebrityDoubanDoList,
+        movieDoubanOfCelebrityDoubanDoListOrderByScore,
+        movieDoubanOfCelebrityDoubanDoListOrderByStartYear,
         awardOfMovieAndCelebrityDoubanDoList);
   }
 
@@ -120,7 +127,7 @@ public class CelebrityDoubanServiceImpl implements CelebrityDoubanService {
       /** 与豆瓣影人相关的豆瓣电影列表 */
       List<MovieDoubanOfCelebrityDoubanDo> movieDoubanOfCelebrityDoubanDoList =
           movieDoubanMapperPlus.selectMovieDoubanOfCelebrityDoubanListByCelebrityDoubanId(
-              celebrityDouban.getId());
+              celebrityDouban.getId(), 5, "score");
       searchResultCelebrityDoubanDoList.add(
           new SearchResultCelebrityDoubanDo(
               celebrityDouban, aliasCelebrityDoubanList, movieDoubanOfCelebrityDoubanDoList));

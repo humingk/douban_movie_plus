@@ -1,5 +1,6 @@
 package org.humingk.movie.service.imdb.service;
 
+import org.humingk.movie.dal.entity.MovieImdb;
 import org.humingk.movie.service.imdb.dto.movie.MovieImdbDetailsDto;
 import org.humingk.movie.service.imdb.dto.movie.MovieImdbDto;
 import org.springframework.validation.annotation.Validated;
@@ -48,4 +49,12 @@ public interface MovieImdbService {
    */
   @NotNull(message = "该豆瓣电影ID暂无对应IMDB电影")
   MovieImdbDetailsDto getMovieImdbDetailsByMovieDoubanId(long id);
+
+  /**
+   * 根据IMDB电影基础信息获取IMDB电影详细信息
+   *
+   * @param movieImdb IMDB电影基础信息
+   * @return
+   */
+  MovieImdbDetailsDto getMovieImdbDetailsByMovieImdb(MovieImdb movieImdb);
 }

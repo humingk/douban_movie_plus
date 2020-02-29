@@ -1,6 +1,6 @@
 {
   "//": "服务器地址",
-  "serverUrl": "http://localhost:8080",
+  "serverUrl": "http://localhost:8081/v2",
   "//": "是否开启严格模式,需要标准文档注释",
   "isStrict": false,
   "//": "是否将文档合并到一个文件",

@@ -25,10 +25,11 @@ public interface CelebrityDoubanService {
    * 获取豆瓣影人详细信息
    *
    * @param id 豆瓣影人ID
+   * @param limit 相关电影限制数
    * @return
    */
   @NotNull(message = "此豆瓣影人ID暂无相关豆瓣影人信息")
-  CelebrityDoubanDetailsDto getCelebrityDoubanDetailsByCelebrityDoubanId(long id);
+  CelebrityDoubanDetailsDto getCelebrityDoubanDetailsByCelebrityDoubanId(long id, int limit);
 
   /**
    * 获取豆瓣影人搜索提示列表

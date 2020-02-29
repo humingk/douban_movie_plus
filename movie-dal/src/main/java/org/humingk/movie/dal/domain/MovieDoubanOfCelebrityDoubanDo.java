@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.humingk.movie.dal.entity.MovieDoubanToCelebrityDouban;
+import org.humingk.movie.dal.entity.RateMovieDouban;
 
 import java.io.Serializable;
 
@@ -57,6 +58,11 @@ public class MovieDoubanOfCelebrityDoubanDo implements Serializable {
 
   /** 简介 */
   private String summary;
+
+  // rate ------
+
+  /** 豆瓣电影评分 */
+  private RateMovieDouban rateMovieDouban;
 
   // MovieDoubanToCelebrityDouban --------------------------------------
 

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.PositiveOrZero;
 
 // 用于生成API文档
 // import org.springframework.web.bind.annotation.RestController;
@@ -37,9 +38,13 @@ public interface ImdbApi {
    * IMDB影人详细信息
    *
    * @param id IMDB影人ID
+   * @param limit 相关的电影限制数（默认10）
    * @return
    * @apiNote 包括影人基础信息，相关的IMDB电影
    */
   @RequestMapping(value = "/celebrity/imdb/details", method = RequestMethod.GET)
-  Result<CelebrityImdbDetailsVo> details(@RequestParam("id") @NotNull Long id);
+  Result<CelebrityImdbDetailsVo> details(
+      @RequestParam("id") @NotNull Long id,
+      @RequestParam(value = "limit", required = false, defaultValue = "10") @PositiveOrZero
+          Integer limit);
 }

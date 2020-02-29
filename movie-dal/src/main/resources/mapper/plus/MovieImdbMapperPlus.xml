@@ -17,7 +17,7 @@
                      resultMap="MovieImdbToCelebrityImdb"/>
     </resultMap>
     <!--通过IMDB影人ID获取与IMDB影人相关的IMDB电影信息列表-->
-    <select id="selectMovieImdbOfCelebrityImdbListByCelebrityImdbId" parameterType="java.lang.Long"
+    <select id="selectMovieImdbOfCelebrityImdbListByCelebrityImdbId"
             resultMap="MovieImdbOfCelebrityImdbDoResultMapPlus">
         select movie_imdb.id,
                id_type_video,
@@ -36,5 +36,6 @@
                  inner join movie_imdb_to_celebrity_imdb
                             on movie_imdb.id = movie_imdb_to_celebrity_imdb.id_movie_imdb
         where movie_imdb_to_celebrity_imdb.id_celebrity_imdb = #{idCelebrityImdb,jdbcType=BIGINT}
+        limit #{limit,jdbcType=INTEGER}
     </select>
 </mapper>

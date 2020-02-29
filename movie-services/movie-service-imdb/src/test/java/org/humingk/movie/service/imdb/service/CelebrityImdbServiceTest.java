@@ -24,12 +24,13 @@ public class CelebrityImdbServiceTest {
 
   @Test
   public void getCelebrityImdbDetailsByCelebrityImdbId() {
-    System.out.println(celebrityImdbService.getCelebrityImdbDetailsByCelebrityImdbId(158));
+    System.out.println(celebrityImdbService.getCelebrityImdbDetailsByCelebrityImdbId(158, 10));
   }
 
   @Test
   public void getCelebrityImdbDetailsByCelebrityDoubanId() {
 
-    System.out.println(celebrityImdbService.getCelebrityImdbDetailsByCelebrityDoubanId(1054450));
+    System.out.println(
+        celebrityImdbService.getCelebrityImdbDetailsByCelebrityDoubanId(1054450, 10));
   }
 }

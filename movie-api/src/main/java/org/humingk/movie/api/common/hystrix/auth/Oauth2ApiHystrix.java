@@ -4,7 +4,9 @@ import org.humingk.movie.api.auth.Oauth2Api;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.RequestBody;
 
+import javax.validation.constraints.NotEmpty;
 import java.util.Map;
 
 /** @author humingk */
@@ -18,7 +20,8 @@ public class Oauth2ApiHystrix implements Oauth2Api {
    * @return
    */
   @Override
-  public ResponseEntity<Object> postAccessToken(Map<String, String> parameters) {
+  public ResponseEntity<Object> postAccessToken(
+      @RequestBody @NotEmpty Map<String, String> parameters) {
     return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("hystrix");
   }
 }

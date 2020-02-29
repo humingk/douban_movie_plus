@@ -27,8 +27,10 @@ public class CelebrityDoubanDetailsVo implements Serializable {
   private List<AliasCelebrityDoubanVo> aliasList;
   /** 豆瓣影人图片列表 */
   private List<ImageDoubanVo> imageList;
-  /** 与豆瓣影人相关的豆瓣电影列表 */
-  private List<MovieDoubanOfCelebrityDoubanVo> movieList;
+  /** 与豆瓣影人相关的豆瓣电影列表 order by score */
+  private List<MovieDoubanOfCelebrityDoubanVo> movieListOrderByScore;
+  /** 与豆瓣影人相关的豆瓣电影列表 order by start year */
+  private List<MovieDoubanOfCelebrityDoubanVo> movieListOrderByStartYear;
   /** 豆瓣影人-电影奖项 */
   private List<AwardOfMovieAndCelebrityDoubanVo> awardList;
 }

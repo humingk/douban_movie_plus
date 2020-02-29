@@ -2,9 +2,24 @@ custom:
   api:
     # api的版本
     version: v2
+# 熔断超时时间 10s
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 10000
 spring:
   cloud:
     gateway:
+      # 允许跨域
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            allowedOrigins: "http://localhost:8080,https://movie.doubans.com"
+            allowedMethods: "*"
+            allowedHeaders: "*"
       discovery:
         locator:
           # true:开启gateway服务注册中心服务发现,并且gateway根据服务名自动为每个服务创建一个router
@@ -80,6 +95,20 @@ spring:
           uri: lb://movie-server-celebrity
           predicates:
             - Path=/${custom.api.version}/celebrity/**
+          filters:
+            - StripPrefix=1
+            # 限流过滤器
+            - name: RequestRateLimiter
+              args:
+                key-resolver: '#{@myHostAddrKeyResolver}'
+                redis-rate-limiter.replenishRate: 1
+                redis-rate-limiter.burstCapacity: 5
+        # ----------------------------------------
+        # 场景
+        - id: movie-server-scene
+          uri: lb://movie-server-scene
+          predicates:
+            - Path=/${custom.api.version}/scene/**
           filters:
             - StripPrefix=1
             # 限流过滤器

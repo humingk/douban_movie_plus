@@ -8,6 +8,7 @@ import org.humingk.movie.api.movie.ImdbApi;
 import org.humingk.movie.common.entity.Result;
 import org.humingk.movie.service.imdb.service.MovieImdbService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.constraints.NotNull;
@@ -20,12 +21,12 @@ public class ImdbController implements ImdbApi {
   @Autowired private MovieImdbDetailsVoConverter movieImdbDetailsVoConverter;
 
   @Override
-  public Result<MovieImdbVo> bases(@NotNull Long id) {
+  public Result<MovieImdbVo> bases(@RequestParam("id") @NotNull Long id) {
     return Result.success(movieImdbVoConverter.to(movieImdbService.getMovieImdbByMovieImdbId(id)));
   }
 
   @Override
-  public Result<MovieImdbDetailsVo> details(@NotNull Long id) {
+  public Result<MovieImdbDetailsVo> details(@RequestParam("id") @NotNull Long id) {
     return Result.success(
         movieImdbDetailsVoConverter.to(movieImdbService.getMovieImdbDetailsByMovieImdbId(id)));
   }

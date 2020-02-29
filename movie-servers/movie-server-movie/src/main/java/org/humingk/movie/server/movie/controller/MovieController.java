@@ -9,6 +9,7 @@ import org.humingk.movie.common.entity.Result;
 import org.humingk.movie.service.douban.service.MovieDoubanService;
 import org.humingk.movie.service.imdb.service.MovieImdbService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.constraints.NotNull;
@@ -26,7 +27,7 @@ public class MovieController implements MovieApi {
   @Autowired private MovieDetailsVoConverter movieDetailsVoConverter;
 
   @Override
-  public Result<MovieVo> bases(@NotNull Long id) {
+  public Result<MovieVo> bases(@RequestParam("id") @NotNull Long id) {
     return Result.success(
         movieVoConverter.to(
             movieDoubanService.getMovieDoubanByMovieDoubanId(id),
@@ -34,7 +35,7 @@ public class MovieController implements MovieApi {
   }
 
   @Override
-  public Result<MovieDetailsVo> details(@NotNull Long id) {
+  public Result<MovieDetailsVo> details(@RequestParam("id") @NotNull Long id) {
     return Result.success(
         movieDetailsVoConverter.to(
             movieDoubanService.getMovieDoubanDetailsByMovieDoubanId(id),

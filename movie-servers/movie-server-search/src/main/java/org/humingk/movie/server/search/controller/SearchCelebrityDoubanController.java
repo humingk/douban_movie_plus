@@ -8,6 +8,7 @@ import org.humingk.movie.api.search.SearchCelebrityDoubanApi;
 import org.humingk.movie.common.entity.Result;
 import org.humingk.movie.service.douban.service.CelebrityDoubanService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.constraints.NotBlank;
@@ -25,7 +26,11 @@ public class SearchCelebrityDoubanController implements SearchCelebrityDoubanApi
 
   @Override
   public Result<List<SearchTipsCelebrityDoubanVo>> searchTips(
-      @NotBlank String keyword, @PositiveOrZero Integer offset, @PositiveOrZero Integer limit) {
+      @RequestParam("keyword") @NotBlank String keyword,
+      @RequestParam(value = "offset", required = false, defaultValue = "0") @PositiveOrZero
+          Integer offset,
+      @RequestParam(value = "limit", required = false, defaultValue = "10") @PositiveOrZero
+          Integer limit) {
     return Result.success(
         searchTipsCelebrityDoubanVoConverter.toList(
             celebrityDoubanService.getSearchTipsCelebrityDoubanListByCelebrityDoubanKeywordStart(
@@ -34,7 +39,11 @@ public class SearchCelebrityDoubanController implements SearchCelebrityDoubanApi
 
   @Override
   public Result<List<SearchResultCelebrityDoubanVo>> searchDetails(
-      @NotBlank String keyword, @PositiveOrZero Integer offset, @PositiveOrZero Integer limit) {
+      @RequestParam("keyword") @NotBlank String keyword,
+      @RequestParam(value = "offset", required = false, defaultValue = "0") @PositiveOrZero
+          Integer offset,
+      @RequestParam(value = "limit", required = false, defaultValue = "10") @PositiveOrZero
+          Integer limit) {
     return Result.success(
         searchResultCelebrityDoubanVoConverter.toList(
             celebrityDoubanService.getSearchResultCelebrityDoubanListByCelebrityDoubanKeyword(

@@ -28,7 +28,12 @@ public interface CelebrityDoubanDetailsVoConverter
     @Mapping(target = "base", source = "celebrityDoubanDto"),
     @Mapping(target = "aliasList", source = "aliasCelebrityDoubanList"),
     @Mapping(target = "imageList", source = "imageDoubanDoList"),
-    @Mapping(target = "movieList", source = "movieDoubanOfCelebrityDoubanDoList"),
+    @Mapping(
+        target = "movieListOrderByScore",
+        source = "movieDoubanOfCelebrityDoubanDoListOrderByScore"),
+    @Mapping(
+        target = "movieListOrderByStartYear",
+        source = "movieDoubanOfCelebrityDoubanDoListOrderByStartYear"),
     @Mapping(target = "awardList", source = "awardOfMovieAndCelebrityDoubanDoList"),
   })
   CelebrityDoubanDetailsVo to(CelebrityDoubanDetailsDto celebrityDoubanDetailsDto);

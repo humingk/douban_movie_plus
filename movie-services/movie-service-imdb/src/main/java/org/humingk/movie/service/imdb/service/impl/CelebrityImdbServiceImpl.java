@@ -45,32 +45,27 @@ public class CelebrityImdbServiceImpl implements CelebrityImdbService {
   }
 
   @Override
-  public CelebrityImdbDetailsDto getCelebrityImdbDetailsByCelebrityImdbId(long id) {
+  public CelebrityImdbDetailsDto getCelebrityImdbDetailsByCelebrityImdbId(long id, int limit) {
     CelebrityImdb celebrityImdb = celebrityImdbMapper.selectByPrimaryKey(id);
-    return getCelebrityImdbDetailsByCelebrityImdb(celebrityImdb);
+    return getCelebrityImdbDetailsByCelebrityImdb(celebrityImdb, limit);
   }
 
   @Override
-  public CelebrityImdbDetailsDto getCelebrityImdbDetailsByCelebrityDoubanId(long id) {
+  public CelebrityImdbDetailsDto getCelebrityImdbDetailsByCelebrityDoubanId(long id, int limit) {
     celebrityImdbExample.start().andIdCelebrityDoubanEqualTo(id);
     List<CelebrityImdb> celebrityImdbList =
         celebrityImdbMapper.selectByExample(celebrityImdbExample);
     return celebrityImdbList.size() != 1
         ? null
-        : getCelebrityImdbDetailsByCelebrityImdb(celebrityImdbList.get(0));
+        : getCelebrityImdbDetailsByCelebrityImdb(celebrityImdbList.get(0), limit);
   }
 
-  /**
-   * 根据IMDB基础信息获取IMDB影人详细信息
-   *
-   * @param celebrityImdb IMDB基础信息
-   * @return
-   */
+  @Override
   public CelebrityImdbDetailsDto getCelebrityImdbDetailsByCelebrityImdb(
-      CelebrityImdb celebrityImdb) {
+      CelebrityImdb celebrityImdb, int limit) {
     List<MovieImdbOfCelebrityImdbDo> movieImdbOfCelebrityImdbDoList =
         movieImdbMapperPlus.selectMovieImdbOfCelebrityImdbListByCelebrityImdbId(
-            celebrityImdb.getId());
+            celebrityImdb.getId(), limit);
     return celebrityImdbDetailsDtoConverter.to(celebrityImdb, movieImdbOfCelebrityImdbDoList);
   }
 }
