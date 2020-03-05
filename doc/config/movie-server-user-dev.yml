@@ -11,8 +11,8 @@ spring:
           # 通过本地注册服务器认证
           auth:
             client-id: client
-            client-secret: client
-            client-scopes: all
+            client-secret: secret
+            client-scopes: scopes
           # 通过Github认证
           github:
             client-id: e97fedfabcf648c19043
@@ -20,7 +20,7 @@ spring:
             # 获取Github授权验证码
             authorize-uri: https://github.com/login/oauth/authorize
             # 获取授权码后回调
-            callback-uri: http://localhost:10103/github_callback
+            callback-uri: http://localhost:8081/v2/user/github_callback
             # 通过Github授权验证码和客户端密钥获取token
             access-token-uri: https://github.com/login/oauth/access_token
             # Github用户信息

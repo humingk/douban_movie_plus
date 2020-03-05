@@ -1,5 +1,5 @@
 #!/bin/bash
-base_path=/home/humingk/gits/douban_movie_plus/
+base_path=/home/humingk/git/douban_movie_plus/
 
 echo "========== 豆瓣电影Plus 脚本工具 =========="
 echo "[0]  更改项目版本"
@@ -98,7 +98,7 @@ function api_update() {
     exec $exec_api"postman"
     ;;
   esac
-  env_release
+  # env_release
 }
 
 # 部署环境配置

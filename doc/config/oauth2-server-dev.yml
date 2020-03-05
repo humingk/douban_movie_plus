@@ -10,6 +10,6 @@ custom:
       # 别名
       alias: oauth2
       # oauth2.jks 绝对路径
-      location: /home/humingk/gits/douban_movie_plus/doc/key/oauth2.jks
+      location: /home/humingk/git/douban_movie_plus/doc/key/oauth2.jks
       # 秘钥口令和秘钥库口令
       secret: 12331233

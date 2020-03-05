@@ -37,7 +37,7 @@ public interface UserApi {
    * @return
    */
   @RequestMapping(value = "/user/login", method = RequestMethod.POST)
-  Result login(
+  Result<Object> login(
       @RequestParam("email") @NotBlank String email,
       @RequestParam("password") @NotBlank String password);
 
@@ -58,7 +58,7 @@ public interface UserApi {
    * @return
    */
   @RequestMapping(value = "/user/github_callback", method = RequestMethod.GET)
-  Result githubCallback(
+  Result<Object> githubCallback(
       @RequestParam("code") @NotBlank String code, @RequestParam("state") @NotBlank String state);
 
   /**
@@ -70,7 +70,7 @@ public interface UserApi {
    * @return
    */
   @RequestMapping(value = "/user/register", method = RequestMethod.POST)
-  Result register(
+  Result<Object> register(
       @RequestParam(value = "id", required = false, defaultValue = "") @NotBlank String id,
       @RequestParam("email") @NotBlank String email,
       @RequestParam("password") @NotBlank String password);
@@ -85,7 +85,7 @@ public interface UserApi {
       value = "/user/user_info",
       method = RequestMethod.GET,
       consumes = APPLICATION_JSON_VALUE)
-  Result userInfo(@RequestBody @NotNull Principal principal);
+  Result<Object> userInfo(@RequestBody @NotNull Principal principal);
 
   /**
    * 更新豆瓣用户ID
@@ -94,5 +94,5 @@ public interface UserApi {
    * @return
    */
   @RequestMapping(value = "/user/update_id", method = RequestMethod.PUT)
-  Result updateId(@RequestParam("id") @NotBlank String id);
+  Result<Object> updateId(@RequestParam("id") @NotBlank String id);
 }

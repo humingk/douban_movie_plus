@@ -11,7 +11,6 @@ import org.humingk.movie.dal.entity.User;
 import org.humingk.movie.service.user.service.RegisterService;
 import org.jsoup.Jsoup;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.http.ResponseEntity;
@@ -60,12 +59,11 @@ public class UserController implements UserApi {
 
   @Autowired private RegisterService registerService;
 
-  @Autowired
-  @Qualifier("movie-server-auth")
-  private Oauth2Api oauth2Api;
+  //  @Qualifier("movie-server-auth")
+  @Autowired private Oauth2Api oauth2Api;
 
   @Override
-  public Result login(@NotBlank String email, @NotBlank String password) {
+  public Result<Object> login(@NotBlank String email, @NotBlank String password) {
     try {
       Map<String, String> params =
           new HashMap() {
@@ -98,7 +96,7 @@ public class UserController implements UserApi {
   }
 
   @Override
-  public Result githubCallback(@NotBlank String code, @NotBlank String state) {
+  public Result<Object> githubCallback(@NotBlank String code, @NotBlank String state) {
     // github申请token的请求参数
     Map<String, String> params =
         new HashMap() {
@@ -143,18 +141,19 @@ public class UserController implements UserApi {
   }
 
   @Override
-  public Result register(@NotBlank String id, @NotBlank String email, @NotBlank String password) {
+  public Result<Object> register(
+      @NotBlank String id, @NotBlank String email, @NotBlank String password) {
     String userId = registerService.register(new User(id, email, password));
     return userId.isEmpty() ? Result.error(userId) : Result.success(userId);
   }
 
   @Override
-  public Result userInfo(@NotNull Principal principal) {
+  public Result<Object> userInfo(@NotNull Principal principal) {
     return Result.success(ResponseEntity.ok(principal));
   }
 
   @Override
-  public Result updateId(@NotBlank String id) {
+  public Result<Object> updateId(@NotBlank String id) {
     return null;
   }
 }

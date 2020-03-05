@@ -6,7 +6,7 @@
   "//": "是否将文档合并到一个文件",
   "allInOne": true,
   "//": "指定文档的输出路径",
-  "outPath": "/home/humingk/gits/douban_movie_plus/doc/api",
+  "outPath": "/home/humingk/git/douban_movie_plus/doc/api",
   "//": "是否覆盖旧的文件(markdown)",
   "coverOld": true,
   "//": "controller包过滤，英文逗号隔开",

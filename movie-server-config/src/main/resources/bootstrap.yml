@@ -18,8 +18,7 @@ spring:
         # 本地配置
         native:
           # 配置文件所在目录
-          #          search-locations: classpath:/config
-          search-locations: /home/humingk/gits/douban_movie_plus/doc/config
+          search-locations: doc/config
 
 #    # git远程配置
 #    config:

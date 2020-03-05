@@ -4,7 +4,7 @@ security:
     # 客户端
     client:
       client-id: client
-      client-secret: client
+      client-secret: secret
       access-token-uri: http://localhost:8006/oauth/token
       grant-type: password,refresh_token
-      scope: all
+      scope: scopes

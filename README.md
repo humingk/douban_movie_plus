@@ -19,8 +19,6 @@ https://movie.doubans.com
 
 # 2.0版本开发中，1.0版本详见分支 [v1.0](https://github.com/humingk/douban_movie_plus/tree/v1.0)
 
-
-
 # 使用方式
 
 - 从豆瓣电影官网访问(**推荐**)
@@ -35,8 +33,6 @@ https://movie.doubans.com
 
   https://movie.doubans.com
 
-
-
 # 1.0项目框架图
 
 ![](./doc/image/structure.png)
@@ -44,3 +40,29 @@ https://movie.doubans.com
 # 数据库关系模型图
 
 ![ER关系图](./doc/image/movie_2.0_er.png)
+
+# 安装相关
+### 下载
+`git clone --depth 1 https://github.com/humingk/douban_movie_plus`
+### maven导入
+### 项目基于JDK1.8
+### 修改配置文件绝对路径
+- tools.sh项目 base_path
+`tools.sh`
+- oauth2秘钥 key.location
+`doc/config/oauth2-server-dev.yml`
+- api文档生成器配置文件 plugin-configFile
+`pom.xml`
+- api文档输出 outPath
+`doc/api/smart-doc.json`
+### zipkin服务(2)
+`./tools.sh`
+### rabbitmq 
+依赖erlang,注意版本
+- <https://github.com/rabbitmq/rabbitmq-server/releases>
+- <https://www.erlang.org/downloads>
+### Redis默认
+### MysSQL默认
+### server启动顺序
+eureka -> config -> zipkin -> servers -> gateway
+
