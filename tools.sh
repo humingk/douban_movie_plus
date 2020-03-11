@@ -138,7 +138,7 @@ function env_release() {
 
 function delete_target() {
   read -p "你确定要删除target目录吗？[y/n]:" choose_delete_target
-  if [ "choose_delete_target" = "y" ]; then
+  if [ "$choose_delete_target" = "y" ]; then
     rm -rf ./*/target
     rm -rf ./movie-servers/*/target
     rm -rf ./movie-services/*/target
@@ -148,7 +148,7 @@ function delete_target() {
 
 function export_database_sql_create() {
   read -p "你确定要导出数据库建表SQL语句吗？[y/n]:" choose_export
-  if [ "choose_export" = "y" ]; then
+  if [ "$choose_export" = "y" ]; then
     mysqldump -h localhost -P 3306 -uroot -p -d --databases movie >./doc/sql/export_movie.sql
     if [ $? -eq 0 ]; then
       echo "导出成功 => ./doc/export_movie.sql"

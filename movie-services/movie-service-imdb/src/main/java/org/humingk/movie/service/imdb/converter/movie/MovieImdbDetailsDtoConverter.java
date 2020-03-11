@@ -6,17 +6,12 @@ import org.humingk.movie.dal.entity.MovieImdbToTypeMovie;
 import org.humingk.movie.dal.entity.RateImdb;
 import org.humingk.movie.service.imdb.dto.movie.MovieImdbDetailsDto;
 import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
-import org.mapstruct.Mappings;
 
 import java.util.List;
 
 /** @author humingk */
-@Mapper(
-    componentModel = "spring",
-    uses = {MovieImdbDtoConverter.class})
+@Mapper(componentModel = "spring")
 public interface MovieImdbDetailsDtoConverter {
-  @Mappings({@Mapping(target = "movieImdbDto", source = "movieImdb")})
   MovieImdbDetailsDto to(
       /** IMDB电影基础信息 */
       MovieImdb movieImdb,

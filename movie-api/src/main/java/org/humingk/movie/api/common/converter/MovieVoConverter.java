@@ -3,8 +3,8 @@ package org.humingk.movie.api.common.converter;
 import org.humingk.movie.api.common.converter.movie.MovieDoubanVoConverter;
 import org.humingk.movie.api.common.converter.movie.MovieImdbVoConverter;
 import org.humingk.movie.api.common.vo.MovieVo;
-import org.humingk.movie.service.douban.dto.movie.MovieDoubanDto;
-import org.humingk.movie.service.imdb.dto.movie.MovieImdbDto;
+import org.humingk.movie.dal.entity.MovieDouban;
+import org.humingk.movie.dal.entity.MovieImdb;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
@@ -15,8 +15,8 @@ import org.mapstruct.Mappings;
     uses = {MovieDoubanVoConverter.class, MovieImdbVoConverter.class})
 public interface MovieVoConverter {
   @Mappings({
-    @Mapping(target = "douban", source = "movieDoubanDto"),
-    @Mapping(target = "imdb", source = "movieImdbDto")
+    @Mapping(target = "douban", source = "movieDouban"),
+    @Mapping(target = "imdb", source = "movieImdb")
   })
-  MovieVo to(MovieDoubanDto movieDoubanDto, MovieImdbDto movieImdbDto);
+  MovieVo to(MovieDouban movieDouban, MovieImdb movieImdb);
 }

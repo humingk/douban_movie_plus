@@ -10,14 +10,8 @@ import org.humingk.movie.dal.mapper.auto.*;
 import org.humingk.movie.dal.mapper.plus.CelebrityDoubanMapperPlus;
 import org.humingk.movie.dal.mapper.plus.MovieDouanToAwardMovieMapperPlus;
 import org.humingk.movie.dal.mapper.plus.ReviewMovieDoubanMapperPlus;
-import org.humingk.movie.service.douban.converter.movie.MovieDoubanDetailsDtoConverter;
-import org.humingk.movie.service.douban.converter.movie.MovieDoubanDtoConverter;
-import org.humingk.movie.service.douban.converter.movie.SearchResultMovieDoubanDtoConverter;
-import org.humingk.movie.service.douban.converter.movie.SearchTipsMovieDoubanDtoConverter;
-import org.humingk.movie.service.douban.dto.movie.MovieDoubanDetailsDto;
-import org.humingk.movie.service.douban.dto.movie.MovieDoubanDto;
-import org.humingk.movie.service.douban.dto.movie.SearchResultMovieDoubanDto;
-import org.humingk.movie.service.douban.dto.movie.SearchTipsMovieDoubanDto;
+import org.humingk.movie.service.douban.converter.MovieDoubanDetailsDtoConverter;
+import org.humingk.movie.service.douban.dto.MovieDoubanDetailsDto;
 import org.humingk.movie.service.douban.service.MovieDoubanService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,11 +25,7 @@ import java.util.List;
 public class MovieDoubanServiceImpl implements MovieDoubanService {
 
   /** converter */
-  @Autowired private MovieDoubanDtoConverter movieDoubanDtoConverter;
-
   @Autowired private MovieDoubanDetailsDtoConverter movieDoubanDetailsDtoConverter;
-  @Autowired private SearchTipsMovieDoubanDtoConverter searchTipsMovieDoubanDtoConverter;
-  @Autowired private SearchResultMovieDoubanDtoConverter searchResultMovieDoubanDtoConverter;
   /** example */
   @Autowired private AliasMovieDoubanExample aliasMovieDoubanExample;
 
@@ -63,8 +53,8 @@ public class MovieDoubanServiceImpl implements MovieDoubanService {
   @Autowired private MovieDouanToAwardMovieMapperPlus moviedouanToAwardMovieMapperPlus;
 
   @Override
-  public MovieDoubanDto getMovieDoubanByMovieDoubanId(long id) {
-    return movieDoubanDtoConverter.to(movieDoubanMapper.selectByPrimaryKey(id));
+  public MovieDouban getMovieDoubanByMovieDoubanId(long id) {
+    return movieDoubanMapper.selectByPrimaryKey(id);
   }
 
   @Override
@@ -126,7 +116,7 @@ public class MovieDoubanServiceImpl implements MovieDoubanService {
   }
 
   @Override
-  public List<SearchTipsMovieDoubanDto> getSearchTipsMovieDoubanListByMovieDoubanKeywordStart(
+  public List<SearchTipsMovieDoubanDo> getSearchTipsMovieDoubanListByMovieDoubanKeywordStart(
       String keyword, int offset, int limit) {
     List<SearchTipsMovieDoubanDo> searchTipsMovieDoubanDoList = new ArrayList<>();
     movieDoubanExample.start().andNameZhLike(keyword.trim() + "%");
@@ -141,11 +131,11 @@ public class MovieDoubanServiceImpl implements MovieDoubanService {
       searchTipsMovieDoubanDoList.add(
           new SearchTipsMovieDoubanDo(movieDouban, rateMovieDouban, aliasMovieDoubanList));
     }
-    return searchTipsMovieDoubanDtoConverter.toList(searchTipsMovieDoubanDoList);
+    return searchTipsMovieDoubanDoList;
   }
 
   @Override
-  public List<SearchResultMovieDoubanDto> getSearchResultMovieDoubanListByMovieDoubanKeyword(
+  public List<SearchResultMovieDoubanDo> getSearchResultMovieDoubanListByMovieDoubanKeyword(
       String keyword, int offset, int limit) {
     List<SearchResultMovieDoubanDo> searchResultMovieDoubanDoList = new ArrayList<>();
     movieDoubanExample.start().andNameZhLike("%" + keyword.trim() + "%");
@@ -171,6 +161,6 @@ public class MovieDoubanServiceImpl implements MovieDoubanService {
               movieDoubanToTypeMovieList,
               celebrityDoubanOfMovieDoubanDoList));
     }
-    return searchResultMovieDoubanDtoConverter.toList(searchResultMovieDoubanDoList);
+    return searchResultMovieDoubanDoList;
   }
 }

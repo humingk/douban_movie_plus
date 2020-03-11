@@ -1,12 +1,13 @@
-package org.humingk.movie.service.douban.dto.celebrity;
+package org.humingk.movie.service.douban.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.humingk.movie.dal.domain.AwardOfMovieAndCelebrityDoubanDo;
+import org.humingk.movie.dal.domain.ImageDoubanDo;
 import org.humingk.movie.dal.domain.MovieDoubanOfCelebrityDoubanDo;
 import org.humingk.movie.dal.entity.AliasCelebrityDouban;
-import org.humingk.movie.dal.domain.ImageDoubanDo;
+import org.humingk.movie.dal.entity.CelebrityDouban;
 
 import java.io.Serializable;
 import java.util.List;
@@ -23,7 +24,7 @@ public class CelebrityDoubanDetailsDto implements Serializable {
   private static final long serialVersionUID = 1L;
 
   /** 豆瓣影人基础信息 */
-  private CelebrityDoubanDto celebrityDoubanDto;
+  private CelebrityDouban celebrityDouban;
   /** 豆瓣影人别称列表 */
   private List<AliasCelebrityDouban> aliasCelebrityDoubanList;
   /** 豆瓣图片列表 */

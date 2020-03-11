@@ -1,6 +1,6 @@
 package org.humingk.movie.service.scene.service;
 
-import org.humingk.movie.service.scene.dto.PlaceSceneDto;
+import org.humingk.movie.dal.entity.PlaceScene;
 import org.springframework.validation.annotation.Validated;
 
 import java.util.List;
@@ -20,5 +20,5 @@ public interface ScenePlaceService {
    * @param limit 限制数
    * @return
    */
-  List<PlaceSceneDto> getPlaceSceneListByPlaceKeywordStart(String keyword, int offset, int limit);
+  List<PlaceScene> getPlaceSceneListByPlaceKeywordStart(String keyword, int offset, int limit);
 }

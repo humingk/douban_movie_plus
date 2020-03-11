@@ -9,10 +9,8 @@ import org.humingk.movie.dal.mapper.auto.*;
 import org.humingk.movie.dal.mapper.plus.CelebritySceneMapperPlus;
 import org.humingk.movie.service.scene.converter.MovieSceneAllDtoConverter;
 import org.humingk.movie.service.scene.converter.MovieSceneBriefDtoConverter;
-import org.humingk.movie.service.scene.converter.MovieSceneDtoConverter;
 import org.humingk.movie.service.scene.dto.MovieSceneAllDto;
 import org.humingk.movie.service.scene.dto.MovieSceneBriefDto;
-import org.humingk.movie.service.scene.dto.MovieSceneDto;
 import org.humingk.movie.service.scene.service.SceneMovieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -54,7 +52,6 @@ public class SceneMovieServiceImpl implements SceneMovieService {
   @Autowired private MovieSceneAllDtoConverter movieSceneAllDtoConverter;
 
   @Autowired private MovieSceneBriefDtoConverter movieSceneBriefDtoConverter;
-  @Autowired private MovieSceneDtoConverter movieSceneDtoConverter;
 
   @Override
   public MovieScene getMovieSceneByMovieDoubanId(Long id) {
@@ -87,7 +84,7 @@ public class SceneMovieServiceImpl implements SceneMovieService {
                   placeSceneMapper.selectByPrimaryKey(scene.getIdPlaceScene()),
                   imagePlaceSceneMapper.selectByExample(imagePlaceSceneExample))));
     }
-    return movieSceneBriefDtoConverter.to(movieSceneDtoConverter.to(movieScene), sceneBriefDoList);
+    return movieSceneBriefDtoConverter.to(movieScene, sceneBriefDoList);
   }
 
   @Override
@@ -134,15 +131,15 @@ public class SceneMovieServiceImpl implements SceneMovieService {
                   citySceneMapper.selectByPrimaryKey(placeScene.getIdCityScene()),
                   stateSceneMapper.selectByPrimaryKey(placeScene.getIdStateScene()))));
     }
-    return movieSceneAllDtoConverter.to(movieSceneDtoConverter.to(movieScene), sceneAllDoList);
+    return movieSceneAllDtoConverter.to(movieScene, sceneAllDoList);
   }
 
   @Override
-  public List<MovieSceneDto> getMovieSceneListByMovieSceneKeywordStart(
+  public List<MovieScene> getMovieSceneListByMovieSceneKeywordStart(
       String keyword, int offset, int limit) {
     movieSceneExample.start().andNameZhLike(keyword.trim() + "%");
     movieSceneExample.or().andNameEnLike(keyword.trim() + "%");
     PageHelper.offsetPage(offset, limit);
-    return movieSceneDtoConverter.toList(movieSceneMapper.selectByExample(movieSceneExample));
+    return movieSceneMapper.selectByExample(movieSceneExample);
   }
 }

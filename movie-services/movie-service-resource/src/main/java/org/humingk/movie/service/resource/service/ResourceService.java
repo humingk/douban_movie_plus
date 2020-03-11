@@ -1,6 +1,6 @@
 package org.humingk.movie.service.resource.service;
 
-import org.humingk.movie.service.resource.dto.ResourceMovieDto;
+import org.humingk.movie.dal.entity.ResourceMovie;
 import org.springframework.validation.annotation.Validated;
 
 import java.util.List;
@@ -18,5 +18,5 @@ public interface ResourceService {
    * @param id 豆瓣电影ID
    * @return
    */
-  List<ResourceMovieDto> getResourceListByMovieDoubanId(Long id);
+  List<ResourceMovie> getResourceListByMovieDoubanId(Long id);
 }

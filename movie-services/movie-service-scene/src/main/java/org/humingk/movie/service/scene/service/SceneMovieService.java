@@ -4,7 +4,6 @@ import org.humingk.movie.dal.entity.MovieScene;
 import org.humingk.movie.dal.entity.Scene;
 import org.humingk.movie.service.scene.dto.MovieSceneAllDto;
 import org.humingk.movie.service.scene.dto.MovieSceneBriefDto;
-import org.humingk.movie.service.scene.dto.MovieSceneDto;
 import org.springframework.validation.annotation.Validated;
 
 import javax.validation.constraints.NotNull;
@@ -58,6 +57,5 @@ public interface SceneMovieService {
    * @param limit 限制数
    * @return
    */
-  List<MovieSceneDto> getMovieSceneListByMovieSceneKeywordStart(
-      String keyword, int offset, int limit);
+  List<MovieScene> getMovieSceneListByMovieSceneKeywordStart(String keyword, int offset, int limit);
 }

@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.humingk.movie.dal.domain.MovieImdbOfCelebrityImdbDo;
+import org.humingk.movie.dal.entity.CelebrityImdb;
 
 import java.io.Serializable;
 import java.util.List;
@@ -19,7 +20,7 @@ import java.util.List;
 public class CelebrityImdbDetailsDto implements Serializable {
   private static final long serialVersionUID = 1L;
   /** IMDB影人基础信息 */
-  private CelebrityImdbDto celebrityImdbDto;
+  private CelebrityImdb celebrityImdb;
   /** 与IMDB影人相关的IMDB电影 */
   private List<MovieImdbOfCelebrityImdbDo> movieImdbOfCelebrityImdbDoList;
 }

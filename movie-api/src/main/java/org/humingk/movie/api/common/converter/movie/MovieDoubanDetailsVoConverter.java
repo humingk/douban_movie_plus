@@ -6,7 +6,7 @@ import org.humingk.movie.api.common.converter.share.AwardOfMovieAndCelebrityDoub
 import org.humingk.movie.api.common.converter.share.ImageDoubanVoConverter;
 import org.humingk.movie.api.common.util.ConverterUtil;
 import org.humingk.movie.api.common.vo.movie.MovieDoubanDetailsVo;
-import org.humingk.movie.service.douban.dto.movie.MovieDoubanDetailsDto;
+import org.humingk.movie.service.douban.dto.MovieDoubanDetailsDto;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
@@ -29,7 +29,7 @@ import org.mapstruct.Mappings;
 public interface MovieDoubanDetailsVoConverter {
 
   @Mappings({
-    @Mapping(target = "base", source = "movieDoubanDto"),
+    @Mapping(target = "base", source = "movieDouban"),
     @Mapping(target = "rate", source = "rateMovieDouban"),
     @Mapping(
         target = "aliasList",

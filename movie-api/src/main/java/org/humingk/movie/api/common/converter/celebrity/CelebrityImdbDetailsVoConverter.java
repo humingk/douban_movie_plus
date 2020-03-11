@@ -16,7 +16,7 @@ public interface CelebrityImdbDetailsVoConverter
     extends BaseConverter<CelebrityImdbDetailsVo, CelebrityImdbDetailsDto> {
   @Override
   @Mappings({
-    @Mapping(target = "base", source = "celebrityImdbDto"),
+    @Mapping(target = "base", source = "celebrityImdb"),
     @Mapping(target = "movieList", source = "movieImdbOfCelebrityImdbDoList"),
   })
   CelebrityImdbDetailsVo to(CelebrityImdbDetailsDto celebrityImdbDetailsDto);

@@ -1,9 +1,9 @@
 package org.humingk.movie.service.douban.service;
 
-import org.humingk.movie.service.douban.dto.movie.MovieDoubanDetailsDto;
-import org.humingk.movie.service.douban.dto.movie.MovieDoubanDto;
-import org.humingk.movie.service.douban.dto.movie.SearchResultMovieDoubanDto;
-import org.humingk.movie.service.douban.dto.movie.SearchTipsMovieDoubanDto;
+import org.humingk.movie.dal.domain.SearchResultMovieDoubanDo;
+import org.humingk.movie.dal.domain.SearchTipsMovieDoubanDo;
+import org.humingk.movie.dal.entity.MovieDouban;
+import org.humingk.movie.service.douban.dto.MovieDoubanDetailsDto;
 import org.springframework.validation.annotation.Validated;
 
 import javax.validation.constraints.NotNull;
@@ -24,7 +24,7 @@ public interface MovieDoubanService {
    * @return
    */
   @NotNull(message = "该ID暂无对应豆瓣电影")
-  MovieDoubanDto getMovieDoubanByMovieDoubanId(long id);
+  MovieDouban getMovieDoubanByMovieDoubanId(long id);
 
   /**
    * 豆瓣电影详细信息
@@ -43,7 +43,7 @@ public interface MovieDoubanService {
    * @param limit 限制数
    * @return
    */
-  List<SearchTipsMovieDoubanDto> getSearchTipsMovieDoubanListByMovieDoubanKeywordStart(
+  List<SearchTipsMovieDoubanDo> getSearchTipsMovieDoubanListByMovieDoubanKeywordStart(
       String keyword, int offset, int limit);
 
   /**
@@ -54,6 +54,6 @@ public interface MovieDoubanService {
    * @param limit 限制数
    * @return
    */
-  List<SearchResultMovieDoubanDto> getSearchResultMovieDoubanListByMovieDoubanKeyword(
+  List<SearchResultMovieDoubanDo> getSearchResultMovieDoubanListByMovieDoubanKeyword(
       String keyword, int offset, int limit);
 }

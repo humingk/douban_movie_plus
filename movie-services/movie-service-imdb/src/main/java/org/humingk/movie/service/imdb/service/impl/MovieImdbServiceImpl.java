@@ -7,9 +7,7 @@ import org.humingk.movie.dal.mapper.auto.MovieImdbToTypeMovieMapper;
 import org.humingk.movie.dal.mapper.auto.RateImdbMapper;
 import org.humingk.movie.dal.mapper.plus.CelebrityImdbMapperPlus;
 import org.humingk.movie.service.imdb.converter.movie.MovieImdbDetailsDtoConverter;
-import org.humingk.movie.service.imdb.converter.movie.MovieImdbDtoConverter;
 import org.humingk.movie.service.imdb.dto.movie.MovieImdbDetailsDto;
-import org.humingk.movie.service.imdb.dto.movie.MovieImdbDto;
 import org.humingk.movie.service.imdb.service.MovieImdbService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,8 +20,6 @@ import java.util.List;
 public class MovieImdbServiceImpl implements MovieImdbService {
 
   /** converter */
-  @Autowired private MovieImdbDtoConverter movieImdbDtoConverter;
-
   @Autowired private MovieImdbDetailsDtoConverter movieImdbDetailsDtoConverter;
   /** example */
   @Autowired private MovieImdbToTypeMovieExample movieImdbToTypeMovieExample;
@@ -38,17 +34,17 @@ public class MovieImdbServiceImpl implements MovieImdbService {
   @Autowired private CelebrityImdbMapperPlus celebrityImdbMapperPlus;
 
   @Override
-  public MovieImdbDto getMovieImdbByMovieImdbId(long id) {
-    return movieImdbDtoConverter.to(movieImdbMapper.selectByPrimaryKey(id));
+  public MovieImdb getMovieImdbByMovieImdbId(long id) {
+    return movieImdbMapper.selectByPrimaryKey(id);
   }
 
   @Override
-  public MovieImdbDto getMovieImdbByMovieDoubanId(long id) {
+  public MovieImdb getMovieImdbByMovieDoubanId(long id) {
     movieImdbExample.start().andIdMovieDoubanEqualTo(id);
     List<MovieImdb> movieImdbList = movieImdbMapper.selectByExample(movieImdbExample);
     return movieImdbList.size() != 1
         ? null
-        : movieImdbDtoConverter.to(movieImdbMapper.selectByExample(movieImdbExample).get(0));
+        : movieImdbMapper.selectByExample(movieImdbExample).get(0);
   }
 
   @Override

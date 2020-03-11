@@ -27,7 +27,7 @@ public interface MovieImdbDetailsVoConverter
     extends BaseConverter<MovieImdbDetailsVo, MovieImdbDetailsDto> {
   @Override
   @Mappings({
-    @Mapping(target = "base", source = "movieImdbDto"),
+    @Mapping(target = "base", source = "movieImdb"),
     @Mapping(target = "rate", source = "rateImdb"),
     @Mapping(
         target = "typeList",

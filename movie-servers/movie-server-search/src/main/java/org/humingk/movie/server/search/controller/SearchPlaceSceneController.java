@@ -4,7 +4,7 @@ import org.humingk.movie.api.common.converter.scene.PlaceSceneVoConverter;
 import org.humingk.movie.api.common.vo.scene.PlaceSceneVo;
 import org.humingk.movie.api.search.SearchPlaceSceneApi;
 import org.humingk.movie.common.entity.Result;
-import org.humingk.movie.service.scene.service.SceneMovieService;
+import org.humingk.movie.service.scene.service.ScenePlaceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,7 +16,7 @@ import java.util.List;
 /** @author humingk */
 @RestController
 public class SearchPlaceSceneController implements SearchPlaceSceneApi {
-  @Autowired private SceneMovieService sceneMovieService;
+  @Autowired private ScenePlaceService scenePlaceService;
   @Autowired private PlaceSceneVoConverter placeSceneVoConverter;
 
   @Override
@@ -26,10 +26,8 @@ public class SearchPlaceSceneController implements SearchPlaceSceneApi {
           Integer offset,
       @RequestParam(value = "limit", required = false, defaultValue = "10") @PositiveOrZero
           Integer limit) {
-    return null;
-    //    return Result.success(
-    //        movieSceneVoConverter.toList(
-    //            sceneMovieService.getMovieSceneListByMovieSceneKeywordStart(
-    //                keyword.trim(), offset, limit)));
+    return Result.success(
+        placeSceneVoConverter.toList(
+            scenePlaceService.getPlaceSceneListByPlaceKeywordStart(keyword.trim(), offset, limit)));
   }
 }

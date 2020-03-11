@@ -6,9 +6,7 @@ import org.humingk.movie.dal.entity.CelebrityImdbExample;
 import org.humingk.movie.dal.mapper.auto.CelebrityImdbMapper;
 import org.humingk.movie.dal.mapper.plus.MovieImdbMapperPlus;
 import org.humingk.movie.service.imdb.converter.celebrity.CelebrityImdbDetailsDtoConverter;
-import org.humingk.movie.service.imdb.converter.celebrity.CelebrityImdbDtoConverter;
 import org.humingk.movie.service.imdb.dto.celebrity.CelebrityImdbDetailsDto;
-import org.humingk.movie.service.imdb.dto.celebrity.CelebrityImdbDto;
 import org.humingk.movie.service.imdb.service.CelebrityImdbService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,8 +17,6 @@ import java.util.List;
 @Service
 public class CelebrityImdbServiceImpl implements CelebrityImdbService {
   /** converter */
-  @Autowired private CelebrityImdbDtoConverter celebrityImdbDtoConverter;
-
   @Autowired private CelebrityImdbDetailsDtoConverter celebrityImdbDetailsDtoConverter;
   /** example */
   @Autowired private CelebrityImdbExample celebrityImdbExample;
@@ -30,18 +26,16 @@ public class CelebrityImdbServiceImpl implements CelebrityImdbService {
   @Autowired private MovieImdbMapperPlus movieImdbMapperPlus;
 
   @Override
-  public CelebrityImdbDto getCelebrityImdbByCelebrityImdbId(long id) {
-    return celebrityImdbDtoConverter.to(celebrityImdbMapper.selectByPrimaryKey(id));
+  public CelebrityImdb getCelebrityImdbByCelebrityImdbId(long id) {
+    return celebrityImdbMapper.selectByPrimaryKey(id);
   }
 
   @Override
-  public CelebrityImdbDto getCelebrityImdbByCelebrityDoubanId(long id) {
+  public CelebrityImdb getCelebrityImdbByCelebrityDoubanId(long id) {
     celebrityImdbExample.start().andIdCelebrityDoubanEqualTo(id);
     List<CelebrityImdb> celebrityImdbList =
         celebrityImdbMapper.selectByExample(celebrityImdbExample);
-    return celebrityImdbList.size() != 1
-        ? null
-        : celebrityImdbDtoConverter.to(celebrityImdbList.get(0));
+    return celebrityImdbList.size() != 1 ? null : celebrityImdbList.get(0);
   }
 
   @Override

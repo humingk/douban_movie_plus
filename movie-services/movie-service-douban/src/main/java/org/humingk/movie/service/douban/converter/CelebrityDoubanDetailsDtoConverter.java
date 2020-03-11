@@ -1,12 +1,11 @@
-package org.humingk.movie.service.douban.converter.celebrity;
+package org.humingk.movie.service.douban.converter;
 
 import org.humingk.movie.dal.domain.AwardOfMovieAndCelebrityDoubanDo;
 import org.humingk.movie.dal.domain.MovieDoubanOfCelebrityDoubanDo;
 import org.humingk.movie.dal.entity.AliasCelebrityDouban;
 import org.humingk.movie.dal.entity.CelebrityDouban;
 import org.humingk.movie.dal.entity.ImageCelebrityDouban;
-import org.humingk.movie.service.douban.converter.ImageDoubanDoConverter;
-import org.humingk.movie.service.douban.dto.celebrity.CelebrityDoubanDetailsDto;
+import org.humingk.movie.service.douban.dto.CelebrityDoubanDetailsDto;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
@@ -16,12 +15,9 @@ import java.util.List;
 /** @author humingk */
 @Mapper(
     componentModel = "spring",
-    uses = {CelebrityDoubanDtoConverter.class, ImageDoubanDoConverter.class})
+    uses = {ImageDoubanDoConverter.class})
 public interface CelebrityDoubanDetailsDtoConverter {
-  @Mappings({
-    @Mapping(target = "celebrityDoubanDto", source = "celebrityDouban"),
-    @Mapping(target = "imageDoubanDoList", source = "imageCelebrityDoubanList")
-  })
+  @Mappings({@Mapping(target = "imageDoubanDoList", source = "imageCelebrityDoubanList")})
   CelebrityDoubanDetailsDto to(
       /** 豆瓣影人基础信息 */
       CelebrityDouban celebrityDouban,

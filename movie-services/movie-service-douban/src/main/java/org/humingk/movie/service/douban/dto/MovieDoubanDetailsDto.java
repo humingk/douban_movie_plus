@@ -1,12 +1,12 @@
-package org.humingk.movie.service.douban.dto.movie;
+package org.humingk.movie.service.douban.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.humingk.movie.dal.domain.AwardOfMovieAndCelebrityDoubanDo;
 import org.humingk.movie.dal.domain.CelebrityDoubanOfMovieDoubanDo;
-import org.humingk.movie.dal.entity.*;
 import org.humingk.movie.dal.domain.ImageDoubanDo;
+import org.humingk.movie.dal.entity.*;
 
 import java.io.Serializable;
 import java.util.List;
@@ -22,7 +22,7 @@ import java.util.List;
 public class MovieDoubanDetailsDto implements Serializable {
   private static final long serialVersionUID = 1L;
   /** 豆瓣电影基础信息 */
-  private MovieDoubanDto movieDoubanDto;
+  private MovieDouban movieDouban;
   /** 豆瓣电影评分信息 */
   private RateMovieDouban rateMovieDouban;
   /** 豆瓣电影别名列表 */

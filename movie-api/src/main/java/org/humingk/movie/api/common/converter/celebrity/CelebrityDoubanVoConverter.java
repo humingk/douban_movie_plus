@@ -3,7 +3,7 @@ package org.humingk.movie.api.common.converter.celebrity;
 import org.humingk.movie.api.common.util.ConverterUtil;
 import org.humingk.movie.api.common.vo.celebrity.CelebrityDoubanVo;
 import org.humingk.movie.common.util.BaseConverter;
-import org.humingk.movie.service.douban.dto.celebrity.CelebrityDoubanDto;
+import org.humingk.movie.dal.entity.CelebrityDouban;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
@@ -13,7 +13,7 @@ import org.mapstruct.Mappings;
     componentModel = "spring",
     uses = {ConverterUtil.class})
 public interface CelebrityDoubanVoConverter
-    extends BaseConverter<CelebrityDoubanVo, CelebrityDoubanDto> {
+    extends BaseConverter<CelebrityDoubanVo, CelebrityDouban> {
   @Override
   @Mappings({
     @Mapping(
@@ -41,5 +41,5 @@ public interface CelebrityDoubanVoConverter
         source = "urlPortrait",
         qualifiedByName = {"util", "urlPortrait"})
   })
-  CelebrityDoubanVo to(CelebrityDoubanDto celebrityDoubanDto);
+  CelebrityDoubanVo to(CelebrityDouban celebrityDouban);
 }

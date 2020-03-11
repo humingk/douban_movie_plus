@@ -2,7 +2,6 @@ package org.humingk.movie.service.imdb.service;
 
 import org.humingk.movie.dal.entity.MovieImdb;
 import org.humingk.movie.service.imdb.dto.movie.MovieImdbDetailsDto;
-import org.humingk.movie.service.imdb.dto.movie.MovieImdbDto;
 import org.springframework.validation.annotation.Validated;
 
 import javax.validation.constraints.NotNull;
@@ -21,7 +20,7 @@ public interface MovieImdbService {
    * @return
    */
   @NotNull(message = "该IMDB电影ID暂无对应IMDB电影")
-  MovieImdbDto getMovieImdbByMovieImdbId(long id);
+  MovieImdb getMovieImdbByMovieImdbId(long id);
 
   /**
    * 获取IMDB电影基础信息
@@ -30,7 +29,7 @@ public interface MovieImdbService {
    * @return
    */
   @NotNull(message = "该IMDB电影ID暂无对应IMDB电影")
-  MovieImdbDto getMovieImdbByMovieDoubanId(long id);
+  MovieImdb getMovieImdbByMovieDoubanId(long id);
 
   /**
    * 获取IMDB电影详细信息

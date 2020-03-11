@@ -239,7 +239,7 @@ public class ConverterUtil {
    */
   @Named("urlImage")
   public String urlImage(String id) {
-    return "http://cache.fotoplace.cc/mocation/" + id;
+    return id.isEmpty() ? "" : "http://cache.fotoplace.cc/mocation/" + id;
   }
 
   /**

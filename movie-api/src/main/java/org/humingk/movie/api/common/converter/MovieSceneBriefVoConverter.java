@@ -17,7 +17,7 @@ public interface MovieSceneBriefVoConverter
     extends BaseConverter<MovieSceneBriefVo, MovieSceneBriefDto> {
   @Override
   @Mappings({
-    @Mapping(target = "base", source = "movieSceneDto"),
+    @Mapping(target = "base", source = "movieScene"),
     @Mapping(target = "sceneList", source = "sceneBriefDoList")
   })
   MovieSceneBriefVo to(MovieSceneBriefDto movieSceneBriefDto);

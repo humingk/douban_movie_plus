@@ -11,14 +11,8 @@ import org.humingk.movie.dal.mapper.auto.CelebrityDoubanMapper;
 import org.humingk.movie.dal.mapper.auto.ImageCelebrityDoubanMapper;
 import org.humingk.movie.dal.mapper.plus.MovieDouanToAwardMovieMapperPlus;
 import org.humingk.movie.dal.mapper.plus.MovieDoubanMapperPlus;
-import org.humingk.movie.service.douban.converter.celebrity.CelebrityDoubanDetailsDtoConverter;
-import org.humingk.movie.service.douban.converter.celebrity.CelebrityDoubanDtoConverter;
-import org.humingk.movie.service.douban.converter.celebrity.SearchResultCelebrityDoubanDtoConverter;
-import org.humingk.movie.service.douban.converter.celebrity.SearchTipsCelebrityDoubanDtoConverter;
-import org.humingk.movie.service.douban.dto.celebrity.CelebrityDoubanDetailsDto;
-import org.humingk.movie.service.douban.dto.celebrity.CelebrityDoubanDto;
-import org.humingk.movie.service.douban.dto.celebrity.SearchResultCelebrityDoubanDto;
-import org.humingk.movie.service.douban.dto.celebrity.SearchTipsCelebrityDoubanDto;
+import org.humingk.movie.service.douban.converter.CelebrityDoubanDetailsDtoConverter;
+import org.humingk.movie.service.douban.dto.CelebrityDoubanDetailsDto;
 import org.humingk.movie.service.douban.service.CelebrityDoubanService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -38,14 +32,8 @@ public class CelebrityDoubanServiceImpl implements CelebrityDoubanService {
   @Autowired private ImageCelebrityDoubanMapper imageCelebrityDoubanMapper;
   @Autowired private MovieDouanToAwardMovieMapperPlus movieDouanToAwardMovieMapperPlus;
   /** converter */
-  @Autowired private CelebrityDoubanDtoConverter celebrityDoubanDtoConverter;
-
   @Autowired private CelebrityDoubanDetailsDtoConverter celebrityDoubanDetailsDtoConverter;
 
-  @Autowired private SearchTipsCelebrityDoubanDtoConverter searchTipsCelebrityDoubanDtoConverter;
-
-  @Autowired
-  private SearchResultCelebrityDoubanDtoConverter searchResultCelebrityDoubanDtoConverter;
   /** example */
   @Autowired private AliasCelebrityDoubanExample aliasCelebrityDoubanExample;
 
@@ -53,8 +41,8 @@ public class CelebrityDoubanServiceImpl implements CelebrityDoubanService {
   @Autowired private ImageCelebrityDoubanExample imageCelebrityDoubanExample;
 
   @Override
-  public CelebrityDoubanDto getCelebrityDoubanByCelebrityDoubanId(long id) {
-    return celebrityDoubanDtoConverter.to(celebrityDoubanMapper.selectByPrimaryKey(id));
+  public CelebrityDouban getCelebrityDoubanByCelebrityDoubanId(long id) {
+    return celebrityDoubanMapper.selectByPrimaryKey(id);
   }
 
   @Override
@@ -91,7 +79,7 @@ public class CelebrityDoubanServiceImpl implements CelebrityDoubanService {
   }
 
   @Override
-  public List<SearchTipsCelebrityDoubanDto>
+  public List<SearchTipsCelebrityDoubanDo>
       getSearchTipsCelebrityDoubanListByCelebrityDoubanKeywordStart(
           String keyword, int offset, int limit) {
     List<SearchTipsCelebrityDoubanDo> searchTipsCelebrityDoubanDoList = new ArrayList<>();
@@ -107,11 +95,11 @@ public class CelebrityDoubanServiceImpl implements CelebrityDoubanService {
       searchTipsCelebrityDoubanDoList.add(
           new SearchTipsCelebrityDoubanDo(celebrityDouban, aliasCelebrityDoubanList));
     }
-    return searchTipsCelebrityDoubanDtoConverter.toList(searchTipsCelebrityDoubanDoList);
+    return searchTipsCelebrityDoubanDoList;
   }
 
   @Override
-  public List<SearchResultCelebrityDoubanDto>
+  public List<SearchResultCelebrityDoubanDo>
       getSearchResultCelebrityDoubanListByCelebrityDoubanKeyword(
           String keyword, int offset, int limit) {
     List<SearchResultCelebrityDoubanDo> searchResultCelebrityDoubanDoList = new ArrayList<>();
@@ -132,6 +120,6 @@ public class CelebrityDoubanServiceImpl implements CelebrityDoubanService {
           new SearchResultCelebrityDoubanDo(
               celebrityDouban, aliasCelebrityDoubanList, movieDoubanOfCelebrityDoubanDoList));
     }
-    return searchResultCelebrityDoubanDtoConverter.toList(searchResultCelebrityDoubanDoList);
+    return searchResultCelebrityDoubanDoList;
   }
 }
