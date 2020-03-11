@@ -34,7 +34,7 @@ public class MyErrorController implements ErrorController {
    * @return
    */
   @RequestMapping("/error")
-  public Result error() {
+  public Result<Object> error() {
     int status = (int) request.getAttribute("javax.servlet.error.status_code");
     switch (status) {
       case 400:

@@ -24,7 +24,7 @@ public class SearchMovieDoubanController implements SearchMovieDoubanApi {
   @Autowired private SearchResultMovieDoubanVoConverter searchResultMovieDoubanVoConverter;
 
   @Override
-  public Result<List<SearchTipsMovieDoubanVo>> searchTips(
+  public Result<List<SearchTipsMovieDoubanVo>> tips(
       @RequestParam("keyword") @NotBlank String keyword,
       @RequestParam(value = "offset", required = false, defaultValue = "0") @PositiveOrZero
           Integer offset,
@@ -37,7 +37,7 @@ public class SearchMovieDoubanController implements SearchMovieDoubanApi {
   }
 
   @Override
-  public Result<List<SearchResultMovieDoubanVo>> searchDetails(
+  public Result<List<SearchResultMovieDoubanVo>> details(
       @RequestParam("keyword") @NotBlank String keyword,
       @RequestParam(value = "offset", required = false, defaultValue = "0") @PositiveOrZero
           Integer offset,

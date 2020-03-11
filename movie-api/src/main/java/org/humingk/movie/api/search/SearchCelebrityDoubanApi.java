@@ -34,8 +34,8 @@ public interface SearchCelebrityDoubanApi {
    * @return
    * @apiNote 根据影人名称开头的字符串找出豆瓣影人的基本信息列表
    */
-  @RequestMapping(value = "/search/celebrity/douban/search_tips", method = RequestMethod.GET)
-  Result<List<SearchTipsCelebrityDoubanVo>> searchTips(
+  @RequestMapping(value = "/search/celebrity/douban/tips", method = RequestMethod.GET)
+  Result<List<SearchTipsCelebrityDoubanVo>> tips(
       @RequestParam("keyword") @NotBlank String keyword,
       @RequestParam(value = "offset", required = false, defaultValue = "0") @PositiveOrZero
           Integer offset,
@@ -51,8 +51,8 @@ public interface SearchCelebrityDoubanApi {
    * @return
    * @apiNote 根据影人名称字符串找出豆瓣影人的基本信息列表
    */
-  @RequestMapping(value = "/search/celebrity/douban/search_details", method = RequestMethod.GET)
-  Result<List<SearchResultCelebrityDoubanVo>> searchDetails(
+  @RequestMapping(value = "/search/celebrity/douban/details", method = RequestMethod.GET)
+  Result<List<SearchResultCelebrityDoubanVo>> details(
       @RequestParam("keyword") @NotBlank String keyword,
       @RequestParam(value = "offset", required = false, defaultValue = "0") @PositiveOrZero
           Integer offset,

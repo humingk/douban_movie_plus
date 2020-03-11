@@ -1,6 +1,7 @@
 package org.humingk.movie.security.config;
 
 import org.humingk.movie.common.exception.translator.MyOauth2Translator;
+import org.humingk.movie.service.user.entity.SecurityUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -89,7 +90,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
       Map<String, Object> map =
           new HashMap() {
             {
-              put("key_1", "value_1");
+              put("userId", ((SecurityUser) authentication.getPrincipal()).getId());
               put("organization", authentication.getName());
             }
           };

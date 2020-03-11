@@ -18,21 +18,15 @@ public interface MovieImdbMapper {
 
     int insertSelective(MovieImdb record);
 
-    List<MovieImdb> selectByExampleWithBLOBs(MovieImdbExample example);
-
     List<MovieImdb> selectByExample(MovieImdbExample example);
 
     MovieImdb selectByPrimaryKey(Long id);
 
     int updateByExampleSelective(@Param("record") MovieImdb record, @Param("example") MovieImdbExample example);
 
-    int updateByExampleWithBLOBs(@Param("record") MovieImdb record, @Param("example") MovieImdbExample example);
-
     int updateByExample(@Param("record") MovieImdb record, @Param("example") MovieImdbExample example);
 
     int updateByPrimaryKeySelective(MovieImdb record);
-
-    int updateByPrimaryKeyWithBLOBs(MovieImdb record);
 
     int updateByPrimaryKey(MovieImdb record);
 }

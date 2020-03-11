@@ -31,7 +31,7 @@ public class ConverterUtil {
    */
   @Named("unixTimestamp")
   public String unixTimestamp(Long unixTimestamp) {
-    return DateFormatUtils.format(unixTimestamp, "yyyy-MM-dd");
+    return unixTimestamp == 0 ? "" : DateFormatUtils.format(unixTimestamp, "yyyy-MM-dd");
   }
 
   /**

@@ -71,7 +71,7 @@ public interface UserApi {
    */
   @RequestMapping(value = "/user/register", method = RequestMethod.POST)
   Result<Object> register(
-      @RequestParam(value = "id", required = false, defaultValue = "") @NotBlank String id,
+      @RequestParam(value = "id", required = false, defaultValue = "") String id,
       @RequestParam("email") @NotBlank String email,
       @RequestParam("password") @NotBlank String password);
 

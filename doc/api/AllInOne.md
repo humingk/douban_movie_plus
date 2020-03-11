@@ -2773,6 +2773,7 @@ data|object|具体结果|-
 
 ## 电影场景API
 ### 电影场景简略信息
+
 **URL:** http://localhost:8081/v2/scene/fotoplace/bases
 
 **Type:** GET

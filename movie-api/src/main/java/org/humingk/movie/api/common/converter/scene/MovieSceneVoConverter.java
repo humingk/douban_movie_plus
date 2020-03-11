@@ -3,7 +3,7 @@ package org.humingk.movie.api.common.converter.scene;
 import org.humingk.movie.api.common.util.ConverterUtil;
 import org.humingk.movie.api.common.vo.scene.MovieSceneVo;
 import org.humingk.movie.common.util.BaseConverter;
-import org.humingk.movie.dal.entity.MovieScene;
+import org.humingk.movie.service.scene.dto.MovieSceneDto;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
@@ -12,7 +12,7 @@ import org.mapstruct.Mappings;
 @Mapper(
     componentModel = "spring",
     uses = {ConverterUtil.class})
-public interface MovieSceneVoConverter extends BaseConverter<MovieSceneVo, MovieScene> {
+public interface MovieSceneVoConverter extends BaseConverter<MovieSceneVo, MovieSceneDto> {
   @Override
   @Mappings({
     @Mapping(
@@ -28,5 +28,5 @@ public interface MovieSceneVoConverter extends BaseConverter<MovieSceneVo, Movie
         source = "urlMap",
         qualifiedByName = {"util", "urlMap"}),
   })
-  MovieSceneVo to(MovieScene movieScene);
+  MovieSceneVo to(MovieSceneDto movieSceneDto);
 }

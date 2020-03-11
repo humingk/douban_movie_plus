@@ -1,12 +1,12 @@
 package org.humingk.movie.server.user.controller;
 
 import com.alibaba.fastjson.JSONObject;
+import feign.FeignException;
 import lombok.extern.slf4j.Slf4j;
 import org.humingk.movie.api.auth.Oauth2Api;
 import org.humingk.movie.api.user.UserApi;
 import org.humingk.movie.common.entity.Result;
 import org.humingk.movie.common.enumeration.CodeAndMsg;
-import org.humingk.movie.common.exception.MyException;
 import org.humingk.movie.dal.entity.User;
 import org.humingk.movie.service.user.service.RegisterService;
 import org.jsoup.Jsoup;
@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletResponse;
@@ -63,23 +64,29 @@ public class UserController implements UserApi {
   @Autowired private Oauth2Api oauth2Api;
 
   @Override
-  public Result<Object> login(@NotBlank String email, @NotBlank String password) {
+  public Result<Object> login(
+      @RequestParam("email") @NotBlank String email,
+      @RequestParam("password") @NotBlank String password) {
+    Map<String, String> params =
+        new HashMap() {
+          {
+            put("username", email);
+            put("password", password);
+            put("grant_type", "password");
+            put("scope", authClientScopes);
+            put("client_id", authClientId);
+            put("client_secret", authClientSecret);
+          }
+        };
     try {
-      Map<String, String> params =
-          new HashMap() {
-            {
-              put("username", email);
-              put("password", password);
-              put("grant_type", "password");
-              put("scope", authClientScopes);
-              put("client_id", authClientId);
-              put("client_secret", authClientSecret);
-            }
-          };
-      return Result.success(oauth2Api.postAccessToken(params));
-    } catch (Exception e) {
-      log.error("登录出错", e);
-      throw new MyException(CodeAndMsg.ERROR, e.getMessage());
+      return Result.success(oauth2Api.postAccessToken(params).getBody());
+    } catch (FeignException e) {
+      if (e.status() == 400) {
+        return Result.error(CodeAndMsg.UNAUTHORIZED, "密码错误");
+      } else if (e.status() == 401) {
+        return Result.error(CodeAndMsg.NOUSER);
+      }
+      return Result.error(CodeAndMsg.FORBIDDEN);
     }
   }
 
@@ -134,7 +141,7 @@ public class UserController implements UserApi {
                   .get()
                   .body()
                   .text()));
-    } catch (Exception e) {
+    } catch (IOException e) {
       log.error("Github申请token失败", e);
     }
     return Result.success(result);
@@ -142,9 +149,11 @@ public class UserController implements UserApi {
 
   @Override
   public Result<Object> register(
-      @NotBlank String id, @NotBlank String email, @NotBlank String password) {
+      @RequestParam(value = "id", required = false, defaultValue = "") String id,
+      @RequestParam("email") @NotBlank String email,
+      @RequestParam("password") @NotBlank String password) {
     String userId = registerService.register(new User(id, email, password));
-    return userId.isEmpty() ? Result.error(userId) : Result.success(userId);
+    return userId.isEmpty() ? Result.error(CodeAndMsg.BADREQUEST) : login(email, password);
   }
 
   @Override

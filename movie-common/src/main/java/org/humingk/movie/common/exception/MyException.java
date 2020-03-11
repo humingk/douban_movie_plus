@@ -21,51 +21,45 @@ import static org.humingk.movie.common.enumeration.CodeAndMsg.ERROR;
 @EqualsAndHashCode(callSuper = true)
 public class MyException extends RuntimeException {
   /** 异常状态码 */
-  protected int status;
+  protected int code;
   /** 异常信息 */
-  protected String message;
+  protected String msg;
 
-  /** 更多异常信息（包括自定义异常信息、错误堆栈信息） */
-  protected Object data;
-
-  /** 500，服务器内部错误,不包括任何详细错误信息 */
+  /** 500，服务器内部错误 */
   public MyException() {
-    this.status = ERROR.code;
-    this.message = ERROR.msg;
-    this.data = null;
+    this.code = ERROR.code;
+    this.msg = ERROR.msg;
   }
 
   /**
-   * 500，服务器内部错误,包括更多自定义错误信息
+   * 500，服务器内部错误
    *
-   * @param data
+   * @param msg 自定义异常信息
    */
-  public MyException(Object data) {
-    this.status = ERROR.code;
-    this.message = ERROR.msg;
-    this.data = data;
+  public MyException(String msg) {
+    this.code = ERROR.code;
+    this.msg = msg;
   }
 
   /**
-   * 业务错误,已知错误类型，且错误类型已加入StateAndMessage，不包括任何错误细节
+   * 业务错误
    *
-   * @param codeAndMsg
-   */
-  public MyException(CodeAndMsg codeAndMsg) {
-    this.status = codeAndMsg.code;
-    this.message = codeAndMsg.msg;
-    this.data = null;
-  }
-
-  /**
-   * 业务错误,已知错误类型，且错误类型已加入StateAndMessage，包括更多错误信息（自定义信息，甚至错误堆栈信息）
-   *
-   * @param codeAndMsg
+   * @param codeAndMsg 已知错误类型
    * @return
    */
-  public MyException(CodeAndMsg codeAndMsg, Object data) {
-    this.status = codeAndMsg.code;
-    this.message = codeAndMsg.msg;
-    this.data = data;
+  public MyException(CodeAndMsg codeAndMsg) {
+    this.code = codeAndMsg.code;
+    this.msg = codeAndMsg.msg;
+  }
+  /**
+   * 业务错误
+   *
+   * @param codeAndMsg 已知错误类型
+   * @param msg 自定义异常信息
+   * @return
+   */
+  public MyException(CodeAndMsg codeAndMsg, String msg) {
+    this.code = codeAndMsg.code;
+    this.msg = msg;
   }
 }

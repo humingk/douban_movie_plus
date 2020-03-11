@@ -34,8 +34,8 @@ public interface SearchMovieDoubanApi {
    * @return
    * @apiNote 根据电影名称开头的字符串找出豆瓣电影的基本信息列表
    */
-  @RequestMapping(value = "/search/movie/douban/search_tips", method = RequestMethod.GET)
-  Result<List<SearchTipsMovieDoubanVo>> searchTips(
+  @RequestMapping(value = "/search/movie/douban/tips", method = RequestMethod.GET)
+  Result<List<SearchTipsMovieDoubanVo>> tips(
       @RequestParam("keyword") @NotBlank String keyword,
       @RequestParam(value = "offset", required = false, defaultValue = "0") @PositiveOrZero
           Integer offset,
@@ -51,8 +51,8 @@ public interface SearchMovieDoubanApi {
    * @return
    * @apiNote 根据电影名称字符串找出豆瓣电影的基本信息列表
    */
-  @RequestMapping(value = "/search/movie/douban/search_details", method = RequestMethod.GET)
-  Result<List<SearchResultMovieDoubanVo>> searchDetails(
+  @RequestMapping(value = "/search/movie/douban/details", method = RequestMethod.GET)
+  Result<List<SearchResultMovieDoubanVo>> details(
       @RequestParam("keyword") @NotBlank String keyword,
       @RequestParam(value = "offset", required = false, defaultValue = "0") @PositiveOrZero
           Integer offset,

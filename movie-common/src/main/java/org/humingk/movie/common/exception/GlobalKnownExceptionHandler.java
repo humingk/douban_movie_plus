@@ -39,8 +39,8 @@ public class GlobalKnownExceptionHandler extends ResponseEntityExceptionHandler 
    * @return
    */
   @ExceptionHandler(MyException.class)
-  public Result handleMyException(MyException e) {
-    log.error("已知异常:{},{}:{}", e.getStatus(), e.getMessage(), e.getData());
+  public Result<Object> handleMyException(MyException e) {
+    log.error("已知异常:{},{}", e.getCode(), e.getMsg());
     return Result.error(e);
   }
 
@@ -60,7 +60,7 @@ public class GlobalKnownExceptionHandler extends ResponseEntityExceptionHandler 
       HttpStatus status,
       WebRequest request) {
     return handleExceptionInternal(
-        ex, Result.error(PARAMTER, ex), headers, HttpStatus.BAD_REQUEST, request);
+        ex, Result.error(PARAMTER), headers, HttpStatus.BAD_REQUEST, request);
   }
 
   /**
@@ -70,9 +70,9 @@ public class GlobalKnownExceptionHandler extends ResponseEntityExceptionHandler 
    * @return
    */
   @ExceptionHandler(ValidationException.class)
-  public Result handleValidationException(ValidationException e) {
+  public Result<Object> handleValidationException(ValidationException e) {
     log.error("校验异常:{}", e.getMessage());
-    return Result.error(PARAMTER, e);
+    return Result.error(PARAMTER);
   }
 
   /**
@@ -82,8 +82,8 @@ public class GlobalKnownExceptionHandler extends ResponseEntityExceptionHandler 
    * @return
    */
   @ExceptionHandler(ConstraintViolationException.class)
-  public Result handleConstraintViolationException(ConstraintViolationException e) {
+  public Result<Object> handleConstraintViolationException(ConstraintViolationException e) {
     log.error("约束校验异常:{}", e.getMessage());
-    return Result.error(PARAMTER, e);
+    return Result.error(PARAMTER);
   }
 }

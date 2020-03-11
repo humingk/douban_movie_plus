@@ -3,7 +3,7 @@
 <mapper namespace="org.humingk.movie.dal.mapper.auto.MovieZhihuMapper">
   <resultMap id="BaseResultMap" type="org.humingk.movie.dal.entity.MovieZhihu">
     <id column="id" jdbcType="BIGINT" property="id" />
-    <id column="id_movie_douban" jdbcType="BIGINT" property="idMovieDouban" />
+    <result column="id_movie_douban" jdbcType="BIGINT" property="idMovieDouban" />
     <result column="name_zh" jdbcType="VARCHAR" property="nameZh" />
     <result column="zhihu_score" jdbcType="DECIMAL" property="zhihuScore" />
     <result column="zhihu_vote" jdbcType="INTEGER" property="zhihuVote" />
@@ -84,17 +84,15 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" parameterType="map" resultMap="BaseResultMap">
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from movie_zhihu
     where id = #{id,jdbcType=BIGINT}
-      and id_movie_douban = #{idMovieDouban,jdbcType=BIGINT}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="map">
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from movie_zhihu
     where id = #{id,jdbcType=BIGINT}
-      and id_movie_douban = #{idMovieDouban,jdbcType=BIGINT}
   </delete>
   <delete id="deleteByExample" parameterType="org.humingk.movie.dal.entity.MovieZhihuExample">
     delete from movie_zhihu
@@ -200,6 +198,9 @@
   <update id="updateByPrimaryKeySelective" parameterType="org.humingk.movie.dal.entity.MovieZhihu">
     update movie_zhihu
     <set>
+      <if test="idMovieDouban != null">
+        id_movie_douban = #{idMovieDouban,jdbcType=BIGINT},
+      </if>
       <if test="nameZh != null">
         name_zh = #{nameZh,jdbcType=VARCHAR},
       </if>
@@ -214,15 +215,14 @@
       </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
-      and id_movie_douban = #{idMovieDouban,jdbcType=BIGINT}
   </update>
   <update id="updateByPrimaryKey" parameterType="org.humingk.movie.dal.entity.MovieZhihu">
     update movie_zhihu
-    set name_zh = #{nameZh,jdbcType=VARCHAR},
+    set id_movie_douban = #{idMovieDouban,jdbcType=BIGINT},
+      name_zh = #{nameZh,jdbcType=VARCHAR},
       zhihu_score = #{zhihuScore,jdbcType=DECIMAL},
       zhihu_vote = #{zhihuVote,jdbcType=INTEGER},
       maoyan_score = #{maoyanScore,jdbcType=DECIMAL}
     where id = #{id,jdbcType=BIGINT}
-      and id_movie_douban = #{idMovieDouban,jdbcType=BIGINT}
   </update>
 </mapper>

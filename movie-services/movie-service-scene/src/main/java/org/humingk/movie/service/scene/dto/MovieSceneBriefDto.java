@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.humingk.movie.dal.domain.scene.SceneBriefDo;
-import org.humingk.movie.dal.entity.MovieScene;
 
 import java.io.Serializable;
 import java.util.List;
@@ -20,7 +19,7 @@ import java.util.List;
 public class MovieSceneBriefDto implements Serializable {
   private static final long serialVersionUID = 1L;
   /** 场景电影基础信息 */
-  private MovieScene movieScene;
+  private MovieSceneDto movieSceneDto;
   /** 场景地点简略信息 */
   private List<SceneBriefDo> sceneBriefDoList;
 }

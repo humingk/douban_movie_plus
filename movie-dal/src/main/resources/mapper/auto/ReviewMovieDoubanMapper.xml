@@ -7,9 +7,7 @@
     <result column="against_vote" jdbcType="INTEGER" property="againstVote" />
     <result column="create_datetime" jdbcType="BIGINT" property="createDatetime" />
     <result column="title" jdbcType="VARCHAR" property="title" />
-  </resultMap>
-  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="org.humingk.movie.dal.entity.ReviewMovieDouban">
-    <result column="content" jdbcType="LONGVARCHAR" property="content" />
+    <result column="content" jdbcType="VARCHAR" property="content" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -70,27 +68,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, agree_vote, against_vote, create_datetime, title
+    id, agree_vote, against_vote, create_datetime, title, content
   </sql>
-  <sql id="Blob_Column_List">
-    content
-  </sql>
-  <select id="selectByExampleWithBLOBs" parameterType="org.humingk.movie.dal.entity.ReviewMovieDoubanExample" resultMap="ResultMapWithBLOBs">
-    select
-    <if test="distinct">
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
-    from review_movie_douban
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null">
-      order by ${orderByClause}
-    </if>
-  </select>
   <select id="selectByExample" parameterType="org.humingk.movie.dal.entity.ReviewMovieDoubanExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
@@ -105,11 +84,9 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
     from review_movie_douban
     where id = #{id,jdbcType=BIGINT}
   </select>
@@ -128,7 +105,7 @@
       create_datetime, title, content
       )
     values (#{id,jdbcType=BIGINT}, #{agreeVote,jdbcType=INTEGER}, #{againstVote,jdbcType=INTEGER}, 
-      #{createDatetime,jdbcType=BIGINT}, #{title,jdbcType=VARCHAR}, #{content,jdbcType=LONGVARCHAR}
+      #{createDatetime,jdbcType=BIGINT}, #{title,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}
       )
   </insert>
   <insert id="insertSelective" parameterType="org.humingk.movie.dal.entity.ReviewMovieDouban">
@@ -170,7 +147,7 @@
         #{title,jdbcType=VARCHAR},
       </if>
       <if test="content != null">
-        #{content,jdbcType=LONGVARCHAR},
+        #{content,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -199,21 +176,9 @@
         title = #{record.title,jdbcType=VARCHAR},
       </if>
       <if test="record.content != null">
-        content = #{record.content,jdbcType=LONGVARCHAR},
+        content = #{record.content,jdbcType=VARCHAR},
       </if>
     </set>
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByExampleWithBLOBs" parameterType="map">
-    update review_movie_douban
-    set id = #{record.id,jdbcType=BIGINT},
-      agree_vote = #{record.agreeVote,jdbcType=INTEGER},
-      against_vote = #{record.againstVote,jdbcType=INTEGER},
-      create_datetime = #{record.createDatetime,jdbcType=BIGINT},
-      title = #{record.title,jdbcType=VARCHAR},
-      content = #{record.content,jdbcType=LONGVARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -224,7 +189,8 @@
       agree_vote = #{record.agreeVote,jdbcType=INTEGER},
       against_vote = #{record.againstVote,jdbcType=INTEGER},
       create_datetime = #{record.createDatetime,jdbcType=BIGINT},
-      title = #{record.title,jdbcType=VARCHAR}
+      title = #{record.title,jdbcType=VARCHAR},
+      content = #{record.content,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -245,18 +211,9 @@
         title = #{title,jdbcType=VARCHAR},
       </if>
       <if test="content != null">
-        content = #{content,jdbcType=LONGVARCHAR},
+        content = #{content,jdbcType=VARCHAR},
       </if>
     </set>
-    where id = #{id,jdbcType=BIGINT}
-  </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="org.humingk.movie.dal.entity.ReviewMovieDouban">
-    update review_movie_douban
-    set agree_vote = #{agreeVote,jdbcType=INTEGER},
-      against_vote = #{againstVote,jdbcType=INTEGER},
-      create_datetime = #{createDatetime,jdbcType=BIGINT},
-      title = #{title,jdbcType=VARCHAR},
-      content = #{content,jdbcType=LONGVARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
   <update id="updateByPrimaryKey" parameterType="org.humingk.movie.dal.entity.ReviewMovieDouban">
@@ -264,7 +221,8 @@
     set agree_vote = #{agreeVote,jdbcType=INTEGER},
       against_vote = #{againstVote,jdbcType=INTEGER},
       create_datetime = #{createDatetime,jdbcType=BIGINT},
-      title = #{title,jdbcType=VARCHAR}
+      title = #{title,jdbcType=VARCHAR},
+      content = #{content,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
 </mapper>

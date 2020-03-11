@@ -16,7 +16,7 @@ import org.mapstruct.Mappings;
 public interface MovieSceneAllVoConverter extends BaseConverter<MovieSceneAllVo, MovieSceneAllDto> {
   @Override
   @Mappings({
-    @Mapping(target = "base", source = "movieScene"),
+    @Mapping(target = "base", source = "movieSceneDto"),
     @Mapping(target = "sceneList", source = "sceneAllDoList")
   })
   MovieSceneAllVo to(MovieSceneAllDto movieSceneAllDto);

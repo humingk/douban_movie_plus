@@ -19,6 +19,7 @@ import java.util.UUID;
 /** @author humingk */
 @Service
 public class RegisterServiceImpl implements RegisterService {
+
   @Autowired private UserMapper userMapper;
   @Autowired private UserToRoleMapper userToRoleMapper;
 
@@ -39,9 +40,9 @@ public class RegisterServiceImpl implements RegisterService {
       userInsert = userMapper.insert(user);
     } catch (DuplicateKeyException e) {
       if (e.getCause().getMessage().contains("PRIMARY")) {
-        throw new MyException(CodeAndMsg.USER_ID_EXIST, "豆瓣ID:" + user.getId());
+        throw new MyException(CodeAndMsg.USER_ID_EXIST);
       } else {
-        throw new MyException(CodeAndMsg.EMAIL_EXIST, "email:" + user.getEmail());
+        throw new MyException(CodeAndMsg.EMAIL_EXIST);
       }
     }
     // 赋予普通用户权限

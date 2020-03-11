@@ -9,9 +9,7 @@
     <result column="sex" jdbcType="TINYINT" property="sex" />
     <result column="birth_date" jdbcType="BIGINT" property="birthDate" />
     <result column="url_portrait" jdbcType="BIGINT" property="urlPortrait" />
-  </resultMap>
-  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="org.humingk.movie.dal.entity.CelebrityDouban">
-    <result column="summary" jdbcType="LONGVARCHAR" property="summary" />
+    <result column="summary" jdbcType="VARCHAR" property="summary" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -72,27 +70,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, id_celebrity_imdb, name_zh, name_origin, sex, birth_date, url_portrait
+    id, id_celebrity_imdb, name_zh, name_origin, sex, birth_date, url_portrait, summary
   </sql>
-  <sql id="Blob_Column_List">
-    summary
-  </sql>
-  <select id="selectByExampleWithBLOBs" parameterType="org.humingk.movie.dal.entity.CelebrityDoubanExample" resultMap="ResultMapWithBLOBs">
-    select
-    <if test="distinct">
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
-    from celebrity_douban
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null">
-      order by ${orderByClause}
-    </if>
-  </select>
   <select id="selectByExample" parameterType="org.humingk.movie.dal.entity.CelebrityDoubanExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
@@ -107,11 +86,9 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
     from celebrity_douban
     where id = #{id,jdbcType=BIGINT}
   </select>
@@ -131,7 +108,7 @@
       url_portrait, summary)
     values (#{id,jdbcType=BIGINT}, #{idCelebrityImdb,jdbcType=BIGINT}, #{nameZh,jdbcType=VARCHAR}, 
       #{nameOrigin,jdbcType=VARCHAR}, #{sex,jdbcType=TINYINT}, #{birthDate,jdbcType=BIGINT}, 
-      #{urlPortrait,jdbcType=BIGINT}, #{summary,jdbcType=LONGVARCHAR})
+      #{urlPortrait,jdbcType=BIGINT}, #{summary,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="org.humingk.movie.dal.entity.CelebrityDouban">
     insert into celebrity_douban
@@ -184,7 +161,7 @@
         #{urlPortrait,jdbcType=BIGINT},
       </if>
       <if test="summary != null">
-        #{summary,jdbcType=LONGVARCHAR},
+        #{summary,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -219,23 +196,9 @@
         url_portrait = #{record.urlPortrait,jdbcType=BIGINT},
       </if>
       <if test="record.summary != null">
-        summary = #{record.summary,jdbcType=LONGVARCHAR},
+        summary = #{record.summary,jdbcType=VARCHAR},
       </if>
     </set>
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByExampleWithBLOBs" parameterType="map">
-    update celebrity_douban
-    set id = #{record.id,jdbcType=BIGINT},
-      id_celebrity_imdb = #{record.idCelebrityImdb,jdbcType=BIGINT},
-      name_zh = #{record.nameZh,jdbcType=VARCHAR},
-      name_origin = #{record.nameOrigin,jdbcType=VARCHAR},
-      sex = #{record.sex,jdbcType=TINYINT},
-      birth_date = #{record.birthDate,jdbcType=BIGINT},
-      url_portrait = #{record.urlPortrait,jdbcType=BIGINT},
-      summary = #{record.summary,jdbcType=LONGVARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -248,7 +211,8 @@
       name_origin = #{record.nameOrigin,jdbcType=VARCHAR},
       sex = #{record.sex,jdbcType=TINYINT},
       birth_date = #{record.birthDate,jdbcType=BIGINT},
-      url_portrait = #{record.urlPortrait,jdbcType=BIGINT}
+      url_portrait = #{record.urlPortrait,jdbcType=BIGINT},
+      summary = #{record.summary,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -275,20 +239,9 @@
         url_portrait = #{urlPortrait,jdbcType=BIGINT},
       </if>
       <if test="summary != null">
-        summary = #{summary,jdbcType=LONGVARCHAR},
+        summary = #{summary,jdbcType=VARCHAR},
       </if>
     </set>
-    where id = #{id,jdbcType=BIGINT}
-  </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="org.humingk.movie.dal.entity.CelebrityDouban">
-    update celebrity_douban
-    set id_celebrity_imdb = #{idCelebrityImdb,jdbcType=BIGINT},
-      name_zh = #{nameZh,jdbcType=VARCHAR},
-      name_origin = #{nameOrigin,jdbcType=VARCHAR},
-      sex = #{sex,jdbcType=TINYINT},
-      birth_date = #{birthDate,jdbcType=BIGINT},
-      url_portrait = #{urlPortrait,jdbcType=BIGINT},
-      summary = #{summary,jdbcType=LONGVARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
   <update id="updateByPrimaryKey" parameterType="org.humingk.movie.dal.entity.CelebrityDouban">
@@ -298,7 +251,8 @@
       name_origin = #{nameOrigin,jdbcType=VARCHAR},
       sex = #{sex,jdbcType=TINYINT},
       birth_date = #{birthDate,jdbcType=BIGINT},
-      url_portrait = #{urlPortrait,jdbcType=BIGINT}
+      url_portrait = #{urlPortrait,jdbcType=BIGINT},
+      summary = #{summary,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
 </mapper>

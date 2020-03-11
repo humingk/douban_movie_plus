@@ -24,7 +24,7 @@ public class SearchDoubanController implements SearchDoubanApi {
   @Autowired private SearchResultDoubanVoConverter searchResultDoubanVoConverter;
 
   @Override
-  public Result<SearchTipsDoubanVo> searchTips(
+  public Result<SearchTipsDoubanVo> tips(
       @RequestParam("keyword") @NotBlank String keyword,
       @RequestParam(value = "offset", required = false, defaultValue = "0") @PositiveOrZero
           Integer offset,
@@ -39,7 +39,7 @@ public class SearchDoubanController implements SearchDoubanApi {
   }
 
   @Override
-  public Result<SearchResultDoubanVo> searchDetails(
+  public Result<SearchResultDoubanVo> details(
       @RequestParam("keyword") @NotBlank String keyword,
       @RequestParam(value = "offset", required = false, defaultValue = "0") @PositiveOrZero
           Integer offset,

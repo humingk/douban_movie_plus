@@ -18,21 +18,15 @@ public interface MovieDoubanMapper {
 
     int insertSelective(MovieDouban record);
 
-    List<MovieDouban> selectByExampleWithBLOBs(MovieDoubanExample example);
-
     List<MovieDouban> selectByExample(MovieDoubanExample example);
 
     MovieDouban selectByPrimaryKey(Long id);
 
     int updateByExampleSelective(@Param("record") MovieDouban record, @Param("example") MovieDoubanExample example);
 
-    int updateByExampleWithBLOBs(@Param("record") MovieDouban record, @Param("example") MovieDoubanExample example);
-
     int updateByExample(@Param("record") MovieDouban record, @Param("example") MovieDoubanExample example);
 
     int updateByPrimaryKeySelective(MovieDouban record);
-
-    int updateByPrimaryKeyWithBLOBs(MovieDouban record);
 
     int updateByPrimaryKey(MovieDouban record);
 }

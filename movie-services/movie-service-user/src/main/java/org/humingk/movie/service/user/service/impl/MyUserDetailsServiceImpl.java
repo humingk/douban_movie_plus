@@ -18,8 +18,6 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.google.common.base.Preconditions.checkState;
-
 /**
  * 用户验证服务
  *
@@ -38,10 +36,10 @@ public class MyUserDetailsServiceImpl implements MyUserDetailsService {
    * @return
    */
   @Override
-  public List<User> getUserByEmail(String email) {
+  public User getUserByEmail(String email) {
     UserExample example = new UserExample();
     example.or().andEmailEqualTo(email);
-    return userMapper.selectByExample(example);
+    return userMapper.selectByExample(example).get(0);
   }
 
   /**
@@ -65,14 +63,12 @@ public class MyUserDetailsServiceImpl implements MyUserDetailsService {
   @Override
   public UserDetails loadUserByUsername(String username)
       throws UsernameNotFoundException, MyException {
-    List<User> userList = getUserByEmail(username);
-    checkState(userList.size() == 1, "暂无此用户,email:" + username);
-    List<Role> roleList = getRoleListByUserId(userList.get(0).getId());
-    checkState(roleList.size() >= 1, "此用户暂无权限,email:" + username);
+    User user = getUserByEmail(username);
+    List<Role> roleList = getRoleListByUserId(user.getId());
     List<SecurityRole> securityRoleList = new ArrayList<>();
     for (Role role : roleList) {
       securityRoleList.add(new SecurityRole(role));
     }
-    return new SecurityUser(userList.get(0), securityRoleList);
+    return new SecurityUser(user, securityRoleList);
   }
 }

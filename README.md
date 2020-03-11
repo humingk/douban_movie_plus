@@ -55,6 +55,8 @@ https://movie.doubans.com
 `pom.xml`
 - api文档输出 outPath
 `doc/api/smart-doc.json`
+- Mybatis通用插件 mysql相关 3个targetPackage
+`movie-dal/src/main/resources/mybatis/generatorConfig.xml`
 ### zipkin服务(2)
 `./tools.sh`
 ### rabbitmq 

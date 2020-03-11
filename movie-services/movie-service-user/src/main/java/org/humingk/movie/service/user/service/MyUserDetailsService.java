@@ -22,7 +22,7 @@ public interface MyUserDetailsService extends UserDetailsService {
    * @param email
    * @return
    */
-  List<User> getUserByEmail(String email);
+  User getUserByEmail(String email);
 
   /**
    * 根据用户ID获取该用户的角色列表

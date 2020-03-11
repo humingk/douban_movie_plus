@@ -10,10 +10,8 @@
     <result column="name_origin" jdbcType="VARCHAR" property="nameOrigin" />
     <result column="runtime" jdbcType="SMALLINT" property="runtime" />
     <result column="url_poster" jdbcType="VARCHAR" property="urlPoster" />
+    <result column="summary" jdbcType="VARCHAR" property="summary" />
     <result column="id_movie_douban" jdbcType="BIGINT" property="idMovieDouban" />
-  </resultMap>
-  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="org.humingk.movie.dal.entity.MovieImdb">
-    <result column="summary" jdbcType="LONGVARCHAR" property="summary" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -75,27 +73,8 @@
   </sql>
   <sql id="Base_Column_List">
     id, id_type_video, name_en, start_year, is_adult, name_origin, runtime, url_poster, 
-    id_movie_douban
+    summary, id_movie_douban
   </sql>
-  <sql id="Blob_Column_List">
-    summary
-  </sql>
-  <select id="selectByExampleWithBLOBs" parameterType="org.humingk.movie.dal.entity.MovieImdbExample" resultMap="ResultMapWithBLOBs">
-    select
-    <if test="distinct">
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
-    from movie_imdb
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null">
-      order by ${orderByClause}
-    </if>
-  </select>
   <select id="selectByExample" parameterType="org.humingk.movie.dal.entity.MovieImdbExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
@@ -110,11 +89,9 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
     from movie_imdb
     where id = #{id,jdbcType=BIGINT}
   </select>
@@ -131,12 +108,12 @@
   <insert id="insert" parameterType="org.humingk.movie.dal.entity.MovieImdb">
     insert into movie_imdb (id, id_type_video, name_en, 
       start_year, is_adult, name_origin, 
-      runtime, url_poster, id_movie_douban, 
-      summary)
+      runtime, url_poster, summary, 
+      id_movie_douban)
     values (#{id,jdbcType=BIGINT}, #{idTypeVideo,jdbcType=TINYINT}, #{nameEn,jdbcType=VARCHAR}, 
       #{startYear,jdbcType=SMALLINT}, #{isAdult,jdbcType=TINYINT}, #{nameOrigin,jdbcType=VARCHAR}, 
-      #{runtime,jdbcType=SMALLINT}, #{urlPoster,jdbcType=VARCHAR}, #{idMovieDouban,jdbcType=BIGINT}, 
-      #{summary,jdbcType=LONGVARCHAR})
+      #{runtime,jdbcType=SMALLINT}, #{urlPoster,jdbcType=VARCHAR}, #{summary,jdbcType=VARCHAR}, 
+      #{idMovieDouban,jdbcType=BIGINT})
   </insert>
   <insert id="insertSelective" parameterType="org.humingk.movie.dal.entity.MovieImdb">
     insert into movie_imdb
@@ -165,11 +142,11 @@
       <if test="urlPoster != null">
         url_poster,
       </if>
-      <if test="idMovieDouban != null">
-        id_movie_douban,
-      </if>
       <if test="summary != null">
         summary,
+      </if>
+      <if test="idMovieDouban != null">
+        id_movie_douban,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -197,11 +174,11 @@
       <if test="urlPoster != null">
         #{urlPoster,jdbcType=VARCHAR},
       </if>
+      <if test="summary != null">
+        #{summary,jdbcType=VARCHAR},
+      </if>
       <if test="idMovieDouban != null">
         #{idMovieDouban,jdbcType=BIGINT},
-      </if>
-      <if test="summary != null">
-        #{summary,jdbcType=LONGVARCHAR},
       </if>
     </trim>
   </insert>
@@ -238,29 +215,13 @@
       <if test="record.urlPoster != null">
         url_poster = #{record.urlPoster,jdbcType=VARCHAR},
       </if>
+      <if test="record.summary != null">
+        summary = #{record.summary,jdbcType=VARCHAR},
+      </if>
       <if test="record.idMovieDouban != null">
         id_movie_douban = #{record.idMovieDouban,jdbcType=BIGINT},
       </if>
-      <if test="record.summary != null">
-        summary = #{record.summary,jdbcType=LONGVARCHAR},
-      </if>
     </set>
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByExampleWithBLOBs" parameterType="map">
-    update movie_imdb
-    set id = #{record.id,jdbcType=BIGINT},
-      id_type_video = #{record.idTypeVideo,jdbcType=TINYINT},
-      name_en = #{record.nameEn,jdbcType=VARCHAR},
-      start_year = #{record.startYear,jdbcType=SMALLINT},
-      is_adult = #{record.isAdult,jdbcType=TINYINT},
-      name_origin = #{record.nameOrigin,jdbcType=VARCHAR},
-      runtime = #{record.runtime,jdbcType=SMALLINT},
-      url_poster = #{record.urlPoster,jdbcType=VARCHAR},
-      id_movie_douban = #{record.idMovieDouban,jdbcType=BIGINT},
-      summary = #{record.summary,jdbcType=LONGVARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -275,6 +236,7 @@
       name_origin = #{record.nameOrigin,jdbcType=VARCHAR},
       runtime = #{record.runtime,jdbcType=SMALLINT},
       url_poster = #{record.urlPoster,jdbcType=VARCHAR},
+      summary = #{record.summary,jdbcType=VARCHAR},
       id_movie_douban = #{record.idMovieDouban,jdbcType=BIGINT}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -304,26 +266,13 @@
       <if test="urlPoster != null">
         url_poster = #{urlPoster,jdbcType=VARCHAR},
       </if>
+      <if test="summary != null">
+        summary = #{summary,jdbcType=VARCHAR},
+      </if>
       <if test="idMovieDouban != null">
         id_movie_douban = #{idMovieDouban,jdbcType=BIGINT},
       </if>
-      <if test="summary != null">
-        summary = #{summary,jdbcType=LONGVARCHAR},
-      </if>
     </set>
-    where id = #{id,jdbcType=BIGINT}
-  </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="org.humingk.movie.dal.entity.MovieImdb">
-    update movie_imdb
-    set id_type_video = #{idTypeVideo,jdbcType=TINYINT},
-      name_en = #{nameEn,jdbcType=VARCHAR},
-      start_year = #{startYear,jdbcType=SMALLINT},
-      is_adult = #{isAdult,jdbcType=TINYINT},
-      name_origin = #{nameOrigin,jdbcType=VARCHAR},
-      runtime = #{runtime,jdbcType=SMALLINT},
-      url_poster = #{urlPoster,jdbcType=VARCHAR},
-      id_movie_douban = #{idMovieDouban,jdbcType=BIGINT},
-      summary = #{summary,jdbcType=LONGVARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
   <update id="updateByPrimaryKey" parameterType="org.humingk.movie.dal.entity.MovieImdb">
@@ -335,6 +284,7 @@
       name_origin = #{nameOrigin,jdbcType=VARCHAR},
       runtime = #{runtime,jdbcType=SMALLINT},
       url_poster = #{urlPoster,jdbcType=VARCHAR},
+      summary = #{summary,jdbcType=VARCHAR},
       id_movie_douban = #{idMovieDouban,jdbcType=BIGINT}
     where id = #{id,jdbcType=BIGINT}
   </update>

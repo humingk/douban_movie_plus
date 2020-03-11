@@ -12,7 +12,7 @@ public interface MovieZhihuMapper {
 
     int deleteByExample(MovieZhihuExample example);
 
-    int deleteByPrimaryKey(@Param("id") Long id, @Param("idMovieDouban") Long idMovieDouban);
+    int deleteByPrimaryKey(Long id);
 
     int insert(MovieZhihu record);
 
@@ -20,7 +20,7 @@ public interface MovieZhihuMapper {
 
     List<MovieZhihu> selectByExample(MovieZhihuExample example);
 
-    MovieZhihu selectByPrimaryKey(@Param("id") Long id, @Param("idMovieDouban") Long idMovieDouban);
+    MovieZhihu selectByPrimaryKey(Long id);
 
     int updateByExampleSelective(@Param("record") MovieZhihu record, @Param("example") MovieZhihuExample example);
 

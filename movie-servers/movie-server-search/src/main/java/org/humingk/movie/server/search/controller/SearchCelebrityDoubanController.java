@@ -25,7 +25,7 @@ public class SearchCelebrityDoubanController implements SearchCelebrityDoubanApi
   @Autowired private CelebrityDoubanService celebrityDoubanService;
 
   @Override
-  public Result<List<SearchTipsCelebrityDoubanVo>> searchTips(
+  public Result<List<SearchTipsCelebrityDoubanVo>> tips(
       @RequestParam("keyword") @NotBlank String keyword,
       @RequestParam(value = "offset", required = false, defaultValue = "0") @PositiveOrZero
           Integer offset,
@@ -38,7 +38,7 @@ public class SearchCelebrityDoubanController implements SearchCelebrityDoubanApi
   }
 
   @Override
-  public Result<List<SearchResultCelebrityDoubanVo>> searchDetails(
+  public Result<List<SearchResultCelebrityDoubanVo>> details(
       @RequestParam("keyword") @NotBlank String keyword,
       @RequestParam(value = "offset", required = false, defaultValue = "0") @PositiveOrZero
           Integer offset,

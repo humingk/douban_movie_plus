@@ -18,21 +18,15 @@ public interface CelebrityDoubanMapper {
 
     int insertSelective(CelebrityDouban record);
 
-    List<CelebrityDouban> selectByExampleWithBLOBs(CelebrityDoubanExample example);
-
     List<CelebrityDouban> selectByExample(CelebrityDoubanExample example);
 
     CelebrityDouban selectByPrimaryKey(Long id);
 
     int updateByExampleSelective(@Param("record") CelebrityDouban record, @Param("example") CelebrityDoubanExample example);
 
-    int updateByExampleWithBLOBs(@Param("record") CelebrityDouban record, @Param("example") CelebrityDoubanExample example);
-
     int updateByExample(@Param("record") CelebrityDouban record, @Param("example") CelebrityDoubanExample example);
 
     int updateByPrimaryKeySelective(CelebrityDouban record);
-
-    int updateByPrimaryKeyWithBLOBs(CelebrityDouban record);
 
     int updateByPrimaryKey(CelebrityDouban record);
 }

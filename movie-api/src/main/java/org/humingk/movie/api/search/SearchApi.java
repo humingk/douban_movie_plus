@@ -31,8 +31,8 @@ public interface SearchApi {
    * @return
    * @apiNote 根据名称开头的字符串找出豆瓣电影、豆瓣影人、网易云音乐等基本信息列表
    */
-  @RequestMapping(value = "/search/search_tips", method = RequestMethod.GET)
-  Result searchTips(
+  @RequestMapping(value = "/search/tips", method = RequestMethod.GET)
+  Result tips(
       @RequestParam("keyword") @NotBlank String keyword,
       @RequestParam(value = "offset", required = false, defaultValue = "0") @PositiveOrZero
           Integer offset,
@@ -48,8 +48,8 @@ public interface SearchApi {
    * @return
    * @apiNote 根据名称字符串找出豆瓣电影、豆瓣影人、网易云音乐等基本信息列表
    */
-  @RequestMapping(value = "/search/search_details", method = RequestMethod.GET)
-  Result searchDetails(
+  @RequestMapping(value = "/search/details", method = RequestMethod.GET)
+  Result details(
       @RequestParam("keyword") @NotBlank String keyword,
       @RequestParam(value = "offset", required = false, defaultValue = "0") @PositiveOrZero
           Integer offset,

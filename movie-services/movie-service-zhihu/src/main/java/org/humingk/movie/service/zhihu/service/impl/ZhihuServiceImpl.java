@@ -1,5 +1,7 @@
 package org.humingk.movie.service.zhihu.service.impl;
 
+import org.humingk.movie.common.enumeration.CodeAndMsg;
+import org.humingk.movie.common.exception.MyException;
 import org.humingk.movie.dal.entity.MovieZhihu;
 import org.humingk.movie.dal.entity.MovieZhihuExample;
 import org.humingk.movie.dal.entity.QuestionZhihuExample;
@@ -31,7 +33,8 @@ public class ZhihuServiceImpl implements ZhihuService {
       questionZhihuExample.start().andIdMovieDoubanEqualTo(id);
       return zhihuDtoConverter.to(
           movieZhihuList.get(0), questionZhihuMapper.selectByExample(questionZhihuExample));
+    } else {
+      throw new MyException(CodeAndMsg.NO_RESOURCE);
     }
-    return null;
   }
 }

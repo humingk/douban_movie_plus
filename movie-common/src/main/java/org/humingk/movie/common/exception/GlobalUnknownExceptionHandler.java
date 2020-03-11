@@ -30,7 +30,7 @@ public class GlobalUnknownExceptionHandler extends ResponseEntityExceptionHandle
    * @return
    */
   @ExceptionHandler(Exception.class)
-  public Result handleUnknownException(Exception e) {
+  public Result<Object> handleUnknownException(Exception e) {
     log.error("未知异常:{}", e.getMessage(), e);
     return Result.error(e.getMessage());
   }
