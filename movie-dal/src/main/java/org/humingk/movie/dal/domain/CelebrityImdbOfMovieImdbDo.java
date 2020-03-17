@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import org.humingk.movie.dal.entity.MovieImdbToCelebrityImdb;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * 与IMDB电影相关的IMDB影人
@@ -32,6 +33,6 @@ public class CelebrityImdbOfMovieImdbDo implements Serializable {
 
   // MovieImdbToCelebrityImdb ---------------------
 
-  /** IMDB电影-IMDB影人 */
-  private MovieImdbToCelebrityImdb movieImdbToCelebrityImdb;
+  /** IMDB电影-IMDB影人 关系列表 */
+  private List<MovieImdbToCelebrityImdb> movieImdbToCelebrityImdbList;
 }

@@ -12,9 +12,9 @@
     <resultMap id="CelebrityImdbOfMovieImdbDoResultMapPlus"
                type="org.humingk.movie.dal.domain.CelebrityImdbOfMovieImdbDo"
                extends="BaseResultMapPlus">
-        <association property="movieImdbToCelebrityImdb"
-                     javaType="org.humingk.movie.dal.entity.MovieImdbToCelebrityImdb"
-                     resultMap="MovieImdbToCelebrityImdb"/>
+        <collection property="movieImdbToCelebrityImdbList"
+                    ofType="org.humingk.movie.dal.entity.MovieImdbToCelebrityImdb"
+                    resultMap="MovieImdbToCelebrityImdb"/>
     </resultMap>
     <!--通过IMDB电影ID获取与IMDB电影相关的IMDB影人信息列表-->
     <select id="selectCelebrityImdbOfMovieImdbListByMovieImdbId" parameterType="java.lang.Long"

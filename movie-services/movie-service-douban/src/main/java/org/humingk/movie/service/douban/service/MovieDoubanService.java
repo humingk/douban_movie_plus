@@ -1,5 +1,6 @@
 package org.humingk.movie.service.douban.service;
 
+import org.humingk.movie.dal.domain.ImageDoubanDo;
 import org.humingk.movie.dal.domain.SearchResultMovieDoubanDo;
 import org.humingk.movie.dal.domain.SearchTipsMovieDoubanDo;
 import org.humingk.movie.dal.entity.MovieDouban;
@@ -56,4 +57,13 @@ public interface MovieDoubanService {
    */
   List<SearchResultMovieDoubanDo> getSearchResultMovieDoubanListByMovieDoubanKeyword(
       String keyword, int offset, int limit);
+
+  /**
+   * 获取豆瓣电影壁纸列表
+   *
+   * @param offset 偏移量
+   * @param limit 限制数
+   * @return
+   */
+  List<ImageDoubanDo> getImageDoubanWallpapersList(int offset, int limit);
 }

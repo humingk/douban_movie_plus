@@ -118,20 +118,33 @@ spring:
                 redis-rate-limiter.replenishRate: 1
                 redis-rate-limiter.burstCapacity: 5
         # ----------------------------------------
+        #        # 音乐
+        #        - id: movie-server-music
+        #          uri: lb://movie-server-music
+        #          predicates:
+        #            - Path=/${custom.api.version}/music/**
+        #          filters:
+        #            - StripPrefix=1
+        #            # 限流过滤器
+        #            - name: RequestRateLimiter
+        #              args:
+        #                key-resolver: '#{@myHostAddrKeyResolver}'
+        #                redis-rate-limiter.replenishRate: 1
+        #                redis-rate-limiter.burstCapacity: 5
+        # ----------------------------------------
         # 音乐
-        - id: movie-server-music
-          uri: lb://movie-server-music
+        - id: NeteaseCloudMusicApi
+          uri: http://localhost:10102
           predicates:
             - Path=/${custom.api.version}/music/**
           filters:
-            - StripPrefix=1
+            - StripPrefix=2
             # 限流过滤器
             - name: RequestRateLimiter
               args:
                 key-resolver: '#{@myHostAddrKeyResolver}'
                 redis-rate-limiter.replenishRate: 1
                 redis-rate-limiter.burstCapacity: 5
-        # ----------------------------------------
         # ----------------------------------------
       # 所有路由默认过滤器
       default-filters:

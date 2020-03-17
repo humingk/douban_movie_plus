@@ -8,9 +8,10 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
 
+/** @author humingk */
 @Mapper(
     componentModel = "spring",
-    uses = {ConverterUtil.class})
+    uses = {ConverterUtil.class, MovieImdbToCelebrityImdbVoConverter.class})
 public interface CelebrityImdbOfMovieImdbVoConverter
     extends BaseConverter<CelebrityImdbOfMovieImdbVo, CelebrityImdbOfMovieImdbDo> {
   @Override
@@ -24,18 +25,10 @@ public interface CelebrityImdbOfMovieImdbVoConverter
         source = "id",
         qualifiedByName = {"util", "urlCelebrityImdb"}),
     @Mapping(
-        target = "idMovieImdb",
-        source = "movieImdbToCelebrityImdb.idMovieImdb",
-        qualifiedByName = {"util", "urlMovieImdb"}),
-    @Mapping(
         target = "urlCelebrityDouban",
         source = "idCelebrityDouban",
         qualifiedByName = {"util", "urlCelebrityDouban"}),
-    @Mapping(target = "idProfession", source = "movieImdbToCelebrityImdb.idProfession"),
-    @Mapping(
-        target = "profession",
-        source = "movieImdbToCelebrityImdb.idProfession",
-        qualifiedByName = {"util", "profession"})
+    @Mapping(target = "relationList", source = "movieImdbToCelebrityImdbList")
   })
   CelebrityImdbOfMovieImdbVo to(CelebrityImdbOfMovieImdbDo celebrityImdbOfMovieImdbDo);
 }

@@ -59,6 +59,8 @@ https://movie.doubans.com
 `movie-dal/src/main/resources/mybatis/generatorConfig.xml`
 ### zipkin服务(2)
 `./tools.sh`
+### NeteaseCloudMusicApi服务(暂时)(8)
+`./tools.sh`
 ### rabbitmq 
 依赖erlang,注意版本
 - <https://github.com/rabbitmq/rabbitmq-server/releases>

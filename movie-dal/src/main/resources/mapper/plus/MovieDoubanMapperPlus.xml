@@ -19,9 +19,9 @@
         <association property="rateMovieDouban"
                      javaType="org.humingk.movie.dal.entity.RateMovieDouban"
                      resultMap="RateMovieDouban"/>
-        <association property="movieDoubanToCelebrityDouban"
-                     javaType="org.humingk.movie.dal.entity.MovieDoubanToCelebrityDouban"
-                     resultMap="MovieDoubanToCelebrityDouban"/>
+        <collection property="movieDoubanToCelebrityDoubanList"
+                    ofType="org.humingk.movie.dal.entity.MovieDoubanToCelebrityDouban"
+                    resultMap="MovieDoubanToCelebrityDouban"/>
     </resultMap>
     <!--通过豆瓣影人ID获取与豆瓣影人相关的豆瓣电影信息列表-->
     <select id="selectMovieDoubanOfCelebrityDoubanListByCelebrityDoubanId"

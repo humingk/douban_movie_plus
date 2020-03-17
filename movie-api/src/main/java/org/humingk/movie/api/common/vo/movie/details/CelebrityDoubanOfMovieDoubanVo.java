@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * 与豆瓣电影相关的豆瓣影人
@@ -47,12 +48,6 @@ public class CelebrityDoubanOfMovieDoubanVo implements Serializable {
   /** 影人简介 */
   private String summary;
 
-  /** 该影人在该电影中的职位ID */
-  private Byte idProfession;
-
-  /** 该影人在该电影中的职位 */
-  private String profession;
-
-  /** 该影人在该电影中的演员排列顺序 */
-  private Short sort;
+  /** 该影人与该电影的关系列表 */
+  private List<MovieDoubanToCelebrityDoubanVo> relationList;
 }

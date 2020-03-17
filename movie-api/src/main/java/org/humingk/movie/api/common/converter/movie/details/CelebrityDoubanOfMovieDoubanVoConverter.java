@@ -11,7 +11,7 @@ import org.mapstruct.Mappings;
 /** @author humingk */
 @Mapper(
     componentModel = "spring",
-    uses = {ConverterUtil.class})
+    uses = {ConverterUtil.class, MovieDoubanToCelebrityDoubanVoConverter.class})
 public interface CelebrityDoubanOfMovieDoubanVoConverter
     extends BaseConverter<CelebrityDoubanOfMovieDoubanVo, CelebrityDoubanOfMovieDoubanDo> {
   @Override
@@ -40,12 +40,7 @@ public interface CelebrityDoubanOfMovieDoubanVoConverter
         target = "urlPortrait",
         source = "urlPortrait",
         qualifiedByName = {"util", "urlPortrait"}),
-    @Mapping(target = "idProfession", source = "movieDoubanToCelebrityDouban.idProfession"),
-    @Mapping(
-        target = "profession",
-        source = "movieDoubanToCelebrityDouban.idProfession",
-        qualifiedByName = {"util", "profession"}),
-    @Mapping(target = "sort", source = "movieDoubanToCelebrityDouban.sort")
+    @Mapping(target = "relationList", source = "movieDoubanToCelebrityDoubanList")
   })
   CelebrityDoubanOfMovieDoubanVo to(CelebrityDoubanOfMovieDoubanDo celebrityDoubanOfMovieDoubanDo);
 }
