@@ -1,8 +1,9 @@
 package org.humingk.movie.api.common.converter.scene;
 
-import org.humingk.movie.dal.domain.scene.PlaceSceneAllDo;
-import org.humingk.movie.dal.domain.scene.SceneAllDo;
-import org.humingk.movie.dal.domain.scene.SceneDetailAllDo;
+import org.humingk.movie.api.common.converter.scene.all.SceneAllVoConverter;
+import org.humingk.movie.dal.domain.scene.all.PlaceSceneAllDo;
+import org.humingk.movie.dal.domain.scene.all.SceneAllDo;
+import org.humingk.movie.dal.domain.scene.all.SceneDetailAllDo;
 import org.humingk.movie.dal.entity.CountryScene;
 import org.humingk.movie.dal.entity.Scene;
 import org.humingk.movie.dal.entity.SceneDetail;

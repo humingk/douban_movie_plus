@@ -3,7 +3,7 @@ package org.humingk.movie.service.scene.dto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.humingk.movie.dal.domain.scene.SceneBriefDo;
+import org.humingk.movie.dal.domain.scene.brief.SceneBriefDo;
 import org.humingk.movie.dal.entity.MovieScene;
 
 import java.io.Serializable;

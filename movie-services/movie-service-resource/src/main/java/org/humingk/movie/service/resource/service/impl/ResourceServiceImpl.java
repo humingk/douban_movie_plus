@@ -21,6 +21,7 @@ public class ResourceServiceImpl implements ResourceService {
   @Override
   public List<ResourceMovie> getResourceListByMovieDoubanId(Long id) {
     resourceMovieExample.start().andIdMovieDoubanEqualTo(id);
+    resourceMovieExample.setOrderByClause("id_type_resource");
     List<ResourceMovie> resultList = resourceMovieMapper.selectByExample(resourceMovieExample);
     if (resultList.isEmpty()) {
       throw new MyException(CodeAndMsg.NO_RESOURCE);

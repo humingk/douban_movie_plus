@@ -1,8 +1,9 @@
-package org.humingk.movie.dal.domain.scene;
+package org.humingk.movie.dal.domain.scene.all;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.humingk.movie.dal.domain.scene.CelebritySceneOfSceneDetailDo;
 import org.humingk.movie.dal.entity.ImageSceneDetail;
 import org.humingk.movie.dal.entity.SceneDetail;
 

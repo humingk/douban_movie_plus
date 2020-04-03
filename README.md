@@ -46,7 +46,7 @@ https://movie.doubans.com
 `git clone --depth 1 https://github.com/humingk/douban_movie_plus`
 ### maven导入
 ### 项目基于JDK1.8
-### 修改配置文件绝对路径
+### 修改部分配置文件绝对路径
 - tools.sh项目 base_path
 `tools.sh`
 - oauth2秘钥 key.location
@@ -69,4 +69,17 @@ https://movie.doubans.com
 ### MysSQL默认
 ### server启动顺序
 eureka -> config -> zipkin -> servers -> gateway
+
+# 声明
+
+- 本项目免费且开源,若发现 收费/广告 等行为请联系本人
+
+
+- 本项目的目标用户为**深度电影迷**
+
+
+- 如有侵权请联系本人,将立即删除对应条目
+
+
+- 欢迎大家帮忙完善这个项目!
 

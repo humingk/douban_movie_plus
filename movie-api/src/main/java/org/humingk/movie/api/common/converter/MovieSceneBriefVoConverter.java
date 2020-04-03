@@ -1,7 +1,7 @@
 package org.humingk.movie.api.common.converter;
 
 import org.humingk.movie.api.common.converter.scene.MovieSceneVoConverter;
-import org.humingk.movie.api.common.converter.scene.SceneBriefVoConverter;
+import org.humingk.movie.api.common.converter.scene.brief.SceneBriefVoConverter;
 import org.humingk.movie.api.common.vo.MovieSceneBriefVo;
 import org.humingk.movie.common.util.BaseConverter;
 import org.humingk.movie.service.scene.dto.MovieSceneBriefDto;
