@@ -1,5 +1,6 @@
 package org.humingk.movie.api.common.converter.celebrity.details;
 
+import org.humingk.movie.api.common.converter.movie.details.MovieDoubanToCelebrityDoubanVoConverter;
 import org.humingk.movie.api.common.util.ConverterUtil;
 import org.humingk.movie.api.common.vo.celebrity.details.MovieDoubanOfCelebrityDoubanVo;
 import org.humingk.movie.common.util.BaseConverter;
@@ -11,7 +12,7 @@ import org.mapstruct.Mappings;
 /** @author humingk */
 @Mapper(
     componentModel = "spring",
-    uses = {ConverterUtil.class})
+    uses = {ConverterUtil.class, MovieDoubanToCelebrityDoubanVoConverter.class})
 public interface MovieDoubanOfCelebrityDoubanVoConverter
     extends BaseConverter<MovieDoubanOfCelebrityDoubanVo, MovieDoubanOfCelebrityDoubanDo> {
   @Override
@@ -36,11 +37,7 @@ public interface MovieDoubanOfCelebrityDoubanVoConverter
         target = "urlPoster",
         source = "urlPoster",
         qualifiedByName = {"util", "urlPoster"}),
-    @Mapping(
-        target = "profession",
-        source = "movieDoubanToCelebrityDouban.idProfession",
-        qualifiedByName = {"util", "profession"}),
-    @Mapping(target = "sort", source = "movieDoubanToCelebrityDouban.sort")
+    @Mapping(target = "relationList", source = "movieDoubanToCelebrityDoubanList")
   })
   MovieDoubanOfCelebrityDoubanVo to(MovieDoubanOfCelebrityDoubanDo movieDoubanOfCelebrityDoubanDo);
 }

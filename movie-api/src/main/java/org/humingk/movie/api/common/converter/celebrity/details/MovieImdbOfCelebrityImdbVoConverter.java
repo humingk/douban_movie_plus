@@ -1,5 +1,6 @@
 package org.humingk.movie.api.common.converter.celebrity.details;
 
+import org.humingk.movie.api.common.converter.movie.details.MovieImdbToCelebrityImdbVoConverter;
 import org.humingk.movie.api.common.util.ConverterUtil;
 import org.humingk.movie.api.common.vo.celebrity.details.MovieImdbOfCelebrityImdbVo;
 import org.humingk.movie.common.util.BaseConverter;
@@ -11,7 +12,7 @@ import org.mapstruct.Mappings;
 /** @author humingk */
 @Mapper(
     componentModel = "spring",
-    uses = {ConverterUtil.class})
+    uses = {ConverterUtil.class, MovieImdbToCelebrityImdbVoConverter.class})
 public interface MovieImdbOfCelebrityImdbVoConverter
     extends BaseConverter<MovieImdbOfCelebrityImdbVo, MovieImdbOfCelebrityImdbDo> {
   @Override
@@ -28,11 +29,7 @@ public interface MovieImdbOfCelebrityImdbVoConverter
         target = "urlPoster",
         source = "urlPoster",
         qualifiedByName = {"util", "urlPosterImdb"}),
-    @Mapping(target = "idProfession", source = "movieImdbToCelebrityImdb.idProfession"),
-    @Mapping(
-        target = "profession",
-        source = "movieImdbToCelebrityImdb.idProfession",
-        qualifiedByName = {"util", "profession"}),
+    @Mapping(target = "relationList", source = "movieImdbToCelebrityImdbList")
   })
   MovieImdbOfCelebrityImdbVo to(MovieImdbOfCelebrityImdbDo movieImdbOfCelebrityImdbDo);
 }

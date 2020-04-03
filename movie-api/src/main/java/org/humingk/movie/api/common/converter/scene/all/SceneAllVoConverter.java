@@ -1,8 +1,9 @@
-package org.humingk.movie.api.common.converter.scene;
+package org.humingk.movie.api.common.converter.scene.all;
 
+import org.humingk.movie.api.common.converter.scene.SceneVoConverter;
 import org.humingk.movie.api.common.vo.scene.SceneAllVo;
 import org.humingk.movie.common.util.BaseConverter;
-import org.humingk.movie.dal.domain.scene.SceneAllDo;
+import org.humingk.movie.dal.domain.scene.all.SceneAllDo;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;

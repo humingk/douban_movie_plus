@@ -176,26 +176,27 @@ public class MovieConstant {
     WEBSITE_RESOURCE.put((short) 106, "http://www.goodaitv.com");
     WEBSITE_RESOURCE.put((short) 107, "在线之家");
     WEBSITE_RESOURCE.put((short) 107, "http://www.zxzjs.com");
-    WEBSITE_RESOURCE.put((short) 108, "比热大雄");
+    WEBSITE_RESOURCE.put((short) 108, "比特大雄");
     WEBSITE_RESOURCE.put((short) 108, "https://www.btdx8.com");
   }
 
   /** 电影资源类型 */
   public static final ImmutableMap<Short, String> RESOURCE_TYPE =
       ImmutableMap.<Short, String>builder()
-          .put((short) 2, "免费观看")
-          .put((short) 3, "VIP免费观看")
+          .put((short) 0, "")
+          .put((short) 2, "在线免费")
+          .put((short) 3, "VIP免费")
           .put((short) 4, "单片付费")
           .put((short) 5, "用劵/单片付费")
           // ---
-          .put((short) 100, "未知")
-          .put((short) 101, "在线观看")
+          .put((short) 100, "")
+          .put((short) 101, "在线")
           .put((short) 102, "网盘")
-          .put((short) 111, "BluRay")
-          .put((short) 112, "1080p")
+          .put((short) 111, "蓝光")
+          .put((short) 112, "1080P")
           .put((short) 113, "1280超清")
           .put((short) 114, "1024超清")
-          .put((short) 115, "720p")
+          .put((short) 115, "720P")
           .put((short) 116, "1280高清")
           .put((short) 117, "1024高清")
           .build();

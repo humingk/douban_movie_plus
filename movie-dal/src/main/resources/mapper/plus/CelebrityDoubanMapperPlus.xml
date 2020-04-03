@@ -12,9 +12,9 @@
     <resultMap id="CelebrityDoubanOfMovieDoubanDoResultMapPlus"
                type="org.humingk.movie.dal.domain.CelebrityDoubanOfMovieDoubanDo"
                extends="BaseResultMapPlus">
-        <association property="movieDoubanToCelebrityDouban"
-                     javaType="org.humingk.movie.dal.entity.MovieDoubanToCelebrityDouban"
-                     resultMap="MovieDoubanToCelebrityDouban"/>
+        <collection property="movieDoubanToCelebrityDoubanList"
+                    ofType="org.humingk.movie.dal.entity.MovieDoubanToCelebrityDouban"
+                    resultMap="MovieDoubanToCelebrityDouban"/>
     </resultMap>
     <!--通过豆瓣电影ID获取与豆瓣电影相关的豆瓣影人信息列表-->
     <select id="selectCelebrityDoubanOfMovieDoubanListByMovieDoubanId" parameterType="java.lang.Long"
@@ -35,5 +35,6 @@
                  inner join movie_douban_to_celebrity_douban
                             on celebrity_douban.id = movie_douban_to_celebrity_douban.id_celebrity_douban
         where movie_douban_to_celebrity_douban.id_movie_douban = #{idMovieDouban,jdbcType=BIGINT}
+        order by sort
     </select>
 </mapper>

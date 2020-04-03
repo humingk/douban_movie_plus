@@ -30,30 +30,6 @@ spring:
       # 路由转发
       routes:
         # ----------------------------------------
-        # oauth2认证
-        - id: movie-server-auth
-          uri: lb://movie-server-auth
-          predicates:
-            - Path=/${custom.api.version}/oauth/**
-          filters:
-            - StripPrefix=1
-        # ----------------------------------------
-        # config服务
-        - id: movie-server-config
-          uri: lb://movie-server-config
-          predicates:
-            - Path=/${custom.api.version}/actuator/**
-          filters:
-            - StripPrefix=1
-        # ----------------------------------------
-        # 用户
-        - id: movie-server-user
-          uri: lb://movie-server-user
-          predicates:
-            - Path=/${custom.api.version}/user/**
-          filters:
-            - StripPrefix=1
-        # ----------------------------------------
         # 电影
         - id: movie-server-movie
           # douban服务地址
@@ -118,20 +94,57 @@ spring:
                 redis-rate-limiter.replenishRate: 1
                 redis-rate-limiter.burstCapacity: 5
         # ----------------------------------------
+        # oauth2认证
+        - id: movie-server-auth
+          uri: lb://movie-server-auth
+          predicates:
+            - Path=/${custom.api.version}/oauth/**
+          filters:
+            - StripPrefix=1
+        # ----------------------------------------
+        # config服务
+        - id: movie-server-config
+          uri: lb://movie-server-config
+          predicates:
+            - Path=/${custom.api.version}/actuator/**
+          filters:
+            - StripPrefix=1
+        # ----------------------------------------
+        # 用户
+        - id: movie-server-user
+          uri: lb://movie-server-user
+          predicates:
+            - Path=/${custom.api.version}/user/**
+          filters:
+            - StripPrefix=1
+        # ----------------------------------------
+        #        # 音乐
+        #        - id: movie-server-music
+        #          uri: lb://movie-server-music
+        #          predicates:
+        #            - Path=/${custom.api.version}/music/**
+        #          filters:
+        #            - StripPrefix=1
+        #            # 限流过滤器
+        #            - name: RequestRateLimiter
+        #              args:
+        #                key-resolver: '#{@myHostAddrKeyResolver}'
+        #                redis-rate-limiter.replenishRate: 1
+        #                redis-rate-limiter.burstCapacity: 5
+        # ----------------------------------------
         # 音乐
-        - id: movie-server-music
-          uri: lb://movie-server-music
+        - id: NeteaseCloudMusicApi
+          uri: http://localhost:10102
           predicates:
             - Path=/${custom.api.version}/music/**
           filters:
-            - StripPrefix=1
+            - StripPrefix=2
             # 限流过滤器
             - name: RequestRateLimiter
               args:
                 key-resolver: '#{@myHostAddrKeyResolver}'
-                redis-rate-limiter.replenishRate: 1
-                redis-rate-limiter.burstCapacity: 5
-        # ----------------------------------------
+                redis-rate-limiter.replenishRate: 2
+                redis-rate-limiter.burstCapacity: 20
         # ----------------------------------------
       # 所有路由默认过滤器
       default-filters:

@@ -2,6 +2,7 @@ package org.humingk.movie.api.movie;
 
 import org.humingk.movie.api.common.vo.movie.MovieDoubanDetailsVo;
 import org.humingk.movie.api.common.vo.movie.MovieDoubanVo;
+import org.humingk.movie.api.common.vo.share.ImageDoubanVo;
 import org.humingk.movie.common.entity.Result;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.validation.annotation.Validated;
@@ -10,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.PositiveOrZero;
+import java.util.List;
 
 // 用于生成API文档
 // import org.springframework.web.bind.annotation.RestController;
@@ -43,4 +46,19 @@ public interface DoubanApi {
    */
   @RequestMapping(value = "/movie/douban/details", method = RequestMethod.GET)
   Result<MovieDoubanDetailsVo> details(@RequestParam("id") @NotNull Long id);
+
+  /**
+   * 豆瓣电影壁纸列表
+   *
+   * @param offset 偏移量（默认0）
+   * @param limit 限制数（默认10）
+   * @return
+   * @apiNote 包括图片ID等信息，以及壁纸的长与宽
+   */
+  @RequestMapping(value = "/movie/douban/wallpapers", method = RequestMethod.GET)
+  Result<List<ImageDoubanVo>> wallpapers(
+      @RequestParam(value = "offset", required = false, defaultValue = "0") @PositiveOrZero
+          Integer offset,
+      @RequestParam(value = "limit", required = false, defaultValue = "10") @PositiveOrZero
+          Integer limit);
 }

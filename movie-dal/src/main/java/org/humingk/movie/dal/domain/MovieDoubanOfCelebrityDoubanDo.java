@@ -7,6 +7,7 @@ import org.humingk.movie.dal.entity.MovieDoubanToCelebrityDouban;
 import org.humingk.movie.dal.entity.RateMovieDouban;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * 与豆瓣影人相关的豆瓣电影
@@ -66,6 +67,6 @@ public class MovieDoubanOfCelebrityDoubanDo implements Serializable {
 
   // MovieDoubanToCelebrityDouban --------------------------------------
 
-  /** 豆瓣电影-豆瓣影人 */
-  private MovieDoubanToCelebrityDouban movieDoubanToCelebrityDouban;
+  /** 豆瓣电影-豆瓣影人 关系列表 */
+  private List<MovieDoubanToCelebrityDouban> movieDoubanToCelebrityDoubanList;
 }

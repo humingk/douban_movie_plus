@@ -105,7 +105,7 @@ public class ConverterUtil {
    * @return
    */
   @Named("profession")
-  public String professionZh(Byte id) {
+  public String profession(Byte id) {
     return MovieConstant.PROFESSION_TYPE.get(id).get(0);
   }
 

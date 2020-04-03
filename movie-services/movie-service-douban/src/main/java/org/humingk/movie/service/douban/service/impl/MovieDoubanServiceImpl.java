@@ -1,10 +1,7 @@
 package org.humingk.movie.service.douban.service.impl;
 
 import com.github.pagehelper.PageHelper;
-import org.humingk.movie.dal.domain.AwardOfMovieAndCelebrityDoubanDo;
-import org.humingk.movie.dal.domain.CelebrityDoubanOfMovieDoubanDo;
-import org.humingk.movie.dal.domain.SearchResultMovieDoubanDo;
-import org.humingk.movie.dal.domain.SearchTipsMovieDoubanDo;
+import org.humingk.movie.dal.domain.*;
 import org.humingk.movie.dal.entity.*;
 import org.humingk.movie.dal.mapper.auto.*;
 import org.humingk.movie.dal.mapper.plus.CelebrityDoubanMapperPlus;
@@ -162,5 +159,12 @@ public class MovieDoubanServiceImpl implements MovieDoubanService {
               celebrityDoubanOfMovieDoubanDoList));
     }
     return searchResultMovieDoubanDoList;
+  }
+
+  @Override
+  public List<ImageDoubanDo> getImageDoubanWallpapersList(int offset, int limit) {
+    // 此处默认壁纸处理
+    // 电影指定壁纸在details中处理
+    return null;
   }
 }

@@ -1,6 +1,6 @@
 package org.humingk.movie.service.scene.converter;
 
-import org.humingk.movie.dal.domain.scene.SceneBriefDo;
+import org.humingk.movie.dal.domain.scene.brief.SceneBriefDo;
 import org.humingk.movie.dal.entity.MovieScene;
 import org.humingk.movie.service.scene.dto.MovieSceneBriefDto;
 import org.mapstruct.Mapper;

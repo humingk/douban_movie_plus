@@ -1,13 +1,12 @@
-package org.humingk.movie.api.common.converter.scene;
+package org.humingk.movie.api.common.converter.scene.brief;
 
+import org.humingk.movie.api.common.converter.scene.ImagePlaceSceneVoConverter;
+import org.humingk.movie.api.common.converter.scene.PlaceSceneVoConverter;
 import org.humingk.movie.api.common.vo.scene.PlaceSceneBriefVo;
-import org.humingk.movie.dal.entity.ImagePlaceScene;
-import org.humingk.movie.dal.entity.PlaceScene;
+import org.humingk.movie.dal.domain.scene.brief.PlaceSceneBriefDo;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
-
-import java.util.List;
 
 /** @author humingk */
 @Mapper(
@@ -18,9 +17,5 @@ public interface PlaceSceneBriefVoConverter {
     @Mapping(target = "base", source = "placeScene"),
     @Mapping(target = "imageList", source = "imagePlaceSceneList")
   })
-  PlaceSceneBriefVo to(
-      /** 场景地点基础信息 */
-      PlaceScene placeScene,
-      /** 场景地点图片列表 */
-      List<ImagePlaceScene> imagePlaceSceneList);
+  PlaceSceneBriefVo to(PlaceSceneBriefDo placeSceneBriefDo);
 }

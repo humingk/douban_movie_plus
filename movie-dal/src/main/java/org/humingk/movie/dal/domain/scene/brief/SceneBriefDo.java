@@ -1,4 +1,4 @@
-package org.humingk.movie.dal.domain.scene;
+package org.humingk.movie.dal.domain.scene.brief;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

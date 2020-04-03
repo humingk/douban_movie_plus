@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * 与IMDB电影相关的IMDB影人
@@ -22,9 +23,6 @@ public class CelebrityImdbOfMovieImdbVo implements Serializable {
   /** IMDB影人链接 */
   private String urlCelebrityImdb;
 
-  /** IMDB电影ID */
-  private String idMovieImdb;
-
   /** 豆瓣影人ID 0-未匹配 1-已匹配 */
   private Long idCelebrityDouban;
   /** 豆瓣电影链接 */
@@ -35,8 +33,7 @@ public class CelebrityImdbOfMovieImdbVo implements Serializable {
 
   /** 出生年份 /year */
   private Short birthYear;
-  /** 该影人在该电影中的职位ID */
-  private Byte idProfession;
-  /** 该影人在该电影中的职位 */
-  private String profession;
+
+  /** 该影人与该电影的关系列表 */
+  private List<MovieImdbToCelebrityImdbVo> relationList;
 }

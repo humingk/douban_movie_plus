@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import org.humingk.movie.dal.entity.MovieDoubanToCelebrityDouban;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * 与豆瓣电影相关的豆瓣影人
@@ -48,6 +49,6 @@ public class CelebrityDoubanOfMovieDoubanDo implements Serializable {
 
   // MovieDoubanToCelebrityDouban --------------------------------------
 
-  /** 豆瓣电影-豆瓣影人 */
-  private MovieDoubanToCelebrityDouban movieDoubanToCelebrityDouban;
+  /** 豆瓣电影-豆瓣影人 列表 */
+  private List<MovieDoubanToCelebrityDouban> movieDoubanToCelebrityDoubanList;
 }

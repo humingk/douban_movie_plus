@@ -3,8 +3,10 @@ package org.humingk.movie.api.common.vo.celebrity.details;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.humingk.movie.api.common.vo.movie.details.MovieImdbToCelebrityImdbVo;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * 与IMDB影人相关的IMDB电影
@@ -50,8 +52,6 @@ public class MovieImdbOfCelebrityImdbVo implements Serializable {
   /** 简介 */
   private String summary;
 
-  /** 该影人在该电影中的职位ID */
-  private Byte idProfession;
-  /** 该影人在该电影中的职位 */
-  private String profession;
+  /** 该电影与该影人的关系列表 */
+  private List<MovieImdbToCelebrityImdbVo> relationList;
 }

@@ -10,6 +10,7 @@ echo "[4]  强制部署[3]需要的环境"
 echo "[5]  强制撤销[3]部署的环境"
 echo "[6]  删除target目录"
 echo "[7]  导出数据库建表SQL语句"
+echo "[8]  启动NeteaseCloudMusicApi服务"
 echo "========================================="
 read -p "请选择脚本:" choose
 
@@ -158,6 +159,28 @@ function export_database_sql_create() {
   fi
 }
 
+# 启动NeteaseCloudMusicApi服务
+function netease_start() {
+  if [ ! -d "./NeteaseCloudMusicApi" ]; then
+    git clone --depth 1 https://github.com/Binaryify/NeteaseCloudMusicApi
+    cd NeteaseCloudMusicApi && npm install && cd ..
+  fi
+  exec="PORT=10102 node ./NeteaseCloudMusicApi/app.js"
+  read -p "你希望后台运行吗? [y/n]:" choose_back
+  if [ "$choose_back" = "n" ]; then
+    eval $exec
+  else
+    exec_new="nohup "$exec" >>./doc/log/NeteaseCloudMusicApi-server.log 2>&1 &"
+    eval $exec_new
+    if [ $? -eq 0 ]; then
+      echo "NeteaseCloudMusicApi已在后台运行，查看进程：ps -ef | grep NeteaseCloudMusicApi"
+    else
+      echo "NeteaseCloudMusicApi运行失败"
+    fi
+  fi
+}
+
+
 # main
 # ------------------------------
 case $choose in
@@ -184,5 +207,8 @@ case $choose in
   ;;
 7)
   export_database_sql_create
+  ;;
+8)
+  netease_start
   ;;
 esac
