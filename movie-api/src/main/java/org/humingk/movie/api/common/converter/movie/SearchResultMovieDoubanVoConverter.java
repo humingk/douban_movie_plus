@@ -5,7 +5,7 @@ import org.humingk.movie.api.common.converter.movie.rate.RateMovieImdbVoConverte
 import org.humingk.movie.api.common.util.ConverterUtil;
 import org.humingk.movie.api.common.vo.movie.SearchResultMovieDoubanVo;
 import org.humingk.movie.common.util.BaseConverter;
-import org.humingk.movie.dal.domain.SearchResultMovieDoubanDo;
+import org.humingk.movie.service.douban.dto.movie.SearchResultMovieDoubanDto;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
@@ -20,7 +20,7 @@ import org.mapstruct.Mappings;
       CelebrityDoubanOfMovieDoubanVoConverter.class
     })
 public interface SearchResultMovieDoubanVoConverter
-    extends BaseConverter<SearchResultMovieDoubanVo, SearchResultMovieDoubanDo> {
+    extends BaseConverter<SearchResultMovieDoubanVo, SearchResultMovieDoubanDto> {
   @Override
   @Mappings({
     @Mapping(target = "base", source = "movieDouban"),
@@ -35,5 +35,5 @@ public interface SearchResultMovieDoubanVoConverter
         qualifiedByName = {"util", "typeList"}),
     @Mapping(target = "celebrityList", source = "celebrityDoubanOfMovieDoubanDoList")
   })
-  SearchResultMovieDoubanVo to(SearchResultMovieDoubanDo searchResultMovieDoubanDo);
+  SearchResultMovieDoubanVo to(SearchResultMovieDoubanDto searchResultMovieDoubanDto);
 }

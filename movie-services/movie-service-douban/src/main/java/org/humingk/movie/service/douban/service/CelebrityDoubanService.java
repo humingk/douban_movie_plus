@@ -1,9 +1,9 @@
 package org.humingk.movie.service.douban.service;
 
-import org.humingk.movie.dal.domain.SearchResultCelebrityDoubanDo;
-import org.humingk.movie.dal.domain.SearchTipsCelebrityDoubanDo;
 import org.humingk.movie.dal.entity.CelebrityDouban;
-import org.humingk.movie.service.douban.dto.CelebrityDoubanDetailsDto;
+import org.humingk.movie.service.douban.dto.celebrity.CelebrityDoubanDetailsDto;
+import org.humingk.movie.service.douban.dto.celebrity.SearchResultCelebrityDoubanDto;
+import org.humingk.movie.service.douban.dto.celebrity.SearchTipsCelebrityDoubanDto;
 import org.springframework.validation.annotation.Validated;
 
 import javax.validation.constraints.NotNull;
@@ -39,7 +39,7 @@ public interface CelebrityDoubanService {
    * @param limit 限制数
    * @return
    */
-  List<SearchTipsCelebrityDoubanDo> getSearchTipsCelebrityDoubanListByCelebrityDoubanKeywordStart(
+  List<SearchTipsCelebrityDoubanDto> getSearchTipsCelebrityDoubanListByCelebrityDoubanKeywordStart(
       String keyword, int offset, int limit);
 
   /**
@@ -50,6 +50,6 @@ public interface CelebrityDoubanService {
    * @param limit 限制数
    * @return
    */
-  List<SearchResultCelebrityDoubanDo> getSearchResultCelebrityDoubanListByCelebrityDoubanKeyword(
+  List<SearchResultCelebrityDoubanDto> getSearchResultCelebrityDoubanListByCelebrityDoubanKeyword(
       String keyword, int offset, int limit);
 }

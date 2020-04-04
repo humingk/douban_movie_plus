@@ -1,6 +1,6 @@
 package org.humingk.movie.dal.mapper.plus;
 
-import org.humingk.movie.dal.domain.AwardOfMovieAndCelebrityDoubanDo;
+import org.humingk.movie.dal.domain.douban.AwardOfMovieAndCelebrityDoubanDo;
 import org.humingk.movie.dal.entity.MovieDoubanToAwardMovie;
 import org.humingk.movie.dal.entity.MovieDoubanToAwardMovieExample;
 

@@ -4,7 +4,7 @@ import org.humingk.movie.api.common.converter.movie.details.MovieImdbToCelebrity
 import org.humingk.movie.api.common.util.ConverterUtil;
 import org.humingk.movie.api.common.vo.celebrity.details.MovieImdbOfCelebrityImdbVo;
 import org.humingk.movie.common.util.BaseConverter;
-import org.humingk.movie.dal.domain.MovieImdbOfCelebrityImdbDo;
+import org.humingk.movie.dal.domain.imdb.MovieImdbOfCelebrityImdbDo;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;

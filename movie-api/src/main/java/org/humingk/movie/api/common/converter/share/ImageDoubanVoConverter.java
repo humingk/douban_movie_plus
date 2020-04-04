@@ -2,7 +2,7 @@ package org.humingk.movie.api.common.converter.share;
 
 import org.humingk.movie.api.common.vo.share.ImageDoubanVo;
 import org.humingk.movie.common.util.BaseConverter;
-import org.humingk.movie.dal.domain.ImageDoubanDo;
+import org.humingk.movie.dal.domain.douban.ImageDoubanDo;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;

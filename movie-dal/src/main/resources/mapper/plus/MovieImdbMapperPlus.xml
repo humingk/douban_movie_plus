@@ -10,7 +10,7 @@
                extends="org.humingk.movie.dal.mapper.auto.MovieImdbToCelebrityImdbMapper.BaseResultMap"/>
     <!--与IMDB影人相关的IMDB电影-->
     <resultMap id="MovieImdbOfCelebrityImdbDoResultMapPlus"
-               type="org.humingk.movie.dal.domain.MovieImdbOfCelebrityImdbDo"
+               type="org.humingk.movie.dal.domain.imdb.MovieImdbOfCelebrityImdbDo"
                extends="BaseResultMapPlus">
         <collection property="movieImdbToCelebrityImdbList"
                     ofType="org.humingk.movie.dal.entity.MovieImdbToCelebrityImdb"

@@ -10,11 +10,16 @@ import java.io.Serializable;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class ReviewMovieDoubanVo implements Serializable {
+public class ReviewOfMovieDoubanVo implements Serializable {
   private static final long serialVersionUID = 1L;
   /** 豆瓣电影影评ID */
   private Long id;
-
+  /** 豆瓣用户ID */
+  private String idUserDouban;
+  /** 豆瓣用户昵称 */
+  private String nameUserDouban;
+  /** 豆瓣用户链接 */
+  private String urlUserDouban;
   /** 影评链接 */
   private String urlReview;
 

@@ -1,6 +1,6 @@
 package org.humingk.movie.service.imdb.converter.celebrity;
 
-import org.humingk.movie.dal.domain.MovieImdbOfCelebrityImdbDo;
+import org.humingk.movie.dal.domain.imdb.MovieImdbOfCelebrityImdbDo;
 import org.humingk.movie.dal.entity.CelebrityImdb;
 import org.humingk.movie.service.imdb.dto.celebrity.CelebrityImdbDetailsDto;
 import org.mapstruct.Mapper;

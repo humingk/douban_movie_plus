@@ -10,7 +10,7 @@
                extends="org.humingk.movie.dal.mapper.auto.AwardMovieMapper.BaseResultMap"/>
     <!--与豆瓣电影相关的奖项信息-->
     <resultMap id="AwardOfMovieAndCelebrityDoubanResultMapPlus"
-               type="org.humingk.movie.dal.domain.AwardOfMovieAndCelebrityDoubanDo"
+               type="org.humingk.movie.dal.domain.douban.AwardOfMovieAndCelebrityDoubanDo"
                extends="BaseResultMapPlus">
         <association property="awardMovie"
                      javaType="org.humingk.movie.dal.entity.AwardMovie"

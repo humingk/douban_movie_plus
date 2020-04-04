@@ -40,9 +40,9 @@ public class MovieDoubanDetailsVo implements Serializable {
   /** 豆瓣电影经典台词列表 */
   private List<ClassicDoubanVo> classicList;
   /** 豆瓣电影热门影评列表 */
-  private List<ReviewMovieDoubanVo> reviewList;
+  private List<ReviewOfMovieDoubanVo> reviewList;
   /** 豆瓣电影奖项列表 */
   private List<AwardOfMovieAndCelebrityDoubanVo> awardList;
   /** 豆瓣电影热门评论列表 */
-  private List<CommentMovieDoubanVo> commentList;
+  private List<CommentOfMovieDoubanVo> commentList;
 }

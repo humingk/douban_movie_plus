@@ -14,7 +14,7 @@
                extends="org.humingk.movie.dal.mapper.auto.RateMovieDoubanMapper.BaseResultMap"/>
     <!--与豆瓣电影相关的豆瓣影人-->
     <resultMap id="MovieDoubanOfCelebrityDoubanDoResultMapPlus"
-               type="org.humingk.movie.dal.domain.MovieDoubanOfCelebrityDoubanDo"
+               type="org.humingk.movie.dal.domain.douban.MovieDoubanOfCelebrityDoubanDo"
                extends="BaseResultMapPlus">
         <association property="rateMovieDouban"
                      javaType="org.humingk.movie.dal.entity.RateMovieDouban"

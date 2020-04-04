@@ -1,5 +1,6 @@
 package org.humingk.movie.dal.mapper.plus;
 
+import org.humingk.movie.dal.domain.douban.ReviewOfMovieDoubanDo;
 import org.humingk.movie.dal.entity.ReviewMovieDouban;
 import org.humingk.movie.dal.entity.ReviewMovieDoubanExample;
 
@@ -14,5 +15,5 @@ public interface ReviewMovieDoubanMapperPlus
    * @param idMovieDouban 豆瓣电影ID
    * @return
    */
-  List<ReviewMovieDouban> selectReviewMovieDoubanListByMovieDoubanId(Long idMovieDouban);
+  List<ReviewOfMovieDoubanDo> selectReviewOfMovieDoubanListByMovieDoubanId(Long idMovieDouban);
 }

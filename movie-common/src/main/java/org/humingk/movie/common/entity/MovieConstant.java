@@ -183,13 +183,13 @@ public class MovieConstant {
   /** 电影资源类型 */
   public static final ImmutableMap<Short, String> RESOURCE_TYPE =
       ImmutableMap.<Short, String>builder()
-          .put((short) 0, "")
+          .put((short) 0, "未知")
           .put((short) 2, "在线免费")
           .put((short) 3, "VIP免费")
           .put((short) 4, "单片付费")
           .put((short) 5, "用劵/单片付费")
           // ---
-          .put((short) 100, "")
+          .put((short) 100, "未知")
           .put((short) 101, "在线")
           .put((short) 102, "网盘")
           .put((short) 111, "蓝光")

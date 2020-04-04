@@ -1,11 +1,12 @@
-package org.humingk.movie.service.douban.converter;
+package org.humingk.movie.service.douban.converter.celebrity;
 
-import org.humingk.movie.dal.domain.AwardOfMovieAndCelebrityDoubanDo;
-import org.humingk.movie.dal.domain.MovieDoubanOfCelebrityDoubanDo;
+import org.humingk.movie.dal.domain.douban.AwardOfMovieAndCelebrityDoubanDo;
+import org.humingk.movie.dal.domain.douban.MovieDoubanOfCelebrityDoubanDo;
 import org.humingk.movie.dal.entity.AliasCelebrityDouban;
 import org.humingk.movie.dal.entity.CelebrityDouban;
 import org.humingk.movie.dal.entity.ImageCelebrityDouban;
-import org.humingk.movie.service.douban.dto.CelebrityDoubanDetailsDto;
+import org.humingk.movie.service.douban.converter.ImageDoubanDoConverter;
+import org.humingk.movie.service.douban.dto.celebrity.CelebrityDoubanDetailsDto;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;

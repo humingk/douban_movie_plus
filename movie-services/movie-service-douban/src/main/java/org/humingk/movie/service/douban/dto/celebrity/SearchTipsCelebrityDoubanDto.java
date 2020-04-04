@@ -1,4 +1,4 @@
-package org.humingk.movie.dal.domain;
+package org.humingk.movie.service.douban.dto.celebrity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -17,7 +17,7 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class SearchTipsCelebrityDoubanDo implements Serializable {
+public class SearchTipsCelebrityDoubanDto implements Serializable {
   private static final long serialVersionUID = 1L;
   /** 豆瓣影人基础信息 */
   private CelebrityDouban celebrityDouban;

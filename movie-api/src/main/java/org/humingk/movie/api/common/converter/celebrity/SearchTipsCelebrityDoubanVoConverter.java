@@ -3,7 +3,7 @@ package org.humingk.movie.api.common.converter.celebrity;
 import org.humingk.movie.api.common.converter.celebrity.details.AliasCelebrityDoubanVoConverter;
 import org.humingk.movie.api.common.vo.celebrity.SearchTipsCelebrityDoubanVo;
 import org.humingk.movie.common.util.BaseConverter;
-import org.humingk.movie.dal.domain.SearchTipsCelebrityDoubanDo;
+import org.humingk.movie.service.douban.dto.celebrity.SearchTipsCelebrityDoubanDto;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
@@ -16,11 +16,11 @@ import org.mapstruct.Mappings;
       AliasCelebrityDoubanVoConverter.class,
     })
 public interface SearchTipsCelebrityDoubanVoConverter
-    extends BaseConverter<SearchTipsCelebrityDoubanVo, SearchTipsCelebrityDoubanDo> {
+    extends BaseConverter<SearchTipsCelebrityDoubanVo, SearchTipsCelebrityDoubanDto> {
   @Override
   @Mappings({
     @Mapping(target = "base", source = "celebrityDouban"),
     @Mapping(target = "aliasList", source = "aliasCelebrityDoubanList")
   })
-  SearchTipsCelebrityDoubanVo to(SearchTipsCelebrityDoubanDo searchTipsCelebrityDoubanDo);
+  SearchTipsCelebrityDoubanVo to(SearchTipsCelebrityDoubanDto searchTipsCelebrityDoubanDto);
 }

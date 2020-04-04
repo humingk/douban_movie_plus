@@ -1,4 +1,4 @@
-package org.humingk.movie.dal.domain;
+package org.humingk.movie.dal.domain.douban;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

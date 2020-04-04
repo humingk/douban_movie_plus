@@ -3,7 +3,7 @@ package org.humingk.movie.service.imdb.dto.movie;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.humingk.movie.dal.domain.CelebrityImdbOfMovieImdbDo;
+import org.humingk.movie.dal.domain.imdb.CelebrityImdbOfMovieImdbDo;
 import org.humingk.movie.dal.entity.MovieImdb;
 import org.humingk.movie.dal.entity.MovieImdbToTypeMovie;
 import org.humingk.movie.dal.entity.RateImdb;

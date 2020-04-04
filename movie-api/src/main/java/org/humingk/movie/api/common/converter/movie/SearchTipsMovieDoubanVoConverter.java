@@ -4,7 +4,7 @@ import org.humingk.movie.api.common.converter.movie.rate.RateMovieImdbVoConverte
 import org.humingk.movie.api.common.util.ConverterUtil;
 import org.humingk.movie.api.common.vo.movie.SearchTipsMovieDoubanVo;
 import org.humingk.movie.common.util.BaseConverter;
-import org.humingk.movie.dal.domain.SearchTipsMovieDoubanDo;
+import org.humingk.movie.service.douban.dto.movie.SearchTipsMovieDoubanDto;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
@@ -14,7 +14,7 @@ import org.mapstruct.Mappings;
     componentModel = "spring",
     uses = {ConverterUtil.class, MovieDoubanVoConverter.class, RateMovieImdbVoConverter.class})
 public interface SearchTipsMovieDoubanVoConverter
-    extends BaseConverter<SearchTipsMovieDoubanVo, SearchTipsMovieDoubanDo> {
+    extends BaseConverter<SearchTipsMovieDoubanVo, SearchTipsMovieDoubanDto> {
   @Override
   @Mappings({
     @Mapping(target = "base", source = "movieDouban"),
@@ -24,5 +24,5 @@ public interface SearchTipsMovieDoubanVoConverter
         source = "aliasMovieDoubanList",
         qualifiedByName = {"util", "aliasList"}),
   })
-  SearchTipsMovieDoubanVo to(SearchTipsMovieDoubanDo searchTipsMovieDoubanDo);
+  SearchTipsMovieDoubanVo to(SearchTipsMovieDoubanDto searchTipsMovieDoubanDto);
 }

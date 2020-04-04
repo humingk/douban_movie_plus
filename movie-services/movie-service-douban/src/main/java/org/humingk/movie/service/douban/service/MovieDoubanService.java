@@ -1,10 +1,10 @@
 package org.humingk.movie.service.douban.service;
 
-import org.humingk.movie.dal.domain.ImageDoubanDo;
-import org.humingk.movie.dal.domain.SearchResultMovieDoubanDo;
-import org.humingk.movie.dal.domain.SearchTipsMovieDoubanDo;
+import org.humingk.movie.dal.domain.douban.ImageDoubanDo;
 import org.humingk.movie.dal.entity.MovieDouban;
-import org.humingk.movie.service.douban.dto.MovieDoubanDetailsDto;
+import org.humingk.movie.service.douban.dto.movie.MovieDoubanDetailsDto;
+import org.humingk.movie.service.douban.dto.movie.SearchResultMovieDoubanDto;
+import org.humingk.movie.service.douban.dto.movie.SearchTipsMovieDoubanDto;
 import org.springframework.validation.annotation.Validated;
 
 import javax.validation.constraints.NotNull;
@@ -44,7 +44,7 @@ public interface MovieDoubanService {
    * @param limit 限制数
    * @return
    */
-  List<SearchTipsMovieDoubanDo> getSearchTipsMovieDoubanListByMovieDoubanKeywordStart(
+  List<SearchTipsMovieDoubanDto> getSearchTipsMovieDoubanListByMovieDoubanKeywordStart(
       String keyword, int offset, int limit);
 
   /**
@@ -55,7 +55,7 @@ public interface MovieDoubanService {
    * @param limit 限制数
    * @return
    */
-  List<SearchResultMovieDoubanDo> getSearchResultMovieDoubanListByMovieDoubanKeyword(
+  List<SearchResultMovieDoubanDto> getSearchResultMovieDoubanListByMovieDoubanKeyword(
       String keyword, int offset, int limit);
 
   /**

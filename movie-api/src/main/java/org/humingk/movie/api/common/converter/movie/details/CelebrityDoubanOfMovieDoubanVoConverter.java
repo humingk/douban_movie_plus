@@ -3,7 +3,7 @@ package org.humingk.movie.api.common.converter.movie.details;
 import org.humingk.movie.api.common.util.ConverterUtil;
 import org.humingk.movie.api.common.vo.movie.details.CelebrityDoubanOfMovieDoubanVo;
 import org.humingk.movie.common.util.BaseConverter;
-import org.humingk.movie.dal.domain.CelebrityDoubanOfMovieDoubanDo;
+import org.humingk.movie.dal.domain.douban.CelebrityDoubanOfMovieDoubanDo;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;

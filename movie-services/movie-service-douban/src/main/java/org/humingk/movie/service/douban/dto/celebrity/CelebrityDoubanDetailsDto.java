@@ -1,11 +1,11 @@
-package org.humingk.movie.service.douban.dto;
+package org.humingk.movie.service.douban.dto.celebrity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.humingk.movie.dal.domain.AwardOfMovieAndCelebrityDoubanDo;
-import org.humingk.movie.dal.domain.ImageDoubanDo;
-import org.humingk.movie.dal.domain.MovieDoubanOfCelebrityDoubanDo;
+import org.humingk.movie.dal.domain.douban.AwardOfMovieAndCelebrityDoubanDo;
+import org.humingk.movie.dal.domain.douban.ImageDoubanDo;
+import org.humingk.movie.dal.domain.douban.MovieDoubanOfCelebrityDoubanDo;
 import org.humingk.movie.dal.entity.AliasCelebrityDouban;
 import org.humingk.movie.dal.entity.CelebrityDouban;
 

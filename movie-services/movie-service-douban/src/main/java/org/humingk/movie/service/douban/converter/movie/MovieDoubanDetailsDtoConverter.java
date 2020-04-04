@@ -1,9 +1,12 @@
-package org.humingk.movie.service.douban.converter;
+package org.humingk.movie.service.douban.converter.movie;
 
-import org.humingk.movie.dal.domain.AwardOfMovieAndCelebrityDoubanDo;
-import org.humingk.movie.dal.domain.CelebrityDoubanOfMovieDoubanDo;
+import org.humingk.movie.dal.domain.douban.AwardOfMovieAndCelebrityDoubanDo;
+import org.humingk.movie.dal.domain.douban.CelebrityDoubanOfMovieDoubanDo;
+import org.humingk.movie.dal.domain.douban.CommentOfMovieDoubanDo;
+import org.humingk.movie.dal.domain.douban.ReviewOfMovieDoubanDo;
 import org.humingk.movie.dal.entity.*;
-import org.humingk.movie.service.douban.dto.MovieDoubanDetailsDto;
+import org.humingk.movie.service.douban.converter.ImageDoubanDoConverter;
+import org.humingk.movie.service.douban.dto.movie.MovieDoubanDetailsDto;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
@@ -36,9 +39,9 @@ public interface MovieDoubanDetailsDtoConverter {
       /** 豆瓣电影经典台词列表 */
       List<ClassicDouban> classicDoubanList,
       /** 豆瓣电影热门评论列表 */
-      List<CommentMovieDouban> commentMovieDoubanList,
+      List<CommentOfMovieDoubanDo> commentOfMovieDoubanDoList,
       /** 豆瓣电影热门影评列表 */
-      List<ReviewMovieDouban> reviewMovieDoubanList,
+      List<ReviewOfMovieDoubanDo> reviewOfMovieDoubanDoList,
       /** 豆瓣电影奖项列表 */
       List<AwardOfMovieAndCelebrityDoubanDo> awardOfMovieAndCelebrityDoubanDoList);
 }

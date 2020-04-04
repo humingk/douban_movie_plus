@@ -1,6 +1,6 @@
 package org.humingk.movie.service.douban.converter;
 
-import org.humingk.movie.dal.domain.ImageDoubanDo;
+import org.humingk.movie.dal.domain.douban.ImageDoubanDo;
 import org.humingk.movie.dal.entity.ImageCelebrityDouban;
 import org.humingk.movie.dal.entity.ImageMovieDouban;
 import org.mapstruct.Mapper;

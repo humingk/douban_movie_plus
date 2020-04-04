@@ -57,6 +57,17 @@ public class ConverterUtil {
   }
 
   /**
+   * 获取豆瓣用户url
+   *
+   * @param id
+   * @return
+   */
+  @Named("urlUserDouban")
+  public String urlUserDouban(String id) {
+    return "https://www.douban.com/people/" + id;
+  }
+
+  /**
    * 获取IMDB电影ID
    *
    * @param id

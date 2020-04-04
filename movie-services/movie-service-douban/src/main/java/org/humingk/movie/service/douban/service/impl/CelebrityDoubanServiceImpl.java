@@ -1,18 +1,18 @@
 package org.humingk.movie.service.douban.service.impl;
 
 import com.github.pagehelper.PageHelper;
-import org.humingk.movie.dal.domain.AwardOfMovieAndCelebrityDoubanDo;
-import org.humingk.movie.dal.domain.MovieDoubanOfCelebrityDoubanDo;
-import org.humingk.movie.dal.domain.SearchResultCelebrityDoubanDo;
-import org.humingk.movie.dal.domain.SearchTipsCelebrityDoubanDo;
+import org.humingk.movie.dal.domain.douban.AwardOfMovieAndCelebrityDoubanDo;
+import org.humingk.movie.dal.domain.douban.MovieDoubanOfCelebrityDoubanDo;
 import org.humingk.movie.dal.entity.*;
 import org.humingk.movie.dal.mapper.auto.AliasCelebrityDoubanMapper;
 import org.humingk.movie.dal.mapper.auto.CelebrityDoubanMapper;
 import org.humingk.movie.dal.mapper.auto.ImageCelebrityDoubanMapper;
 import org.humingk.movie.dal.mapper.plus.MovieDouanToAwardMovieMapperPlus;
 import org.humingk.movie.dal.mapper.plus.MovieDoubanMapperPlus;
-import org.humingk.movie.service.douban.converter.CelebrityDoubanDetailsDtoConverter;
-import org.humingk.movie.service.douban.dto.CelebrityDoubanDetailsDto;
+import org.humingk.movie.service.douban.converter.celebrity.CelebrityDoubanDetailsDtoConverter;
+import org.humingk.movie.service.douban.dto.celebrity.CelebrityDoubanDetailsDto;
+import org.humingk.movie.service.douban.dto.celebrity.SearchResultCelebrityDoubanDto;
+import org.humingk.movie.service.douban.dto.celebrity.SearchTipsCelebrityDoubanDto;
 import org.humingk.movie.service.douban.service.CelebrityDoubanService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -79,10 +79,10 @@ public class CelebrityDoubanServiceImpl implements CelebrityDoubanService {
   }
 
   @Override
-  public List<SearchTipsCelebrityDoubanDo>
+  public List<SearchTipsCelebrityDoubanDto>
       getSearchTipsCelebrityDoubanListByCelebrityDoubanKeywordStart(
           String keyword, int offset, int limit) {
-    List<SearchTipsCelebrityDoubanDo> searchTipsCelebrityDoubanDoList = new ArrayList<>();
+    List<SearchTipsCelebrityDoubanDto> searchTipsCelebrityDoubanDtoList = new ArrayList<>();
     celebrityDoubanExample.start().andNameZhLike(keyword.trim() + "%");
     celebrityDoubanExample.or().andNameOriginLike(keyword.trim() + "%");
     PageHelper.offsetPage(offset, limit);
@@ -92,17 +92,17 @@ public class CelebrityDoubanServiceImpl implements CelebrityDoubanService {
       aliasCelebrityDoubanExample.start().andIdCelebrityDoubanEqualTo(celebrityDouban.getId());
       List<AliasCelebrityDouban> aliasCelebrityDoubanList =
           aliasCelebrityDoubanMapper.selectByExample(aliasCelebrityDoubanExample);
-      searchTipsCelebrityDoubanDoList.add(
-          new SearchTipsCelebrityDoubanDo(celebrityDouban, aliasCelebrityDoubanList));
+      searchTipsCelebrityDoubanDtoList.add(
+          new SearchTipsCelebrityDoubanDto(celebrityDouban, aliasCelebrityDoubanList));
     }
-    return searchTipsCelebrityDoubanDoList;
+    return searchTipsCelebrityDoubanDtoList;
   }
 
   @Override
-  public List<SearchResultCelebrityDoubanDo>
+  public List<SearchResultCelebrityDoubanDto>
       getSearchResultCelebrityDoubanListByCelebrityDoubanKeyword(
           String keyword, int offset, int limit) {
-    List<SearchResultCelebrityDoubanDo> searchResultCelebrityDoubanDoList = new ArrayList<>();
+    List<SearchResultCelebrityDoubanDto> searchResultCelebrityDoubanDtoList = new ArrayList<>();
     celebrityDoubanExample.start().andNameZhLike("%" + keyword.trim() + "%");
     celebrityDoubanExample.or().andNameOriginLike("%" + keyword.trim() + "%");
     PageHelper.offsetPage(offset, limit);
@@ -116,10 +116,10 @@ public class CelebrityDoubanServiceImpl implements CelebrityDoubanService {
       List<MovieDoubanOfCelebrityDoubanDo> movieDoubanOfCelebrityDoubanDoList =
           movieDoubanMapperPlus.selectMovieDoubanOfCelebrityDoubanListByCelebrityDoubanId(
               celebrityDouban.getId(), 5, "score");
-      searchResultCelebrityDoubanDoList.add(
-          new SearchResultCelebrityDoubanDo(
+      searchResultCelebrityDoubanDtoList.add(
+          new SearchResultCelebrityDoubanDto(
               celebrityDouban, aliasCelebrityDoubanList, movieDoubanOfCelebrityDoubanDoList));
     }
-    return searchResultCelebrityDoubanDoList;
+    return searchResultCelebrityDoubanDtoList;
   }
 }

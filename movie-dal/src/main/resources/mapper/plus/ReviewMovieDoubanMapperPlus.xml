@@ -4,13 +4,36 @@
     <resultMap id="BaseResultMapPlus"
                extends="org.humingk.movie.dal.mapper.auto.ReviewMovieDoubanMapper.BaseResultMap"
                type="org.humingk.movie.dal.entity.ReviewMovieDouban"/>
+    <!--豆瓣用户-->
+    <resultMap id="UserDouban"
+               type="org.humingk.movie.dal.entity.UserDouban"
+               extends="org.humingk.movie.dal.mapper.auto.UserDoubanMapper.BaseResultMap"/>
+    <!--豆瓣影评以及用户-->
+    <resultMap id="ReviewOfMovieDoubanDoResultMapPlus"
+               type="org.humingk.movie.dal.domain.douban.ReviewOfMovieDoubanDo"
+               extends="BaseResultMapPlus">
+        <association property="userDouban"
+                     javaType="org.humingk.movie.dal.entity.UserDouban"
+                     resultMap="UserDouban"/>
+    </resultMap>
     <!--根据豆瓣电影ID获取热门影评列表-->
-    <select id="selectReviewMovieDoubanListByMovieDoubanId" parameterType="java.lang.Long"
-            resultMap="BaseResultMapPlus">
-        select review_movie_douban.id, agree_vote, against_vote, create_datetime, title, content
+    <select id="selectReviewOfMovieDoubanListByMovieDoubanId" parameterType="java.lang.Long"
+            resultMap="ReviewOfMovieDoubanDoResultMapPlus">
+        select review_movie_douban.id,
+               agree_vote,
+               against_vote,
+               create_datetime,
+               title,
+               content,
+               user_douban.id,
+               name_zh
         from review_movie_douban
                  inner join movie_douban_to_review_movie_douban
                             on review_movie_douban.id = movie_douban_to_review_movie_douban.id_review_movie_douban
+                 inner join user_douban_to_review_movie_douban
+                            on review_movie_douban.id = user_douban_to_review_movie_douban.id_review_movie_douban
+                 inner join user_douban
+                            on user_douban_to_review_movie_douban.id_user_douban = user_douban.id
         where movie_douban_to_review_movie_douban.id_movie_douban = #{idMovieDouban,jdbcType=BIGINT}
     </select>
 </mapper>

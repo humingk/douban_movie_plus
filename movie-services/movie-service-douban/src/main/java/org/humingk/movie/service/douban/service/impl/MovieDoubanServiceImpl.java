@@ -1,14 +1,17 @@
 package org.humingk.movie.service.douban.service.impl;
 
 import com.github.pagehelper.PageHelper;
-import org.humingk.movie.dal.domain.*;
+import org.humingk.movie.dal.domain.douban.*;
 import org.humingk.movie.dal.entity.*;
 import org.humingk.movie.dal.mapper.auto.*;
 import org.humingk.movie.dal.mapper.plus.CelebrityDoubanMapperPlus;
+import org.humingk.movie.dal.mapper.plus.CommentMovieDoubanMapperPlus;
 import org.humingk.movie.dal.mapper.plus.MovieDouanToAwardMovieMapperPlus;
 import org.humingk.movie.dal.mapper.plus.ReviewMovieDoubanMapperPlus;
-import org.humingk.movie.service.douban.converter.MovieDoubanDetailsDtoConverter;
-import org.humingk.movie.service.douban.dto.MovieDoubanDetailsDto;
+import org.humingk.movie.service.douban.converter.movie.MovieDoubanDetailsDtoConverter;
+import org.humingk.movie.service.douban.dto.movie.MovieDoubanDetailsDto;
+import org.humingk.movie.service.douban.dto.movie.SearchResultMovieDoubanDto;
+import org.humingk.movie.service.douban.dto.movie.SearchTipsMovieDoubanDto;
 import org.humingk.movie.service.douban.service.MovieDoubanService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -33,7 +36,6 @@ public class MovieDoubanServiceImpl implements MovieDoubanService {
   @Autowired private TrailerMovieDoubanExample trailerMovieDoubanExample;
   @Autowired private ImageMovieDoubanExample imageMovieDoubanExample;
   @Autowired private ClassicDoubanExample classicDoubanExample;
-  @Autowired private CommentMovieDoubanExample commentMovieDoubanExample;
   /** mapper */
   @Autowired private AliasMovieDoubanMapper aliasMovieDoubanMapper;
 
@@ -43,11 +45,11 @@ public class MovieDoubanServiceImpl implements MovieDoubanService {
   @Autowired private TrailerMovieDoubanMapper trailerMovieDoubanMapper;
   @Autowired private ImageMovieDoubanMapper imageMovieDoubanMapper;
   @Autowired private ClassicDoubanMapper classicDoubanMapper;
-  @Autowired private CommentMovieDoubanMapper commentMovieDoubanMapper;
   @Autowired private ReviewMovieDoubanMapperPlus reviewMovieDoubanMapperPlus;
   @Autowired private MovieDoubanMapper movieDoubanMapper;
   @Autowired private RateMovieDoubanMapper rateMovieDoubanMapper;
   @Autowired private MovieDouanToAwardMovieMapperPlus moviedouanToAwardMovieMapperPlus;
+  @Autowired private CommentMovieDoubanMapperPlus commentMovieDoubanMapperPlus;
 
   @Override
   public MovieDouban getMovieDoubanByMovieDoubanId(long id) {
@@ -87,12 +89,11 @@ public class MovieDoubanServiceImpl implements MovieDoubanService {
     List<ClassicDouban> classicDoubanList =
         classicDoubanMapper.selectByExample(classicDoubanExample);
     /** 豆瓣电影热门评论列表 */
-    commentMovieDoubanExample.start().andIdMovieDoubanEqualTo(id);
-    List<CommentMovieDouban> commentMovieDoubanList =
-        commentMovieDoubanMapper.selectByExample(commentMovieDoubanExample);
+    List<CommentOfMovieDoubanDo> commentOfMovieDoubanDoList =
+        commentMovieDoubanMapperPlus.selectCommentOfMovieDoubanListByMovieDoubanId(id);
     /** 豆瓣电影-热门影评列表 */
-    List<ReviewMovieDouban> reviewMovieDoubanList =
-        reviewMovieDoubanMapperPlus.selectReviewMovieDoubanListByMovieDoubanId(id);
+    List<ReviewOfMovieDoubanDo> reviewOfMovieDoubanDoList =
+        reviewMovieDoubanMapperPlus.selectReviewOfMovieDoubanListByMovieDoubanId(id);
     /** 豆瓣电影-奖项列表 */
     List<AwardOfMovieAndCelebrityDoubanDo> awardOfMovieAndCelebrityDoubanDoList =
         moviedouanToAwardMovieMapperPlus.selectAwardOfMovieAndCelebrityListByMovieDoubanId(id);
@@ -107,15 +108,15 @@ public class MovieDoubanServiceImpl implements MovieDoubanService {
         trailerMovieDoubanList,
         imageMovieDoubanList,
         classicDoubanList,
-        commentMovieDoubanList,
-        reviewMovieDoubanList,
+        commentOfMovieDoubanDoList,
+        reviewOfMovieDoubanDoList,
         awardOfMovieAndCelebrityDoubanDoList);
   }
 
   @Override
-  public List<SearchTipsMovieDoubanDo> getSearchTipsMovieDoubanListByMovieDoubanKeywordStart(
+  public List<SearchTipsMovieDoubanDto> getSearchTipsMovieDoubanListByMovieDoubanKeywordStart(
       String keyword, int offset, int limit) {
-    List<SearchTipsMovieDoubanDo> searchTipsMovieDoubanDoList = new ArrayList<>();
+    List<SearchTipsMovieDoubanDto> searchTipsMovieDoubanDtoList = new ArrayList<>();
     movieDoubanExample.start().andNameZhLike(keyword.trim() + "%");
     movieDoubanExample.or().andNameOriginLike(keyword.trim() + "%");
     PageHelper.offsetPage(offset, limit);
@@ -125,16 +126,16 @@ public class MovieDoubanServiceImpl implements MovieDoubanService {
       aliasMovieDoubanExample.start().andIdMovieDoubanEqualTo(movieDouban.getId());
       List<AliasMovieDouban> aliasMovieDoubanList =
           aliasMovieDoubanMapper.selectByExample(aliasMovieDoubanExample);
-      searchTipsMovieDoubanDoList.add(
-          new SearchTipsMovieDoubanDo(movieDouban, rateMovieDouban, aliasMovieDoubanList));
+      searchTipsMovieDoubanDtoList.add(
+          new SearchTipsMovieDoubanDto(movieDouban, rateMovieDouban, aliasMovieDoubanList));
     }
-    return searchTipsMovieDoubanDoList;
+    return searchTipsMovieDoubanDtoList;
   }
 
   @Override
-  public List<SearchResultMovieDoubanDo> getSearchResultMovieDoubanListByMovieDoubanKeyword(
+  public List<SearchResultMovieDoubanDto> getSearchResultMovieDoubanListByMovieDoubanKeyword(
       String keyword, int offset, int limit) {
-    List<SearchResultMovieDoubanDo> searchResultMovieDoubanDoList = new ArrayList<>();
+    List<SearchResultMovieDoubanDto> searchResultMovieDoubanDtoList = new ArrayList<>();
     movieDoubanExample.start().andNameZhLike("%" + keyword.trim() + "%");
     movieDoubanExample.or().andNameOriginLike("%" + keyword.trim() + "%");
     PageHelper.offsetPage(offset, limit);
@@ -150,15 +151,15 @@ public class MovieDoubanServiceImpl implements MovieDoubanService {
       List<CelebrityDoubanOfMovieDoubanDo> celebrityDoubanOfMovieDoubanDoList =
           celebrityDoubanMapperPlus.selectCelebrityDoubanOfMovieDoubanListByMovieDoubanId(
               movieDouban.getId());
-      searchResultMovieDoubanDoList.add(
-          new SearchResultMovieDoubanDo(
+      searchResultMovieDoubanDtoList.add(
+          new SearchResultMovieDoubanDto(
               movieDouban,
               rateMovieDouban,
               aliasMovieDoubanList,
               movieDoubanToTypeMovieList,
               celebrityDoubanOfMovieDoubanDoList));
     }
-    return searchResultMovieDoubanDoList;
+    return searchResultMovieDoubanDtoList;
   }
 
   @Override

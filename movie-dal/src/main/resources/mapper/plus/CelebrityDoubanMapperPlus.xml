@@ -10,7 +10,7 @@
                extends="org.humingk.movie.dal.mapper.auto.MovieDoubanToCelebrityDoubanMapper.BaseResultMap"/>
     <!--与豆瓣电影相关的豆瓣影人-->
     <resultMap id="CelebrityDoubanOfMovieDoubanDoResultMapPlus"
-               type="org.humingk.movie.dal.domain.CelebrityDoubanOfMovieDoubanDo"
+               type="org.humingk.movie.dal.domain.douban.CelebrityDoubanOfMovieDoubanDo"
                extends="BaseResultMapPlus">
         <collection property="movieDoubanToCelebrityDoubanList"
                     ofType="org.humingk.movie.dal.entity.MovieDoubanToCelebrityDouban"

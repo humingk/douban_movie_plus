@@ -6,7 +6,7 @@ import org.humingk.movie.api.common.converter.share.AwardOfMovieAndCelebrityDoub
 import org.humingk.movie.api.common.converter.share.ImageDoubanVoConverter;
 import org.humingk.movie.api.common.util.ConverterUtil;
 import org.humingk.movie.api.common.vo.movie.MovieDoubanDetailsVo;
-import org.humingk.movie.service.douban.dto.MovieDoubanDetailsDto;
+import org.humingk.movie.service.douban.dto.movie.MovieDoubanDetailsDto;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
@@ -22,9 +22,9 @@ import org.mapstruct.Mappings;
       TrailerMovieDoubanVoConverter.class,
       ImageDoubanVoConverter.class,
       ClassicDoubanVoConverter.class,
-      ReviewMovieDoubanVoConverter.class,
+      ReviewOfMovieDoubanVoConverter.class,
       AwardOfMovieAndCelebrityDoubanVoConverter.class,
-      CommentMovieDoubanVoConverter.class
+      CommentOfMovieDoubanVoConverter.class
     })
 public interface MovieDoubanDetailsVoConverter {
 
@@ -47,9 +47,9 @@ public interface MovieDoubanDetailsVoConverter {
     @Mapping(target = "trailerList", source = "trailerMovieDoubanList"),
     @Mapping(target = "imageList", source = "imageDoubanDoList"),
     @Mapping(target = "classicList", source = "classicDoubanList"),
-    @Mapping(target = "reviewList", source = "reviewMovieDoubanList"),
+    @Mapping(target = "reviewList", source = "reviewOfMovieDoubanDoList"),
     @Mapping(target = "awardList", source = "awardOfMovieAndCelebrityDoubanDoList"),
-    @Mapping(target = "commentList", source = "commentMovieDoubanList")
+    @Mapping(target = "commentList", source = "commentOfMovieDoubanDoList")
   })
   MovieDoubanDetailsVo to(MovieDoubanDetailsDto movieDoubanDetailsDto);
 }

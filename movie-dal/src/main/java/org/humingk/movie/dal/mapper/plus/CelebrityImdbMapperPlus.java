@@ -1,6 +1,6 @@
 package org.humingk.movie.dal.mapper.plus;
 
-import org.humingk.movie.dal.domain.CelebrityImdbOfMovieImdbDo;
+import org.humingk.movie.dal.domain.imdb.CelebrityImdbOfMovieImdbDo;
 import org.humingk.movie.dal.entity.CelebrityImdb;
 import org.humingk.movie.dal.entity.CelebrityImdbExample;
 

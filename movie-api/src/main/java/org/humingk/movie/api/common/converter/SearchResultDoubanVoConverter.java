@@ -3,8 +3,8 @@ package org.humingk.movie.api.common.converter;
 import org.humingk.movie.api.common.converter.celebrity.SearchResultCelebrityDoubanVoConverter;
 import org.humingk.movie.api.common.converter.movie.SearchResultMovieDoubanVoConverter;
 import org.humingk.movie.api.common.vo.SearchResultDoubanVo;
-import org.humingk.movie.dal.domain.SearchResultCelebrityDoubanDo;
-import org.humingk.movie.dal.domain.SearchResultMovieDoubanDo;
+import org.humingk.movie.service.douban.dto.celebrity.SearchResultCelebrityDoubanDto;
+import org.humingk.movie.service.douban.dto.movie.SearchResultMovieDoubanDto;
 import org.mapstruct.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -17,10 +17,10 @@ public abstract class SearchResultDoubanVoConverter {
   @Autowired private SearchResultCelebrityDoubanVoConverter searchResultCelebrityDoubanVoConverter;
 
   public SearchResultDoubanVo to(
-      List<SearchResultMovieDoubanDo> searchResultMovieDoubanDoList,
-      List<SearchResultCelebrityDoubanDo> searchResultCelebrityDoubanDoList) {
+      List<SearchResultMovieDoubanDto> searchResultMovieDoubanDtoList,
+      List<SearchResultCelebrityDoubanDto> searchResultCelebrityDoubanDtoList) {
     return new SearchResultDoubanVo(
-        searchResultMovieDoubanVoConverter.toList(searchResultMovieDoubanDoList),
-        searchResultCelebrityDoubanVoConverter.toList(searchResultCelebrityDoubanDoList));
+        searchResultMovieDoubanVoConverter.toList(searchResultMovieDoubanDtoList),
+        searchResultCelebrityDoubanVoConverter.toList(searchResultCelebrityDoubanDtoList));
   }
 }

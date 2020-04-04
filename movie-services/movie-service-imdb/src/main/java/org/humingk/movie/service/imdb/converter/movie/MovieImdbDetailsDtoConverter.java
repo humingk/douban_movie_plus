@@ -1,6 +1,6 @@
 package org.humingk.movie.service.imdb.converter.movie;
 
-import org.humingk.movie.dal.domain.CelebrityImdbOfMovieImdbDo;
+import org.humingk.movie.dal.domain.imdb.CelebrityImdbOfMovieImdbDo;
 import org.humingk.movie.dal.entity.MovieImdb;
 import org.humingk.movie.dal.entity.MovieImdbToTypeMovie;
 import org.humingk.movie.dal.entity.RateImdb;

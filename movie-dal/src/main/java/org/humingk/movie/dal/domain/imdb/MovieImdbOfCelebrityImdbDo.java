@@ -1,4 +1,4 @@
-package org.humingk.movie.dal.domain;
+package org.humingk.movie.dal.domain.imdb;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

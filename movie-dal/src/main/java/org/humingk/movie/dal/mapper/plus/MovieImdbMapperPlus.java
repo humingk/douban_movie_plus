@@ -1,7 +1,7 @@
 package org.humingk.movie.dal.mapper.plus;
 
 import org.apache.ibatis.annotations.Param;
-import org.humingk.movie.dal.domain.MovieImdbOfCelebrityImdbDo;
+import org.humingk.movie.dal.domain.imdb.MovieImdbOfCelebrityImdbDo;
 import org.humingk.movie.dal.entity.MovieImdb;
 import org.humingk.movie.dal.entity.MovieImdbExample;
 

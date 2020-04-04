@@ -3,7 +3,7 @@ package org.humingk.movie.api.common.converter.movie.details;
 import org.humingk.movie.api.common.util.ConverterUtil;
 import org.humingk.movie.api.common.vo.movie.details.CelebrityImdbOfMovieImdbVo;
 import org.humingk.movie.common.util.BaseConverter;
-import org.humingk.movie.dal.domain.CelebrityImdbOfMovieImdbDo;
+import org.humingk.movie.dal.domain.imdb.CelebrityImdbOfMovieImdbDo;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;

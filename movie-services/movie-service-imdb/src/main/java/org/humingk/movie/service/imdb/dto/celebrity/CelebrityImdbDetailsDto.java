@@ -3,7 +3,7 @@ package org.humingk.movie.service.imdb.dto.celebrity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.humingk.movie.dal.domain.MovieImdbOfCelebrityImdbDo;
+import org.humingk.movie.dal.domain.imdb.MovieImdbOfCelebrityImdbDo;
 import org.humingk.movie.dal.entity.CelebrityImdb;
 
 import java.io.Serializable;
