@@ -2,8 +2,8 @@
 <img src="./doc/image/logo.png" style="width: 500px"/>
 </div>
 <div align="center">
-<a href="https://travis-ci.org/humingk/douban_movie"><img src="https://travis-ci.org/humingk/douban_movie.svg?branch=master" alt="Build Status"></a>
-<a href="https://codecov.io/gh/humingk/douban_movie"><img src="https://codecov.io/gh/humingk/douban_movie/branch/master/graph/badge.svg" alt="codecov]"></a>
+<a href="https://travis-ci.org/humingk/douban_movie_plus"><img src="https://travis-ci.org/humingk/douban_movie_plus.svg?branch=master" alt="Build Status"></a>
+<a href="https://codecov.io/gh/humingk/douban_movie_plus"><img src="https://codecov.io/gh/humingk/douban_movie_plus/branch/master/graph/badge.svg" alt="codecov]"></a>
 <a href=""><img src="./doc/image/license-GPL-blue.svg"></a>
 <a href=""><img src="./doc/image/language-Java-green.svg"></a>
 </div>
@@ -24,7 +24,7 @@
 - 调用本项目后端API服务你的前端应用，[API调用文档说明](https://movie.doubans.com/api)
 
 
-- 聊天吹水提建议，欢迎加入QQ群:豆瓣电影Plus交流群 `476584154`，口令：`doubans`
+- 聊天吹水提建议，欢迎加入QQ豆瓣电影Plus交流群 `476584154`，口令：`doubans`
 
 ## 开发相关
 
