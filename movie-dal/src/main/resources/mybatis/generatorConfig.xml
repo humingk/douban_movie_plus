@@ -351,7 +351,7 @@
         <table tableName="celebrity_douban">
             <columnOverride column="summary" javaType="java.lang.String" jdbcType="VARCHAR"/>
         </table>
-        <table tableName="celebrity_douban_to_classic"/>
+        <table tableName="celebrity_douban_to_classic_douban"/>
         <table tableName="celebrity_imdb"/>
         <table tableName="celebrity_scene"/>
         <table tableName="city_scene"/>

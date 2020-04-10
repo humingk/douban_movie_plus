@@ -47,7 +47,7 @@ public class CelebrityDouban implements Serializable {
     /**
      * 豆瓣影人海报ID
      */
-    private Long urlPortrait;
+    private String urlPortrait;
 
     /**
      * 影人简介

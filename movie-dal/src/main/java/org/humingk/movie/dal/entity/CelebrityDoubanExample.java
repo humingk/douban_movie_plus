@@ -507,52 +507,62 @@ public class CelebrityDoubanExample {
             return (Criteria) this;
         }
 
-        public Criteria andUrlPortraitEqualTo(Long value) {
+        public Criteria andUrlPortraitEqualTo(String value) {
             addCriterion("url_portrait =", value, "urlPortrait");
             return (Criteria) this;
         }
 
-        public Criteria andUrlPortraitNotEqualTo(Long value) {
+        public Criteria andUrlPortraitNotEqualTo(String value) {
             addCriterion("url_portrait <>", value, "urlPortrait");
             return (Criteria) this;
         }
 
-        public Criteria andUrlPortraitGreaterThan(Long value) {
+        public Criteria andUrlPortraitGreaterThan(String value) {
             addCriterion("url_portrait >", value, "urlPortrait");
             return (Criteria) this;
         }
 
-        public Criteria andUrlPortraitGreaterThanOrEqualTo(Long value) {
+        public Criteria andUrlPortraitGreaterThanOrEqualTo(String value) {
             addCriterion("url_portrait >=", value, "urlPortrait");
             return (Criteria) this;
         }
 
-        public Criteria andUrlPortraitLessThan(Long value) {
+        public Criteria andUrlPortraitLessThan(String value) {
             addCriterion("url_portrait <", value, "urlPortrait");
             return (Criteria) this;
         }
 
-        public Criteria andUrlPortraitLessThanOrEqualTo(Long value) {
+        public Criteria andUrlPortraitLessThanOrEqualTo(String value) {
             addCriterion("url_portrait <=", value, "urlPortrait");
             return (Criteria) this;
         }
 
-        public Criteria andUrlPortraitIn(List<Long> values) {
+        public Criteria andUrlPortraitLike(String value) {
+            addCriterion("url_portrait like", value, "urlPortrait");
+            return (Criteria) this;
+        }
+
+        public Criteria andUrlPortraitNotLike(String value) {
+            addCriterion("url_portrait not like", value, "urlPortrait");
+            return (Criteria) this;
+        }
+
+        public Criteria andUrlPortraitIn(List<String> values) {
             addCriterion("url_portrait in", values, "urlPortrait");
             return (Criteria) this;
         }
 
-        public Criteria andUrlPortraitNotIn(List<Long> values) {
+        public Criteria andUrlPortraitNotIn(List<String> values) {
             addCriterion("url_portrait not in", values, "urlPortrait");
             return (Criteria) this;
         }
 
-        public Criteria andUrlPortraitBetween(Long value1, Long value2) {
+        public Criteria andUrlPortraitBetween(String value1, String value2) {
             addCriterion("url_portrait between", value1, value2, "urlPortrait");
             return (Criteria) this;
         }
 
-        public Criteria andUrlPortraitNotBetween(Long value1, Long value2) {
+        public Criteria andUrlPortraitNotBetween(String value1, String value2) {
             addCriterion("url_portrait not between", value1, value2, "urlPortrait");
             return (Criteria) this;
         }

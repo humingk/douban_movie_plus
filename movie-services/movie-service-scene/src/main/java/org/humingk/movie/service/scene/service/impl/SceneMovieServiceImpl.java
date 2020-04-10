@@ -71,7 +71,13 @@ public class SceneMovieServiceImpl implements SceneMovieService {
 
   @Override
   public List<Scene> getSceneListByMovieSceneId(Long id) {
+    return getSceneListByMovieSceneId(id, 0, 8);
+  }
+
+  @Override
+  public List<Scene> getSceneListByMovieSceneId(Long id, int offset, int limit) {
     sceneExample.start().andIdMovieSceneEqualTo(id);
+    PageHelper.offsetPage(offset, limit);
     return sceneMapper.selectByExample(sceneExample);
   }
 
@@ -79,15 +85,13 @@ public class SceneMovieServiceImpl implements SceneMovieService {
   public MovieSceneBriefDto getMovieSceneBriefByMovieDoubanId(Long id) {
     MovieScene movieScene = getMovieSceneByMovieDoubanId(id);
     List<SceneBriefDo> sceneBriefDoList = new ArrayList<>();
+
     for (Scene scene : getSceneListByMovieSceneId(movieScene.getId())) {
-      imagePlaceSceneExample.start().andIdPlaceSceneEqualTo(scene.getIdPlaceScene());
       sceneBriefDoList.add(
           new SceneBriefDo(
               scene,
               // place brief
-              new PlaceSceneBriefDo(
-                  placeSceneMapper.selectByPrimaryKey(scene.getIdPlaceScene()),
-                  imagePlaceSceneMapper.selectByExample(imagePlaceSceneExample))));
+              new PlaceSceneBriefDo(placeSceneMapper.selectByPrimaryKey(scene.getIdPlaceScene()))));
     }
     return movieSceneBriefDtoConverter.to(movieScene, sceneBriefDoList);
   }
@@ -96,7 +100,7 @@ public class SceneMovieServiceImpl implements SceneMovieService {
   public MovieSceneAllDto getMovieSceneAllByMovieDoubanId(Long id) {
     MovieScene movieScene = getMovieSceneByMovieDoubanId(id);
     List<SceneAllDo> sceneAllDoList = new ArrayList<>();
-    for (Scene scene : getSceneListByMovieSceneId(movieScene.getId())) {
+    for (Scene scene : getSceneListByMovieSceneId(movieScene.getId(), 0, 1000)) {
       List<SceneDetailAllDo> sceneDetailAllDoList = new ArrayList<>();
       sceneDetailExample.start().andIdSceneEqualTo(scene.getId());
       for (SceneDetail sceneDetail : sceneDetailMapper.selectByExample(sceneDetailExample)) {

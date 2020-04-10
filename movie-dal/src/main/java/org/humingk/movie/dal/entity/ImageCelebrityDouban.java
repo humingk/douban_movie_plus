@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ImageCelebrityDouban implements Serializable {
     /**
-     * 豆瓣影人图片
+     * 豆瓣影人图片ID
      */
     private Long id;
 

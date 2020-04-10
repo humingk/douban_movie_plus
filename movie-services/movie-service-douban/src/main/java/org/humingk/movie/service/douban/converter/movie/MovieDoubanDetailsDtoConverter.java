@@ -1,9 +1,6 @@
 package org.humingk.movie.service.douban.converter.movie;
 
-import org.humingk.movie.dal.domain.douban.AwardOfMovieAndCelebrityDoubanDo;
-import org.humingk.movie.dal.domain.douban.CelebrityDoubanOfMovieDoubanDo;
-import org.humingk.movie.dal.domain.douban.CommentOfMovieDoubanDo;
-import org.humingk.movie.dal.domain.douban.ReviewOfMovieDoubanDo;
+import org.humingk.movie.dal.domain.douban.*;
 import org.humingk.movie.dal.entity.*;
 import org.humingk.movie.service.douban.converter.ImageDoubanDoConverter;
 import org.humingk.movie.service.douban.dto.movie.MovieDoubanDetailsDto;
@@ -37,7 +34,7 @@ public interface MovieDoubanDetailsDtoConverter {
       /** 豆瓣电影图片列表 */
       List<ImageMovieDouban> imageMovieDoubanList,
       /** 豆瓣电影经典台词列表 */
-      List<ClassicDouban> classicDoubanList,
+      List<ClassicOfMovieDoubanDo> classicOfMovieDoubanDoList,
       /** 豆瓣电影热门评论列表 */
       List<CommentOfMovieDoubanDo> commentOfMovieDoubanDoList,
       /** 豆瓣电影热门影评列表 */

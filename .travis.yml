@@ -1,0 +1,12 @@
+language: java
+jdk:
+  - oraclejdk8
+cache:
+  directories:
+    - '$HOME/.m2/repository'
+install: mvn install -DskipTests=true -Dmaven.javadoc.skip=true
+script:
+  -"mvn compile"
+after_success:
+  - codecov
+  - bash <(curl -s https://codecov.io/bash)

@@ -3,7 +3,10 @@ package org.humingk.movie.api.common.vo.movie;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.humingk.movie.api.common.vo.movie.details.*;
+import org.humingk.movie.api.common.vo.movie.details.CelebrityDoubanOfMovieDoubanVo;
+import org.humingk.movie.api.common.vo.movie.details.CommentOfMovieDoubanVo;
+import org.humingk.movie.api.common.vo.movie.details.ReviewOfMovieDoubanVo;
+import org.humingk.movie.api.common.vo.movie.details.TrailerMovieDoubanVo;
 import org.humingk.movie.api.common.vo.movie.rate.RateMovieDoubanVo;
 import org.humingk.movie.api.common.vo.share.AwardOfMovieAndCelebrityDoubanVo;
 import org.humingk.movie.api.common.vo.share.ImageDoubanVo;
@@ -38,7 +41,7 @@ public class MovieDoubanDetailsVo implements Serializable {
   /** 豆瓣电影图片列表 */
   private List<ImageDoubanVo> imageList;
   /** 豆瓣电影经典台词列表 */
-  private List<ClassicDoubanVo> classicList;
+  private List<ClassicOfMovieDoubanVo> classicList;
   /** 豆瓣电影热门影评列表 */
   private List<ReviewOfMovieDoubanVo> reviewList;
   /** 豆瓣电影奖项列表 */

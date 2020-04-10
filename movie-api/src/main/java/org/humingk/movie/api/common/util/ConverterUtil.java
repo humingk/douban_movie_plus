@@ -160,7 +160,7 @@ public class ConverterUtil {
    * @return
    */
   @Named("urlPortrait")
-  public String urlCelebrityPortrait(Long id) {
+  public String urlPortrait(String id) {
     return "https://img1.doubanio.com/view/celebrity/s_ratio_celebrity/public/p" + id + ".webp";
   }
 

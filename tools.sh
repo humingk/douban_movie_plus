@@ -1,5 +1,4 @@
 #!/bin/bash
-base_path=/home/humingk/git/douban_movie_plus/
 
 echo "========== 豆瓣电影Plus 脚本工具 =========="
 echo "[0]  更改项目版本"
@@ -11,7 +10,8 @@ echo "[5]  强制撤销[3]部署的环境"
 echo "[6]  删除target目录"
 echo "[7]  导出数据库建表SQL语句"
 echo "[8]  启动NeteaseCloudMusicApi服务"
-echo "========================================="
+echo "[9]  删除Mybatis通用工具自动生成的文件"
+echo "==========================================="
 read -p "请选择脚本:" choose
 
 # 功能函数
@@ -19,6 +19,7 @@ read -p "请选择脚本:" choose
 
 # 更改项目版本
 function version_change() {
+  sed -n '28p;29q' pom.xml | sed 's/<version>\(.*\)<\/version>/当前版本号为: \1/g'
   read -p "请输入新版本号:" new_version
   mvn -f "pom.xml" versions:set -DoldVersion=* -DnewVersion="$new_version" -DprocessAllModules=true -DallowSnapshots=true -DgenerateBackupPoms=false
   if [ $? -eq 0 ]; then
@@ -150,9 +151,12 @@ function delete_target() {
 function export_database_sql_create() {
   read -p "你确定要导出数据库建表SQL语句吗？[y/n]:" choose_export
   if [ "$choose_export" = "y" ]; then
-    mysqldump -h localhost -P 3306 -uroot -p -d --databases movie >./doc/sql/export_movie.sql
+    rm ./movie-dal/src/main/java/org/humingk/movie/dal/entity/*
+    rm ./movie-dal/src/main/java/org/humingk/movie/dal/mapper/auto/*
+    rm ./movie-dal/src/main/resources/mapper/auto/*
+    mysqldump -h localhost -P 3306 -uroot -p -d --databases movie >./doc/sql/movie_import.sql
     if [ $? -eq 0 ]; then
-      echo "导出成功 => ./doc/export_movie.sql"
+      echo "导出成功 => ./doc/movie_import.sql"
     else
       echo "导出失败..."
     fi
@@ -166,7 +170,7 @@ function netease_start() {
     cd NeteaseCloudMusicApi && npm install && cd ..
   fi
   exec="PORT=10102 node ./NeteaseCloudMusicApi/app.js"
-  read -p "你希望后台运行吗? [y/n]:" choose_back
+  read -p "你希望后台运行musicApi吗? [y/n]:" choose_back
   if [ "$choose_back" = "n" ]; then
     eval $exec
   else
@@ -180,6 +184,20 @@ function netease_start() {
   fi
 }
 
+# 删除Mybatis通用工具自动生成的文件
+function remove_mybatis_auto() {
+  read -p "你确定要删除Mybatis通用工具自动生成的文件吗？[y/n]:" choose_remove_mybatis_auto
+  if [ "$choose_remove_mybatis_auto" = "y" ]; then
+    rm ./movie-dal/src/main/java/org/humingk/movie/dal/entity/*
+    rm ./movie-dal/src/main/java/org/humingk/movie/dal/mapper/auto/*
+    rm ./movie-dal/src/main/resources/mapper/auto/*
+    if [ $? -eq 0 ]; then
+      echo "删除成功"
+    else
+      echo "删除失败..."
+    fi
+  fi
+}
 
 # main
 # ------------------------------
@@ -210,5 +228,8 @@ case $choose in
   ;;
 8)
   netease_start
+  ;;
+9)
+  remove_mybatis_auto
   ;;
 esac

@@ -17,7 +17,7 @@ public class ClassicDouban implements Serializable {
     /**
      * 豆瓣电影经典台词ID
      */
-    private Long id;
+    private String id;
 
     /**
      * 豆瓣电影ID

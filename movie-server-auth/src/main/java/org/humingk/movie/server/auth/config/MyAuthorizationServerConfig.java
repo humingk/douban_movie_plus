@@ -7,11 +7,11 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 
+import static org.humingk.movie.common.enumeration.Roles.ROOT;
+import static org.humingk.movie.common.enumeration.Roles.USER;
 import static org.humingk.movie.server.auth.entity.Oauth2Mode.PASSWORD;
 import static org.humingk.movie.server.auth.entity.Oauth2Mode.REFRESH;
 import static org.humingk.movie.server.auth.entity.ResourceId.*;
-import static org.humingk.movie.common.enumeration.Roles.ROOT;
-import static org.humingk.movie.common.enumeration.Roles.USER;
 
 /**
  * Oauth2认证授权服务配置

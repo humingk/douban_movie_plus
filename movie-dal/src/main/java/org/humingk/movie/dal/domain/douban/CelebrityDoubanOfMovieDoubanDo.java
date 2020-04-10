@@ -42,7 +42,7 @@ public class CelebrityDoubanOfMovieDoubanDo implements Serializable {
   private Long birthDate;
 
   /** 豆瓣影人海报ID */
-  private Long urlPortrait;
+  private String urlPortrait;
 
   /** 影人简介 */
   private String summary;

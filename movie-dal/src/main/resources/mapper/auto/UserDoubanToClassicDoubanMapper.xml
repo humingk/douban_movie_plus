@@ -3,7 +3,8 @@
 <mapper namespace="org.humingk.movie.dal.mapper.auto.UserDoubanToClassicDoubanMapper">
   <resultMap id="BaseResultMap" type="org.humingk.movie.dal.entity.UserDoubanToClassicDouban">
     <id column="id_user_douban" jdbcType="VARCHAR" property="idUserDouban" />
-    <id column="id_classic_douban" jdbcType="BIGINT" property="idClassicDouban" />
+    <id column="id_classic_douban" jdbcType="VARCHAR" property="idClassicDouban" />
+    <result column="name_zh_user_douban" jdbcType="VARCHAR" property="nameZhUserDouban" />
     <result column="record_datetime" jdbcType="BIGINT" property="recordDatetime" />
     <result column="description" jdbcType="VARCHAR" property="description" />
   </resultMap>
@@ -66,7 +67,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id_user_douban, id_classic_douban, record_datetime, description
+    id_user_douban, id_classic_douban, name_zh_user_douban, record_datetime, description
   </sql>
   <select id="selectByExample" parameterType="org.humingk.movie.dal.entity.UserDoubanToClassicDoubanExample" resultMap="BaseResultMap">
     select
@@ -87,12 +88,12 @@
     <include refid="Base_Column_List" />
     from user_douban_to_classic_douban
     where id_user_douban = #{idUserDouban,jdbcType=VARCHAR}
-      and id_classic_douban = #{idClassicDouban,jdbcType=BIGINT}
+      and id_classic_douban = #{idClassicDouban,jdbcType=VARCHAR}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="map">
     delete from user_douban_to_classic_douban
     where id_user_douban = #{idUserDouban,jdbcType=VARCHAR}
-      and id_classic_douban = #{idClassicDouban,jdbcType=BIGINT}
+      and id_classic_douban = #{idClassicDouban,jdbcType=VARCHAR}
   </delete>
   <delete id="deleteByExample" parameterType="org.humingk.movie.dal.entity.UserDoubanToClassicDoubanExample">
     delete from user_douban_to_classic_douban
@@ -101,10 +102,10 @@
     </if>
   </delete>
   <insert id="insert" parameterType="org.humingk.movie.dal.entity.UserDoubanToClassicDouban">
-    insert into user_douban_to_classic_douban (id_user_douban, id_classic_douban, record_datetime, 
-      description)
-    values (#{idUserDouban,jdbcType=VARCHAR}, #{idClassicDouban,jdbcType=BIGINT}, #{recordDatetime,jdbcType=BIGINT}, 
-      #{description,jdbcType=VARCHAR})
+    insert into user_douban_to_classic_douban (id_user_douban, id_classic_douban, name_zh_user_douban, 
+      record_datetime, description)
+    values (#{idUserDouban,jdbcType=VARCHAR}, #{idClassicDouban,jdbcType=VARCHAR}, #{nameZhUserDouban,jdbcType=VARCHAR}, 
+      #{recordDatetime,jdbcType=BIGINT}, #{description,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="org.humingk.movie.dal.entity.UserDoubanToClassicDouban">
     insert into user_douban_to_classic_douban
@@ -114,6 +115,9 @@
       </if>
       <if test="idClassicDouban != null">
         id_classic_douban,
+      </if>
+      <if test="nameZhUserDouban != null">
+        name_zh_user_douban,
       </if>
       <if test="recordDatetime != null">
         record_datetime,
@@ -127,7 +131,10 @@
         #{idUserDouban,jdbcType=VARCHAR},
       </if>
       <if test="idClassicDouban != null">
-        #{idClassicDouban,jdbcType=BIGINT},
+        #{idClassicDouban,jdbcType=VARCHAR},
+      </if>
+      <if test="nameZhUserDouban != null">
+        #{nameZhUserDouban,jdbcType=VARCHAR},
       </if>
       <if test="recordDatetime != null">
         #{recordDatetime,jdbcType=BIGINT},
@@ -150,7 +157,10 @@
         id_user_douban = #{record.idUserDouban,jdbcType=VARCHAR},
       </if>
       <if test="record.idClassicDouban != null">
-        id_classic_douban = #{record.idClassicDouban,jdbcType=BIGINT},
+        id_classic_douban = #{record.idClassicDouban,jdbcType=VARCHAR},
+      </if>
+      <if test="record.nameZhUserDouban != null">
+        name_zh_user_douban = #{record.nameZhUserDouban,jdbcType=VARCHAR},
       </if>
       <if test="record.recordDatetime != null">
         record_datetime = #{record.recordDatetime,jdbcType=BIGINT},
@@ -166,7 +176,8 @@
   <update id="updateByExample" parameterType="map">
     update user_douban_to_classic_douban
     set id_user_douban = #{record.idUserDouban,jdbcType=VARCHAR},
-      id_classic_douban = #{record.idClassicDouban,jdbcType=BIGINT},
+      id_classic_douban = #{record.idClassicDouban,jdbcType=VARCHAR},
+      name_zh_user_douban = #{record.nameZhUserDouban,jdbcType=VARCHAR},
       record_datetime = #{record.recordDatetime,jdbcType=BIGINT},
       description = #{record.description,jdbcType=VARCHAR}
     <if test="_parameter != null">
@@ -176,6 +187,9 @@
   <update id="updateByPrimaryKeySelective" parameterType="org.humingk.movie.dal.entity.UserDoubanToClassicDouban">
     update user_douban_to_classic_douban
     <set>
+      <if test="nameZhUserDouban != null">
+        name_zh_user_douban = #{nameZhUserDouban,jdbcType=VARCHAR},
+      </if>
       <if test="recordDatetime != null">
         record_datetime = #{recordDatetime,jdbcType=BIGINT},
       </if>
@@ -184,13 +198,14 @@
       </if>
     </set>
     where id_user_douban = #{idUserDouban,jdbcType=VARCHAR}
-      and id_classic_douban = #{idClassicDouban,jdbcType=BIGINT}
+      and id_classic_douban = #{idClassicDouban,jdbcType=VARCHAR}
   </update>
   <update id="updateByPrimaryKey" parameterType="org.humingk.movie.dal.entity.UserDoubanToClassicDouban">
     update user_douban_to_classic_douban
-    set record_datetime = #{recordDatetime,jdbcType=BIGINT},
+    set name_zh_user_douban = #{nameZhUserDouban,jdbcType=VARCHAR},
+      record_datetime = #{recordDatetime,jdbcType=BIGINT},
       description = #{description,jdbcType=VARCHAR}
     where id_user_douban = #{idUserDouban,jdbcType=VARCHAR}
-      and id_classic_douban = #{idClassicDouban,jdbcType=BIGINT}
+      and id_classic_douban = #{idClassicDouban,jdbcType=VARCHAR}
   </update>
 </mapper>

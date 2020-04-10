@@ -28,6 +28,16 @@ public interface SceneMovieService {
    * 获取场景列表
    *
    * @param id 场景电影ID
+   * @param offset
+   * @param limit
+   * @return
+   */
+  List<Scene> getSceneListByMovieSceneId(Long id, int offset, int limit);
+
+  /**
+   * 获取场景列表 默认0-5
+   *
+   * @param id 场景电影ID
    * @return
    */
   List<Scene> getSceneListByMovieSceneId(Long id);

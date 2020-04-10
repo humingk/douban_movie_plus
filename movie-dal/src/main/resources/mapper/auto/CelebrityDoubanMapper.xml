@@ -8,7 +8,7 @@
     <result column="name_origin" jdbcType="VARCHAR" property="nameOrigin" />
     <result column="sex" jdbcType="TINYINT" property="sex" />
     <result column="birth_date" jdbcType="BIGINT" property="birthDate" />
-    <result column="url_portrait" jdbcType="BIGINT" property="urlPortrait" />
+    <result column="url_portrait" jdbcType="VARCHAR" property="urlPortrait" />
     <result column="summary" jdbcType="VARCHAR" property="summary" />
   </resultMap>
   <sql id="Example_Where_Clause">
@@ -108,7 +108,7 @@
       url_portrait, summary)
     values (#{id,jdbcType=BIGINT}, #{idCelebrityImdb,jdbcType=BIGINT}, #{nameZh,jdbcType=VARCHAR}, 
       #{nameOrigin,jdbcType=VARCHAR}, #{sex,jdbcType=TINYINT}, #{birthDate,jdbcType=BIGINT}, 
-      #{urlPortrait,jdbcType=BIGINT}, #{summary,jdbcType=VARCHAR})
+      #{urlPortrait,jdbcType=VARCHAR}, #{summary,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="org.humingk.movie.dal.entity.CelebrityDouban">
     insert into celebrity_douban
@@ -158,7 +158,7 @@
         #{birthDate,jdbcType=BIGINT},
       </if>
       <if test="urlPortrait != null">
-        #{urlPortrait,jdbcType=BIGINT},
+        #{urlPortrait,jdbcType=VARCHAR},
       </if>
       <if test="summary != null">
         #{summary,jdbcType=VARCHAR},
@@ -193,7 +193,7 @@
         birth_date = #{record.birthDate,jdbcType=BIGINT},
       </if>
       <if test="record.urlPortrait != null">
-        url_portrait = #{record.urlPortrait,jdbcType=BIGINT},
+        url_portrait = #{record.urlPortrait,jdbcType=VARCHAR},
       </if>
       <if test="record.summary != null">
         summary = #{record.summary,jdbcType=VARCHAR},
@@ -211,7 +211,7 @@
       name_origin = #{record.nameOrigin,jdbcType=VARCHAR},
       sex = #{record.sex,jdbcType=TINYINT},
       birth_date = #{record.birthDate,jdbcType=BIGINT},
-      url_portrait = #{record.urlPortrait,jdbcType=BIGINT},
+      url_portrait = #{record.urlPortrait,jdbcType=VARCHAR},
       summary = #{record.summary,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -236,7 +236,7 @@
         birth_date = #{birthDate,jdbcType=BIGINT},
       </if>
       <if test="urlPortrait != null">
-        url_portrait = #{urlPortrait,jdbcType=BIGINT},
+        url_portrait = #{urlPortrait,jdbcType=VARCHAR},
       </if>
       <if test="summary != null">
         summary = #{summary,jdbcType=VARCHAR},
@@ -251,7 +251,7 @@
       name_origin = #{nameOrigin,jdbcType=VARCHAR},
       sex = #{sex,jdbcType=TINYINT},
       birth_date = #{birthDate,jdbcType=BIGINT},
-      url_portrait = #{urlPortrait,jdbcType=BIGINT},
+      url_portrait = #{urlPortrait,jdbcType=VARCHAR},
       summary = #{summary,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>

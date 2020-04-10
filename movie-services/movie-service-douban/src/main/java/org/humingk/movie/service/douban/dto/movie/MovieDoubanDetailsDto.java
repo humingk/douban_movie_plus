@@ -36,7 +36,7 @@ public class MovieDoubanDetailsDto implements Serializable {
   /** 豆瓣图片列表 */
   private List<ImageDoubanDo> imageDoubanDoList;
   /** 豆瓣电影经典台词列表 */
-  private List<ClassicDouban> classicDoubanList;
+  private List<ClassicOfMovieDoubanDo> classicOfMovieDoubanDoList;
   /** 豆瓣电影热门影评列表 */
   private List<ReviewOfMovieDoubanDo> reviewOfMovieDoubanDoList;
   /** 豆瓣电影-奖项列表 */

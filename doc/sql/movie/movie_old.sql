@@ -90,7 +90,7 @@ update place_scene set url_map=replace(url_map,".png","")
 
 # 1.公共电影基础表---------------------------------------
 
-# 影片种类/类型  (电影、电视剧...) 
+# 影片种类/类型  (电影、电视剧...)
 create table type_video
 (
     id      tinyint unsigned not null primary key,
@@ -104,7 +104,7 @@ create table type_video
 ) ENGINE = InnoDB
   default charset = utf8mb4;
 
-# 电影奖项 
+# 电影奖项
 create table award_movie
 (
     id      varchar(255) not null primary key,
@@ -134,7 +134,7 @@ create table type_movie
 
 # 1.IMDB电影基础表---------------------------------------
 
-# IMDB电影 
+# IMDB电影
 create table movie_imdb
 (
     id              bigint unsigned      not null primary key,
@@ -205,7 +205,7 @@ create table movie_imdb_to_type_movie
 
 # 1.豆瓣电影基础表---------------------------------------
 
-# 豆瓣电影 
+# 豆瓣电影
 create table movie_douban
 (
     id            bigint unsigned      not null primary key,
@@ -299,7 +299,7 @@ create table trailer_movie_douban
 # 豆瓣电影经典台词
 create table classic_douban
 (
-    id              bigint unsigned not null auto_increment primary key,
+    id              varchar(255)    not null primary key,
     # 豆瓣电影ID
     id_movie_douban bigint unsigned not null default 0,
     # 经典台词内容
@@ -393,7 +393,7 @@ create table movie_douban_to_award_movie
     id_celebrity_douban bigint unsigned   not null default 0,
     # 奖项的类别中文名 (最佳XXX...)
     type_award          varchar(255)      not null default '未知',
-    # 获奖奖项届数 
+    # 获奖奖项届数
     award_th            smallint unsigned not null default 1,
     # 是否提名 0-仅提名，未获奖 1-获奖者，非提名
     is_nominated        tinyint(2)        not null default 0,
@@ -539,7 +539,7 @@ create table movie_douban_to_celebrity_douban
 create table celebrity_douban_to_classic
 (
     id_celebrity_douban bigint unsigned not null,
-    id_classic_douban   bigint unsigned not null,
+    id_classic_douban   varchar(255)    not null,
 
     primary key (id_celebrity_douban, id_classic_douban)
 ) ENGINE = InnoDB
@@ -784,12 +784,13 @@ create table user_douban_to_review_movie_douban
 # 豆瓣电影经典台词-用户
 create table user_douban_to_classic_douban
 (
-    id_user_douban    varchar(255)    not null,
-    id_classic_douban bigint unsigned not null,
+    id_user_douban    varchar(255)  not null,
+    id_classic_douban varchar(255)  not null,
+    guest             varchar(255)  not null default '',
     # 豆瓣用户收录时间
-    record_datetime   bigint          not null default 0,
+    record_datetime   bigint        not null default 0,
     # 豆瓣用户评价
-    description       varchar(1000)   not null default '',
+    description       varchar(1000) not null default '',
 
     primary key (id_user_douban, id_classic_douban),
     index (record_datetime)
@@ -804,7 +805,7 @@ create table user_douban_to_classic_douban
 
 # 1.电影资源基础表---------------------------------------
 
-# 电影资源网站 
+# 电影资源网站
 create table website_resource
 (
     # <100:正版在线 >100:盗版

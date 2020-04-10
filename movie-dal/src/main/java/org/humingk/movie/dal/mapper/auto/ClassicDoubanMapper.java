@@ -12,7 +12,7 @@ public interface ClassicDoubanMapper {
 
     int deleteByExample(ClassicDoubanExample example);
 
-    int deleteByPrimaryKey(Long id);
+    int deleteByPrimaryKey(String id);
 
     int insert(ClassicDouban record);
 
@@ -20,7 +20,7 @@ public interface ClassicDoubanMapper {
 
     List<ClassicDouban> selectByExample(ClassicDoubanExample example);
 
-    ClassicDouban selectByPrimaryKey(Long id);
+    ClassicDouban selectByPrimaryKey(String id);
 
     int updateByExampleSelective(@Param("record") ClassicDouban record, @Param("example") ClassicDoubanExample example);
 

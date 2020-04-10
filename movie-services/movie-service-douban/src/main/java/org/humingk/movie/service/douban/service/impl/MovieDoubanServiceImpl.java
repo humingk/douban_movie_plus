@@ -4,10 +4,7 @@ import com.github.pagehelper.PageHelper;
 import org.humingk.movie.dal.domain.douban.*;
 import org.humingk.movie.dal.entity.*;
 import org.humingk.movie.dal.mapper.auto.*;
-import org.humingk.movie.dal.mapper.plus.CelebrityDoubanMapperPlus;
-import org.humingk.movie.dal.mapper.plus.CommentMovieDoubanMapperPlus;
-import org.humingk.movie.dal.mapper.plus.MovieDouanToAwardMovieMapperPlus;
-import org.humingk.movie.dal.mapper.plus.ReviewMovieDoubanMapperPlus;
+import org.humingk.movie.dal.mapper.plus.*;
 import org.humingk.movie.service.douban.converter.movie.MovieDoubanDetailsDtoConverter;
 import org.humingk.movie.service.douban.dto.movie.MovieDoubanDetailsDto;
 import org.humingk.movie.service.douban.dto.movie.SearchResultMovieDoubanDto;
@@ -50,6 +47,7 @@ public class MovieDoubanServiceImpl implements MovieDoubanService {
   @Autowired private RateMovieDoubanMapper rateMovieDoubanMapper;
   @Autowired private MovieDouanToAwardMovieMapperPlus moviedouanToAwardMovieMapperPlus;
   @Autowired private CommentMovieDoubanMapperPlus commentMovieDoubanMapperPlus;
+  @Autowired private ClassicDoubanMapperPlus classicDoubanMapperPlus;
 
   @Override
   public MovieDouban getMovieDoubanByMovieDoubanId(long id) {
@@ -82,12 +80,12 @@ public class MovieDoubanServiceImpl implements MovieDoubanService {
         trailerMovieDoubanMapper.selectByExample(trailerMovieDoubanExample);
     /** 豆瓣电影图片列表 */
     imageMovieDoubanExample.start().andIdMovieDoubanEqualTo(id);
+    imageMovieDoubanExample.setOrderByClause("sort");
     List<ImageMovieDouban> imageMovieDoubanList =
         imageMovieDoubanMapper.selectByExample(imageMovieDoubanExample);
     /** 豆瓣电影经典台词列表 */
-    classicDoubanExample.start().andIdMovieDoubanEqualTo(id);
-    List<ClassicDouban> classicDoubanList =
-        classicDoubanMapper.selectByExample(classicDoubanExample);
+    List<ClassicOfMovieDoubanDo> classicOfMovieDoubanDoList =
+        classicDoubanMapperPlus.selectClassicOfMovieDoubanDoListByMovieDoubanId(id);
     /** 豆瓣电影热门评论列表 */
     List<CommentOfMovieDoubanDo> commentOfMovieDoubanDoList =
         commentMovieDoubanMapperPlus.selectCommentOfMovieDoubanListByMovieDoubanId(id);
@@ -107,7 +105,7 @@ public class MovieDoubanServiceImpl implements MovieDoubanService {
         celebrityDoubanOfMovieDoubanDoList,
         trailerMovieDoubanList,
         imageMovieDoubanList,
-        classicDoubanList,
+        classicOfMovieDoubanDoList,
         commentOfMovieDoubanDoList,
         reviewOfMovieDoubanDoList,
         awardOfMovieAndCelebrityDoubanDoList);
@@ -160,12 +158,5 @@ public class MovieDoubanServiceImpl implements MovieDoubanService {
               celebrityDoubanOfMovieDoubanDoList));
     }
     return searchResultMovieDoubanDtoList;
-  }
-
-  @Override
-  public List<ImageDoubanDo> getImageDoubanWallpapersList(int offset, int limit) {
-    // 此处默认壁纸处理
-    // 电影指定壁纸在details中处理
-    return null;
   }
 }

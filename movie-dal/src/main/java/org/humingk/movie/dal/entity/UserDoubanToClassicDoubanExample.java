@@ -197,53 +197,133 @@ public class UserDoubanToClassicDoubanExample {
             return (Criteria) this;
         }
 
-        public Criteria andIdClassicDoubanEqualTo(Long value) {
+        public Criteria andIdClassicDoubanEqualTo(String value) {
             addCriterion("id_classic_douban =", value, "idClassicDouban");
             return (Criteria) this;
         }
 
-        public Criteria andIdClassicDoubanNotEqualTo(Long value) {
+        public Criteria andIdClassicDoubanNotEqualTo(String value) {
             addCriterion("id_classic_douban <>", value, "idClassicDouban");
             return (Criteria) this;
         }
 
-        public Criteria andIdClassicDoubanGreaterThan(Long value) {
+        public Criteria andIdClassicDoubanGreaterThan(String value) {
             addCriterion("id_classic_douban >", value, "idClassicDouban");
             return (Criteria) this;
         }
 
-        public Criteria andIdClassicDoubanGreaterThanOrEqualTo(Long value) {
+        public Criteria andIdClassicDoubanGreaterThanOrEqualTo(String value) {
             addCriterion("id_classic_douban >=", value, "idClassicDouban");
             return (Criteria) this;
         }
 
-        public Criteria andIdClassicDoubanLessThan(Long value) {
+        public Criteria andIdClassicDoubanLessThan(String value) {
             addCriterion("id_classic_douban <", value, "idClassicDouban");
             return (Criteria) this;
         }
 
-        public Criteria andIdClassicDoubanLessThanOrEqualTo(Long value) {
+        public Criteria andIdClassicDoubanLessThanOrEqualTo(String value) {
             addCriterion("id_classic_douban <=", value, "idClassicDouban");
             return (Criteria) this;
         }
 
-        public Criteria andIdClassicDoubanIn(List<Long> values) {
+        public Criteria andIdClassicDoubanLike(String value) {
+            addCriterion("id_classic_douban like", value, "idClassicDouban");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdClassicDoubanNotLike(String value) {
+            addCriterion("id_classic_douban not like", value, "idClassicDouban");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdClassicDoubanIn(List<String> values) {
             addCriterion("id_classic_douban in", values, "idClassicDouban");
             return (Criteria) this;
         }
 
-        public Criteria andIdClassicDoubanNotIn(List<Long> values) {
+        public Criteria andIdClassicDoubanNotIn(List<String> values) {
             addCriterion("id_classic_douban not in", values, "idClassicDouban");
             return (Criteria) this;
         }
 
-        public Criteria andIdClassicDoubanBetween(Long value1, Long value2) {
+        public Criteria andIdClassicDoubanBetween(String value1, String value2) {
             addCriterion("id_classic_douban between", value1, value2, "idClassicDouban");
             return (Criteria) this;
         }
 
-        public Criteria andIdClassicDoubanNotBetween(Long value1, Long value2) {
+        public Criteria andIdClassicDoubanNotBetween(String value1, String value2) {
             addCriterion("id_classic_douban not between", value1, value2, "idClassicDouban");
+            return (Criteria) this;
+        }
+
+        public Criteria andNameZhUserDoubanIsNull() {
+            addCriterion("name_zh_user_douban is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andNameZhUserDoubanIsNotNull() {
+            addCriterion("name_zh_user_douban is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andNameZhUserDoubanEqualTo(String value) {
+            addCriterion("name_zh_user_douban =", value, "nameZhUserDouban");
+            return (Criteria) this;
+        }
+
+        public Criteria andNameZhUserDoubanNotEqualTo(String value) {
+            addCriterion("name_zh_user_douban <>", value, "nameZhUserDouban");
+            return (Criteria) this;
+        }
+
+        public Criteria andNameZhUserDoubanGreaterThan(String value) {
+            addCriterion("name_zh_user_douban >", value, "nameZhUserDouban");
+            return (Criteria) this;
+        }
+
+        public Criteria andNameZhUserDoubanGreaterThanOrEqualTo(String value) {
+            addCriterion("name_zh_user_douban >=", value, "nameZhUserDouban");
+            return (Criteria) this;
+        }
+
+        public Criteria andNameZhUserDoubanLessThan(String value) {
+            addCriterion("name_zh_user_douban <", value, "nameZhUserDouban");
+            return (Criteria) this;
+        }
+
+        public Criteria andNameZhUserDoubanLessThanOrEqualTo(String value) {
+            addCriterion("name_zh_user_douban <=", value, "nameZhUserDouban");
+            return (Criteria) this;
+        }
+
+        public Criteria andNameZhUserDoubanLike(String value) {
+            addCriterion("name_zh_user_douban like", value, "nameZhUserDouban");
+            return (Criteria) this;
+        }
+
+        public Criteria andNameZhUserDoubanNotLike(String value) {
+            addCriterion("name_zh_user_douban not like", value, "nameZhUserDouban");
+            return (Criteria) this;
+        }
+
+        public Criteria andNameZhUserDoubanIn(List<String> values) {
+            addCriterion("name_zh_user_douban in", values, "nameZhUserDouban");
+            return (Criteria) this;
+        }
+
+        public Criteria andNameZhUserDoubanNotIn(List<String> values) {
+            addCriterion("name_zh_user_douban not in", values, "nameZhUserDouban");
+            return (Criteria) this;
+        }
+
+        public Criteria andNameZhUserDoubanBetween(String value1, String value2) {
+            addCriterion("name_zh_user_douban between", value1, value2, "nameZhUserDouban");
+            return (Criteria) this;
+        }
+
+        public Criteria andNameZhUserDoubanNotBetween(String value1, String value2) {
+            addCriterion("name_zh_user_douban not between", value1, value2, "nameZhUserDouban");
             return (Criteria) this;
         }
 

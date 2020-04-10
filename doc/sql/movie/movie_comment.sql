@@ -224,7 +224,7 @@ alter table classic_douban
     comment '豆瓣电影经典台词';
 
 alter table classic_douban
-    modify column id bigint unsigned not null auto_increment comment '豆瓣电影经典台词ID';
+    modify column id varchar(255) not null comment '豆瓣电影经典台词ID';
 # 豆瓣电影ID
 alter table classic_douban
     modify column id_movie_douban bigint unsigned not null default 0 comment '豆瓣电影ID';
@@ -474,7 +474,7 @@ alter table celebrity_douban_to_classic
 alter table celebrity_douban_to_classic
     modify column id_celebrity_douban bigint unsigned not null comment '豆瓣影人ID';
 alter table celebrity_douban_to_classic
-    modify column id_classic_douban bigint unsigned not null comment '豆瓣电影经典台词ID';
+    modify column id_classic_douban varchar(255) not null comment '豆瓣电影经典台词ID';
 
 
 
@@ -724,7 +724,9 @@ alter table user_douban_to_classic_douban
 alter table user_douban_to_classic_douban
     modify column id_user_douban varchar(255) not null comment '豆瓣用户ID';
 alter table user_douban_to_classic_douban
-    modify column id_classic_douban bigint unsigned not null comment '豆瓣电影经典台词ID';
+    modify column id_classic_douban varchar(255) not null comment '豆瓣电影经典台词ID';
+alter table user_douban_to_classic_douban
+    modify column guest varchar(255) not null default '' comment '未登录用户昵称';
 # 豆瓣用户收录时间
 alter table user_douban_to_classic_douban
     modify column record_datetime bigint not null default 0 comment '豆瓣用户收录时间 /unix';

@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.humingk.movie.dal.mapper.auto.ClassicDoubanMapper">
   <resultMap id="BaseResultMap" type="org.humingk.movie.dal.entity.ClassicDouban">
-    <id column="id" jdbcType="BIGINT" property="id" />
+    <id column="id" jdbcType="VARCHAR" property="id" />
     <result column="id_movie_douban" jdbcType="BIGINT" property="idMovieDouban" />
     <result column="content" jdbcType="VARCHAR" property="content" />
     <result column="happen_time" jdbcType="INTEGER" property="happenTime" />
@@ -83,15 +83,15 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from classic_douban
-    where id = #{id,jdbcType=BIGINT}
+    where id = #{id,jdbcType=VARCHAR}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from classic_douban
-    where id = #{id,jdbcType=BIGINT}
+    where id = #{id,jdbcType=VARCHAR}
   </delete>
   <delete id="deleteByExample" parameterType="org.humingk.movie.dal.entity.ClassicDoubanExample">
     delete from classic_douban
@@ -102,7 +102,7 @@
   <insert id="insert" parameterType="org.humingk.movie.dal.entity.ClassicDouban">
     insert into classic_douban (id, id_movie_douban, content, 
       happen_time, agree_vote)
-    values (#{id,jdbcType=BIGINT}, #{idMovieDouban,jdbcType=BIGINT}, #{content,jdbcType=VARCHAR}, 
+    values (#{id,jdbcType=VARCHAR}, #{idMovieDouban,jdbcType=BIGINT}, #{content,jdbcType=VARCHAR}, 
       #{happenTime,jdbcType=INTEGER}, #{agreeVote,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="org.humingk.movie.dal.entity.ClassicDouban">
@@ -126,7 +126,7 @@
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
-        #{id,jdbcType=BIGINT},
+        #{id,jdbcType=VARCHAR},
       </if>
       <if test="idMovieDouban != null">
         #{idMovieDouban,jdbcType=BIGINT},
@@ -152,7 +152,7 @@
     update classic_douban
     <set>
       <if test="record.id != null">
-        id = #{record.id,jdbcType=BIGINT},
+        id = #{record.id,jdbcType=VARCHAR},
       </if>
       <if test="record.idMovieDouban != null">
         id_movie_douban = #{record.idMovieDouban,jdbcType=BIGINT},
@@ -173,7 +173,7 @@
   </update>
   <update id="updateByExample" parameterType="map">
     update classic_douban
-    set id = #{record.id,jdbcType=BIGINT},
+    set id = #{record.id,jdbcType=VARCHAR},
       id_movie_douban = #{record.idMovieDouban,jdbcType=BIGINT},
       content = #{record.content,jdbcType=VARCHAR},
       happen_time = #{record.happenTime,jdbcType=INTEGER},
@@ -198,7 +198,7 @@
         agree_vote = #{agreeVote,jdbcType=INTEGER},
       </if>
     </set>
-    where id = #{id,jdbcType=BIGINT}
+    where id = #{id,jdbcType=VARCHAR}
   </update>
   <update id="updateByPrimaryKey" parameterType="org.humingk.movie.dal.entity.ClassicDouban">
     update classic_douban
@@ -206,6 +206,6 @@
       content = #{content,jdbcType=VARCHAR},
       happen_time = #{happenTime,jdbcType=INTEGER},
       agree_vote = #{agreeVote,jdbcType=INTEGER}
-    where id = #{id,jdbcType=BIGINT}
+    where id = #{id,jdbcType=VARCHAR}
   </update>
 </mapper>

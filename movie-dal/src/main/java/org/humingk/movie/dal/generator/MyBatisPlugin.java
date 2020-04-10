@@ -5,7 +5,9 @@ import org.mybatis.generator.api.IntrospectedTable;
 import org.mybatis.generator.api.PluginAdapter;
 import org.mybatis.generator.api.dom.java.*;
 
-import java.util.List;;
+import java.util.List;
+
+;
 
 /**
  * Mybatis 插件，自定义注释+lombak

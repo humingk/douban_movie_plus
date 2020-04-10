@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class CelebrityDoubanToClassic implements Serializable {
+public class CelebrityDoubanToClassicDouban implements Serializable {
     /**
      * 豆瓣影人ID
      */
@@ -22,7 +22,12 @@ public class CelebrityDoubanToClassic implements Serializable {
     /**
      * 豆瓣电影经典台词ID
      */
-    private Long idClassicDouban;
+    private String idClassicDouban;
+
+    /**
+     * 豆瓣影人中文名
+     */
+    private String nameZhCelebrityDouban;
 
     private static final long serialVersionUID = 1L;
 }

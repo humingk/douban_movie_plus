@@ -12,7 +12,7 @@ public interface UserDoubanToClassicDoubanMapper {
 
     int deleteByExample(UserDoubanToClassicDoubanExample example);
 
-    int deleteByPrimaryKey(@Param("idUserDouban") String idUserDouban, @Param("idClassicDouban") Long idClassicDouban);
+    int deleteByPrimaryKey(@Param("idUserDouban") String idUserDouban, @Param("idClassicDouban") String idClassicDouban);
 
     int insert(UserDoubanToClassicDouban record);
 
@@ -20,7 +20,7 @@ public interface UserDoubanToClassicDoubanMapper {
 
     List<UserDoubanToClassicDouban> selectByExample(UserDoubanToClassicDoubanExample example);
 
-    UserDoubanToClassicDouban selectByPrimaryKey(@Param("idUserDouban") String idUserDouban, @Param("idClassicDouban") Long idClassicDouban);
+    UserDoubanToClassicDouban selectByPrimaryKey(@Param("idUserDouban") String idUserDouban, @Param("idClassicDouban") String idClassicDouban);
 
     int updateByExampleSelective(@Param("record") UserDoubanToClassicDouban record, @Param("example") UserDoubanToClassicDoubanExample example);
 

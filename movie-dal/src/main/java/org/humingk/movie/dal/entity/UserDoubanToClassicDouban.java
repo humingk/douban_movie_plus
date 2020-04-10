@@ -15,14 +15,19 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class UserDoubanToClassicDouban implements Serializable {
     /**
-     * 豆瓣用户ID
+     * 豆瓣用户ID 0-未登录用户
      */
     private String idUserDouban;
 
     /**
      * 豆瓣电影经典台词ID
      */
-    private Long idClassicDouban;
+    private String idClassicDouban;
+
+    /**
+     * 用户中文名
+     */
+    private String nameZhUserDouban;
 
     /**
      * 豆瓣用户收录时间 /unix

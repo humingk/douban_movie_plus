@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.humingk.movie.dal.mapper.plus.ClassicDoubanMapperPlus">
+    <resultMap id="BaseResultMapPlus"
+               extends="org.humingk.movie.dal.mapper.auto.ClassicDoubanMapper.BaseResultMap"
+               type="org.humingk.movie.dal.entity.ClassicDouban"/>
+    <!--豆瓣用户-经典台词-->
+    <resultMap id="UserDoubanToClassicDouban"
+               type="org.humingk.movie.dal.entity.UserDoubanToClassicDouban"
+               extends="org.humingk.movie.dal.mapper.auto.UserDoubanToClassicDoubanMapper.BaseResultMap"/>
+    <!--豆瓣影人-经典台词-->
+    <resultMap id="CelebrityDoubanToClassicDouban"
+               type="org.humingk.movie.dal.entity.CelebrityDoubanToClassicDouban"
+               extends="org.humingk.movie.dal.mapper.auto.CelebrityDoubanToClassicDoubanMapper.BaseResultMap"/>
+    <!--豆瓣电影经典台词相关-->
+    <resultMap id="ClassicOfMovieDoubanDoResultMapPlus"
+               type="org.humingk.movie.dal.domain.douban.ClassicOfMovieDoubanDo"
+               extends="BaseResultMapPlus">
+        <association property="userDoubanToClassicDouban"
+                     javaType="org.humingk.movie.dal.entity.UserDoubanToClassicDouban"
+                     resultMap="UserDoubanToClassicDouban"/>
+        <association property="celebrityDoubanToClassicDouban"
+                     javaType="org.humingk.movie.dal.entity.CelebrityDoubanToClassicDouban"
+                     resultMap="CelebrityDoubanToClassicDouban"/>
+    </resultMap>
+    <!--根据豆瓣电影ID获取经典台词相关-->
+    <select id="selectClassicOfMovieDoubanDoListByMovieDoubanId" parameterType="java.lang.Long"
+            resultMap="ClassicOfMovieDoubanDoResultMapPlus">
+        select classic_douban.id,
+               id_movie_douban,
+               content,
+               happen_time,
+               agree_vote,
+               user_douban_to_classic_douban.id_user_douban,
+               user_douban_to_classic_douban.id_classic_douban,
+               name_zh_user_douban,
+               record_datetime,
+               description,
+               celebrity_douban_to_classic_douban.id_celebrity_douban,
+               celebrity_douban_to_classic_douban.id_classic_douban,
+               name_zh_celebrity_douban
+        from classic_douban
+                 left join user_douban_to_classic_douban
+                           on classic_douban.id = user_douban_to_classic_douban.id_classic_douban
+                 left join celebrity_douban_to_classic_douban
+                           on classic_douban.id = celebrity_douban_to_classic_douban.id_classic_douban
+        where classic_douban.id_movie_douban = #{idMovieDouban,jdbcType=BIGINT}
+        order by classic_douban.agree_vote desc
+    </select>
+</mapper>
