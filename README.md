@@ -1,5 +1,5 @@
 <div align="center">
-<img src="./doc/image/logo.png" style="max-width: 500px;"/>
+<img src="./doc/image/logo.png" width="500"/>
 </div>
 <div align="center">
 <a target="_blank" href="https://travis-ci.org/humingk/douban_movie_plus"><img src="https://travis-ci.org/humingk/douban_movie_plus.svg?branch=master" alt="Build Status"></a>
@@ -10,16 +10,16 @@
 
 ## 网站地址
 
-<a target="_blank" href="https://movie.doubans.com">https://movie.doubans.com</a>
+<https://movie.doubans.com>
 
 ---
 
 ## 使用相关
 
-- 推荐从豆瓣电影官网访问，例如二级域名`douban`后加`s`即可跳转 <a target="_blank" href="https://movie.doubans.com/subject/1889243">https://movie.douban`s`.com/subject/1889243</a>
+- 推荐从豆瓣电影官网访问，例如二级域名`douban`后加`s`即可跳转 [https://movie.douban`s`.com/subject/1889243](https://movie.doubans.com/subject/1889243)
 
 
-- 调用本项目后端API服务你的前端应用 <a target="_blank" href="https://movie.doubans.com/api">API文档</a> ，<a target="_blank" href="./doc/api/AllInOne.md">API文档 (md)</a> ，<a target="_blank" href="./doc/api/postman.json">Postman测试数据</a>
+- 调用本项目后端API服务你的前端应用 [API文档](https://movie.doubans.com/api) ，[API文档md](./doc/api/AllInOne.md) ，[Postman测试数据](./doc/api/postman.json)
 
 
 - 聊天吹水提建议，欢迎加入QQ豆瓣电影Plus交流群 `476584154` ，口令：`doubans`
@@ -28,7 +28,7 @@
 
 ### 前端开发 (Vue)
 
-<a target="_blank" href="https://github.com/humingk/douban_movie_vue">前端仓库</a>
+[前端仓库](https://github.com/humingk/douban_movie_vue)
 
 ### 后端开发 (Spring)
 
