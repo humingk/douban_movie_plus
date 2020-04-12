@@ -79,6 +79,7 @@ function api_update() {
   sed -i "s/@RestController/\/\/\ @RestController/g" $(grep annotation -rl ./movie-server-gateway/src/main/java/org/humingk/movie/server/gateway/controller/FallbackController.java)
   sed -i "s/\/\/\ import/import/g" $(grep annotation -rl ./movie-api/src/main/java/org/humingk/movie/api/*/*Api.java)
   sed -i "s/\/\/\ @RestController/@RestController/g" $(grep annotation -rl ./movie-api/src/main/java/org/humingk/movie/api/*/*Api.java)
+  echo "部署环境..."
   echo "正在生成文档..."
   mvn -pl movie-api -Dfile.encoding=UTF-8 smart-doc:html||true
   mvn -pl movie-api -Dfile.encoding=UTF-8 smart-doc:markdown||true
@@ -87,6 +88,7 @@ function api_update() {
   sed -i "s/\/\/\ @RestController/@RestController/g" $(grep annotation -rl ./movie-server-gateway/src/main/java/org/humingk/movie/server/gateway/controller/FallbackController.java)
   sed -i "s/import\ org.springframework.web.bind.annotation.RestController;/\/\/\ import\ org.springframework.web.bind.annotation.RestController;/g" $(grep annotation -rl ./movie-api/src/main/java/org/humingk/movie/api/*/*Api.java)
   sed -i "s/@RestController/\/\/\ @RestController/g" $(grep annotation -rl ./movie-api/src/main/java/org/humingk/movie/api/*/*Api.java)
+  echo "撤销环境..."
   fi
 }
 

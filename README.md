@@ -4,8 +4,8 @@
 <div align="center">
 <a target="_blank" href="https://travis-ci.org/humingk/douban_movie_plus"><img src="https://travis-ci.org/humingk/douban_movie_plus.svg?branch=master" alt="Build Status"></a>
 <a target="_blank" href="https://codecov.io/gh/humingk/douban_movie_plus"><img src="https://codecov.io/gh/humingk/douban_movie_plus/branch/master/graph/badge.svg" alt="codecov]"></a>
-<a><img src="./doc/image/license-GPL-blue.svg"></a>
-<a><img src="./doc/image/language-Java-green.svg"></a>
+<img src="./doc/image/license-GPL-blue.svg">
+<img src="./doc/image/language-Java-green.svg">
 </div>
 
 ## 网站地址
@@ -14,17 +14,17 @@
 
 ---
 
-## 使用相关
+## 使用
 
-- 推荐从豆瓣电影官网访问，例如二级域名`douban`后加`s`即可跳转 [https://movie.douban`s`.com/subject/1889243](https://movie.doubans.com/subject/1889243)
+- 推荐从豆瓣电影官网访问，二级域名`douban`后加`s`即可跳转 [https://movie.douban`s`.com/subject/1889243](https://movie.doubans.com/subject/1889243)
 
 
-- 调用本项目后端API服务你的前端应用 [API文档](https://movie.doubans.com/api) ，[API文档md](./doc/api/AllInOne.md) ，[Postman测试数据](./doc/api/postman.json)
+- 调用本项目后端API服务你的前端应用 [API文档 (html)](https://movie.doubans.com/api) ，[API文档 (md)](./doc/api/AllInOne.md) ，[Postman测试数据 (json)](./doc/api/postman.json)
 
 
 - 聊天吹水提建议，欢迎加入QQ豆瓣电影Plus交流群 `476584154` ，口令：`doubans`
 
-## 开发相关
+## 开发
 
 ### 前端开发 (Vue)
 
@@ -41,9 +41,7 @@
 #### 2. clone (替换用户名，且一定要加上--depth)
 
 `git clone -b dev --depth 1 https://github.com/humingk/douban_movie_plus`
-
 or
-
 `git clone -b dev --depth 1 git@github.com:humingk/douban_movie_plus.git`
 
 #### 3. 导入项目
@@ -71,26 +69,21 @@ RabbitMQ依赖erlang,注意版本依赖
 #### 6. MysSQL配置
 
 - 导入movie数据库
-
     `sudo mysql -uroot -p movie < ./doc/sql/movie_import.sql`
 
 - 导入测试数据
-
     `sudo mysql -uroot -p movie < ./doc/sql/movie_default.sql`
 
 - MySQL配置文件 
-
     `./doc/config/mysql-dev.yml`
 
 #### 7. 修改部分配置文件绝对路径
 
-必要:
-
+**必要**:
 - config-server search-locations `./movie-server-config/src/main/resources/bootstrap.yml`
 
-- 项目根路径 base-dir `./pom.xml`
-
 非必要:
+- 项目根路径 base-dir `./pom.xml`
 
 - oauth2秘钥 key.location `./doc/config/oauth2-server-dev.yml`
 
@@ -108,9 +101,15 @@ RabbitMQ依赖erlang,注意版本依赖
 
 #### 10. server启动顺序
 
-eureka -> config -> zipkin -> server list -> gateway
+`eureka -> config -> zipkin -> server list -> gateway`
 
-#### 11. 请提交到**dev**分支
+#### 11. 测试
+
+测试前启动euraka和config服务
+
+`mvn test`
+
+#### 12. 请提交到**dev**分支
 
 ## 声明
 

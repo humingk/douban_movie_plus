@@ -1,7 +1,7 @@
 {
   "info": {
     "schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
-    "_postman_id": "a2336c07-647f-4104-983d-7b22a8123dd6",
+    "_postman_id": "5a645bae-1e00-4891-b171-8214e666be9e",
     "name": "豆瓣电影Plus RESTful-API文档"
   },
   "item": [
@@ -19,11 +19,11 @@
                   "key": "id",
                   "type": "text",
                   "desc": "豆瓣电影ID",
-                  "value": "107"
+                  "value": "126"
                 }
               ]
             },
-            "url": "https://api.doubans.com/v2/movie/resource/bases?id\u003d107",
+            "url": "https://api.doubans.com/v2/movie/resource/bases?id\u003d126",
             "description": "电影资源",
             "header": [
               {
@@ -53,11 +53,11 @@
                   "key": "id",
                   "type": "text",
                   "desc": "豆瓣电影ID",
-                  "value": "756"
+                  "value": "682"
                 }
               ]
             },
-            "url": "https://api.doubans.com/v2/movie/zhihu/bases?id\u003d756",
+            "url": "https://api.doubans.com/v2/movie/zhihu/bases?id\u003d682",
             "description": "豆瓣电影知乎相关",
             "header": [
               {
@@ -87,11 +87,11 @@
                   "key": "id",
                   "type": "text",
                   "desc": "豆瓣电影ID",
-                  "value": "416"
+                  "value": "326"
                 }
               ]
             },
-            "url": "https://api.doubans.com/v2/movie/bases?id\u003d416",
+            "url": "https://api.doubans.com/v2/movie/bases?id\u003d326",
             "description": "电影基础信息",
             "header": [
               {
@@ -116,11 +116,11 @@
                   "key": "id",
                   "type": "text",
                   "desc": "豆瓣电影ID",
-                  "value": "634"
+                  "value": "645"
                 }
               ]
             },
-            "url": "https://api.doubans.com/v2/movie/details?id\u003d634",
+            "url": "https://api.doubans.com/v2/movie/details?id\u003d645",
             "description": "电影详情信息",
             "header": [
               {
@@ -150,11 +150,11 @@
                   "key": "id",
                   "type": "text",
                   "desc": "豆瓣电影ID",
-                  "value": "67"
+                  "value": "992"
                 }
               ]
             },
-            "url": "https://api.doubans.com/v2/movie/douban/bases?id\u003d67",
+            "url": "https://api.doubans.com/v2/movie/douban/bases?id\u003d992",
             "description": "豆瓣电影基础信息",
             "header": [
               {
@@ -179,11 +179,11 @@
                   "key": "id",
                   "type": "text",
                   "desc": "豆瓣电影ID",
-                  "value": "205"
+                  "value": "174"
                 }
               ]
             },
-            "url": "https://api.doubans.com/v2/movie/douban/details?id\u003d205",
+            "url": "https://api.doubans.com/v2/movie/douban/details?id\u003d174",
             "description": "豆瓣电影详情信息",
             "header": [
               {
@@ -213,11 +213,11 @@
                   "key": "id",
                   "type": "text",
                   "desc": "IMDB电影ID",
-                  "value": "980"
+                  "value": "947"
                 }
               ]
             },
-            "url": "https://api.doubans.com/v2/movie/imdb/bases?id\u003d980",
+            "url": "https://api.doubans.com/v2/movie/imdb/bases?id\u003d947",
             "description": "IMDB电影基础信息",
             "header": [
               {
@@ -242,11 +242,11 @@
                   "key": "id",
                   "type": "text",
                   "desc": "IMDB电影ID",
-                  "value": "94"
+                  "value": "283"
                 }
               ]
             },
-            "url": "https://api.doubans.com/v2/movie/imdb/details?id\u003d94",
+            "url": "https://api.doubans.com/v2/movie/imdb/details?id\u003d283",
             "description": "IMDB电影详情信息",
             "header": [
               {
@@ -276,7 +276,7 @@
                   "key": "keyword",
                   "type": "text",
                   "desc": "搜索关键字",
-                  "value": "w03zb9"
+                  "value": "85uzu2"
                 },
                 {
                   "key": "offset",
@@ -292,7 +292,7 @@
                 }
               ]
             },
-            "url": "https://api.doubans.com/v2/search/place/scene/tips?limit\u003d10\u0026keyword\u003dw03zb9\u0026offset\u003d0",
+            "url": "https://api.doubans.com/v2/search/place/scene/tips?limit\u003d10\u0026keyword\u003d85uzu2\u0026offset\u003d0",
             "description": "场景地点搜索提示",
             "header": [
               {
@@ -322,7 +322,7 @@
                   "key": "keyword",
                   "type": "text",
                   "desc": "搜索关键字",
-                  "value": "cygif7"
+                  "value": "pjavsi"
                 },
                 {
                   "key": "offset",
@@ -338,7 +338,7 @@
                 }
               ]
             },
-            "url": "https://api.doubans.com/v2/search/douban/tips?keyword\u003dcygif7\u0026limit\u003d10\u0026offset\u003d0",
+            "url": "https://api.doubans.com/v2/search/douban/tips?keyword\u003dpjavsi\u0026limit\u003d10\u0026offset\u003d0",
             "description": "豆瓣搜索提示",
             "header": [
               {
@@ -363,7 +363,7 @@
                   "key": "keyword",
                   "type": "text",
                   "desc": "搜索关键字",
-                  "value": "t5zfuf"
+                  "value": "myzkan"
                 },
                 {
                   "key": "offset",
@@ -379,7 +379,7 @@
                 }
               ]
             },
-            "url": "https://api.doubans.com/v2/search/douban/details?keyword\u003dt5zfuf\u0026offset\u003d0\u0026limit\u003d10",
+            "url": "https://api.doubans.com/v2/search/douban/details?keyword\u003dmyzkan\u0026offset\u003d0\u0026limit\u003d10",
             "description": "豆瓣搜索结果",
             "header": [
               {
@@ -409,7 +409,7 @@
                   "key": "keyword",
                   "type": "text",
                   "desc": "搜索关键字",
-                  "value": "74cmet"
+                  "value": "tjuznt"
                 },
                 {
                   "key": "offset",
@@ -425,7 +425,7 @@
                 }
               ]
             },
-            "url": "https://api.doubans.com/v2/search/movie/douban/tips?offset\u003d0\u0026keyword\u003d74cmet\u0026limit\u003d10",
+            "url": "https://api.doubans.com/v2/search/movie/douban/tips?offset\u003d0\u0026keyword\u003dtjuznt\u0026limit\u003d10",
             "description": "豆瓣电影搜索提示",
             "header": [
               {
@@ -450,7 +450,7 @@
                   "key": "keyword",
                   "type": "text",
                   "desc": "搜索关键字",
-                  "value": "2zpzl4"
+                  "value": "pbl59g"
                 },
                 {
                   "key": "offset",
@@ -466,7 +466,7 @@
                 }
               ]
             },
-            "url": "https://api.doubans.com/v2/search/movie/douban/details?offset\u003d0\u0026keyword\u003d2zpzl4\u0026limit\u003d10",
+            "url": "https://api.doubans.com/v2/search/movie/douban/details?offset\u003d0\u0026keyword\u003dpbl59g\u0026limit\u003d10",
             "description": "豆瓣电影搜索结果",
             "header": [
               {
@@ -496,7 +496,7 @@
                   "key": "keyword",
                   "type": "text",
                   "desc": "搜索关键字",
-                  "value": "98ietf"
+                  "value": "fb5bu6"
                 },
                 {
                   "key": "offset",
@@ -512,7 +512,7 @@
                 }
               ]
             },
-            "url": "https://api.doubans.com/v2/search/celebrity/douban/tips?keyword\u003d98ietf\u0026offset\u003d0\u0026limit\u003d10",
+            "url": "https://api.doubans.com/v2/search/celebrity/douban/tips?keyword\u003dfb5bu6\u0026offset\u003d0\u0026limit\u003d10",
             "description": "豆瓣影人搜索提示",
             "header": [
               {
@@ -537,7 +537,7 @@
                   "key": "keyword",
                   "type": "text",
                   "desc": "搜索关键字",
-                  "value": "2nmms6"
+                  "value": "jz7cca"
                 },
                 {
                   "key": "offset",
@@ -553,7 +553,7 @@
                 }
               ]
             },
-            "url": "https://api.doubans.com/v2/search/celebrity/douban/details?keyword\u003d2nmms6\u0026offset\u003d0\u0026limit\u003d10",
+            "url": "https://api.doubans.com/v2/search/celebrity/douban/details?keyword\u003djz7cca\u0026offset\u003d0\u0026limit\u003d10",
             "description": "豆瓣影人搜索结果",
             "header": [
               {
@@ -583,7 +583,7 @@
                   "key": "keyword",
                   "type": "text",
                   "desc": "搜索关键字",
-                  "value": "k6ps2f"
+                  "value": "43ks00"
                 },
                 {
                   "key": "offset",
@@ -599,7 +599,7 @@
                 }
               ]
             },
-            "url": "https://api.doubans.com/v2/search/movie/scene/tips?limit\u003d10\u0026keyword\u003dk6ps2f\u0026offset\u003d0",
+            "url": "https://api.doubans.com/v2/search/movie/scene/tips?limit\u003d10\u0026keyword\u003d43ks00\u0026offset\u003d0",
             "description": "场景电影搜索提示",
             "header": [
               {
@@ -633,11 +633,11 @@
                   "key": "id",
                   "type": "text",
                   "desc": "豆瓣影人ID",
-                  "value": "618"
+                  "value": "408"
                 }
               ]
             },
-            "url": "https://api.doubans.com/v2/celebrity/douban/bases?id\u003d618",
+            "url": "https://api.doubans.com/v2/celebrity/douban/bases?id\u003d408",
             "description": "豆瓣影人基础信息",
             "header": [
               {
@@ -662,7 +662,7 @@
                   "key": "id",
                   "type": "text",
                   "desc": "豆瓣影人ID",
-                  "value": "734"
+                  "value": "100"
                 },
                 {
                   "key": "limit",
@@ -672,7 +672,7 @@
                 }
               ]
             },
-            "url": "https://api.doubans.com/v2/celebrity/douban/details?limit\u003d10\u0026id\u003d734",
+            "url": "https://api.doubans.com/v2/celebrity/douban/details?limit\u003d10\u0026id\u003d100",
             "description": "豆瓣影人详细信息",
             "header": [
               {
@@ -697,7 +697,7 @@
                   "key": "id",
                   "type": "text",
                   "desc": "豆瓣影人ID",
-                  "value": "729"
+                  "value": "918"
                 },
                 {
                   "key": "offset",
@@ -713,7 +713,7 @@
                 }
               ]
             },
-            "url": "https://api.doubans.com/v2/celebrity/douban/cooperators_bases?id\u003d729\u0026offset\u003d0\u0026limit\u003d10",
+            "url": "https://api.doubans.com/v2/celebrity/douban/cooperators_bases?id\u003d918\u0026offset\u003d0\u0026limit\u003d10",
             "description": "豆瓣影人合作过的影人基础信息",
             "header": [
               {
@@ -743,11 +743,11 @@
                   "key": "id",
                   "type": "text",
                   "desc": "豆瓣影人ID",
-                  "value": "150"
+                  "value": "5"
                 }
               ]
             },
-            "url": "https://api.doubans.com/v2/celebrity/bases?id\u003d150",
+            "url": "https://api.doubans.com/v2/celebrity/bases?id\u003d5",
             "description": "影人基础信息",
             "header": [
               {
@@ -772,7 +772,7 @@
                   "key": "id",
                   "type": "text",
                   "desc": "豆瓣影人ID",
-                  "value": "622"
+                  "value": "231"
                 },
                 {
                   "key": "doubanLimit",
@@ -788,7 +788,7 @@
                 }
               ]
             },
-            "url": "https://api.doubans.com/v2/celebrity/details?imdbLimit\u003d10\u0026doubanLimit\u003d10\u0026id\u003d622",
+            "url": "https://api.doubans.com/v2/celebrity/details?imdbLimit\u003d10\u0026doubanLimit\u003d10\u0026id\u003d231",
             "description": "影人详细信息",
             "header": [
               {
@@ -818,11 +818,11 @@
                   "key": "id",
                   "type": "text",
                   "desc": "IMDB影人ID",
-                  "value": "451"
+                  "value": "904"
                 }
               ]
             },
-            "url": "https://api.doubans.com/v2/celebrity/imdb/bases?id\u003d451",
+            "url": "https://api.doubans.com/v2/celebrity/imdb/bases?id\u003d904",
             "description": "IMDB影人基础信息",
             "header": [
               {
@@ -847,7 +847,7 @@
                   "key": "id",
                   "type": "text",
                   "desc": "IMDB影人ID",
-                  "value": "177"
+                  "value": "397"
                 },
                 {
                   "key": "limit",
@@ -857,7 +857,7 @@
                 }
               ]
             },
-            "url": "https://api.doubans.com/v2/celebrity/imdb/details?limit\u003d10\u0026id\u003d177",
+            "url": "https://api.doubans.com/v2/celebrity/imdb/details?limit\u003d10\u0026id\u003d397",
             "description": "IMDB影人详细信息",
             "header": [
               {
@@ -891,11 +891,11 @@
                   "key": "id",
                   "type": "text",
                   "desc": "豆瓣电影ID",
-                  "value": "475"
+                  "value": "630"
                 }
               ]
             },
-            "url": "https://api.doubans.com/v2/scene/fotoplace/bases?id\u003d475",
+            "url": "https://api.doubans.com/v2/scene/fotoplace/bases?id\u003d630",
             "description": "电影场景简略信息",
             "header": [
               {
@@ -920,11 +920,11 @@
                   "key": "id",
                   "type": "text",
                   "desc": "豆瓣电影ID",
-                  "value": "208"
+                  "value": "321"
                 }
               ]
             },
-            "url": "https://api.doubans.com/v2/scene/fotoplace/details?id\u003d208",
+            "url": "https://api.doubans.com/v2/scene/fotoplace/details?id\u003d321",
             "description": "电影场景详细信息",
             "header": [
               {

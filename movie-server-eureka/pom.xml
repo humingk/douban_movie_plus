@@ -29,7 +29,7 @@
                 <configuration>
                     <source>${java.version}</source>
                     <target>${java.version}</target>
-                    <outputDirectory>${base-dir}/run</outputDirectory>
+                    <outputDirectory>../run</outputDirectory>
                 </configuration>
                 <executions>
                     <execution>
