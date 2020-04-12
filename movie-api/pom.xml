@@ -5,99 +5,123 @@
     <parent>
         <groupId>org.humingk</groupId>
         <artifactId>movie</artifactId>
-        <version>2.0.4</version>
+        <version>2.0.5</version>
     </parent>
     <artifactId>movie-api</artifactId>
     <name>movie-api</name>
     <description>api for movie server</description>
 
     <dependencies>
-        <!--feign 包括Hystrix-->
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-openfeign</artifactId>
-        </dependency>
-        <!--config client-->
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-config</artifactId>
-        </dependency>
-        <!--zipkin client-->
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-zipkin</artifactId>
-        </dependency>
         <!--common-->
         <dependency>
             <groupId>org.humingk</groupId>
             <artifactId>movie-common</artifactId>
+            <!--            <scope>provided</scope>-->
         </dependency>
         <!--dal-->
         <dependency>
             <groupId>org.humingk</groupId>
             <artifactId>movie-dal</artifactId>
+            <!--            <scope>provided</scope>-->
         </dependency>
         <!--service list-->
         <dependency>
             <groupId>org.humingk</groupId>
             <artifactId>movie-service-douban</artifactId>
+            <!--            <scope>provided</scope>-->
         </dependency>
         <dependency>
             <groupId>org.humingk</groupId>
             <artifactId>movie-service-netease</artifactId>
+            <!--            <scope>provided</scope>-->
         </dependency>
         <dependency>
             <groupId>org.humingk</groupId>
             <artifactId>movie-service-user</artifactId>
+            <!--            <scope>provided</scope>-->
         </dependency>
         <dependency>
             <groupId>org.humingk</groupId>
             <artifactId>movie-service-imdb</artifactId>
+            <!--            <scope>provided</scope>-->
         </dependency>
         <dependency>
             <groupId>org.humingk</groupId>
             <artifactId>movie-service-scene</artifactId>
+            <!--            <scope>provided</scope>-->
         </dependency>
         <dependency>
             <groupId>org.humingk</groupId>
             <artifactId>movie-service-zhihu</artifactId>
+            <!--            <scope>provided</scope>-->
         </dependency>
         <dependency>
             <groupId>org.humingk</groupId>
             <artifactId>movie-service-resource</artifactId>
+            <!--            <scope>provided</scope>-->
         </dependency>
-        <!--apache httpclient-->
+        <!--父公共依赖 ====================== -->
+        <!--bus+rabbit-->
         <dependency>
-            <groupId>org.apache.httpcomponents</groupId>
-            <artifactId>httpclient</artifactId>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-bus-amqp</artifactId>
+            <scope>provided</scope>
         </dependency>
-        <!--feign httpclient-->
-        <dependency>
-            <groupId>com.netflix.feign</groupId>
-            <artifactId>feign-httpclient</artifactId>
-        </dependency>
+        <!--不需要打包的依赖 ====================== -->
         <!--lombok-->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <scope>provided</scope>
         </dependency>
-        <!--lang3-->
-        <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-lang3</artifactId>
-        </dependency>
         <!--mapstruct-->
         <dependency>
             <groupId>org.mapstruct</groupId>
             <artifactId>mapstruct</artifactId>
-            <scope>compile</scope>
+            <scope>provided</scope>
         </dependency>
         <!--mapstruct-processor-->
         <dependency>
             <groupId>org.mapstruct</groupId>
             <artifactId>mapstruct-processor</artifactId>
-            <scope>compile</scope>
+            <scope>provided</scope>
+        </dependency>
+        <!--需要打包的依赖 ====================== -->
+        <!--feign 包括Hystrix-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-openfeign</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <!--config client-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-config</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <!--apache httpclient-->
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <!--feign httpclient-->
+        <dependency>
+            <groupId>com.netflix.feign</groupId>
+            <artifactId>feign-httpclient</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <!--lang3-->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <!--servlet-->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
 </project>

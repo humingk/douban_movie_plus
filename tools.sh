@@ -1,16 +1,14 @@
 #!/bin/bash
 
 echo "========== 豆瓣电影Plus 脚本工具 =========="
-echo "[0]  更改项目版本"
+echo "[0]  更新项目版本"
 echo "[1]  生成RSA密钥对"
 echo "[2]  启动zipkin服务"
-echo "[3]  更新API文档(暂时bug,记得结束后运行[5])"
-echo "[4]  强制部署[3]需要的环境"
-echo "[5]  强制撤销[3]部署的环境"
-echo "[6]  删除target目录"
-echo "[7]  导出数据库建表SQL语句"
-echo "[8]  启动NeteaseCloudMusicApi服务"
-echo "[9]  删除Mybatis通用工具自动生成的文件"
+echo "[3]  更新API文档"
+echo "[4]  手动删除target目录"
+echo "[5]  导出数据库建表语句"
+echo "[6]  导出数据库备份文件"
+echo "[7]  启动MusicApi服务"
 echo "==========================================="
 read -p "请选择脚本:" choose
 
@@ -45,10 +43,10 @@ function rsa_create() {
 
 # 启动zipkin服务
 function zipkin_start() {
-  if [ ! -f "./zipkin.jar" ]; then
+  if [ ! -f "./run/zipkin.jar" ]; then
     curl -sSL https://zipkin.io/quickstart.sh | bash -s
   fi
-  exec="java -jar zipkin.jar
+  exec="java -jar ./run/zipkin.jar
       --zipkin.collector.rabbitmq.addresses=localhost
       --zipkin.collector.rabbitmq.port=6572
       --zipkin.collector.rabbitmq.username=guest
@@ -59,7 +57,7 @@ function zipkin_start() {
       --MYSQL_DB=movie
       --MYSQL_USER=root
       --MYSQL_PASS=1233"
-  read -p "你希望后台运行吗? [y/n]:" choose_back
+  read -p "你希望后台运行Zipkin服务吗? [y/n]:" choose_back
   if [ "$choose_back" = "n" ]; then
     eval $exec
   else
@@ -75,66 +73,20 @@ function zipkin_start() {
 
 # 更新API文档
 function api_update() {
-  echo "请选择生成文档类型"
-  echo "-------------------"
-  echo "[0] adoc"
-  echo "[1] html"
-  echo "[2] markdown"
-  echo "[3] postman"
-  echo "-------------------"
-  read -p "请选择类型：" choose_api
-  env_create
-  # 执行mvn
-  exec_api="mvn -Dfile.encoding=UTF-8 smart-doc:"
-  case $choose_api in
-  0)
-    exec $exec_api"adoc"
-    ;;
-  1)
-    exec $exec_api"html"
-    ;;
-  2)
-    exec $exec_api"markdown"
-    ;;
-  3)
-    exec $exec_api"postman"
-    ;;
-  esac
-  # env_release
-}
-
-# 部署环境配置
-function env_create() {
-  read -p "你确定要部署API环境配置吗？[y/n]:" choose_sure_api_env_create
-  if [ "$choose_sure_api_env_create" = "y" ]; then
-    echo "配置环境..."
-    # pom
-    sed -i "s/<module>/<\!--<module>/g" ./pom.xml
-    sed -i "s/<\/module>/<\/module>-->/g" ./pom.xml
-    sed -i "s/<\!--<module>movie-api<\/module>-->/<module>movie-api<\/module>/g" ./pom.xml
-    sed -i "s/<\!--<module>movie-dal<\/module>-->/<module>movie-dal<\/module>/g" ./pom.xml
-    sed -i "s/<\!--<module>movie-common<\/module>-->/<module>movie-common<\/module>/g" ./pom.xml
-    # controller
-    sed -i "s/@RestController/\/\/\ @RestController/g" $(grep annotation -rl ./movie-common/src/main/java/org/humingk/movie/common/controller/MyErrorController.java)
-    sed -i "s/@RestController/\/\/\ @RestController/g" $(grep annotation -rl ./movie-server-gateway/src/main/java/org/humingk/movie/server/gateway/controller/FallbackController.java)
-    sed -i "s/\/\/\ import/import/g" $(grep annotation -rl ./movie-api/src/main/java/org/humingk/movie/api/*/*Api.java)
-    sed -i "s/\/\/\ @RestController/@RestController/g" $(grep annotation -rl ./movie-api/src/main/java/org/humingk/movie/api/*/*Api.java)
-  fi
-}
-
-# 撤销环境配置
-function env_release() {
-  read -p "你确定要撤销部署API环境配置吗？[y/n]:" choose_sure_api_env_release
-  if [ "$choose_sure_api_env_release" = "y" ]; then
-    echo "撤销配置环境..."
-    # pom
-    sed -i "s/<\!--<module>/<module>/g" ./pom.xml
-    sed -i "s/<\/module>-->/<\/module>/g" ./pom.xml
-    # controller
-    sed -i "s/\/\/\ @RestController/@RestController/g" $(grep annotation -rl ./movie-common/src/main/java/org/humingk/movie/common/controller/MyErrorController.java)
-    sed -i "s/\/\/\ @RestController/@RestController/g" $(grep annotation -rl ./movie-server-gateway/src/main/java/org/humingk/movie/server/gateway/controller/FallbackController.java)
-    sed -i "s/import\ org.springframework.web.bind.annotation.RestController;/\/\/\ import\ org.springframework.web.bind.annotation.RestController;/g" $(grep annotation -rl ./movie-api/src/main/java/org/humingk/movie/api/*/*Api.java)
-    sed -i "s/@RestController/\/\/\ @RestController/g" $(grep annotation -rl ./movie-api/src/main/java/org/humingk/movie/api/*/*Api.java)
+  read -p "你确定要更新API文档吗？[y/n]:" choose_update_api
+  if [ "$choose_update_api" = "y" ]; then
+  sed -i "s/@RestController/\/\/\ @RestController/g" $(grep annotation -rl ./movie-common/src/main/java/org/humingk/movie/common/controller/MyErrorController.java)
+  sed -i "s/@RestController/\/\/\ @RestController/g" $(grep annotation -rl ./movie-server-gateway/src/main/java/org/humingk/movie/server/gateway/controller/FallbackController.java)
+  sed -i "s/\/\/\ import/import/g" $(grep annotation -rl ./movie-api/src/main/java/org/humingk/movie/api/*/*Api.java)
+  sed -i "s/\/\/\ @RestController/@RestController/g" $(grep annotation -rl ./movie-api/src/main/java/org/humingk/movie/api/*/*Api.java)
+  echo "正在生成文档..."
+  mvn -pl movie-api -Dfile.encoding=UTF-8 smart-doc:html||true
+  mvn -pl movie-api -Dfile.encoding=UTF-8 smart-doc:markdown||true
+  mvn -pl movie-api -Dfile.encoding=UTF-8 smart-doc:postman||true
+  sed -i "s/\/\/\ @RestController/@RestController/g" $(grep annotation -rl ./movie-common/src/main/java/org/humingk/movie/common/controller/MyErrorController.java)
+  sed -i "s/\/\/\ @RestController/@RestController/g" $(grep annotation -rl ./movie-server-gateway/src/main/java/org/humingk/movie/server/gateway/controller/FallbackController.java)
+  sed -i "s/import\ org.springframework.web.bind.annotation.RestController;/\/\/\ import\ org.springframework.web.bind.annotation.RestController;/g" $(grep annotation -rl ./movie-api/src/main/java/org/humingk/movie/api/*/*Api.java)
+  sed -i "s/@RestController/\/\/\ @RestController/g" $(grep annotation -rl ./movie-api/src/main/java/org/humingk/movie/api/*/*Api.java)
   fi
 }
 
@@ -163,14 +115,19 @@ function export_database_sql_create() {
   fi
 }
 
+function export_database_backup(){
+    date=$(date "+%Y%m%d")
+    sudo mysqldump -h localhost -P 3306 -uroot -p --databases movie > ~/Documents/备份/movie${date}.sql
+}
+
 # 启动NeteaseCloudMusicApi服务
 function netease_start() {
-  if [ ! -d "./NeteaseCloudMusicApi" ]; then
-    git clone --depth 1 https://github.com/Binaryify/NeteaseCloudMusicApi
-    cd NeteaseCloudMusicApi && npm install && cd ..
+  if [ ! -d "./run/NeteaseCloudMusicApi" ]; then
+    git clone --depth 1 https://github.com/Binaryify/NeteaseCloudMusicApi ./run/
+    cd ./run/NeteaseCloudMusicApi && npm install && cd ../..
   fi
-  exec="PORT=10102 node ./NeteaseCloudMusicApi/app.js"
-  read -p "你希望后台运行musicApi吗? [y/n]:" choose_back
+  exec="PORT=10102 node ./run/NeteaseCloudMusicApi/app.js"
+  read -p "你希望后台运行musicApi服务吗? [y/n]:" choose_back
   if [ "$choose_back" = "n" ]; then
     eval $exec
   else
@@ -180,21 +137,6 @@ function netease_start() {
       echo "NeteaseCloudMusicApi已在后台运行，查看进程：ps -ef | grep NeteaseCloudMusicApi"
     else
       echo "NeteaseCloudMusicApi运行失败"
-    fi
-  fi
-}
-
-# 删除Mybatis通用工具自动生成的文件
-function remove_mybatis_auto() {
-  read -p "你确定要删除Mybatis通用工具自动生成的文件吗？[y/n]:" choose_remove_mybatis_auto
-  if [ "$choose_remove_mybatis_auto" = "y" ]; then
-    rm ./movie-dal/src/main/java/org/humingk/movie/dal/entity/*
-    rm ./movie-dal/src/main/java/org/humingk/movie/dal/mapper/auto/*
-    rm ./movie-dal/src/main/resources/mapper/auto/*
-    if [ $? -eq 0 ]; then
-      echo "删除成功"
-    else
-      echo "删除失败..."
     fi
   fi
 }
@@ -215,21 +157,15 @@ case $choose in
   api_update
   ;;
 4)
-  env_create
-  ;;
-5)
-  env_release
-  ;;
-6)
   delete_target
   ;;
-7)
+5)
   export_database_sql_create
   ;;
-8)
-  netease_start
+6)
+  export_database_backup
   ;;
-9)
-  remove_mybatis_auto
+7)
+  netease_start
   ;;
 esac

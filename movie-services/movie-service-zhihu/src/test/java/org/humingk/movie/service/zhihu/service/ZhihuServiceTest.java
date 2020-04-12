@@ -1,5 +1,6 @@
 package org.humingk.movie.service.zhihu.service;
 
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,9 +12,15 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 public class ZhihuServiceTest {
 
   @Autowired private ZhihuService zhihuService;
+  private static final Long MOVIE_DOUBAN_ID = 1291561L;
 
   @Test
   public void getMovieZhihuByMovieDoubanId() {
-    System.out.println(zhihuService.getMovieZhihuByMovieDoubanId(1291561L));
+    Assert.assertEquals(
+        MOVIE_DOUBAN_ID,
+        zhihuService
+            .getMovieZhihuByMovieDoubanId(MOVIE_DOUBAN_ID)
+            .getMovieZhihu()
+            .getIdMovieDouban());
   }
 }

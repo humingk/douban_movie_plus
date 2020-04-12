@@ -1,5 +1,6 @@
 package org.humingk.movie.service.douban.service;
 
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,28 +13,38 @@ public class CelebrityDoubanServiceTest {
 
   @Autowired private CelebrityDoubanService celebrityDoubanService;
 
+  private static final Long CELEBRITY_DOUBAN_ID = 1054439L;
+
   @Test
   public void getCelebrityDoubanByCelebrityDoubanId() {
-    System.out.println(celebrityDoubanService.getCelebrityDoubanByCelebrityDoubanId(1054439));
+    Assert.assertEquals(
+        CELEBRITY_DOUBAN_ID,
+        celebrityDoubanService.getCelebrityDoubanByCelebrityDoubanId(CELEBRITY_DOUBAN_ID).getId());
   }
 
   @Test
   public void getCelebrityDoubanDetailsByCelebrityDoubanId() {
-    System.out.println(
-        celebrityDoubanService.getCelebrityDoubanDetailsByCelebrityDoubanId(1054439, 10));
+    Assert.assertEquals(
+        CELEBRITY_DOUBAN_ID,
+        celebrityDoubanService
+            .getCelebrityDoubanDetailsByCelebrityDoubanId(CELEBRITY_DOUBAN_ID, 10)
+            .getCelebrityDouban()
+            .getId());
   }
 
   @Test
   public void getSearchTipsCelebrityDoubanListByCelebrityDoubanKeywordStart() {
-    System.out.println(
-        celebrityDoubanService.getSearchTipsCelebrityDoubanListByCelebrityDoubanKeywordStart(
-            "宫", 0, 10));
+    Assert.assertFalse(
+        celebrityDoubanService
+            .getSearchTipsCelebrityDoubanListByCelebrityDoubanKeywordStart("宫", 0, 10)
+            .isEmpty());
   }
 
   @Test
   public void getSearchResultCelebrityDoubanListByCelebrityDoubanKeyword() {
-    System.out.println(
-        celebrityDoubanService.getSearchResultCelebrityDoubanListByCelebrityDoubanKeyword(
-            "爱", 0, 10));
+    Assert.assertFalse(
+        celebrityDoubanService
+            .getSearchResultCelebrityDoubanListByCelebrityDoubanKeyword("爱", 0, 10)
+            .isEmpty());
   }
 }

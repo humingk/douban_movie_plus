@@ -16,7 +16,7 @@ import javax.validation.constraints.NotNull;
 // @RestController
 
 /**
- * IMDB电影API
+ * IMDB电影
  *
  * @author humingk
  */

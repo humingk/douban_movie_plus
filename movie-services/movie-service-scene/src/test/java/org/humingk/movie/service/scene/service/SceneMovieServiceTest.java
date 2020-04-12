@@ -1,5 +1,6 @@
 package org.humingk.movie.service.scene.service;
 
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,13 +13,25 @@ public class SceneMovieServiceTest {
 
   @Autowired private SceneMovieService sceneMovieService;
 
+  private static final Long MOVIE_DOUBAN_ID = 1291875L;
+
   @Test
   public void getMovieSceneBriefByMovieDoubanId() {
-    System.out.println(sceneMovieService.getMovieSceneBriefByMovieDoubanId(1291875L));
+    Assert.assertEquals(
+        MOVIE_DOUBAN_ID,
+        sceneMovieService
+            .getMovieSceneBriefByMovieDoubanId(MOVIE_DOUBAN_ID)
+            .getMovieScene()
+            .getIdMovieDouban());
   }
 
   @Test
   public void getMovieSceneAllByMovieDoubanId() {
-    System.out.println(sceneMovieService.getMovieSceneAllByMovieDoubanId(1291875L));
+    Assert.assertEquals(
+        MOVIE_DOUBAN_ID,
+        sceneMovieService
+            .getMovieSceneAllByMovieDoubanId(MOVIE_DOUBAN_ID)
+            .getMovieScene()
+            .getIdMovieDouban());
   }
 }

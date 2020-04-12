@@ -25,7 +25,7 @@
     <!--项目详情-->
     <groupId>org.humingk</groupId>
     <artifactId>movie</artifactId>
-    <version>2.0.4</version>
+    <version>2.0.5</version>
     <!--父依赖的打包类型为pom(其他默认为jar)-->
     <!--jar:    内部调用,服务-->
     <!--war:    需要部署的项目-->
@@ -57,8 +57,10 @@
         <module>movie-services</module>
 
     </modules>
-    <!--版本管理 -->
     <properties>
+        <!--公共变量-->
+        <base-dir>/home/humingk/git/douban_movie_plus</base-dir>
+        <!--版本管理 -->
         <java.version>1.8</java.version>
         <spring-cloud-dependencies.version>Finchley.SR4</spring-cloud-dependencies.version>
         <versions-maven-plugin.version>2.7</versions-maven-plugin.version>
@@ -76,23 +78,12 @@
         <guava.version>28.1-jre</guava.version>
         <zipkin.version>2.11.3</zipkin.version>
         <jsoup.version>1.12.1</jsoup.version>
-        <smart-doc-plugin.version>1.0.2</smart-doc-plugin.version>
+        <smart-doc-plugin.version>1.0.5</smart-doc-plugin.version>
         <swagger.version>1.9.1.RELEASE</swagger.version>
         <mapstruct.version>1.3.1.Final</mapstruct.version>
-
     </properties>
     <!--依赖(子模块需要的公共依赖，子模块默认会继承)-->
     <dependencies>
-        <!--eureka-->
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
-        </dependency>
-        <!--bus+rabbit-->
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-bus-amqp</artifactId>
-        </dependency>
         <!--测试 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -118,58 +109,58 @@
             <dependency>
                 <groupId>org.humingk</groupId>
                 <artifactId>movie-api</artifactId>
-                <version>2.0.4</version>
+                <version>2.0.5</version>
             </dependency>
             <dependency>
                 <groupId>org.humingk</groupId>
                 <artifactId>movie-common</artifactId>
-                <version>2.0.4</version>
+                <version>2.0.5</version>
             </dependency>
             <dependency>
                 <groupId>org.humingk</groupId>
                 <artifactId>movie-dal</artifactId>
-                <version>2.0.4</version>
+                <version>2.0.5</version>
             </dependency>
             <dependency>
                 <groupId>org.humingk</groupId>
                 <artifactId>movie-security</artifactId>
-                <version>2.0.4</version>
+                <version>2.0.5</version>
             </dependency>
             <!--service list-->
             <dependency>
                 <groupId>org.humingk</groupId>
                 <artifactId>movie-service-douban</artifactId>
-                <version>2.0.4</version>
+                <version>2.0.5</version>
             </dependency>
             <dependency>
                 <groupId>org.humingk</groupId>
                 <artifactId>movie-service-netease</artifactId>
-                <version>2.0.4</version>
+                <version>2.0.5</version>
             </dependency>
             <dependency>
                 <groupId>org.humingk</groupId>
                 <artifactId>movie-service-user</artifactId>
-                <version>2.0.4</version>
+                <version>2.0.5</version>
             </dependency>
             <dependency>
                 <groupId>org.humingk</groupId>
                 <artifactId>movie-service-imdb</artifactId>
-                <version>2.0.4</version>
+                <version>2.0.5</version>
             </dependency>
             <dependency>
                 <groupId>org.humingk</groupId>
                 <artifactId>movie-service-scene</artifactId>
-                <version>2.0.4</version>
+                <version>2.0.5</version>
             </dependency>
             <dependency>
                 <groupId>org.humingk</groupId>
                 <artifactId>movie-service-zhihu</artifactId>
-                <version>2.0.4</version>
+                <version>2.0.5</version>
             </dependency>
             <dependency>
                 <groupId>org.humingk</groupId>
                 <artifactId>movie-service-resource</artifactId>
-                <version>2.0.4</version>
+                <version>2.0.5</version>
             </dependency>
             <!--other tools -->
             <!--mybatis-->
@@ -272,11 +263,6 @@
     <build>
         <!--插件-->
         <plugins>
-            <!--maven-->
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
             <!--maven version-->
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
@@ -290,7 +276,7 @@
                 <version>${smart-doc-plugin.version}</version>
                 <configuration>
                     <!--配置文件-->
-                    <configFile>/home/humingk/git/douban_movie_plus/doc/api/smart-doc.json</configFile>
+                    <configFile>${base-dir}/doc/api/smart-doc.json</configFile>
                     <!--指定项目名称-->
                     <projectName>豆瓣电影Plus</projectName>
                 </configuration>

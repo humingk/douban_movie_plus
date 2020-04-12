@@ -5,30 +5,12 @@
     <parent>
         <groupId>org.humingk</groupId>
         <artifactId>movie-services</artifactId>
-        <version>2.0.4</version>
+        <version>2.0.5</version>
     </parent>
     <artifactId>movie-service-scene</artifactId>
     <name>movie-service-scene</name>
     <description>scene service for movie</description>
 
     <dependencies>
-        <!--lombok-->
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <scope>provided</scope>
-        </dependency>
-        <!--mapstruct-->
-        <dependency>
-            <groupId>org.mapstruct</groupId>
-            <artifactId>mapstruct</artifactId>
-            <scope>compile</scope>
-        </dependency>
-        <!--mapstruct-processor-->
-        <dependency>
-            <groupId>org.mapstruct</groupId>
-            <artifactId>mapstruct-processor</artifactId>
-            <scope>compile</scope>
-        </dependency>
     </dependencies>
 </project>

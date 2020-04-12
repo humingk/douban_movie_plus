@@ -5,17 +5,55 @@
     <parent>
         <groupId>org.humingk</groupId>
         <artifactId>movie</artifactId>
-        <version>2.0.4</version>
+        <version>2.0.5</version>
     </parent>
     <artifactId>movie-security</artifactId>
     <name>movie-security</name>
     <description>security for movie</description>
 
     <dependencies>
+        <!--dal-->
+        <dependency>
+            <groupId>org.humingk</groupId>
+            <artifactId>movie-dal</artifactId>
+<!--            <scope>provided</scope>-->
+        </dependency>
+        <!--common-->
+        <dependency>
+            <groupId>org.humingk</groupId>
+            <artifactId>movie-common</artifactId>
+<!--            <scope>provided</scope>-->
+        </dependency>
         <!--service user-->
         <dependency>
             <groupId>org.humingk</groupId>
             <artifactId>movie-service-user</artifactId>
+<!--            <scope>provided</scope>-->
+        </dependency>
+        <!--父公共依赖 ====================== -->
+        <!--bus+rabbit-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-bus-amqp</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <!-- 不需要打包的 依赖 ================================ -->
+        <!-- 需要打包的 依赖 ================================ -->
+
+        <!-- service-user 依赖 ========================= -->
+        <!-- cloud security-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-security</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- 其他依赖 ========================= -->
+        <!--mybatis-->
+        <dependency>
+            <groupId>org.mybatis.spring.boot</groupId>
+            <artifactId>mybatis-spring-boot-starter</artifactId>
+            <scope>provided</scope>
         </dependency>
         <!--security oauth2 (包含security)-->
         <dependency>

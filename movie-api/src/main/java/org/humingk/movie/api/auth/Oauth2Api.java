@@ -15,7 +15,6 @@ import java.util.Map;
  * @author humingk
  */
 @Validated
-// @FeignClient(value = "movie-server-auth", fallback = Oauth2ApiHystrix.class)
 @FeignClient(value = "movie-server-auth")
 public interface Oauth2Api {
   /**

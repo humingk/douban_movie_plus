@@ -1,5 +1,7 @@
 server:
   port: 8888
+  tomcat:
+    max-threads: 5
 spring:
   application:
     name: movie-server-config
@@ -18,18 +20,17 @@ spring:
         # 本地配置
         native:
           # 配置文件所在目录
-          search-locations: doc/config
-
-#    # git远程配置
-#    config:
-#      server:
-#        git:
-#          # git远程仓库地址,访问url:  /{application}/{profile} eg: /movie-server-config/dev
-#          uri: https://github.com/humingk/douban_movie_config
-#          # 仓库路径
-#          search-paths: config
-#      # 仓库分支
-#      label: master
+          #          search-locations: doc/config
+          search-locations: /home/humingk/git/douban_movie_plus/doc/config
+      #        # git远程配置
+      #        git:
+      #          # git远程仓库地址,访问url:  /{application}/{profile} eg: /movie-server-config/dev
+      #          # uri: git@github.com:humingk/douban_movie_config.git
+      #          uri: https://github.com/humingk/douban_movie_config
+      #          username: humingk
+      #          # 仓库路径
+      #          search-paths: config
+      label: master
 management:
   endpoints:
     web:

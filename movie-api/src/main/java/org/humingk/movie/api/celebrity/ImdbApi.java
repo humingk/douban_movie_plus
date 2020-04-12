@@ -17,7 +17,7 @@ import javax.validation.constraints.PositiveOrZero;
 // @RestController
 
 /**
- * IMDB影人API
+ * IMDB影人
  *
  * @author humingk
  */

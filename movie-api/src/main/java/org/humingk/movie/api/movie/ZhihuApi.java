@@ -15,7 +15,7 @@ import javax.validation.constraints.NotNull;
 // @RestController
 
 /**
- * 知乎API
+ * 知乎电影
  *
  * @author humingk
  */

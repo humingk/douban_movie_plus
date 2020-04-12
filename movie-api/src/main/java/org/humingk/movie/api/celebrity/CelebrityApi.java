@@ -17,7 +17,7 @@ import javax.validation.constraints.PositiveOrZero;
 // @RestController
 
 /**
- * 影人API
+ * 影人集合
  *
  * @author humingk
  */

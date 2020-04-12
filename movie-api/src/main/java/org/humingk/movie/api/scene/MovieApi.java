@@ -1,9 +1,5 @@
 package org.humingk.movie.api.scene;
 
-// 用于生成API文档
-// import org.springframework.web.bind.annotation.RestController;
-// @RestController
-
 import org.humingk.movie.api.common.vo.MovieSceneAllVo;
 import org.humingk.movie.api.common.vo.MovieSceneBriefVo;
 import org.humingk.movie.common.entity.Result;
@@ -15,8 +11,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.constraints.NotNull;
 
+// 用于生成API文档
+// import org.springframework.web.bind.annotation.RestController;
+// @RestController
+
 /**
- * 电影场景API
+ * 电影场景
  *
  * @author humingk
  */

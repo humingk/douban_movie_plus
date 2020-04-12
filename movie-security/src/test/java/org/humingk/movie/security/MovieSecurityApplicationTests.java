@@ -4,8 +4,8 @@ import org.junit.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class MovieSecurityApplicationTests {
+public class MovieSecurityApplicationTests {
 
   @Test
-  void contextLoads() {}
+  public void contextLoads() {}
 }

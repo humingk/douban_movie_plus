@@ -16,7 +16,8 @@ import org.springframework.context.annotation.ComponentScan;
       "org.humingk.movie.common",
       "org.humingk.movie.api"
     })
-@MapperScan(basePackages = {"org.humingk.movie.dal.mapper"})
+@MapperScan(
+    basePackages = {"org.humingk.movie.dal.mapper.auto", "org.humingk.movie.dal.mapper.plus"})
 public class MovieServerUserApplication {
 
   public static void main(String[] args) {

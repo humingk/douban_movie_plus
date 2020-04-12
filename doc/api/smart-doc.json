@@ -10,9 +10,9 @@
   "//": "是否覆盖旧的文件(markdown)",
   "coverOld": true,
   "//": "controller包过滤，英文逗号隔开",
-  "packageFilters": "",
+  "packageFilters": "org.humingk.movie.api",
   "//": "每个controller生成一个html文件时,生成html时加密文档名不暴露controller的名称",
-  "md5EncryptedHtmlName": false,
+  "md5EncryptedHtmlName": true,
   "//": "项目名称",
   "projectName": "豆瓣电影Plus RESTful-API文档",
   "//": "暂无用",
@@ -30,6 +30,16 @@
       "author": "humingk",
       "//": "变更描述",
       "remarks": "创建RESTful-API文档"
+    },
+    {
+      "//": "文档版本号",
+      "version": "2.0.5",
+      "//": "变更操作状态，eg：创建、更新等",
+      "status": "update",
+      "//": "文档变更作者",
+      "author": "humingk",
+      "//": "变更描述",
+      "remarks": "更新"
     }
   ],
   "//": "自定义添加字段和注释，遇到同名字段则直接给相应字段加注释",

@@ -16,7 +16,7 @@ import javax.validation.constraints.NotNull;
 // @RestController
 
 /**
- * 豆瓣电影API
+ * 豆瓣电影
  *
  * @author humingk
  */

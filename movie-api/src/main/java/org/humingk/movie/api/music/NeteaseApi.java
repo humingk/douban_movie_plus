@@ -8,7 +8,7 @@ import org.springframework.validation.annotation.Validated;
 // @RestController
 
 /**
- * 音乐API
+ * 音乐
  *
  * @author humingk
  */

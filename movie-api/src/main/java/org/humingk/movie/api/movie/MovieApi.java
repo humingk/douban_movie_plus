@@ -15,7 +15,7 @@ import javax.validation.constraints.NotNull;
 // @RestController
 
 /**
- * 电影API
+ * 电影集合
  *
  * @author humingk
  */
@@ -37,7 +37,7 @@ public interface MovieApi {
    *
    * @param id 豆瓣电影ID
    * @return
-   * @apiNote 豆瓣电影和IMDB电影,包括电影基础信息、评分信息、标签类型、相关影人基础信息、图片、预告片、热门影评短评、j奖项等
+   * @apiNote 豆瓣电影和IMDB电影,包括电影基础信息、评分信息、标签类型、相关影人基础信息、图片、预告片、热门影评短评、奖项等
    */
   @RequestMapping(value = "/movie/details", method = RequestMethod.GET)
   Result<MovieDetailsVo> details(@RequestParam("id") @NotNull Long id);

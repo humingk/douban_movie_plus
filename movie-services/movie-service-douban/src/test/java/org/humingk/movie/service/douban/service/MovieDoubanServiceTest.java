@@ -1,5 +1,6 @@
 package org.humingk.movie.service.douban.service;
 
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,26 +12,37 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 public class MovieDoubanServiceTest {
   @Autowired private MovieDoubanService movieDoubanService;
 
+  private static final Long MOVIE_DOUBAN_ID = 1291561L;
+
   @Test
   public void getMovieDoubanByMovieDoubanId() {
-    System.out.println(movieDoubanService.getMovieDoubanByMovieDoubanId(1291561));
+    Assert.assertEquals(
+        MOVIE_DOUBAN_ID, movieDoubanService.getMovieDoubanByMovieDoubanId(MOVIE_DOUBAN_ID).getId());
   }
 
   @Test
   public void getMovieDoubanDetailsByMovieDoubanId() {
-    //    System.out.println(movieService.getMovieDoubanDetailsByMovieDoubanId(1291561));
-    System.out.println(movieDoubanService.getMovieDoubanDetailsByMovieDoubanId(26920842));
+    Assert.assertEquals(
+        MOVIE_DOUBAN_ID,
+        movieDoubanService
+            .getMovieDoubanDetailsByMovieDoubanId(MOVIE_DOUBAN_ID)
+            .getMovieDouban()
+            .getId());
   }
 
   @Test
   public void getSearchTipsMovieDoubanByKeywordStart() {
-    System.out.println(
-        movieDoubanService.getSearchTipsMovieDoubanListByMovieDoubanKeywordStart("- 歌剧", 0, 10));
+    Assert.assertFalse(
+        movieDoubanService
+            .getSearchTipsMovieDoubanListByMovieDoubanKeywordStart("爱", 0, 10)
+            .isEmpty());
   }
 
   @Test
   public void getSearchResultMovieDoubanListByMovieDoubanKeyword() {
-    System.out.println(
-        movieDoubanService.getSearchResultMovieDoubanListByMovieDoubanKeyword("爱", 0, 10));
+    Assert.assertFalse(
+        movieDoubanService
+            .getSearchResultMovieDoubanListByMovieDoubanKeyword("爱", 0, 10)
+            .isEmpty());
   }
 }

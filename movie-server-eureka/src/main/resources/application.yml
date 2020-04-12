@@ -1,5 +1,8 @@
 server:
   port: 8761
+  tomcat:
+    # tomcat最大线程数
+    max-threads: 5
 spring:
   application:
     name: movie-server-eureka

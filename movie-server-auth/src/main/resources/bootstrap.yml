@@ -1,5 +1,7 @@
 server:
   port: 8006
+  tomcat:
+    max-threads: 10
 spring:
   application:
     name: movie-server-auth

@@ -1,4 +1,4 @@
-package org.humingk.movie.server.scene;
+package org.humingk.movie.server.scene.controller;
 
 import org.humingk.movie.api.common.converter.MovieSceneAllVoConverter;
 import org.humingk.movie.api.common.converter.MovieSceneBriefVoConverter;

@@ -5,7 +5,8 @@
 **/.mvn/
 **/mvnw
 **/mvnw.cmd
-zipkin.jar
 doc/log/
 **/rebel.xml
+run/**
+zipkin.jar
 NeteaseCloudMusicApi/

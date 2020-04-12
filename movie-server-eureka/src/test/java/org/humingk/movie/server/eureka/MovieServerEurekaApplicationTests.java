@@ -4,8 +4,8 @@ import org.junit.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class MovieServerEurekaApplicationTests {
+public class MovieServerEurekaApplicationTests {
 
   @Test
-  void contextLoads() {}
+  public void contextLoads() {}
 }

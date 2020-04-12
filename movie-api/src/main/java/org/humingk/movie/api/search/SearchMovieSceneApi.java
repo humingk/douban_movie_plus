@@ -1,9 +1,5 @@
 package org.humingk.movie.api.search;
 
-// 用于生成API文档
-// import org.springframework.web.bind.annotation.RestController;
-// @RestController
-
 import org.humingk.movie.api.common.vo.scene.MovieSceneVo;
 import org.humingk.movie.common.entity.Result;
 import org.springframework.cloud.openfeign.FeignClient;
@@ -16,8 +12,12 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.PositiveOrZero;
 import java.util.List;
 
+// 用于生成API文档
+// import org.springframework.web.bind.annotation.RestController;
+// @RestController
+
 /**
- * 场景电影搜索API
+ * 场景电影搜索
  *
  * @author humingk
  */

@@ -16,7 +16,7 @@ import java.util.List;
 // @RestController
 
 /**
- * 电影资源API
+ * 电影资源
  *
  * @author humingk
  */

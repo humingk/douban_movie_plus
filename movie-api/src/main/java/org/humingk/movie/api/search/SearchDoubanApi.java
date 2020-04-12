@@ -1,9 +1,5 @@
 package org.humingk.movie.api.search;
 
-// 用于生成API文档
-// import org.springframework.web.bind.annotation.RestController;
-// @RestController
-
 import org.humingk.movie.api.common.vo.SearchResultDoubanVo;
 import org.humingk.movie.api.common.vo.SearchTipsDoubanVo;
 import org.humingk.movie.common.entity.Result;
@@ -16,8 +12,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.PositiveOrZero;
 
+// 用于生成API文档
+// import org.springframework.web.bind.annotation.RestController;
+// @RestController
 /**
- * 豆瓣搜索API
+ * 豆瓣搜索
  *
  * @author humingk
  */
