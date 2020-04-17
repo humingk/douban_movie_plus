@@ -1,6 +1,7 @@
 package org.humingk.movie.common.exception;
 
 import lombok.extern.slf4j.Slf4j;
+import org.apache.catalina.connector.ClientAbortException;
 import org.humingk.movie.common.entity.Result;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
@@ -42,6 +43,17 @@ public class GlobalKnownExceptionHandler extends ResponseEntityExceptionHandler 
   public Result<Object> handleMyException(MyException e) {
     log.error("已知异常:{},{}", e.getCode(), e.getMsg());
     return Result.error(e);
+  }
+
+  /**
+   * IO中断异常
+   *
+   * @param e
+   * @return
+   */
+  @ExceptionHandler(ClientAbortException.class)
+  public void handleClientAbortException(ClientAbortException e) {
+    log.warn("已知异常:io中断,{}", e.getMessage());
   }
 
   /**

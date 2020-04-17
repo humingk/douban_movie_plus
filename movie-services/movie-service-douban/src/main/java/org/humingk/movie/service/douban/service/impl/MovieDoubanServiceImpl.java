@@ -1,6 +1,7 @@
 package org.humingk.movie.service.douban.service.impl;
 
 import com.github.pagehelper.PageHelper;
+import org.humingk.movie.common.annotation.RedisCache;
 import org.humingk.movie.dal.domain.douban.*;
 import org.humingk.movie.dal.entity.*;
 import org.humingk.movie.dal.mapper.auto.*;
@@ -18,7 +19,7 @@ import java.util.List;
 
 /** @author humingk */
 @Service
-// @RedisCache
+@RedisCache
 public class MovieDoubanServiceImpl implements MovieDoubanService {
 
   /** converter */

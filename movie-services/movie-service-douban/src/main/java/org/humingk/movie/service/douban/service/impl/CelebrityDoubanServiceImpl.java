@@ -1,6 +1,7 @@
 package org.humingk.movie.service.douban.service.impl;
 
 import com.github.pagehelper.PageHelper;
+import org.humingk.movie.common.annotation.RedisCache;
 import org.humingk.movie.dal.domain.douban.AwardOfMovieAndCelebrityDoubanDo;
 import org.humingk.movie.dal.domain.douban.MovieDoubanOfCelebrityDoubanDo;
 import org.humingk.movie.dal.entity.*;
@@ -22,7 +23,7 @@ import java.util.List;
 
 /** @author humingk */
 @Service
-// @RedisCache
+@RedisCache
 public class CelebrityDoubanServiceImpl implements CelebrityDoubanService {
   /** mapper */
   @Autowired private CelebrityDoubanMapper celebrityDoubanMapper;

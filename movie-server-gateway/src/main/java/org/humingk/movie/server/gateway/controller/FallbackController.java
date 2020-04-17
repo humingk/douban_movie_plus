@@ -17,7 +17,7 @@ public class FallbackController {
    * @return
    */
   @RequestMapping("/fallback")
-  public Result fallback() {
-    return Result.error("gateway fallback");
+  public Result<Object> fallback() {
+    return Result.error("gateway fallback, please try again");
   }
 }

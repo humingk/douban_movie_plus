@@ -1,6 +1,7 @@
 package org.humingk.movie.service.scene.service.impl;
 
 import com.github.pagehelper.PageHelper;
+import org.humingk.movie.common.annotation.RedisCache;
 import org.humingk.movie.dal.entity.PlaceScene;
 import org.humingk.movie.dal.entity.PlaceSceneExample;
 import org.humingk.movie.dal.mapper.auto.PlaceSceneMapper;
@@ -12,6 +13,7 @@ import java.util.List;
 
 /** @author humingk */
 @Service
+@RedisCache
 public class ScenePlaceServiceImpl implements ScenePlaceService {
   /** mapper */
   @Autowired private PlaceSceneMapper placeSceneMapper;

@@ -1,6 +1,6 @@
 package org.humingk.movie.api.common.util;
 
-import org.apache.commons.lang.time.DateFormatUtils;
+import org.apache.commons.lang3.time.DateFormatUtils;
 import org.humingk.movie.common.entity.MovieConstant;
 import org.humingk.movie.dal.entity.*;
 import org.mapstruct.Named;

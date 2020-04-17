@@ -5,18 +5,14 @@
     <parent>
         <groupId>org.humingk</groupId>
         <artifactId>movie-servers</artifactId>
-        <version>2.0.5</version>
+        <version>2.0.6</version>
+        <relativePath>../pom.xml</relativePath>
     </parent>
     <artifactId>movie-server-user</artifactId>
     <name>movie-server-user</name>
     <description>user server for movie</description>
 
     <dependencies>
-
-        <!-- service-user 依赖 ========================= -->
-        <!--service user 已重复-->
-        <!-- cloud security 已重复-->
-        <!-- 其他依赖 ========================= -->
         <!--jsoup 连接github需要-->
         <dependency>
             <groupId>org.jsoup</groupId>

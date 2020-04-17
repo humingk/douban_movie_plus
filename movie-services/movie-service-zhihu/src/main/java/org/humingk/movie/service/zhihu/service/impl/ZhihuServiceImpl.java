@@ -1,5 +1,6 @@
 package org.humingk.movie.service.zhihu.service.impl;
 
+import org.humingk.movie.common.annotation.RedisCache;
 import org.humingk.movie.common.enumeration.CodeAndMsg;
 import org.humingk.movie.common.exception.MyException;
 import org.humingk.movie.dal.entity.MovieZhihu;
@@ -17,7 +18,7 @@ import java.util.List;
 
 /** @author humingk */
 @Service
-// @RedisCache
+@RedisCache
 public class ZhihuServiceImpl implements ZhihuService {
   @Autowired private ZhihuDtoConverter zhihuDtoConverter;
   @Autowired private MovieZhihuMapper movieZhihuMapper;

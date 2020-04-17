@@ -8,7 +8,7 @@ spring:
     active: dev
   cloud:
     config:
-      name: redis,rabbitmq,aes
+      name: redis,rabbitmq,aes,logback
       # 当前服务使用的config配置类型：dev/pro
       profile: ${spring.profiles.active}
       discovery:
@@ -20,3 +20,5 @@ eureka:
   client:
     service-url:
       defaultZone: http://localhost:8761/eureka/
+logging:
+  pattern:

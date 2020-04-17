@@ -5,17 +5,18 @@
     <parent>
         <groupId>org.humingk</groupId>
         <artifactId>movie</artifactId>
-        <version>2.0.5</version>
+        <version>2.0.6</version>
+        <relativePath>../pom.xml</relativePath>
     </parent>
     <artifactId>movie-server-auth</artifactId>
     <name>movie-server-auth</name>
     <description>auth server for movie</description>
 
     <dependencies>
-        <!--common-->
+        <!--eureka-->
         <dependency>
-            <groupId>org.humingk</groupId>
-            <artifactId>movie-common</artifactId>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
         </dependency>
         <!--security-->
         <dependency>
@@ -27,98 +28,21 @@
             <groupId>org.humingk</groupId>
             <artifactId>movie-service-user</artifactId>
         </dependency>
-        <!-- 父公共依赖 ================================ -->
-        <!--eureka-->
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
-        </dependency>
-        <!--bus+rabbit-->
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-bus-amqp</artifactId>
-        </dependency>
-        <!-- 不需要打包的 依赖 ================================ -->
-        <!--lombok-->
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <scope>provided</scope>
-        </dependency>
-        <!-- 需要打包的 依赖 ================================ -->
-
-        <!-- common 依赖 ================================ -->
-        <!--web-->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
-        <!--aop -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-aop</artifactId>
-        </dependency>
-        <!--redis-->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-redis</artifactId>
-        </dependency>
-        <!--pool2-->
-        <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-pool2</artifactId>
-        </dependency>
-        <!--fastjson-->
-        <dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>fastjson</artifactId>
-        </dependency>
-        <!--google  guava-->
-        <dependency>
-            <groupId>com.google.guava</groupId>
-            <artifactId>guava</artifactId>
-        </dependency>
-        <!--servlet-->
-        <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>javax.servlet-api</artifactId>
-        </dependency>
         <!--config client-->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-config</artifactId>
         </dependency>
-
-        <!-- security 依赖 ========================= -->
-        <!--mybatis-->
+        <!--web-->
         <dependency>
-            <groupId>org.mybatis.spring.boot</groupId>
-            <artifactId>mybatis-spring-boot-starter</artifactId>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
         <!--security oauth2 (包含security)-->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-oauth2</artifactId>
         </dependency>
-        <!-- service-user 依赖 ========================= -->
-        <!-- cloud security-->
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-security</artifactId>
-        </dependency>
-        <!-- dal 依赖 =================================== -->
-        <!--mybatis 重复-->
-        <!--config client 重复-->
-        <!--mysql 驱动-->
-        <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-        </dependency>
-        <!-- 其他依赖 ========================= -->
-        <!--mybatis 重复-->
-        <!--config client 重复-->
-        <!--web 重复-->
-        <!--security oauth2 (包含security) 重复-->
         <!--zipkin client-->
         <dependency>
             <groupId>org.springframework.cloud</groupId>

@@ -5,23 +5,23 @@
     <parent>
         <groupId>org.humingk</groupId>
         <artifactId>movie</artifactId>
-        <version>2.0.5</version>
+        <version>2.0.6</version>
+        <relativePath>../pom.xml</relativePath>
     </parent>
     <artifactId>movie-server-config</artifactId>
     <name>movie-server-config</name>
     <description>config server for movie</description>
 
     <dependencies>
-        <!--config server-->
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-config-server</artifactId>
-        </dependency>
-        <!-- 父公共 依赖 ================================ -->
         <!--eureka-->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+        </dependency>
+        <!--config server-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-config-server</artifactId>
         </dependency>
     </dependencies>
     <build>

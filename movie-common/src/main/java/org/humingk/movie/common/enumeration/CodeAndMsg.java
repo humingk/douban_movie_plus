@@ -22,7 +22,8 @@ public enum CodeAndMsg {
   NOROLE(1003, "此用户无权限"),
   EMAIL_EXIST(1004, "此邮箱已被注册"),
   USER_ID_EXIST(1005, "此豆瓣ID已被注册"),
-  NO_RESOURCE(1006, "该电影暂无相关资源");
+  NO_RESOURCE(1006, "该电影暂无相关资源"),
+  IO_BAD(1007, "IO异常");
 
   /** 状态码 */
   public final int code;

@@ -23,11 +23,10 @@ public class LogGlobalFilter implements GlobalFilter, Ordered {
     String url = request.getURI().getRawPath();
     // gateway拦截所有的请求，统一记录请求日志
     log.info(
-        "gateway's request: url={},ip={},args={},method={}",
-        request.getURI().getRawPath(),
+        "ip={},url={},args={}",
         request.getRemoteAddress(),
-        request.getQueryParams().toString(),
-        request.getMethod());
+        request.getURI().getRawPath(),
+        request.getQueryParams().toString());
     return chain.filter(exchange);
   }
 

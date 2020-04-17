@@ -1,5 +1,6 @@
 package org.humingk.movie.service.imdb.service.impl;
 
+import org.humingk.movie.common.annotation.RedisCache;
 import org.humingk.movie.dal.domain.imdb.MovieImdbOfCelebrityImdbDo;
 import org.humingk.movie.dal.entity.CelebrityImdb;
 import org.humingk.movie.dal.entity.CelebrityImdbExample;
@@ -15,6 +16,7 @@ import java.util.List;
 
 /** @author humingk */
 @Service
+@RedisCache
 public class CelebrityImdbServiceImpl implements CelebrityImdbService {
   /** converter */
   @Autowired private CelebrityImdbDetailsDtoConverter celebrityImdbDetailsDtoConverter;

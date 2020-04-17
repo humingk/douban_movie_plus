@@ -6,6 +6,8 @@ import lombok.NoArgsConstructor;
 import org.humingk.movie.dal.entity.CelebrityDoubanToClassicDouban;
 import org.humingk.movie.dal.entity.UserDoubanToClassicDouban;
 
+import java.io.Serializable;
+
 /**
  * 豆瓣电影经典台词相关
  *
@@ -14,7 +16,7 @@ import org.humingk.movie.dal.entity.UserDoubanToClassicDouban;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class ClassicOfMovieDoubanDo {
+public class ClassicOfMovieDoubanDo implements Serializable {
   /** 豆瓣电影经典台词ID */
   private String id;
 

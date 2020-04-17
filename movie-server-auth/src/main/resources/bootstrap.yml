@@ -1,7 +1,5 @@
 server:
   port: 8006
-  tomcat:
-    max-threads: 10
 spring:
   application:
     name: movie-server-auth
@@ -10,7 +8,7 @@ spring:
     active: dev
   cloud:
     config:
-      name: oauth2-server,rabbitmq,mysql,redis,aes,zipkin-client,feign-client
+      name: oauth2-server,rabbitmq,mysql,redis,aes,zipkin-client,feign-client,logback,servlet
       # 当前服务使用的config配置类型：dev/pro
       profile: ${spring.profiles.active}
       discovery:

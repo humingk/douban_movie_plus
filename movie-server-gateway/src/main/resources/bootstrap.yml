@@ -1,7 +1,5 @@
 server:
-  port: 8081
-  tomcat:
-    max-threads: 20
+  port: 9527
 spring:
   application:
     name: movie-server-gateway
@@ -10,7 +8,7 @@ spring:
     active: dev
   cloud:
     config:
-      name: gateway,rabbitmq,zipkin-client
+      name: gateway,rabbitmq,zipkin-client,logback,redis,servlet
       # 当前服务使用的config配置类型：dev/pro
       profile: ${spring.profiles.active}
       discovery:

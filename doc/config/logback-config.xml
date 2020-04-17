@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration debug="false">
+
+    <!--日志文件的存储路径home-->
+    <property name="LOG_HOME" value="/home/humingk/git/douban_movie_plus/doc/log"/>
+
+    <!--输出格式-->
+    <property name="ENCODER_PATTERN"
+              value="%d{yyyy-MM-dd HH:mm:ss.SSS} %-5.5level [%-10.10thread] %-50.50logger{50} : %msg%n"/>
+
+    <!-- 控制台输出 -->
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>${ENCODER_PATTERN}</pattern>
+        </encoder>
+    </appender>
+
+    <!-- 根日志文件 -->
+    <appender name="ROOT_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!--日志文件名-->
+            <FileNamePattern>${LOG_HOME}/root/root_%d{yyyy-MM-dd}.log</FileNamePattern>
+            <!--日志文件保留天数-->
+            <MaxHistory>100</MaxHistory>
+        </rollingPolicy>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>${ENCODER_PATTERN}</pattern>
+        </encoder>
+        <!--日志文件最大值-->
+        <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+            <MaxFileSize>100MB</MaxFileSize>
+        </triggeringPolicy>
+    </appender>
+
+    <!-- 网关日志文件 -->
+    <appender name="GATEWAY" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <FileNamePattern>${LOG_HOME}/gateway/gateway_%d{yyyy-MM-dd}.log</FileNamePattern>
+            <MaxHistory>100</MaxHistory>
+        </rollingPolicy>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>${ENCODER_PATTERN}</pattern>
+        </encoder>
+        <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+            <MaxFileSize>100MB</MaxFileSize>
+        </triggeringPolicy>
+    </appender>
+
+    <!-- server list 日志文件 -->
+    <appender name="SERVER_LIST" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <FileNamePattern>${LOG_HOME}/server_list/server_list_%d{yyyy-MM-dd}.log</FileNamePattern>
+            <MaxHistory>100</MaxHistory>
+        </rollingPolicy>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>${ENCODER_PATTERN}</pattern>
+        </encoder>
+        <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+            <MaxFileSize>100MB</MaxFileSize>
+        </triggeringPolicy>
+    </appender>
+
+    <!-- service list 日志文件 -->
+    <appender name="SERVICE_LIST" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <FileNamePattern>${LOG_HOME}/service_list/service_list_%d{yyyy-MM-dd}.log</FileNamePattern>
+            <MaxHistory>100</MaxHistory>
+        </rollingPolicy>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>${ENCODER_PATTERN}</pattern>
+        </encoder>
+        <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+            <MaxFileSize>100MB</MaxFileSize>
+        </triggeringPolicy>
+    </appender>
+
+    <!-- root日志-->
+    <root level="info">
+        <!--        <appender-ref ref="STDOUT"/>-->
+        <appender-ref ref="ROOT_FILE"/>
+    </root>
+
+    <!-- dditivity属性为false，表示此logger的打印信息不再向上级传递 -->
+
+    <!--业务-网关日志-->
+    <logger name="org.humingk.movie.server.gateway.filter.LogGlobalFilter" additivity="false" level="info">
+        <appender-ref ref="GATEWAY"/>
+    </logger>
+
+    <!--业务-server list日志-->
+    <logger name="org.humingk.movie.server" additivity="false" level="info">
+        <appender-ref ref="SERVER_LIST"/>
+    </logger>
+
+    <!--业务-service list日志-->
+    <logger name="org.humingk.movie.service" additivity="false" level="info">
+        <appender-ref ref="SERVICE_LIST"/>
+    </logger>
+
+</configuration>
+

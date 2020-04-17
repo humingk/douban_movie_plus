@@ -5,26 +5,21 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
 
-import java.util.Objects;
-
 /**
- * IP限流解析器
+ * IP限流配置
  *
  * @author humingk
  */
 @Component
-public class MyHostAddrKeyResolver implements KeyResolver {
+public class IpLimiter implements KeyResolver {
   /**
-   * Hostname进行限流，用hostAddress判断
+   * 根据请求IP限流
    *
    * @param exchange
    * @return
    */
   @Override
   public Mono<String> resolve(ServerWebExchange exchange) {
-    return Mono.just(
-        Objects.requireNonNull(exchange.getRequest().getRemoteAddress())
-            .getAddress()
-            .getHostAddress());
+    return Mono.just(exchange.getRequest().getRemoteAddress().getAddress().getHostAddress());
   }
 }

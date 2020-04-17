@@ -1,6 +1,7 @@
 package org.humingk.movie.service.scene.service.impl;
 
 import com.github.pagehelper.PageHelper;
+import org.humingk.movie.common.annotation.RedisCache;
 import org.humingk.movie.common.enumeration.CodeAndMsg;
 import org.humingk.movie.common.exception.MyException;
 import org.humingk.movie.dal.domain.scene.CelebritySceneOfSceneDetailDo;
@@ -27,7 +28,7 @@ import java.util.List;
 /** @author humingk */
 @Service
 @Validated
-// @RedisCache
+@RedisCache
 public class SceneMovieServiceImpl implements SceneMovieService {
 
   /** mapper */

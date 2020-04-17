@@ -1,7 +1,5 @@
 server:
   port: 10102
-  tomcat:
-    max-threads: 10
 spring:
   application:
     name: movie-server-music
@@ -10,7 +8,7 @@ spring:
     active: dev
   cloud:
     config:
-      name: movie-server-music,mysql,redis,aes,rabbitmq,zipkin-client,feign-client,oauth2-resource
+      name: movie-server-music,mysql,redis,aes,rabbitmq,zipkin-client,feign-client,oauth2-resource,logback,servlet
       # 当前服务使用的config配置类型：dev/pro
       profile: ${spring.profiles.active}
       discovery:

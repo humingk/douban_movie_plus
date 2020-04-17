@@ -8,7 +8,7 @@ spring:
     active: dev
   cloud:
     config:
-      name: mysql,rabbitmq,oauth2-server
+      name: mysql,rabbitmq,oauth2-server,logback
       # 当前服务使用的config配置类型：dev/pro
       profile: ${spring.profiles.active}
       discovery:

@@ -1,7 +1,5 @@
 server:
   port: 10103
-  tomcat:
-    max-threads: 10
 spring:
   application:
     name: movie-server-user
@@ -10,7 +8,7 @@ spring:
     active: dev
   cloud:
     config:
-      name: movie-server-user,rabbitmq,mysql,redis,aes,zipkin-client,feign-client,oauth2-resource,oauth2-client
+      name: movie-server-user,rabbitmq,mysql,redis,aes,zipkin-client,feign-client,oauth2-resource,oauth2-client,logback,servlet
       # 当前服务使用的config配置类型：dev/pro
       profile: ${spring.profiles.active}
       discovery:

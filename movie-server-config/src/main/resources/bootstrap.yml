@@ -1,8 +1,10 @@
 server:
   port: 8888
-  tomcat:
-    max-threads: 5
 spring:
+  mvc:
+    servlet:
+      # 默认-1，不初始化DispatcherServlet
+      load-on-startup: 1
   application:
     name: movie-server-config
   profiles:

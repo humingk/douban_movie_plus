@@ -1,9 +1,10 @@
 server:
   port: 8761
-  tomcat:
-    # tomcat最大线程数
-    max-threads: 5
 spring:
+  mvc:
+    servlet:
+      # 默认-1，不初始化DispatcherServlet
+      load-on-startup: 1
   application:
     name: movie-server-eureka
 eureka:
