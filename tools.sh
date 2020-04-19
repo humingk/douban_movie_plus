@@ -164,10 +164,11 @@ function netease_start() {
 function start_project(){
     # 环境变量
     source /etc/profile
+    start_time=$(date +%s%N)
     echo "正在启动项目..."
     # eureka ------------------------------
     echo "正在启动eureka..."
-    nohup java -jar $JVM_128_256 $SERVER_EUREKA_JAR >>$OUTPUT_SERVER/eureka 2>&1 &
+    nohup java -jar $JVM_128_256 $SERVER_EUREKA_JAR >>$OUTPUT_SERVER/eureka.log 2>&1 &
     eureka_pid=`lsof -i:$SERVER_EUREKA_PORT|grep "LISTEN"|awk '{print $2}'`
     until [ -n "$eureka_pid" ]
     do
@@ -176,7 +177,7 @@ function start_project(){
     echo "eureka启动成功..."
     # config ------------------------------
     echo "正在启动config..."
-    nohup java -jar $JVM_128_256 $SERVER_CONFIG_JAR >>$OUTPUT_SERVER/config 2>&1 &
+    nohup java -jar $JVM_128_256 $SERVER_CONFIG_JAR >>$OUTPUT_SERVER/config.log 2>&1 &
     config_pid=`lsof -i:$SERVER_CONFIG_PORT|grep "LISTEN"|awk '{print $2}'`
     until [ -n "$config_pid" ]
     do
@@ -185,7 +186,7 @@ function start_project(){
     echo "config启动成功..."
     # auth ------------------------------
     echo "正在启动auth..."
-    nohup java -jar $JVM_160_256 $SERVER_AUTH_JAR >>$OUTPUT_SERVER/auth 2>&1 &
+    nohup java -jar $JVM_160_256 $SERVER_AUTH_JAR >>$OUTPUT_SERVER/auth.log 2>&1 &
     auth_pid=`lsof -i:$SERVER_AUTH_PORT|grep "LISTEN"|awk '{print $2}'`
     until [ -n "$auth_pid" ]
     do
@@ -194,7 +195,7 @@ function start_project(){
     echo "auth启动成功..."
     # movie ------------------------------
     echo "正在启动movie..."
-    nohup java -jar $JVM_256_256 $SERVER_MOVIE_JAR >>$OUTPUT_SERVER/movie 2>&1 &
+    nohup java -jar $JVM_256_256 $SERVER_MOVIE_JAR >>$OUTPUT_SERVER/movie.log 2>&1 &
     movie_pid=`lsof -i:$SERVER_MOVIE_PORT|grep "LISTEN"|awk '{print $2}'`
     until [ -n "$movie_pid" ]
     do
@@ -203,7 +204,7 @@ function start_project(){
     echo "movie启动成功..."
     # search ------------------------------
     echo "正在启动search..."
-    nohup java -jar $JVM_256_256 $SERVER_SEARCH_JAR >>$OUTPUT_SERVER/search 2>&1 &
+    nohup java -jar $JVM_256_256 $SERVER_SEARCH_JAR >>$OUTPUT_SERVER/search.log 2>&1 &
     search_pid=`lsof -i:$SERVER_SEARCH_PORT|grep "LISTEN"|awk '{print $2}'`
     until [ -n "$search_pid" ]
     do
@@ -212,7 +213,7 @@ function start_project(){
     echo "search启动成功..."
     # scene ------------------------------
     echo "正在启动scene..."
-    nohup java -jar $JVM_256_256 $SERVER_SCENE_JAR >>$OUTPUT_SERVER/scene 2>&1 &
+    nohup java -jar $JVM_256_256 $SERVER_SCENE_JAR >>$OUTPUT_SERVER/scene.log 2>&1 &
     scene_pid=`lsof -i:$SERVER_SCENE_PORT|grep "LISTEN"|awk '{print $2}'`
     until [ -n "$scene_pid" ]
     do
@@ -221,7 +222,7 @@ function start_project(){
     echo "scene启动成功..."
     # celebrity ------------------------------
     echo "正在启动celebrity..."
-    nohup java -jar $JVM_256_256 $SERVER_CELEBRITY_JAR >>$OUTPUT_SERVER/celebrity 2>&1 &
+    nohup java -jar $JVM_256_256 $SERVER_CELEBRITY_JAR >>$OUTPUT_SERVER/celebrity.log 2>&1 &
     celebrity_pid=`lsof -i:$SERVER_CELEBRITY_PORT|grep "LISTEN"|awk '{print $2}'`
     until [ -n "$celebrity_pid" ]
     do
@@ -230,7 +231,7 @@ function start_project(){
     echo "celebrity启动成功..."
     # user ------------------------------
     echo "正在启动user..."
-    nohup java -jar $JVM_256_256 $SERVER_USER_JAR >>$OUTPUT_SERVER/user 2>&1 &
+    nohup java -jar $JVM_256_256 $SERVER_USER_JAR >>$OUTPUT_SERVER/user.log 2>&1 &
     user_pid=`lsof -i:$SERVER_USER_PORT|grep "LISTEN"|awk '{print $2}'`
     until [ -n "$user_pid" ]
     do
@@ -239,13 +240,18 @@ function start_project(){
     echo "user启动成功..."
     # gateway ------------------------------
     echo "正在启动gateway..."
-    nohup java -jar $JVM_512_256 $SERVER_GATEWAY_JAR >>$OUTPUT_SERVER/gateway 2>&1 &
+    nohup java -jar $JVM_512_256 $SERVER_GATEWAY_JAR >>$OUTPUT_SERVER/gateway.log 2>&1 &
     gateway_pid=`lsof -i:$SERVER_GATEWAY_PORT|grep "LISTEN"|awk '{print $2}'`
     until [ -n "$gateway_pid" ]
     do
         gateway_pid=`lsof -i:$SERVER_GATEWAY_PORT|grep "LISTEN"|awk '{print $2}'`
     done
     echo "gateway启动成功..."
+    end_time=$(date +%s%N)
+    use_time=`echo $end_time $start_time | awk '{ print ($1 - $2) / 1000000000}'`
+    date=$(date "+%Y%m%d %H:%M:%S")
+    echo "当前时间为${date},服务启动时间为:${use_time}s"
+    echo "------------------------------------------------"
 }
 
 function stop_project(){

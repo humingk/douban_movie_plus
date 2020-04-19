@@ -5,45 +5,41 @@ custom:
 spring:
   cloud:
     gateway:
+      # 全局跨域配置
       globalcors:
         cors-configurations:
-          # 全局跨域配置
-          globalcors:
-            cors-configurations:
-              # 不对外提供的API服务
-              '[/v2/oauth/**]':
-                # 允许携带认证信息
-                allow-credentials: true
-                allowedOrigins: "http://localhost:8080,https://movie.doubans.com"
-                allowedMethods: "*"
-                allowedHeaders: "*"
-              '[/v2/actuator/**]':
-                allow-credentials: true
-                allowedOrigins: "http://localhost:8080,https://movie.doubans.com"
-                allowedMethods: "*"
-                allowedHeaders: "*"
-              '[/v2/user/**]':
-                allow-credentials: true
-                allowedOrigins: "http://localhost:8080,https://movie.doubans.com"
-                allowedMethods: "*"
-                allowedHeaders: "*"
-              '[/v2/music/**]':
-                allow-credentials: true
-                allowedOrigins: "http://localhost:8080,https://movie.doubans.com"
-                allowedMethods: "*"
-                allowedHeaders: "*"
-              '[/v2/search/**]':
-                allow-credentials: true
-                allowedOrigins: "http://localhost:8080,https://movie.doubans.com"
-                allowedMethods: "*"
-                allowedHeaders: "*"
-              # 其他对外提供的API服务
-              '[/v2/**]':
-                allow-credentials: true
-                allowedOrigins: "*"
-                allowedMethods:
-                  - GET
-                allowedHeaders: "*"
+          #          # 不对外提供的API服务
+          #          '[/v2/oauth/**]':
+          #            # 允许携带认证信息
+          #            allow-credentials: true
+          #            allowedOrigins: "http://localhost:8080,https://movie.doubans.com"
+          #            allowedMethods: "*"
+          #            allowedHeaders: "*"
+          #          '[/v2/actuator/**]':
+          #            allow-credentials: true
+          #            allowedOrigins: "http://localhost:8080,https://movie.doubans.com"
+          #            allowedMethods: "*"
+          #            allowedHeaders: "*"
+          #          '[/v2/user/**]':
+          #            allow-credentials: true
+          #            allowedOrigins: "http://localhost:8080,https://movie.doubans.com"
+          #            allowedMethods: "*"
+          #            allowedHeaders: "*"
+          #          '[/v2/music/**]':
+          #            allow-credentials: true
+          #            allowedOrigins: "http://localhost:8080,https://movie.doubans.com"
+          #            allowedMethods: "*"
+          #            allowedHeaders: "*"
+          #          '[/v2/search/**]':
+          #            allow-credentials: true
+          #            allowedOrigins: "http://localhost:8080,https://movie.doubans.com"
+          #            allowedMethods: "*"
+          #            allowedHeaders: "*"
+          # 其他对外提供的API服务
+          '[/**]':
+            allowedOrigins: "http://localhost:8080,https://movie.doubans.com"
+            allowedMethods: "*"
+            allowedHeaders: "*"
       discovery:
         locator:
           # true:开启gateway服务注册中心服务发现,并且gateway根据服务名自动为每个服务创建一个router
@@ -211,7 +207,7 @@ hystrix:
             maxConcurrentRequests: 100
           thread:
             # 用来设置thread和semaphore两种隔离策略的超时时间，默认值是1000 ms
-            timeoutInMilliseconds: 2000
+            timeoutInMilliseconds: 5000
       # 所有命令降级配置对策略ExecutionIsolationStrategy.THREAD或者ExecutionIsolationStrategy.SEMAPHORE都生效
       fallback:
         isolation:

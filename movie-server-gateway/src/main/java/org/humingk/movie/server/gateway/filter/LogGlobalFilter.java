@@ -23,8 +23,9 @@ public class LogGlobalFilter implements GlobalFilter, Ordered {
     String url = request.getURI().getRawPath();
     // gateway拦截所有的请求，统一记录请求日志
     log.info(
-        "ip={},url={},args={}",
+        "ip={},real-ip={},url={},args={}",
         request.getRemoteAddress(),
+        request.getHeaders().get("X-Real-IP"),
         request.getURI().getRawPath(),
         request.getQueryParams().toString());
     return chain.filter(exchange);
