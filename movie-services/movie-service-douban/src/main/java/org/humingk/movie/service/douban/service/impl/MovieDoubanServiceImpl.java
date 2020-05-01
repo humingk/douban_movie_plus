@@ -56,6 +56,11 @@ public class MovieDoubanServiceImpl implements MovieDoubanService {
   }
 
   @Override
+  public RateMovieDouban getRateMovieDoubanByMovieDoubanId(long id) {
+    return rateMovieDoubanMapper.selectByPrimaryKey(id);
+  }
+
+  @Override
   public MovieDoubanDetailsDto getMovieDoubanDetailsByMovieDoubanId(long id) {
     /** 豆瓣电影基础信息 */
     MovieDouban movieDouban = movieDoubanMapper.selectByPrimaryKey(id);

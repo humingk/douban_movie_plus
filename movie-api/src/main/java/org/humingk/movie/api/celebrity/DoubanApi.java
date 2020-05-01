@@ -30,6 +30,7 @@ public interface DoubanApi {
    *
    * @param id 豆瓣影人ID
    * @return
+   * @since 2.0.0
    * @apiNote 包括影人头像,影人简介等
    */
   @RequestMapping(value = "/celebrity/douban/bases", method = RequestMethod.GET)
@@ -41,6 +42,7 @@ public interface DoubanApi {
    * @param id 豆瓣影人ID
    * @param limit 相关电影限制数(默认10)
    * @return
+   * @since 2.0.0
    * @apiNote 包括影人基础信息，别称，图片，相关的豆瓣电影，获得的奖项
    */
   @RequestMapping(value = "/celebrity/douban/details", method = RequestMethod.GET)
@@ -58,6 +60,7 @@ public interface DoubanApi {
    * @param offset 合作次数偏移量（默认0）
    * @param limit 合作次数限制数（默认10）
    * @return
+   * @since
    * @apiNote 包括影人照片、基础信息、相关电影基础信息（电影海报、基础信息）
    */
   @RequestMapping(value = "/celebrity/douban/cooperators_bases", method = RequestMethod.GET)

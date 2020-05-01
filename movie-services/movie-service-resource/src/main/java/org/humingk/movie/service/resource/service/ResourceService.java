@@ -19,4 +19,14 @@ public interface ResourceService {
    * @return
    */
   List<ResourceMovie> getResourceListByMovieDoubanId(Long id);
+
+  /**
+   * 搜索电影资源
+   *
+   * @param keyword 电影关键字
+   * @param offset 偏移量
+   * @param limit 限制数
+   * @return
+   */
+  List<ResourceMovie> getResourceListByKeyword(String keyword, int offset, int limit);
 }

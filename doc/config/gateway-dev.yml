@@ -164,7 +164,7 @@ spring:
         # ----------------------------------------
         # 音乐
         - id: NeteaseCloudMusicApi
-          uri: http://localhost:10102
+          uri: http://localhost:3000
           predicates:
             - Path=/${custom.api.version}/music/**
           filters:

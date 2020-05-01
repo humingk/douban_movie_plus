@@ -45,4 +45,11 @@ public class MovieDoubanServiceTest {
             .getSearchResultMovieDoubanListByMovieDoubanKeyword("爱", 0, 10)
             .isEmpty());
   }
+
+  @Test
+  public void getRateMovieDoubanByMovieDoubanId() {
+    Assert.assertEquals(
+        MOVIE_DOUBAN_ID,
+        movieDoubanService.getRateMovieDoubanByMovieDoubanId(MOVIE_DOUBAN_ID).getId());
+  }
 }

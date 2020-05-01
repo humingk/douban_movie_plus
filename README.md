@@ -9,15 +9,15 @@
 
 ## 使用方法
 
-- 推荐从豆瓣电影官网访问，二级域名`douban`后加`s`即可跳转 [https://movie.douban`s`.com/subject/1889243](https://movie.doubans.com/subject/1889243)
+- 推荐从豆瓣电影访问，二级域名`douban`后加`s`即可 [https://movie.douban`s`.com/subject/1889243](https://movie.doubans.com/subject/1889243)
 
 
-- 调用本项目API服务你的前端应用 [API文档 (html)](https://api.doubans.com) ，[API文档 (md)](./doc/api/AllInOne.md) ，[Postman测试 (json)](./doc/api/postman.json)
+- 调用本项目API服务你的应用 [API文档 (html)](https://api.doubans.com) ，[API文档 (md)](./doc/api/AllInOne.md) ，[Postman测试 (json)](./doc/api/postman.json)
 
 
-- 聊天吹水提建议，欢迎加入QQ豆瓣电影Plus交流群 `476584154` ，口令：`doubans`
+- 聊天吹水提建议，欢迎加入豆瓣电影Plus交流群 `476584154` ，口令：`doubans`
 
-## 开发流程
+## 开发相关
 
 ### 前端开发 (Vue)
 

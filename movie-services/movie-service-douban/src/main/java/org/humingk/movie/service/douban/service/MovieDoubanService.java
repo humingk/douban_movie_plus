@@ -1,6 +1,7 @@
 package org.humingk.movie.service.douban.service;
 
 import org.humingk.movie.dal.entity.MovieDouban;
+import org.humingk.movie.dal.entity.RateMovieDouban;
 import org.humingk.movie.service.douban.dto.movie.MovieDoubanDetailsDto;
 import org.humingk.movie.service.douban.dto.movie.SearchResultMovieDoubanDto;
 import org.humingk.movie.service.douban.dto.movie.SearchTipsMovieDoubanDto;
@@ -25,6 +26,15 @@ public interface MovieDoubanService {
    */
   @NotNull(message = "该ID暂无对应豆瓣电影")
   MovieDouban getMovieDoubanByMovieDoubanId(long id);
+
+  /**
+   * 豆瓣电影评分信息
+   *
+   * @param id
+   * @return
+   */
+  @NotNull(message = "该ID暂无对应豆瓣电影")
+  RateMovieDouban getRateMovieDoubanByMovieDoubanId(long id);
 
   /**
    * 豆瓣电影详细信息

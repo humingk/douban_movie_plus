@@ -49,6 +49,12 @@ public class MovieImdbServiceImpl implements MovieImdbService {
   }
 
   @Override
+  public RateImdb getRateImdbByMovieDoubanId(long id) {
+    MovieImdb movieImdb = getMovieImdbByMovieDoubanId(id);
+    return movieImdb == null ? null : rateImdbMapper.selectByPrimaryKey(movieImdb.getId());
+  }
+
+  @Override
   public MovieImdbDetailsDto getMovieImdbDetailsByMovieImdbId(long id) {
     MovieImdb movieImdb = movieImdbMapper.selectByPrimaryKey(id);
     return getMovieImdbDetailsByMovieImdb(movieImdb);

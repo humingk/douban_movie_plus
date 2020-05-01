@@ -403,7 +403,7 @@ CREATE TABLE `movie_douban` (
   `id_movie_imdb` bigint unsigned NOT NULL DEFAULT '0' COMMENT 'IMDB电影ID 0-未匹配 1-已匹配',
   `start_year` smallint unsigned NOT NULL DEFAULT '0' COMMENT '上映时间 /year',
   `name_zh` varchar(255) NOT NULL DEFAULT '' COMMENT '豆瓣电影中文名',
-  `name_origin` varchar(255) NOT NULL DEFAULT '' COMMENT '豆瓣电影原始名',
+  `name_origin` varchar(700) NOT NULL DEFAULT '' COMMENT '豆瓣电影原始名',
   `runtime` smallint unsigned NOT NULL DEFAULT '0' COMMENT '豆瓣电影运行片长 /m',
   `url_poster` bigint unsigned NOT NULL DEFAULT '0' COMMENT '豆瓣电影海报ID',
   `summary` text COMMENT '简介',
@@ -834,7 +834,7 @@ CREATE TABLE `resource_movie` (
   KEY `id_type_resource` (`id_type_resource`),
   KEY `name_zh` (`name_zh`),
   KEY `create_year` (`create_year`)
-) ENGINE=InnoDB AUTO_INCREMENT=807861 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='电影资源';
+) ENGINE=InnoDB AUTO_INCREMENT=990863 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='电影资源';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1304,4 +1304,4 @@ CREATE TABLE `zipkin_spans` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-04-17 18:28:48
+-- Dump completed on 2020-05-01 21:57:54

@@ -1,5 +1,6 @@
 package org.humingk.movie.service.resource.service.impl;
 
+import com.github.pagehelper.PageHelper;
 import org.humingk.movie.common.annotation.RedisCache;
 import org.humingk.movie.common.enumeration.CodeAndMsg;
 import org.humingk.movie.common.exception.MyException;
@@ -29,5 +30,13 @@ public class ResourceServiceImpl implements ResourceService {
     } else {
       return resultList;
     }
+  }
+
+  @Override
+  public List<ResourceMovie> getResourceListByKeyword(String keyword, int offset, int limit) {
+    resourceMovieExample.start().andNameZhLike("%" + keyword + "%");
+    resourceMovieExample.or().andNameOriginLike("%" + keyword + "%");
+    PageHelper.offsetPage(offset, limit);
+    return resourceMovieMapper.selectByExample(resourceMovieExample);
   }
 }

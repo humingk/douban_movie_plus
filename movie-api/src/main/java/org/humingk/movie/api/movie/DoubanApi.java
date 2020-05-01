@@ -29,6 +29,7 @@ public interface DoubanApi {
    *
    * @param id 豆瓣电影ID
    * @return
+   * @since 2.0.0
    * @apiNote 包括电影海报, 电影简介等基础信息
    */
   @RequestMapping(value = "/movie/douban/bases", method = RequestMethod.GET)
@@ -39,6 +40,7 @@ public interface DoubanApi {
    *
    * @param id 豆瓣电影ID
    * @return
+   * @since 2.0.0
    * @apiNote 包括电影基础信息、评分信息、标签类型、相关影人基础信息、图片、预告片、热门影评短评、j奖项等
    */
   @RequestMapping(value = "/movie/douban/details", method = RequestMethod.GET)

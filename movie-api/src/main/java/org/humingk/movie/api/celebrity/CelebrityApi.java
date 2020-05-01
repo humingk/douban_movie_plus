@@ -30,6 +30,7 @@ public interface CelebrityApi {
    *
    * @param id 豆瓣影人ID
    * @return
+   * @since 2.0.0
    * @apiNote 包括影人头像,影人简介等
    */
   @RequestMapping(value = "/celebrity/bases", method = RequestMethod.GET)
@@ -42,6 +43,7 @@ public interface CelebrityApi {
    * @param doubanLimit 豆瓣相关的电影限制数（默认10）
    * @param imdbLimit IMDB相关的电影限制数（默认10）
    * @return
+   * @since 2.0.0
    * @apiNote 包括影人基础信息，别称，图片，相关的电影，获得的奖项
    */
   @RequestMapping(value = "/celebrity/details", method = RequestMethod.GET)

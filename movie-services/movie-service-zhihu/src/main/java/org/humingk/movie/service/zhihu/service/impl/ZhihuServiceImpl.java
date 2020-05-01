@@ -28,14 +28,23 @@ public class ZhihuServiceImpl implements ZhihuService {
 
   @Override
   public ZhihuDto getMovieZhihuByMovieDoubanId(Long id) {
-    movieZhihuExample.start().andIdMovieDoubanEqualTo(id);
-    List<MovieZhihu> movieZhihuList = movieZhihuMapper.selectByExample(movieZhihuExample);
-    if (movieZhihuList.size() == 1) {
+    MovieZhihu movieZhihu = getMovieZhihuTopicByMovieDoubanId(id);
+    if (movieZhihu != null) {
       questionZhihuExample.start().andIdMovieDoubanEqualTo(id);
       return zhihuDtoConverter.to(
-          movieZhihuList.get(0), questionZhihuMapper.selectByExample(questionZhihuExample));
+          movieZhihu, questionZhihuMapper.selectByExample(questionZhihuExample));
     } else {
       throw new MyException(CodeAndMsg.NO_RESOURCE);
     }
+  }
+
+  @Override
+  public MovieZhihu getMovieZhihuTopicByMovieDoubanId(Long id) {
+    movieZhihuExample.start().andIdMovieDoubanEqualTo(id);
+    List<MovieZhihu> movieZhihuList = movieZhihuMapper.selectByExample(movieZhihuExample);
+    if (movieZhihuList.size() == 1) {
+      return movieZhihuList.get(0);
+    }
+    return null;
   }
 }

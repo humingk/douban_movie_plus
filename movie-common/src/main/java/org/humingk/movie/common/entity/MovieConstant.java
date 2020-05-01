@@ -165,7 +165,7 @@ public class MovieConstant {
     WEBSITE_RESOURCE.put((short) 101, "电影天堂");
     WEBSITE_RESOURCE.put((short) 101, "https://www.dy2018.com");
     WEBSITE_RESOURCE.put((short) 102, "LOL电影天堂");
-    WEBSITE_RESOURCE.put((short) 102, "https://www.loldytt.tv");
+    WEBSITE_RESOURCE.put((short) 102, "https://www.loldytt.com");
     WEBSITE_RESOURCE.put((short) 103, "BT电影天堂");
     WEBSITE_RESOURCE.put((short) 103, "http://www.btbtdy.me");
     WEBSITE_RESOURCE.put((short) 104, "xl720");
@@ -175,7 +175,7 @@ public class MovieConstant {
     WEBSITE_RESOURCE.put((short) 106, "狗带TV");
     WEBSITE_RESOURCE.put((short) 106, "http://www.goodaitv.com");
     WEBSITE_RESOURCE.put((short) 107, "在线之家");
-    WEBSITE_RESOURCE.put((short) 107, "http://www.zxzjs.com");
+    WEBSITE_RESOURCE.put((short) 107, "http://www.zxzj.me");
     WEBSITE_RESOURCE.put((short) 108, "比特大雄");
     WEBSITE_RESOURCE.put((short) 108, "https://www.btdx8.com");
   }

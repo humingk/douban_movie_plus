@@ -129,7 +129,7 @@ values (2, '爱奇艺视频', 'https://www.iqiyi.com'),
        (10, 'AcFun', 'https://www.acfun.cn'),
 
        (101, '电影天堂', 'https://www.dy2018.com'),
-       (102, 'LOL电影天堂', 'https://www.loldytt.tv'),
+       (102, 'LOL电影天堂', 'https://www.loldytt.com'),
        (103, 'BT电影天堂', 'http://www.btbtdy.me'),
        (104, 'xl720', 'https://www.xl720.com'),
        (105, '6v电影网', 'http://www.hao6v.com'),
@@ -142,21 +142,22 @@ values (2, '爱奇艺视频', 'https://www.iqiyi.com'),
 
 # 资源类型
 insert into type_resource
-values (2, '免费观看'),
-       (3, 'VIP免费观看'),
+values (0, '未知'),
+       (2, '在线免费'),
+       (3, 'VIP免费'),
        (4, '单片付费'),
        (5, '用劵/单片付费'),
 
        (100, '未知'),
 
-       (101, '在线观看'),
+       (101, '在线'),
        (102, '网盘'),
 
-       (111, 'BluRay'),
-       (112, '1080p'),
+       (111, '蓝光'),
+       (112, '1080P'),
        (113, '1280超清'),
        (114, '1024超清'),
-       (115, '720p'),
+       (115, '720P'),
        (116, '1280高清'),
        (117, '1024高清');
 

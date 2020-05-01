@@ -33,7 +33,7 @@
     },
     {
       "//": "文档版本号",
-      "version": "2.0.5",
+      "version": "2.0.7",
       "//": "变更操作状态，eg：创建、更新等",
       "status": "update",
       "//": "文档变更作者",
@@ -60,7 +60,7 @@
       "type": "string",
       "desc": "access_token",
       "required": false,
-      "since": "-"
+      "since": "2.0.0"
     }
   ],
   "//": "设置代码路径，默认会自动加载src/main/java",

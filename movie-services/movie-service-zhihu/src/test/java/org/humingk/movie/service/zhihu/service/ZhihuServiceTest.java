@@ -23,4 +23,11 @@ public class ZhihuServiceTest {
             .getMovieZhihu()
             .getIdMovieDouban());
   }
+
+  @Test
+  public void getMovieZhihuTopicByMovieDoubanId() {
+    Assert.assertEquals(
+        MOVIE_DOUBAN_ID,
+        zhihuService.getMovieZhihuTopicByMovieDoubanId(MOVIE_DOUBAN_ID).getIdMovieDouban());
+  }
 }

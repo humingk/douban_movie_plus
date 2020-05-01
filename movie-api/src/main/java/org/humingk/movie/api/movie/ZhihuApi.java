@@ -27,6 +27,7 @@ public interface ZhihuApi {
    *
    * @param id 豆瓣电影ID
    * @return
+   * @since 2.0.0
    * @apiNote 包括知乎话题、知乎评分、猫眼评分、知乎问题列表等
    */
   @RequestMapping(value = "/movie/zhihu/bases", method = RequestMethod.GET)

@@ -29,6 +29,7 @@ public interface ImdbApi {
    *
    * @param id IMDB电影ID
    * @return
+   * @since 2.0.0
    * @apiNote 包括电影海报、电影简介等
    */
   @RequestMapping(value = "/movie/imdb/bases", method = RequestMethod.GET)
@@ -39,6 +40,7 @@ public interface ImdbApi {
    *
    * @param id IMDB电影ID
    * @return
+   * @since 2.0.0
    * @apiNote 包括电影基础信息、评分、相关影人信息等
    */
   @RequestMapping(value = "/movie/imdb/details", method = RequestMethod.GET)

@@ -29,6 +29,7 @@ public interface ImdbApi {
    *
    * @param id IMDB影人ID
    * @return
+   * @since 2.0.0
    * @apiNote 简略
    */
   @RequestMapping(value = "/celebrity/imdb/bases", method = RequestMethod.GET)
@@ -40,6 +41,7 @@ public interface ImdbApi {
    * @param id IMDB影人ID
    * @param limit 相关的电影限制数（默认10）
    * @return
+   * @since 2.0.0
    * @apiNote 包括影人基础信息，相关的IMDB电影
    */
   @RequestMapping(value = "/celebrity/imdb/details", method = RequestMethod.GET)

@@ -1,6 +1,7 @@
 package org.humingk.movie.service.imdb.service;
 
 import org.humingk.movie.dal.entity.MovieImdb;
+import org.humingk.movie.dal.entity.RateImdb;
 import org.humingk.movie.service.imdb.dto.movie.MovieImdbDetailsDto;
 import org.springframework.validation.annotation.Validated;
 
@@ -28,8 +29,17 @@ public interface MovieImdbService {
    * @param id 豆瓣电影ID
    * @return
    */
-  @NotNull(message = "该IMDB电影ID暂无对应IMDB电影")
+  @NotNull(message = "该豆瓣电影ID暂无对应IMDB电影")
   MovieImdb getMovieImdbByMovieDoubanId(long id);
+
+  /**
+   * 获取IMDB电影评分信息
+   *
+   * @param id 豆瓣电影ID
+   * @return
+   */
+  @NotNull(message = "该豆瓣电影ID暂无对应IMDB电影")
+  RateImdb getRateImdbByMovieDoubanId(long id);
 
   /**
    * 获取IMDB电影详细信息

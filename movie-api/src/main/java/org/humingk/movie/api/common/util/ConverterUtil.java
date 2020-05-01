@@ -75,7 +75,7 @@ public class ConverterUtil {
    */
   @Named("idMovieImdb")
   public String idMovieImdb(Long id) {
-    return id == 0 || id == 1 ? "" : "tt" + String.format("%07d", id);
+    return (id == 0 || id == 1) ? "" : ("tt" + String.format("%07d", id));
   }
   /**
    * 获取IMDB影人ID
@@ -85,7 +85,7 @@ public class ConverterUtil {
    */
   @Named("idCelebrityImdb")
   public String idCelebrityImdb(Long id) {
-    return id == 0 || id == 1 ? "" : "nm" + String.format("%07d", id);
+    return (id == 0 || id == 1) ? "" : ("nm" + String.format("%07d", id));
   }
 
   /**
@@ -139,7 +139,9 @@ public class ConverterUtil {
    */
   @Named("urlPoster")
   public String urlMoviePoster(Long id) {
-    return "https://img1.doubanio.com/view/photo/s_ratio_poster/public/p" + id + ".webp";
+    return id == 0
+        ? ""
+        : ("https://img1.doubanio.com/view/photo/s_ratio_poster/public/p" + id + ".webp");
   }
 
   /**
@@ -150,7 +152,7 @@ public class ConverterUtil {
    */
   @Named("urlPosterImdb")
   public String urlPosterImdb(String url) {
-    return "https://m.media-amazon.com/images/M/" + url;
+    return "".equals(url) ? "" : ("https://m.media-amazon.com/images/M/" + url);
   }
 
   /**
@@ -161,7 +163,9 @@ public class ConverterUtil {
    */
   @Named("urlPortrait")
   public String urlPortrait(String id) {
-    return "https://img1.doubanio.com/view/celebrity/s_ratio_celebrity/public/p" + id + ".webp";
+    return "".equals(id)
+        ? ""
+        : ("https://img1.doubanio.com/view/celebrity/s_ratio_celebrity/public/p" + id + ".webp");
   }
 
   /**
@@ -224,7 +228,7 @@ public class ConverterUtil {
    */
   @Named("urlMovieScene")
   public String urlMovieScene(Long id) {
-    return "https://-----------------" + id;
+    return "https://movie.doubans.com/scene/" + id;
   }
 
   /**
@@ -250,7 +254,7 @@ public class ConverterUtil {
    */
   @Named("urlImage")
   public String urlImage(String id) {
-    return id.isEmpty() ? "" : "http://cache.fotoplace.cc/mocation/" + id;
+    return id.isEmpty() ? "" : ("http://cache.fotoplace.cc/mocation/" + id);
   }
 
   /**

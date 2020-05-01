@@ -32,6 +32,7 @@ public interface SearchCelebrityDoubanApi {
    * @param offset 偏移量（默认0）
    * @param limit 限制数（默认10）
    * @return
+   * @since 2.0.0
    * @apiNote 根据影人名称开头的字符串找出豆瓣影人的基本信息列表
    */
   @RequestMapping(value = "/search/celebrity/douban/tips", method = RequestMethod.GET)
@@ -49,6 +50,7 @@ public interface SearchCelebrityDoubanApi {
    * @param offset 偏移量（默认0）
    * @param limit 限制数（默认10）
    * @return
+   * @since 2.0.0
    * @apiNote 根据影人名称字符串找出豆瓣影人的基本信息列表
    */
   @RequestMapping(value = "/search/celebrity/douban/details", method = RequestMethod.GET)

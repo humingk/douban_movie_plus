@@ -28,6 +28,7 @@ public interface MovieApi {
    *
    * @param id 豆瓣电影ID
    * @return
+   * @since 2.0.0
    * @apiNote 包括场景电影基础信息，分布图，场景地点简略信息，场景地点图等
    */
   @RequestMapping(value = "/scene/fotoplace/bases", method = RequestMethod.GET)
@@ -38,6 +39,7 @@ public interface MovieApi {
    *
    * @param id 豆瓣电影ID
    * @return
+   * @since 2.0.0
    * @apiNote 包括场景电影基础信息，分布图，场景详细信息,场景地点详细信息，场景图片等
    */
   @RequestMapping(value = "/scene/fotoplace/details", method = RequestMethod.GET)

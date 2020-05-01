@@ -28,6 +28,7 @@ public interface ResourceApi {
    *
    * @param id 豆瓣电影ID
    * @return
+   * @since 2.0.0
    * @apiNote 包括正版资源、盗版资源、在线资源、离线资源
    */
   @RequestMapping(value = "/movie/resource/bases", method = RequestMethod.GET)

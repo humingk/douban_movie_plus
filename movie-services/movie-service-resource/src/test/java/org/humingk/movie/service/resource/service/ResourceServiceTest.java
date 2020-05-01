@@ -19,4 +19,10 @@ public class ResourceServiceTest {
   public void getResourceListByMovieDoubanId() {
     Assert.assertFalse(resourceService.getResourceListByMovieDoubanId(MOVIE_DOUBAN_ID).isEmpty());
   }
+
+  @Test
+  public void getResourceListByKeyword() {
+    Assert.assertFalse(resourceService.getResourceListByKeyword("星", 0, 10).isEmpty());
+    System.out.println();
+  }
 }
