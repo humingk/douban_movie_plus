@@ -6,6 +6,7 @@ import org.humingk.movie.dal.entity.*;
 import org.mapstruct.Named;
 import org.springframework.stereotype.Component;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -376,5 +377,29 @@ public class ConverterUtil {
   @Named("typeResource")
   public String typeResource(Short id) {
     return MovieConstant.RESOURCE_TYPE.get(id);
+  }
+
+  /**
+   * 获取烂番茄新鲜度主题色
+   *
+   * @param tomatoScore 烂番茄新鲜度
+   * @return
+   */
+  @Named("tomatoColor")
+  public String tomatoColor(BigDecimal tomatoScore) {
+    return tomatoScore.compareTo(new BigDecimal(6)) > 0 ? "250,48,8" : "9,199,84";
+  }
+
+  /**
+   * 获取mtc评分主题色
+   *
+   * @param mtcScore mtc评分
+   * @return
+   */
+  @Named("mtcColor")
+  public String mtcColor(BigDecimal mtcScore) {
+    return mtcScore.compareTo(new BigDecimal(8)) >= 0
+        ? "102,204,51"
+        : (mtcScore.compareTo(new BigDecimal(4)) >= 0 ? "255,204,51" : "255,0,0");
   }
 }

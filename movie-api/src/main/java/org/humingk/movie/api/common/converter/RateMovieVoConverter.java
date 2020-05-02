@@ -33,8 +33,14 @@ public interface RateMovieVoConverter {
     @Mapping(target = "tomatoScore", source = "rateImdb.tomatoScore"),
     @Mapping(target = "mtcScore", source = "rateImdb.mtcScore"),
     @Mapping(target = "imdbColor", constant = "0,162,232"),
-    @Mapping(target = "tomatoColor", constant = "250,48,8"),
-    @Mapping(target = "mtcColor", constant = "102,204,51"),
+    @Mapping(
+        target = "tomatoColor",
+        source = "rateImdb.tomatoScore",
+        qualifiedByName = {"util", "tomatoColor"}),
+    @Mapping(
+        target = "mtcColor",
+        source = "rateImdb.mtcScore",
+        qualifiedByName = {"util", "mtcColor"}),
     @Mapping(target = "idMovieZhihu", source = "movieZhihu.id"),
     @Mapping(
         target = "urlZhihuTopic",
