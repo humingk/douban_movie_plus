@@ -358,6 +358,16 @@ public class ConverterUtil {
     return MovieConstant.WEBSITE_RESOURCE.get(id).get(1);
   }
   /**
+   * 获取电影资源网站主题色rgb
+   *
+   * @param id 资源网站ID
+   * @return
+   */
+  @Named("websiteColor")
+  public String websiteColor(Short id) {
+    return MovieConstant.WEBSITE_RESOURCE.get(id).get(2);
+  }
+  /**
    * 获取电影资源类型
    *
    * @param id 资源类型ID

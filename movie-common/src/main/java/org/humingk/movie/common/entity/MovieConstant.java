@@ -143,41 +143,56 @@ public class MovieConstant {
           .put((byte) 26, "学校")
           .build();
 
-  /** 资源网站类型 */
+  /** 资源网站类型 中文名+网址+rgb主题色 */
   public static final ListMultimap<Short, String> WEBSITE_RESOURCE = ArrayListMultimap.create();
 
   static {
-    WEBSITE_RESOURCE.put((short) (short) 2, "爱奇艺视频");
-    WEBSITE_RESOURCE.put((short) (short) 2, "https://www.iqiyi.com");
+    WEBSITE_RESOURCE.put((short) 2, "爱奇艺视频");
+    WEBSITE_RESOURCE.put((short) 2, "https://www.iqiyi.com");
+    WEBSITE_RESOURCE.put((short) 2, "0,190,6");
     WEBSITE_RESOURCE.put((short) 3, "腾讯视频");
     WEBSITE_RESOURCE.put((short) 3, "https://v.qq.com");
+    WEBSITE_RESOURCE.put((short) 3, "255,121,4");
     WEBSITE_RESOURCE.put((short) 4, "哔哩哔哩");
     WEBSITE_RESOURCE.put((short) 4, "https://www.bilibili.com");
+    WEBSITE_RESOURCE.put((short) 4, "251,114,153");
     WEBSITE_RESOURCE.put((short) 5, "搜狐视频");
     WEBSITE_RESOURCE.put((short) 5, "https://tv.sohu.com");
+    WEBSITE_RESOURCE.put((short) 5, "215,14,25");
     WEBSITE_RESOURCE.put((short) 6, "优酷视频");
     WEBSITE_RESOURCE.put((short) 6, "https://www.youku.com");
+    WEBSITE_RESOURCE.put((short) 6, "255,48,102");
     WEBSITE_RESOURCE.put((short) 7, "1905电影网");
     WEBSITE_RESOURCE.put((short) 7, "https://vip.1905.com");
+    WEBSITE_RESOURCE.put((short) 7, "19,136,194");
     WEBSITE_RESOURCE.put((short) 8, "芒果TV");
     WEBSITE_RESOURCE.put((short) 8, "https://www.mgtv.com");
+    WEBSITE_RESOURCE.put((short) 8, "243,123,37");
     // ---
     WEBSITE_RESOURCE.put((short) 101, "电影天堂");
     WEBSITE_RESOURCE.put((short) 101, "https://www.dy2018.com");
+    WEBSITE_RESOURCE.put((short) 101, "0,135,232");
     WEBSITE_RESOURCE.put((short) 102, "LOL电影天堂");
     WEBSITE_RESOURCE.put((short) 102, "https://www.loldytt.com");
+    WEBSITE_RESOURCE.put((short) 102, "240,36,50");
     WEBSITE_RESOURCE.put((short) 103, "BT电影天堂");
     WEBSITE_RESOURCE.put((short) 103, "http://www.btbtdy.me");
+    WEBSITE_RESOURCE.put((short) 103, "17,122,243");
     WEBSITE_RESOURCE.put((short) 104, "xl720");
     WEBSITE_RESOURCE.put((short) 104, "https://www.xl720.com");
+    WEBSITE_RESOURCE.put((short) 104, "37,141,205");
     WEBSITE_RESOURCE.put((short) 105, "6v电影网");
     WEBSITE_RESOURCE.put((short) 105, "http://www.hao6v.com");
+    WEBSITE_RESOURCE.put((short) 105, "44,142,59");
     WEBSITE_RESOURCE.put((short) 106, "狗带TV");
     WEBSITE_RESOURCE.put((short) 106, "http://www.goodaitv.com");
+    WEBSITE_RESOURCE.put((short) 106, "27,111,47");
     WEBSITE_RESOURCE.put((short) 107, "在线之家");
     WEBSITE_RESOURCE.put((short) 107, "http://www.zxzj.me");
+    WEBSITE_RESOURCE.put((short) 107, "244,153,3");
     WEBSITE_RESOURCE.put((short) 108, "比特大雄");
     WEBSITE_RESOURCE.put((short) 108, "https://www.btdx8.com");
+    WEBSITE_RESOURCE.put((short) 108, "244,237,37");
   }
 
   /** 电影资源类型 */

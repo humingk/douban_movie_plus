@@ -18,7 +18,10 @@ public interface RateMovieImdbVoConverter extends BaseConverter<RateMovieImdbVo,
     @Mapping(
         target = "idMovieImdb",
         source = "id",
-        qualifiedByName = {"util", "idMovieImdb"})
+        qualifiedByName = {"util", "idMovieImdb"}),
+    @Mapping(target = "imdbColor", constant = "0,162,232"),
+    @Mapping(target = "tomatoColor", constant = "250,48,8"),
+    @Mapping(target = "mtcColor", constant = "102,204,51")
   })
   RateMovieImdbVo to(RateImdb rateImdb);
 }

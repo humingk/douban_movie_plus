@@ -25,6 +25,10 @@ public interface ResourceMovieVoConverter extends BaseConverter<ResourceMovieVo,
         source = "idMovieImdb",
         qualifiedByName = {"util", "urlMovieImdb"}),
     @Mapping(
+        target = "websiteColor",
+        source = "idWebsiteResource",
+        qualifiedByName = {"util", "websiteColor"}),
+    @Mapping(
         target = "urlWebsiteResource",
         source = "idWebsiteResource",
         qualifiedByName = {"util", "urlWebsiteResource"}),

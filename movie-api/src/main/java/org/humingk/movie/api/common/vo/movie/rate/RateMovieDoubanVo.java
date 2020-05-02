@@ -23,6 +23,8 @@ public class RateMovieDoubanVo implements Serializable {
   private BigDecimal score;
   /** 豆瓣电影评分人数 */
   private Integer vote;
+  /** 评分主题色 */
+  private String rateColor;
   /** 豆瓣5星比例 */
   private BigDecimal score5;
   /** 豆瓣4星比例 */

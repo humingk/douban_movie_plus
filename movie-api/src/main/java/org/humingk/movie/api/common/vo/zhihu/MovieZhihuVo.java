@@ -31,14 +31,20 @@ public class MovieZhihuVo implements Serializable {
   /** 知乎电影中文名 */
   private String nameZh;
 
-  /** 知乎评分 */
+  /** 知乎推荐度 */
   private BigDecimal zhihuScore;
+
+  /** 知乎推荐度主题色 */
+  private String zhihuColor;
 
   /** 知乎评分票数 */
   private Integer zhihuVote;
 
   /** 猫眼评分 */
   private BigDecimal maoyanScore;
+
+  /** 猫眼评分主题色 */
+  private String maoyanColor;
 
   private static final long serialVersionUID = 1L;
 }

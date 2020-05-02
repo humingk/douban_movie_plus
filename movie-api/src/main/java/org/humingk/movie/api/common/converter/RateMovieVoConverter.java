@@ -32,6 +32,9 @@ public interface RateMovieVoConverter {
     @Mapping(target = "imdbVote", source = "rateImdb.imdbVote"),
     @Mapping(target = "tomatoScore", source = "rateImdb.tomatoScore"),
     @Mapping(target = "mtcScore", source = "rateImdb.mtcScore"),
+    @Mapping(target = "imdbColor", constant = "0,162,232"),
+    @Mapping(target = "tomatoColor", constant = "250,48,8"),
+    @Mapping(target = "mtcColor", constant = "102,204,51"),
     @Mapping(target = "idMovieZhihu", source = "movieZhihu.id"),
     @Mapping(
         target = "urlZhihuTopic",
@@ -40,6 +43,8 @@ public interface RateMovieVoConverter {
     @Mapping(target = "zhihuScore", source = "movieZhihu.zhihuScore"),
     @Mapping(target = "zhihuVote", source = "movieZhihu.zhihuVote"),
     @Mapping(target = "maoyanScore", source = "movieZhihu.maoyanScore"),
+    @Mapping(target = "zhihuColor", constant = "0,132,255"),
+    @Mapping(target = "maoyanColor", constant = "229,51,41")
   })
   RateMovieVo to(
       MovieDouban movieDouban,

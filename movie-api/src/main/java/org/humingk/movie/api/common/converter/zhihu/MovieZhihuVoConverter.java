@@ -23,6 +23,8 @@ public interface MovieZhihuVoConverter extends BaseConverter<MovieZhihuVo, Movie
         target = "urlZhihuTopic",
         source = "id",
         qualifiedByName = {"util", "urlZhihuTopic"}),
+    @Mapping(target = "zhihuColor", constant = "0,132,255"),
+    @Mapping(target = "maoyanColor", constant = "229,51,41")
   })
   MovieZhihuVo to(MovieZhihu movieZhihu);
 }

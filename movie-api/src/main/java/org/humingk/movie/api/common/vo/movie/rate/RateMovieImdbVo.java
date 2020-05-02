@@ -23,12 +23,21 @@ public class RateMovieImdbVo implements Serializable {
   /** IMDB评分 */
   private BigDecimal imdbScore;
 
+  /** IMDB评分主题色 */
+  private String imdbColor;
+
   /** IMDB评分人数 */
   private Integer imdbVote;
 
   /** 烂番茄新鲜度 */
   private BigDecimal tomatoScore;
 
+  /** 烂番茄新鲜度主题色 */
+  private String tomatoColor;
+
   /** MTC评分 */
   private BigDecimal mtcScore;
+
+  /** MTC评分主题色 */
+  private String mtcColor;
 }

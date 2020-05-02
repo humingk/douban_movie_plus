@@ -36,11 +36,20 @@ public class RateMovieVo implements Serializable {
   /** IMDB评分人数 */
   private Integer imdbVote;
 
+  /** IMDB评分主题色 */
+  private String imdbColor;
+
   /** 烂番茄新鲜度 */
   private BigDecimal tomatoScore;
 
+  /** 烂番茄新鲜度主题色 */
+  private String tomatoColor;
+
   /** MTC评分 */
   private BigDecimal mtcScore;
+
+  /** MTC评分主题色 */
+  private String mtcColor;
 
   /** 知乎电影ID */
   private Long idMovieZhihu;
@@ -54,8 +63,14 @@ public class RateMovieVo implements Serializable {
   /** 知乎评分票数 */
   private Integer zhihuVote;
 
+  /** 知乎推荐度主题色 */
+  private String zhihuColor;
+
   /** 猫眼评分 */
   private BigDecimal maoyanScore;
+
+  /** 猫眼评分主题色 */
+  private String maoyanColor;
 
   private static final long serialVersionUID = 1L;
 }

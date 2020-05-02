@@ -36,6 +36,9 @@ public class ResourceMovieVo implements Serializable {
   /** 电影资源网站名称 */
   private String websiteResource;
 
+  /** 电影资源网站主题色rgb */
+  private String websiteColor;
+
   /** 电影资源网站官网链接 */
   private String urlWebsiteResource;
 

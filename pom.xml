@@ -25,7 +25,7 @@
     <!--项目详情-->
     <groupId>org.humingk</groupId>
     <artifactId>movie</artifactId>
-    <version>2.0.7</version>
+    <version>2.0.8</version>
     <!--父依赖的打包类型为pom(其他默认为jar)-->
     <!--jar:    内部调用,服务-->
     <!--war:    需要部署的项目-->
@@ -116,58 +116,58 @@
             <dependency>
                 <groupId>org.humingk</groupId>
                 <artifactId>movie-api</artifactId>
-                <version>2.0.7</version>
+                <version>2.0.8</version>
             </dependency>
             <dependency>
                 <groupId>org.humingk</groupId>
                 <artifactId>movie-common</artifactId>
-                <version>2.0.7</version>
+                <version>2.0.8</version>
             </dependency>
             <dependency>
                 <groupId>org.humingk</groupId>
                 <artifactId>movie-dal</artifactId>
-                <version>2.0.7</version>
+                <version>2.0.8</version>
             </dependency>
             <dependency>
                 <groupId>org.humingk</groupId>
                 <artifactId>movie-security</artifactId>
-                <version>2.0.7</version>
+                <version>2.0.8</version>
             </dependency>
             <!--service list-->
             <dependency>
                 <groupId>org.humingk</groupId>
                 <artifactId>movie-service-douban</artifactId>
-                <version>2.0.7</version>
+                <version>2.0.8</version>
             </dependency>
             <dependency>
                 <groupId>org.humingk</groupId>
                 <artifactId>movie-service-netease</artifactId>
-                <version>2.0.7</version>
+                <version>2.0.8</version>
             </dependency>
             <dependency>
                 <groupId>org.humingk</groupId>
                 <artifactId>movie-service-user</artifactId>
-                <version>2.0.7</version>
+                <version>2.0.8</version>
             </dependency>
             <dependency>
                 <groupId>org.humingk</groupId>
                 <artifactId>movie-service-imdb</artifactId>
-                <version>2.0.7</version>
+                <version>2.0.8</version>
             </dependency>
             <dependency>
                 <groupId>org.humingk</groupId>
                 <artifactId>movie-service-scene</artifactId>
-                <version>2.0.7</version>
+                <version>2.0.8</version>
             </dependency>
             <dependency>
                 <groupId>org.humingk</groupId>
                 <artifactId>movie-service-zhihu</artifactId>
-                <version>2.0.7</version>
+                <version>2.0.8</version>
             </dependency>
             <dependency>
                 <groupId>org.humingk</groupId>
                 <artifactId>movie-service-resource</artifactId>
-                <version>2.0.7</version>
+                <version>2.0.8</version>
             </dependency>
             <!--other tools -->
             <!--mybatis-->
