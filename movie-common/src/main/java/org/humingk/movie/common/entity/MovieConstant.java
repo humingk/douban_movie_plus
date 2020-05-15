@@ -147,6 +147,9 @@ public class MovieConstant {
   public static final ListMultimap<Short, String> WEBSITE_RESOURCE = ArrayListMultimap.create();
 
   static {
+    WEBSITE_RESOURCE.put((short) 1, "其他");
+    WEBSITE_RESOURCE.put((short) 1, "https://movie.doubans.com");
+    WEBSITE_RESOURCE.put((short) 1, "5,78,189");
     WEBSITE_RESOURCE.put((short) 2, "爱奇艺视频");
     WEBSITE_RESOURCE.put((short) 2, "https://www.iqiyi.com");
     WEBSITE_RESOURCE.put((short) 2, "0,190,6");
@@ -168,6 +171,21 @@ public class MovieConstant {
     WEBSITE_RESOURCE.put((short) 8, "芒果TV");
     WEBSITE_RESOURCE.put((short) 8, "https://www.mgtv.com");
     WEBSITE_RESOURCE.put((short) 8, "243,123,37");
+    WEBSITE_RESOURCE.put((short) 9, "西瓜视频");
+    WEBSITE_RESOURCE.put((short) 9, "https://www.ixigua.com");
+    WEBSITE_RESOURCE.put((short) 9, "254,20,67");
+    WEBSITE_RESOURCE.put((short) 10, "acfun");
+    WEBSITE_RESOURCE.put((short) 10, "https://www.acfun.cn");
+    WEBSITE_RESOURCE.put((short) 10, "253,76,93");
+    WEBSITE_RESOURCE.put((short) 11, "咪咕视频");
+    WEBSITE_RESOURCE.put((short) 11, "http://www.miguvideo.com");
+    WEBSITE_RESOURCE.put((short) 11, "0,146,220");
+    WEBSITE_RESOURCE.put((short) 12, "欢喜首映");
+    WEBSITE_RESOURCE.put((short) 12, "http://www.huanxi.com");
+    WEBSITE_RESOURCE.put((short) 12, "169,1,1");
+    WEBSITE_RESOURCE.put((short) 13, "央视网");
+    WEBSITE_RESOURCE.put((short) 13, "http://tv.cctv.com");
+    WEBSITE_RESOURCE.put((short) 13, "93,99,111");
     // ---
     WEBSITE_RESOURCE.put((short) 101, "电影天堂");
     WEBSITE_RESOURCE.put((short) 101, "https://www.dy2018.com");
@@ -198,13 +216,13 @@ public class MovieConstant {
   /** 电影资源类型 */
   public static final ImmutableMap<Short, String> RESOURCE_TYPE =
       ImmutableMap.<Short, String>builder()
-          .put((short) 0, "未知")
-          .put((short) 2, "在线免费")
-          .put((short) 3, "VIP免费")
-          .put((short) 4, "单片付费")
-          .put((short) 5, "用劵/单片付费")
+          .put((short) 0, "在线")
+          .put((short) 1, "在线")
+          .put((short) 2, "免费在线")
+          .put((short) 3, "VIP免费在线")
+          .put((short) 4, "单片付费在线")
+          .put((short) 5, "用劵/单片付费在线")
           // ---
-          .put((short) 100, "未知")
           .put((short) 101, "在线")
           .put((short) 102, "网盘")
           .put((short) 111, "蓝光")
@@ -214,5 +232,6 @@ public class MovieConstant {
           .put((short) 115, "720P")
           .put((short) 116, "1280高清")
           .put((short) 117, "1024高清")
+          .put((short) 1000, "未知")
           .build();
 }

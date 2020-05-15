@@ -43,7 +43,7 @@ public class ConverterUtil {
    */
   @Named("urlMovieDouban")
   public String urlMovieDouban(Long id) {
-    return "https://movie.douban.com/subject/" + id;
+    return id == 0 ? "" : "https://movie.douban.com/subject/" + id;
   }
 
   /**
@@ -54,7 +54,7 @@ public class ConverterUtil {
    */
   @Named("urlCelebrityDouban")
   public String urlCelebrityDouban(Long id) {
-    return "https://movie.douban.com/celebrity/" + id;
+    return id == 0 ? "" : "https://movie.douban.com/celebrity/" + id;
   }
 
   /**
@@ -65,7 +65,7 @@ public class ConverterUtil {
    */
   @Named("urlUserDouban")
   public String urlUserDouban(String id) {
-    return "https://www.douban.com/people/" + id;
+    return "".equals(id) ? "" : "https://www.douban.com/people/" + id;
   }
 
   /**
@@ -97,7 +97,7 @@ public class ConverterUtil {
    */
   @Named("urlMovieImdb")
   public String urlMovieImdb(Long id) {
-    return "https://www.imdb.com/title/" + idMovieImdb(id);
+    return (id == 0 || id == 1) ? "" : "https://www.imdb.com/title/" + idMovieImdb(id);
   }
   /**
    * 获取IMDB影人url
@@ -107,7 +107,7 @@ public class ConverterUtil {
    */
   @Named("urlCelebrityImdb")
   public String urlCelebrityImdb(Long id) {
-    return "https://www.imdb.com/name/" + idCelebrityImdb(id);
+    return (id == 0 || id == 1) ? "" : "https://www.imdb.com/name/" + idCelebrityImdb(id);
   }
 
   /**
@@ -153,7 +153,7 @@ public class ConverterUtil {
    */
   @Named("urlPosterImdb")
   public String urlPosterImdb(String url) {
-    return "".equals(url) ? "" : ("https://m.media-amazon.com/images/M/" + url);
+    return "".equals(url) ? "" : ("https://m.media-amazon.com/images/M/" + url + ".jpg");
   }
 
   /**
@@ -327,12 +327,14 @@ public class ConverterUtil {
   /**
    * 知乎问题链接
    *
-   * @param id 知乎问题ID
+   * @param questionZhihu 知乎问题
    * @return
    */
   @Named("urlZhihuQuestion")
-  public String urlZhihuQuestion(Long id) {
-    return "https://www.zhihu.com/question/" + id;
+  public String urlZhihuQuestion(QuestionZhihu questionZhihu) {
+    return "https://www.zhihu.com/"
+        + (questionZhihu.getAnswerNum() == 1 ? "p/" : "question/")
+        + questionZhihu.getId();
   }
 
   // resource

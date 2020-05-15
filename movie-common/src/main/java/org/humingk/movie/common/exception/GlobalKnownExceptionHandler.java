@@ -15,7 +15,6 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import javax.validation.ConstraintViolationException;
-import javax.xml.bind.ValidationException;
 
 import static org.humingk.movie.common.enumeration.CodeAndMsg.PARAMTER;
 
@@ -76,18 +75,6 @@ public class GlobalKnownExceptionHandler extends ResponseEntityExceptionHandler 
   }
 
   /**
-   * 校验异常
-   *
-   * @param e
-   * @return
-   */
-  @ExceptionHandler(ValidationException.class)
-  public Result<Object> handleValidationException(ValidationException e) {
-    log.error("校验异常:{}", e.getMessage());
-    return Result.error(PARAMTER);
-  }
-
-  /**
    * 约束校验异常
    *
    * @param e
@@ -96,6 +83,6 @@ public class GlobalKnownExceptionHandler extends ResponseEntityExceptionHandler 
   @ExceptionHandler(ConstraintViolationException.class)
   public Result<Object> handleConstraintViolationException(ConstraintViolationException e) {
     log.error("约束校验异常:{}", e.getMessage());
-    return Result.error(PARAMTER);
+    return Result.error(PARAMTER, e.getMessage());
   }
 }

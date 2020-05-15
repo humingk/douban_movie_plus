@@ -13,11 +13,13 @@ public class ResourceServiceTest {
 
   @Autowired private ResourceService resourceService;
 
-  private static final Long MOVIE_DOUBAN_ID = 3711760L;
+  //  private static final Long MOVIE_DOUBAN_ID = 3711760L;
+  private static final Long MOVIE_DOUBAN_ID = 2131459L;
 
   @Test
   public void getResourceListByMovieDoubanId() {
-    Assert.assertFalse(resourceService.getResourceListByMovieDoubanId(MOVIE_DOUBAN_ID).isEmpty());
+    Assert.assertFalse(
+        resourceService.getResourceListByMovieDoubanId(MOVIE_DOUBAN_ID, 0, 10).isEmpty());
   }
 
   @Test

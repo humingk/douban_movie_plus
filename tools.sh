@@ -184,15 +184,15 @@ function start_project(){
         config_pid=`lsof -i:$SERVER_CONFIG_PORT|grep "LISTEN"|awk '{print $2}'`
     done
     echo "config启动成功..."
-    # auth ------------------------------
-    echo "正在启动auth..."
-    nohup java -jar $JVM_160_256 $SERVER_AUTH_JAR >>$OUTPUT_SERVER/auth.log 2>&1 &
-    auth_pid=`lsof -i:$SERVER_AUTH_PORT|grep "LISTEN"|awk '{print $2}'`
-    until [ -n "$auth_pid" ]
-    do
-        auth_pid=`lsof -i:$SERVER_AUTH_PORT|grep "LISTEN"|awk '{print $2}'`
-    done
-    echo "auth启动成功..."
+#    # auth ------------------------------
+#    echo "正在启动auth..."
+#    nohup java -jar $JVM_160_256 $SERVER_AUTH_JAR >>$OUTPUT_SERVER/auth.log 2>&1 &
+#    auth_pid=`lsof -i:$SERVER_AUTH_PORT|grep "LISTEN"|awk '{print $2}'`
+#    until [ -n "$auth_pid" ]
+#    do
+#        auth_pid=`lsof -i:$SERVER_AUTH_PORT|grep "LISTEN"|awk '{print $2}'`
+#    done
+#    echo "auth启动成功..."
     # movie ------------------------------
     echo "正在启动movie..."
     nohup java -jar $JVM_256_256 $SERVER_MOVIE_JAR >>$OUTPUT_SERVER/movie.log 2>&1 &
@@ -229,15 +229,15 @@ function start_project(){
         celebrity_pid=`lsof -i:$SERVER_CELEBRITY_PORT|grep "LISTEN"|awk '{print $2}'`
     done
     echo "celebrity启动成功..."
-    # user ------------------------------
-    echo "正在启动user..."
-    nohup java -jar $JVM_256_256 $SERVER_USER_JAR >>$OUTPUT_SERVER/user.log 2>&1 &
-    user_pid=`lsof -i:$SERVER_USER_PORT|grep "LISTEN"|awk '{print $2}'`
-    until [ -n "$user_pid" ]
-    do
-        user_pid=`lsof -i:$SERVER_USER_PORT|grep "LISTEN"|awk '{print $2}'`
-    done
-    echo "user启动成功..."
+#    # user ------------------------------
+#    echo "正在启动user..."
+#    nohup java -jar $JVM_256_256 $SERVER_USER_JAR >>$OUTPUT_SERVER/user.log 2>&1 &
+#    user_pid=`lsof -i:$SERVER_USER_PORT|grep "LISTEN"|awk '{print $2}'`
+#    until [ -n "$user_pid" ]
+#    do
+#        user_pid=`lsof -i:$SERVER_USER_PORT|grep "LISTEN"|awk '{print $2}'`
+#    done
+#    echo "user启动成功..."
     # gateway ------------------------------
     echo "正在启动gateway..."
     nohup java -jar $JVM_512_256 $SERVER_GATEWAY_JAR >>$OUTPUT_SERVER/gateway.log 2>&1 &

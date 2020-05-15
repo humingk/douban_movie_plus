@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.PositiveOrZero;
 import java.util.List;
 
 /** @author humingk */
@@ -19,8 +20,14 @@ public class ResourceController implements ResourceApi {
   @Autowired private ResourceService resourceService;
 
   @Override
-  public Result<List<ResourceMovieVo>> bases(@RequestParam("id") @NotNull Long id) {
+  public Result<List<ResourceMovieVo>> bases(
+      @RequestParam("id") @NotNull Long id,
+      @RequestParam(value = "offset", required = false, defaultValue = "0") @PositiveOrZero
+          Integer offset,
+      @RequestParam(value = "limit", required = false, defaultValue = "20") @PositiveOrZero
+          Integer limit) {
     return Result.success(
-        resourceMovieVoConverter.toList(resourceService.getResourceListByMovieDoubanId(id)));
+        resourceMovieVoConverter.toList(
+            resourceService.getResourceListByMovieDoubanId(id, offset, limit)));
   }
 }

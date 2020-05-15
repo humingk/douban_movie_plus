@@ -21,7 +21,7 @@ public interface QuestionZhihuVoConverter extends BaseConverter<QuestionZhihuVo,
         qualifiedByName = {"util", "urlMovieDouban"}),
     @Mapping(
         target = "urlZhihuQuestion",
-        source = "id",
+        source = "questionZhihu",
         qualifiedByName = {"util", "urlZhihuQuestion"}),
   })
   QuestionZhihuVo to(QuestionZhihu questionZhihu);

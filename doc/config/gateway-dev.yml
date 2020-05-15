@@ -8,36 +8,46 @@ spring:
       # 全局跨域配置
       globalcors:
         cors-configurations:
-          #          # 不对外提供的API服务
-          #          '[/v2/oauth/**]':
-          #            # 允许携带认证信息
-          #            allow-credentials: true
-          #            allowedOrigins: "http://localhost:8080,https://movie.doubans.com"
-          #            allowedMethods: "*"
-          #            allowedHeaders: "*"
-          #          '[/v2/actuator/**]':
-          #            allow-credentials: true
-          #            allowedOrigins: "http://localhost:8080,https://movie.doubans.com"
-          #            allowedMethods: "*"
-          #            allowedHeaders: "*"
-          #          '[/v2/user/**]':
-          #            allow-credentials: true
-          #            allowedOrigins: "http://localhost:8080,https://movie.doubans.com"
-          #            allowedMethods: "*"
-          #            allowedHeaders: "*"
-          #          '[/v2/music/**]':
-          #            allow-credentials: true
-          #            allowedOrigins: "http://localhost:8080,https://movie.doubans.com"
-          #            allowedMethods: "*"
-          #            allowedHeaders: "*"
-          #          '[/v2/search/**]':
-          #            allow-credentials: true
-          #            allowedOrigins: "http://localhost:8080,https://movie.doubans.com"
-          #            allowedMethods: "*"
-          #            allowedHeaders: "*"
-          # 其他对外提供的API服务
-          '[/**]':
+          # 不对外提供的API服务
+          '[/v2/oauth/**]':
+            allow-credentials: true
             allowedOrigins: "http://localhost:8080,https://movie.doubans.com"
+            allowedMethods: "*"
+            allowedHeaders: "*"
+          '[/v2/actuator/**]':
+            allow-credentials: true
+            allowedOrigins: "http://localhost:8080,https://movie.doubans.com"
+            allowedMethods: "*"
+            allowedHeaders: "*"
+          '[/v2/user/**]':
+            allow-credentials: true
+            allowedOrigins: "http://localhost:8080,https://movie.doubans.com"
+            allowedMethods: "*"
+            allowedHeaders: "*"
+          # 其他对外提供的API服务
+          '[/v2/music/**]':
+            allow-credentials: true
+            allowedOrigins: "*"
+            allowedMethods: "*"
+            allowedHeaders: "*"
+          '[/v2/search/**]':
+            allow-credentials: true
+            allowedOrigins: "*"
+            allowedMethods: "*"
+            allowedHeaders: "*"
+          '[/v2/movie/**]':
+            allow-credentials: true
+            allowedOrigins: "*"
+            allowedMethods: "*"
+            allowedHeaders: "*"
+          '[/v2/celebrity/**]':
+            allow-credentials: true
+            allowedOrigins: "*"
+            allowedMethods: "*"
+            allowedHeaders: "*"
+          '[/v2/scene/**]':
+            allow-credentials: true
+            allowedOrigins: "*"
             allowedMethods: "*"
             allowedHeaders: "*"
       discovery:
@@ -68,7 +78,7 @@ spring:
                 # 令牌桶每秒填充平均速率 (相当于该用户在瞬间消耗完总容量的令牌后，之后每秒的请求数限制)
                 redis-rate-limiter.replenishRate: 1
                 # 令牌桶总容量 (相当于该用户瞬间能请求的最大数目)
-                redis-rate-limiter.burstCapacity: 6
+                redis-rate-limiter.burstCapacity: 10
         # ----------------------------------------
         # 搜索
         - id: movie-server-search
@@ -82,7 +92,7 @@ spring:
               args:
                 key-resolver: '#{@ipLimiter}'
                 redis-rate-limiter.replenishRate: 1
-                redis-rate-limiter.burstCapacity: 8
+                redis-rate-limiter.burstCapacity: 20
         # ----------------------------------------
         # 影人
         - id: movie-server-celebrity
@@ -96,7 +106,7 @@ spring:
               args:
                 key-resolver: '#{@ipLimiter}'
                 redis-rate-limiter.replenishRate: 1
-                redis-rate-limiter.burstCapacity: 6
+                redis-rate-limiter.burstCapacity: 10
         # ----------------------------------------
         # 场景
         - id: movie-server-scene
@@ -110,7 +120,7 @@ spring:
               args:
                 key-resolver: '#{@ipLimiter}'
                 redis-rate-limiter.replenishRate: 1
-                redis-rate-limiter.burstCapacity: 6
+                redis-rate-limiter.burstCapacity: 10
         # ----------------------------------------
         # oauth2认证
         - id: movie-server-auth
@@ -124,7 +134,7 @@ spring:
               args:
                 key-resolver: '#{@ipLimiter}'
                 redis-rate-limiter.replenishRate: 1
-                redis-rate-limiter.burstCapacity: 10
+                redis-rate-limiter.burstCapacity: 50
         # ----------------------------------------
         #        # config服务
         #        - id: movie-server-config
@@ -146,7 +156,7 @@ spring:
               args:
                 key-resolver: '#{@ipLimiter}'
                 redis-rate-limiter.replenishRate: 1
-                redis-rate-limiter.burstCapacity: 6
+                redis-rate-limiter.burstCapacity: 10
         # ----------------------------------------
         #        # 音乐
         #        - id: movie-server-music
@@ -175,7 +185,7 @@ spring:
                 key-resolver: '#{@ipLimiter}'
                 redis-rate-limiter.replenishRate: 2
                 # 每个页面初始化大概需要8个请求
-                redis-rate-limiter.burstCapacity: 20
+                redis-rate-limiter.burstCapacity: 50
         # ----------------------------------------
       # 全局路由默认过滤器
       default-filters:
@@ -207,7 +217,7 @@ hystrix:
             maxConcurrentRequests: 100
           thread:
             # 用来设置thread和semaphore两种隔离策略的超时时间，默认值是1000 ms
-            timeoutInMilliseconds: 5000
+            timeoutInMilliseconds: 10000
       # 所有命令降级配置对策略ExecutionIsolationStrategy.THREAD或者ExecutionIsolationStrategy.SEMAPHORE都生效
       fallback:
         isolation:
@@ -224,3 +234,12 @@ hystrix:
       coreSize: 50
       # 最大线程数 默认10
       maximumSize: 100
+ribbon:
+  # ribbon 默认超时时间 1s
+  ReadTimeout: 10000
+  ConnectTimeout: 10000
+  #饥饿加载模式
+  eager-load:
+    enabled: true
+    # 指定需要饥饿加载的客户端名称、服务名
+    clients: spring-application-name服务名称

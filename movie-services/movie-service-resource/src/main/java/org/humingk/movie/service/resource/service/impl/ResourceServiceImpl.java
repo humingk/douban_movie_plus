@@ -21,9 +21,10 @@ public class ResourceServiceImpl implements ResourceService {
   @Autowired private ResourceMovieExample resourceMovieExample;
 
   @Override
-  public List<ResourceMovie> getResourceListByMovieDoubanId(Long id) {
+  public List<ResourceMovie> getResourceListByMovieDoubanId(Long id, int offset, int limit) {
     resourceMovieExample.start().andIdMovieDoubanEqualTo(id);
     resourceMovieExample.setOrderByClause("id_type_resource");
+    PageHelper.offsetPage(offset, limit);
     List<ResourceMovie> resultList = resourceMovieMapper.selectByExample(resourceMovieExample);
     if (resultList.isEmpty()) {
       throw new MyException(CodeAndMsg.NO_RESOURCE);
@@ -37,6 +38,11 @@ public class ResourceServiceImpl implements ResourceService {
     resourceMovieExample.start().andNameZhLike("%" + keyword + "%");
     resourceMovieExample.or().andNameOriginLike("%" + keyword + "%");
     PageHelper.offsetPage(offset, limit);
-    return resourceMovieMapper.selectByExample(resourceMovieExample);
+    List<ResourceMovie> resultList = resourceMovieMapper.selectByExample(resourceMovieExample);
+    if (resultList.isEmpty()) {
+      throw new MyException(CodeAndMsg.NO_RESOURCE);
+    } else {
+      return resultList;
+    }
   }
 }

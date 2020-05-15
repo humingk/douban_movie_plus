@@ -66,7 +66,7 @@ public class SceneMovieServiceImpl implements SceneMovieService {
     if (movieSceneList.size() == 1) {
       return movieSceneList.get(0);
     } else {
-      throw new MyException(CodeAndMsg.NO_RESOURCE);
+      throw new MyException(CodeAndMsg.NO_RESOURCE, "该电影暂无场景信息");
     }
   }
 

@@ -76,7 +76,7 @@
 
     <!-- root日志-->
     <root level="info">
-        <!--        <appender-ref ref="STDOUT"/>-->
+        <appender-ref ref="STDOUT"/>
         <appender-ref ref="ROOT_FILE"/>
     </root>
 
