@@ -412,6 +412,7 @@
         <table tableName="user_to_role"/>
         <table tableName="user_netease"/>
         <table tableName="website_resource"/>
+        <table tableName="message"/>
 
 
     </context>

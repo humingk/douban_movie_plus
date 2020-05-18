@@ -242,4 +242,4 @@ ribbon:
   eager-load:
     enabled: true
     # 指定需要饥饿加载的客户端名称、服务名
-    clients: spring-application-name服务名称
+    clients: '*'

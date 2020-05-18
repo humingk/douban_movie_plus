@@ -32,7 +32,7 @@ public interface SearchPlaceSceneApi {
    * @param limit 限制数（默认10）
    * @return
    * @since 2.0.0
-   * @apiNote 根据地点名称开头的字符串找出场景地点的基本信息列表
+   * @apiNote 根据地点名称开头的字符串找出场景地点的基本信息列表,,查询结果为空的将替换为模糊匹配
    */
   @RequestMapping(value = "/search/place/scene/tips", method = RequestMethod.GET)
   Result<List<PlaceSceneVo>> tips(

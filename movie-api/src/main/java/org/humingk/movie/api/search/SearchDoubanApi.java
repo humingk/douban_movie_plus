@@ -31,7 +31,7 @@ public interface SearchDoubanApi {
    * @param limit 限制数（默认10）
    * @return
    * @since 2.0.0
-   * @apiNote 根据名称开头的字符串找出豆瓣电影、豆瓣影人等基本信息列表
+   * @apiNote 根据名称开头的字符串找出豆瓣电影、豆瓣影人等基本信息列表,,查询结果为空的将替换为模糊匹配
    */
   @RequestMapping(value = "/search/douban/tips", method = RequestMethod.GET)
   Result<SearchTipsDoubanVo> tips(

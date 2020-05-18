@@ -46,6 +46,26 @@ public interface MovieDoubanService {
   MovieDoubanDetailsDto getMovieDoubanDetailsByMovieDoubanId(long id);
 
   /**
+   * 根据字符串获取电影基础列表信息
+   *
+   * @param keyword 关键字,包括%
+   * @param offset 偏移量
+   * @param limit 限制数
+   * @return
+   */
+  List<MovieDouban> getMovieDoubanListByKeyword(String keyword, int offset, int limit);
+
+  /**
+   * 通过别名获取电影基础列表信息
+   *
+   * @param keyword 别名关键字,包括%
+   * @param offset 偏移量
+   * @param limit 限制数
+   * @return
+   */
+  List<MovieDouban> getMovieDoubanListByAliasKeyword(String keyword, int offset, int limit);
+
+  /**
    * 根据电影名称开头的字符串匹配电影的基础信息列表
    *
    * @param keyword 电影开头关键字

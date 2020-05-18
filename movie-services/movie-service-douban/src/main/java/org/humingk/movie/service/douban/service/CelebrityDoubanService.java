@@ -32,6 +32,26 @@ public interface CelebrityDoubanService {
   CelebrityDoubanDetailsDto getCelebrityDoubanDetailsByCelebrityDoubanId(long id, int limit);
 
   /**
+   * 获取豆瓣影人列表
+   *
+   * @param keyword 影人关键字,包括%
+   * @param offset 偏移量
+   * @param limit 限制数
+   * @return
+   */
+  List<CelebrityDouban> getCelebrityDoubanListByKeyword(String keyword, int offset, int limit);
+
+  /**
+   * 通过别名获取豆瓣影人列表
+   *
+   * @param keyword 影人别名关键字,包括%
+   * @param offset 偏移量
+   * @param limit 限制数
+   * @return
+   */
+  List<CelebrityDouban> getCelebrityDoubanListByAliasKeyword(String keyword, int offset, int limit);
+
+  /**
    * 获取豆瓣影人搜索提示列表
    *
    * @param keyword 影人开头关键字

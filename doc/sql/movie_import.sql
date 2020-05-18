@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 8.0.19, for Linux (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.20, for Linux (x86_64)
 --
 -- Host: localhost    Database: movie
 -- ------------------------------------------------------
--- Server version	8.0.19
+-- Server version	8.0.20
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -388,6 +388,30 @@ CREATE TABLE `image_scene_detail` (
   PRIMARY KEY (`id`),
   KEY `id_scene_detail` (`id_scene_detail`)
 ) ENGINE=InnoDB AUTO_INCREMENT=103845 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='场景详情剧照';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `message`
+--
+
+DROP TABLE IF EXISTS `message`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `message` (
+  `id` varchar(255) NOT NULL COMMENT '留言ID',
+  `id_user` varchar(255) NOT NULL DEFAULT '' COMMENT '用户ID',
+  `nickname` varchar(255) NOT NULL DEFAULT '' COMMENT '用户昵称',
+  `ip` varchar(255) NOT NULL DEFAULT '' COMMENT 'IP地址',
+  `content` varchar(1000) NOT NULL DEFAULT '' COMMENT '留言内容',
+  `create_time` bigint unsigned NOT NULL DEFAULT '0' COMMENT '留言时间',
+  `agree` int unsigned NOT NULL DEFAULT '0' COMMENT '赞同数',
+  PRIMARY KEY (`id`),
+  KEY `id_user` (`id_user`),
+  KEY `nickname` (`nickname`),
+  KEY `ip` (`ip`),
+  KEY `create_time` (`create_time` DESC),
+  KEY `agree` (`agree` DESC)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='留言板';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -834,7 +858,7 @@ CREATE TABLE `resource_movie` (
   KEY `id_type_resource` (`id_type_resource`),
   KEY `name_zh` (`name_zh`),
   KEY `create_year` (`create_year`)
-) ENGINE=InnoDB AUTO_INCREMENT=990863 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='电影资源';
+) ENGINE=InnoDB AUTO_INCREMENT=1027736 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='电影资源';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1304,4 +1328,4 @@ CREATE TABLE `zipkin_spans` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-05-01 21:57:54
+-- Dump completed on 2020-05-16 15:27:11

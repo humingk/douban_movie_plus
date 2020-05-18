@@ -38,6 +38,10 @@ public class CelebrityDoubanServiceTest {
         celebrityDoubanService
             .getSearchTipsCelebrityDoubanListByCelebrityDoubanKeywordStart("宫", 0, 10)
             .isEmpty());
+    Assert.assertFalse(
+        celebrityDoubanService
+            .getSearchTipsCelebrityDoubanListByCelebrityDoubanKeywordStart("宮﨑駿", 0, 10)
+            .isEmpty());
   }
 
   @Test
@@ -45,6 +49,10 @@ public class CelebrityDoubanServiceTest {
     Assert.assertFalse(
         celebrityDoubanService
             .getSearchResultCelebrityDoubanListByCelebrityDoubanKeyword("爱", 0, 10)
+            .isEmpty());
+    Assert.assertFalse(
+        celebrityDoubanService
+            .getSearchResultCelebrityDoubanListByCelebrityDoubanKeyword("宮﨑駿", 0, 10)
             .isEmpty());
   }
 }

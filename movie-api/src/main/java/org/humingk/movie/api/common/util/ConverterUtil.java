@@ -36,6 +36,17 @@ public class ConverterUtil {
   }
 
   /**
+   * Unix时间戳转换为yyyy-MM-dd HH:mm:ss
+   *
+   * @param unixTimestamp
+   * @return
+   */
+  @Named("unixTimestamp2")
+  public String unixTimestamp2(Long unixTimestamp) {
+    return unixTimestamp == 0 ? "" : DateFormatUtils.format(unixTimestamp, "yyyy-MM-dd HH:mm:ss");
+  }
+
+  /**
    * 获取豆瓣电影url
    *
    * @param id
@@ -403,5 +414,19 @@ public class ConverterUtil {
     return mtcScore.compareTo(new BigDecimal(8)) >= 0
         ? "102,204,51"
         : (mtcScore.compareTo(new BigDecimal(4)) >= 0 ? "255,204,51" : "255,0,0");
+  }
+  /**
+   * ip地址隐藏
+   *
+   * @param ip
+   * @return
+   */
+  @Named("ip")
+  public String ip(String ip) {
+    String[] list = ip.split("\\.");
+    if (list.length == 4) {
+      return list[0] + ".*.*." + list[3];
+    }
+    return ip;
   }
 }

@@ -60,6 +60,16 @@ public interface SceneMovieService {
   MovieSceneAllDto getMovieSceneAllByMovieDoubanId(Long id);
 
   /**
+   * 获取场景电影列表
+   *
+   * @param keyword 电影名称关键字,包括%
+   * @param offset 偏移量
+   * @param limit 限制数
+   * @return
+   */
+  List<MovieScene> getMovieSceneListByKeyword(String keyword, int offset, int limit);
+
+  /**
    * 通过关键字开头获取场景电影列表
    *
    * @param keyword 电影名称关键字

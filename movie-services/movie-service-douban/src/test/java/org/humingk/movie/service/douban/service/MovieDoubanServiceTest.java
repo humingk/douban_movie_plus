@@ -36,6 +36,10 @@ public class MovieDoubanServiceTest {
         movieDoubanService
             .getSearchTipsMovieDoubanListByMovieDoubanKeywordStart("爱", 0, 10)
             .isEmpty());
+    Assert.assertFalse(
+        movieDoubanService
+            .getSearchTipsMovieDoubanListByMovieDoubanKeywordStart("刺激1995", 0, 10)
+            .isEmpty());
   }
 
   @Test
@@ -43,6 +47,10 @@ public class MovieDoubanServiceTest {
     Assert.assertFalse(
         movieDoubanService
             .getSearchResultMovieDoubanListByMovieDoubanKeyword("爱", 0, 10)
+            .isEmpty());
+    Assert.assertFalse(
+        movieDoubanService
+            .getSearchResultMovieDoubanListByMovieDoubanKeyword("刺激1995", 0, 10)
             .isEmpty());
   }
 

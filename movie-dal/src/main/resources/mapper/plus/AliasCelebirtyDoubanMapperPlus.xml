@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.humingk.movie.dal.mapper.plus.AliasCelebrityDoubanMapperPlus">
+    <resultMap id="BaseResultMapPlus"
+               extends="org.humingk.movie.dal.mapper.auto.AliasCelebrityDoubanMapper.BaseResultMap"
+               type="org.humingk.movie.dal.entity.AliasCelebrityDouban"/>
+    <!--豆瓣影人ID列表-->
+    <select id="selectIdCelebrityDoubanListByKeyword" resultType="java.lang.Long">
+        select id_celebrity_douban
+        from alias_celebrity_douban
+        where name_alias like #{keyword}
+        group by(id_celebrity_douban)
+        limit #{offset},#{limit}
+    </select>
+</mapper>

@@ -235,3 +235,71 @@ insert into celebrity_douban_to_classic_douban
 values (1023337, '0B5E86CE-55D2-5942-5A93-D6D03A961ABC', '柊瑠美'),
        (1023337, 'C3538117-7D57-65AA-FE70-4548D79CDB06', '柊瑠美'),
        (1387991, '416B8DCC-42ED-2B17-0B6A-1A18D3ADDB4C', '中村彰男');
+
+
+insert into message
+values ('top', 'humingk', 'humingk', '0.0.0.0', '聊天吹水提建议，欢迎加入豆瓣电影Plus交流群 476584154 口令 doubans', 7979483471000, 111111);
+insert into message
+values ('11', 'humingk', '老x', '0.0.0.0', '大哥，你是了解我的', 1577901722000, 1);
+insert into message
+values ('12', 'humingk', '叶问', '0.0.0.0', '我要打十个', 1577905322000,
+        1);
+insert into message
+values ('13', 'humingk', '酱爆', '0.0.0.0', '我酱爆，在这moment，要爆了~', 1584982801000,
+        9);
+insert into message
+values ('14', 'humingk', '至尊宝', '0.0.0.0', '人家两个男才女貌，哪轮得到你这个妖怪来反对', 1578682922000,
+        8);
+insert into message
+values ('15', 'humingk', '牛夫人', '0.0.0.0', '以前陪我看月亮的时候，叫我小甜甜，现在新人胜旧人啦！叫人家牛夫人', 1584896401000,
+        8);
+insert into message
+values ('16', 'humingk', '9527', '0.0.0.0', '越来越接近秋香姐，今天的心情是大不同啊，大不同', 1583902922000,
+        3);
+insert into message
+values ('17', 'humingk', '星', '0.0.0.0', '一支穿云箭，千军万马来相见', 1581570122000,
+        4);
+insert into message
+values ('18', 'humingk', '凌凌漆', '0.0.0.0', '表面上看这是一个吹风机，实际上它是一个刮胡刀', 1579662122000,
+        5);
+insert into message
+values ('19', 'humingk', '星', '0.0.0.0', '到底是让我打他还是打他妈啊！你搞得我好乱啊！', 1582599722000,
+        4);
+insert into message
+values ('20', 'humingk', '至尊宝', '0.0.0.0', '长夜漫漫，无心睡眠，我以为只有我睡不着觉，没想到晶晶姑娘你也一样', 1585105322000,
+        9);
+insert into message
+values ('21', 'humingk', '何志武', '0.0.0.0', '每个人都有一个习惯，我的习惯是在这里等阿may下班', 1578711722000,
+        8);
+insert into message
+values ('22', 'humingk', '鲁迅', '0.0.0.0', '你抓周树人和我鲁迅有什么关系', 1584982861000,
+        7);
+insert into message
+values ('23', 'humingk', '唐三藏', '0.0.0.0', '人是人他妈生的，妖是妖他妈生的，只要你有一颗善良的心就不再是妖，是人妖', 1581044522000,
+        6);
+insert into message
+values ('24', 'humingk', '讨债的', '0.0.0.0',
+        '你以为你躲起来我就找不到你了吗？没有用的，你是那样拉风的男人。不管在什么地方，就好像漆黑中的萤火虫一样，那样的鲜明，那样的出众，你那忧郁的眼神、唏嘘的胡渣子、神乎其技的刀法，还有那杯Dry Martine……都深深地迷住了我',
+        1578106922000,
+        8);
+insert into message
+values ('25', 'humingk', '9527', '0.0.0.0', '八目共赏，赏花赏月赏秋香！', 1578366122000,
+        5);
+insert into message
+values ('26', 'humingk', '何金银', '0.0.0.0', '扶老太太过马路我每个星期都做一次，如果是碰到国定假日的话，我还做两三次呢', 1578193322000,
+        4);
+insert into message
+values ('27', 'humingk', '唐伯虎', '0.0.0.0', '落花有意随流水，而流水无心恋落花', 1578538922000,
+        7);
+insert into message
+values ('28', 'humingk', '何金银', '0.0.0.0', '除暴安良是我做市民的责任，积德行善是我的兴趣', 1578508922000,
+        3);
+insert into message
+values ('29', 'humingk', '包龙星', '0.0.0.0', '大家都听到了，是他叫我打我才打的', 1578511922000,
+        5);
+insert into message
+values ('30', 'humingk', '唐三藏', '0.0.0.0', '紫霞在你心目中是不是一个惊叹号？还是一个句号？你脑袋里是不是充满了问号？', 1578538111000,
+        5);
+insert into message
+values ('31', 'humingk', '武状元', '0.0.0.0', '那么在哪里才能买到呢', 1578511122000,
+        4);

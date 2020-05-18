@@ -49,6 +49,7 @@ public class MovieDoubanServiceImpl implements MovieDoubanService {
   @Autowired private MovieDouanToAwardMovieMapperPlus moviedouanToAwardMovieMapperPlus;
   @Autowired private CommentMovieDoubanMapperPlus commentMovieDoubanMapperPlus;
   @Autowired private ClassicDoubanMapperPlus classicDoubanMapperPlus;
+  @Autowired private AliasMovieDoubanMapperPlus aliasMovieDoubanMapperPlus;
 
   @Override
   public MovieDouban getMovieDoubanByMovieDoubanId(long id) {
@@ -118,13 +119,40 @@ public class MovieDoubanServiceImpl implements MovieDoubanService {
   }
 
   @Override
+  public List<MovieDouban> getMovieDoubanListByKeyword(String keyword, int offset, int limit) {
+    movieDoubanExample.start().andNameZhLike(keyword.trim());
+    movieDoubanExample.or().andNameOriginLike(keyword.trim());
+    PageHelper.offsetPage(offset, limit);
+    return movieDoubanMapper.selectByExample(movieDoubanExample);
+  }
+
+  @Override
+  public List<MovieDouban> getMovieDoubanListByAliasKeyword(String keyword, int offset, int limit) {
+    List<MovieDouban> movieDoubanList = new ArrayList<>();
+    List<Long> idMovieDoubanList =
+        aliasMovieDoubanMapperPlus.selectIdMovieDoubanListByKeyword(keyword.trim(), offset, limit);
+    for (Long idMovieDouban : idMovieDoubanList) {
+      movieDoubanList.add(movieDoubanMapper.selectByPrimaryKey(idMovieDouban));
+    }
+    return movieDoubanList;
+  }
+
+  @Override
   public List<SearchTipsMovieDoubanDto> getSearchTipsMovieDoubanListByMovieDoubanKeywordStart(
       String keyword, int offset, int limit) {
     List<SearchTipsMovieDoubanDto> searchTipsMovieDoubanDtoList = new ArrayList<>();
-    movieDoubanExample.start().andNameZhLike(keyword.trim() + "%");
-    movieDoubanExample.or().andNameOriginLike(keyword.trim() + "%");
-    PageHelper.offsetPage(offset, limit);
-    for (MovieDouban movieDouban : movieDoubanMapper.selectByExample(movieDoubanExample)) {
+    List<MovieDouban> movieDoubanList =
+        getMovieDoubanListByKeyword(keyword.trim() + "%", offset, limit);
+    if (movieDoubanList.isEmpty()) {
+      movieDoubanList = getMovieDoubanListByKeyword("%" + keyword.trim() + "%", offset, limit);
+    }
+    if (movieDoubanList.isEmpty()) {
+      movieDoubanList = getMovieDoubanListByAliasKeyword(keyword.trim() + "%", offset, limit);
+    }
+    if (movieDoubanList.isEmpty()) {
+      movieDoubanList = getMovieDoubanListByAliasKeyword("%" + keyword.trim() + "%", offset, limit);
+    }
+    for (MovieDouban movieDouban : movieDoubanList) {
       RateMovieDouban rateMovieDouban =
           rateMovieDoubanMapper.selectByPrimaryKey(movieDouban.getId());
       aliasMovieDoubanExample.start().andIdMovieDoubanEqualTo(movieDouban.getId());
@@ -140,10 +168,12 @@ public class MovieDoubanServiceImpl implements MovieDoubanService {
   public List<SearchResultMovieDoubanDto> getSearchResultMovieDoubanListByMovieDoubanKeyword(
       String keyword, int offset, int limit) {
     List<SearchResultMovieDoubanDto> searchResultMovieDoubanDtoList = new ArrayList<>();
-    movieDoubanExample.start().andNameZhLike("%" + keyword.trim() + "%");
-    movieDoubanExample.or().andNameOriginLike("%" + keyword.trim() + "%");
-    PageHelper.offsetPage(offset, limit);
-    for (MovieDouban movieDouban : movieDoubanMapper.selectByExample(movieDoubanExample)) {
+    List<MovieDouban> movieDoubanList =
+        getMovieDoubanListByKeyword("%" + keyword.trim() + "%", offset, limit);
+    if (movieDoubanList.isEmpty()) {
+      movieDoubanList = getMovieDoubanListByAliasKeyword("%" + keyword.trim() + "%", offset, limit);
+    }
+    for (MovieDouban movieDouban : movieDoubanList) {
       RateMovieDouban rateMovieDouban =
           rateMovieDoubanMapper.selectByPrimaryKey(movieDouban.getId());
       aliasMovieDoubanExample.start().andIdMovieDoubanEqualTo(movieDouban.getId());

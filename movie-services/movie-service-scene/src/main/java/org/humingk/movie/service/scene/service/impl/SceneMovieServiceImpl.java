@@ -145,11 +145,20 @@ public class SceneMovieServiceImpl implements SceneMovieService {
   }
 
   @Override
-  public List<MovieScene> getMovieSceneListByMovieSceneKeywordStart(
-      String keyword, int offset, int limit) {
-    movieSceneExample.start().andNameZhLike(keyword.trim() + "%");
-    movieSceneExample.or().andNameEnLike(keyword.trim() + "%");
+  public List<MovieScene> getMovieSceneListByKeyword(String keyword, int offset, int limit) {
+    movieSceneExample.start().andNameZhLike(keyword.trim());
+    movieSceneExample.or().andNameEnLike(keyword.trim());
     PageHelper.offsetPage(offset, limit);
     return movieSceneMapper.selectByExample(movieSceneExample);
+  }
+
+  @Override
+  public List<MovieScene> getMovieSceneListByMovieSceneKeywordStart(
+      String keyword, int offset, int limit) {
+    List<MovieScene> movieSceneList = getMovieSceneListByKeyword(keyword + "%", offset, limit);
+    if (movieSceneList.isEmpty()) {
+      movieSceneList = getMovieSceneListByKeyword("%" + keyword + "%", offset, limit);
+    }
+    return movieSceneList;
   }
 }

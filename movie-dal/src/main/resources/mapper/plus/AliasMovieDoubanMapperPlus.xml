@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.humingk.movie.dal.mapper.plus.AliasMovieDoubanMapperPlus">
+    <resultMap id="BaseResultMapPlus"
+               extends="org.humingk.movie.dal.mapper.auto.AliasMovieDoubanMapper.BaseResultMap"
+               type="org.humingk.movie.dal.entity.AliasMovieDouban"/>
+    <!--豆瓣电影ID列表-->
+    <select id="selectIdMovieDoubanListByKeyword" resultType="java.lang.Long">
+        select id_movie_douban
+        from alias_movie_douban
+        where name_alias like #{keyword}
+        group by(id_movie_douban)
+        limit #{offset},#{limit}
+    </select>
+</mapper>

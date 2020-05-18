@@ -32,7 +32,7 @@ public interface SearchMovieSceneApi {
    * @param limit 限制数（默认10）
    * @return
    * @since 2.0.0
-   * @apiNote 根据电影名称开头的字符串找出场景电影的基本信息列表
+   * @apiNote 根据电影名称开头的字符串找出场景电影的基本信息列表,,查询结果为空的将替换为模糊匹配
    */
   @RequestMapping(value = "/search/movie/scene/tips", method = RequestMethod.GET)
   Result<List<MovieSceneVo>> tips(

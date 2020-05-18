@@ -15,6 +15,16 @@ public interface ScenePlaceService {
   /**
    * 获取场景地点列表
    *
+   * @param keyword 地点名称关键字,包括%
+   * @param offset 偏移量
+   * @param limit 限制数
+   * @return
+   */
+  List<PlaceScene> getPlaceSceneListByKeyword(String keyword, int offset, int limit);
+
+  /**
+   * 获取场景地点列表
+   *
    * @param keyword 地点名称关键字
    * @param offset 偏移量
    * @param limit 限制数
