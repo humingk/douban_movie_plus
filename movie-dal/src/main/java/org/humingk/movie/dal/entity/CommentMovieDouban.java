@@ -27,7 +27,7 @@ public class CommentMovieDouban implements Serializable {
     /**
      * 投票数
      */
-    private Short agreeVote;
+    private Long agreeVote;
 
     /**
      * 短评日期 /unix

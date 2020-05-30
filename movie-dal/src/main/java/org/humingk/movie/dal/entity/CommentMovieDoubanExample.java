@@ -257,52 +257,52 @@ public class CommentMovieDoubanExample {
             return (Criteria) this;
         }
 
-        public Criteria andAgreeVoteEqualTo(Short value) {
+        public Criteria andAgreeVoteEqualTo(Long value) {
             addCriterion("agree_vote =", value, "agreeVote");
             return (Criteria) this;
         }
 
-        public Criteria andAgreeVoteNotEqualTo(Short value) {
+        public Criteria andAgreeVoteNotEqualTo(Long value) {
             addCriterion("agree_vote <>", value, "agreeVote");
             return (Criteria) this;
         }
 
-        public Criteria andAgreeVoteGreaterThan(Short value) {
+        public Criteria andAgreeVoteGreaterThan(Long value) {
             addCriterion("agree_vote >", value, "agreeVote");
             return (Criteria) this;
         }
 
-        public Criteria andAgreeVoteGreaterThanOrEqualTo(Short value) {
+        public Criteria andAgreeVoteGreaterThanOrEqualTo(Long value) {
             addCriterion("agree_vote >=", value, "agreeVote");
             return (Criteria) this;
         }
 
-        public Criteria andAgreeVoteLessThan(Short value) {
+        public Criteria andAgreeVoteLessThan(Long value) {
             addCriterion("agree_vote <", value, "agreeVote");
             return (Criteria) this;
         }
 
-        public Criteria andAgreeVoteLessThanOrEqualTo(Short value) {
+        public Criteria andAgreeVoteLessThanOrEqualTo(Long value) {
             addCriterion("agree_vote <=", value, "agreeVote");
             return (Criteria) this;
         }
 
-        public Criteria andAgreeVoteIn(List<Short> values) {
+        public Criteria andAgreeVoteIn(List<Long> values) {
             addCriterion("agree_vote in", values, "agreeVote");
             return (Criteria) this;
         }
 
-        public Criteria andAgreeVoteNotIn(List<Short> values) {
+        public Criteria andAgreeVoteNotIn(List<Long> values) {
             addCriterion("agree_vote not in", values, "agreeVote");
             return (Criteria) this;
         }
 
-        public Criteria andAgreeVoteBetween(Short value1, Short value2) {
+        public Criteria andAgreeVoteBetween(Long value1, Long value2) {
             addCriterion("agree_vote between", value1, value2, "agreeVote");
             return (Criteria) this;
         }
 
-        public Criteria andAgreeVoteNotBetween(Short value1, Short value2) {
+        public Criteria andAgreeVoteNotBetween(Long value1, Long value2) {
             addCriterion("agree_vote not between", value1, value2, "agreeVote");
             return (Criteria) this;
         }

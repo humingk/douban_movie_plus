@@ -4,7 +4,7 @@
   <resultMap id="BaseResultMap" type="org.humingk.movie.dal.entity.CommentMovieDouban">
     <id column="id_movie_douban" jdbcType="BIGINT" property="idMovieDouban" />
     <id column="id_user_douban" jdbcType="VARCHAR" property="idUserDouban" />
-    <result column="agree_vote" jdbcType="SMALLINT" property="agreeVote" />
+    <result column="agree_vote" jdbcType="BIGINT" property="agreeVote" />
     <result column="create_date" jdbcType="BIGINT" property="createDate" />
     <result column="content" jdbcType="VARCHAR" property="content" />
   </resultMap>
@@ -104,7 +104,7 @@
   <insert id="insert" parameterType="org.humingk.movie.dal.entity.CommentMovieDouban">
     insert into comment_movie_douban (id_movie_douban, id_user_douban, agree_vote, 
       create_date, content)
-    values (#{idMovieDouban,jdbcType=BIGINT}, #{idUserDouban,jdbcType=VARCHAR}, #{agreeVote,jdbcType=SMALLINT}, 
+    values (#{idMovieDouban,jdbcType=BIGINT}, #{idUserDouban,jdbcType=VARCHAR}, #{agreeVote,jdbcType=BIGINT}, 
       #{createDate,jdbcType=BIGINT}, #{content,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="org.humingk.movie.dal.entity.CommentMovieDouban">
@@ -134,7 +134,7 @@
         #{idUserDouban,jdbcType=VARCHAR},
       </if>
       <if test="agreeVote != null">
-        #{agreeVote,jdbcType=SMALLINT},
+        #{agreeVote,jdbcType=BIGINT},
       </if>
       <if test="createDate != null">
         #{createDate,jdbcType=BIGINT},
@@ -160,7 +160,7 @@
         id_user_douban = #{record.idUserDouban,jdbcType=VARCHAR},
       </if>
       <if test="record.agreeVote != null">
-        agree_vote = #{record.agreeVote,jdbcType=SMALLINT},
+        agree_vote = #{record.agreeVote,jdbcType=BIGINT},
       </if>
       <if test="record.createDate != null">
         create_date = #{record.createDate,jdbcType=BIGINT},
@@ -177,7 +177,7 @@
     update comment_movie_douban
     set id_movie_douban = #{record.idMovieDouban,jdbcType=BIGINT},
       id_user_douban = #{record.idUserDouban,jdbcType=VARCHAR},
-      agree_vote = #{record.agreeVote,jdbcType=SMALLINT},
+      agree_vote = #{record.agreeVote,jdbcType=BIGINT},
       create_date = #{record.createDate,jdbcType=BIGINT},
       content = #{record.content,jdbcType=VARCHAR}
     <if test="_parameter != null">
@@ -188,7 +188,7 @@
     update comment_movie_douban
     <set>
       <if test="agreeVote != null">
-        agree_vote = #{agreeVote,jdbcType=SMALLINT},
+        agree_vote = #{agreeVote,jdbcType=BIGINT},
       </if>
       <if test="createDate != null">
         create_date = #{createDate,jdbcType=BIGINT},
@@ -202,7 +202,7 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="org.humingk.movie.dal.entity.CommentMovieDouban">
     update comment_movie_douban
-    set agree_vote = #{agreeVote,jdbcType=SMALLINT},
+    set agree_vote = #{agreeVote,jdbcType=BIGINT},
       create_date = #{createDate,jdbcType=BIGINT},
       content = #{content,jdbcType=VARCHAR}
     where id_movie_douban = #{idMovieDouban,jdbcType=BIGINT}

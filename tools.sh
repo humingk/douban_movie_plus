@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# 此处路径为生产环境绝对路径,开发环境本地测试请忽略
 RUN_SERVER=/home/humingk/run
 OUTPUT_SERVER=/home/humingk/git/douban_movie_plus/doc/log
 # jar
@@ -116,9 +117,9 @@ function api_update() {
 function export_database_sql_create() {
   read -p "你确定要导出数据库建表SQL语句吗？[y/n]:" choose_export
   if [ "$choose_export" = "y" ]; then
-    mysqldump -h localhost -P 3306 -uroot -p -d --databases movie >./doc/sql/movie_import.sql
+    mysqldump -h localhost -P 3306 -uroot -p -d --databases movie >./doc/sql/movie_structure.sql
     if [ $? -eq 0 ]; then
-      echo "导出成功 => ./doc/movie_import.sql"
+      echo "导出成功 => ./doc/movie_structure.sql"
     else
       echo "导出失败..."
     fi
@@ -135,6 +136,7 @@ function delete_target() {
   fi
 }
 
+# 数据库备份
 function export_database_backup(){
     date=$(date "+%Y%m%d")
     sudo mysqldump -h localhost -P 3306 -uroot -p --databases movie > ~/Documents/备份/movie${date}.sql
@@ -161,6 +163,7 @@ function netease_start() {
   fi
 }
 
+# 生产环境启动专用,开发环境本地测试请忽略
 function start_project(){
     # 环境变量
     source /etc/profile
@@ -254,6 +257,7 @@ function start_project(){
     echo "------------------------------------------------"
 }
 
+# 生产环境启动专用,开发环境本地测试请忽略
 function stop_project(){
     echo "正在停止项目..."
     server_list[0]=$SERVER_EUREKA_JAR
@@ -293,9 +297,9 @@ else
     echo "[4]  手动删除target目录"
     echo "[5]  导出数据库建表语句"
     echo "[6]  导出数据库备份文件"
-    echo "[7]  启动MusicApi服务"
-    echo "[8]  启动项目 start"
-    echo "[9]  停止项目 stop"
+    echo "[7]  启动NeteaseCloudMusicApi服务"
+#    echo "[8]  启动项目 start (生产环境)"
+#    echo "[9]  停止项目 stop  (生产环境)"
     echo "==========================================="
     read -p "请选择脚本:" choose
     case $choose in

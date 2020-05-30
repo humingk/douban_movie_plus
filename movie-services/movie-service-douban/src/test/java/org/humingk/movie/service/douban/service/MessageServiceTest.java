@@ -17,7 +17,6 @@ public class MessageServiceTest {
   public void insertMessage() {
     Assert.assertNotNull(
         messageService.insertMessage("jiangbao", "酱爆", "0.0.0.0", "我酱爆，在这moment，要爆了~"));
-    Assert.assertNotNull(messageService.insertMessage("luxun", "鲁迅", "0.0.0.0", "你抓周树人和我鲁迅有什么关系"));
   }
 
   @Test
@@ -33,6 +32,6 @@ public class MessageServiceTest {
 
   @Test
   public void agree() {
-    Assert.assertTrue(messageService.agree("top"));
+    Assert.assertTrue(messageService.agree("13"));
   }
 }

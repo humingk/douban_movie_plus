@@ -12,7 +12,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 public class ZhihuServiceTest {
 
   @Autowired private ZhihuService zhihuService;
-  private static final Long MOVIE_DOUBAN_ID = 1291561L;
+  private static final Long MOVIE_DOUBAN_ID = 1889243L;
 
   @Test
   public void getMovieZhihuByMovieDoubanId() {

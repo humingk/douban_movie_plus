@@ -252,7 +252,7 @@ DROP TABLE IF EXISTS `comment_movie_douban`;
 CREATE TABLE `comment_movie_douban` (
   `id_movie_douban` bigint unsigned NOT NULL COMMENT '豆瓣电影ID',
   `id_user_douban` varchar(255) NOT NULL COMMENT '豆瓣用户ID',
-  `agree_vote` smallint NOT NULL DEFAULT '0' COMMENT '投票数',
+  `agree_vote` bigint NOT NULL DEFAULT '0' COMMENT '投票数',
   `create_date` bigint NOT NULL DEFAULT '0' COMMENT '短评日期 /unix',
   `content` varchar(1000) NOT NULL DEFAULT '' COMMENT '短评内容',
   PRIMARY KEY (`id_movie_douban`,`id_user_douban`),
@@ -642,28 +642,6 @@ CREATE TABLE `movie_zhihu` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Table structure for table `movie_zhihu_copy`
---
-
-DROP TABLE IF EXISTS `movie_zhihu_copy`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `movie_zhihu_copy` (
-  `id` bigint unsigned NOT NULL DEFAULT '0' COMMENT '知乎电影ID',
-  `id_movie_douban` bigint unsigned NOT NULL DEFAULT '0' COMMENT '豆瓣电影ID',
-  `name_zh` varchar(255) NOT NULL DEFAULT '' COMMENT '知乎电影中文名',
-  `zhihu_score` decimal(3,1) NOT NULL DEFAULT '0.0' COMMENT '知乎评分',
-  `zhihu_vote` int unsigned NOT NULL DEFAULT '0' COMMENT '知乎评分票数',
-  `maoyan_score` decimal(3,1) NOT NULL DEFAULT '0.0' COMMENT '猫眼评分',
-  PRIMARY KEY (`id`,`id_movie_douban`),
-  KEY `name_zh` (`name_zh`),
-  KEY `zhihu_score` (`zhihu_score` DESC),
-  KEY `zhihu_vote` (`zhihu_vote` DESC),
-  KEY `maoyan_score` (`maoyan_score` DESC)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='知乎电影';
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
 -- Table structure for table `permission`
 --
 
@@ -858,7 +836,7 @@ CREATE TABLE `resource_movie` (
   KEY `id_type_resource` (`id_type_resource`),
   KEY `name_zh` (`name_zh`),
   KEY `create_year` (`create_year`)
-) ENGINE=InnoDB AUTO_INCREMENT=1027736 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='电影资源';
+) ENGINE=InnoDB AUTO_INCREMENT=1114420 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='电影资源';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1328,4 +1306,4 @@ CREATE TABLE `zipkin_spans` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-05-16 15:27:11
+-- Dump completed on 2020-05-29 13:27:15

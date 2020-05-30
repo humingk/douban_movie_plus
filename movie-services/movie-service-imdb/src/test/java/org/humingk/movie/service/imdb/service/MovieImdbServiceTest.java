@@ -13,7 +13,7 @@ public class MovieImdbServiceTest {
 
   @Autowired private MovieImdbService movieImdbService;
 
-  private static final Long MOVIE_DOUBAN_ID = 1291561L;
+  private static final Long MOVIE_DOUBAN_ID = 1889243L;
   private static final Long MOVIE_IMDB_ID = 245429L;
 
   @Test

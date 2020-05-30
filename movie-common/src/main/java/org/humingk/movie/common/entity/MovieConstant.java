@@ -187,30 +187,30 @@ public class MovieConstant {
     WEBSITE_RESOURCE.put((short) 13, "http://tv.cctv.com");
     WEBSITE_RESOURCE.put((short) 13, "93,99,111");
     // ---
-    WEBSITE_RESOURCE.put((short) 101, "电影天堂");
-    WEBSITE_RESOURCE.put((short) 101, "https://www.dy2018.com");
-    WEBSITE_RESOURCE.put((short) 101, "0,135,232");
-    WEBSITE_RESOURCE.put((short) 102, "LOL电影天堂");
-    WEBSITE_RESOURCE.put((short) 102, "https://www.loldytt.com");
-    WEBSITE_RESOURCE.put((short) 102, "240,36,50");
-    WEBSITE_RESOURCE.put((short) 103, "BT电影天堂");
-    WEBSITE_RESOURCE.put((short) 103, "http://www.btbtdy.me");
-    WEBSITE_RESOURCE.put((short) 103, "17,122,243");
-    WEBSITE_RESOURCE.put((short) 104, "xl720");
-    WEBSITE_RESOURCE.put((short) 104, "https://www.xl720.com");
-    WEBSITE_RESOURCE.put((short) 104, "37,141,205");
-    WEBSITE_RESOURCE.put((short) 105, "6v电影网");
-    WEBSITE_RESOURCE.put((short) 105, "http://www.hao6v.com");
-    WEBSITE_RESOURCE.put((short) 105, "44,142,59");
-    WEBSITE_RESOURCE.put((short) 106, "狗带TV");
-    WEBSITE_RESOURCE.put((short) 106, "http://www.goodaitv.com");
-    WEBSITE_RESOURCE.put((short) 106, "27,111,47");
-    WEBSITE_RESOURCE.put((short) 107, "在线之家");
-    WEBSITE_RESOURCE.put((short) 107, "http://www.zxzj.me");
-    WEBSITE_RESOURCE.put((short) 107, "244,153,3");
-    WEBSITE_RESOURCE.put((short) 108, "比特大雄");
-    WEBSITE_RESOURCE.put((short) 108, "https://www.btdx8.com");
-    WEBSITE_RESOURCE.put((short) 108, "244,237,37");
+    WEBSITE_RESOURCE.put((short) 110, "在线之家");
+    WEBSITE_RESOURCE.put((short) 110, "http://www.zxzj.me");
+    WEBSITE_RESOURCE.put((short) 110, "244,153,3");
+    WEBSITE_RESOURCE.put((short) 120, "比特大雄");
+    WEBSITE_RESOURCE.put((short) 120, "https://www.btdx8.com");
+    WEBSITE_RESOURCE.put((short) 120, "244,237,37");
+    WEBSITE_RESOURCE.put((short) 130, "xl720");
+    WEBSITE_RESOURCE.put((short) 130, "https://www.xl720.com");
+    WEBSITE_RESOURCE.put((short) 130, "37,141,205");
+    WEBSITE_RESOURCE.put((short) 140, "电影天堂");
+    WEBSITE_RESOURCE.put((short) 140, "https://www.dy2018.com");
+    WEBSITE_RESOURCE.put((short) 140, "0,135,232");
+    WEBSITE_RESOURCE.put((short) 150, "6v电影网");
+    WEBSITE_RESOURCE.put((short) 150, "http://www.hao6v.com");
+    WEBSITE_RESOURCE.put((short) 150, "44,142,59");
+    WEBSITE_RESOURCE.put((short) 160, "BT电影天堂");
+    WEBSITE_RESOURCE.put((short) 160, "http://www.btbtdy.me");
+    WEBSITE_RESOURCE.put((short) 160, "17,122,243");
+    WEBSITE_RESOURCE.put((short) 170, "LOL电影天堂");
+    WEBSITE_RESOURCE.put((short) 170, "https://www.loldytt.com");
+    WEBSITE_RESOURCE.put((short) 170, "240,36,50");
+    WEBSITE_RESOURCE.put((short) 180, "狗带TV");
+    WEBSITE_RESOURCE.put((short) 180, "http://www.goodaitv.com");
+    WEBSITE_RESOURCE.put((short) 180, "27,111,47");
   }
 
   /** 电影资源类型 */

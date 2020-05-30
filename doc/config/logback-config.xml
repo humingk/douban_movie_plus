@@ -87,15 +87,15 @@
         <appender-ref ref="GATEWAY"/>
     </logger>
 
-    <!--业务-server list日志-->
-    <logger name="org.humingk.movie.server" additivity="false" level="info">
-        <appender-ref ref="SERVER_LIST"/>
-    </logger>
+    <!--    &lt;!&ndash;业务-server list日志&ndash;&gt;-->
+    <!--    <logger name="org.humingk.movie.server" additivity="false" level="info">-->
+    <!--        <appender-ref ref="SERVER_LIST"/>-->
+    <!--    </logger>-->
 
-    <!--业务-service list日志-->
-    <logger name="org.humingk.movie.service" additivity="false" level="info">
-        <appender-ref ref="SERVICE_LIST"/>
-    </logger>
+    <!--    &lt;!&ndash;业务-service list日志&ndash;&gt;-->
+    <!--    <logger name="org.humingk.movie.service" additivity="false" level="info">-->
+    <!--        <appender-ref ref="SERVICE_LIST"/>-->
+    <!--    </logger>-->
 
 </configuration>
 

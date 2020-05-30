@@ -16,11 +16,10 @@ public interface ResourceService {
    * 获取电影资源
    *
    * @param id 豆瓣电影ID
-   * @param offset 偏移量
    * @param limit 限制数
    * @return
    */
-  List<ResourceMovie> getResourceListByMovieDoubanId(Long id, int offset, int limit);
+  List<ResourceMovie> getResourceListByMovieDoubanId(Long id, int limit);
 
   /**
    * 搜索电影资源

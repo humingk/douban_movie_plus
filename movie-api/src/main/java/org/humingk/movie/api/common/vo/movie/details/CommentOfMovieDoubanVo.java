@@ -29,7 +29,7 @@ public class CommentOfMovieDoubanVo implements Serializable {
   private String urlUserDouban;
 
   /** 投票数 */
-  private Short agreeVote;
+  private Long agreeVote;
 
   /** 短评日期 */
   private String createDate;

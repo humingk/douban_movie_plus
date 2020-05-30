@@ -22,12 +22,9 @@ public class ResourceController implements ResourceApi {
   @Override
   public Result<List<ResourceMovieVo>> bases(
       @RequestParam("id") @NotNull Long id,
-      @RequestParam(value = "offset", required = false, defaultValue = "0") @PositiveOrZero
-          Integer offset,
-      @RequestParam(value = "limit", required = false, defaultValue = "20") @PositiveOrZero
+      @RequestParam(value = "limit", required = false, defaultValue = "30") @PositiveOrZero
           Integer limit) {
     return Result.success(
-        resourceMovieVoConverter.toList(
-            resourceService.getResourceListByMovieDoubanId(id, offset, limit)));
+        resourceMovieVoConverter.toList(resourceService.getResourceListByMovieDoubanId(id, limit)));
   }
 }

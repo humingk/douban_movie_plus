@@ -122,6 +122,7 @@ public class MovieDoubanServiceImpl implements MovieDoubanService {
   public List<MovieDouban> getMovieDoubanListByKeyword(String keyword, int offset, int limit) {
     movieDoubanExample.start().andNameZhLike(keyword.trim());
     movieDoubanExample.or().andNameOriginLike(keyword.trim());
+    movieDoubanExample.setOrderByClause("have_seen");
     PageHelper.offsetPage(offset, limit);
     return movieDoubanMapper.selectByExample(movieDoubanExample);
   }

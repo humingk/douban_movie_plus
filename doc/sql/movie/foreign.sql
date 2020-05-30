@@ -1,3 +1,5 @@
+# 外键关系
+# <= 2.0.0
 alter table movie_imdb
     add foreign key (id_movie_douban) references movie_douban (id);
 alter table movie_imdb

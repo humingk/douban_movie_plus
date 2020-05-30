@@ -3,6 +3,8 @@ package org.humingk.movie.service.douban.service;
 import org.humingk.movie.dal.entity.Message;
 import org.springframework.validation.annotation.Validated;
 
+import javax.validation.constraints.AssertTrue;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 /**
@@ -22,6 +24,7 @@ public interface MessageService {
    * @param content 留言内容
    * @return
    */
+  @NotNull(message = "留言失败")
   Message insertMessage(String idUser, String nickname, String ip, String content);
 
   /**
@@ -39,6 +42,7 @@ public interface MessageService {
    *
    * @return
    */
+  @NotNull(message = "获取留言板信息列表总数失败")
   long getMessageAmount();
 
   /**
@@ -46,5 +50,6 @@ public interface MessageService {
    *
    * @param id 留言ID
    */
+  @AssertTrue(message = "点赞失败")
   boolean agree(String id);
 }

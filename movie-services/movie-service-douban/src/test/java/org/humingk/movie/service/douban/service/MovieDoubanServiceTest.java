@@ -12,7 +12,9 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 public class MovieDoubanServiceTest {
   @Autowired private MovieDoubanService movieDoubanService;
 
-  private static final Long MOVIE_DOUBAN_ID = 1291561L;
+  private static final Long MOVIE_DOUBAN_ID = 1889243L;
+
+  private static final String KEYWORD = "爱";
 
   @Test
   public void getMovieDoubanByMovieDoubanId() {
@@ -34,11 +36,11 @@ public class MovieDoubanServiceTest {
   public void getSearchTipsMovieDoubanByKeywordStart() {
     Assert.assertFalse(
         movieDoubanService
-            .getSearchTipsMovieDoubanListByMovieDoubanKeywordStart("爱", 0, 10)
+            .getSearchTipsMovieDoubanListByMovieDoubanKeywordStart(KEYWORD, 0, 10)
             .isEmpty());
-    Assert.assertFalse(
+    Assert.assertTrue(
         movieDoubanService
-            .getSearchTipsMovieDoubanListByMovieDoubanKeywordStart("刺激1995", 0, 10)
+            .getSearchTipsMovieDoubanListByMovieDoubanKeywordStart("逐梦演艺圈", 0, 10)
             .isEmpty());
   }
 
@@ -46,11 +48,11 @@ public class MovieDoubanServiceTest {
   public void getSearchResultMovieDoubanListByMovieDoubanKeyword() {
     Assert.assertFalse(
         movieDoubanService
-            .getSearchResultMovieDoubanListByMovieDoubanKeyword("爱", 0, 10)
+            .getSearchResultMovieDoubanListByMovieDoubanKeyword(KEYWORD, 0, 10)
             .isEmpty());
-    Assert.assertFalse(
+    Assert.assertTrue(
         movieDoubanService
-            .getSearchResultMovieDoubanListByMovieDoubanKeyword("刺激1995", 0, 10)
+            .getSearchResultMovieDoubanListByMovieDoubanKeyword("逐梦演艺圈", 0, 10)
             .isEmpty());
   }
 

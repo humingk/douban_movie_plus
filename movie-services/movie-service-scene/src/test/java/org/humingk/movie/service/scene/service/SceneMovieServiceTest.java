@@ -13,7 +13,7 @@ public class SceneMovieServiceTest {
 
   @Autowired private SceneMovieService sceneMovieService;
 
-  private static final Long MOVIE_DOUBAN_ID = 1291875L;
+  private static final Long MOVIE_DOUBAN_ID = 1889243L;
 
   @Test
   public void getMovieSceneBriefByMovieDoubanId() {
