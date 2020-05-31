@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.humingk.movie.dal.mapper.plus.MovieDoubanMapperPlus">
+    <resultMap id="BaseResultMapPlus"
+               extends="org.humingk.movie.dal.mapper.auto.MovieDoubanMapper.BaseResultMap"
+               type="org.humingk.movie.dal.entity.MovieDouban"/>
+    <!--豆瓣电影-豆瓣影人-->
+    <resultMap id="MovieDoubanToCelebrityDouban"
+               type="org.humingk.movie.dal.entity.MovieDoubanToCelebrityDouban"
+               extends="org.humingk.movie.dal.mapper.auto.MovieDoubanToCelebrityDoubanMapper.BaseResultMap"/>
+    <!--豆瓣电影评分-->
+    <resultMap id="RateMovieDouban"
+               type="org.humingk.movie.dal.entity.RateMovieDouban"
+               extends="org.humingk.movie.dal.mapper.auto.RateMovieDoubanMapper.BaseResultMap"/>
+    <!--与豆瓣电影相关的豆瓣影人-->
+    <resultMap id="MovieDoubanOfCelebrityDoubanDoResultMapPlus"
+               type="org.humingk.movie.dal.domain.douban.MovieDoubanOfCelebrityDoubanDo"
+               extends="BaseResultMapPlus">
+        <association property="rateMovieDouban"
+                     javaType="org.humingk.movie.dal.entity.RateMovieDouban"
+                     resultMap="RateMovieDouban"/>
+        <collection property="movieDoubanToCelebrityDoubanList"
+                    ofType="org.humingk.movie.dal.entity.MovieDoubanToCelebrityDouban"
+                    resultMap="MovieDoubanToCelebrityDouban"/>
+    </resultMap>
+    <!--通过豆瓣影人ID获取与豆瓣影人相关的豆瓣电影信息列表-->
+    <select id="selectMovieDoubanOfCelebrityDoubanListByCelebrityDoubanId"
+            resultMap="MovieDoubanOfCelebrityDoubanDoResultMapPlus">
+        select movie_douban.id,
+               id_type_video,
+               id_movie_imdb,
+               start_year,
+               name_zh,
+               name_origin,
+               runtime,
+               url_poster,
+               summary,
+               have_seen,
+               wanna_see,
+               is_netease,
+               is_zhihu,
+               rate_movie_douban.id,
+               score,
+               vote,
+               score5,
+               score4,
+               score3,
+               score2,
+               score1,
+               movie_douban_to_celebrity_douban.id_movie_douban,
+               id_celebrity_douban,
+               id_profession,
+               sort
+        from rate_movie_douban,
+             movie_douban
+                 inner join movie_douban_to_celebrity_douban
+                            on movie_douban.id = movie_douban_to_celebrity_douban.id_movie_douban
+        where movie_douban.id = rate_movie_douban.id
+          and movie_douban_to_celebrity_douban.id_celebrity_douban = #{idCelebrityDouban,jdbcType=BIGINT}
+        order by #{order,jdbcType=VARCHAR} desc
+        limit #{limit,jdbcType=INTEGER}
+    </select>
+</mapper>

@@ -1,0 +1,43 @@
+package org.humingk.movie.api.common.vo.movie.rate;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.io.Serializable;
+import java.math.BigDecimal;
+
+/**
+ * IMDB电影评分，包括MTC、烂番茄新鲜度
+ *
+ * @author humingk
+ */
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class RateMovieImdbVo implements Serializable {
+  private static final long serialVersionUID = 1L;
+  /** IMDB电影ID */
+  private String idMovieImdb;
+
+  /** IMDB评分 */
+  private BigDecimal imdbScore;
+
+  /** IMDB评分主题色 */
+  private String imdbColor;
+
+  /** IMDB评分人数 */
+  private Integer imdbVote;
+
+  /** 烂番茄新鲜度 */
+  private BigDecimal tomatoScore;
+
+  /** 烂番茄新鲜度主题色 */
+  private String tomatoColor;
+
+  /** MTC评分 */
+  private BigDecimal mtcScore;
+
+  /** MTC评分主题色 */
+  private String mtcColor;
+}

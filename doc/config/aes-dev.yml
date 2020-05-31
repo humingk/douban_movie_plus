@@ -1,0 +1,6 @@
+custom:
+  aes:
+    # AesUtil加密方式
+    way: AES
+    # 密钥（16位）
+    key: youaretheapofmye

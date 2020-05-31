@@ -1,0 +1,45 @@
+server:
+  port: 8888
+spring:
+  mvc:
+    servlet:
+      # 默认-1，不初始化DispatcherServlet
+      load-on-startup: 1
+  application:
+    name: movie-server-config
+  profiles:
+    # 启用本地存储配置
+    active: native
+  # 消息中间件rabbit
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+  cloud:
+    config:
+      server:
+        # 本地配置
+        native:
+          # 配置文件所在目录
+          #          search-locations: doc/config
+          search-locations: /home/humingk/git/douban_movie_plus/doc/config
+      #        # git远程配置
+      #        git:
+      #          # git远程仓库地址,访问url:  /{application}/{profile} eg: /movie-server-config/dev
+      #          # uri: git@github.com:humingk/douban_movie_config.git
+      #          uri: https://github.com/humingk/douban_movie_config
+      #          username: humingk
+      #          # 仓库路径
+      #          search-paths: config
+      label: master
+management:
+  endpoints:
+    web:
+      exposure:
+        # 暴露bus刷新接口
+        include: bus-refresh,trace
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/

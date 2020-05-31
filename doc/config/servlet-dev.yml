@@ -1,0 +1,5 @@
+spring:
+  mvc:
+    servlet:
+      # 默认-1，不初始化DispatcherServlet
+      load-on-startup: 1

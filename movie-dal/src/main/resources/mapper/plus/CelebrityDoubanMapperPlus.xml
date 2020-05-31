@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.humingk.movie.dal.mapper.plus.CelebrityDoubanMapperPlus">
+    <resultMap id="BaseResultMapPlus"
+               extends="org.humingk.movie.dal.mapper.auto.CelebrityDoubanMapper.BaseResultMap"
+               type="org.humingk.movie.dal.entity.CelebrityDouban"/>
+    <!--豆瓣电影-豆瓣影人-->
+    <resultMap id="MovieDoubanToCelebrityDouban"
+               type="org.humingk.movie.dal.entity.MovieDoubanToCelebrityDouban"
+               extends="org.humingk.movie.dal.mapper.auto.MovieDoubanToCelebrityDoubanMapper.BaseResultMap"/>
+    <!--与豆瓣电影相关的豆瓣影人-->
+    <resultMap id="CelebrityDoubanOfMovieDoubanDoResultMapPlus"
+               type="org.humingk.movie.dal.domain.douban.CelebrityDoubanOfMovieDoubanDo"
+               extends="BaseResultMapPlus">
+        <collection property="movieDoubanToCelebrityDoubanList"
+                    ofType="org.humingk.movie.dal.entity.MovieDoubanToCelebrityDouban"
+                    resultMap="MovieDoubanToCelebrityDouban"/>
+    </resultMap>
+    <!--通过豆瓣电影ID获取与豆瓣电影相关的豆瓣影人信息列表-->
+    <select id="selectCelebrityDoubanOfMovieDoubanListByMovieDoubanId" parameterType="java.lang.Long"
+            resultMap="CelebrityDoubanOfMovieDoubanDoResultMapPlus">
+        select celebrity_douban.id,
+               id_celebrity_imdb,
+               name_zh,
+               name_origin,
+               sex,
+               birth_date,
+               url_portrait,
+               summary,
+               movie_douban_to_celebrity_douban.id_movie_douban,
+               id_celebrity_douban,
+               id_profession,
+               sort
+        from celebrity_douban
+                 inner join movie_douban_to_celebrity_douban
+                            on celebrity_douban.id = movie_douban_to_celebrity_douban.id_celebrity_douban
+        where movie_douban_to_celebrity_douban.id_movie_douban = #{idMovieDouban,jdbcType=BIGINT}
+        order by sort
+    </select>
+</mapper>

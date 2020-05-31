@@ -1,0 +1,12 @@
+.idea/
+*.iml
+**/target/
+**/*.iml
+**/.mvn/
+**/mvnw
+**/mvnw.cmd
+doc/log/
+**/rebel.xml
+run/**
+zipkin.jar
+NeteaseCloudMusicApi/

@@ -1,0 +1,22 @@
+server:
+  port: 10102
+spring:
+  application:
+    name: movie-server-music
+  profiles:
+    # 当前服务启用的运行环境：dev/pro
+    active: dev
+  cloud:
+    config:
+      name: movie-server-music,mysql,redis,aes,rabbitmq,zipkin-client,feign-client,oauth2-resource,logback,servlet
+      # 当前服务使用的config配置类型：dev/pro
+      profile: ${spring.profiles.active}
+      discovery:
+        # 开启服务发现
+        enabled: true
+        service-id: movie-server-config
+# eureka注册
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/

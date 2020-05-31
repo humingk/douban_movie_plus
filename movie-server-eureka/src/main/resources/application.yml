@@ -1,0 +1,22 @@
+server:
+  port: 8761
+spring:
+  mvc:
+    servlet:
+      # 默认-1，不初始化DispatcherServlet
+      load-on-startup: 1
+  application:
+    name: movie-server-eureka
+eureka:
+  # 实例
+  instance:
+    hostname: localhost
+  # 服务提供者
+  client:
+    # 是否将当前应用注册到eureka server(当前服务注册中心是单点且非高用)
+    register-with-eureka: false
+    # 是否从eureka server获取注册信息(不需要同步其他eureka server)
+    fetch-registry: false
+    service-url:
+      # 与eureka server交互的地址
+      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/

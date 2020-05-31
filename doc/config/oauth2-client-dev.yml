@@ -1,0 +1,10 @@
+# auth对应的客户端配置
+security:
+  oauth2:
+    # 客户端
+    client:
+      client-id: client
+      client-secret: secret
+      access-token-uri: http://localhost:8006/oauth/token
+      grant-type: password,refresh_token
+      scope: scopes

@@ -1,0 +1,73 @@
+{
+  "//": "服务器地址 https://api.doubans.com/v2",
+  "serverUrl": "https://api.doubans.com/v2",
+  "//": "是否开启严格模式,需要标准文档注释",
+  "isStrict": false,
+  "//": "是否将文档合并到一个文件",
+  "allInOne": true,
+  "//": "指定文档的输出路径",
+  "outPath": "/home/humingk/git/douban_movie_plus/doc/api",
+  "//": "是否覆盖旧的文件(markdown)",
+  "coverOld": true,
+  "//": "controller包过滤，英文逗号隔开",
+  "packageFilters": "org.humingk.movie.api",
+  "//": "每个controller生成一个html文件时,生成html时加密文档名不暴露controller的名称",
+  "md5EncryptedHtmlName": true,
+  "//": "项目名称",
+  "projectName": "豆瓣电影Plus RESTful-API文档",
+  "//": "暂无用",
+  "skipTransientField": true,
+  "//": "是否显示接口作者名称",
+  "showAuthor": true,
+  "//": "设置文档变更记录",
+  "revisionLogs": [
+    {
+      "//": "文档版本号",
+      "version": "2.0.0",
+      "//": "变更操作状态，eg：创建、更新等",
+      "status": "create",
+      "//": "文档变更作者",
+      "author": "humingk",
+      "//": "变更描述",
+      "remarks": "创建RESTful-API文档"
+    },
+    {
+      "//": "文档版本号",
+      "version": "2.0.7",
+      "//": "变更操作状态，eg：创建、更新等",
+      "status": "update",
+      "//": "文档变更作者",
+      "author": "humingk",
+      "//": "变更描述",
+      "remarks": "更新"
+    }
+  ],
+  "//": "自定义添加字段和注释，遇到同名字段则直接给相应字段加注释",
+  "customResponseFields": [
+    {
+      "//": "覆盖响应码字段",
+      "name": "offset233",
+      "//": "覆盖响应码的字段注释",
+      "desc": "偏移量(默认0)233",
+      "//": "设置响应码的值",
+      "value": "0233"
+    }
+  ],
+  "//": "设置请求头",
+  "requestHeaders": [
+    {
+      "name": "Authorization",
+      "type": "string",
+      "desc": "access_token",
+      "required": false,
+      "since": "2.0.0"
+    }
+  ],
+  "//": "设置代码路径，默认会自动加载src/main/java",
+  "sourceCodePaths": [
+    {
+      "path": "src/main/java",
+      "desc": "default"
+    }
+  ]
+}

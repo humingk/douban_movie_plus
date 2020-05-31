@@ -1,0 +1,245 @@
+custom:
+  api:
+    # api的版本
+    version: v2
+spring:
+  cloud:
+    gateway:
+      # 全局跨域配置
+      globalcors:
+        cors-configurations:
+          # 不对外提供的API服务
+          '[/v2/oauth/**]':
+            allow-credentials: true
+            allowedOrigins: "http://localhost:8080,https://movie.doubans.com"
+            allowedMethods: "*"
+            allowedHeaders: "*"
+          '[/v2/actuator/**]':
+            allow-credentials: true
+            allowedOrigins: "http://localhost:8080,https://movie.doubans.com"
+            allowedMethods: "*"
+            allowedHeaders: "*"
+          '[/v2/user/**]':
+            allow-credentials: true
+            allowedOrigins: "http://localhost:8080,https://movie.doubans.com"
+            allowedMethods: "*"
+            allowedHeaders: "*"
+          # 其他对外提供的API服务
+          '[/v2/music/**]':
+            allow-credentials: true
+            allowedOrigins: "*"
+            allowedMethods: "*"
+            allowedHeaders: "*"
+          '[/v2/search/**]':
+            allow-credentials: true
+            allowedOrigins: "*"
+            allowedMethods: "*"
+            allowedHeaders: "*"
+          '[/v2/movie/**]':
+            allow-credentials: true
+            allowedOrigins: "*"
+            allowedMethods: "*"
+            allowedHeaders: "*"
+          '[/v2/celebrity/**]':
+            allow-credentials: true
+            allowedOrigins: "*"
+            allowedMethods: "*"
+            allowedHeaders: "*"
+          '[/v2/scene/**]':
+            allow-credentials: true
+            allowedOrigins: "*"
+            allowedMethods: "*"
+            allowedHeaders: "*"
+      discovery:
+        locator:
+          # true:开启gateway服务注册中心服务发现,并且gateway根据服务名自动为每个服务创建一个router
+          # 通过服务名路径访问,eg: http://localhost:8086/MOVIE-SERVICE-COMMON/...
+          enabled: false
+          # true:请求路径服务名配置为小写
+          lower-case-service-id: true
+      # 路由转发
+      routes:
+        # ----------------------------------------
+        # 电影
+        - id: movie-server-movie
+          # douban服务地址
+          # lb://服务名 LoadBalancerClient过滤器，通过ribbon实现默认负载均衡算法
+          uri: lb://movie-server-movie
+          predicates:
+            - Path=/${custom.api.version}/movie/**
+          filters:
+            # 转发前去掉匹配path最前面的n个
+            - StripPrefix=1
+            # IP限流过滤器,令牌桶限流算法
+            - name: RequestRateLimiter
+              args:
+                # 限流键解析器Bean 根据IP限流(用户)
+                key-resolver: '#{@ipLimiter}'
+                # 令牌桶每秒填充平均速率 (相当于该用户在瞬间消耗完总容量的令牌后，之后每秒的请求数限制)
+                redis-rate-limiter.replenishRate: 1
+                # 令牌桶总容量 (相当于该用户瞬间能请求的最大数目)
+                redis-rate-limiter.burstCapacity: 10
+        # ----------------------------------------
+        # 搜索
+        - id: movie-server-search
+          uri: lb://movie-server-search
+          predicates:
+            - Path=/${custom.api.version}/search/**
+          filters:
+            - StripPrefix=1
+            # IP限流过滤器
+            - name: RequestRateLimiter
+              args:
+                key-resolver: '#{@ipLimiter}'
+                redis-rate-limiter.replenishRate: 1
+                redis-rate-limiter.burstCapacity: 20
+        # ----------------------------------------
+        # 影人
+        - id: movie-server-celebrity
+          uri: lb://movie-server-celebrity
+          predicates:
+            - Path=/${custom.api.version}/celebrity/**
+          filters:
+            - StripPrefix=1
+            # IP限流过滤器
+            - name: RequestRateLimiter
+              args:
+                key-resolver: '#{@ipLimiter}'
+                redis-rate-limiter.replenishRate: 1
+                redis-rate-limiter.burstCapacity: 10
+        # ----------------------------------------
+        # 场景
+        - id: movie-server-scene
+          uri: lb://movie-server-scene
+          predicates:
+            - Path=/${custom.api.version}/scene/**
+          filters:
+            - StripPrefix=1
+            # IP限流过滤器
+            - name: RequestRateLimiter
+              args:
+                key-resolver: '#{@ipLimiter}'
+                redis-rate-limiter.replenishRate: 1
+                redis-rate-limiter.burstCapacity: 10
+        # ----------------------------------------
+        # oauth2认证
+        - id: movie-server-auth
+          uri: lb://movie-server-auth
+          predicates:
+            - Path=/${custom.api.version}/oauth/**
+          filters:
+            - StripPrefix=1
+            # IP限流过滤器
+            - name: RequestRateLimiter
+              args:
+                key-resolver: '#{@ipLimiter}'
+                redis-rate-limiter.replenishRate: 1
+                redis-rate-limiter.burstCapacity: 50
+        # ----------------------------------------
+        #        # config服务
+        #        - id: movie-server-config
+        #          uri: lb://movie-server-config
+        #          predicates:
+        #            - Path=/${custom.api.version}/actuator/**
+        #          filters:
+        #            - StripPrefix=1
+        # ----------------------------------------
+        # 用户
+        - id: movie-server-user
+          uri: lb://movie-server-user
+          predicates:
+            - Path=/${custom.api.version}/user/**
+          filters:
+            - StripPrefix=1
+            # IP限流过滤器
+            - name: RequestRateLimiter
+              args:
+                key-resolver: '#{@ipLimiter}'
+                redis-rate-limiter.replenishRate: 1
+                redis-rate-limiter.burstCapacity: 10
+        # ----------------------------------------
+        #        # 音乐
+        #        - id: movie-server-music
+        #          uri: lb://movie-server-music
+        #          predicates:
+        #            - Path=/${custom.api.version}/music/**
+        #          filters:
+        #            - StripPrefix=1
+        #            # 限流过滤器
+        #            - name: RequestRateLimiter
+        #              args:
+        #                key-resolver: '#{@ipLimiter}'
+        #                redis-rate-limiter.replenishRate: 1
+        #                redis-rate-limiter.burstCapacity: 5
+        # ----------------------------------------
+        # 音乐
+        - id: NeteaseCloudMusicApi
+          uri: http://localhost:3000
+          predicates:
+            - Path=/${custom.api.version}/music/**
+          filters:
+            - StripPrefix=2
+            # IP限流过滤器
+            - name: RequestRateLimiter
+              args:
+                key-resolver: '#{@ipLimiter}'
+                redis-rate-limiter.replenishRate: 2
+                # 每个页面初始化大概需要8个请求
+                redis-rate-limiter.burstCapacity: 50
+        # ----------------------------------------
+      # 全局路由默认过滤器
+      default-filters:
+        # 熔断过滤器
+        # 调用其他服务失败时进行熔断，缓解服务器压力，同时快速返回错误结果
+        - name: Hystrix
+          args:
+            name: fallback
+            # 熔断降级时重定向url
+            fallbackUri: forward:/fallback
+# 熔断配置
+hystrix:
+  command:
+    # 默认全局配置
+    default:
+      # 是否启用请求缓存 默认true
+      requestCache:
+        enabled: true
+      execution:
+        isolation:
+          # 指定隔离策略
+          # THREAD：线程隔离，在单独的线程上执行，并发请求受线程池大小的控制
+          # SEMAPHORE：信号量隔离，在调用线程上执行，并发请求受信号量计数器的限制
+          # 当应用需要与外网交互，由于网络开销比较大与请求比较耗时这时选用线程隔离策略，可以保证有剩余的容器（Tomcat | Undertow | Jetty）线程可用，而不会由于外部原因使得线程一直处于阻塞或等待状态可以快速失败返回
+          # 当我们的应用只在内网交互，并且体量比较大，这时使用信号量隔离策略就比较好，因为这类应用的响应通常会非常快（由于在内网），不会占用容器线程太长时间，使用信号量线程上下文就会成为一个瓶颈，可以减少线程切换的开销，提高应用运转的效率，也可以起到对请求进行全局限流的作用。
+          strategy: THREAD
+          semaphore:
+            # 最大并发请求上限 (SEMAPHORE专用) 默认10
+            maxConcurrentRequests: 100
+          thread:
+            # 用来设置thread和semaphore两种隔离策略的超时时间，默认值是1000 ms
+            timeoutInMilliseconds: 10000
+      # 所有命令降级配置对策略ExecutionIsolationStrategy.THREAD或者ExecutionIsolationStrategy.SEMAPHORE都生效
+      fallback:
+        isolation:
+          semaphore:
+            # 最大并发降级请求处理上限 默认10
+            # 实例方法在执行线程中调用的最大上限，如果超过此上限，降级逻辑不会执行并且会抛出一个异常
+            maxConcurrentRequests: 100
+  threadpool:
+    default:
+      # 核心线程数 默认10
+      # 健康时达到峰值的每秒请求数×每秒99％的延迟+呼吸空间
+      # eg: 每秒30个请求，99%的响应时间为0.2s，缓存4个，30*0.2+4=10
+      # eg: 100*0.2+20=40
+      coreSize: 50
+      # 最大线程数 默认10
+      maximumSize: 100
+ribbon:
+  # ribbon 默认超时时间 1s
+  ReadTimeout: 10000
+  ConnectTimeout: 10000
+  #饥饿加载模式
+  eager-load:
+    enabled: true
+    # 指定需要饥饿加载的客户端名称、服务名
+    clients: '*'

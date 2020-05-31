@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.humingk.movie.dal.mapper.plus.CelebritySceneMapperPlus">
+    <resultMap id="BaseResultMapPlus"
+               extends="org.humingk.movie.dal.mapper.auto.CelebritySceneMapper.BaseResultMap"
+               type="org.humingk.movie.dal.entity.CelebrityScene"/>
+    <!--场景详情-场景影人-->
+    <resultMap id="SceneDetailToCelebrityScene"
+               type="org.humingk.movie.dal.entity.SceneDetailToCelebrityScene"
+               extends="org.humingk.movie.dal.mapper.auto.SceneDetailToCelebritySceneMapper.BaseResultMap"/>
+    <!--与场景详情相关的场景影人-->
+    <resultMap id="CelebritySceneOfSceneDetailDoResultMapPlus"
+               type="org.humingk.movie.dal.domain.scene.CelebritySceneOfSceneDetailDo"
+               extends="BaseResultMapPlus">
+        <association property="sceneDetailToCelebrityScene"
+                     javaType="org.humingk.movie.dal.entity.SceneDetailToCelebrityScene"
+                     resultMap="SceneDetailToCelebrityScene"/>
+    </resultMap>
+    <!--通过场景详情ID获取与场景详情相关的场景影人列表-->
+    <select id="selectCelebritySceneOfSceneDetailListBySceneDetailId" parameterType="java.lang.Long"
+            resultMap="CelebritySceneOfSceneDetailDoResultMapPlus">
+        select celebrity_scene.id,
+               id_celebrity_douban,
+               name_zh,
+               name_en,
+               scene_detail_to_celebrity_scene.id_scene_detail,
+               id_celebrity_scene
+        from celebrity_scene
+                 inner join scene_detail_to_celebrity_scene
+                            on celebrity_scene.id = scene_detail_to_celebrity_scene.id_celebrity_scene
+        where scene_detail_to_celebrity_scene.id_scene_detail = #{idSceneDetail,jdbcType=BIGINT}
+    </select>
+</mapper>

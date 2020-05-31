@@ -1,0 +1,3 @@
+logging:
+  # logback配置文件路径
+  config: /home/humingk/git/douban_movie_plus/doc/config/logback-config.xml

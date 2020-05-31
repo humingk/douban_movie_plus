@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.humingk.movie.dal.mapper.plus.CommentMovieDoubanMapperPlus">
+    <resultMap id="BaseResultMapPlus"
+               extends="org.humingk.movie.dal.mapper.auto.CommentMovieDoubanMapper.BaseResultMap"
+               type="org.humingk.movie.dal.entity.CommentMovieDouban"/>
+    <!--豆瓣用户-->
+    <resultMap id="UserDouban"
+               type="org.humingk.movie.dal.entity.UserDouban"
+               extends="org.humingk.movie.dal.mapper.auto.UserDoubanMapper.BaseResultMap"/>
+    <!--豆瓣评论以及用户-->
+    <resultMap id="CommentOfMovieDoubanDoResultMapPlus"
+               type="org.humingk.movie.dal.domain.douban.CommentOfMovieDoubanDo"
+               extends="BaseResultMapPlus">
+        <association property="userDouban"
+                     javaType="org.humingk.movie.dal.entity.UserDouban"
+                     resultMap="UserDouban"/>
+    </resultMap>
+    <!--通过豆瓣电影ID获取豆瓣评论以及豆瓣用户-->
+    <select id="selectCommentOfMovieDoubanListByMovieDoubanId" parameterType="java.lang.Long"
+            resultMap="CommentOfMovieDoubanDoResultMapPlus">
+        select comment_movie_douban.id_movie_douban,
+               id_user_douban,
+               agree_vote,
+               create_date,
+               content,
+               user_douban.id,
+               name_zh
+        from comment_movie_douban
+                 inner join user_douban
+                            on comment_movie_douban.id_user_douban = user_douban.id
+        where comment_movie_douban.id_movie_douban = #{idMovieDouban,jdbcType=BIGINT}
+        order by comment_movie_douban.agree_vote desc
+    </select>
+</mapper>
