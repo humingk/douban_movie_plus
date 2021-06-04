@@ -69,7 +69,7 @@
         <jwt.version>0.9.1</jwt.version>
         <commons-lang3.version>3.9</commons-lang3.version>
         <commons-pool2.version>2.7.0</commons-pool2.version>
-        <apache-httpclient.version>4.5.6</apache-httpclient.version>
+        <apache-httpclient.version>4.5.13</apache-httpclient.version>
         <feign-httpclient.version>8.18.0</feign-httpclient.version>
         <guava.version>28.1-jre</guava.version>
         <zipkin.version>2.11.3</zipkin.version>
