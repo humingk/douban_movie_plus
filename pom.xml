@@ -71,7 +71,7 @@
         <commons-pool2.version>2.7.0</commons-pool2.version>
         <apache-httpclient.version>4.5.6</apache-httpclient.version>
         <feign-httpclient.version>8.18.0</feign-httpclient.version>
-        <guava.version>28.1-jre</guava.version>
+        <guava.version>29.0-jre</guava.version>
         <zipkin.version>2.11.3</zipkin.version>
         <jsoup.version>1.12.1</jsoup.version>
         <smart-doc-plugin.version>1.0.5</smart-doc-plugin.version>
